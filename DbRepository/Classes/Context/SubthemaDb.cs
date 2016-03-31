@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using DbRepository.Classes.Entities;
+using DbRepository.Context;
 
 namespace DbRepository.Classes.Context
 {
@@ -92,6 +93,20 @@ namespace DbRepository.Classes.Context
             catch (Exception ex)
             {
                 throw new Exception("GetAllSubthemas method failed.", ex);
+            }
+        }
+
+        #endregion
+
+        #region Entity Framework
+
+        public void DeleteSubthema(int subthemaId)
+        {
+            using (var db = new DistanceStudyEF())
+            {
+                var subthema = db.SubThemas.Find(subthemaId);
+                db.SubThemas.Remove(subthema);
+                db.SaveChanges();
             }
         }
 
