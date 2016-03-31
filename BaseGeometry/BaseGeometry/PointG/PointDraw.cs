@@ -198,7 +198,37 @@ namespace GeomObjects.Points
                 this.PointPlan3Y0Z_PositionByFrame = this.PointPositionCorrection(this.PointPlan3Y0Z_PositionByPicture, PointY0Z_Diametre, FrameCentre_Source);
             }
         }
-
+        /// <summary>
+        /// Инициализация нового экземпляра PointDraw
+        /// </summary>
+        /// <param name="pointOfPlan1X0YSource">Заданная горизонтальная проекция 3D точки</param>
+        /// <param name="pointOfPlan2X0ZSource">Заданная фронтальная проекция 3D точки</param>
+        /// <param name="pointOfPlan3Y0ZSource">Заданная профильная проекция 3D точки</param>
+        /// <param name="penPoint1X0Y">Перо для отрисовки горизонтальной проекции 3D точки</param>
+        /// <param name="penPoint2X0Z">Перо для отрисовки фронтальной проекции 3D точки</param>
+        /// <param name="penPoint3Y0Z">Перо для отрисовки профильной проекции 3D точки</param>
+        /// <param name="frameCentreSource">Точка, соотвествующая центру заданной системе координат</param>
+        public PointDraw(PointOfPlan1X0Y pointOfPlan1X0YSource, PointOfPlan2X0Z pointOfPlan2X0ZSource, PointOfPlan3Y0Z pointOfPlan3Y0ZSource, Pen penPoint1X0Y, Pen penPoint2X0Z, Pen penPoint3Y0Z, Point frameCentreSource)
+        {
+            if (pointOfPlan1X0YSource != null)
+            {
+                Pen_Point1X0Y = penPoint1X0Y;
+                this.PointPlan1X0Y_PositionByPicture = CnvPoint3DProjection_ToPoint(pointOfPlan1X0YSource);
+                this.PointPlan1X0Y_PositionByFrame = PointPositionCorrection(PointPlan1X0Y_PositionByPicture, Pen_Point1X0Y.Width / 2, frameCentreSource);
+            }
+            if (pointOfPlan2X0ZSource != null)
+            {
+                Pen_Point2X0Z = penPoint2X0Z;
+                this.PointPlan2X0Z_PositionByPicture = CnvPoint3DProjection_ToPoint(pointOfPlan2X0ZSource);
+                this.PointPlan2X0Z_PositionByFrame = PointPositionCorrection(PointPlan2X0Z_PositionByPicture, Pen_Point2X0Z.Width / 2, frameCentreSource);
+            }
+            if (pointOfPlan3Y0ZSource != null)
+            {
+                Pen_Point3Y0Z = penPoint3Y0Z;
+                this.PointPlan3Y0Z_PositionByPicture = CnvPoint3DProjection_ToPoint(pointOfPlan3Y0ZSource);
+                this.PointPlan3Y0Z_PositionByFrame = PointPositionCorrection(PointPlan3Y0Z_PositionByPicture, Pen_Point3Y0Z.Width / 2, frameCentreSource);
+            }
+        }
         //---------------------------------- Свойства ----------------------------------------
 
         /// <summary>
@@ -699,7 +729,7 @@ namespace GeomObjects.Points
         {
             System.Drawing.Point PointProjection_Temp = new System.Drawing.Point();
             PointProjection_Temp = this.PointPositionCorrection(this.CnvPoint3DProjection_ToPoint(PointXoY_Sourse), PointRadius, Frame2D_Centre);
-            Graphics_Source.DrawPie(Pen_Point1X0Y_Var, Convert.ToInt32(PointProjection_Temp.X), Convert.ToInt32(PointProjection_Temp.Y), PointRadius * 2 + 1, PointRadius * 2 + 1, 0, 360);
+            Graphics_Source.DrawPie(Pen_Point1X0Y_Var, Convert.ToInt32(PointProjection_Temp.X), Convert.ToInt32(PointProjection_Temp.Y), PointRadius * 2, PointRadius * 2, 0, 360);
         }
 
         /// <summary>

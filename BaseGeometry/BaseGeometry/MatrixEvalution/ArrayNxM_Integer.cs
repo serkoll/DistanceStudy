@@ -76,7 +76,7 @@ namespace GeomObjects
             //Проверка изменений после перестановки нулевых строк и столбцов
             if ((int)MrxTrans.GetValue(NumRow, NumCol) == 0 | MrxTrans.GetValue(NumRow, NumCol) == ArrayNxM_Source.GetValue(NumRow, NumCol))
             {
-                goto Calc_Step4a;
+                goto Calc_Step4;
             }
             else
             {
@@ -84,9 +84,9 @@ namespace GeomObjects
             }
 
         //Поиск требуемого (или не нулевого) элемента в матрице. Область поиска ограничивается координатами заданного элемента (начало)и либо нулевой строкой и столбцом либо верхними границами матрицы (конец)
-        Calc_Step4: //Задание матрицы, размер которой равен размеру области поиска
+        //Задание матрицы, размер которой равен размеру области поиска
 
-        Calc_Step4a:
+        Calc_Step4:
             //Поиск не нулевого элемента по столбцу
             i = NumRow;
             while (i <= MrxTrans.GetUpperBound(0))
@@ -216,7 +216,6 @@ namespace GeomObjects
         /// <param name="ArrayNxM_Source" >Заданный массив</param>
         public int[,] MoveToRight_ZeroCols(int[,] ArrayNxM_Source)
         {
-            int[,] functionReturnValue = null;
             int[,] MrxTrans = null;
             int[,] MrxTransInt = null;
             //Вспомогательные матрицы
@@ -240,7 +239,6 @@ namespace GeomObjects
             if (VarMrxZero == true)
             {
                 return MrxTrans;
-                return functionReturnValue;
             }
         Calc_Step2:
             //Определение существования нулевых столбцов 

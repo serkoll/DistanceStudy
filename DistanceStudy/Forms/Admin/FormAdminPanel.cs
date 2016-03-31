@@ -9,8 +9,6 @@ namespace DistanceStudy.Forms.Admin
         public FormAdminPanel()
         {
             InitializeComponent();
-            DrawG.MainForm mForm = new MainForm();
-            mForm.Show();
         }
 
         private void FormAdminPanel_FormClosing(object sender, FormClosingEventArgs e)
@@ -23,7 +21,8 @@ namespace DistanceStudy.Forms.Admin
 
         private void FormAdminPanel_Load(object sender, EventArgs e)
         {
-            
+            DrawG.MainForm mForm = new MainForm();
+            mForm.Show();
         }
     }
 }

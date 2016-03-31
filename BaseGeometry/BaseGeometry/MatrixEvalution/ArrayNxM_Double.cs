@@ -77,14 +77,13 @@ namespace GeomObjects
             //Проверка изменений после перестановки нулевых строк и столбцов
             if ((double)MrxTrans.GetValue(NumRow, NumCol) == 0 | MrxTrans.GetValue(NumRow, NumCol) == ArrayNxM_Source.GetValue(NumRow, NumCol))
             {
-                goto Calc_Step4a;
+                goto Calc_Step4;
             }
             else
             {
                 goto CalcEnd;
             }
         Calc_Step4:
-        Calc_Step4a:
             //Поиск требуемого (или не нулевого) элемента в матрице. Область поиска ограничивается координатами заданного элемента (начало)и либо нулевой строкой и столбцом либо верхними границами матрицы (конец)
             //Задание матрицы, размер которой равен размеру области поиска
             //Поиск не нулевого элемента по столбцу
@@ -2021,7 +2020,6 @@ namespace GeomObjects
         /// </remarks>
         public double[,] Array_RowСhange(double[,] СhangeArray, double[,] SourceArrayForAdd, int IndexFirstChangeRow)
         {
-            double[,] functionReturnValue = null;
             int i = 0;
             int j = 0;
             //Контроль значения индекса заданной строки
