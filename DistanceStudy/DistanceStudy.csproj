@@ -34,7 +34,7 @@
   <ItemGroup>
     <Reference Include="BaseGeometry, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\BaseGeometry.dll</HintPath>
+      <HintPath>..\BaseGeometry\BaseGeometry\bin\Debug\BaseGeometry.dll</HintPath>
     </Reference>
     <Reference Include="DbRepository">
       <HintPath>..\DbRepository\bin\Debug\DbRepository.dll</HintPath>

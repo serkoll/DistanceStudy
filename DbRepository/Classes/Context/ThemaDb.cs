@@ -20,10 +20,6 @@ namespace DbRepository.Classes.Context
             _connectionString = ConfigurationManager.ConnectionStrings["DistanceStudyDB"].ConnectionString;
         }
 
-        /// <summary>
-        ///     Добавление темы в бд
-        /// </summary>
-        /// <param name="item">Объект текущей темы</param>
         public void AddThema(Thema item)
         {
             try
@@ -47,11 +43,6 @@ namespace DbRepository.Classes.Context
             }
         }
 
-        /// <summary>
-        /// Удаление темы из бд
-        /// </summary>
-        /// <param name="themaName">Название темы</param>
-        /// <returns></returns>
         public void DeleteThema(string themaName)
         {
             try
@@ -125,11 +116,6 @@ namespace DbRepository.Classes.Context
             {
                 throw new Exception("GetAllThemas method failed.", ex);
             }
-        }
-
-        public int CountThemas()
-        {
-            throw new NotImplementedException();
         }
     }
 }
