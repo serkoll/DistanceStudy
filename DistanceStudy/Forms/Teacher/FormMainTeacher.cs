@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
 using BaseLibrary.Classes;
-using DbRepository.Classes.Entities;
 using DistanceStudy.Classes;
 
 namespace DistanceStudy.Forms.Teacher
@@ -56,13 +55,12 @@ namespace DistanceStudy.Forms.Teacher
         /// <param name="e"></param>
         private void toolStripButtonExit_Click(object sender, EventArgs e)
         {
-            //this.Dispose();
-            this.Visible = false;
-            this.Hide();
+            Visible = false;
+            Hide();
             Program.MainForm.Visible = true;
             Program.MainForm.textLogin.Text = string.Empty;
             Program.MainForm.textPassword.Text = string.Empty;
-            WorkWithTree.DisposeResources();
+            //WorkWithTree.DisposeResources();
         }
         /// <summary>
         /// Удаление узлов в дереве темы/подтемы/задачи

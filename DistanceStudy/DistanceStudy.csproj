@@ -160,6 +160,10 @@
       <Project>{50fd6624-c01a-41a4-8759-d75a4948193c}</Project>
       <Name>BaseLibrary</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DrawGL\DrawGL\DrawGL.csproj">
+      <Project>{247cb926-7d51-45d6-9e9b-05aa4f4e30d6}</Project>
+      <Name>DrawGL</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\create.png" />
