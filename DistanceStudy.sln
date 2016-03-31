@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistanceStudy", "DistanceStudy_001\DistanceStudy.csproj", "{38077D60-C603-467B-9C53-9C5C3172458B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistanceStudy", "DistanceStudy\DistanceStudy.csproj", "{38077D60-C603-467B-9C53-9C5C3172458B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseLibrary", "BaseLibrary\BaseLibrary.csproj", "{50FD6624-C01A-41A4-8759-D75A4948193C}"
 EndProject
