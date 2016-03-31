@@ -1,0 +1,645 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DistanceStudy.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AlgorithmStatus">
+          <Key>
+            <PropertyRef Name="Id_AlgorithmStatus" />
+          </Key>
+          <Property Name="Id_AlgorithmStatus" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubGroupNumber" Type="int" Nullable="false" />
+          <Property Name="Condition" Type="nvarchar" MaxLength="512" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SubThema">
+          <Key>
+            <PropertyRef Name="Id_SubThema" />
+          </Key>
+          <Property Name="Id_SubThema" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Thema" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="512" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="512" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DistanceStudy.dbo.Task_Algorithm' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Task_Algorithm">
+          <Key>
+            <PropertyRef Name="Id_Task" />
+            <PropertyRef Name="AlgorithmStatus" />
+          </Key>
+          <Property Name="Id_Task" Type="int" Nullable="false" />
+          <Property Name="AlgorithmStatus" Type="nvarchar" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Task_Parametrs">
+          <Key>
+            <PropertyRef Name="Id_Parametr" />
+          </Key>
+          <Property Name="Id_Parametr" Type="int" Nullable="false" />
+          <Property Name="Id_Task" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="512" Nullable="false" />
+          <Property Name="Value" Type="nvarchar" MaxLength="512" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tasks">
+          <Key>
+            <PropertyRef Name="Id_Task" />
+          </Key>
+          <Property Name="Id_Task" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_SubThema" Type="int" Nullable="false" />
+          <Property Name="Id_Status" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="512" Nullable="false" />
+          <Property Name="Condition" Type="nvarchar" MaxLength="512" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Themas">
+          <Key>
+            <PropertyRef Name="Id_Thema" />
+          </Key>
+          <Property Name="Id_Thema" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="512" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="512" />
+          <Property Name="PhysicalNumber" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DistanceStudy.dbo.User_Info' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="User_Info">
+          <Key>
+            <PropertyRef Name="Id_User" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Surname" />
+          </Key>
+          <Property Name="Id_User" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="512" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DistanceStudy.dbo.User_Status' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="User_Status">
+          <Key>
+            <PropertyRef Name="Id_User" />
+            <PropertyRef Name="Permission" />
+          </Key>
+          <Property Name="Id_User" Type="int" Nullable="false" />
+          <Property Name="Permission" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Subgroup" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="512" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DistanceStudy.dbo.User_TaskAlgorithm' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="User_TaskAlgorithm">
+          <Key>
+            <PropertyRef Name="Id_Task" />
+            <PropertyRef Name="User_Algorithm_Code" />
+          </Key>
+          <Property Name="Id_Task" Type="int" Nullable="false" />
+          <Property Name="User_Algorithm_Code" Type="binary" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id_User" />
+          </Key>
+          <Property Name="Id_User" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="varchar" MaxLength="512" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="512" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_SubThema_Themas">
+          <End Role="Themas" Type="Self.Themas" Multiplicity="1" />
+          <End Role="SubThema" Type="Self.SubThema" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Themas">
+              <PropertyRef Name="Id_Thema" />
+            </Principal>
+            <Dependent Role="SubThema">
+              <PropertyRef Name="Id_Thema" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_Algorithm_Tasks">
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="1" />
+          <End Role="Task_Algorithm" Type="Self.Task_Algorithm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="Id_Task" />
+            </Principal>
+            <Dependent Role="Task_Algorithm">
+              <PropertyRef Name="Id_Task" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_Parametrs_Tasks">
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="1" />
+          <End Role="Task_Parametrs" Type="Self.Task_Parametrs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="Id_Task" />
+            </Principal>
+            <Dependent Role="Task_Parametrs">
+              <PropertyRef Name="Id_Task" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tasks_Article">
+          <End Role="SubThema" Type="Self.SubThema" Multiplicity="1" />
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubThema">
+              <PropertyRef Name="Id_SubThema" />
+            </Principal>
+            <Dependent Role="Tasks">
+              <PropertyRef Name="Id_SubThema" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tasks_Status">
+          <End Role="AlgorithmStatus" Type="Self.AlgorithmStatus" Multiplicity="1" />
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AlgorithmStatus">
+              <PropertyRef Name="Id_AlgorithmStatus" />
+            </Principal>
+            <Dependent Role="Tasks">
+              <PropertyRef Name="Id_Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Group_User">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="User_Status" Type="Self.User_Status" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id_User" />
+            </Principal>
+            <Dependent Role="User_Status">
+              <PropertyRef Name="Id_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Info_User">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="User_Info" Type="Self.User_Info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id_User" />
+            </Principal>
+            <Dependent Role="User_Info">
+              <PropertyRef Name="Id_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_TaskAlgorithm_Tasks">
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="1" />
+          <End Role="User_TaskAlgorithm" Type="Self.User_TaskAlgorithm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="Id_Task" />
+            </Principal>
+            <Dependent Role="User_TaskAlgorithm">
+              <PropertyRef Name="Id_Task" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DistanceStudyStoreContainer">
+          <EntitySet Name="AlgorithmStatus" EntityType="Self.AlgorithmStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubThema" EntityType="Self.SubThema" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Task_Parametrs" EntityType="Self.Task_Parametrs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tasks" EntityType="Self.Tasks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Themas" EntityType="Self.Themas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Task_Algorithm" EntityType="Self.Task_Algorithm" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Task_Algorithm].[Id_Task] AS [Id_Task], 
+    [Task_Algorithm].[AlgorithmStatus] AS [AlgorithmStatus]
+    FROM [dbo].[Task_Algorithm] AS [Task_Algorithm]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="User_Info" EntityType="Self.User_Info" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [User_Info].[Id_User] AS [Id_User], 
+    [User_Info].[Name] AS [Name], 
+    [User_Info].[Surname] AS [Surname], 
+    [User_Info].[Description] AS [Description]
+    FROM [dbo].[User_Info] AS [User_Info]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="User_Status" EntityType="Self.User_Status" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [User_Status].[Id_User] AS [Id_User], 
+    [User_Status].[Permission] AS [Permission], 
+    [User_Status].[Subgroup] AS [Subgroup], 
+    [User_Status].[Description] AS [Description]
+    FROM [dbo].[User_Status] AS [User_Status]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="User_TaskAlgorithm" EntityType="Self.User_TaskAlgorithm" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [User_TaskAlgorithm].[Id_Task] AS [Id_Task], 
+    [User_TaskAlgorithm].[User_Algorithm_Code] AS [User_Algorithm_Code]
+    FROM [dbo].[User_TaskAlgorithm] AS [User_TaskAlgorithm]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_SubThema_Themas" Association="Self.FK_SubThema_Themas">
+            <End Role="Themas" EntitySet="Themas" />
+            <End Role="SubThema" EntitySet="SubThema" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_Algorithm_Tasks" Association="Self.FK_Task_Algorithm_Tasks">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="Task_Algorithm" EntitySet="Task_Algorithm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_Parametrs_Tasks" Association="Self.FK_Task_Parametrs_Tasks">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="Task_Parametrs" EntitySet="Task_Parametrs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tasks_Article" Association="Self.FK_Tasks_Article">
+            <End Role="SubThema" EntitySet="SubThema" />
+            <End Role="Tasks" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tasks_Status" Association="Self.FK_Tasks_Status">
+            <End Role="AlgorithmStatus" EntitySet="AlgorithmStatus" />
+            <End Role="Tasks" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Group_User" Association="Self.FK_User_Group_User">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="User_Status" EntitySet="User_Status" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Info_User" Association="Self.FK_User_Info_User">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="User_Info" EntitySet="User_Info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_TaskAlgorithm_Tasks" Association="Self.FK_User_TaskAlgorithm_Tasks">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="User_TaskAlgorithm" EntitySet="User_TaskAlgorithm" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DistanceStudy" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AlgorithmStatu">
+          <Key>
+            <PropertyRef Name="Id_AlgorithmStatus" />
+          </Key>
+          <Property Name="Id_AlgorithmStatus" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubGroupNumber" Type="Int32" Nullable="false" />
+          <Property Name="Condition" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tasks" Relationship="Self.FK_Tasks_Status" FromRole="AlgorithmStatus" ToRole="Tasks" />
+        </EntityType>
+        <EntityType Name="SubThema">
+          <Key>
+            <PropertyRef Name="Id_SubThema" />
+          </Key>
+          <Property Name="Id_SubThema" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Thema" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Thema" Relationship="Self.FK_SubThema_Themas" FromRole="SubThema" ToRole="Themas" />
+          <NavigationProperty Name="Tasks" Relationship="Self.FK_Tasks_Article" FromRole="SubThema" ToRole="Tasks" />
+        </EntityType>
+        <EntityType Name="Task_Parametrs">
+          <Key>
+            <PropertyRef Name="Id_Parametr" />
+          </Key>
+          <Property Name="Id_Parametr" Type="Int32" Nullable="false" />
+          <Property Name="Id_Task" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Value" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Task" Relationship="Self.FK_Task_Parametrs_Tasks" FromRole="Task_Parametrs" ToRole="Tasks" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="Id_Task" />
+          </Key>
+          <Property Name="Id_Task" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_SubThema" Type="Int32" Nullable="false" />
+          <Property Name="Id_Status" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Condition" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AlgorithmStatu" Relationship="Self.FK_Tasks_Status" FromRole="Tasks" ToRole="AlgorithmStatus" />
+          <NavigationProperty Name="SubThema" Relationship="Self.FK_Tasks_Article" FromRole="Tasks" ToRole="SubThema" />
+          <NavigationProperty Name="Task_Parametrs" Relationship="Self.FK_Task_Parametrs_Tasks" FromRole="Tasks" ToRole="Task_Parametrs" />
+          <NavigationProperty Name="Task_Algorithm" Relationship="Self.FK_Task_Algorithm_Tasks" FromRole="Tasks" ToRole="Task_Algorithm" />
+          <NavigationProperty Name="User_TaskAlgorithm" Relationship="Self.FK_User_TaskAlgorithm_Tasks" FromRole="Tasks" ToRole="User_TaskAlgorithm" />
+        </EntityType>
+        <EntityType Name="Thema">
+          <Key>
+            <PropertyRef Name="Id_Thema" />
+          </Key>
+          <Property Name="Id_Thema" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="PhysicalNumber" Type="Int32" />
+          <NavigationProperty Name="SubThemas" Relationship="Self.FK_SubThema_Themas" FromRole="Themas" ToRole="SubThema" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id_User" />
+          </Key>
+          <Property Name="Id_User" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="512" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="512" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="User_Status" Relationship="Self.FK_User_Group_User" FromRole="Users" ToRole="User_Status" />
+          <NavigationProperty Name="User_Info" Relationship="Self.FK_User_Info_User" FromRole="Users" ToRole="User_Info" />
+        </EntityType>
+        <EntityType Name="Task_Algorithm">
+          <Key>
+            <PropertyRef Name="Id_Task" />
+            <PropertyRef Name="AlgorithmStatus" />
+          </Key>
+          <Property Name="Id_Task" Type="Int32" Nullable="false" />
+          <Property Name="AlgorithmStatus" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Task" Relationship="Self.FK_Task_Algorithm_Tasks" FromRole="Task_Algorithm" ToRole="Tasks" />
+        </EntityType>
+        <EntityType Name="User_Info">
+          <Key>
+            <PropertyRef Name="Id_User" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Surname" />
+          </Key>
+          <Property Name="Id_User" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="Self.FK_User_Info_User" FromRole="User_Info" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User_Status">
+          <Key>
+            <PropertyRef Name="Id_User" />
+            <PropertyRef Name="Permission" />
+          </Key>
+          <Property Name="Id_User" Type="Int32" Nullable="false" />
+          <Property Name="Permission" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Subgroup" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="Self.FK_User_Group_User" FromRole="User_Status" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User_TaskAlgorithm">
+          <Key>
+            <PropertyRef Name="Id_Task" />
+            <PropertyRef Name="User_Algorithm_Code" />
+          </Key>
+          <Property Name="Id_Task" Type="Int32" Nullable="false" />
+          <Property Name="User_Algorithm_Code" Type="Binary" MaxLength="50" FixedLength="true" Nullable="false" />
+          <NavigationProperty Name="Task" Relationship="Self.FK_User_TaskAlgorithm_Tasks" FromRole="User_TaskAlgorithm" ToRole="Tasks" />
+        </EntityType>
+        <Association Name="FK_Tasks_Status">
+          <End Role="AlgorithmStatus" Type="Self.AlgorithmStatu" Multiplicity="1" />
+          <End Role="Tasks" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AlgorithmStatus">
+              <PropertyRef Name="Id_AlgorithmStatus" />
+            </Principal>
+            <Dependent Role="Tasks">
+              <PropertyRef Name="Id_Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubThema_Themas">
+          <End Role="Themas" Type="Self.Thema" Multiplicity="1" />
+          <End Role="SubThema" Type="Self.SubThema" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Themas">
+              <PropertyRef Name="Id_Thema" />
+            </Principal>
+            <Dependent Role="SubThema">
+              <PropertyRef Name="Id_Thema" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tasks_Article">
+          <End Role="SubThema" Type="Self.SubThema" Multiplicity="1" />
+          <End Role="Tasks" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubThema">
+              <PropertyRef Name="Id_SubThema" />
+            </Principal>
+            <Dependent Role="Tasks">
+              <PropertyRef Name="Id_SubThema" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_Parametrs_Tasks">
+          <End Role="Tasks" Type="Self.Task" Multiplicity="1" />
+          <End Role="Task_Parametrs" Type="Self.Task_Parametrs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="Id_Task" />
+            </Principal>
+            <Dependent Role="Task_Parametrs">
+              <PropertyRef Name="Id_Task" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_Algorithm_Tasks">
+          <End Role="Tasks" Type="Self.Task" Multiplicity="1" />
+          <End Role="Task_Algorithm" Type="Self.Task_Algorithm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="Id_Task" />
+            </Principal>
+            <Dependent Role="Task_Algorithm">
+              <PropertyRef Name="Id_Task" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_TaskAlgorithm_Tasks">
+          <End Role="Tasks" Type="Self.Task" Multiplicity="1" />
+          <End Role="User_TaskAlgorithm" Type="Self.User_TaskAlgorithm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="Id_Task" />
+            </Principal>
+            <Dependent Role="User_TaskAlgorithm">
+              <PropertyRef Name="Id_Task" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Group_User">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="User_Status" Type="Self.User_Status" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id_User" />
+            </Principal>
+            <Dependent Role="User_Status">
+              <PropertyRef Name="Id_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Info_User">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="User_Info" Type="Self.User_Info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id_User" />
+            </Principal>
+            <Dependent Role="User_Info">
+              <PropertyRef Name="Id_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DistanceStudyEF" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AlgorithmStatus" EntityType="Self.AlgorithmStatu" />
+          <EntitySet Name="SubThemas" EntityType="Self.SubThema" />
+          <EntitySet Name="Task_Parametrs" EntityType="Self.Task_Parametrs" />
+          <EntitySet Name="Tasks" EntityType="Self.Task" />
+          <EntitySet Name="Themas" EntityType="Self.Thema" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="Task_Algorithm" EntityType="Self.Task_Algorithm" />
+          <EntitySet Name="User_Info" EntityType="Self.User_Info" />
+          <EntitySet Name="User_Status" EntityType="Self.User_Status" />
+          <EntitySet Name="User_TaskAlgorithm" EntityType="Self.User_TaskAlgorithm" />
+          <AssociationSet Name="FK_Tasks_Status" Association="Self.FK_Tasks_Status">
+            <End Role="AlgorithmStatus" EntitySet="AlgorithmStatus" />
+            <End Role="Tasks" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubThema_Themas" Association="Self.FK_SubThema_Themas">
+            <End Role="Themas" EntitySet="Themas" />
+            <End Role="SubThema" EntitySet="SubThemas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tasks_Article" Association="Self.FK_Tasks_Article">
+            <End Role="SubThema" EntitySet="SubThemas" />
+            <End Role="Tasks" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_Parametrs_Tasks" Association="Self.FK_Task_Parametrs_Tasks">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="Task_Parametrs" EntitySet="Task_Parametrs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_Algorithm_Tasks" Association="Self.FK_Task_Algorithm_Tasks">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="Task_Algorithm" EntitySet="Task_Algorithm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_TaskAlgorithm_Tasks" Association="Self.FK_User_TaskAlgorithm_Tasks">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="User_TaskAlgorithm" EntitySet="User_TaskAlgorithm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Group_User" Association="Self.FK_User_Group_User">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="User_Status" EntitySet="User_Status" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Info_User" Association="Self.FK_User_Info_User">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="User_Info" EntitySet="User_Info" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DistanceStudyStoreContainer" CdmEntityContainer="DistanceStudyEF">
+          <EntitySetMapping Name="AlgorithmStatus">
+            <EntityTypeMapping TypeName="DistanceStudy.AlgorithmStatu">
+              <MappingFragment StoreEntitySet="AlgorithmStatus">
+                <ScalarProperty Name="Id_AlgorithmStatus" ColumnName="Id_AlgorithmStatus" />
+                <ScalarProperty Name="SubGroupNumber" ColumnName="SubGroupNumber" />
+                <ScalarProperty Name="Condition" ColumnName="Condition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubThemas">
+            <EntityTypeMapping TypeName="DistanceStudy.SubThema">
+              <MappingFragment StoreEntitySet="SubThema">
+                <ScalarProperty Name="Id_SubThema" ColumnName="Id_SubThema" />
+                <ScalarProperty Name="Id_Thema" ColumnName="Id_Thema" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Task_Parametrs">
+            <EntityTypeMapping TypeName="DistanceStudy.Task_Parametrs">
+              <MappingFragment StoreEntitySet="Task_Parametrs">
+                <ScalarProperty Name="Id_Parametr" ColumnName="Id_Parametr" />
+                <ScalarProperty Name="Id_Task" ColumnName="Id_Task" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tasks">
+            <EntityTypeMapping TypeName="DistanceStudy.Task">
+              <MappingFragment StoreEntitySet="Tasks">
+                <ScalarProperty Name="Id_Task" ColumnName="Id_Task" />
+                <ScalarProperty Name="Id_SubThema" ColumnName="Id_SubThema" />
+                <ScalarProperty Name="Id_Status" ColumnName="Id_Status" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Condition" ColumnName="Condition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Themas">
+            <EntityTypeMapping TypeName="DistanceStudy.Thema">
+              <MappingFragment StoreEntitySet="Themas">
+                <ScalarProperty Name="Id_Thema" ColumnName="Id_Thema" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PhysicalNumber" ColumnName="PhysicalNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="DistanceStudy.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id_User" ColumnName="Id_User" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Task_Algorithm">
+            <EntityTypeMapping TypeName="DistanceStudy.Task_Algorithm">
+              <MappingFragment StoreEntitySet="Task_Algorithm">
+                <ScalarProperty Name="Id_Task" ColumnName="Id_Task" />
+                <ScalarProperty Name="AlgorithmStatus" ColumnName="AlgorithmStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Info">
+            <EntityTypeMapping TypeName="DistanceStudy.User_Info">
+              <MappingFragment StoreEntitySet="User_Info">
+                <ScalarProperty Name="Id_User" ColumnName="Id_User" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Status">
+            <EntityTypeMapping TypeName="DistanceStudy.User_Status">
+              <MappingFragment StoreEntitySet="User_Status">
+                <ScalarProperty Name="Id_User" ColumnName="Id_User" />
+                <ScalarProperty Name="Permission" ColumnName="Permission" />
+                <ScalarProperty Name="Subgroup" ColumnName="Subgroup" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_TaskAlgorithm">
+            <EntityTypeMapping TypeName="DistanceStudy.User_TaskAlgorithm">
+              <MappingFragment StoreEntitySet="User_TaskAlgorithm">
+                <ScalarProperty Name="Id_Task" ColumnName="Id_Task" />
+                <ScalarProperty Name="User_Algorithm_Code" ColumnName="User_Algorithm_Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

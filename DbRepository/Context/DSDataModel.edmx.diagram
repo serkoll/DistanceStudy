@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a2e6dec5d54a47ab948947262ee24b04" Name="Diagram1">
+        <EntityTypeShape EntityType="DistanceStudy.AlgorithmStatu" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DistanceStudy.SubThema" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DistanceStudy.Task_Parametrs" Width="1.5" PointX="7.5" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DistanceStudy.Task" Width="1.5" PointX="5.25" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DistanceStudy.Thema" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DistanceStudy.User" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DistanceStudy.Task_Algorithm" Width="1.5" PointX="7.5" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="DistanceStudy.User_Info" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DistanceStudy.User_Status" Width="1.5" PointX="3" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="DistanceStudy.User_TaskAlgorithm" Width="1.5" PointX="7.5" PointY="6.375" IsExpanded="true" />
+        <AssociationConnector Association="DistanceStudy.FK_Tasks_Status" ManuallyRouted="false" />
+        <AssociationConnector Association="DistanceStudy.FK_SubThema_Themas" ManuallyRouted="false" />
+        <AssociationConnector Association="DistanceStudy.FK_Tasks_Article" ManuallyRouted="false" />
+        <AssociationConnector Association="DistanceStudy.FK_Task_Parametrs_Tasks" ManuallyRouted="false" />
+        <AssociationConnector Association="DistanceStudy.FK_Task_Algorithm_Tasks" ManuallyRouted="false" />
+        <AssociationConnector Association="DistanceStudy.FK_User_TaskAlgorithm_Tasks" ManuallyRouted="false" />
+        <AssociationConnector Association="DistanceStudy.FK_User_Group_User" ManuallyRouted="false" />
+        <AssociationConnector Association="DistanceStudy.FK_User_Info_User" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -17,10 +17,8 @@ namespace DbRepository.Classes.Context
             _connectionString = ConfigurationManager.ConnectionStrings["DistanceStudyDB"].ConnectionString;
         }
 
-        /// <summary>
-        /// Добавление подтемы в бд
-        /// </summary>
-        /// <param name="item">Объект типа подтемы</param>
+        #region ADO.NET
+
         public void AddSubthema(Subthema item)
         {
             try
@@ -45,16 +43,6 @@ namespace DbRepository.Classes.Context
             }
         }
 
-        public void DeleteSubthema(int subthemaId)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Получение объекта отдельной подтемы по имени подтемы
-        /// </summary>
-        /// <param name="subthemaName"></param>
-        /// <returns></returns>
         public Subthema GetSubthema(string subthemaName)
         {
             try
@@ -79,10 +67,6 @@ namespace DbRepository.Classes.Context
             }
         }
 
-        /// <summary>
-        /// Получение всех подтем в БД
-        /// </summary>
-        /// <returns></returns>
         public IEnumerable<Subthema> GetAllSubthemas()
         {
             try
@@ -111,9 +95,7 @@ namespace DbRepository.Classes.Context
             }
         }
 
-        public int CountSubthemas()
-        {
-            throw new NotImplementedException();
-        }
+        #endregion
+
     }
 }

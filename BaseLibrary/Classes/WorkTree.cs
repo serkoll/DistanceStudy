@@ -162,7 +162,7 @@ namespace BaseLibrary.Classes
             if (_tree.SelectedNode.Parent != null)
             {
                 var idSubthema = dbSubThema.GetSubthema(name).Id;
-                dbSubThema.DeleteSubthema(idSubthema);
+                //dbSubThema.DeleteSubthema(idSubthema);
             }
         }
         /// <summary>
