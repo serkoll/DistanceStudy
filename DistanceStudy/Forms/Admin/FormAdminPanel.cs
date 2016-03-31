@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using DrawG;
 
 namespace DistanceStudy.Forms.Admin
 {
@@ -20,7 +21,8 @@ namespace DistanceStudy.Forms.Admin
 
         private void FormAdminPanel_Load(object sender, EventArgs e)
         {
-            
+            DrawG.MainForm mForm = new MainForm();
+            mForm.Show();
         }
     }
 }

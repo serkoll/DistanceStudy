@@ -30,9 +30,9 @@ namespace GeomObjects.Lines
         public Pen PenPointsX0Z { get; set; }
         public Pen PenPointsY0Z { get; set; }
 
-        public Pen PenLineX0Y = new Pen(Color.Black, 1);
-        public Pen PenLineX0Z = new Pen(Color.Black, 1);
-        public Pen PenLineY0Z = new Pen(Color.Black, 1);
+        public Pen PenLineX0Y = new Pen(Color.Black, 4);
+        public Pen PenLineX0Z = new Pen(Color.Black, 4);
+        public Pen PenLineY0Z = new Pen(Color.Black, 4);
 
         public bool FlagDrawPointPlan1X0Y { get; set; }//Флаг необходимости отрисовки горизонтальной проекции
         public bool FlagDrawPointPlan2X0Z { get; set; }//Флаг необходимости отрисовки фронтальной проекции
@@ -154,23 +154,84 @@ namespace GeomObjects.Lines
 
             }
         }
-
         /// <summary>
-        /// Инициализация нового экземпляра PointDraw
+        /// Инициализация нового экземпляра LineDraw
+        /// </summary>
+        /// <param name="lineOfPlan1X0YSource"></param>
+        /// <param name="lineOfPlan2X0ZSource"></param>
+        /// <param name="lineOfPlan3Y0ZSource"></param>
+        /// <param name="frameCentreSource"></param>
+        public LineDraw(LineOfPlan1X0Y lineOfPlan1X0YSource, 
+                        LineOfPlan2X0Z lineOfPlan2X0ZSource, 
+                        LineOfPlan3Y0Z lineOfPlan3Y0ZSource, 
+                        Pen penPointsX0Y, 
+                        Pen penPointsX0Z,
+                        Pen penPointsY0Z,
+                        Pen penLineX0Y,
+                        Pen penLineX0Z,
+                        Pen penLineY0Z,
+                        Point frameCentreSource)
+        {
+            if (lineOfPlan1X0YSource != null)
+            {
+                PenPointsX0Y = penPointsX0Y;
+                PenLineX0Y = penLineX0Y;
+                LineOfPlan1X0YPositionByPicture = LinePositionCorrection(this.CnvLine3DProjection(lineOfPlan1X0YSource), frameCentreSource);
+                LineOfPlan1X0YPositionByFrame = LinePositionCorrection(this.CnvLine3DProjection(lineOfPlan1X0YSource), this.PenPointsX0Y.Width, frameCentreSource);
+
+            }
+            if (lineOfPlan2X0ZSource != null)
+            {
+                PenPointsX0Z = penPointsX0Z;
+                PenLineX0Z = penLineX0Z;
+                LineOfPlan2X0ZPositionByPicture = LinePositionCorrection(this.CnvLine3DProjection(lineOfPlan2X0ZSource), frameCentreSource);
+                LineOfPlan2X0ZPositionByFrame = LinePositionCorrection(this.CnvLine3DProjection(lineOfPlan2X0ZSource), this.PenPointsX0Z.Width, frameCentreSource);
+
+            }
+            if (lineOfPlan3Y0ZSource != null)
+            {
+                PenPointsY0Z = penPointsY0Z;
+                PenLineY0Z = penLineY0Z;
+                LineOfPlan3Y0ZPositionByPicture = LinePositionCorrection(this.CnvLine3DProjection(lineOfPlan3Y0ZSource), frameCentreSource);
+                LineOfPlan3Y0ZPositionByFrame = LinePositionCorrection(this.CnvLine3DProjection(lineOfPlan3Y0ZSource), this.PenPointsY0Z.Width, frameCentreSource);
+
+            }
+        }
+        /// <summary>
+        /// Корректирует координаты точек прямой
+        /// </summary>
+        /// <param name="line2DSource"></param>
+        /// <param name="PointDiametre"></param>
+        /// <param name="frameCentreSource"></param>
+        /// <returns></returns>
+        public Line2D LinePositionCorrection(Line2D line2DSource, Point frameCentreSource)
+        {
+            Line2D line2DVar = new Line2D();
+
+            line2DVar.Point_0.X = line2DSource.Point_0.X + frameCentreSource.X;
+            line2DVar.Point_0.Y = line2DSource.Point_0.Y + frameCentreSource.Y;
+
+            line2DVar.Point_1.X = line2DSource.Point_1.X + frameCentreSource.X;
+            line2DVar.Point_1.Y = line2DSource.Point_1.Y + frameCentreSource.Y;
+
+            return line2DVar;
+        }
+        /// <summary>
+        /// Корректирует координаты точек прямой для отрисовки
         /// </summary>
         /// <param name="Line2DSource"></param>
-        /// <param name="PointRadius"></param>
+        /// <param name="PointDiametre"></param>
         /// <param name="FrameCentreSource"></param>
         /// <returns></returns>
-        public Line2D LinePositionCorrection(Line2D Line2DSource, float PointRadius, Point FrameCentreSource)
+        public Line2D LinePositionCorrection(Line2D Line2DSource, float PointDiametre, Point FrameCentreSource)
         {
             Line2D Line2DVar = new Line2D();
 
-            Line2DVar.Point_0.X = Line2DSource.Point_0.X + FrameCentreSource.X - (int)PointRadius;
-            Line2DVar.Point_0.Y = Line2DSource.Point_0.Y + FrameCentreSource.Y - (int)PointRadius;
+            Line2DVar.Point_0.X = Line2DSource.Point_0.X + FrameCentreSource.X - (int)PointDiametre / 2;
+            Line2DVar.Point_0.Y = Line2DSource.Point_0.Y + FrameCentreSource.Y - (int)PointDiametre / 2;
 
-            Line2DVar.Point_1.X = Line2DSource.Point_1.X + FrameCentreSource.X - (int)PointRadius;
-            Line2DVar.Point_1.Y = Line2DSource.Point_1.Y + FrameCentreSource.Y - (int)PointRadius;
+            Line2DVar.Point_1.X = Line2DSource.Point_1.X + FrameCentreSource.X - (int)PointDiametre / 2;
+            Line2DVar.Point_1.Y = Line2DSource.Point_1.Y + FrameCentreSource.Y - (int)PointDiametre / 2;
 
             return Line2DVar;
         }
@@ -319,26 +380,7 @@ namespace GeomObjects.Lines
             {
                 linePoints.Add(new Point((int)Math.Round((double)-(B * (coordStart.Y + height) + C) / A), coordStart.Y + height));
             }
-            //if ((-C / A) >= 0 && (-C / A) <= width)
-            //{
-            //    linePoints.Add(new Point((int)Math.Round((double)(-C / A)), 0));
-            //}
-            //// x = 0
-            //if ((-C / B) >= 0 && (-C / A) <= height)
-            //{
-            //    linePoints.Add(new Point(0, (int)Math.Round((double)(-C / B))));
 
-            //}
-            ///// x = max
-            //if ((-(A * width + C) / B) >= 0 && (-(A * width + C)) <= height)
-            //{
-            //    linePoints.Add(new Point(width, (int)Math.Round((double)-(A * width + C) / B)));
-            //}
-            ///// y = max
-            //if ((-(B * height + C) / A) >= 0 && (-(B * height + C)) <= width)
-            //{
-            //    linePoints.Add(new Point((int)Math.Round((double)-(B * height + C) / A), height));
-            //}
             return new Point[]
                 {
                     new Point(linePoints[0].X, linePoints[0].Y),

@@ -173,7 +173,6 @@ namespace GeomObjects
                 DetMrx = (double)Mrx.GetValue(0, 0) * (double)Mrx.GetValue(1, 1) - (double)Mrx.GetValue(0, 1) * (double)Mrx.GetValue(1, 0);
                 return DetMrx;
             }
-        CalcEnd: return 0;
         }
 
         /// <summary>
@@ -222,7 +221,6 @@ namespace GeomObjects
                     {
                         Var = false;
                         goto Calc3Rang;
-                        break; // TODO: might not be correct. Was : Exit Do
                     }
                     j += 1;
                 }
@@ -334,9 +332,7 @@ namespace GeomObjects
                     if ((double)Mrx.GetValue(i, j) != 0)
                     {
                         Var = false;
-                        goto Calc2Rang;
-                        break; // TODO: might not be correct. Was : Exit Do
-                    }
+                        goto Calc2Rang;                    }
                     j += 1;
                 }
                 i += 1;
@@ -359,8 +355,7 @@ namespace GeomObjects
                 RangMrx = 1;
                 goto CalcEnd;
             }
-            return RangMrx;
-        CalcEnd: return 0;
+        CalcEnd: return RangMrx;
         }
 
         /// <summary>

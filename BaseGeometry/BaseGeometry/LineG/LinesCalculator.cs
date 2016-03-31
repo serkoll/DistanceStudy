@@ -583,7 +583,6 @@ namespace GeomObjects.Lines
         /// <remarks></remarks>
         public static double? DistantionPointToLine(Points.Point3D Point, Line3D Line)
         {
-            double functionReturnValue = 0;
             //Функция возвращает величину расстояния от заданной 3D точки до 3D прямой
             double DistPtLn = 0;
             //Рассчитывается по треугольнику
@@ -616,7 +615,6 @@ namespace GeomObjects.Lines
             DistPtLn = S * 2 / l_12;
             //Расстояние как высота треугольника
             return DistPtLn;
-            return functionReturnValue;
         }
 
 
