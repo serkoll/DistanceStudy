@@ -30,9 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DrawYVP_DefaultSettings, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\DrawYVP_DefaultSettings.dll</HintPath>
+    <Reference Include="DrawYVP_DefaultSettings">
+      <HintPath>..\..\DLL\DrawYVP_DefaultSettings.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />

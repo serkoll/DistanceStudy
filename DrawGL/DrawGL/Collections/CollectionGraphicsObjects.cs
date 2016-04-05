@@ -15,7 +15,7 @@ namespace DrawG
     /// <summary>
     /// Обеспечивает доступ и управление отрисованными графическими объектами
     /// </summary>
-    public static class CollectionGraphicsObjects
+    static class CollectionGraphicsObjects
     {
         /// <summary>
         /// Коллекция графическиъ объектов
