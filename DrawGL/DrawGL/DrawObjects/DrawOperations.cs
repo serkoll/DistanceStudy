@@ -12,7 +12,7 @@ namespace DrawG
     /// <summary>
     /// Класс инструментов управления отрисовкой графических объектов посредством работы с формой
     /// </summary>
-    class ControlDraw
+    static class DrawOperations
     {
         public static GraphicsTools GraphicsTools_Var = new GraphicsTools(); //Инструменты работы с Graphics
         public static GridG GridDraw_Var = new GridG(); //Переменная для работы с классом инструментов расчета и отображения СЕТКИ
@@ -70,7 +70,7 @@ namespace DrawG
         public static void Objects_SelectAndDelete(PictureBox PictureBox_Source, PictureBox PictureBox_Back)
         {
             DrawObjectsToPictureBox.ObjectGraphics_DeleteFromCollectionAndRedraw(CursorPointToObject_Distantion, PictureBox_Source, PictureBox_Back);
-            ControlDraw.UserMouseClick = null;
+            DrawOperations.UserMouseClick = null;
         }
         /// <summary>
         /// Удаляет заранее выбранные графические объекты, записанные в коллекцию ObjectsGraphics_Select.

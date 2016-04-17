@@ -87,7 +87,7 @@ namespace DrawG
             {
                 FlagPoint3D_CreateStop = true;
 
-                Point3D_Var.Point3DDraw = new PointDraw(Point3D_Var, ControlDraw.GridDraw_Var.GridCenter);
+                Point3D_Var.Point3DDraw = new PointDraw(Point3D_Var, DrawOperations.GridDraw_Var.GridCenter);
                 Point3D_Var.Point3DDraw.Pen_Point1X0Y = Pen_PointPlan1X0Y;
                 Point3D_Var.Point3DDraw.Pen_Point2X0Z = Pen_PointPlan2X0Z;
                 Point3D_Var.Point3DDraw.Pen_Point3Y0Z = Pen_PointPlan3Y0Z;
@@ -114,15 +114,15 @@ namespace DrawG
 
             if (PointOfPlan1_X0Y_Var != null)
             {
-                Draw_Point3DProectionsTemp.DrawPointProection(PointOfPlan1_X0Y_Var, (int)Draw_Point3DProectionsTemp.Pen_Point1X0Y.Width / 2, ControlDraw.GridDraw_Var.GridCenter, ref Graphics_Source);
+                Draw_Point3DProectionsTemp.DrawPointProection(PointOfPlan1_X0Y_Var, (int)Draw_Point3DProectionsTemp.Pen_Point1X0Y.Width / 2, DrawOperations.GridDraw_Var.GridCenter, ref Graphics_Source);
             }
             if (PointOfPlan2_X0Z_Var != null)
             {
-                Draw_Point3DProectionsTemp.DrawPointProection(PointOfPlan2_X0Z_Var, (int)Draw_Point3DProectionsTemp.Pen_Point2X0Z.Width / 2, ControlDraw.GridDraw_Var.GridCenter, ref Graphics_Source);
+                Draw_Point3DProectionsTemp.DrawPointProection(PointOfPlan2_X0Z_Var, (int)Draw_Point3DProectionsTemp.Pen_Point2X0Z.Width / 2, DrawOperations.GridDraw_Var.GridCenter, ref Graphics_Source);
             }
             if (PointOfPlan3_Y0Z_Var != null)
             {
-                Draw_Point3DProectionsTemp.DrawPointProection(PointOfPlan3_Y0Z_Var, (int)Draw_Point3DProectionsTemp.Pen_Point3Y0Z.Width / 2, ControlDraw.GridDraw_Var.GridCenter, ref Graphics_Source);
+                Draw_Point3DProectionsTemp.DrawPointProection(PointOfPlan3_Y0Z_Var, (int)Draw_Point3DProectionsTemp.Pen_Point3Y0Z.Width / 2, DrawOperations.GridDraw_Var.GridCenter, ref Graphics_Source);
             }
         }
         /// <summary>

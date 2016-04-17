@@ -52,21 +52,21 @@ namespace DrawG
                 if (ObjectsGraphicsCollection_Source[i] is Point3D)
                 {
                     var temp = (Point3D)ObjectsGraphicsCollection_Source[i];
-                    Point PointProectionToScreen_Var = PropertyPoint3D.Draw_Point3D_Var.PointPositionCorrection(temp.Point3DDraw.PointPlan1X0Y_PositionByPicture, 0, ControlDraw.GridDraw_Var.GridCenter);
+                    Point PointProectionToScreen_Var = PropertyPoint3D.Draw_Point3D_Var.PointPositionCorrection(temp.Point3DDraw.PointPlan1X0Y_PositionByPicture, 0, DrawOperations.GridDraw_Var.GridCenter);
                     len = Math.Sqrt((CursorPoint.X - PointProectionToScreen_Var.X) ^ 2 + (CursorPoint.Y - PointProectionToScreen_Var.Y) ^ 2);
                     if (len < Distance_CursorToObject)
                     {
                         Object_Var = temp.PointOfPlan1X0Y;
                         break;
                     }
-                    PointProectionToScreen_Var = PropertyPoint3D.Draw_Point3D_Var.PointPositionCorrection(temp.Point3DDraw.PointPlan2X0Z_PositionByPicture, 0, ControlDraw.GridDraw_Var.GridCenter);
+                    PointProectionToScreen_Var = PropertyPoint3D.Draw_Point3D_Var.PointPositionCorrection(temp.Point3DDraw.PointPlan2X0Z_PositionByPicture, 0, DrawOperations.GridDraw_Var.GridCenter);
                     len = Math.Sqrt((CursorPoint.X - PointProectionToScreen_Var.X) ^ 2 + (CursorPoint.Y - PointProectionToScreen_Var.Y) ^ 2);
                     if (len < Distance_CursorToObject)
                     {
                         Object_Var = temp.PointOfPlan2X0Z;
                         break;
                     }
-                    PointProectionToScreen_Var = PropertyPoint3D.Draw_Point3D_Var.PointPositionCorrection(temp.Point3DDraw.PointPlan3Y0Z_PositionByPicture, 0, ControlDraw.GridDraw_Var.GridCenter);
+                    PointProectionToScreen_Var = PropertyPoint3D.Draw_Point3D_Var.PointPositionCorrection(temp.Point3DDraw.PointPlan3Y0Z_PositionByPicture, 0, DrawOperations.GridDraw_Var.GridCenter);
                     len = Math.Sqrt((CursorPoint.X - PointProectionToScreen_Var.X) ^ 2 + (CursorPoint.Y - PointProectionToScreen_Var.Y) ^ 2);
                     if (len < Distance_CursorToObject)
                     {
@@ -81,7 +81,7 @@ namespace DrawG
                 if (ObjectsGraphicsCollection_Source[i] is PointOfPlan1X0Y)
                 {
                     var temp = (PointOfPlan1X0Y)ObjectsGraphicsCollection_Source[i];
-                    Point PointProectionToScreen_Var = PropertyPoint3D.Draw_Point3D_Var.PointPositionCorrection(temp.Point3D_Draw.PointPlan1X0Y_PositionByPicture, 0, ControlDraw.GridDraw_Var.GridCenter);
+                    Point PointProectionToScreen_Var = PropertyPoint3D.Draw_Point3D_Var.PointPositionCorrection(temp.Point3D_Draw.PointPlan1X0Y_PositionByPicture, 0, DrawOperations.GridDraw_Var.GridCenter);
                     len = Math.Sqrt((CursorPoint.X - PointProectionToScreen_Var.X) ^ 2 + (CursorPoint.Y - PointProectionToScreen_Var.Y) ^ 2);
                     if (len < Distance_CursorToObject)
                     {
@@ -96,7 +96,7 @@ namespace DrawG
                 if (ObjectsGraphicsCollection_Source[i] is PointOfPlan2X0Z)
                 {
                     PointOfPlan2X0Z temp = (PointOfPlan2X0Z)ObjectsGraphicsCollection_Source[i];
-                    Point PointProectionToScreen_Var = PropertyPoint3D.Draw_Point3D_Var.PointPositionCorrection(temp.Point3D_Draw.PointPlan2X0Z_PositionByPicture, 0, ControlDraw.GridDraw_Var.GridCenter);
+                    Point PointProectionToScreen_Var = PropertyPoint3D.Draw_Point3D_Var.PointPositionCorrection(temp.Point3D_Draw.PointPlan2X0Z_PositionByPicture, 0, DrawOperations.GridDraw_Var.GridCenter);
                     len = Math.Sqrt((CursorPoint.X - PointProectionToScreen_Var.X) ^ 2 + (CursorPoint.Y - PointProectionToScreen_Var.Y) ^ 2);
                     if (len < Distance_CursorToObject)
                     {
@@ -111,7 +111,7 @@ namespace DrawG
                 if (ObjectsGraphicsCollection_Source[i] is PointOfPlan3Y0Z)
                 {
                     PointOfPlan3Y0Z temp = (PointOfPlan3Y0Z)ObjectsGraphicsCollection_Source[i];
-                    Point PointProectionToScreen_Var = PropertyPoint3D.Draw_Point3D_Var.PointPositionCorrection(temp.Point3D_Draw.PointPlan3Y0Z_PositionByPicture, 0, ControlDraw.GridDraw_Var.GridCenter);
+                    Point PointProectionToScreen_Var = PropertyPoint3D.Draw_Point3D_Var.PointPositionCorrection(temp.Point3D_Draw.PointPlan3Y0Z_PositionByPicture, 0, DrawOperations.GridDraw_Var.GridCenter);
                     len = Math.Sqrt((CursorPoint.X - PointProectionToScreen_Var.X) ^ 2 + (CursorPoint.Y - PointProectionToScreen_Var.Y) ^ 2);
                     if (len < Distance_CursorToObject)
                     {
@@ -147,7 +147,7 @@ namespace DrawG
                 if (ObjectsGraphicsCollection_Source[i] is PointOfPlan1X0Y)
                 {
                     PointOfPlan1X0Y temp = (PointOfPlan1X0Y)ObjectsGraphicsCollection_Source[i];
-                    Point PointProectionToScreen_Var = PropertyPoint3D.Draw_Point3D_Var.PointPositionCorrection(temp.Point3D_Draw.PointPlan1X0Y_PositionByPicture, 0, ControlDraw.GridDraw_Var.GridCenter);
+                    Point PointProectionToScreen_Var = PropertyPoint3D.Draw_Point3D_Var.PointPositionCorrection(temp.Point3D_Draw.PointPlan1X0Y_PositionByPicture, 0, DrawOperations.GridDraw_Var.GridCenter);
                     len = Math.Sqrt((CursorPoint.X - PointProectionToScreen_Var.X) ^ 2 + (CursorPoint.Y - PointProectionToScreen_Var.Y) ^ 2);
                     if (len < Distance_CursorToPointOfPlane)
                     {
@@ -162,7 +162,7 @@ namespace DrawG
                 if (ObjectsGraphicsCollection_Source[i] is PointOfPlan2X0Z)
                 {
                     PointOfPlan2X0Z temp = (PointOfPlan2X0Z)ObjectsGraphicsCollection_Source[i];
-                    Point PointProectionToScreen_Var = PropertyPoint3D.Draw_Point3D_Var.PointPositionCorrection(temp.Point3D_Draw.PointPlan2X0Z_PositionByPicture, 0, ControlDraw.GridDraw_Var.GridCenter);
+                    Point PointProectionToScreen_Var = PropertyPoint3D.Draw_Point3D_Var.PointPositionCorrection(temp.Point3D_Draw.PointPlan2X0Z_PositionByPicture, 0, DrawOperations.GridDraw_Var.GridCenter);
                     len = Math.Sqrt((CursorPoint.X - PointProectionToScreen_Var.X) ^ 2 + (CursorPoint.Y - PointProectionToScreen_Var.Y) ^ 2);
                     if (len < Distance_CursorToPointOfPlane)
                     {
@@ -177,7 +177,7 @@ namespace DrawG
                 if (ObjectsGraphicsCollection_Source[i] is PointOfPlan3Y0Z)
                 {
                     PointOfPlan3Y0Z temp = (PointOfPlan3Y0Z)ObjectsGraphicsCollection_Source[i];
-                    Point PointProectionToScreen_Var = PropertyPoint3D.Draw_Point3D_Var.PointPositionCorrection(temp.Point3D_Draw.PointPlan3Y0Z_PositionByPicture, 0, ControlDraw.GridDraw_Var.GridCenter);
+                    Point PointProectionToScreen_Var = PropertyPoint3D.Draw_Point3D_Var.PointPositionCorrection(temp.Point3D_Draw.PointPlan3Y0Z_PositionByPicture, 0, DrawOperations.GridDraw_Var.GridCenter);
                     len = Math.Sqrt((CursorPoint.X - PointProectionToScreen_Var.X) ^ 2 + (CursorPoint.Y - PointProectionToScreen_Var.Y) ^ 2);
                     if (len < Distance_CursorToPointOfPlane)
                     {

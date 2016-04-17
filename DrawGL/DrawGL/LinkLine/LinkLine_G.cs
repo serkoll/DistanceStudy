@@ -59,69 +59,69 @@ namespace DrawG
             {
                 if (CollectionGraphicsObjects.GraphicsObjectsCollection[i] is Point3D)
                 {
-                    Point3D_LLG.Point3DDraw.DrawLinkLine((Point3D)CollectionGraphicsObjects.GraphicsObjectsCollection[i], ControlDraw.GridDraw_Var.GridCenter, ref Graphics_Source);
+                    Point3D_LLG.Point3DDraw.DrawLinkLine((Point3D)CollectionGraphicsObjects.GraphicsObjectsCollection[i], DrawOperations.GridDraw_Var.GridCenter, ref Graphics_Source);
                 }
                 if (CollectionGraphicsObjects.GraphicsObjectsCollection[i] is PointOfPlan1X0Y)
                 {
-                    Point3D_LLG.Point3DDraw.DrawLinkLine((PointOfPlan1X0Y)CollectionGraphicsObjects.GraphicsObjectsCollection[i], true, true, true, true, true, ControlDraw.GridDraw_Var.GridCenter, ref Graphics_Source);
+                    Point3D_LLG.Point3DDraw.DrawLinkLine((PointOfPlan1X0Y)CollectionGraphicsObjects.GraphicsObjectsCollection[i], true, true, true, true, true, DrawOperations.GridDraw_Var.GridCenter, ref Graphics_Source);
                 }
                 if (CollectionGraphicsObjects.GraphicsObjectsCollection[i] is PointOfPlan2X0Z)
                 {
-                    Point3D_LLG.Point3DDraw.DrawLinkLine((PointOfPlan2X0Z)CollectionGraphicsObjects.GraphicsObjectsCollection[i], true, true, true, true, ControlDraw.GridDraw_Var.GridCenter, ref Graphics_Source);
+                    Point3D_LLG.Point3DDraw.DrawLinkLine((PointOfPlan2X0Z)CollectionGraphicsObjects.GraphicsObjectsCollection[i], true, true, true, true, DrawOperations.GridDraw_Var.GridCenter, ref Graphics_Source);
                 }
                 if (CollectionGraphicsObjects.GraphicsObjectsCollection[i] is PointOfPlan3Y0Z)
                 {
-                    Point3D_LLG.Point3DDraw.DrawLinkLine((PointOfPlan3Y0Z)CollectionGraphicsObjects.GraphicsObjectsCollection[i], true, true, true, true, true, ControlDraw.GridDraw_Var.GridCenter, ref Graphics_Source);
+                    Point3D_LLG.Point3DDraw.DrawLinkLine((PointOfPlan3Y0Z)CollectionGraphicsObjects.GraphicsObjectsCollection[i], true, true, true, true, true, DrawOperations.GridDraw_Var.GridCenter, ref Graphics_Source);
                 }
                 if (CollectionGraphicsObjects.GraphicsObjectsCollection[i] is LineOfPlan1X0Y)
                 {
-                    Line3D_LLG.Line_Draw.DrawLinkLine((LineOfPlan1X0Y)CollectionGraphicsObjects.GraphicsObjectsCollection[i], true, true, true, true, true, ControlDraw.GridDraw_Var.GridCenter, ref Graphics_Source);
+                    Line3D_LLG.Line_Draw.DrawLinkLine((LineOfPlan1X0Y)CollectionGraphicsObjects.GraphicsObjectsCollection[i], true, true, true, true, true, DrawOperations.GridDraw_Var.GridCenter, ref Graphics_Source);
                 }
                 if (CollectionGraphicsObjects.GraphicsObjectsCollection[i] is LineOfPlan2X0Z)
                 {
-                    Line3D_LLG.Line_Draw.DrawLinkLine((LineOfPlan2X0Z)CollectionGraphicsObjects.GraphicsObjectsCollection[i], true, true, true, true, ControlDraw.GridDraw_Var.GridCenter, ref Graphics_Source);
+                    Line3D_LLG.Line_Draw.DrawLinkLine((LineOfPlan2X0Z)CollectionGraphicsObjects.GraphicsObjectsCollection[i], true, true, true, true, DrawOperations.GridDraw_Var.GridCenter, ref Graphics_Source);
                 }
                 if (CollectionGraphicsObjects.GraphicsObjectsCollection[i] is LineOfPlan3Y0Z)
                 {
-                    Line3D_LLG.Line_Draw.DrawLinkLine((LineOfPlan3Y0Z)CollectionGraphicsObjects.GraphicsObjectsCollection[i], true, true, true, true, true, ControlDraw.GridDraw_Var.GridCenter, ref Graphics_Source);
+                    Line3D_LLG.Line_Draw.DrawLinkLine((LineOfPlan3Y0Z)CollectionGraphicsObjects.GraphicsObjectsCollection[i], true, true, true, true, true, DrawOperations.GridDraw_Var.GridCenter, ref Graphics_Source);
                 }
             }
             if (PropertyPoint3D.PointOfPlan1_X0Y_Var != null)
             {
-                Point3D_LLG.Point3DDraw.DrawLinkLine(PropertyPoint3D.PointOfPlan1_X0Y_Var, LinLineXoY_toX_Flag_LLG, LinLineXoY_toY_Flag_LLG, LinLineXoY_toX_Flag_LLG, LinLineXoY_toY_Flag_LLG, LinLineXoY_toY_Flag_LLG, ControlDraw.GridDraw_Var.GridCenter, ref Graphics_Source);
+                Point3D_LLG.Point3DDraw.DrawLinkLine(PropertyPoint3D.PointOfPlan1_X0Y_Var, LinLineXoY_toX_Flag_LLG, LinLineXoY_toY_Flag_LLG, LinLineXoY_toX_Flag_LLG, LinLineXoY_toY_Flag_LLG, LinLineXoY_toY_Flag_LLG, DrawOperations.GridDraw_Var.GridCenter, ref Graphics_Source);
             }
             if (PropertyPoint3D.PointOfPlan2_X0Z_Var != null)
             {
-                Point3D_LLG.Point3DDraw.DrawLinkLine(PropertyPoint3D.PointOfPlan2_X0Z_Var, LinLineXoY_toX_Flag_LLG, LinLineXoY_toY_Flag_LLG, LinLineXoY_toX_Flag_LLG, LinLineXoY_toY_Flag_LLG, ControlDraw.GridDraw_Var.GridCenter, ref Graphics_Source);
+                Point3D_LLG.Point3DDraw.DrawLinkLine(PropertyPoint3D.PointOfPlan2_X0Z_Var, LinLineXoY_toX_Flag_LLG, LinLineXoY_toY_Flag_LLG, LinLineXoY_toX_Flag_LLG, LinLineXoY_toY_Flag_LLG, DrawOperations.GridDraw_Var.GridCenter, ref Graphics_Source);
             }
             if (PropertyPoint3D.PointOfPlan3_Y0Z_Var != null)
             {
-                Point3D_LLG.Point3DDraw.DrawLinkLine(PropertyPoint3D.PointOfPlan3_Y0Z_Var, LinLineXoY_toX_Flag_LLG, LinLineXoY_toY_Flag_LLG, LinLineXoY_toX_Flag_LLG, LinLineXoY_toY_Flag_LLG, LinLineXoY_toY_Flag_LLG, ControlDraw.GridDraw_Var.GridCenter, ref Graphics_Source);
+                Point3D_LLG.Point3DDraw.DrawLinkLine(PropertyPoint3D.PointOfPlan3_Y0Z_Var, LinLineXoY_toX_Flag_LLG, LinLineXoY_toY_Flag_LLG, LinLineXoY_toX_Flag_LLG, LinLineXoY_toY_Flag_LLG, LinLineXoY_toY_Flag_LLG, DrawOperations.GridDraw_Var.GridCenter, ref Graphics_Source);
             }
             if (PropertyLine3D.Point0OfPlan1X0Y != null)
             {
-                Point3D_LLG.Point3DDraw.DrawLinkLine(PropertyLine3D.Point0OfPlan1X0Y, LinLineXoY_toX_Flag_LLG, LinLineXoY_toY_Flag_LLG, LinLineXoY_toX_Flag_LLG, LinLineXoY_toY_Flag_LLG, LinLineXoY_toY_Flag_LLG, ControlDraw.GridDraw_Var.GridCenter, ref Graphics_Source);
+                Point3D_LLG.Point3DDraw.DrawLinkLine(PropertyLine3D.Point0OfPlan1X0Y, LinLineXoY_toX_Flag_LLG, LinLineXoY_toY_Flag_LLG, LinLineXoY_toX_Flag_LLG, LinLineXoY_toY_Flag_LLG, LinLineXoY_toY_Flag_LLG, DrawOperations.GridDraw_Var.GridCenter, ref Graphics_Source);
             }
             if (PropertyLine3D.Point0OfPlan2X0Z != null)
             {
-                Point3D_LLG.Point3DDraw.DrawLinkLine(PropertyLine3D.Point0OfPlan2X0Z, LinLineXoY_toX_Flag_LLG, LinLineXoY_toY_Flag_LLG, LinLineXoY_toX_Flag_LLG, LinLineXoY_toY_Flag_LLG, ControlDraw.GridDraw_Var.GridCenter, ref Graphics_Source);
+                Point3D_LLG.Point3DDraw.DrawLinkLine(PropertyLine3D.Point0OfPlan2X0Z, LinLineXoY_toX_Flag_LLG, LinLineXoY_toY_Flag_LLG, LinLineXoY_toX_Flag_LLG, LinLineXoY_toY_Flag_LLG, DrawOperations.GridDraw_Var.GridCenter, ref Graphics_Source);
             }
             if (PropertyLine3D.Point0OfPlan3Y0Z != null)
             {
-                Point3D_LLG.Point3DDraw.DrawLinkLine(PropertyLine3D.Point0OfPlan3Y0Z, LinLineXoY_toX_Flag_LLG, LinLineXoY_toY_Flag_LLG, LinLineXoY_toX_Flag_LLG, LinLineXoY_toY_Flag_LLG, LinLineXoY_toY_Flag_LLG, ControlDraw.GridDraw_Var.GridCenter, ref Graphics_Source);
+                Point3D_LLG.Point3DDraw.DrawLinkLine(PropertyLine3D.Point0OfPlan3Y0Z, LinLineXoY_toX_Flag_LLG, LinLineXoY_toY_Flag_LLG, LinLineXoY_toX_Flag_LLG, LinLineXoY_toY_Flag_LLG, LinLineXoY_toY_Flag_LLG, DrawOperations.GridDraw_Var.GridCenter, ref Graphics_Source);
             }
 
             if (PropertyLineProjections.Point0LineOfPlan1X0Y != null)
             {
-                Point3D_LLG.Point3DDraw.DrawLinkLine(PropertyLineProjections.Point0LineOfPlan1X0Y, LinLineXoY_toX_Flag_LLG, LinLineXoY_toY_Flag_LLG, LinLineXoY_toX_Flag_LLG, LinLineXoY_toY_Flag_LLG, LinLineXoY_toY_Flag_LLG, ControlDraw.GridDraw_Var.GridCenter, ref Graphics_Source);
+                Point3D_LLG.Point3DDraw.DrawLinkLine(PropertyLineProjections.Point0LineOfPlan1X0Y, LinLineXoY_toX_Flag_LLG, LinLineXoY_toY_Flag_LLG, LinLineXoY_toX_Flag_LLG, LinLineXoY_toY_Flag_LLG, LinLineXoY_toY_Flag_LLG, DrawOperations.GridDraw_Var.GridCenter, ref Graphics_Source);
             }
             if (PropertyLineProjections.Point0LineOfPlan2X0Z != null)
             {
-                Point3D_LLG.Point3DDraw.DrawLinkLine(PropertyLineProjections.Point0LineOfPlan2X0Z, LinLineXoY_toX_Flag_LLG, LinLineXoY_toY_Flag_LLG, LinLineXoY_toX_Flag_LLG, LinLineXoY_toY_Flag_LLG, ControlDraw.GridDraw_Var.GridCenter, ref Graphics_Source);
+                Point3D_LLG.Point3DDraw.DrawLinkLine(PropertyLineProjections.Point0LineOfPlan2X0Z, LinLineXoY_toX_Flag_LLG, LinLineXoY_toY_Flag_LLG, LinLineXoY_toX_Flag_LLG, LinLineXoY_toY_Flag_LLG, DrawOperations.GridDraw_Var.GridCenter, ref Graphics_Source);
             }
             if (PropertyLineProjections.Point0LineOfPlan3Y0Z != null)
             {
-                Point3D_LLG.Point3DDraw.DrawLinkLine(PropertyLineProjections.Point0LineOfPlan3Y0Z, LinLineXoY_toX_Flag_LLG, LinLineXoY_toY_Flag_LLG, LinLineXoY_toX_Flag_LLG, LinLineXoY_toY_Flag_LLG, LinLineXoY_toY_Flag_LLG, ControlDraw.GridDraw_Var.GridCenter, ref Graphics_Source);
+                Point3D_LLG.Point3DDraw.DrawLinkLine(PropertyLineProjections.Point0LineOfPlan3Y0Z, LinLineXoY_toX_Flag_LLG, LinLineXoY_toY_Flag_LLG, LinLineXoY_toX_Flag_LLG, LinLineXoY_toY_Flag_LLG, LinLineXoY_toY_Flag_LLG, DrawOperations.GridDraw_Var.GridCenter, ref Graphics_Source);
             }
             PropertyPoint3D.Draw_ProectionsTemp(Graphics_Source); //Отрисовка точек проекций
         }

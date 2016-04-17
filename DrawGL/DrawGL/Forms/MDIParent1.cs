@@ -76,34 +76,34 @@ namespace DrawG {
         /// <param name="e"></param>
         private void PictureBox1_MouseDown(object sender, EventArgs e)
         {
-            ControlDraw.UserMouseClick = PictureBox1.PointToClient(Control.MousePosition);
-            Point op = (Point)ControlDraw.UserMouseClick;
+            DrawOperations.UserMouseClick = PictureBox1.PointToClient(Control.MousePosition);
+            Point op = (Point)DrawOperations.UserMouseClick;
             if (DrawObjectsToPictureBox.Tool_DrawObject == DrawObjectsToPictureBox.Tools_DrawObjects.SetPoint) {
-                ControlDraw.Objects_DrawAndAdd(PictureBox1);
+                DrawOperations.Objects_DrawAndAdd(PictureBox1);
             } else if (DrawObjectsToPictureBox.Tool_DrawObject == DrawObjectsToPictureBox.Tools_DrawObjects.SetPoint3D) {
                 PropertyPoint3D.FlagPoint_Point3D = true;
                 PropertyPoint3D.FlagPoint3D_CreateStop = false;
                 DoEvents_Point3D();
                 PropertyPoint3D.FlagPoint3D_CreateStop = true;
             } else if (DrawObjectsToPictureBox.Tool_DrawObject == DrawObjectsToPictureBox.Tools_DrawObjects.SetPointPlan1X0Y) {
-                ControlDraw.Objects_DrawAndAdd(PictureBox1);
-                if (ControlDraw.LinkLine_Var.ShowLinkLine_XYZ_Flag) {
-                    ControlDraw.LinkLine_Var.LinkLineToGrpahics_Add(DrawObjectsToPictureBox.GraphicsActive);
+                DrawOperations.Objects_DrawAndAdd(PictureBox1);
+                if (DrawOperations.LinkLine_Var.ShowLinkLine_XYZ_Flag) {
+                    DrawOperations.LinkLine_Var.LinkLineToGrpahics_Add(DrawObjectsToPictureBox.GraphicsActive);
                 }
             } else if (DrawObjectsToPictureBox.Tool_DrawObject == DrawObjectsToPictureBox.Tools_DrawObjects.SetPointPlan2X0Z) {
-                ControlDraw.Objects_DrawAndAdd(PictureBox1);
-                if (ControlDraw.LinkLine_Var.ShowLinkLine_XYZ_Flag) {
-                    ControlDraw.LinkLine_Var.LinkLineToGrpahics_Add(DrawObjectsToPictureBox.GraphicsActive);
+                DrawOperations.Objects_DrawAndAdd(PictureBox1);
+                if (DrawOperations.LinkLine_Var.ShowLinkLine_XYZ_Flag) {
+                    DrawOperations.LinkLine_Var.LinkLineToGrpahics_Add(DrawObjectsToPictureBox.GraphicsActive);
                 }
             } else if (DrawObjectsToPictureBox.Tool_DrawObject == DrawObjectsToPictureBox.Tools_DrawObjects.SetPointPlan3Y0Z) {
-                ControlDraw.Objects_DrawAndAdd(PictureBox1);
-                if (ControlDraw.LinkLine_Var.ShowLinkLine_XYZ_Flag) {
-                    ControlDraw.LinkLine_Var.LinkLineToGrpahics_Add(DrawObjectsToPictureBox.GraphicsActive);
+                DrawOperations.Objects_DrawAndAdd(PictureBox1);
+                if (DrawOperations.LinkLine_Var.ShowLinkLine_XYZ_Flag) {
+                    DrawOperations.LinkLine_Var.LinkLineToGrpahics_Add(DrawObjectsToPictureBox.GraphicsActive);
                 }
             } else if (DrawObjectsToPictureBox.Tool_DrawObject == DrawObjectsToPictureBox.Tools_DrawObjects.SelectObject) { // Выбор и изменение активных объектов
-                ControlDraw.Objects_SelectAndFire(PictureBox1);
+                DrawOperations.Objects_SelectAndFire(PictureBox1);
             } else if (DrawObjectsToPictureBox.Tool_DrawObject == DrawObjectsToPictureBox.Tools_DrawObjects.SetPoint3DByPointOfPlan) {
-                ControlDraw.Objects_SelectAndFirePointOfPlane(PictureBox1);
+                DrawOperations.Objects_SelectAndFirePointOfPlane(PictureBox1);
                 if (PropertyPoint3D.FlagPoint_Point3D) {
                 } else {
                     DrawObjectsToPictureBox.Tool_DrawObject = DrawObjectsToPictureBox.Tools_DrawObjects.None;
@@ -111,33 +111,33 @@ namespace DrawG {
                 }
             } else if (DrawObjectsToPictureBox.Tool_DrawObject == DrawObjectsToPictureBox.Tools_DrawObjects.DeleteSelectObjects) // Удалить выбранные объекты
             {
-                ControlDraw.UserMouseClick = PictureBox1.PointToClient(Control.MousePosition); // Фиксация положения курсора при MouseDown
-                ControlDraw.Objects_SelectAndDelete(PictureBox1, PictureBox2); // Удалить выбранные объект
+                DrawOperations.UserMouseClick = PictureBox1.PointToClient(Control.MousePosition); // Фиксация положения курсора при MouseDown
+                DrawOperations.Objects_SelectAndDelete(PictureBox1, PictureBox2); // Удалить выбранные объект
             } else if (DrawObjectsToPictureBox.Tool_DrawObject == DrawObjectsToPictureBox.Tools_DrawObjects.DeleteObjects) {
-                ControlDraw.UserMouseClick = PictureBox1.PointToClient(Control.MousePosition); // Фиксация положения курсора при MouseDown
-                ControlDraw.Objects_SelectAndFire(PictureBox1); // Подсветить удаляемый объект
-                ControlDraw.Objects_SelectAndDelete(PictureBox1, PictureBox2); // Удалить выбранный объект
+                DrawOperations.UserMouseClick = PictureBox1.PointToClient(Control.MousePosition); // Фиксация положения курсора при MouseDown
+                DrawOperations.Objects_SelectAndFire(PictureBox1); // Подсветить удаляемый объект
+                DrawOperations.Objects_SelectAndDelete(PictureBox1, PictureBox2); // Удалить выбранный объект
             } else if (DrawObjectsToPictureBox.Tool_DrawObject == DrawObjectsToPictureBox.Tools_DrawObjects.SetLine) {
-                ControlDraw.Objects_DrawAndAdd(PictureBox1);
+                DrawOperations.Objects_DrawAndAdd(PictureBox1);
             } else if (DrawObjectsToPictureBox.Tool_DrawObject == DrawObjectsToPictureBox.Tools_DrawObjects.SetLine3D) {
                 PropertyLine3D.FlagPoint3DCreateStop = false;
                 PropertyLine3D.FlagLine3D = true;
                 DoEvents_Line3D();
                 PropertyLine3D.FlagPoint3DCreateStop = false;
             } else if (DrawObjectsToPictureBox.Tool_DrawObject == DrawObjectsToPictureBox.Tools_DrawObjects.SetLinePlan1X0Y) {
-                ControlDraw.Objects_DrawAndAdd(PictureBox1);
-                if (ControlDraw.LinkLine_Var.ShowLinkLine_XYZ_Flag) {
-                    ControlDraw.LinkLine_Var.LinkLineToGrpahics_Add(DrawObjectsToPictureBox.GraphicsActive);
+                DrawOperations.Objects_DrawAndAdd(PictureBox1);
+                if (DrawOperations.LinkLine_Var.ShowLinkLine_XYZ_Flag) {
+                    DrawOperations.LinkLine_Var.LinkLineToGrpahics_Add(DrawObjectsToPictureBox.GraphicsActive);
                 }
             } else if (DrawObjectsToPictureBox.Tool_DrawObject == DrawObjectsToPictureBox.Tools_DrawObjects.SetLinePlan2X0Z) {
-                ControlDraw.Objects_DrawAndAdd(PictureBox1);
-                if (ControlDraw.LinkLine_Var.ShowLinkLine_XYZ_Flag) {
-                    ControlDraw.LinkLine_Var.LinkLineToGrpahics_Add(DrawObjectsToPictureBox.GraphicsActive);
+                DrawOperations.Objects_DrawAndAdd(PictureBox1);
+                if (DrawOperations.LinkLine_Var.ShowLinkLine_XYZ_Flag) {
+                    DrawOperations.LinkLine_Var.LinkLineToGrpahics_Add(DrawObjectsToPictureBox.GraphicsActive);
                 }
             } else if (DrawObjectsToPictureBox.Tool_DrawObject == DrawObjectsToPictureBox.Tools_DrawObjects.SetLinePlan3Y0Z) {
-                ControlDraw.Objects_DrawAndAdd(PictureBox1);
-                if (ControlDraw.LinkLine_Var.ShowLinkLine_XYZ_Flag) {
-                    ControlDraw.LinkLine_Var.LinkLineToGrpahics_Add(DrawObjectsToPictureBox.GraphicsActive);
+                DrawOperations.Objects_DrawAndAdd(PictureBox1);
+                if (DrawOperations.LinkLine_Var.ShowLinkLine_XYZ_Flag) {
+                    DrawOperations.LinkLine_Var.LinkLineToGrpahics_Add(DrawObjectsToPictureBox.GraphicsActive);
                 }
             }
             PictureBox1.Image = (Image)DrawObjectsToPictureBox.BitmapActive.Clone(); // Передача картинки активных объектов в PictureBox_Source
@@ -153,8 +153,8 @@ namespace DrawG {
             Cursor_Draw.CursorPointToGridMove(PictureBox1); // Привязка к сетке
 
             // Отображение координат текущего положения курсора
-            toolStripStatusLabel1_X_Value.Text = (PictureBox1.PointToClient(Cursor.Position).X - ControlDraw.GridDraw_Var.GridCenter.X).ToString();
-            toolStripStatusLabel1_Y_Value.Text = (PictureBox1.PointToClient(Cursor.Position).Y - ControlDraw.GridDraw_Var.GridCenter.Y).ToString();
+            toolStripStatusLabel1_X_Value.Text = (PictureBox1.PointToClient(Cursor.Position).X - DrawOperations.GridDraw_Var.GridCenter.X).ToString();
+            toolStripStatusLabel1_Y_Value.Text = (PictureBox1.PointToClient(Cursor.Position).Y - DrawOperations.GridDraw_Var.GridCenter.Y).ToString();
         }
         /// <summary>
         /// Отрисовка активной 2D точки 
@@ -175,13 +175,13 @@ namespace DrawG {
         {
             if (toolStripStatusLabel4_StatusGrid.BorderStyle == Border3DStyle.RaisedInner) {
                 toolStripStatusLabel4_StatusGrid.BorderStyle = Border3DStyle.SunkenOuter;
-                ControlDraw.GridDraw_Var.GridFlagDraw = true;
-                ControlDraw.GridDraw_Var.GridDefaultSetting.FlagDraw = true; // Передача значения в параметры настройки
+                DrawOperations.GridDraw_Var.GridFlagDraw = true;
+                DrawOperations.GridDraw_Var.GridDefaultSetting.FlagDraw = true; // Передача значения в параметры настройки
                 DrawObjectsToPictureBox.GraphicsBack_Add(PictureBox1, PictureBox2);
             } else {
                 toolStripStatusLabel4_StatusGrid.BorderStyle = Border3DStyle.RaisedInner;
-                ControlDraw.GridDraw_Var.GridFlagDraw = false;
-                ControlDraw.GridDraw_Var.GridDefaultSetting.FlagDraw = false; // Передача значения в параметры настройки
+                DrawOperations.GridDraw_Var.GridFlagDraw = false;
+                DrawOperations.GridDraw_Var.GridDefaultSetting.FlagDraw = false; // Передача значения в параметры настройки
                 DrawObjectsToPictureBox.GraphicsBack_Clear(PictureBox1, PictureBox2);
             }
         }
@@ -194,11 +194,11 @@ namespace DrawG {
         {
             if (toolStripStatusLabel5_SatusAxis.BorderStyle == Border3DStyle.RaisedInner) {
                 toolStripStatusLabel5_SatusAxis.BorderStyle = Border3DStyle.SunkenOuter;
-                ControlDraw.AxisDraw_Var.showAxisXYZ = true;
+                DrawOperations.AxisDraw_Var.showAxisXYZ = true;
                 DrawObjectsToPictureBox.GraphicsBack_Add(PictureBox1, PictureBox2);
             } else {
                 toolStripStatusLabel5_SatusAxis.BorderStyle = Border3DStyle.RaisedInner;
-                ControlDraw.AxisDraw_Var.showAxisXYZ = false;
+                DrawOperations.AxisDraw_Var.showAxisXYZ = false;
                 DrawObjectsToPictureBox.GraphicsBack_Clear(PictureBox1, PictureBox2);
             }
         }
@@ -211,7 +211,7 @@ namespace DrawG {
         {
             DrawObjectsToPictureBox.Tool_DrawObject = DrawObjectsToPictureBox.Tools_DrawObjects.SelectObject; // Задание режима выбора активного объекта
             PictureBox1.Cursor = Cursors.Hand; // Указание вида курсора
-            ControlDraw.UserMouseClick = null; // Обнуление для указания следующего объекта
+            DrawOperations.UserMouseClick = null; // Обнуление для указания следующего объекта
         }
         /// <summary>
         /// Удалить выбранный объект ( Кнопка "Стереть" )
@@ -230,7 +230,7 @@ namespace DrawG {
         /// <param name="e"></param>
         private void toolStripButton11_Click(object sender, EventArgs e)
         {
-            ControlDraw.Objects_ClearAll(PictureBox1, PictureBox2);
+            DrawOperations.Objects_ClearAll(PictureBox1, PictureBox2);
             PictureBox1.Cursor = Cursors.Default;
         }
         /// <summary>
@@ -241,7 +241,7 @@ namespace DrawG {
         private void toolStripButton10_Click(object sender, EventArgs e)
         {
             DrawObjectsToPictureBox.Tool_DrawObject = DrawObjectsToPictureBox.Tools_DrawObjects.DeleteSelectObjects;
-            ControlDraw.ObjectsSelected_Delete(PictureBox1, PictureBox2);
+            DrawOperations.ObjectsSelected_Delete(PictureBox1, PictureBox2);
             PictureBox1.Cursor = Cursors.Default;
         }
         /// <summary>
@@ -310,7 +310,7 @@ namespace DrawG {
             PropertyPoint3D.FlagPoint_Point3D = true;
             DrawObjectsToPictureBox.Tool_DrawObject = DrawObjectsToPictureBox.Tools_DrawObjects.SetPoint3DByPointOfPlan;
             PictureBox1.Cursor = Cursors.Hand;
-            ControlDraw.UserMouseClick = null;
+            DrawOperations.UserMouseClick = null;
         }
         /// <summary>
         /// Цикл отслеживания событий для возможности указания нескольких проекций для формирования 3D точки
@@ -324,11 +324,11 @@ namespace DrawG {
                 } else break;
                 if (PropertyPoint3D.FlagPoint_Point3D) {
                     DrawObjectsToPictureBox.GraphicsBack_Clear(PictureBox1, PictureBox2);
-                    ControlDraw.Objects_DrawAndAdd(PictureBox1);
+                    DrawOperations.Objects_DrawAndAdd(PictureBox1);
                     if (PropertyPoint3D.FlagPoint_Point3D) { } else {
-                        if (ControlDraw.LinkLine_Var.ShowLinkLine_XYZ_Flag) {
+                        if (DrawOperations.LinkLine_Var.ShowLinkLine_XYZ_Flag) {
                             DrawObjectsToPictureBox.GraphicsBack_Clear(PictureBox1, PictureBox2);
-                            ControlDraw.LinkLine_Var.LinkLineToGrpahics_Add(DrawObjectsToPictureBox.GraphicsActive);
+                            DrawOperations.LinkLine_Var.LinkLineToGrpahics_Add(DrawObjectsToPictureBox.GraphicsActive);
                         } else {
                             PropertyPoint3D.Draw_ProectionsTemp(DrawObjectsToPictureBox.GraphicsActive);
                         }
@@ -341,9 +341,9 @@ namespace DrawG {
             }
             while (true);
             PropertyPoint3D.FlagPoint3D_CreateStop = false;
-            if (ControlDraw.LinkLine_Var.ShowLinkLine_XYZ_Flag) {
+            if (DrawOperations.LinkLine_Var.ShowLinkLine_XYZ_Flag) {
                 DrawObjectsToPictureBox.GraphicsBack_Clear(PictureBox1, PictureBox2);
-                ControlDraw.LinkLine_Var.LinkLineToGrpahics_Add(DrawObjectsToPictureBox.GraphicsActive);
+                DrawOperations.LinkLine_Var.LinkLineToGrpahics_Add(DrawObjectsToPictureBox.GraphicsActive);
             }
             PictureBox1.Image = (Bitmap)DrawObjectsToPictureBox.BitmapActive.Clone();
             PictureBox1.Refresh();
@@ -357,11 +357,11 @@ namespace DrawG {
                 } else break;
                 if (PropertyLine3D.FlagLine3D) {
                     DrawObjectsToPictureBox.GraphicsBack_Clear(PictureBox1, PictureBox2);
-                    ControlDraw.Objects_DrawAndAdd(PictureBox1);
+                    DrawOperations.Objects_DrawAndAdd(PictureBox1);
                     if (PropertyLine3D.FlagLine3D) { } else {
-                        if (ControlDraw.LinkLine_Var.ShowLinkLine_XYZ_Flag) {
+                        if (DrawOperations.LinkLine_Var.ShowLinkLine_XYZ_Flag) {
                             DrawObjectsToPictureBox.GraphicsBack_Clear(PictureBox1, PictureBox2);
-                            ControlDraw.LinkLine_Var.LinkLineToGrpahics_Add(DrawObjectsToPictureBox.GraphicsActive);
+                            DrawOperations.LinkLine_Var.LinkLineToGrpahics_Add(DrawObjectsToPictureBox.GraphicsActive);
                         } else {
                             PropertyLine3D.DrawTempPointsProjections(DrawObjectsToPictureBox.GraphicsActive);
                         }
@@ -374,9 +374,9 @@ namespace DrawG {
             }
             while (true);
             PropertyLine3D.FlagPoint3DCreateStop = false;
-            if (ControlDraw.LinkLine_Var.ShowLinkLine_XYZ_Flag) {
+            if (DrawOperations.LinkLine_Var.ShowLinkLine_XYZ_Flag) {
                 DrawObjectsToPictureBox.GraphicsBack_Clear(PictureBox1, PictureBox2);
-                ControlDraw.LinkLine_Var.LinkLineToGrpahics_Add(DrawObjectsToPictureBox.GraphicsActive);
+                DrawOperations.LinkLine_Var.LinkLineToGrpahics_Add(DrawObjectsToPictureBox.GraphicsActive);
             }
             PictureBox1.Image = (Bitmap)DrawObjectsToPictureBox.BitmapActive.Clone();
             PictureBox1.Refresh();
@@ -396,12 +396,12 @@ namespace DrawG {
         {
             if (toolStripStatusLabel6_StatusLinkLine.BorderStyle == Border3DStyle.RaisedInner) {
                 toolStripStatusLabel6_StatusLinkLine.BorderStyle = Border3DStyle.SunkenOuter;
-                ControlDraw.LinkLine_Var.ShowLinkLine_XYZ_Flag = true;
-                ControlDraw.LinkLine_Var.LinkLineToGrpahics_Add(DrawObjectsToPictureBox.GraphicsActive);
+                DrawOperations.LinkLine_Var.ShowLinkLine_XYZ_Flag = true;
+                DrawOperations.LinkLine_Var.LinkLineToGrpahics_Add(DrawObjectsToPictureBox.GraphicsActive);
                 DrawObjectsToPictureBox.GraphicsBack_Add(PictureBox1, PictureBox2);
             } else {
                 toolStripStatusLabel6_StatusLinkLine.BorderStyle = Border3DStyle.RaisedInner;
-                ControlDraw.LinkLine_Var.ShowLinkLine_XYZ_Flag = false;
+                DrawOperations.LinkLine_Var.ShowLinkLine_XYZ_Flag = false;
                 DrawObjectsToPictureBox.GraphicsBack_Clear(PictureBox1, PictureBox2);
             }
         }

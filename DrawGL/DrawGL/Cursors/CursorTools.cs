@@ -36,38 +36,38 @@ namespace DrawG
         public static void CursorPointToGridMove(PictureBox PictureBox_Source)
         {
             // 1. Контроль включения привязки к сетке
-            if(CursorToGridFixation) {}
+            if (CursorToGridFixation) { }
             else
             {
                 CursorTools_Var.CursorPosition_Old = new Point();
                 return;
             }
             // 2. Контроль изменения размеров PictureBox (для устранения (погрешности) приращения координат)
-            if((PictureBox_Height==0) && (PictureBox_Width==0)) // Контроль изменения размеров PictureBox
+            if ((PictureBox_Height == 0) && (PictureBox_Width == 0)) // Контроль изменения размеров PictureBox
             {
                 PictureBox_Height = PictureBox_Source.Height;
                 PictureBox_Width = PictureBox_Source.Width;
                 CursorTools_Var.CursorPosition_Old = new Point();
             }
-            else if ((PictureBox_Height != PictureBox_Source.Height) && (PictureBox_Width != PictureBox_Source.Width) )
+            else if ((PictureBox_Height != PictureBox_Source.Height) && (PictureBox_Width != PictureBox_Source.Width))
             {
                 PictureBox_Height = PictureBox_Source.Height;
                 PictureBox_Width = PictureBox_Source.Width;
                 CursorTools_Var.CursorPosition_Old = new Point();
             }
             // 3. Контроль изменения параметров сетки (для устранения (погрешности) приращения координат)
-            if ((GridStep_HeightOld == ControlDraw.GridDraw_Var.GridStepOfHeight) && (GridStep_WidthOld == ControlDraw.GridDraw_Var.GridStepOfWidth)) { }// Контроль изменения параметров сетки
+            if ((GridStep_HeightOld == DrawOperations.GridDraw_Var.GridStepOfHeight) && (GridStep_WidthOld == DrawOperations.GridDraw_Var.GridStepOfWidth)) { }// Контроль изменения параметров сетки
             else
             {
-                GridStep_HeightOld = ControlDraw.GridDraw_Var.GridStepOfHeight;
-                GridStep_WidthOld = ControlDraw.GridDraw_Var.GridStepOfWidth;
+                GridStep_HeightOld = DrawOperations.GridDraw_Var.GridStepOfHeight;
+                GridStep_WidthOld = DrawOperations.GridDraw_Var.GridStepOfWidth;
                 CursorTools_Var.CursorPosition_Old = new Point();
             }
             // 4. Расчет привязки положения точки курсора к узлам сетки
-            CursorTools_Var.CursorPointToGridMove(PictureBox_Source, ControlDraw.GridDraw_Var.GridCenter, ControlDraw.GridDraw_Var.GridStepOfHeight, ControlDraw.GridDraw_Var.GridStepOfWidth);
+            CursorTools_Var.CursorPointToGridMove(PictureBox_Source, DrawOperations.GridDraw_Var.GridCenter, DrawOperations.GridDraw_Var.GridStepOfHeight, DrawOperations.GridDraw_Var.GridStepOfWidth);
         }
     }
-    
+
     /// <summary>
     /// Класс, содержащий инструменты работы с курсором при отрисовке графических объектов
     /// </summary>
@@ -117,7 +117,7 @@ namespace DrawG
             int dY = Cursor.Position.Y - PictureBox_Source.PointToClient(Cursor.Position).Y; //Разность значений координат Y в системе координат основной формы и в системе координат PictureBox1 (определяет положение PictureBox1 в системе координат основной формы)
             Graphics Graphics_Source = PictureBox_Source.CreateGraphics();
 
-            if(CursorPosition_Old.X==0 && CursorPosition_Old.Y==0) // Установка стартовых значений
+            if (CursorPosition_Old.X == 0 && CursorPosition_Old.Y == 0) // Установка стартовых значений
             {
                 Point CursorPoint_ToGrid = new Point();
                 int DistanceX, DistanceY;
@@ -140,7 +140,7 @@ namespace DrawG
                 CursorPoint_ToGrid.Y = CursorPoint_ToGrid.Y + GridCentre_Source.Y;
 
                 // 4. Смещение положения курсора в точку с округленными координатами
-                Cursor.Position = new Point( (int)Math.Truncate((double)(CursorPoint_ToGrid.X + dX)), (int)Math.Truncate((double)(CursorPoint_ToGrid.Y + dY)) );
+                Cursor.Position = new Point((int)Math.Truncate((double)(CursorPoint_ToGrid.X + dX)), (int)Math.Truncate((double)(CursorPoint_ToGrid.Y + dY)));
                 // 5. Запись текущего положения курсора
                 CursorPosition_Old.X = Cursor.Position.X;
                 CursorPosition_Old.Y = Cursor.Position.Y;
@@ -148,13 +148,13 @@ namespace DrawG
             }
 
             CursorPosition_New = Cursor.Position;
-      
-            if(CursorPosition_Old.X > CursorPosition_New.X) // Движение курсора влево
+
+            if (CursorPosition_Old.X > CursorPosition_New.X) // Движение курсора влево
             {
                 Cursor.Position = new Point(CursorPosition_Old.X - GridStep_Width, CursorPosition_Old.Y);
                 CursorPosition_Old.X -= GridStep_Width;
             }
-            else if(CursorPosition_Old.X < CursorPosition_New.X) // Движение курсора вправо
+            else if (CursorPosition_Old.X < CursorPosition_New.X) // Движение курсора вправо
             {
                 Cursor.Position = new Point(CursorPosition_Old.X + GridStep_Width, CursorPosition_Old.Y);
                 CursorPosition_Old.X += GridStep_Width;
