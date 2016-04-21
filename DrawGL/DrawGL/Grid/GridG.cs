@@ -15,12 +15,12 @@ namespace DrawG
     /// <summary>
     /// Класс, содержащий инструменты задания и отрисовки СЕТКИ
     /// </summary>
-    class GridG
+    class GridG : GridCalculation
     {
         /// <summary>
         /// Массив узловых точек сетки
         /// </summary>
-        public Point[,] GridKnots{ get; set; }
+        public Point[,] GridKnots { get; set; }
         /// <summary>
         /// Размер сетки по высоте (координата Y в пространстве рисунка, направлена вниз)
         /// </summary>
@@ -28,15 +28,11 @@ namespace DrawG
         /// <summary>
         /// Размер сетки по ширине (координата X в пространстве рисунка, направлена вправо)
         /// </summary>
-        public int GridWidth{ get; set; }
+        public int GridWidth { get; set; }
         /// <summary>
         /// Центральная точка сетки
         /// </summary>
         public Point GridCenter { get; set; }
-        /// <summary>
-        /// Переменная для работы с классом, содержащим функции расчета СЕТКИ
-        /// </summary>
-        public GridCalculation GridCalculation = new GridCalculation();
         /// <summary>
         /// Переменная для работы с классом настроек СЕТКИ
         /// </summary>
@@ -96,14 +92,14 @@ namespace DrawG
             {
                 GridHeight = (int)g.VisibleClipBounds.Size.Height;
                 GridWidth = (int)g.VisibleClipBounds.Size.Width;
-                GridKnots = GridCalculation.CalculateGrid(GridHeight, GridWidth, GridStepOfHeight, GridStepOfWidth);
-                GridCenter = GridCalculation.CalculateGridCentre(GridKnots);
+                GridKnots = CalculateGrid(GridHeight, GridWidth, GridStepOfHeight, GridStepOfWidth);
+                GridCenter = CalculateGridCentre(GridKnots);
                 DrawGrid(GridKnots, this.GridDefaultSetting.PointsColor, this.GridDefaultSetting.PointSize, g);
             }
             else
             {
-                GridKnots = GridCalculation.CalculateGrid(GridHeight, GridWidth, GridStepOfHeight, GridStepOfWidth);
-                GridCenter = GridCalculation.CalculateGridCentre(GridKnots);
+                GridKnots = CalculateGrid(GridHeight, GridWidth, GridStepOfHeight, GridStepOfWidth);
+                GridCenter = CalculateGridCentre(GridKnots);
                 DrawGrid(GridKnots, this.GridDefaultSetting.PointsColor, this.GridDefaultSetting.PointSize, g);
             }
         }
@@ -123,17 +119,17 @@ namespace DrawG
             {
                 GridHeight = (int)g.VisibleClipBounds.Size.Height;
                 GridWidth = (int)g.VisibleClipBounds.Size.Width;
-                GridKnots = GridCalculation.CalculateGrid(GridHeight, GridWidth, GridStepOfHeight, GridStepOfWidth);
-                GridCenter = GridCalculation.CalculateGridCentre(GridKnots);
+                GridKnots = CalculateGrid(GridHeight, GridWidth, GridStepOfHeight, GridStepOfWidth);
+                GridCenter = CalculateGridCentre(GridKnots);
                 DrawGrid(GridKnots, GridColor, Knots_R, g);
             }
             else
             {
-                GridKnots = GridCalculation.CalculateGrid(GridHeight, GridWidth, GridStepOfHeight, GridStepOfWidth);
-                GridCenter = GridCalculation.CalculateGridCentre(GridKnots);
+                GridKnots = CalculateGrid(GridHeight, GridWidth, GridStepOfHeight, GridStepOfWidth);
+                GridCenter = CalculateGridCentre(GridKnots);
                 DrawGrid(GridKnots, GridColor, Knots_R, g);
             }
-        } 
+        }
         /// <summary>
         /// Задает сетку на поверхности Graphics
         /// </summary>
@@ -145,12 +141,12 @@ namespace DrawG
         {
             Point GridPoint = new Point();
             Pen Pens = new Pen(KnotPointColor, KnotPointR);
-            for(int i=0;i<GridKnotPoints.GetUpperBound(0);i++)
+            for (int i = 0; i < GridKnotPoints.GetUpperBound(0); i++)
             {
-                for(int j=0;j<GridKnotPoints.GetUpperBound(1);j++)
+                for (int j = 0; j < GridKnotPoints.GetUpperBound(1); j++)
                 {
-                   GridPoint=GridCalculation.GetGridKnotPoint(GridKnotPoints,i,j);
-                   g.DrawPie(Pens, GridPoint.X, GridPoint.Y, KnotPointR, KnotPointR, 0, 360);
+                    GridPoint = GetGridKnotPoint(GridKnotPoints, i, j);
+                    g.DrawPie(Pens, GridPoint.X, GridPoint.Y, KnotPointR, KnotPointR, 0, 360);
                 }
             }
         }
@@ -164,16 +160,16 @@ namespace DrawG
         public void DrawGrid(int[,] GridKnotPoints, System.Windows.Forms.PictureBox pb, Color PointColor, int PointR)
         {
             int CenterX, CenterY;
-            Point GrPoint=new Point();
+            Point GrPoint = new Point();
             Point[] GrPoints = new Point[GridKnotPoints.GetUpperBound(0)];
             Pen Pens = new Pen(PointColor, PointR);
             CenterX = pb.ClientRectangle.Width / 2;
             CenterY = pb.ClientRectangle.Height / 2;
-            for(int i=0; i<GridKnotPoints.GetUpperBound(0); i++)
+            for (int i = 0; i < GridKnotPoints.GetUpperBound(0); i++)
             {
-                GrPoint.X=(int)(CenterX+GridKnotPoints[i,0]);
-                GrPoint.Y=(int)(CenterY+GridKnotPoints[i,1]);
-                pb.CreateGraphics().DrawEllipse(Pens,(int)(GrPoint.X-PointR/2),(int)(GrPoint.Y-PointR/2),PointR,PointR);
+                GrPoint.X = (int)(CenterX + GridKnotPoints[i, 0]);
+                GrPoint.Y = (int)(CenterY + GridKnotPoints[i, 1]);
+                pb.CreateGraphics().DrawEllipse(Pens, (int)(GrPoint.X - PointR / 2), (int)(GrPoint.Y - PointR / 2), PointR, PointR);
             }
         }
         /// <summary>
@@ -192,7 +188,7 @@ namespace DrawG
             {
                 for (int j = 0; j < GridKnotPoints.GetUpperBound(1); j++)
                 {
-                    GridPoint = GridCalculation.GetGridKnotPoint(GridKnotPoints, i, j);
+                    GridPoint = GetGridKnotPoint(GridKnotPoints, i, j);
                     Grid_Gr.DrawPie(Pens, GridPoint.Y, GridPoint.X, KnotPoint_R, KnotPoint_R, 0, 360);
                 }
             }

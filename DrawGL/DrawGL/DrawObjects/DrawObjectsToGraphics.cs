@@ -36,12 +36,12 @@ namespace DrawG
             GraphicsBack_Clear(Grahpics_Source);
             if (GridFlag)
             {
-                ControlDraw.GridDraw_Var.CreateGridToGraphics(Grahpics_Source);
+                DrawOperations.GridDraw_Var.CreateGridToGraphics(Grahpics_Source);
             }
             if (AxisFlag)
             {
-                ControlDraw.AxisDraw_Var.AxisCalculationByGrid(ControlDraw.GridDraw_Var.GridKnots);
-                ControlDraw.AxisDraw_Var.AddAxisToGraphics(ControlDraw.GridDraw_Var.GridCenter, Grahpics_Source);
+                DrawOperations.AxisDraw_Var.AxisCalculationByGrid(DrawOperations.GridDraw_Var.GridKnots);
+                DrawOperations.AxisDraw_Var.AddAxisToGraphics(DrawOperations.GridDraw_Var.GridCenter, Grahpics_Source);
             }
         }
         /// <summary>
@@ -54,12 +54,12 @@ namespace DrawG
         {
             if (Grid_FlagDraw)
             {
-                ControlDraw.GridDraw_Var.CreateGridToGraphics(Grahpics_Source);
+                DrawOperations.GridDraw_Var.CreateGridToGraphics(Grahpics_Source);
             }
             if (Axis_FlagDraw)
             {
-                ControlDraw.AxisDraw_Var.AxisCalculationByGrid(ControlDraw.GridDraw_Var.GridKnots);
-                ControlDraw.AxisDraw_Var.AddAxisToGraphics(ControlDraw.GridDraw_Var.GridCenter, Grahpics_Source);
+                DrawOperations.AxisDraw_Var.AxisCalculationByGrid(DrawOperations.GridDraw_Var.GridKnots);
+                DrawOperations.AxisDraw_Var.AddAxisToGraphics(DrawOperations.GridDraw_Var.GridCenter, Grahpics_Source);
             }
         }
         /// <summary>
@@ -74,14 +74,14 @@ namespace DrawG
         {
             if (Grid_FlagDraw)
             {
-                ControlDraw.GridDraw_Var.CreateGridToGraphics(GraphicsBack_Source);
-                ControlDraw.GridDraw_Var.CreateGridToGraphics(GraphicsActive_Source);
+                DrawOperations.GridDraw_Var.CreateGridToGraphics(GraphicsBack_Source);
+                DrawOperations.GridDraw_Var.CreateGridToGraphics(GraphicsActive_Source);
             }
             if (Axis_FlagDraw)
             {
-                ControlDraw.AxisDraw_Var.AxisCalculationByGrid(ControlDraw.GridDraw_Var.GridKnots);
-                ControlDraw.AxisDraw_Var.AddAxisToGraphics(ControlDraw.GridDraw_Var.GridCenter, GraphicsBack_Source);
-                ControlDraw.AxisDraw_Var.AddAxisToGraphics(ControlDraw.GridDraw_Var.GridCenter, GraphicsActive_Source);
+                DrawOperations.AxisDraw_Var.AxisCalculationByGrid(DrawOperations.GridDraw_Var.GridKnots);
+                DrawOperations.AxisDraw_Var.AddAxisToGraphics(DrawOperations.GridDraw_Var.GridCenter, GraphicsBack_Source);
+                DrawOperations.AxisDraw_Var.AddAxisToGraphics(DrawOperations.GridDraw_Var.GridCenter, GraphicsActive_Source);
             }
         }
         /// <summary>
@@ -104,12 +104,12 @@ namespace DrawG
             GraphicsBack_Clear(GraphicsBack_Source);
             if (Grid_FlagDraw)
             {
-                ControlDraw.GridDraw_Var.CreateGridToGraphics(GraphicsBack_Source);
+                DrawOperations.GridDraw_Var.CreateGridToGraphics(GraphicsBack_Source);
             }
             if (Axis_FlagDraw)
             {
-                ControlDraw.AxisDraw_Var.AxisCalculationByGrid(ControlDraw.GridDraw_Var.GridKnots);
-                ControlDraw.AxisDraw_Var.AddAxisToGraphics(ControlDraw.GridDraw_Var.GridCenter, GraphicsBack_Source);
+                DrawOperations.AxisDraw_Var.AxisCalculationByGrid(DrawOperations.GridDraw_Var.GridKnots);
+                DrawOperations.AxisDraw_Var.AddAxisToGraphics(DrawOperations.GridDraw_Var.GridCenter, GraphicsBack_Source);
             }
         }
         /// <summary>
@@ -131,22 +131,22 @@ namespace DrawG
             else if (CollectionOfGraphicObjcets_Source[GraphicObjcet_Number - 1] is Point3D)
             {
                 var temp = (Point3D)CollectionOfGraphicObjcets_Source[GraphicObjcet_Number - 1];
-                DrawPoint3DToXYXZYZ(temp, ControlDraw.GridDraw_Var.GridCenter, ref Graphics_Source);
+                DrawPoint3DToXYXZYZ(temp, DrawOperations.GridDraw_Var.GridCenter, ref Graphics_Source);
             }
             else if (CollectionOfGraphicObjcets_Source[GraphicObjcet_Number - 1] is PointOfPlan1X0Y)
             {
                 var temp = (PointOfPlan1X0Y)CollectionOfGraphicObjcets_Source[GraphicObjcet_Number - 1];
-                DrawPointOfPlan1X0Y(temp, ControlDraw.GridDraw_Var.GridCenter, ref Graphics_Source);
+                DrawPointOfPlan1X0Y(temp, DrawOperations.GridDraw_Var.GridCenter, ref Graphics_Source);
             }
             else if (CollectionOfGraphicObjcets_Source[GraphicObjcet_Number - 1] is PointOfPlan2X0Z)
             {
                 var temp = (PointOfPlan2X0Z)CollectionOfGraphicObjcets_Source[GraphicObjcet_Number - 1];
-                DrawPointOfPlan2X0Z(temp, ControlDraw.GridDraw_Var.GridCenter, ref Graphics_Source);
+                DrawPointOfPlan2X0Z(temp, DrawOperations.GridDraw_Var.GridCenter, ref Graphics_Source);
             }
             else if (CollectionOfGraphicObjcets_Source[GraphicObjcet_Number - 1] is PointOfPlan3Y0Z)
             {
                 var temp = (PointOfPlan3Y0Z)CollectionOfGraphicObjcets_Source[GraphicObjcet_Number - 1];
-                DrawPointOfPlan3Y0Z(temp, ControlDraw.GridDraw_Var.GridCenter, ref Graphics_Source);
+                DrawPointOfPlan3Y0Z(temp, DrawOperations.GridDraw_Var.GridCenter, ref Graphics_Source);
             }
             else if (CollectionOfGraphicObjcets_Source[GraphicObjcet_Number - 1] is Line2D)
             {
@@ -156,17 +156,17 @@ namespace DrawG
             else if (CollectionOfGraphicObjcets_Source[GraphicObjcet_Number - 1] is LineOfPlan1X0Y)
             {
                 var temp = (LineOfPlan1X0Y)CollectionOfGraphicObjcets_Source[GraphicObjcet_Number - 1];
-                DrawLineOfPlan1X0Y(temp, ControlDraw.GridDraw_Var.GridCenter, ref Graphics_Source);
+                DrawLineOfPlan1X0Y(temp, DrawOperations.GridDraw_Var.GridCenter, ref Graphics_Source);
             }
             else if (CollectionOfGraphicObjcets_Source[GraphicObjcet_Number - 1] is LineOfPlan2X0Z)
             {
                 var temp = (LineOfPlan2X0Z)CollectionOfGraphicObjcets_Source[GraphicObjcet_Number - 1];
-                DrawLineOfPlan2X0Z(temp, ControlDraw.GridDraw_Var.GridCenter, ref Graphics_Source);
+                DrawLineOfPlan2X0Z(temp, DrawOperations.GridDraw_Var.GridCenter, ref Graphics_Source);
             }
             else if (CollectionOfGraphicObjcets_Source[GraphicObjcet_Number - 1] is LineOfPlan3Y0Z)
             {
                 var temp = (LineOfPlan3Y0Z)CollectionOfGraphicObjcets_Source[GraphicObjcet_Number - 1];
-                DrawLineOfPlan3Y0Z(temp, ControlDraw.GridDraw_Var.GridCenter, ref Graphics_Source);
+                DrawLineOfPlan3Y0Z(temp, DrawOperations.GridDraw_Var.GridCenter, ref Graphics_Source);
             }
         }
         /// <summary>
@@ -198,22 +198,22 @@ namespace DrawG
                 else if (CollectionOfGraphicObjects_Source[i] is Point3D)
                 {
                     Point3D temp = (Point3D)CollectionOfGraphicObjects_Source[i];
-                    DrawPoint3DToXYXZYZ(temp, ControlDraw.GridDraw_Var.GridCenter, ref Graphics_Source);
+                    DrawPoint3DToXYXZYZ(temp, DrawOperations.GridDraw_Var.GridCenter, ref Graphics_Source);
                 }
                 else if (CollectionOfGraphicObjects_Source[i] is PointOfPlan1X0Y)
                 {
                     PointOfPlan1X0Y temp = (PointOfPlan1X0Y)CollectionOfGraphicObjects_Source[i];
-                    DrawPointOfPlan1X0Y(temp, ControlDraw.GridDraw_Var.GridCenter, ref Graphics_Source);
+                    DrawPointOfPlan1X0Y(temp, DrawOperations.GridDraw_Var.GridCenter, ref Graphics_Source);
                 }
                 else if (CollectionOfGraphicObjects_Source[i] is PointOfPlan2X0Z)
                 {
                     PointOfPlan2X0Z temp = (PointOfPlan2X0Z)CollectionOfGraphicObjects_Source[i];
-                    DrawPointOfPlan2X0Z(temp, ControlDraw.GridDraw_Var.GridCenter, ref Graphics_Source);
+                    DrawPointOfPlan2X0Z(temp, DrawOperations.GridDraw_Var.GridCenter, ref Graphics_Source);
                 }
                 else if (CollectionOfGraphicObjects_Source[i] is PointOfPlan3Y0Z)
                 {
                     PointOfPlan3Y0Z temp = (PointOfPlan3Y0Z)CollectionOfGraphicObjects_Source[i];
-                    DrawPointOfPlan3Y0Z(temp, ControlDraw.GridDraw_Var.GridCenter, ref Graphics_Source);
+                    DrawPointOfPlan3Y0Z(temp, DrawOperations.GridDraw_Var.GridCenter, ref Graphics_Source);
                 }
                 else if (CollectionOfGraphicObjects_Source[i] is Line2D)
                 {
@@ -223,17 +223,17 @@ namespace DrawG
                 else if (CollectionOfGraphicObjects_Source[i] is LineOfPlan1X0Y)
                 {
                     var temp = (LineOfPlan1X0Y)CollectionOfGraphicObjects_Source[i];
-                    DrawLineOfPlan1X0Y(temp, ControlDraw.GridDraw_Var.GridCenter, ref Graphics_Source);
+                    DrawLineOfPlan1X0Y(temp, DrawOperations.GridDraw_Var.GridCenter, ref Graphics_Source);
                 }
                 else if (CollectionOfGraphicObjects_Source[i] is LineOfPlan2X0Z)
                 {
                     var temp = (LineOfPlan2X0Z)CollectionOfGraphicObjects_Source[i];
-                    DrawLineOfPlan2X0Z(temp, ControlDraw.GridDraw_Var.GridCenter, ref Graphics_Source);
+                    DrawLineOfPlan2X0Z(temp, DrawOperations.GridDraw_Var.GridCenter, ref Graphics_Source);
                 }
                 else if (CollectionOfGraphicObjects_Source[i] is LineOfPlan3Y0Z)
                 {
                     var temp = (LineOfPlan3Y0Z)CollectionOfGraphicObjects_Source[i];
-                    DrawLineOfPlan3Y0Z(temp, ControlDraw.GridDraw_Var.GridCenter, ref Graphics_Source);
+                    DrawLineOfPlan3Y0Z(temp, DrawOperations.GridDraw_Var.GridCenter, ref Graphics_Source);
                 }
             }
 
@@ -263,22 +263,22 @@ namespace DrawG
                 else if (CollectionOfGraphicObjects_Source[i] is Point3D)
                 {
                     Point3D temp = (Point3D)CollectionOfGraphicObjects_Source[i];
-                    DrawPoint3DToXYXZYZ(temp, ControlDraw.GridDraw_Var.GridCenter, ref Graphics_Source);
+                    DrawPoint3DToXYXZYZ(temp, DrawOperations.GridDraw_Var.GridCenter, ref Graphics_Source);
                 }
                 else if (CollectionOfGraphicObjects_Source[i] is PointOfPlan1X0Y)
                 {
                     PointOfPlan1X0Y temp = (PointOfPlan1X0Y)CollectionOfGraphicObjects_Source[i];
-                    DrawPointOfPlan1X0Y(temp, ControlDraw.GridDraw_Var.GridCenter, ref Graphics_Source);
+                    DrawPointOfPlan1X0Y(temp, DrawOperations.GridDraw_Var.GridCenter, ref Graphics_Source);
                 }
                 else if (CollectionOfGraphicObjects_Source[i] is PointOfPlan2X0Z)
                 {
                     PointOfPlan2X0Z temp = (PointOfPlan2X0Z)CollectionOfGraphicObjects_Source[i];
-                    DrawPointOfPlan2X0Z(temp, ControlDraw.GridDraw_Var.GridCenter, ref Graphics_Source);
+                    DrawPointOfPlan2X0Z(temp, DrawOperations.GridDraw_Var.GridCenter, ref Graphics_Source);
                 }
                 else if (CollectionOfGraphicObjects_Source[i] is PointOfPlan3Y0Z)
                 {
                     PointOfPlan3Y0Z temp = (PointOfPlan3Y0Z)CollectionOfGraphicObjects_Source[i];
-                    DrawPointOfPlan3Y0Z(temp, ControlDraw.GridDraw_Var.GridCenter, ref Graphics_Source);
+                    DrawPointOfPlan3Y0Z(temp, DrawOperations.GridDraw_Var.GridCenter, ref Graphics_Source);
                 }
                 else if (CollectionOfGraphicObjects_Source[i] is Line2D)
                 {
@@ -288,17 +288,17 @@ namespace DrawG
                 else if (CollectionOfGraphicObjects_Source[i] is LineOfPlan1X0Y)
                 {
                     var temp = (LineOfPlan1X0Y)CollectionOfGraphicObjects_Source[i];
-                    DrawLineOfPlan1X0Y(temp, ControlDraw.GridDraw_Var.GridCenter, ref Graphics_Source);
+                    DrawLineOfPlan1X0Y(temp, DrawOperations.GridDraw_Var.GridCenter, ref Graphics_Source);
                 }
                 else if (CollectionOfGraphicObjects_Source[i] is LineOfPlan2X0Z)
                 {
                     var temp = (LineOfPlan2X0Z)CollectionOfGraphicObjects_Source[i];
-                    DrawLineOfPlan2X0Z(temp, ControlDraw.GridDraw_Var.GridCenter, ref Graphics_Source);
+                    DrawLineOfPlan2X0Z(temp, DrawOperations.GridDraw_Var.GridCenter, ref Graphics_Source);
                 }
                 else if (CollectionOfGraphicObjects_Source[i] is LineOfPlan3Y0Z)
                 {
                     var temp = (LineOfPlan3Y0Z)CollectionOfGraphicObjects_Source[i];
-                    DrawLineOfPlan3Y0Z(temp, ControlDraw.GridDraw_Var.GridCenter, ref Graphics_Source);
+                    DrawLineOfPlan3Y0Z(temp, DrawOperations.GridDraw_Var.GridCenter, ref Graphics_Source);
                 }
             }
         }
@@ -602,19 +602,19 @@ namespace DrawG
             else if (Object_Source is PointOfPlan1X0Y)
             {
                 PointOfPlan1X0Y temp = (PointOfPlan1X0Y)Object_Source;
-                Point_Var = PropertyPoint3D.Draw_Point3D_Var.PointPositionCorrection(PropertyPoint3D.Draw_Point3D_Var.CnvPoint3DProjection_ToPoint(temp), 0, ControlDraw.GridDraw_Var.GridCenter);
+                Point_Var = PropertyPoint3D.Draw_Point3D_Var.PointPositionCorrection(PropertyPoint3D.Draw_Point3D_Var.CnvPoint3DProjection_ToPoint(temp), 0, DrawOperations.GridDraw_Var.GridCenter);
                 DrawPoint2D(Point_Var.X, Point_Var.Y, Point_ColorNew, PropertyPoint.Diametre_Point + 1, Graphics_Source);
             }
             else if (Object_Source is PointOfPlan2X0Z)
             {
                 PointOfPlan2X0Z temp = (PointOfPlan2X0Z)Object_Source;
-                Point_Var = PropertyPoint3D.Draw_Point3D_Var.PointPositionCorrection(PropertyPoint3D.Draw_Point3D_Var.CnvPoint3DProjection_ToPoint(temp), 0, ControlDraw.GridDraw_Var.GridCenter);
+                Point_Var = PropertyPoint3D.Draw_Point3D_Var.PointPositionCorrection(PropertyPoint3D.Draw_Point3D_Var.CnvPoint3DProjection_ToPoint(temp), 0, DrawOperations.GridDraw_Var.GridCenter);
                 DrawPoint2D(Point_Var.X, Point_Var.Y, Point_ColorNew, PropertyPoint.Diametre_Point + 1, Graphics_Source);
             }
             else if (Object_Source is PointOfPlan3Y0Z)
             {
                 PointOfPlan3Y0Z temp = (PointOfPlan3Y0Z)Object_Source;
-                Point_Var = PropertyPoint3D.Draw_Point3D_Var.PointPositionCorrection(PropertyPoint3D.Draw_Point3D_Var.CnvPoint3DProjection_ToPoint(temp), 0, ControlDraw.GridDraw_Var.GridCenter);
+                Point_Var = PropertyPoint3D.Draw_Point3D_Var.PointPositionCorrection(PropertyPoint3D.Draw_Point3D_Var.CnvPoint3DProjection_ToPoint(temp), 0, DrawOperations.GridDraw_Var.GridCenter);
                 DrawPoint2D(Point_Var.X, Point_Var.Y, Point_ColorNew, PropertyPoint.Diametre_Point + 1, Graphics_Source);
             }
         }

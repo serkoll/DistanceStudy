@@ -9,18 +9,20 @@ using GeomObjects.Lines;
 using GeomObjects.EquationsSysCalc;
 using GeomObjects.Plans;
 
-namespace DrawG {
+namespace DrawG
+{
     /// <summary>
     /// Класс для расчёта осей координат
     /// </summary>
-    class AxisCalculation {
+    class AxisCalculation
+    {
         /// <summary>
         /// Рассчитывает концевые точки ортоганальных 2D осей с началом в центре заданной сетки узловых точек
         /// </summary>
         /// <param name="GridKnotPoints"></param>
         /// <returns>Возвращает массив 4-х концевых точек ортоганальных 2D осей</returns>
         /// <remarks>Первые две точки задают горизонтальную ось. Вторые две точки задают вертикальную ось</remarks>
-        public Point[] CalculateAxis(Point[,] GridKnotPoints) 
+        public Point[] CalculateAxis(Point[,] GridKnotPoints)
         {
             Point[] axisPoints = new Point[4];
             var grigGorizLeft = new Point();

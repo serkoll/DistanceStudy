@@ -50,9 +50,9 @@
     <Compile Include="Axis\AxisG.cs" />
     <Compile Include="Collections\CollectionGraphicsObjects.cs" />
     <Compile Include="Collections\CollectionGraphicsObjectsTools.cs" />
-    <Compile Include="ControlDraw.cs" />
-    <Compile Include="CursorTools.cs" />
-    <Compile Include="DefaultSettings.cs" />
+    <Compile Include="DrawObjects\DrawOperations.cs" />
+    <Compile Include="Cursors\CursorTools.cs" />
+    <Compile Include="Settings\DefaultSettings.cs" />
     <Compile Include="DrawObjects\DrawExternalObjects.cs" />
     <Compile Include="DrawObjects\DrawObjectsToGraphics.cs" />
     <Compile Include="DrawObjects\DrawObjectsToPictureBox.cs" />
@@ -62,7 +62,7 @@
     <Compile Include="Forms\MDIParent1.Designer.cs">
       <DependentUpon>MDIParent1.cs</DependentUpon>
     </Compile>
-    <Compile Include="GraphicsTools.cs" />
+    <Compile Include="DrawObjects\GraphicsTools.cs" />
     <Compile Include="Grid\GridCalculation.cs" />
     <Compile Include="Grid\GridG.cs" />
     <Compile Include="LinkLine\LinkLine_G.cs" />
@@ -121,6 +121,9 @@
       <Project>{9445d9ed-e7b5-451b-bf93-2265ba1e186a}</Project>
       <Name>BaseGeometry</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagramm.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

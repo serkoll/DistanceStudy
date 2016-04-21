@@ -15,7 +15,7 @@ namespace DrawG
     /// <summary>
     /// Класс, содержащий инструменты задания и отрисовки ОСЕЙ
     /// </summary>
-    class AxisG
+    class AxisG : AxisCalculation
     {
         /// <summary>
         /// Получает или задает значение массива массива концевых точек координатных осей
@@ -27,10 +27,6 @@ namespace DrawG
         /// </summary>
         public bool showAxisXYZ { get; set; }
         /// <summary>
-        /// Переменная для работы с классом, содержащим функции расчета ОСЕЙ
-        /// </summary>
-        private AxisCalculation axisCalculation { get; set; }
-        /// <summary>
         /// Переменная для работы с классом настроек ОСЕЙ
         /// </summary>
         private Settings_Axis axisDefaultSetting { get; set; }
@@ -39,7 +35,6 @@ namespace DrawG
         /// </summary>
         public AxisG()
         {
-            axisCalculation = new AxisCalculation();
             axisDefaultSetting = new Settings_Axis();
             showAxisXYZ = true;
         }
@@ -130,7 +125,7 @@ namespace DrawG
         /// <remarks>0-я точка - крайняя левая средняя; 1-я - крайняя правая средняя; 2-я - верхняя средняя средняя; 3-я - нижняя средняя средняя.</remarks>
         public void AxisCalculationByGrid(Point[,] gridKnotPoints)
         {
-            axisFinitePoints = axisCalculation.CalculateAxis(gridKnotPoints);
+            axisFinitePoints = CalculateAxis(gridKnotPoints);
         }
         /// <summary>
         /// Добавляет оси на поверхность Graphics

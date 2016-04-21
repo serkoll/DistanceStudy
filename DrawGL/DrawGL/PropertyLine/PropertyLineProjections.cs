@@ -97,15 +97,15 @@ namespace DrawG
 
             if (Point0LineOfPlan1X0Y != null)
             {
-                drawPoint3DProectionsTemp.DrawPointProection(Point0LineOfPlan1X0Y, Radius_PointProection, ControlDraw.GridDraw_Var.GridCenter, ref graphicsSource);
+                drawPoint3DProectionsTemp.DrawPointProection(Point0LineOfPlan1X0Y, Radius_PointProection, DrawOperations.GridDraw_Var.GridCenter, ref graphicsSource);
             }
             if (Point0LineOfPlan2X0Z != null)
             {
-                drawPoint3DProectionsTemp.DrawPointProection(Point0LineOfPlan2X0Z, Radius_PointProection, ControlDraw.GridDraw_Var.GridCenter, ref graphicsSource);
+                drawPoint3DProectionsTemp.DrawPointProection(Point0LineOfPlan2X0Z, Radius_PointProection, DrawOperations.GridDraw_Var.GridCenter, ref graphicsSource);
             }
             if (Point0LineOfPlan3Y0Z != null)
             {
-                drawPoint3DProectionsTemp.DrawPointProection(Point0LineOfPlan3Y0Z, Radius_PointProection, ControlDraw.GridDraw_Var.GridCenter, ref graphicsSource);
+                drawPoint3DProectionsTemp.DrawPointProection(Point0LineOfPlan3Y0Z, Radius_PointProection, DrawOperations.GridDraw_Var.GridCenter, ref graphicsSource);
             }
         }
     }

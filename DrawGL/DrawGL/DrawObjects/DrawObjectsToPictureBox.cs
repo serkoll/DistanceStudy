@@ -109,18 +109,18 @@ namespace DrawG {
             Point PointVar = new Point();
 
             if (Tool_DrawObject == Tools_DrawObjects.SetPoint) {
-                PointVar = (Point)ControlDraw.UserMouseClick;
+                PointVar = (Point)DrawOperations.UserMouseClick;
                 CollectionGraphicsObjects.AddToCollection(PointVar);
             } else if (Tool_DrawObject == Tools_DrawObjects.SetPoint3D) {
-                PointVar = (Point)ControlDraw.UserMouseClick;
-                PropertyPoint3D.Create_Point3DByDrawProection(PointVar, ControlDraw.GridDraw_Var.GridCenter);
+                PointVar = (Point)DrawOperations.UserMouseClick;
+                PropertyPoint3D.Create_Point3DByDrawProection(PointVar, DrawOperations.GridDraw_Var.GridCenter);
                 if (PropertyPoint3D.FlagPoint3D_CreateStop) {
                     CollectionGraphicsObjects.AddToCollection(PropertyPoint3D.Point3D_Var);
                     PropertyPoint3D.Point3D_Var = null;
                 }
             } else if (Tool_DrawObject == Tools_DrawObjects.SetProectionPoint3D) {
             } else if (Tool_DrawObject == Tools_DrawObjects.SetLine) {
-                PointVar = (Point)ControlDraw.UserMouseClick;
+                PointVar = (Point)DrawOperations.UserMouseClick;
                 PropertyLine2D.CreateLine2D(PointVar);
                 PropertyLine2D.DrawTempPoint(PointVar, ref GraphicsActive);
                 if (PropertyLine2D.LineStopCreate) {
@@ -129,28 +129,28 @@ namespace DrawG {
                     PropertyLine2D.LineStopCreate = false;
                 }
             } else if (Tool_DrawObject == Tools_DrawObjects.SetPointPlan1X0Y) {
-                PointVar = (Point)ControlDraw.UserMouseClick;
-                PropertyPoint3D.PointToPointOfPlan1_X0Y(PointVar, ControlDraw.GridDraw_Var.GridCenter);
+                PointVar = (Point)DrawOperations.UserMouseClick;
+                PropertyPoint3D.PointToPointOfPlan1_X0Y(PointVar, DrawOperations.GridDraw_Var.GridCenter);
                 CollectionGraphicsObjects.AddToCollection(PropertyPoint3D.PointOfPlan1_X0Y_Var);
                 PropertyPoint3D.PointOfPlan1_X0Y_Var = null;
             } else if (Tool_DrawObject == Tools_DrawObjects.SetPointPlan2X0Z) {
-                PointVar = (Point)ControlDraw.UserMouseClick;
-                PropertyPoint3D.PointToPointOfPlan2_X0Z(PointVar, ControlDraw.GridDraw_Var.GridCenter);
+                PointVar = (Point)DrawOperations.UserMouseClick;
+                PropertyPoint3D.PointToPointOfPlan2_X0Z(PointVar, DrawOperations.GridDraw_Var.GridCenter);
                 CollectionGraphicsObjects.AddToCollection(PropertyPoint3D.PointOfPlan2_X0Z_Var);
                 PropertyPoint3D.PointOfPlan2_X0Z_Var = null;
             } else if (Tool_DrawObject == Tools_DrawObjects.SetPointPlan3Y0Z) {
-                PointVar = (Point)ControlDraw.UserMouseClick;
-                PropertyPoint3D.PointToPointOfPlan3_Y0Z(PointVar, ControlDraw.GridDraw_Var.GridCenter);
+                PointVar = (Point)DrawOperations.UserMouseClick;
+                PropertyPoint3D.PointToPointOfPlan3_Y0Z(PointVar, DrawOperations.GridDraw_Var.GridCenter);
                 CollectionGraphicsObjects.AddToCollection(PropertyPoint3D.PointOfPlan3_Y0Z_Var);
                 PropertyPoint3D.PointOfPlan3_Y0Z_Var = null;
             } else if (Tool_DrawObject == Tools_DrawObjects.SetLine3D) {
                 if (!PropertyLine2D.LineStopCreate) {
-                    PropertyLine3D.Point0 = (Point)ControlDraw.UserMouseClick;
+                    PropertyLine3D.Point0 = (Point)DrawOperations.UserMouseClick;
                     PropertyLine2D.LineStopCreate = true;
                     PropertyLine3D.DrawTempPointsProjections(GraphicsActive);
                 } else {
-                    PropertyLine3D.Point1 = (Point)ControlDraw.UserMouseClick;
-                    PropertyLine3D.CreateLine3DByDrawProjection(PropertyLine3D.Point0, PropertyLine3D.Point1, ControlDraw.GridDraw_Var.GridCenter);
+                    PropertyLine3D.Point1 = (Point)DrawOperations.UserMouseClick;
+                    PropertyLine3D.CreateLine3DByDrawProjection(PropertyLine3D.Point0, PropertyLine3D.Point1, DrawOperations.GridDraw_Var.GridCenter);
                     PropertyLine3D.DrawTempLineProjections(GraphicsActive);
                     PropertyLine2D.LineStopCreate = false;
                 }
@@ -159,16 +159,16 @@ namespace DrawG {
                     PropertyPoint3D.Point3D_Var = null;
                 }
             } else if (Tool_DrawObject == Tools_DrawObjects.SetLinePlan1X0Y) {
-                PointVar = (Point)ControlDraw.UserMouseClick;
+                PointVar = (Point)DrawOperations.UserMouseClick;
                 if (!PropertyLineProjections.FlagCreateOrNotLineOfPlan1X0Y) {
-                    PropertyLineProjections.Point0LineOfPlan1X0Y = PropertyPoint3D.PointToPointOfPlan1X0Y(PointVar, ControlDraw.GridDraw_Var.GridCenter);
+                    PropertyLineProjections.Point0LineOfPlan1X0Y = PropertyPoint3D.PointToPointOfPlan1X0Y(PointVar, DrawOperations.GridDraw_Var.GridCenter);
                     if (PropertyLineProjections.Point0LineOfPlan1X0Y == null) {
                     } else {
                         PropertyLineProjections.FlagCreateOrNotLineOfPlan1X0Y = true;
                         PropertyLineProjections.DrawTempPointsProjections(GraphicsActive);
                     }
                 } else {
-                    PropertyLineProjections.Point1LineOfPlan1X0Y = PropertyPoint3D.PointToPointOfPlan1X0Y(PointVar, ControlDraw.GridDraw_Var.GridCenter);
+                    PropertyLineProjections.Point1LineOfPlan1X0Y = PropertyPoint3D.PointToPointOfPlan1X0Y(PointVar, DrawOperations.GridDraw_Var.GridCenter);
                     if (PropertyLineProjections.Point1LineOfPlan1X0Y == null) {
                         PropertyLineProjections.FlagCreateOrNotLineOfPlan1X0Y = false;
                         PropertyLineProjections.Point0LineOfPlan1X0Y = null;
@@ -184,9 +184,9 @@ namespace DrawG {
                     }
                 }
             } else if (Tool_DrawObject == Tools_DrawObjects.SetLinePlan2X0Z) {
-                PointVar = (Point)ControlDraw.UserMouseClick;
+                PointVar = (Point)DrawOperations.UserMouseClick;
                 if (!PropertyLine2D.LineStopCreate) {
-                    PropertyLine3D.Point0OfPlan2X0Z = PropertyPoint3D.PointToPointOfPlan2X0Z(PointVar, ControlDraw.GridDraw_Var.GridCenter);
+                    PropertyLine3D.Point0OfPlan2X0Z = PropertyPoint3D.PointToPointOfPlan2X0Z(PointVar, DrawOperations.GridDraw_Var.GridCenter);
                     if (PropertyLine3D.Point0OfPlan2X0Z == null) {
                         PropertyLine2D.LineStopCreate = false;
                     } else {
@@ -194,7 +194,7 @@ namespace DrawG {
                         PropertyLine3D.DrawTempPointsProjections(GraphicsActive);
                     }
                 } else {
-                    PropertyLine3D.Point1OfPlan2X0Z = PropertyPoint3D.PointToPointOfPlan2X0Z(PointVar, ControlDraw.GridDraw_Var.GridCenter);
+                    PropertyLine3D.Point1OfPlan2X0Z = PropertyPoint3D.PointToPointOfPlan2X0Z(PointVar, DrawOperations.GridDraw_Var.GridCenter);
                     if (PropertyLine3D.Point1OfPlan2X0Z == null) {
                         PropertyLine2D.LineStopCreate = false;
                         PropertyLine3D.Point0OfPlan2X0Z = null;
@@ -209,9 +209,9 @@ namespace DrawG {
                     }
                 }
             } else if (Tool_DrawObject == Tools_DrawObjects.SetLinePlan3Y0Z) {
-                PointVar = (Point)ControlDraw.UserMouseClick;
+                PointVar = (Point)DrawOperations.UserMouseClick;
                 if (!PropertyLine2D.LineStopCreate) {
-                    PropertyLine3D.Point0OfPlan3Y0Z = PropertyPoint3D.PointToPointOfPlan3Y0Z(PointVar, ControlDraw.GridDraw_Var.GridCenter);
+                    PropertyLine3D.Point0OfPlan3Y0Z = PropertyPoint3D.PointToPointOfPlan3Y0Z(PointVar, DrawOperations.GridDraw_Var.GridCenter);
                     if (PropertyLine3D.Point0OfPlan3Y0Z == null) {
                         PropertyLine2D.LineStopCreate = false;
                     } else {
@@ -219,7 +219,7 @@ namespace DrawG {
                         PropertyLine3D.DrawTempPointsProjections(GraphicsActive);
                     }
                 } else {
-                    PropertyLine3D.Point1OfPlan3Y0Z = PropertyPoint3D.PointToPointOfPlan3Y0Z(PointVar, ControlDraw.GridDraw_Var.GridCenter);
+                    PropertyLine3D.Point1OfPlan3Y0Z = PropertyPoint3D.PointToPointOfPlan3Y0Z(PointVar, DrawOperations.GridDraw_Var.GridCenter);
                     if (PropertyLine3D.Point1OfPlan3Y0Z == null) {
                         PropertyLine2D.LineStopCreate = false;
                         PropertyLine3D.Point0OfPlan3Y0Z = null;
@@ -245,11 +245,11 @@ namespace DrawG {
         /// <param name="PictureBox_Source">Заданный PictureBox, в котором отрисованы графические объекты</param>
         public static void ObjectGraphics_SelectAndFire(double Distance_CursorToObject, PictureBox PictureBox_Source)
         {
-            CollectionGraphicsObjectsTools.ObjectG_SelectToCollection((Point)ControlDraw.UserMouseClick, Distance_CursorToObject);
+            CollectionGraphicsObjectsTools.ObjectG_SelectToCollection((Point)DrawOperations.UserMouseClick, Distance_CursorToObject);
             if (CollectionGraphicsObjects.GraphicsObjectsSelect.Count == 0) {
                 return;
             }
-            DrawObjectsToGraphics.Object_FireByCursor(CollectionGraphicsObjects.GraphicsObjectsSelect[CollectionGraphicsObjects.GraphicsObjectsSelect.Count - 1], ControlDraw.Color_SelectPoint, PictureBox_Source.PointToClient(Control.MousePosition), Distance_CursorToObject, GraphicsActive);
+            DrawObjectsToGraphics.Object_FireByCursor(CollectionGraphicsObjects.GraphicsObjectsSelect[CollectionGraphicsObjects.GraphicsObjectsSelect.Count - 1], DrawOperations.Color_SelectPoint, PictureBox_Source.PointToClient(Control.MousePosition), Distance_CursorToObject, GraphicsActive);
             PictureBox_Source.Image = (Image)BitmapActive.Clone();
             PictureBox_Source.Refresh();
         }
@@ -260,11 +260,11 @@ namespace DrawG {
         /// <param name="PictureBox_Source">Заданный PictureBox, в котором отрисованы проекции точки</param>
         public static void ObjectGraphics_SelectAndFirePointOfPlane(double Distance_CursorToPointOfPlane, PictureBox PictureBox_Source)
         {
-            CollectionGraphicsObjectsTools.ObjectG_SelectToCollectionPointOfPlane((Point)ControlDraw.UserMouseClick, Distance_CursorToPointOfPlane);
+            CollectionGraphicsObjectsTools.ObjectG_SelectToCollectionPointOfPlane((Point)DrawOperations.UserMouseClick, Distance_CursorToPointOfPlane);
             if (CollectionGraphicsObjects.GraphicsObjectsSelectPointsOfPlane.Count == 0) {
                 return;
             }
-            DrawObjectsToGraphics.Object_FireByCursor(CollectionGraphicsObjects.GraphicsObjectsSelectPointsOfPlane[CollectionGraphicsObjects.GraphicsObjectsSelectPointsOfPlane.Count - 1], ControlDraw.Color_SelectPoint, PictureBox_Source.PointToClient(Control.MousePosition), Distance_CursorToPointOfPlane, GraphicsActive);
+            DrawObjectsToGraphics.Object_FireByCursor(CollectionGraphicsObjects.GraphicsObjectsSelectPointsOfPlane[CollectionGraphicsObjects.GraphicsObjectsSelectPointsOfPlane.Count - 1], DrawOperations.Color_SelectPoint, PictureBox_Source.PointToClient(Control.MousePosition), Distance_CursorToPointOfPlane, GraphicsActive);
             PictureBox_Source.Image = (Image)BitmapActive.Clone();
             PictureBox_Source.Refresh();
         }
@@ -295,12 +295,12 @@ namespace DrawG {
         /// <param name="PictureBox_Back"></param>
         public static void ObjectGraphics_DeleteFromCollectionAndRedraw(double Distance_CursorToObject, PictureBox PictureBox_Source, PictureBox PictureBox_Back)
         {
-            Point CursorPoint_Var = (Point)ControlDraw.UserMouseClick;
+            Point CursorPoint_Var = (Point)DrawOperations.UserMouseClick;
             CollectionGraphicsObjectsTools.ObjectG_SelectToCollection(CursorPoint_Var, Distance_CursorToObject);
             CollectionGraphicsObjectsTools.ObjectG_DeleteFromCollection(CollectionGraphicsObjects.GraphicsObjectsSelect, CollectionGraphicsObjects.GraphicsObjectsDelete, CollectionGraphicsObjects.GraphicsObjectsCollection);
             DrawObjectsToGraphics.ReFreshCollection(CollectionGraphicsObjects.GraphicsObjectsCollection, PropertyPoint.Color_Point, ref BitmapActive, ref BitmapBack, ref GraphicsActive);
-            if (ControlDraw.LinkLine_Var.ShowLinkLine_XYZ_Flag) {
-                ControlDraw.LinkLine_Var.LinkLineToGrpahics_Add(GraphicsActive);
+            if (DrawOperations.LinkLine_Var.ShowLinkLine_XYZ_Flag) {
+                DrawOperations.LinkLine_Var.LinkLineToGrpahics_Add(GraphicsActive);
             }
             PictureBox_Source.Image = (Image)BitmapActive.Clone();
             PictureBox_Source.Refresh();
@@ -319,8 +319,8 @@ namespace DrawG {
             }
             CollectionGraphicsObjectsTools.ObjectG_DeleteFromCollection(CollectionGraphicsObjects.GraphicsObjectsSelect, CollectionGraphicsObjects.GraphicsObjectsDelete, CollectionGraphicsObjects.GraphicsObjectsCollection);
             DrawObjectsToGraphics.ReFreshCollection(CollectionGraphicsObjects.GraphicsObjectsCollection, PropertyPoint.Color_Point, ref BitmapActive, ref BitmapBack, ref GraphicsActive);
-            if (ControlDraw.LinkLine_Var.ShowLinkLine_XYZ_Flag) {
-                ControlDraw.LinkLine_Var.LinkLineToGrpahics_Add(GraphicsActive);
+            if (DrawOperations.LinkLine_Var.ShowLinkLine_XYZ_Flag) {
+                DrawOperations.LinkLine_Var.LinkLineToGrpahics_Add(GraphicsActive);
             }
             PictureBox_Source.Image = (Image)BitmapActive.Clone();
             PictureBox_Source.Refresh();
@@ -334,8 +334,8 @@ namespace DrawG {
         /// <param name="pb2"></param>
         public static void GraphicsBack_Create(PictureBox pb1, PictureBox pb2)
         {
-            DrawObjectsToGraphics.GraphicsBack_Create(ControlDraw.GridDraw_Var.GridFlagDraw, ControlDraw.AxisDraw_Var.showAxisXYZ, ref GraphicsBack);
-            DrawObjectsToGraphics.GraphicsBack_Create(ControlDraw.GridDraw_Var.GridFlagDraw, ControlDraw.AxisDraw_Var.showAxisXYZ, ref GraphicsActive);
+            DrawObjectsToGraphics.GraphicsBack_Create(DrawOperations.GridDraw_Var.GridFlagDraw, DrawOperations.AxisDraw_Var.showAxisXYZ, ref GraphicsBack);
+            DrawObjectsToGraphics.GraphicsBack_Create(DrawOperations.GridDraw_Var.GridFlagDraw, DrawOperations.AxisDraw_Var.showAxisXYZ, ref GraphicsActive);
             pb1.Image = (Image)BitmapActive.Clone();
             pb1.Refresh();
             pb2.Image = (Image)BitmapBack.Clone();
@@ -348,7 +348,7 @@ namespace DrawG {
         /// <param name="pb2"></param>
         public static void GraphicsBack_Add(PictureBox pb1, PictureBox pb2)
         {
-            DrawObjectsToGraphics.GraphicsBack_Add(ControlDraw.GridDraw_Var.GridFlagDraw, ControlDraw.AxisDraw_Var.showAxisXYZ, ref GraphicsActive, ref GraphicsBack);
+            DrawObjectsToGraphics.GraphicsBack_Add(DrawOperations.GridDraw_Var.GridFlagDraw, DrawOperations.AxisDraw_Var.showAxisXYZ, ref GraphicsActive, ref GraphicsBack);
             pb1.Image = (Image)BitmapActive.Clone();
             pb1.Refresh();
             pb2.Image = (Image)BitmapBack.Clone();
@@ -361,13 +361,13 @@ namespace DrawG {
         /// <param name="PictureBox_Back"></param>
         public static void GraphicsBack_Clear(PictureBox PictureBox_Source, PictureBox PictureBox_Back)
         {
-            DrawObjectsToGraphics.GraphicsBack_Clear(ControlDraw.GridDraw_Var.GridFlagDraw, ControlDraw.AxisDraw_Var.showAxisXYZ, ref GraphicsBack);
+            DrawObjectsToGraphics.GraphicsBack_Clear(DrawOperations.GridDraw_Var.GridFlagDraw, DrawOperations.AxisDraw_Var.showAxisXYZ, ref GraphicsBack);
             BitmapActive = (Bitmap)BitmapBack.Clone();
             GraphicsActive = Graphics.FromImage(BitmapActive);
             if (CollectionGraphicsObjects.GraphicsObjectsCollection.Count == 0) { } else DrawObjectsToGraphics.ReFreshCollection(CollectionGraphicsObjects.GraphicsObjectsCollection, PropertyPoint.Color_Point, GraphicsActive);
-            if (CollectionGraphicsObjects.GraphicsObjectsSelect.Count == 0) { } else DrawObjectsToGraphics.ReFreshCollection(CollectionGraphicsObjects.GraphicsObjectsSelect, ControlDraw.Color_SelectPoint, GraphicsActive);
-            if (ControlDraw.LinkLine_Var.ShowLinkLine_XYZ_Flag) {
-                ControlDraw.LinkLine_Var.LinkLineToGrpahics_Add(GraphicsActive);
+            if (CollectionGraphicsObjects.GraphicsObjectsSelect.Count == 0) { } else DrawObjectsToGraphics.ReFreshCollection(CollectionGraphicsObjects.GraphicsObjectsSelect, DrawOperations.Color_SelectPoint, GraphicsActive);
+            if (DrawOperations.LinkLine_Var.ShowLinkLine_XYZ_Flag) {
+                DrawOperations.LinkLine_Var.LinkLineToGrpahics_Add(GraphicsActive);
             }
             PictureBox_Source.Image = (Bitmap)BitmapActive.Clone();
             PictureBox_Source.Refresh();

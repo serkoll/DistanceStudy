@@ -99,7 +99,7 @@ namespace DrawG {
             } else {
                 FlagPoint3DCreateStop = true;
 
-                Line3D.Line_Draw = new LineDraw(Line3D, ControlDraw.GridDraw_Var.GridCenter);
+                Line3D.Line_Draw = new LineDraw(Line3D, DrawOperations.GridDraw_Var.GridCenter);
                 Line3D.Line_Draw.PenLineX0Y = PenLineOfPlan1X0Y;
                 Line3D.Line_Draw.PenLineX0Z = PenLineOfPlan2X0Z;
                 Line3D.Line_Draw.PenLineY0Z = PenLineOfPlan3Y0Z;
@@ -123,32 +123,32 @@ namespace DrawG {
             int Radius_PointProection = 2;
 
             if (Point0OfPlan1X0Y != null) {
-                drawPoint3DProectionsTemp.DrawPointProection(Point0OfPlan1X0Y, Radius_PointProection, ControlDraw.GridDraw_Var.GridCenter, ref graphicsSource);
+                drawPoint3DProectionsTemp.DrawPointProection(Point0OfPlan1X0Y, Radius_PointProection, DrawOperations.GridDraw_Var.GridCenter, ref graphicsSource);
             }
             if (Point0OfPlan2X0Z != null) {
-                drawPoint3DProectionsTemp.DrawPointProection(Point0OfPlan2X0Z, Radius_PointProection, ControlDraw.GridDraw_Var.GridCenter, ref graphicsSource);
+                drawPoint3DProectionsTemp.DrawPointProection(Point0OfPlan2X0Z, Radius_PointProection, DrawOperations.GridDraw_Var.GridCenter, ref graphicsSource);
             }
             if (Point0OfPlan3Y0Z != null) {
-                drawPoint3DProectionsTemp.DrawPointProection(Point0OfPlan3Y0Z, Radius_PointProection, ControlDraw.GridDraw_Var.GridCenter, ref graphicsSource);
+                drawPoint3DProectionsTemp.DrawPointProection(Point0OfPlan3Y0Z, Radius_PointProection, DrawOperations.GridDraw_Var.GridCenter, ref graphicsSource);
             }
         }
         public static void DrawTempPointProjection(PointOfPlan1X0Y PointOfPlan1X0YProjection, Graphics graphicsSource)
         {
             var drawPoint3DProectionsTemp = new PointDraw();
             drawPoint3DProectionsTemp.Pen_Point1X0Y = new Pen(Color.Gray, 2);
-            drawPoint3DProectionsTemp.DrawPointProection(PointOfPlan1X0YProjection, 2, ControlDraw.GridDraw_Var.GridCenter, ref graphicsSource);
+            drawPoint3DProectionsTemp.DrawPointProection(PointOfPlan1X0YProjection, 2, DrawOperations.GridDraw_Var.GridCenter, ref graphicsSource);
         }
         public static void DrawTempPointProjection(PointOfPlan2X0Z PointOfPlan2X0ZProjection, Graphics graphicsSource)
         {
             var drawPoint3DProectionsTemp = new PointDraw();
             drawPoint3DProectionsTemp.Pen_Point2X0Z = new Pen(Color.Gray, 2);
-            drawPoint3DProectionsTemp.DrawPointProection(PointOfPlan2X0ZProjection, 2, ControlDraw.GridDraw_Var.GridCenter, ref graphicsSource);
+            drawPoint3DProectionsTemp.DrawPointProection(PointOfPlan2X0ZProjection, 2, DrawOperations.GridDraw_Var.GridCenter, ref graphicsSource);
         }
         public static void DrawTempPointProjection(PointOfPlan3Y0Z PointOfPlan3Y0ZProjection, Graphics graphicsSource)
         {
             var drawPoint3DProectionsTemp = new PointDraw();
             drawPoint3DProectionsTemp.Pen_Point3Y0Z = new Pen(Color.Gray, 2);
-            drawPoint3DProectionsTemp.DrawPointProection(PointOfPlan3Y0ZProjection, 2, ControlDraw.GridDraw_Var.GridCenter, ref graphicsSource);
+            drawPoint3DProectionsTemp.DrawPointProection(PointOfPlan3Y0ZProjection, 2, DrawOperations.GridDraw_Var.GridCenter, ref graphicsSource);
         }
         public static void DrawTempLineProjections(Graphics graphicsSource)
         {
@@ -164,16 +164,16 @@ namespace DrawG {
 
 
             if (LineOfPlan1X0YVar != null) {
-                int[] whmass = PropertyLine3D.CalculateQuadrantWidthHeight(DrawObjectsToPictureBox.pictureBoxWidth, DrawObjectsToPictureBox.pictureBoxHeight, ControlDraw.GridDraw_Var.GridCenter, 1);
-                drawLine3DProectionsTemp.DrawLineProjection(LineOfPlan1X0YVar, radiusOfPointsLineProections, ControlDraw.GridDraw_Var.GridCenter, whmass[0], whmass[1], ref graphicsSource);
+                int[] whmass = PropertyLine3D.CalculateQuadrantWidthHeight(DrawObjectsToPictureBox.pictureBoxWidth, DrawObjectsToPictureBox.pictureBoxHeight, DrawOperations.GridDraw_Var.GridCenter, 1);
+                drawLine3DProectionsTemp.DrawLineProjection(LineOfPlan1X0YVar, radiusOfPointsLineProections, DrawOperations.GridDraw_Var.GridCenter, whmass[0], whmass[1], ref graphicsSource);
             }
             if (LineOfPlan2X0ZVar != null) {
-                int[] whmass = PropertyLine3D.CalculateQuadrantWidthHeight(DrawObjectsToPictureBox.pictureBoxWidth, DrawObjectsToPictureBox.pictureBoxHeight, ControlDraw.GridDraw_Var.GridCenter, 2);
-                drawLine3DProectionsTemp.DrawLineProjection(LineOfPlan2X0ZVar, radiusOfPointsLineProections, ControlDraw.GridDraw_Var.GridCenter, whmass[0], whmass[1], ref graphicsSource);
+                int[] whmass = PropertyLine3D.CalculateQuadrantWidthHeight(DrawObjectsToPictureBox.pictureBoxWidth, DrawObjectsToPictureBox.pictureBoxHeight, DrawOperations.GridDraw_Var.GridCenter, 2);
+                drawLine3DProectionsTemp.DrawLineProjection(LineOfPlan2X0ZVar, radiusOfPointsLineProections, DrawOperations.GridDraw_Var.GridCenter, whmass[0], whmass[1], ref graphicsSource);
             }
             if (LineOfPlan3Y0ZVar != null) {
-                int[] whmass = PropertyLine3D.CalculateQuadrantWidthHeight(DrawObjectsToPictureBox.pictureBoxWidth, DrawObjectsToPictureBox.pictureBoxHeight, ControlDraw.GridDraw_Var.GridCenter, 3);
-                drawLine3DProectionsTemp.DrawLineProjection(LineOfPlan3Y0ZVar, radiusOfPointsLineProections, ControlDraw.GridDraw_Var.GridCenter, whmass[0], whmass[1], ref graphicsSource);
+                int[] whmass = PropertyLine3D.CalculateQuadrantWidthHeight(DrawObjectsToPictureBox.pictureBoxWidth, DrawObjectsToPictureBox.pictureBoxHeight, DrawOperations.GridDraw_Var.GridCenter, 3);
+                drawLine3DProectionsTemp.DrawLineProjection(LineOfPlan3Y0ZVar, radiusOfPointsLineProections, DrawOperations.GridDraw_Var.GridCenter, whmass[0], whmass[1], ref graphicsSource);
             }
         }
 
