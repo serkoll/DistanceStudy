@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistanceStudy", "DistanceStudy\DistanceStudy.csproj", "{38077D60-C603-467B-9C53-9C5C3172458B}"
 EndProject
@@ -18,6 +18,13 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrawGL", "DrawGL\DrawGL\DrawGL.csproj", "{247CB926-7D51-45D6-9E9B-05AA4F4E30D6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseGeometry", "BaseGeometry\BaseGeometry\BaseGeometry.csproj", "{9445D9ED-E7B5-451B-BF93-2265BA1E186A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "[MSSQL.DB]", "[MSSQL.DB]", "{97C7FFB5-2EB2-486D-BA39-1108DA5F6BF9}"
+	ProjectSection(SolutionItems) = preProject
+		[MSSQL.DB]\DistanceStudy.ldf = [MSSQL.DB]\DistanceStudy.ldf
+		[MSSQL.DB]\DistanceStudy.mdf = [MSSQL.DB]\DistanceStudy.mdf
+		[MSSQL.DB]\DistanceStudy_log.ldf = [MSSQL.DB]\DistanceStudy_log.ldf
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
