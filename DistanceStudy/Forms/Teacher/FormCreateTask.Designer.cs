@@ -1,4 +1,4 @@
-﻿namespace DistanceStudy.Forms
+﻿namespace DistanceStudy.Forms.Teacher
 {
     partial class FormCreateTask
     {
@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Фактическая", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("Плановая", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup5 = new System.Windows.Forms.ListViewGroup("Фактическая", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup6 = new System.Windows.Forms.ListViewGroup("Плановая", System.Windows.Forms.HorizontalAlignment.Left);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormCreateTask));
             this.splitContainerTextBoxes = new System.Windows.Forms.SplitContainer();
             this.textBoxName = new System.Windows.Forms.TextBox();
@@ -74,6 +74,7 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripPanel = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonAddParams = new System.Windows.Forms.ToolStripButton();
+            this.toolStripAddGraphicCondition = new System.Windows.Forms.ToolStripLabel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerTextBoxes)).BeginInit();
             this.splitContainerTextBoxes.Panel1.SuspendLayout();
             this.splitContainerTextBoxes.Panel2.SuspendLayout();
@@ -406,13 +407,13 @@
             this.columnHeaderFact,
             this.columnHeaderPlane});
             this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            listViewGroup1.Header = "Фактическая";
-            listViewGroup1.Name = "listViewGroupFact";
-            listViewGroup2.Header = "Плановая";
-            listViewGroup2.Name = "listViewGroupPlane";
+            listViewGroup5.Header = "Фактическая";
+            listViewGroup5.Name = "listViewGroupFact";
+            listViewGroup6.Header = "Плановая";
+            listViewGroup6.Name = "listViewGroupPlane";
             this.listView1.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup1,
-            listViewGroup2});
+            listViewGroup5,
+            listViewGroup6});
             this.listView1.Location = new System.Drawing.Point(3, 3);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(741, 136);
@@ -568,7 +569,8 @@
             // toolStripPanel
             // 
             this.toolStripPanel.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButtonAddParams});
+            this.toolStripButtonAddParams,
+            this.toolStripAddGraphicCondition});
             this.toolStripPanel.Location = new System.Drawing.Point(0, 0);
             this.toolStripPanel.Name = "toolStripPanel";
             this.toolStripPanel.Size = new System.Drawing.Size(915, 25);
@@ -584,6 +586,13 @@
             this.toolStripButtonAddParams.Size = new System.Drawing.Size(128, 22);
             this.toolStripButtonAddParams.Text = "Добавить параметры";
             this.toolStripButtonAddParams.Click += new System.EventHandler(this.toolStripButtonAddParams_Click);
+            // 
+            // toolStripAddGraphicCondition
+            // 
+            this.toolStripAddGraphicCondition.Name = "toolStripAddGraphicCondition";
+            this.toolStripAddGraphicCondition.Size = new System.Drawing.Size(165, 22);
+            this.toolStripAddGraphicCondition.Text = "Графическое представление";
+            this.toolStripAddGraphicCondition.Click += new System.EventHandler(this.toolStripAddGraphicCondition_Click);
             // 
             // FormCreateTask
             // 
@@ -675,6 +684,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnField;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnValue;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDescription;
-
+        private System.Windows.Forms.ToolStripLabel toolStripAddGraphicCondition;
     }
 }

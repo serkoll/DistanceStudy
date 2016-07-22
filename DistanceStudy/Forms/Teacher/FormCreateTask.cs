@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using DistanceStudy.Forms.Teacher;
+using DrawG;
 
-namespace DistanceStudy.Forms
+namespace DistanceStudy.Forms.Teacher
 {
     public partial class FormCreateTask : Form
     {
-        private Bitmap itemBmp;
-        private FormCreateAlgorithm formCreateAlgorithm;
+        private Bitmap _itemBmp;
+        private FormCreateAlgorithm _formCreateAlgorithm;
         public FormCreateTask()
         {
             InitializeComponent();
@@ -71,10 +71,10 @@ namespace DistanceStudy.Forms
             {
                 dialog.Dispose();
                 textBoxFilePath.Text = dialog.FileName;
-                itemBmp = new Bitmap(dialog.FileName);
-                pictureBoxImageTask.Image = itemBmp;
+                _itemBmp = new Bitmap(dialog.FileName);
+                pictureBoxImageTask.Image = _itemBmp;
             }
-            if (itemBmp != null)
+            if (_itemBmp != null)
             {
                 labelHereGraphic.Text = "";
             }
@@ -99,8 +99,8 @@ namespace DistanceStudy.Forms
         }
         private void buttonAcceptTask_Click(object sender, EventArgs e)
         {
-            formCreateAlgorithm = new FormCreateAlgorithm();
-            formCreateAlgorithm.Show();
+            _formCreateAlgorithm = new FormCreateAlgorithm();
+            _formCreateAlgorithm.Show();
         }
         /// <summary>
         /// При масштабировании основного окна - колонки также перерисовываются под новый размер
@@ -165,6 +165,12 @@ namespace DistanceStudy.Forms
             {
                 buttonAcceptTask.Enabled = true;
             }
+        }
+
+        private void toolStripAddGraphicCondition_Click(object sender, EventArgs e)
+        {
+            DrawG.MainForm mainForm = new MainForm();
+            mainForm.Show();
         }
     }
 }
