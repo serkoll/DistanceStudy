@@ -8,7 +8,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DistanceStudy.Test</RootNamespace>
     <AssemblyName>DistanceStudy.Test</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -16,6 +16,7 @@
     <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
     <IsCodedUITest>False</IsCodedUITest>
     <TestProjectType>UnitTest</TestProjectType>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,12 +36,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BaseGeometry, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\DistanceStudy_001\bin\Debug\BaseGeometry.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
+    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -55,21 +53,26 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="AuthenticationTest.cs" />
     <Compile Include="ControlTaskTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BaseLibrary\BaseLibrary.csproj">
-      <Project>{50fd6624-c01a-41a4-8759-d75a4948193c}</Project>
-      <Name>BaseLibrary</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ControlTask\ControlTask.csproj">
-      <Project>{671589c2-9247-4eb0-8ea8-d70ed22f10a1}</Project>
-      <Name>ControlTask</Name>
+    <ProjectReference Include="..\BaseGeometry\BaseGeometry\BaseGeometry.csproj">
+      <Project>{9445d9ed-e7b5-451b-bf93-2265ba1e186a}</Project>
+      <Name>BaseGeometry</Name>
     </ProjectReference>
     <ProjectReference Include="..\DbRepository\DbRepository.csproj">
       <Project>{5ec8ce36-c3e5-41a4-bf16-3b4b088c6148}</Project>
       <Name>DbRepository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DistanceStudy\DistanceStudy.csproj">
+      <Project>{38077D60-C603-467B-9C53-9C5C3172458B}</Project>
+      <Name>DistanceStudy</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Service\Service.csproj">
+      <Project>{0AD4D925-6403-4D94-B0EE-8A538C8A88E5}</Project>
+      <Name>Service</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

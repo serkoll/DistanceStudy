@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
-using BaseLibrary.Classes;
 using DistanceStudy.Classes;
+using BaseLibrary.Classes;
 
 namespace DistanceStudy.Forms.Teacher
 {

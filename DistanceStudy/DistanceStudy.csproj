@@ -9,9 +9,8 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DistanceStudy</RootNamespace>
     <AssemblyName>DistanceStudy</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -153,25 +152,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Authentication\Authentication.csproj">
-      <Project>{ca86ad9f-c191-4eaf-8997-681237145207}</Project>
-      <Name>Authentication</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BaseLibrary\BaseLibrary.csproj">
-      <Project>{50fd6624-c01a-41a4-8759-d75a4948193c}</Project>
-      <Name>BaseLibrary</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ControlTask\ControlTask.csproj">
-      <Project>{671589c2-9247-4eb0-8ea8-d70ed22f10a1}</Project>
-      <Name>ControlTask</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DrawGL\DrawGL\DrawGL.csproj">
       <Project>{247cb926-7d51-45d6-9e9b-05aa4f4e30d6}</Project>
       <Name>DrawGL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\XMLFormatter\XMLFormatter.csproj">
-      <Project>{c73287a9-9196-436f-a751-747a387aa2ed}</Project>
-      <Name>XMLFormatter</Name>
+    <ProjectReference Include="..\Service\Service.csproj">
+      <Project>{0ad4d925-6403-4d94-b0ee-8a538c8a88e5}</Project>
+      <Name>Service</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
