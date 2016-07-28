@@ -1,26 +1,10 @@
-﻿using DbRepository.Context;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
+﻿using System.Linq;
+using DbRepository.Context;
 
-namespace DbRepository.Classes.Context
+namespace DbRepository.Classes.Repository
 {
     public class UserRepository
     {
-        private readonly string _connectionString;
-
-        /// <summary>
-        /// Заполнение _connectionString в конструкторе
-        /// </summary>
-        public UserRepository()
-        {
-            // строка подключения к базе данных
-            _connectionString = ConfigurationManager.ConnectionStrings["DistanceStudyDB"].ConnectionString;
-        }
-
         /// <summary>
         /// Проверка на совпадение логина и пароля
         /// </summary>
