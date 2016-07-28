@@ -16,8 +16,7 @@ namespace DbRepository.Context
     {
         public int Id_Parametr { get; set; }
         public int Id_Task { get; set; }
-        public string Name { get; set; }
-        public string Value { get; set; }
+        public string XMLSchema { get; set; }
     
         public virtual Task Task { get; set; }
     }

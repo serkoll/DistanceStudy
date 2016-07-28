@@ -102,7 +102,7 @@ namespace DbRepository.Classes.Context
 
         public void DeleteSubthema(int subthemaId)
         {
-            using (var db = new DistanceStudyEF())
+            using (var db = new DbRepository.Context.Entities())
             {
                 var subthema = db.SubThemas.Find(subthemaId);
                 db.SubThemas.Remove(subthema);

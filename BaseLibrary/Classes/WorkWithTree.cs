@@ -69,15 +69,9 @@ namespace BaseLibrary.Classes
         public WorkWithTree(TreeView itemTreeView)
         {
             WorkWithTreeInitializer();
-            if (itemTreeView != null)
-            {
-                tree = itemTreeView;
-            }
-            else
-            {
-                tree = new TreeView();
-            }
+            tree = itemTreeView ?? new TreeView();
         }
+
         /// <summary>
         /// Добавление узлов в дерево и в бд
         /// </summary>

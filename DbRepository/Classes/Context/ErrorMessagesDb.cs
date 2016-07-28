@@ -17,10 +17,10 @@ namespace DbRepository.Classes.Context
         /// </summary>
         /// <param name="codeError">Код ошибки</param>
         /// <returns>Текст ошибки ошибке</returns>
-        public string GetErrorMessageByCode(int codeError)
+        public string GetErrorMessageByCode(string codeError)
         {
             //throw new NotImplementedException();
-            return "Error!";
+            return codeError;
         }
     }
 }

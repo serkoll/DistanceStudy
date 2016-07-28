@@ -75,6 +75,7 @@
             this.toolStripPanel = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonAddParams = new System.Windows.Forms.ToolStripButton();
             this.toolStripAddGraphicCondition = new System.Windows.Forms.ToolStripLabel();
+            this.buttonAccept = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerTextBoxes)).BeginInit();
             this.splitContainerTextBoxes.Panel1.SuspendLayout();
             this.splitContainerTextBoxes.Panel2.SuspendLayout();
@@ -532,19 +533,19 @@
             // 
             // buttonAcceptTask
             // 
-            this.buttonAcceptTask.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonAcceptTask.Location = new System.Drawing.Point(4, 3);
+            this.buttonAcceptTask.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonAcceptTask.Location = new System.Drawing.Point(3, 36);
             this.buttonAcceptTask.Name = "buttonAcceptTask";
             this.buttonAcceptTask.Size = new System.Drawing.Size(134, 27);
             this.buttonAcceptTask.TabIndex = 4;
-            this.buttonAcceptTask.Text = "Создать";
+            this.buttonAcceptTask.Text = "Добавить алгоритм";
             this.buttonAcceptTask.UseVisualStyleBackColor = true;
             this.buttonAcceptTask.Click += new System.EventHandler(this.buttonAcceptTask_Click);
             // 
             // buttonCancel
             // 
             this.buttonCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonCancel.Location = new System.Drawing.Point(4, 36);
+            this.buttonCancel.Location = new System.Drawing.Point(3, 69);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(134, 27);
             this.buttonCancel.TabIndex = 4;
@@ -554,11 +555,12 @@
             // panelButtons
             // 
             this.panelButtons.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.panelButtons.Controls.Add(this.buttonAccept);
             this.panelButtons.Controls.Add(this.buttonAcceptTask);
             this.panelButtons.Controls.Add(this.buttonCancel);
-            this.panelButtons.Location = new System.Drawing.Point(4, 487);
+            this.panelButtons.Location = new System.Drawing.Point(12, 456);
             this.panelButtons.Name = "panelButtons";
-            this.panelButtons.Size = new System.Drawing.Size(154, 68);
+            this.panelButtons.Size = new System.Drawing.Size(146, 99);
             this.panelButtons.TabIndex = 5;
             // 
             // contextMenuStrip1
@@ -593,6 +595,17 @@
             this.toolStripAddGraphicCondition.Size = new System.Drawing.Size(165, 22);
             this.toolStripAddGraphicCondition.Text = "Графическое представление";
             this.toolStripAddGraphicCondition.Click += new System.EventHandler(this.toolStripAddGraphicCondition_Click);
+            // 
+            // buttonAccept
+            // 
+            this.buttonAccept.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonAccept.Location = new System.Drawing.Point(3, 3);
+            this.buttonAccept.Name = "buttonAccept";
+            this.buttonAccept.Size = new System.Drawing.Size(134, 27);
+            this.buttonAccept.TabIndex = 4;
+            this.buttonAccept.Text = "Подтвердить";
+            this.buttonAccept.UseVisualStyleBackColor = true;
+            this.buttonAccept.Click += new System.EventHandler(this.buttonAccept_Click);
             // 
             // FormCreateTask
             // 
@@ -685,5 +698,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnValue;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDescription;
         private System.Windows.Forms.ToolStripLabel toolStripAddGraphicCondition;
+        private System.Windows.Forms.Button buttonAccept;
     }
 }

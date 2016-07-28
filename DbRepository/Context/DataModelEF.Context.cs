@@ -13,10 +13,10 @@ namespace DbRepository.Context
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DistanceStudyEF : DbContext
+    public partial class Entities : DbContext
     {
-        public DistanceStudyEF()
-            : base("name=DistanceStudyEF")
+        public Entities()
+            : base("name=Entities")
         {
         }
     

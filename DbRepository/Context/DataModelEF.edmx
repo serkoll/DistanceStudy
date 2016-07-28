@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DistanceStudy.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="DistanceStudyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AlgorithmStatus">
           <Key>
             <PropertyRef Name="Id_AlgorithmStatus" />
@@ -38,8 +38,7 @@ warning 6002: The table/view 'DistanceStudy.dbo.Task_Algorithm' does not have a 
           </Key>
           <Property Name="Id_Parametr" Type="int" Nullable="false" />
           <Property Name="Id_Task" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="512" Nullable="false" />
-          <Property Name="Value" Type="nvarchar" MaxLength="512" Nullable="false" />
+          <Property Name="XMLSchema" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Tasks">
           <Key>
@@ -199,7 +198,7 @@ warning 6002: The table/view 'DistanceStudy.dbo.User_TaskAlgorithm' does not hav
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="DistanceStudyStoreContainer">
+        <EntityContainer Name="DistanceStudyModelStoreContainer">
           <EntitySet Name="AlgorithmStatus" EntityType="Self.AlgorithmStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SubThema" EntityType="Self.SubThema" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Task_Parametrs" EntityType="Self.Task_Parametrs" Schema="dbo" store:Type="Tables" />
@@ -271,7 +270,7 @@ warning 6002: The table/view 'DistanceStudy.dbo.User_TaskAlgorithm' does not hav
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="DistanceStudy" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="DistanceStudyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="AlgorithmStatu">
           <Key>
             <PropertyRef Name="Id_AlgorithmStatus" />
@@ -298,8 +297,7 @@ warning 6002: The table/view 'DistanceStudy.dbo.User_TaskAlgorithm' does not hav
           </Key>
           <Property Name="Id_Parametr" Type="Int32" Nullable="false" />
           <Property Name="Id_Task" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Value" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="XMLSchema" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Task" Relationship="Self.FK_Task_Parametrs_Tasks" FromRole="Task_Parametrs" ToRole="Tasks" />
         </EntityType>
         <EntityType Name="Task">
@@ -474,7 +472,7 @@ warning 6002: The table/view 'DistanceStudy.dbo.User_TaskAlgorithm' does not hav
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="DistanceStudyEF" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AlgorithmStatus" EntityType="Self.AlgorithmStatu" />
           <EntitySet Name="SubThemas" EntityType="Self.SubThema" />
           <EntitySet Name="Task_Parametrs" EntityType="Self.Task_Parametrs" />
@@ -523,9 +521,9 @@ warning 6002: The table/view 'DistanceStudy.dbo.User_TaskAlgorithm' does not hav
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DistanceStudyStoreContainer" CdmEntityContainer="DistanceStudyEF">
+        <EntityContainerMapping StorageEntityContainer="DistanceStudyModelStoreContainer" CdmEntityContainer="Entities">
           <EntitySetMapping Name="AlgorithmStatus">
-            <EntityTypeMapping TypeName="DistanceStudy.AlgorithmStatu">
+            <EntityTypeMapping TypeName="DistanceStudyModel.AlgorithmStatu">
               <MappingFragment StoreEntitySet="AlgorithmStatus">
                 <ScalarProperty Name="Id_AlgorithmStatus" ColumnName="Id_AlgorithmStatus" />
                 <ScalarProperty Name="SubGroupNumber" ColumnName="SubGroupNumber" />
@@ -534,7 +532,7 @@ warning 6002: The table/view 'DistanceStudy.dbo.User_TaskAlgorithm' does not hav
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SubThemas">
-            <EntityTypeMapping TypeName="DistanceStudy.SubThema">
+            <EntityTypeMapping TypeName="DistanceStudyModel.SubThema">
               <MappingFragment StoreEntitySet="SubThema">
                 <ScalarProperty Name="Id_SubThema" ColumnName="Id_SubThema" />
                 <ScalarProperty Name="Id_Thema" ColumnName="Id_Thema" />
@@ -544,17 +542,16 @@ warning 6002: The table/view 'DistanceStudy.dbo.User_TaskAlgorithm' does not hav
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Task_Parametrs">
-            <EntityTypeMapping TypeName="DistanceStudy.Task_Parametrs">
+            <EntityTypeMapping TypeName="DistanceStudyModel.Task_Parametrs">
               <MappingFragment StoreEntitySet="Task_Parametrs">
                 <ScalarProperty Name="Id_Parametr" ColumnName="Id_Parametr" />
                 <ScalarProperty Name="Id_Task" ColumnName="Id_Task" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="XMLSchema" ColumnName="XMLSchema" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Tasks">
-            <EntityTypeMapping TypeName="DistanceStudy.Task">
+            <EntityTypeMapping TypeName="DistanceStudyModel.Task">
               <MappingFragment StoreEntitySet="Tasks">
                 <ScalarProperty Name="Id_Task" ColumnName="Id_Task" />
                 <ScalarProperty Name="Id_SubThema" ColumnName="Id_SubThema" />
@@ -565,7 +562,7 @@ warning 6002: The table/view 'DistanceStudy.dbo.User_TaskAlgorithm' does not hav
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Themas">
-            <EntityTypeMapping TypeName="DistanceStudy.Thema">
+            <EntityTypeMapping TypeName="DistanceStudyModel.Thema">
               <MappingFragment StoreEntitySet="Themas">
                 <ScalarProperty Name="Id_Thema" ColumnName="Id_Thema" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -575,7 +572,7 @@ warning 6002: The table/view 'DistanceStudy.dbo.User_TaskAlgorithm' does not hav
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="DistanceStudy.User">
+            <EntityTypeMapping TypeName="DistanceStudyModel.User">
               <MappingFragment StoreEntitySet="Users">
                 <ScalarProperty Name="Id_User" ColumnName="Id_User" />
                 <ScalarProperty Name="Login" ColumnName="Login" />
@@ -584,7 +581,7 @@ warning 6002: The table/view 'DistanceStudy.dbo.User_TaskAlgorithm' does not hav
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Task_Algorithm">
-            <EntityTypeMapping TypeName="DistanceStudy.Task_Algorithm">
+            <EntityTypeMapping TypeName="DistanceStudyModel.Task_Algorithm">
               <MappingFragment StoreEntitySet="Task_Algorithm">
                 <ScalarProperty Name="Id_Task" ColumnName="Id_Task" />
                 <ScalarProperty Name="AlgorithmStatus" ColumnName="AlgorithmStatus" />
@@ -592,7 +589,7 @@ warning 6002: The table/view 'DistanceStudy.dbo.User_TaskAlgorithm' does not hav
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="User_Info">
-            <EntityTypeMapping TypeName="DistanceStudy.User_Info">
+            <EntityTypeMapping TypeName="DistanceStudyModel.User_Info">
               <MappingFragment StoreEntitySet="User_Info">
                 <ScalarProperty Name="Id_User" ColumnName="Id_User" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -602,7 +599,7 @@ warning 6002: The table/view 'DistanceStudy.dbo.User_TaskAlgorithm' does not hav
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="User_Status">
-            <EntityTypeMapping TypeName="DistanceStudy.User_Status">
+            <EntityTypeMapping TypeName="DistanceStudyModel.User_Status">
               <MappingFragment StoreEntitySet="User_Status">
                 <ScalarProperty Name="Id_User" ColumnName="Id_User" />
                 <ScalarProperty Name="Permission" ColumnName="Permission" />
@@ -612,7 +609,7 @@ warning 6002: The table/view 'DistanceStudy.dbo.User_TaskAlgorithm' does not hav
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="User_TaskAlgorithm">
-            <EntityTypeMapping TypeName="DistanceStudy.User_TaskAlgorithm">
+            <EntityTypeMapping TypeName="DistanceStudyModel.User_TaskAlgorithm">
               <MappingFragment StoreEntitySet="User_TaskAlgorithm">
                 <ScalarProperty Name="Id_Task" ColumnName="Id_Task" />
                 <ScalarProperty Name="User_Algorithm_Code" ColumnName="User_Algorithm_Code" />

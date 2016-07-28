@@ -77,16 +77,19 @@ namespace BaseLibrary.Classes
         {
             if (node == null)
             {
+                formTask.Dispose();
                 formThema.Text = "Создать тему";
                 formThema.Show();
                 CurrentFlag = true;
             }
             else if (node.Parent != null)
             {
+                formThema.Dispose();
                 formTask.Show();
             }
             else if (node.Parent == null)
             {
+                formTask.Dispose();
                 formThema.Text = "Создать подтему";
                 formThema.Show();
                 CurrentThema = node.Text;
@@ -94,12 +97,7 @@ namespace BaseLibrary.Classes
             }
         }
 
-        public void CreateEditFormBySelectedNode(TreeNode node, Form formThema, Form formTask)
-        {
-            
-        }
-
-    /// <summary>
+        /// <summary>
         /// Создание темы/подтемы
         /// </summary>
         /// <param name="name">Имя темы/подтемы</param>
@@ -150,17 +148,19 @@ namespace BaseLibrary.Classes
             }
         }
         /// <summary>
-        /// Delete thema or subthema
+        /// Удаление темы или подтемы
         /// </summary>
         public void Delete(string name)
         {
             if (_tree == null || name == null) return;
-            var dbThema = new ThemaDb();
-            var dbSubThema = new SubthemaDb();
-            if (_tree.SelectedNode.Parent == null)
-                dbThema.DeleteThema(name);
-            if (_tree.SelectedNode.Parent != null)
+            if (CurrentFlag)
             {
+                var dbThema = new ThemaDb();
+                dbThema.DeleteThema(name);
+            }
+            else
+            {
+                var dbSubThema = new SubthemaDb();
                 var idSubthema = dbSubThema.GetSubthema(name).Id;
                 dbSubThema.DeleteSubthema(idSubthema);
             }
@@ -190,6 +190,49 @@ namespace BaseLibrary.Classes
             }
             var dbThema = new ThemaDb();
             return dbThema.GetThema(node.Text);
+        }
+
+        /// <summary>
+        /// Редактировать тему или подтему
+        /// </summary>
+        /// <param name="node">Узел темы\подтемы</param>
+        /// <param name="formThemaSubthema">ФОрма редактирования</param>
+        public void EditThemaSubthemaByForm(TreeNode node, Form formThemaSubthema)
+        {
+            if (node == null) return;
+            if (node.Parent == null)
+            {
+                formThemaSubthema.Text = "Редактировать тему";
+                formThemaSubthema.Show();
+                CurrentFlag = true;
+            }
+            if (node.Parent != null)
+            {
+                formThemaSubthema.Text = "Редактировать подтему";
+                formThemaSubthema.Show();
+                CurrentThema = node.Parent.Text;
+                CurrentFlag = false;
+            }
+        }
+
+        /// <summary>
+        /// Получение темы\подтемы по узлу дерева
+        /// </summary>
+        /// <param name="node">Узел дерева</param>
+        /// <returns>Тема\подтема в виде объекта</returns>
+        public dynamic GetThemaOrSubThemaByNode(TreeNode node)
+        {
+            if (node.Parent == null)
+            {
+                var themaDb = new ThemaDb();
+                return themaDb.GetThema(node.Text);
+            }
+            if (node.Parent != null)
+            {
+                var subthemaDb = new SubthemaDb();
+                return subthemaDb.GetSubthema(node.Text);
+            }
+            return null;
         }
     }
 }

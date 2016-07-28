@@ -28,6 +28,7 @@ namespace DistanceStudy.Forms.Teacher
                 Application.Exit();
             }
         }
+
         /// <summary>
         /// Клик не по узлу в область treeView
         /// Снятие выделения с узлов
@@ -37,8 +38,8 @@ namespace DistanceStudy.Forms.Teacher
         private void treeView_thema_Click(object sender, EventArgs e)
         {
             treeView_thema.SelectedNode = null;
-            treeView_thema.Refresh();
         }
+
         /// <summary>
         /// Добавление темы/подтемы/задачи в текущее дерево
         /// </summary>
@@ -46,8 +47,11 @@ namespace DistanceStudy.Forms.Teacher
         /// <param name="e"></param>
         private void newToolStripButton_Click(object sender, EventArgs e)
         {
-            _wt.CreateFormBySelectedNode(treeView_thema.SelectedNode, new FormEnterNew(treeView_thema), new FormCreateTask());
+            _wt.CreateFormBySelectedNode(treeView_thema.SelectedNode, 
+                new FormEnterNew(treeView_thema), 
+                new FormCreateTask());
         }
+
         /// <summary>
         /// Кнопка выхода на форму аутентификации
         /// </summary>
@@ -60,8 +64,8 @@ namespace DistanceStudy.Forms.Teacher
             Program.MainForm.Visible = true;
             Program.MainForm.textLogin.Text = string.Empty;
             Program.MainForm.textPassword.Text = string.Empty;
-            //WorkWithTree.DisposeResources();
         }
+
         /// <summary>
         /// Удаление узлов в дереве темы/подтемы/задачи
         /// </summary>
@@ -72,6 +76,7 @@ namespace DistanceStudy.Forms.Teacher
             _wt.Delete(treeView_thema.SelectedNode.Text);
             _wt.UpdateTree();
         }
+
         /// <summary>
         /// Метод для редактирования существующей темы
         /// </summary>
@@ -79,8 +84,7 @@ namespace DistanceStudy.Forms.Teacher
         /// <param name="e"></param>
         private void edittoolStripButton_Click(object sender, EventArgs e)
         {
-            if (treeView_thema.SelectedNode != null)
-                _wt.CreateFormBySelectedNode(treeView_thema.SelectedNode, new FormEnterNew(treeView_thema, _wt.GetThemaByNode(treeView_thema.SelectedNode)), new FormCreateTask());
+            _wt.EditThemaSubthemaByForm(treeView_thema.SelectedNode, new FormEnterNew(treeView_thema, _wt.GetThemaOrSubThemaByNode(treeView_thema.SelectedNode)));
         }
     }
 }
