@@ -52,86 +52,75 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\Context\ErrorMessagesDb.cs" />
-    <Compile Include="Classes\Entities\Subthema.cs" />
-    <Compile Include="Classes\Context\SubthemaDb.cs" />
-    <Compile Include="Classes\Entities\Thema.cs" />
-    <Compile Include="Classes\Context\ThemaDb.cs" />
+    <Compile Include="Classes\Repository\ErrorMessagesDb.cs" />
+    <Compile Include="Classes\Repository\SubthemaDb.cs" />
+    <Compile Include="Classes\Repository\ThemaRepository.cs" />
     <Compile Include="Classes\DbHelper.cs" />
-    <Compile Include="Classes\Context\UserDb.cs" />
-    <Compile Include="Classes\Entities\User.cs" />
-    <Compile Include="Context\AlgorithmStatu.cs">
-      <DependentUpon>DSDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Context\DSDataModel.Context.cs">
+    <Compile Include="Classes\Repository\UserRepository.cs" />
+    <Compile Include="Context\DSModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DSDataModel.Context.tt</DependentUpon>
+      <DependentUpon>DSModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Context\DSDataModel.cs">
+    <Compile Include="Context\DSModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DSDataModel.tt</DependentUpon>
+      <DependentUpon>DSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Context\DSDataModel.Designer.cs">
+    <Compile Include="Context\DSModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DSDataModel.edmx</DependentUpon>
+      <DependentUpon>DSModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Context\Permission.cs">
+      <DependentUpon>DSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Context\SubThema.cs">
-      <DependentUpon>DSDataModel.tt</DependentUpon>
+      <DependentUpon>DSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Context\Task.cs">
-      <DependentUpon>DSDataModel.tt</DependentUpon>
+      <DependentUpon>DSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Context\Task_Algorithm.cs">
-      <DependentUpon>DSDataModel.tt</DependentUpon>
+    <Compile Include="Context\Task_Algotithm.cs">
+      <DependentUpon>DSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Context\Task_Parametrs.cs">
-      <DependentUpon>DSDataModel.tt</DependentUpon>
+      <DependentUpon>DSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Context\Thema.cs">
-      <DependentUpon>DSDataModel.tt</DependentUpon>
+      <DependentUpon>DSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Context\User.cs">
-      <DependentUpon>DSDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Context\User_Info.cs">
-      <DependentUpon>DSDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Context\User_Status.cs">
-      <DependentUpon>DSDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Context\User_TaskAlgorithm.cs">
-      <DependentUpon>DSDataModel.tt</DependentUpon>
+      <DependentUpon>DSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <EntityDeploy Include="Context\DSDataModel.edmx">
+    <EntityDeploy Include="Context\DSModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DSDataModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>DSModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Context\DSDataModel.edmx.diagram">
-      <DependentUpon>DSDataModel.edmx</DependentUpon>
+    <None Include="Context\DSModel.edmx.diagram">
+      <DependentUpon>DSModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Context\DSDataModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DSDataModel.edmx</DependentUpon>
-      <LastGenOutput>DSDataModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Context\DSDataModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DSDataModel.edmx</DependentUpon>
-      <LastGenOutput>DSDataModel.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Context\DSModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DSModel.edmx</DependentUpon>
+      <LastGenOutput>DSModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Context\DSModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DSModel.edmx</DependentUpon>
+      <LastGenOutput>DSModel.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

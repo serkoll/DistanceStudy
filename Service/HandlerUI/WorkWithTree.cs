@@ -21,7 +21,7 @@ namespace BaseLibrary.Classes
         private static string[] themaNames;
         private static string[] themaDescription;
         // Рабочий репозиторий работы с бд для тем
-        private static ThemaDb _dbThema;
+        private static ThemaRepository _dbThema;
         // Рабочий репозиторий работы с бд для подтем
         private static SubthemaDb _dbSubthema;
         // Текущая тема
@@ -41,7 +41,7 @@ namespace BaseLibrary.Classes
         public static void WorkWithTreeInitializer()
         {
             // Создаем объект общения с бд для тем
-            _dbThema = new ThemaDb();
+            _dbThema = new ThemaRepository();
             // Инициализируем объект темы
             _itemThema = new Thema();
             // Создаем объект общения с бд для подтем

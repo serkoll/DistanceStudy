@@ -20,8 +20,8 @@ namespace DbRepository.Context
             this.Tasks = new HashSet<Task>();
         }
     
-        public int Id_SubThema { get; set; }
-        public int Id_Thema { get; set; }
+        public int SubthemaId { get; set; }
+        public int ThemaId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
     

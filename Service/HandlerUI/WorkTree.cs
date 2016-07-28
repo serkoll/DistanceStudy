@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Windows.Forms;
 using DbRepository.Classes.Context;
-using DbRepository.Classes.Entities;
+using DbRepository.Context;
 
 namespace BaseLibrary.Classes
 {
@@ -40,7 +40,7 @@ namespace BaseLibrary.Classes
         /// </summary>
         private void FillTree()
         {
-            var dbThema = new ThemaDb();
+            var dbThema = new ThemaRepository();
             _themaList = dbThema.GetAllThemas().ToList();
             int index = 0;
             foreach (var item in _themaList)
@@ -48,7 +48,7 @@ namespace BaseLibrary.Classes
                 _tree.Nodes.Add(item.Name);
                 _tree.Nodes[index].Nodes.Add("Все задачи");
                 _themaDictionary[item.Name] = index;
-                GetSubthemasByThemaId(item.Id);
+                GetSubthemasByThemaId(item.ThemaId);
                 AddSubthemasInNode(index);
                 index++;
             }
@@ -108,7 +108,7 @@ namespace BaseLibrary.Classes
         {
             if (CurrentFlag)
             {
-                var dbThema = new ThemaDb();
+                var dbThema = new ThemaRepository();
                 dbThema.AddThema(new Thema
                 {
                     Name = name,
@@ -118,13 +118,13 @@ namespace BaseLibrary.Classes
             else
             {
                 var dbSubthema = new SubthemaDb();
-                var dbThema = new ThemaDb();
-                var currentThema = dbThema.GetThema(CurrentThema);
-                dbSubthema.AddSubthema(new Subthema
+                var dbThema = new ThemaRepository();
+                //var currentThema = dbThema.GetThema(CurrentThema);
+                dbSubthema.AddSubthema(new SubThema
                 {
                     Name = name,
                     Description = description,
-                    Id_Thema = currentThema.Id
+                    ThemaId = currentThema.Id
                 });
             }
         }
@@ -136,7 +136,7 @@ namespace BaseLibrary.Classes
         {
             if (_tree == null) return;
             _tree.Nodes.Clear();
-            var dbThema = new ThemaDb();
+            var dbThema = new ThemaRepository();
             _themaList = dbThema.GetAllThemas().ToList();
             int index = 0;
             foreach (var item in _themaList)
@@ -144,7 +144,7 @@ namespace BaseLibrary.Classes
                 _tree.Nodes.Add(item.Name);
                 _tree.Nodes[index].Nodes.Add("Все задачи");
                 _themaDictionary[item.Name] = index;
-                GetSubthemasByThemaId(item.Id);
+                GetSubthemasByThemaId(item.ThemaId);
                 AddSubthemasInNode(index);
                 index++;
             }
@@ -155,7 +155,7 @@ namespace BaseLibrary.Classes
         public void Delete(string name)
         {
             if (_tree == null || name == null) return;
-            var dbThema = new ThemaDb();
+            var dbThema = new ThemaRepository();
             var dbSubThema = new SubthemaDb();
             if (_tree.SelectedNode.Parent == null)
                 dbThema.DeleteThema(name);
@@ -173,7 +173,7 @@ namespace BaseLibrary.Classes
         {
             var dbSubThema = new SubthemaDb();
             _subthemaList = dbSubThema.GetAllSubthemas()
-                .Where(c => c.Id_Thema == themaId)
+                .Where(c => c.ThemaId == themaId)
                 .ToList();
         }
         /// <summary>
@@ -188,7 +188,7 @@ namespace BaseLibrary.Classes
                 var dbSubthema = new SubthemaDb();
                 return dbSubthema.GetSubthema(node.Text);
             }
-            var dbThema = new ThemaDb();
+            var dbThema = new ThemaRepository();
             return dbThema.GetThema(node.Text);
         }
     }

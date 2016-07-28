@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Forms;
 using DbRepository.Classes.Context;
-using DbRepository.Classes.Entities;
+using DbRepository.Context;
 
 namespace Authentication
 {
@@ -26,11 +26,11 @@ namespace Authentication
                 _dictionaryUsers[item.Key] = dictionaryForms[item.Key];
             }
             // соединение с БД
-            var db = new UserDb();
+            var db = new UserRepository();
             if (login != null && password != null)
             {
                 // Возвращает пользователя с таким логином и паролем
-                _loggedUser = db.CheckUser(login, password);
+                _loggedUser = db.ValidateUserByLoginPassword(login, password);
             }
         }
         /// <summary>
@@ -41,7 +41,7 @@ namespace Authentication
         {
             if (_loggedUser != null)
             {
-                return _dictionaryUsers[_loggedUser.GroupPermission];
+                return _dictionaryUsers[_loggedUser.Permission.GroupName];
             }
             return null;
         }

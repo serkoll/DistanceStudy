@@ -38,6 +38,7 @@
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
+    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -52,6 +53,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="AuthenticationTest.cs" />
     <Compile Include="ControlTaskTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -63,6 +65,10 @@
     <ProjectReference Include="..\DbRepository\DbRepository.csproj">
       <Project>{5ec8ce36-c3e5-41a4-bf16-3b4b088c6148}</Project>
       <Name>DbRepository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DistanceStudy\DistanceStudy.csproj">
+      <Project>{38077D60-C603-467B-9C53-9C5C3172458B}</Project>
+      <Name>DistanceStudy</Name>
     </ProjectReference>
     <ProjectReference Include="..\Service\Service.csproj">
       <Project>{0AD4D925-6403-4D94-B0EE-8A538C8A88E5}</Project>
