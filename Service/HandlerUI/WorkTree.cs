@@ -31,8 +31,6 @@ namespace BaseLibrary.Classes
             if (tree != null)
             {
                 _tree = tree;
-                tree.Nodes.Clear();
-                FillTree();
             }
         }
 
