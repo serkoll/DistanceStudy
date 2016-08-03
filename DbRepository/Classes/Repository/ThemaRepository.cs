@@ -1,14 +1,26 @@
-﻿using System.Collections.Generic;
+﻿using DbRepository.Context;
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
-using DbRepository.Context;
 
-namespace DbRepository.Classes.Repository
+namespace DbRepository.Classes.Context
 {
     /// <summary>
     /// Класс, отвечающий за темы в БД
     /// </summary>
     public class ThemaRepository
     {
+        // Строка подключения к бд
+        private readonly string _connectionString;
+
+        public ThemaRepository()
+        {
+            _connectionString = ConfigurationManager.ConnectionStrings["DistanceStudyDB"].ConnectionString;
+        }
+
         /// <summary>
         /// Добавление темы в бд
         /// </summary>
