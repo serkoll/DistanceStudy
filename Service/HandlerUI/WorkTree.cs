@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows.Forms;
 using DbRepository.Classes.Context;
+using DbRepository.Classes.Repository;
 using DbRepository.Context;
 
 namespace BaseLibrary.Classes

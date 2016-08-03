@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Forms;
-using DbRepository.Classes.Context;
+using DbRepository.Classes.Repository;
 using DbRepository.Context;
 
 namespace Authentication
