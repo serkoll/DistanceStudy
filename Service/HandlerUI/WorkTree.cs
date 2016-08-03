@@ -11,7 +11,7 @@ namespace BaseLibrary.Classes
         // Список тем
         private List<Thema> _themaList;
         // Список подтем
-        private List<Subthema> _subthemaList;
+        private List<SubThema> _subthemaList;
         // Полу ключ - значение соответствие индекса в дереве имени темы
         private readonly Dictionary<string, int> _themaDictionary = new Dictionary<string, int>();
         // Текущее дерево
@@ -117,14 +117,14 @@ namespace BaseLibrary.Classes
             }
             else
             {
-                var dbSubthema = new SubthemaDb();
+                var dbSubthema = new SubthemaRepository();
                 var dbThema = new ThemaRepository();
-                //var currentThema = dbThema.GetThema(CurrentThema);
+                var currentThema = dbThema.GetThema(CurrentThema);
                 dbSubthema.AddSubthema(new SubThema
                 {
                     Name = name,
                     Description = description,
-                    ThemaId = currentThema.Id
+                    ThemaId = currentThema.ThemaId
                 });
             }
         }
@@ -156,12 +156,12 @@ namespace BaseLibrary.Classes
         {
             if (_tree == null || name == null) return;
             var dbThema = new ThemaRepository();
-            var dbSubThema = new SubthemaDb();
+            var dbSubThema = new SubthemaRepository();
             if (_tree.SelectedNode.Parent == null)
                 dbThema.DeleteThema(name);
             if (_tree.SelectedNode.Parent != null)
             {
-                var idSubthema = dbSubThema.GetSubthema(name).Id;
+                var idSubthema = dbSubThema.GetSubthema(name).SubthemaId;
                 dbSubThema.DeleteSubthema(idSubthema);
             }
         }
@@ -171,7 +171,7 @@ namespace BaseLibrary.Classes
         /// <param name="themaId">ID темы</param>
         private void GetSubthemasByThemaId(int themaId)
         {
-            var dbSubThema = new SubthemaDb();
+            var dbSubThema = new SubthemaRepository();
             _subthemaList = dbSubThema.GetAllSubthemas()
                 .Where(c => c.ThemaId == themaId)
                 .ToList();
@@ -185,7 +185,7 @@ namespace BaseLibrary.Classes
         {
             if (node.Parent != null)
             {
-                var dbSubthema = new SubthemaDb();
+                var dbSubthema = new SubthemaRepository();
                 return dbSubthema.GetSubthema(node.Text);
             }
             var dbThema = new ThemaRepository();

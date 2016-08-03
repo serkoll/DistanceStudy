@@ -10,6 +10,7 @@ namespace Authentication
     {
         private readonly User _loggedUser;
         private readonly Dictionary<string, Form> _dictionaryUsers;
+        private readonly UserRepository _db;
 
         /// <summary>
         /// Конструктор для проверки логина и пароля + предоставления прав доступа
@@ -19,18 +20,18 @@ namespace Authentication
         /// <param name="dictionaryForms">Список форм для соответствущей группы пользователя</param>
         public AuthenticationModule(string login, string password, Dictionary<string, Form> dictionaryForms)
         {
+            // доступ к репозиторию
+            _db = new UserRepository();
             // словарь всех разрешений пользователя (роль <-> форма для роли)
             _dictionaryUsers = new Dictionary<string, Form>();
             foreach (var item in dictionaryForms)
             {
                 _dictionaryUsers[item.Key] = dictionaryForms[item.Key];
             }
-            // соединение с БД
-            var db = new UserRepository();
             if (login != null && password != null)
             {
                 // Возвращает пользователя с таким логином и паролем
-                _loggedUser = db.ValidateUserByLoginPassword(login, password);
+                _loggedUser = _db.ValidateUserByLoginPassword(login, password);
             }
         }
         /// <summary>
@@ -41,7 +42,8 @@ namespace Authentication
         {
             if (_loggedUser != null)
             {
-                return _dictionaryUsers[_loggedUser.Permission.GroupName];
+                var permission = _db.GetPermissionForUser(_loggedUser);
+                return _dictionaryUsers[permission.GroupName];
             }
             return null;
         }

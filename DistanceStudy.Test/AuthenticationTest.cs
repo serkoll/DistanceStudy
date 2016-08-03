@@ -35,7 +35,7 @@ namespace DistanceStudy.Test
         [TestMethod]
         public void ServiceShouldReturnTeacherForm()
         {
-            AuthenticationModule module = new AuthenticationModule("user", "123", _dictionaryForms);
+            AuthenticationModule module = new AuthenticationModule("teacher", "123", _dictionaryForms);
             var usersForm = module.CreateUserForm();
             Assert.AreEqual(_dictionaryForms["teacher"], usersForm);
         }
@@ -43,7 +43,7 @@ namespace DistanceStudy.Test
         [TestMethod]
         public void ServiceShouldReturnUserForm()
         {
-            AuthenticationModule module = new AuthenticationModule("teacher", "123", _dictionaryForms);
+            AuthenticationModule module = new AuthenticationModule("user", "123", _dictionaryForms);
             var usersForm = module.CreateUserForm();
             Assert.AreEqual(_dictionaryForms["user"], usersForm);
         }

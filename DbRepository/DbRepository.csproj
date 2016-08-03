@@ -53,9 +53,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Repository\ErrorMessagesDb.cs" />
-    <Compile Include="Classes\Repository\SubthemaDb.cs" />
+    <Compile Include="Classes\Repository\SubthemaRepository.cs" />
     <Compile Include="Classes\Repository\ThemaRepository.cs" />
-    <Compile Include="Classes\DbHelper.cs" />
     <Compile Include="Classes\Repository\UserRepository.cs" />
     <Compile Include="Context\DSModel.Context.cs">
       <AutoGen>True</AutoGen>

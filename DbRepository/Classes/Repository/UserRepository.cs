@@ -1,26 +1,11 @@
 ﻿using DbRepository.Context;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 
 namespace DbRepository.Classes.Context
 {
     public class UserRepository
     {
-        private readonly string _connectionString;
-
-        /// <summary>
-        /// Заполнение _connectionString в конструкторе
-        /// </summary>
-        public UserRepository()
-        {
-            // строка подключения к базе данных
-            _connectionString = ConfigurationManager.ConnectionStrings["DistanceStudyDB"].ConnectionString;
-        }
-
         /// <summary>
         /// Проверка на совпадение логина и пароля
         /// </summary>
@@ -38,5 +23,17 @@ namespace DbRepository.Classes.Context
             }
         }
 
+        /// <summary>
+        /// Вернуть права доступа для текущего юзера
+        /// </summary>
+        /// <param name="user">Пользователь</param>
+        /// <returns>Права доступа</returns>
+        public Permission GetPermissionForUser(User user)
+        {
+            using (var db = new DistanceStudyEntities())
+            {
+                return db.Set<Permission>().FirstOrDefault(c => c.PermissionId == user.PermissionId);
+            }
+        }
     }
 }

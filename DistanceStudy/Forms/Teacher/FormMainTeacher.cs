@@ -24,7 +24,7 @@ namespace DistanceStudy.Forms.Teacher
         {
             if (e.CloseReason == CloseReason.UserClosing)
             {
-                WorkWithTree.DisposeResources();
+                //WorkWithTree.DisposeResources();
                 Application.Exit();
             }
         }

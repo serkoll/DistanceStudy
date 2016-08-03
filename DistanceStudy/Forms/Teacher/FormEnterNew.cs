@@ -2,8 +2,6 @@
 using System.Drawing;
 using System.Windows.Forms;
 using BaseLibrary.Classes;
-using DbRepository.Classes.Context;
-using DbRepository.Classes.Entities;
 using DistanceStudy.Properties;
 
 namespace DistanceStudy.Forms.Teacher
@@ -20,9 +18,9 @@ namespace DistanceStudy.Forms.Teacher
             _wt = new WorkTree(tree);
             InitializeComponent();
             textBox_head.ForeColor = Color.Gray;
-            textBox_head.Text = WorkWithTree.HELP_HEAD;
+            textBox_head.Text = "s";
             textBox_description.ForeColor = Color.Gray;
-            textBox_description.Text = WorkWithTree.HELP_DESCRIPTION;
+            textBox_description.Text = "s";
             MinimumSize = new Size(600, 500);
             buttonOK.Enabled = false;
         }
