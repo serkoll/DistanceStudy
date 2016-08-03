@@ -8,7 +8,11 @@ namespace DistanceStudy.Forms.Teacher
 {
     public partial class FormEnterNew : Form
     {
+        // Экземпляр класса для работы с деревом
         private readonly WorkTree _wt;
+
+        // Свойство для хранения старого значения поля при редактировании
+        private readonly string _oldThemaSubthemaName;
         /// <summary>
         /// Инициализация компонентов формы и задание начальным
         /// текстам подсказок серого цвета
@@ -33,10 +37,11 @@ namespace DistanceStudy.Forms.Teacher
             InitializeComponent();
             textBox_head.ForeColor = Color.Black;
             textBox_head.Text = thema.Name;
-            textBox_description.ForeColor = Color.Black;
+            textBox_description.ForeColor = (thema.Description == null) ? Color.Gray : Color.Black;
             textBox_description.Text = thema.Description;
             MinimumSize = new Size(600, 500);
-            buttonOK.Enabled = false;
+            _oldThemaSubthemaName = thema.Name;
+            buttonOK.Enabled = true;
         }
         /// <summary>
         /// Подтверждение ввода названия темы\подтемы
@@ -45,6 +50,7 @@ namespace DistanceStudy.Forms.Teacher
         /// <param name="e"></param>
         private void buttonOK_Click(object sender, EventArgs e)
         {
+            _wt.Delete(_oldThemaSubthemaName);
             _wt.CreateThemaSubthemaByForm(textBox_head.Text, textBox_description.Text);
             _wt.UpdateTree();
             Dispose();

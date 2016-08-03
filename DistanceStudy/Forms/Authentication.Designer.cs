@@ -62,7 +62,7 @@
             this.textLogin.Name = "textLogin";
             this.textLogin.Size = new System.Drawing.Size(100, 20);
             this.textLogin.TabIndex = 2;
-            this.textLogin.Text = "admin";
+            this.textLogin.Text = "teacher";
             // 
             // textPassword
             // 

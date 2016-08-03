@@ -1,8 +1,7 @@
-﻿using DbRepository.Context;
-using System.Data;
-using System.Linq;
+﻿using System.Linq;
+using DbRepository.Context;
 
-namespace DbRepository.Classes.Context
+namespace DbRepository.Classes.Repository
 {
     public class UserRepository
     {
@@ -23,17 +22,5 @@ namespace DbRepository.Classes.Context
             }
         }
 
-        /// <summary>
-        /// Вернуть права доступа для текущего юзера
-        /// </summary>
-        /// <param name="user">Пользователь</param>
-        /// <returns>Права доступа</returns>
-        public Permission GetPermissionForUser(User user)
-        {
-            using (var db = new DistanceStudyEntities())
-            {
-                return db.Set<Permission>().FirstOrDefault(c => c.PermissionId == user.PermissionId);
-            }
-        }
     }
 }

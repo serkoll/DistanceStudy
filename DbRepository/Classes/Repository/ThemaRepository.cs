@@ -1,8 +1,8 @@
-﻿using DbRepository.Context;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using DbRepository.Context;
 
-namespace DbRepository.Classes.Context
+namespace DbRepository.Classes.Repository
 {
     /// <summary>
     /// Класс, отвечающий за темы в БД
@@ -68,16 +68,6 @@ namespace DbRepository.Classes.Context
                     db.SaveChanges();
                 }
             }
-        }
-
-        public void DeleteThema(string name)
-        {
-            return;
-        }
-
-        public Thema GetThema(string name)
-        {
-            return null;
         }
     }
 }
