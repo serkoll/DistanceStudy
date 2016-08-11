@@ -35,7 +35,6 @@
             this.textPassword = new System.Windows.Forms.TextBox();
             this.buttonNext = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.btnHelp = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // labelLogin
@@ -75,7 +74,7 @@
             // 
             // buttonNext
             // 
-            this.buttonNext.Location = new System.Drawing.Point(150, 29);
+            this.buttonNext.Location = new System.Drawing.Point(150, 51);
             this.buttonNext.Name = "buttonNext";
             this.buttonNext.Size = new System.Drawing.Size(75, 23);
             this.buttonNext.TabIndex = 4;
@@ -85,7 +84,7 @@
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(150, 67);
+            this.buttonCancel.Location = new System.Drawing.Point(150, 90);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 5;
@@ -93,22 +92,11 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
-            // btnHelp
-            // 
-            this.btnHelp.Location = new System.Drawing.Point(150, 107);
-            this.btnHelp.Name = "btnHelp";
-            this.btnHelp.Size = new System.Drawing.Size(75, 23);
-            this.btnHelp.TabIndex = 6;
-            this.btnHelp.Text = "Помощь";
-            this.btnHelp.UseVisualStyleBackColor = true;
-            this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
-            // 
             // AuthenticationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(244, 147);
-            this.Controls.Add(this.btnHelp);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonNext);
             this.Controls.Add(this.textPassword);
@@ -136,6 +124,5 @@
         public System.Windows.Forms.TextBox textPassword;
         private System.Windows.Forms.Button buttonNext;
         private System.Windows.Forms.Button buttonCancel;
-        private System.Windows.Forms.Button btnHelp;
     }
 }
