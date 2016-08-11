@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistanceStudy", "DistanceStudy\DistanceStudy.csproj", "{38077D60-C603-467B-9C53-9C5C3172458B}"
 EndProject
@@ -21,6 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "[MSSQL.DB]", "[MSSQL.DB]", 
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{0AD4D925-6403-4D94-B0EE-8A538C8A88E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XMLFormatter", "XMLFormatter\XMLFormatter.csproj", "{C73287A9-9196-436F-A751-747A387AA2ED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -52,6 +54,10 @@ Global
 		{0AD4D925-6403-4D94-B0EE-8A538C8A88E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0AD4D925-6403-4D94-B0EE-8A538C8A88E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0AD4D925-6403-4D94-B0EE-8A538C8A88E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C73287A9-9196-436F-A751-747A387AA2ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C73287A9-9196-436F-A751-747A387AA2ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C73287A9-9196-436F-A751-747A387AA2ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C73287A9-9196-436F-A751-747A387AA2ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
