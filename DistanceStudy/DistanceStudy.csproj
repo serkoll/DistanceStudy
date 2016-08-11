@@ -60,7 +60,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\GlobalStrings.cs" />
     <Compile Include="Forms\Admin\FormAdminPanel.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -91,13 +90,6 @@
     <Compile Include="Forms\Authentication.Designer.cs">
       <DependentUpon>Authentication.cs</DependentUpon>
     </Compile>
-    <Compile Include="Classes\LoadHelpText.cs" />
-    <Compile Include="Forms\ManualForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\ManualForm.Designer.cs">
-      <DependentUpon>ManualForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Classes\Program.cs" />
     <Compile Include="Forms\Teacher\FormMainTeacher.cs">
       <SubType>Form</SubType>
@@ -120,9 +112,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Authentication.resx">
       <DependentUpon>Authentication.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ManualForm.resx">
-      <DependentUpon>ManualForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Teacher\FormMainTeacher.resx">
       <DependentUpon>FormMainTeacher.cs</DependentUpon>
