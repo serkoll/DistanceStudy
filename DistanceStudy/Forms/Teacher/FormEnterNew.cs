@@ -10,72 +10,86 @@ namespace DistanceStudy.Forms.Teacher
     {
         // Экземпляр класса для работы с деревом
         private readonly WorkTree _wt;
-
-        // Свойство для хранения старого значения поля при редактировании
-        private readonly string _oldThemaSubthemaName;
+        // Редактируемый экземпляр
+        private dynamic _edited = null;
         /// <summary>
         /// Инициализация компонентов формы и задание начальным
         /// текстам подсказок серого цвета
         /// </summary>
-        public FormEnterNew(TreeView tree)
+        public FormEnterNew(WorkTree workTree)
         {
-            _wt = new WorkTree(tree);
+            _wt = workTree;
             InitializeComponent();
-            textBox_head.ForeColor = Color.Gray;
-            textBox_head.Text = "s";
-            textBox_description.ForeColor = Color.Gray;
-            textBox_description.Text = "s";
-            MinimumSize = new Size(600, 500);
-            buttonOK.Enabled = false;
+            InitControlValues(Color.Black, Color.Gray, string.Empty, string.Empty, new Size(600, 500), false);
         }
+
         /// <summary>
         /// Инициализация конструктора для редактирования темы/подтемы
         /// </summary>
-        public FormEnterNew(TreeView tree, dynamic thema)
+        public FormEnterNew(WorkTree workTree, dynamic item)
         {
-            _wt = new WorkTree(tree);
+            _edited = item;
+            _wt = workTree;
             InitializeComponent();
-            textBox_head.ForeColor = Color.Black;
-            textBox_head.Text = thema.Name;
-            textBox_description.ForeColor = (thema.Description == null) ? Color.Gray : Color.Black;
-            textBox_description.Text = thema.Description;
-            MinimumSize = new Size(600, 500);
-            _oldThemaSubthemaName = thema.Name;
-            buttonOK.Enabled = true;
+            InitControlValues(Color.Black, (item.Description == null) ? Color.Gray : Color.Black, _edited.Name, _edited.Description, new Size(600, 500), true);
         }
-        /// <summary>
-        /// Подтверждение ввода названия темы\подтемы
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+
         private void buttonOK_Click(object sender, EventArgs e)
         {
-            //_wt.Delete(_oldThemaSubthemaName);
-            //_wt.CreateThemaSubthemaByForm(textBox_head.Text, textBox_description.Text);
-            //_wt.UpdateTree();
+            int id = 0;
+            dynamic method;
+            if (_edited == null)
+            {
+                method = _wt.GetMethodForCreateNeededObject(out id);
+                method(id, textBoxName.Text, textBoxDescription.Text);
+            }
+            else
+            {
+                method = _wt.GetMethodForUpdateNeededObject(_edited, out id);
+                method(id, textBoxName.Text, textBoxDescription.Text);
+            }
+            _wt.UpdateTree();
             Dispose();
+        }
+
+        /// <summary>
+        /// Инициализация значения свойств контролов
+        /// </summary>
+        private void InitControlValues(Color nameColor, Color descClor, string txtBoxNameVal, string txtBoxDescVal, Size sizeForm, bool buttonEnabled)
+        {
+            textBoxName.ForeColor = nameColor;
+            textBoxName.Text = txtBoxNameVal;
+            textBoxDescription.ForeColor = descClor;
+            textBoxDescription.Text = txtBoxDescVal;
+            MinimumSize = sizeForm;
+            buttonAccept.Enabled = buttonEnabled;
+        }
+
+        private void textBoxName_TextChanged(object sender, EventArgs e)
+        {
+            buttonAccept.Enabled = textBoxName.Text != string.Empty && textBoxName.Text != Resources.EnterName;
         }
 
         #region Обработка событий попадания курсора на текстовые поля. Появление и исчезновение текста подсказок.
 
         private void textBox_head_Enter(object sender, EventArgs e)
         {
-            EnterTextBox(textBox_head, Resources.EnterName);
+            EnterTextBox(textBoxName, Resources.EnterName);
         }
 
         private void textBox_head_Leave(object sender, EventArgs e)
         {
-            LeaveTextBox(textBox_head, Resources.EnterName);
+            LeaveTextBox(textBoxName, Resources.EnterName);
         }
 
         private void textBox_description_Enter(object sender, EventArgs e)
         {
-            EnterTextBox(textBox_description, Resources.EnterDescription);
+            EnterTextBox(textBoxDescription, Resources.EnterDescription);
         }
 
         private void textBox_description_Leave(object sender, EventArgs e)
         {
-            LeaveTextBox(textBox_description, Resources.EnterDescription);
+            LeaveTextBox(textBoxDescription, Resources.EnterDescription);
         }
 
         private void LeaveTextBox(TextBox txtBox, string text)
@@ -97,24 +111,9 @@ namespace DistanceStudy.Forms.Teacher
         }
         #endregion
 
-        /// <summary>
-        /// Отмена введения названия и описания темы\подтемы
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             Dispose();
-        }
-
-        /// <summary>
-        /// Событие проверки на пустой текстбокс с названием
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void textBox_head_TextChanged(object sender, EventArgs e)
-        {
-            buttonOK.Enabled = textBox_head.Text != string.Empty && textBox_head.Text != Resources.EnterName;
         }
     }
 }

@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\FormController.cs" />
     <Compile Include="Forms\Admin\FormAdminPanel.cs">
       <SubType>Form</SubType>
     </Compile>

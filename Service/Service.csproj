@@ -47,6 +47,8 @@
     <Compile Include="HandlerUI\WorkWithTree.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ControlTask\TaskChecker.cs" />
+    <Compile Include="Services\SubthemaService.cs" />
+    <Compile Include="Services\ThemaService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BaseGeometry\BaseGeometry\BaseGeometry.csproj">

@@ -152,7 +152,6 @@
             this.edittoolStripButton.Size = new System.Drawing.Size(123, 36);
             this.edittoolStripButton.Text = "Редактировать";
             this.edittoolStripButton.ToolTipText = "Редактировать текст темы, подтемы или подсказки";
-            this.edittoolStripButton.Click += new System.EventHandler(this.edittoolStripButton_Click);
             // 
             // exitToolStripButton
             // 
@@ -164,7 +163,6 @@
             this.exitToolStripButton.Size = new System.Drawing.Size(45, 36);
             this.exitToolStripButton.Text = "Выход";
             this.exitToolStripButton.ToolTipText = "Выход на окно авторизации";
-            this.exitToolStripButton.Click += new System.EventHandler(this.toolStripButtonExit_Click);
             // 
             // deletetoolStripButton
             // 
@@ -175,7 +173,6 @@
             this.deletetoolStripButton.Size = new System.Drawing.Size(87, 36);
             this.deletetoolStripButton.Text = "Удалить";
             this.deletetoolStripButton.ToolTipText = "Удалить тему, подтему или задачу";
-            this.deletetoolStripButton.Click += new System.EventHandler(this.deletetoolStripButton_Click);
             // 
             // panelMenu
             // 
@@ -195,7 +192,7 @@
             this.Name = "FormMainTeacher";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Добро пожаловать, преподаватель!";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AdministratorForm_FormClosed);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormMainTeacher_FormClosed);
             this.splitContainerPanel.Panel1.ResumeLayout(false);
             this.splitContainerPanel.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerPanel)).EndInit();

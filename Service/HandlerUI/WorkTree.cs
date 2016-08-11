@@ -4,6 +4,9 @@ using System.Windows.Forms;
 using DbRepository.Classes.Context;
 using DbRepository.Classes.Repository;
 using DbRepository.Context;
+using Service.Services;
+using System;
+using Microsoft.CSharp.RuntimeBinder;
 
 namespace BaseLibrary.Classes
 {
@@ -15,6 +18,10 @@ namespace BaseLibrary.Classes
         private List<SubThema> _subthemaList;
         // Текущее дерево
         private readonly TreeView _tree;
+        // Сервис по добавлению тем
+        private ThemaService _themaService;
+        // Сервис по добавлению тем
+        private SubthemaService _subthemaService;
 
         /// <summary>
         /// Конструктор. Заполняет из БД дерево темами, подтемами, задачами
@@ -23,6 +30,46 @@ namespace BaseLibrary.Classes
         public WorkTree(TreeView tree)
         {
             _tree = tree;
+            _themaService = new ThemaService();
+            _subthemaService = new SubthemaService();
+        }
+
+        /// <summary>
+        /// Метод, возвращающий ссылку на метод по добавлению нужного объекта (тема/подтема)
+        /// </summary>
+        /// <returns>Метод по добавлению из сервиса</returns>
+        public Action<int, string, string> GetMethodForCreateNeededObject(out int id)
+        {
+            var currNode = _tree.SelectedNode;
+            var parent = _tree.SelectedNode?.Parent;
+            if (currNode == null)
+            {
+                id = 0;
+                return _themaService.Add;
+            }
+            id = GetThemaIdByNode(currNode).ThemaId;
+            return _subthemaService.Add;
+        }
+
+        /// <summary>
+        /// Метод возвращает ссылку на метод по редактированию темы/подтемы
+        /// </summary>
+        /// <param name="item">Тема/подтема для обновления</param>
+        /// <param name="id">ИД нужного обекта</param>
+        /// <returns>Метод обновления из сервиса</returns>
+        public Action<int, string, string> GetMethodForUpdateNeededObject(dynamic item, out int id)
+        {
+            id = 0;
+            try
+            {
+                id = item.ThemaId;
+                return _themaService.Update;
+            }
+            catch (RuntimeBinderException)
+            {
+                id = item.SubthemaId;
+                return _subthemaService.Update;
+            }
         }
 
         /// <summary>
@@ -32,6 +79,15 @@ namespace BaseLibrary.Classes
         {
             GetAllObjectsFormDb();
             MoveObjectsFromListToTree();
+        }
+
+        /// <summary>
+        /// Обновления узлов дерева
+        /// </summary>
+        public void UpdateTree()
+        {
+            _tree.Nodes.Clear();
+            FillTree();
         }
 
         /// <summary>
@@ -52,7 +108,7 @@ namespace BaseLibrary.Classes
         /// </summary>
         private void MoveObjectsFromListToTree()
         {
-            foreach(var item in _themaList)
+            foreach (var item in _themaList)
             {
                 _tree.Nodes.Add(item.Name);
                 AddSubthemasFromThemaToTree(item);
@@ -66,9 +122,9 @@ namespace BaseLibrary.Classes
         private void AddSubthemasFromThemaToTree(Thema item)
         {
             var subthemasOfThema = _subthemaList.Where(c => c.ThemaId.Equals(item.ThemaId));
-            foreach(var subthema in subthemasOfThema)
+            foreach (var subthema in subthemasOfThema)
             {
-                var index = _tree.Nodes.Count;
+                var index = _tree.Nodes.Count - 1;
                 _tree.Nodes[index].Nodes.Add(subthema.Name);
             }
         }
@@ -84,6 +140,16 @@ namespace BaseLibrary.Classes
             {
                 _tree.Nodes[index].Nodes.Add(item.Name);
             }
+        }
+
+        /// <summary>
+        /// Вернуть тему по узлу из списка в дереве TreeView
+        /// </summary>
+        /// <param name="currNode">Узел</param>
+        /// <returns>Тема</returns>
+        private Thema GetThemaIdByNode(TreeNode currNode)
+        {
+            return _themaList.FirstOrDefault(c => c.Name.Equals(currNode.Text));
         }
     }
 }
