@@ -36,7 +36,7 @@
             this.columnHeaderDesc = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderImage = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.toolStripPanel = new System.Windows.Forms.ToolStrip();
-            this.createToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.CreateButton = new System.Windows.Forms.ToolStripButton();
             this.copyToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.edittoolStripButton = new System.Windows.Forms.ToolStripButton();
             this.exitToolStripButton = new System.Windows.Forms.ToolStripButton();
@@ -111,7 +111,7 @@
             // 
             this.toolStripPanel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.toolStripPanel.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.createToolStripButton,
+            this.CreateButton,
             this.copyToolStripButton,
             this.edittoolStripButton,
             this.exitToolStripButton,
@@ -122,16 +122,16 @@
             this.toolStripPanel.TabIndex = 16;
             this.toolStripPanel.Text = "ToolStrip";
             // 
-            // createToolStripButton
+            // CreateButton
             // 
-            this.createToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("createToolStripButton.Image")));
-            this.createToolStripButton.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.createToolStripButton.ImageTransparentColor = System.Drawing.Color.Black;
-            this.createToolStripButton.Name = "createToolStripButton";
-            this.createToolStripButton.Size = new System.Drawing.Size(86, 36);
-            this.createToolStripButton.Text = "Создать";
-            this.createToolStripButton.ToolTipText = "Создание темы, подтемы или задачи";
-            this.createToolStripButton.Click += new System.EventHandler(this.newToolStripButton_Click);
+            this.CreateButton.Image = ((System.Drawing.Image)(resources.GetObject("CreateButton.Image")));
+            this.CreateButton.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.CreateButton.ImageTransparentColor = System.Drawing.Color.Black;
+            this.CreateButton.Name = "CreateButton";
+            this.CreateButton.Size = new System.Drawing.Size(86, 36);
+            this.CreateButton.Text = "Создать";
+            this.CreateButton.ToolTipText = "Создание темы, подтемы или задачи";
+            this.CreateButton.Click += new System.EventHandler(this.CreateButton_Click);
             // 
             // copyToolStripButton
             // 
@@ -216,7 +216,7 @@
         public System.Windows.Forms.ColumnHeader columnHeaderName;
         public System.Windows.Forms.ColumnHeader columnHeaderDesc;
         private System.Windows.Forms.ToolStrip toolStripPanel;
-        private System.Windows.Forms.ToolStripButton createToolStripButton;
+        private System.Windows.Forms.ToolStripButton CreateButton;
         private System.Windows.Forms.ToolStripButton copyToolStripButton;
         private System.Windows.Forms.ToolStripButton edittoolStripButton;
         private System.Windows.Forms.ColumnHeader columnHeaderImage;

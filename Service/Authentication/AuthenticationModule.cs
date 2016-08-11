@@ -31,7 +31,7 @@ namespace Authentication
             if (login != null && password != null)
             {
                 // Возвращает пользователя с таким логином и паролем
-                _loggedUser = _db.ValidateUserByLoginPassword(login, password);
+                _loggedUser = _db.GetUserByLoginPassword(login, password);
             }
         }
         /// <summary>

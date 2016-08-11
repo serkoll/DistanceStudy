@@ -2,7 +2,6 @@
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using BaseLibrary.StaticContext;
 using DbRepository.Classes;
 using DrawG;
 using GeomObjects.Points;
@@ -179,20 +178,20 @@ namespace DistanceStudy.Forms.Teacher
 
         private void buttonAccept_Click(object sender, EventArgs e)
         {
-            DbRepositoryFake.NameTask = textBoxName.Text;
-            DbRepositoryFake.Description = textBoxDescription.Text;
-            int i = 0;
-            foreach (var item in CollectionGraphicsObjects.GraphicsObjectsCollection)
-            {
-                var point3D = (Point3D) item;
-                DbRepositoryFake.InputParam[i] = point3D;
-                break;
-            }
-            var xml = new XMLFormatter.XmlFormatter();
-            var result = xml.WriteObject2Xml(CollectionGraphicsObjects.GraphicsObjectsCollection.ToList());
-            DbRepositoryFake.OuterXml = result;
-            DbHelper.AddTaskAlgorithmXml(result);
-            Dispose();
+            //DbRepositoryFake.NameTask = textBoxName.Text;
+            //DbRepositoryFake.Description = textBoxDescription.Text;
+            //int i = 0;
+            //foreach (var item in CollectionGraphicsObjects.GraphicsObjectsCollection)
+            //{
+            //    var point3D = (Point3D) item;
+            //    DbRepositoryFake.InputParam[i] = point3D;
+            //    break;
+            //}
+            //var xml = new XMLFormatter.XmlFormatter();
+            //var result = xml.WriteObject2Xml(CollectionGraphicsObjects.GraphicsObjectsCollection.ToList());
+            //DbRepositoryFake.OuterXml = result;
+            //DbHelper.AddTaskAlgorithmXml(result);
+            //Dispose();
         }
     }
 }

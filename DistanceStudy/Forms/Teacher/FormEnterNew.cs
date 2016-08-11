@@ -50,9 +50,9 @@ namespace DistanceStudy.Forms.Teacher
         /// <param name="e"></param>
         private void buttonOK_Click(object sender, EventArgs e)
         {
-            _wt.Delete(_oldThemaSubthemaName);
-            _wt.CreateThemaSubthemaByForm(textBox_head.Text, textBox_description.Text);
-            _wt.UpdateTree();
+            //_wt.Delete(_oldThemaSubthemaName);
+            //_wt.CreateThemaSubthemaByForm(textBox_head.Text, textBox_description.Text);
+            //_wt.UpdateTree();
             Dispose();
         }
 

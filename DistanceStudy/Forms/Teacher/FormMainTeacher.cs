@@ -14,6 +14,7 @@ namespace DistanceStudy.Forms.Teacher
         {
             InitializeComponent();
             _wt = new WorkTree(treeView_thema);
+            _wt.FillTree();
         }
         /// <summary>
         /// Событие при закрытии формы - Application.Exit
@@ -41,18 +42,6 @@ namespace DistanceStudy.Forms.Teacher
         }
 
         /// <summary>
-        /// Добавление темы/подтемы/задачи в текущее дерево
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void newToolStripButton_Click(object sender, EventArgs e)
-        {
-            _wt.CreateFormBySelectedNode(treeView_thema.SelectedNode, 
-                new FormEnterNew(treeView_thema), 
-                new FormCreateTask());
-        }
-
-        /// <summary>
         /// Кнопка выхода на форму аутентификации
         /// </summary>
         /// <param name="sender"></param>
@@ -73,8 +62,8 @@ namespace DistanceStudy.Forms.Teacher
         /// <param name="e"></param>
         private void deletetoolStripButton_Click(object sender, EventArgs e)
         {
-            _wt.Delete(treeView_thema.SelectedNode.Text);
-            _wt.UpdateTree();
+            //_wt.Delete(treeView_thema.SelectedNode.Text);
+            //_wt.UpdateTree();
         }
 
         /// <summary>
@@ -84,7 +73,12 @@ namespace DistanceStudy.Forms.Teacher
         /// <param name="e"></param>
         private void edittoolStripButton_Click(object sender, EventArgs e)
         {
-            _wt.EditThemaSubthemaByForm(treeView_thema.SelectedNode, new FormEnterNew(treeView_thema, _wt.GetThemaOrSubThemaByNode(treeView_thema.SelectedNode)));
+            //_wt.EditThemaSubthemaByForm(treeView_thema.SelectedNode, new FormEnterNew(treeView_thema, _wt.GetThemaOrSubThemaByNode(treeView_thema.SelectedNode)));
+        }
+
+        private void CreateButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

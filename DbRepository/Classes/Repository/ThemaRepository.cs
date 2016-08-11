@@ -13,7 +13,7 @@ namespace DbRepository.Classes.Repository
         /// Добавление темы в бд
         /// </summary>
         /// <param name="thema">Добавляемая тема</param>
-        public void AddThema(Thema thema)
+        public void Add(Thema thema)
         {
             using (var db = new DistanceStudyEntities())
             {
@@ -26,7 +26,7 @@ namespace DbRepository.Classes.Repository
         /// Получение всех тем из бд
         /// </summary>
         /// <returns>Список всех тем</returns>
-        public List<Thema> GetAllThemas()
+        public List<Thema> GetAll()
         {
             using (var db = new DistanceStudyEntities())
             {
@@ -38,7 +38,7 @@ namespace DbRepository.Classes.Repository
         /// Обновление темы
         /// </summary>
         /// <param name="thema">Обновляемая тема</param>
-        public void UpdateThema(Thema thema)
+        public void Update(Thema thema)
         {
             using (var db = new DistanceStudyEntities())
             {
@@ -57,7 +57,7 @@ namespace DbRepository.Classes.Repository
         /// Удаление темы
         /// </summary>
         /// <param name="id">Ид удаляемой темы</param>
-        public void DeleteThema(int id)
+        public void Delete(int id)
         {
             using (var db = new DistanceStudyEntities())
             {

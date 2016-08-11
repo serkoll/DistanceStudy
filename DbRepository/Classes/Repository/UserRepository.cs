@@ -11,7 +11,7 @@ namespace DbRepository.Classes.Repository
         /// <param name="login">Логин пользователя</param>
         /// <param name="password">Пароль польователя</param>
         /// <returns>Объект пользователя (null если такого пользователя не найдено)</returns>
-        public User ValidateUserByLoginPassword(string login, string password)
+        public User GetUserByLoginPassword(string login, string password)
         {
             using (var db = new DistanceStudyEntities())
             {

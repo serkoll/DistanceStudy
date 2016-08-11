@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using DbRepository.Context;
 using System.Linq;
+using DbRepository.Classes.Repository;
 
 namespace DbRepository.Classes.Context
 {
@@ -10,7 +11,7 @@ namespace DbRepository.Classes.Context
         /// Добавление подтемы в бд
         /// </summary>
         /// <param name="item">Объект подтемы</param>
-        public void AddSubthema(SubThema item)
+        public void Add(SubThema item)
         {
             using (var db = new DistanceStudyEntities())
             {
@@ -23,7 +24,7 @@ namespace DbRepository.Classes.Context
         /// Получение всех подтем из бд
         /// </summary>
         /// <returns>Список всех тем</returns>
-        public List<SubThema> GetAllSubthemas()
+        public List<SubThema> GetAll()
         {
             using (var db = new DistanceStudyEntities())
             {
@@ -35,7 +36,7 @@ namespace DbRepository.Classes.Context
         /// Обновление подтемы
         /// </summary>
         /// <param name="item">Обновляемая подтема</param>
-        public void UpdateSubthema(SubThema item)
+        public void Update(SubThema item)
         {
             using (var db = new DistanceStudyEntities())
             {
@@ -55,7 +56,7 @@ namespace DbRepository.Classes.Context
         /// Удаление подтемы
         /// </summary>
         /// <param name="id">Ид удаляемой подтемы</param>
-        public void DeleteSubthema(int id)
+        public void Delete(int id)
         {
             using (var db = new DistanceStudyEntities())
             {
@@ -66,11 +67,6 @@ namespace DbRepository.Classes.Context
                     db.SaveChanges();
                 }
             }
-        }
-
-        public SubThema GetSubthema(string name)
-        {
-            return null;
         }
     }
 }

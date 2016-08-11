@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using BaseLibrary.StaticContext;
 
 namespace DistanceStudy.Forms.Teacher
 {
@@ -81,9 +80,9 @@ namespace DistanceStudy.Forms.Teacher
 
         private void button4_Click(object sender, EventArgs e)
         {
-            DbRepositoryFake.AlghoritmCode = "B";
-            DbRepositoryFake.SubgroupNumber = 2;
-            Dispose();
+            //DbRepositoryFake.AlghoritmCode = "B";
+            //DbRepositoryFake.SubgroupNumber = 2;
+            //Dispose();
         }
     }
 }
