@@ -15,12 +15,28 @@ namespace DbRepository.Classes.Repository
         {
             using (var db = new DistanceStudyEntities())
             {
-                var users = db.Set<User>().ToList();
-                var selected = users.Where(c => c.Login.Equals(login))
+                var selected = db.Set<User>().Where(c => c.Login.Equals(login))
                     .Where(c => c.Password.Equals(password));
                 return selected.FirstOrDefault();
             }
         }
 
+        /// <summary>
+        /// Вернуть права пользователя
+        /// </summary>
+        /// <param name="user">Пользователь</param>
+        /// <returns>Его права</returns>
+        public Permission GetUserPermission(User user)
+        {
+            using (var db = new DistanceStudyEntities())
+            {
+                var selected = db.Set<User>().FirstOrDefault(c => c.UserId.Equals(user.UserId));
+                if(selected != null)
+                {
+                    return db.Set<Permission>().FirstOrDefault(c => c.PermissionId.Equals(user.PermissionId));
+                }
+            }
+            return null;
+        }
     }
 }

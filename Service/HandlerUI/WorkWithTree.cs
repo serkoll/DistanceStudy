@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Forms;
 using DbRepository.Classes.Context;
-using DbRepository.Classes.Entities;
 using DbRepository.Classes.Repository;
 
 namespace BaseLibrary.Classes

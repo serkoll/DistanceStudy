@@ -42,7 +42,7 @@ namespace Authentication
         {
             if (_loggedUser != null)
             {
-                var permission = _db.GetPermissionForUser(_loggedUser);
+                var permission = _db.GetUserPermission(_loggedUser);
                 return _dictionaryUsers[permission.GroupName];
             }
             return null;
