@@ -28,9 +28,14 @@ namespace DistanceStudy.Forms.Teacher
             Application.Exit();
         }
 
-        private void treeView_thema_Click(object sender, EventArgs e)
+        private void edittoolStripButton_Click(object sender, EventArgs e)
         {
-            treeView_thema.SelectedNode = null;
+            FormController<FormEnterNew>.CreateFormByType(_wt).Show();
+        }
+
+        private void treeView_thema_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            edittoolStripButton.Enabled = true;
         }
     }
 }

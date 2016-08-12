@@ -75,7 +75,7 @@
             this.treeView_thema.Name = "treeView_thema";
             this.treeView_thema.Size = new System.Drawing.Size(241, 333);
             this.treeView_thema.TabIndex = 0;
-            this.treeView_thema.Click += new System.EventHandler(this.treeView_thema_Click);
+            this.treeView_thema.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView_thema_NodeMouseClick);
             // 
             // listView_thema
             // 
@@ -152,6 +152,7 @@
             this.edittoolStripButton.Size = new System.Drawing.Size(123, 36);
             this.edittoolStripButton.Text = "Редактировать";
             this.edittoolStripButton.ToolTipText = "Редактировать текст темы, подтемы или подсказки";
+            this.edittoolStripButton.Click += new System.EventHandler(this.edittoolStripButton_Click);
             // 
             // exitToolStripButton
             // 
