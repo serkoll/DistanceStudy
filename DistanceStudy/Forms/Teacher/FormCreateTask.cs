@@ -2,9 +2,6 @@
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using DbRepository.Classes;
-//using DrawG;
-//using GeomObjects.Points;
 
 namespace DistanceStudy.Forms.Teacher
 {

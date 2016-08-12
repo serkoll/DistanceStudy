@@ -35,6 +35,21 @@ namespace Service.HandlerUI
         }
 
         /// <summary>
+        /// Возвращает название типа форма необходимой для создания
+        /// </summary>
+        /// <returns>Название типа формы</returns>
+        public string GetTypeFormNeedToCreateBySelectedNode()
+        {
+            var currNode = _tree.SelectedNode;
+            var parent = _tree.SelectedNode?.Parent;
+            if (currNode == null || parent == null)
+            {
+                return "FormEnterNew";
+            }
+            return "FormCreateTask";
+        }
+
+        /// <summary>
         /// Метод, возвращающий ссылку на метод по добавлению нужного объекта (тема/подтема)
         /// </summary>
         /// <returns>Метод по добавлению из сервиса</returns>
@@ -135,6 +150,16 @@ namespace Service.HandlerUI
         }
 
         /// <summary>
+        /// Вернуть тип для создаваемой формы (по узлу определяется кака форма должна быть создана)
+        /// </summary>
+        /// <returns>Тип создаваемой формы</returns>
+        public Type GetTypeForCreatingForm()
+        {
+            var typeString = GetTypeFormNeedToCreateBySelectedNode();
+            return Type.GetType($"DistanceStudy.Forms.Teacher.{typeString}, DistanceStudy");
+        }
+
+        /// <summary>
         /// Получение всех тем в список из БД
         /// </summary>
         private void GetAllObjectsFormDb()
@@ -170,19 +195,6 @@ namespace Service.HandlerUI
             {
                 var index = _tree.Nodes.Count - 1;
                 _tree.Nodes[index].Nodes.Add(subthema.Name);
-            }
-        }
-
-        /// <summary>
-        /// Добавление в узел темы подтему
-        /// </summary>
-        /// <param name="index">Индекс текущего узла</param>
-        private void AddSubthemasInNode(int index)
-        {
-            if (_subthemaList == null) return;
-            foreach (var item in _subthemaList)
-            {
-                _tree.Nodes[index].Nodes.Add(item.Name);
             }
         }
 
