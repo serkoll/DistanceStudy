@@ -138,7 +138,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DrawGL\DrawGL\DrawGL.csproj">
+    <ProjectReference Include="..\GraphicsModule\GraphicsModule\GraphicsModule.csproj">
       <Project>{247cb926-7d51-45d6-9e9b-05aa4f4e30d6}</Project>
       <Name>DrawGL</Name>
     </ProjectReference>

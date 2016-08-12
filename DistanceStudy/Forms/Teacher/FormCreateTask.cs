@@ -3,8 +3,8 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using DbRepository.Classes;
-using DrawG;
-using GeomObjects.Points;
+//using DrawG;
+//using GeomObjects.Points;
 
 namespace DistanceStudy.Forms.Teacher
 {
@@ -172,8 +172,8 @@ namespace DistanceStudy.Forms.Teacher
 
         private void toolStripAddGraphicCondition_Click(object sender, EventArgs e)
         {
-            DrawG.MainForm mainForm = new MainForm();
-            mainForm.Show();
+            //DrawG.MainForm mainForm = new MainForm();
+            //mainForm.Show();
         }
 
         private void buttonAccept_Click(object sender, EventArgs e)

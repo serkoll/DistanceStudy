@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using ControlTask;
-using DrawG;
-using GeomObjects.Points;
+//using DrawG;
+//using GeomObjects.Points;
 
 namespace DistanceStudy.Forms.Admin
 {
@@ -33,9 +33,9 @@ namespace DistanceStudy.Forms.Admin
 
         private void buttonCreateForm_Click(object sender, EventArgs e)
         {
-            CollectionGraphicsObjects.GraphicsObjectsCollection.Clear();
-            DrawG.MainForm mForm = new MainForm();
-            mForm.Show();
+            //CollectionGraphicsObjects.GraphicsObjectsCollection.Clear();
+            //DrawG.MainForm mForm = new MainForm();
+            //mForm.Show();
         }
 
         private void buttonCheck_Click(object sender, EventArgs e)

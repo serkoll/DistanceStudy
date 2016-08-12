@@ -1,5 +1,4 @@
-﻿using GeomObjects.Points;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Xml;
@@ -8,46 +7,46 @@ namespace XMLFormatter
 {
     public class XmlFormatter
     {
-        public string WriteObject2Xml(List<object> list)
-        {
-            if (list == null)
-                list = new List<object>();
-            XmlDocument doc = new XmlDocument();
-            XmlElement el = (XmlElement)doc.AppendChild(doc.CreateElement("DataBase"));
-            foreach (var item in list)
-            {
-                var key = (XmlElement)el.AppendChild(doc.CreateElement(item.GetType().ToString()));
-                switch (item.GetType().ToString())
-                {
-                    case "GeomObjects.Points.Point3D":
-                        {
-                            var res = (Point3D)item;
-                            key.SetAttribute("X", $"{res.X}");
-                            key.SetAttribute("Y", $"{res.Y}");
-                            key.SetAttribute("Z", $"{res.Y}");
-                            break;
-                        }
-                    case "System.String":
-                        {
-                            var res = (string)item;
-                            key.SetAttribute("x", $"{res}");
-                            key.SetAttribute("y", $"{res}");
-                            key.SetAttribute("z", $"{res}");
-                            break;
-                        }
-                    case "System.Char":
-                        {
-                            var res = (char)item;
-                            key.SetAttribute("x1", $"{res}");
-                            key.SetAttribute("y1", $"{res}");
-                            key.SetAttribute("x2", $"{res}");
-                            key.SetAttribute("y2", $"{res}");
-                            break;
-                        }
-                }
-            }
-            return doc.OuterXml;
-        }
+        //public string WriteObject2Xml(List<object> list)
+        //{
+        //    if (list == null)
+        //        list = new List<object>();
+        //    XmlDocument doc = new XmlDocument();
+        //    XmlElement el = (XmlElement)doc.AppendChild(doc.CreateElement("DataBase"));
+        //    foreach (var item in list)
+        //    {
+        //        var key = (XmlElement)el.AppendChild(doc.CreateElement(item.GetType().ToString()));
+        //        switch (item.GetType().ToString())
+        //        {
+        //            case "GeomObjects.Points.Point3D":
+        //                {
+        //                    var res = (Point3D)item;
+        //                    key.SetAttribute("X", $"{res.X}");
+        //                    key.SetAttribute("Y", $"{res.Y}");
+        //                    key.SetAttribute("Z", $"{res.Y}");
+        //                    break;
+        //                }
+        //            case "System.String":
+        //                {
+        //                    var res = (string)item;
+        //                    key.SetAttribute("x", $"{res}");
+        //                    key.SetAttribute("y", $"{res}");
+        //                    key.SetAttribute("z", $"{res}");
+        //                    break;
+        //                }
+        //            case "System.Char":
+        //                {
+        //                    var res = (char)item;
+        //                    key.SetAttribute("x1", $"{res}");
+        //                    key.SetAttribute("y1", $"{res}");
+        //                    key.SetAttribute("x2", $"{res}");
+        //                    key.SetAttribute("y2", $"{res}");
+        //                    break;
+        //                }
+        //        }
+        //    }
+        //    return doc.OuterXml;
+        //}
 
         public List<object> WriteXml2Object(string outerXml)
         {
