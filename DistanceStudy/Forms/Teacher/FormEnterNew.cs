@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using BaseLibrary.Classes;
 using DistanceStudy.Properties;
+using Service.HandlerUI;
 
 namespace DistanceStudy.Forms.Teacher
 {
@@ -11,7 +11,7 @@ namespace DistanceStudy.Forms.Teacher
         // Экземпляр класса для работы с деревом
         private readonly WorkTree _wt;
         // Редактируемый экземпляр
-        private dynamic _edited = null;
+        private readonly dynamic _edited = null;
         /// <summary>
         /// Инициализация компонентов формы и задание начальным
         /// текстам подсказок серого цвета
@@ -36,17 +36,17 @@ namespace DistanceStudy.Forms.Teacher
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
-            int id = 0;
+            int[] id;
             dynamic method;
             if (_edited == null)
             {
                 method = _wt.GetMethodForCreateNeededObject(out id);
-                method(id, textBoxName.Text, textBoxDescription.Text);
+                method(textBoxName.Text, textBoxDescription.Text, id);
             }
             else
             {
                 method = _wt.GetMethodForUpdateNeededObject(_edited, out id);
-                method(id, textBoxName.Text, textBoxDescription.Text);
+                method(textBoxName.Text, textBoxDescription.Text, id);
             }
             _wt.UpdateTree();
             Dispose();

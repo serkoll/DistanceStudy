@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using DistanceStudy.Classes;
-using BaseLibrary.Classes;
+using Service.HandlerUI;
 
 namespace DistanceStudy.Forms.Teacher
 {
@@ -46,7 +46,7 @@ namespace DistanceStudy.Forms.Teacher
         private void treeView_thema_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             MouseEventArgs me = e;
-            if (me.Button.Equals(System.Windows.Forms.MouseButtons.Left))
+            if (me.Button.Equals(MouseButtons.Left))
             {
                 SetButtonAndNodeProperties(e.Node, true, true, true);
             }
@@ -62,7 +62,7 @@ namespace DistanceStudy.Forms.Teacher
 
         private void deletetoolStripButton_Click(object sender, EventArgs e)
         {
-            int objId = 0;
+            var objId = 0;
             var method = _wt.GetMethodForDeleteNeededObject(out objId);
             method(objId);
             _wt.UpdateTree();

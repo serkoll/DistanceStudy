@@ -1,28 +1,24 @@
 ﻿using DbRepository.Classes.Context;
 using DbRepository.Context;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Service.Services
 {
     public class SubthemaService
     {
         // Репозиторий для добавление в БД тем
-        private SubthemaRepository _subthemaRep = new SubthemaRepository();
+        private readonly SubthemaRepository _subthemaRep = new SubthemaRepository();
 
         /// <summary>
         /// Добавление новой подтемы
         /// </summary>
         /// <param name="name">Название</param>
         /// <param name="description">Описание</param>
-        public void Add(int id, string name, string description)
+        /// <param name="id">ИД [0] - тема ИД, [1] - подтема ИД</param>
+        public void Add(string name, string description, params int[] id)
         {
-            _subthemaRep.Add(new SubThema()
+            _subthemaRep.Add(new SubThema
             {
-                ThemaId = id,
+                ThemaId = id[0],
                 Name = name,
                 Description = description
             });
@@ -31,14 +27,15 @@ namespace Service.Services
         /// <summary>
         /// Редактирование существующей подтемы
         /// </summary>
-        /// <param name="id">ИД</param>
         /// <param name="name">Имя</param>
         /// <param name="desc">Описание</param>
-        public void Update(int id, string name, string desc)
+        /// <param name="id">ИД [0] - тема ИД, [1] - подтема ИД</param>
+        public void Update(string name, string desc, params int[] id)
         {
-            _subthemaRep.Update(new SubThema()
+            _subthemaRep.Update(new SubThema
             {
-                SubthemaId = id,
+                SubthemaId = id[1],
+                ThemaId = id[0],
                 Name = name,
                 Description = desc
             });

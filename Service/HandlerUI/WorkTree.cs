@@ -1,14 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using DbRepository.Classes.Context;
 using DbRepository.Classes.Repository;
 using DbRepository.Context;
-using Service.Services;
-using System;
 using Microsoft.CSharp.RuntimeBinder;
+using Service.Services;
 
-namespace BaseLibrary.Classes
+namespace Service.HandlerUI
 {
     public class WorkTree
     {
@@ -19,9 +19,9 @@ namespace BaseLibrary.Classes
         // Текущее дерево
         private readonly TreeView _tree;
         // Сервис по добавлению тем
-        private ThemaService _themaService;
+        private readonly ThemaService _themaService;
         // Сервис по добавлению тем
-        private SubthemaService _subthemaService;
+        private readonly SubthemaService _subthemaService;
 
         /// <summary>
         /// Конструктор. Заполняет из БД дерево темами, подтемами, задачами
@@ -38,16 +38,16 @@ namespace BaseLibrary.Classes
         /// Метод, возвращающий ссылку на метод по добавлению нужного объекта (тема/подтема)
         /// </summary>
         /// <returns>Метод по добавлению из сервиса</returns>
-        public Action<int, string, string> GetMethodForCreateNeededObject(out int id)
+        public Action<string, string, int[]> GetMethodForCreateNeededObject(out int[] id)
         {
             var currNode = _tree.SelectedNode;
-            var parent = _tree.SelectedNode?.Parent;
+            id = new int[2];
             if (currNode == null)
             {
-                id = 0;
+                id[0] = 0;
                 return _themaService.Add;
             }
-            id = GetThemaByNode(currNode).ThemaId;
+            id[0] = GetThemaByNode(currNode).ThemaId;
             return _subthemaService.Add;
         }
 
@@ -55,21 +55,22 @@ namespace BaseLibrary.Classes
         /// Метод возвращает ссылку на метод по редактированию темы/подтемы
         /// </summary>
         /// <param name="item">Тема/подтема для обновления</param>
-        /// <param name="id">ИД нужного обекта</param>
+        /// <param name="id">ИД нужного обекта [0] - тема ИД, [1] - подтема ИД</param>
         /// <returns>Метод обновления из сервиса</returns>
-        public Action<int, string, string> GetMethodForUpdateNeededObject(dynamic item, out int id)
+        public Action<string, string, int[]> GetMethodForUpdateNeededObject(dynamic item, out int[] id)
         {
-            id = 0;
+            id = new int[2];
             try
             {
                 if (item is Thema)
                 {
-                    id = item.ThemaId;
+                    id[0] = item.ThemaId;
                     return _themaService.Update;
                 }
                 if (item is SubThema)
                 {
-                    id = item.SubthemaId;
+                    id[0] = item.ThemaId;
+                    id[1] = item.SubthemaId;
                     return _subthemaService.Update;
                 }
             }
