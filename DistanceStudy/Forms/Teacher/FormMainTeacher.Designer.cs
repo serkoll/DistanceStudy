@@ -195,6 +195,7 @@
             this.Name = "FormMainTeacher";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Добро пожаловать, преподаватель!";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormMainTeacher_FormClosed);
             this.splitContainerPanel.Panel1.ResumeLayout(false);
             this.splitContainerPanel.Panel2.ResumeLayout(false);

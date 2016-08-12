@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewGroup listViewGroup5 = new System.Windows.Forms.ListViewGroup("Фактическая", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup6 = new System.Windows.Forms.ListViewGroup("Плановая", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Фактическая", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("Плановая", System.Windows.Forms.HorizontalAlignment.Left);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormCreateTask));
             this.splitContainerTextBoxes = new System.Windows.Forms.SplitContainer();
             this.textBoxName = new System.Windows.Forms.TextBox();
@@ -71,11 +71,11 @@
             this.buttonAcceptTask = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.panelButtons = new System.Windows.Forms.Panel();
+            this.buttonAccept = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripPanel = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonAddParams = new System.Windows.Forms.ToolStripButton();
             this.toolStripAddGraphicCondition = new System.Windows.Forms.ToolStripLabel();
-            this.buttonAccept = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerTextBoxes)).BeginInit();
             this.splitContainerTextBoxes.Panel1.SuspendLayout();
             this.splitContainerTextBoxes.Panel2.SuspendLayout();
@@ -408,13 +408,13 @@
             this.columnHeaderFact,
             this.columnHeaderPlane});
             this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            listViewGroup5.Header = "Фактическая";
-            listViewGroup5.Name = "listViewGroupFact";
-            listViewGroup6.Header = "Плановая";
-            listViewGroup6.Name = "listViewGroupPlane";
+            listViewGroup1.Header = "Фактическая";
+            listViewGroup1.Name = "listViewGroupFact";
+            listViewGroup2.Header = "Плановая";
+            listViewGroup2.Name = "listViewGroupPlane";
             this.listView1.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup5,
-            listViewGroup6});
+            listViewGroup1,
+            listViewGroup2});
             this.listView1.Location = new System.Drawing.Point(3, 3);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(741, 136);
@@ -563,6 +563,17 @@
             this.panelButtons.Size = new System.Drawing.Size(146, 99);
             this.panelButtons.TabIndex = 5;
             // 
+            // buttonAccept
+            // 
+            this.buttonAccept.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonAccept.Location = new System.Drawing.Point(3, 3);
+            this.buttonAccept.Name = "buttonAccept";
+            this.buttonAccept.Size = new System.Drawing.Size(134, 27);
+            this.buttonAccept.TabIndex = 4;
+            this.buttonAccept.Text = "Подтвердить";
+            this.buttonAccept.UseVisualStyleBackColor = true;
+            this.buttonAccept.Click += new System.EventHandler(this.buttonAccept_Click);
+            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Name = "contextMenuStrip1";
@@ -595,17 +606,6 @@
             this.toolStripAddGraphicCondition.Size = new System.Drawing.Size(165, 22);
             this.toolStripAddGraphicCondition.Text = "Графическое представление";
             this.toolStripAddGraphicCondition.Click += new System.EventHandler(this.toolStripAddGraphicCondition_Click);
-            // 
-            // buttonAccept
-            // 
-            this.buttonAccept.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonAccept.Location = new System.Drawing.Point(3, 3);
-            this.buttonAccept.Name = "buttonAccept";
-            this.buttonAccept.Size = new System.Drawing.Size(134, 27);
-            this.buttonAccept.TabIndex = 4;
-            this.buttonAccept.Text = "Подтвердить";
-            this.buttonAccept.UseVisualStyleBackColor = true;
-            this.buttonAccept.Click += new System.EventHandler(this.buttonAccept_Click);
             // 
             // FormCreateTask
             // 

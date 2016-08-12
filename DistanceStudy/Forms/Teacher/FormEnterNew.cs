@@ -9,27 +9,27 @@ namespace DistanceStudy.Forms.Teacher
     public partial class FormEnterNew : Form
     {
         // Экземпляр класса для работы с деревом
-        private readonly WorkTree _wt;
+        private readonly WorkEntity _wt;
         // Редактируемый экземпляр
         private readonly dynamic _edited = null;
         /// <summary>
         /// Инициализация компонентов формы и задание начальным
         /// текстам подсказок серого цвета
         /// </summary>
-        public FormEnterNew(WorkTree workTree)
+        public FormEnterNew(WorkEntity workEntity)
         {
-            _wt = workTree;
+            _wt = workEntity;
             InitializeComponent();
-            InitControlValues(Color.Black, Color.Gray, string.Empty, string.Empty, new Size(600, 500), false);
+            InitControlValues(Color.Black, Color.Black, string.Empty, string.Empty, new Size(600, 500), false);
         }
 
         /// <summary>
         /// Инициализация конструктора для редактирования темы/подтемы
         /// </summary>
-        public FormEnterNew(WorkTree workTree, dynamic item)
+        public FormEnterNew(WorkEntity workEntity, dynamic item)
         {
             _edited = item;
-            _wt = workTree;
+            _wt = workEntity;
             InitializeComponent();
             InitControlValues(Color.Black, (item.Description == null) ? Color.Gray : Color.Black, _edited.Name, _edited.Description, new Size(600, 500), true);
         }

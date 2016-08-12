@@ -2,27 +2,27 @@
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using DbRepository.Classes;
-//using DrawG;
-//using GeomObjects.Points;
+using DistanceStudy.Properties;
+using Service.HandlerUI;
 
 namespace DistanceStudy.Forms.Teacher
 {
     public partial class FormCreateTask : Form
     {
-        private Bitmap _itemBmp;
-        private FormCreateAlgorithm _formCreateAlgorithm;
-        public FormCreateTask()
+        // объект работы с деревом
+        private readonly WorkEntity _wt;
+        public FormCreateTask(WorkEntity wt)
         {
+            _wt = wt;
             InitializeComponent();
             textBoxName.ForeColor = Color.Gray;
-            textBoxName.Text = "Введите наименование задачи...";
+            textBoxName.Text = Resources.EnterTaskName;
 
             textBoxDescription.ForeColor = Color.Gray;
-            textBoxDescription.Text = "Введите текстовое описание задачи...";
+            textBoxDescription.Text = Resources.EnterTextDescriptionOfTask;
 
             textBoxFilePath.ForeColor = Color.Gray;
-            textBoxFilePath.Text = "Путь к графическому описанию задачи...";
+            textBoxFilePath.Text = Resources.PathToTaskImage;
             this.MinimumSize = new Size(600, 500);
             // Изначально датагрид невидим, видно только сообщение о том, что параметры не заданы
             dataGridViewDefault.Visible = false;
@@ -35,13 +35,13 @@ namespace DistanceStudy.Forms.Teacher
             if (textBoxName.Text == string.Empty)
             {
                 textBoxName.ForeColor = Color.Gray;
-                textBoxName.Text = "Введите наименование задачи...";
+                textBoxName.Text = Resources.EnterTaskName;
             }
         }
         // Событие активации текстового поля
         private void textBoxName_Enter(object sender, EventArgs e)
         {
-            if (textBoxName.Text == "Введите наименование задачи...")
+            if (textBoxName.Text == Resources.EnterTaskName)
             {
                 textBoxName.Text = string.Empty;
                 textBoxName.ForeColor = Color.Black;
@@ -50,7 +50,7 @@ namespace DistanceStudy.Forms.Teacher
         // Событие активации текстового поля
         private void textBoxDescription_Enter(object sender, EventArgs e)
         {
-            if (textBoxDescription.Text == "Введите текстовое описание задачи...")
+            if (textBoxDescription.Text == Resources.EnterTextDescriptionOfTask)
             {
                 textBoxDescription.Text = string.Empty;
                 textBoxDescription.ForeColor = Color.Black;
@@ -62,30 +62,30 @@ namespace DistanceStudy.Forms.Teacher
             if (textBoxDescription.Text == string.Empty)
             {
                 textBoxDescription.ForeColor = Color.Gray;
-                textBoxDescription.Text = "Введите текстовое описание задачи...";
+                textBoxDescription.Text = Resources.EnterTextDescriptionOfTask;
             }
         }
 
         private void buttonOpenFile_Click(object sender, EventArgs e)
         {
-            System.Windows.Forms.OpenFileDialog dialog = new System.Windows.Forms.OpenFileDialog();
-            dialog.Filter = "All files (*.bmp)|*.bmp;";
-            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                dialog.Dispose();
-                textBoxFilePath.Text = dialog.FileName;
-                _itemBmp = new Bitmap(dialog.FileName);
-                pictureBoxImageTask.Image = _itemBmp;
-            }
-            if (_itemBmp != null)
-            {
-                labelHereGraphic.Text = "";
-            }
+            //System.Windows.Forms.OpenFileDialog dialog = new System.Windows.Forms.OpenFileDialog();
+            //dialog.Filter = "All files (*.bmp)|*.bmp;";
+            //if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            //{
+            //    dialog.Dispose();
+            //    textBoxFilePath.Text = dialog.FileName;
+            //    _itemBmp = new Bitmap(dialog.FileName);
+            //    pictureBoxImageTask.Image = _itemBmp;
+            //}
+            //if (_itemBmp != null)
+            //{
+            //    labelHereGraphic.Text = "";
+            //}
         }
         // Событие активации текстового поля
         private void textBoxFilePath_Enter(object sender, EventArgs e)
         {
-            if (textBoxFilePath.Text == "Путь к графическому описанию задачи...")
+            if (textBoxFilePath.Text == Resources.PathToTaskImage)
             {
                 textBoxFilePath.Text = string.Empty;
                 textBoxFilePath.ForeColor = Color.Black;
@@ -97,13 +97,13 @@ namespace DistanceStudy.Forms.Teacher
             if (textBoxFilePath.Text == string.Empty)
             {
                 textBoxFilePath.ForeColor = Color.Gray;
-                textBoxFilePath.Text = "Путь к графическому описанию задачи...";
+                textBoxFilePath.Text = Resources.PathToTaskImage;
             }
         }
         private void buttonAcceptTask_Click(object sender, EventArgs e)
         {
-            _formCreateAlgorithm = new FormCreateAlgorithm();
-            _formCreateAlgorithm.Show();
+            //_formCreateAlgorithm = new FormCreateAlgorithm();
+            //_formCreateAlgorithm.Show();
         }
         /// <summary>
         /// При масштабировании основного окна - колонки также перерисовываются под новый размер
@@ -160,7 +160,7 @@ namespace DistanceStudy.Forms.Teacher
         /// <param name="e"></param>
         private void textBoxName_TextChanged(object sender, EventArgs e)
         {
-            if (textBoxName.Text == string.Empty || textBoxName.Text == "Введите наименование задачи...")
+            if (textBoxName.Text == string.Empty || textBoxName.Text == Resources.EnterTaskName)
             {
                 buttonAcceptTask.Enabled = false;
             }
