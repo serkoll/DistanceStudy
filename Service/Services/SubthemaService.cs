@@ -38,7 +38,7 @@ namespace Service.Services
         {
             _subthemaRep.Update(new SubThema()
             {
-                ThemaId = id,
+                SubthemaId = id,
                 Name = name,
                 Description = desc
             });

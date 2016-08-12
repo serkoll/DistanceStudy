@@ -30,7 +30,8 @@ namespace DistanceStudy.Forms.Teacher
 
         private void edittoolStripButton_Click(object sender, EventArgs e)
         {
-            FormController<FormEnterNew>.CreateFormByType(_wt).Show();
+            var obj = _wt.GetObjectBySelectedNode();
+            FormController<FormEnterNew>.CreateFormByType(_wt, obj).Show();
         }
 
         private void treeView_thema_KeyPress(object sender, KeyPressEventArgs e)

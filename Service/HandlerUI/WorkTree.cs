@@ -47,7 +47,7 @@ namespace BaseLibrary.Classes
                 id = 0;
                 return _themaService.Add;
             }
-            id = GetThemaIdByNode(currNode).ThemaId;
+            id = GetThemaByNode(currNode).ThemaId;
             return _subthemaService.Add;
         }
 
@@ -62,14 +62,22 @@ namespace BaseLibrary.Classes
             id = 0;
             try
             {
-                id = item.ThemaId;
-                return _themaService.Update;
+                if (item is Thema)
+                {
+                    id = item.ThemaId;
+                    return _themaService.Update;
+                }
+                if (item is SubThema)
+                {
+                    id = item.SubthemaId;
+                    return _subthemaService.Update;
+                }
             }
             catch (RuntimeBinderException)
             {
-                id = item.SubthemaId;
-                return _subthemaService.Update;
+                MessageBox.Show("GetMethodForUpdateNeededObject");
             }
+            return null;
         }
 
         /// <summary>
@@ -83,11 +91,11 @@ namespace BaseLibrary.Classes
             var parent = _tree.SelectedNode?.Parent;
             if (parent == null)
             {
-                var thema = GetThemaIdByNode(currNode);
+                var thema = GetThemaByNode(currNode);
                 id = thema.ThemaId;
                 return _themaService.Delete;
             }
-            var subthema = GetSubthemaIdByNode(currNode);
+            var subthema = GetSubthemaByNode(currNode);
             id = subthema.SubthemaId;
             return _subthemaService.Delete;
         }
@@ -108,6 +116,21 @@ namespace BaseLibrary.Classes
         {
             _tree.Nodes.Clear();
             FillTree();
+        }
+
+        /// <summary>
+        /// Возвращает объект (тема/подтема) по выбранному узлу в дереве
+        /// </summary>
+        /// <returns></returns>
+        public dynamic GetObjectBySelectedNode()
+        {
+            var currNode = _tree.SelectedNode;
+            var parent = _tree.SelectedNode?.Parent;
+            if (parent == null)
+            {
+                return GetThemaByNode(currNode);
+            }
+            return GetSubthemaByNode(currNode);
         }
 
         /// <summary>
@@ -167,7 +190,7 @@ namespace BaseLibrary.Classes
         /// </summary>
         /// <param name="currNode">Узел дерева</param>
         /// <returns>Тема</returns>
-        private Thema GetThemaIdByNode(TreeNode currNode)
+        private Thema GetThemaByNode(TreeNode currNode)
         {
             return _themaList.FirstOrDefault(c => c.Name.Equals(currNode.Text));
         }
@@ -177,7 +200,7 @@ namespace BaseLibrary.Classes
         /// </summary>
         /// <param name="currNode">Узел дерева</param>
         /// <returns>Подтема</returns>
-        private SubThema GetSubthemaIdByNode(TreeNode currNode)
+        private SubThema GetSubthemaByNode(TreeNode currNode)
         {
             return _subthemaList.FirstOrDefault(c => c.Name.Equals(currNode.Text));
         }
