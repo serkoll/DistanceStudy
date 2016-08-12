@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using DbRepository.Classes.Context;
-using GeomObjects.Points;
+using GeometryObjects;
 
 namespace ControlTask
 {

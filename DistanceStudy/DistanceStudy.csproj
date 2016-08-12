@@ -32,10 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BaseGeometry, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\BaseGeometry\BaseGeometry\bin\Debug\BaseGeometry.dll</HintPath>
-    </Reference>
     <Reference Include="DbRepository">
       <HintPath>..\DbRepository\bin\Debug\DbRepository.dll</HintPath>
     </Reference>
@@ -149,6 +145,14 @@
     <ProjectReference Include="..\Service\Service.csproj">
       <Project>{0ad4d925-6403-4d94-b0ee-8a538c8a88e5}</Project>
       <Name>Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Authentication\Authentication.csproj">
+      <Project>{ca86ad9f-c191-4eaf-8997-681237145207}</Project>
+      <Name>Authentication</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BaseLibrary\BaseLibrary.csproj">
+      <Project>{50fd6624-c01a-41a4-8759-d75a4948193c}</Project>
+      <Name>BaseLibrary</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
