@@ -43,5 +43,14 @@ namespace Service.Services
                 Description = desc
             });
         }
+
+        /// <summary>
+        /// Удаление подтемы
+        /// </summary>
+        /// <param name="id">ИД подтемы</param>
+        public void Delete(int id)
+        {
+            _subthemaRep.Delete(id);
+        }
     }
 }

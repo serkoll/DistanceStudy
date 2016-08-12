@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using DbRepository.Context;
+using System.Data.Entity;
 
 namespace DbRepository.Classes.Repository
 {
@@ -64,9 +65,23 @@ namespace DbRepository.Classes.Repository
                 var deleted = db.Themas.Find(id);
                 if (deleted != null)
                 {
+                    DeleteSubthemasFromThemaById(db.SubThemas, id);
                     db.Themas.Remove(deleted);
                     db.SaveChanges();
                 }
+            }
+        }
+
+        /// <summary>
+        /// Удаление всех подтем из темы
+        /// </summary>
+        /// <param name="dbSubthemas">Сет всех подтем</param>
+        /// <param name="id">ИД темы</param>
+        private void DeleteSubthemasFromThemaById(DbSet<SubThema> dbSubthemas, int id)
+        {
+            foreach(var item in dbSubthemas.Where(c => c.ThemaId.Equals(id)))
+            {
+                dbSubthemas.Remove(item);
             }
         }
     }

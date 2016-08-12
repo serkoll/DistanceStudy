@@ -43,5 +43,14 @@ namespace Service.Services
                 Description = desc
             });
         }
+
+        /// <summary>
+        /// Удаление темы
+        /// </summary>
+        /// <param name="id">ИД темы</param>
+        public void Delete(int id)
+        {
+            _themaRep.Delete(id);
+        }
     }
 }

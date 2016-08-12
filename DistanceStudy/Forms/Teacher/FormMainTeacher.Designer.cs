@@ -175,6 +175,7 @@
             this.deletetoolStripButton.Size = new System.Drawing.Size(87, 36);
             this.deletetoolStripButton.Text = "Удалить";
             this.deletetoolStripButton.ToolTipText = "Удалить тему, подтему или задачу";
+            this.deletetoolStripButton.Click += new System.EventHandler(this.deletetoolStripButton_Click);
             // 
             // panelMenu
             // 

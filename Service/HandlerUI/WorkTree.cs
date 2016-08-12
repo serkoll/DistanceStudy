@@ -73,6 +73,26 @@ namespace BaseLibrary.Classes
         }
 
         /// <summary>
+        /// Метод возвращает ссылку на метод для удаления темы/подтемы
+        /// </summary>
+        /// <param name="id">ИД темы/подтемы</param>
+        /// <returns>метод удаления темы или подтемы</returns>
+        public Action<int> GetMethodForDeleteNeededObject(out int id)
+        {
+            var currNode = _tree.SelectedNode;
+            var parent = _tree.SelectedNode?.Parent;
+            if (parent == null)
+            {
+                var thema = GetThemaIdByNode(currNode);
+                id = thema.ThemaId;
+                return _themaService.Delete;
+            }
+            var subthema = GetSubthemaIdByNode(currNode);
+            id = subthema.SubthemaId;
+            return _subthemaService.Delete;
+        }
+
+        /// <summary>
         /// Получение из БД тем и подтем, заполнение ими дерева
         /// </summary>
         public void FillTree()
@@ -145,11 +165,21 @@ namespace BaseLibrary.Classes
         /// <summary>
         /// Вернуть тему по узлу из списка в дереве TreeView
         /// </summary>
-        /// <param name="currNode">Узел</param>
+        /// <param name="currNode">Узел дерева</param>
         /// <returns>Тема</returns>
         private Thema GetThemaIdByNode(TreeNode currNode)
         {
             return _themaList.FirstOrDefault(c => c.Name.Equals(currNode.Text));
+        }
+
+        /// <summary>
+        /// Вернуть подтему по узлу из списка
+        /// </summary>
+        /// <param name="currNode">Узел дерева</param>
+        /// <returns>Подтема</returns>
+        private SubThema GetSubthemaIdByNode(TreeNode currNode)
+        {
+            return _subthemaList.FirstOrDefault(c => c.Name.Equals(currNode.Text));
         }
     }
 }

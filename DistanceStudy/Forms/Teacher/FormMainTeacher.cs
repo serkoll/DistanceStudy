@@ -58,5 +58,13 @@ namespace DistanceStudy.Forms.Teacher
             deletetoolStripButton.Enabled = delete;
             copyToolStripButton.Enabled = copy;
         }
+
+        private void deletetoolStripButton_Click(object sender, EventArgs e)
+        {
+            int objId = 0;
+            var method = _wt.GetMethodForDeleteNeededObject(out objId);
+            method(objId);
+            _wt.UpdateTree();
+        }
     }
 }
