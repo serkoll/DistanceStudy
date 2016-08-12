@@ -55,10 +55,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BaseGeometry\BaseGeometry\BaseGeometry.csproj">
-      <Project>{9445d9ed-e7b5-451b-bf93-2265ba1e186a}</Project>
-      <Name>BaseGeometry</Name>
-    </ProjectReference>
     <ProjectReference Include="..\BaseLibrary\BaseLibrary.csproj">
       <Project>{50fd6624-c01a-41a4-8759-d75a4948193c}</Project>
       <Name>BaseLibrary</Name>

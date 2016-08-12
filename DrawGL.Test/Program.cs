@@ -16,7 +16,7 @@ namespace DrawGL.Test
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new DrawG.MainForm());
+            Application.Run(new GraphicsModule.MainForm());
         }
     }
 }
