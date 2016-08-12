@@ -33,9 +33,30 @@ namespace DistanceStudy.Forms.Teacher
             FormController<FormEnterNew>.CreateFormByType(_wt).Show();
         }
 
+        private void treeView_thema_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            const int escapeKeyCode = 27;
+            if (e.KeyChar == escapeKeyCode)
+            {
+                SetButtonAndNodeProperties(null);
+            }
+        }
+
         private void treeView_thema_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            edittoolStripButton.Enabled = true;
+            MouseEventArgs me = e;
+            if (me.Button.Equals(System.Windows.Forms.MouseButtons.Left))
+            {
+                SetButtonAndNodeProperties(e.Node, true, true, true);
+            }
+        }
+
+        private void SetButtonAndNodeProperties(TreeNode treeNode, bool edit = false, bool delete = false, bool copy = false)
+        {
+            treeView_thema.SelectedNode = treeNode;
+            edittoolStripButton.Enabled = edit;
+            deletetoolStripButton.Enabled = delete;
+            copyToolStripButton.Enabled = copy;
         }
     }
 }

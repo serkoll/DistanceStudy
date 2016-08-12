@@ -76,6 +76,7 @@
             this.treeView_thema.Size = new System.Drawing.Size(241, 333);
             this.treeView_thema.TabIndex = 0;
             this.treeView_thema.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView_thema_NodeMouseClick);
+            this.treeView_thema.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.treeView_thema_KeyPress);
             // 
             // listView_thema
             // 
