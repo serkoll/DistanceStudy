@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Service.HandlerUI;
+using System;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -7,60 +8,17 @@ namespace DistanceStudy.Forms.Teacher
 {
     public partial class FormCreateTask : Form
     {
+        private WorkTree _wt;
         private Bitmap _itemBmp;
         private FormCreateAlgorithm _formCreateAlgorithm;
-        public FormCreateTask()
+        public FormCreateTask(WorkTree wt)
         {
+            _wt = wt;
             InitializeComponent();
-            textBoxName.ForeColor = Color.Gray;
-            textBoxName.Text = "Введите наименование задачи...";
-
-            textBoxDescription.ForeColor = Color.Gray;
-            textBoxDescription.Text = "Введите текстовое описание задачи...";
-
-            textBoxFilePath.ForeColor = Color.Gray;
-            textBoxFilePath.Text = "Путь к графическому описанию задачи...";
-            this.MinimumSize = new Size(600, 500);
-            // Изначально датагрид невидим, видно только сообщение о том, что параметры не заданы
-            dataGridViewDefault.Visible = false;
-            // Кнопка создать неактивна по умолчанию
-            buttonAcceptTask.Enabled = false;
-        }
-        // Событие, срабатывающее при переходе управления к другому контролу
-        private void textBoxName_Leave(object sender, EventArgs e)
-        {
-            if (textBoxName.Text == string.Empty)
-            {
-                textBoxName.ForeColor = Color.Gray;
-                textBoxName.Text = "Введите наименование задачи...";
-            }
-        }
-        // Событие активации текстового поля
-        private void textBoxName_Enter(object sender, EventArgs e)
-        {
-            if (textBoxName.Text == "Введите наименование задачи...")
-            {
-                textBoxName.Text = string.Empty;
-                textBoxName.ForeColor = Color.Black;
-            }
-        }
-        // Событие активации текстового поля
-        private void textBoxDescription_Enter(object sender, EventArgs e)
-        {
-            if (textBoxDescription.Text == "Введите текстовое описание задачи...")
-            {
-                textBoxDescription.Text = string.Empty;
-                textBoxDescription.ForeColor = Color.Black;
-            }
-        }
-        // Событие, срабатывающее при переходе управления к другому контролу
-        private void textBoxDescription_Leave(object sender, EventArgs e)
-        {
-            if (textBoxDescription.Text == string.Empty)
-            {
-                textBoxDescription.ForeColor = Color.Gray;
-                textBoxDescription.Text = "Введите текстовое описание задачи...";
-            }
+            SetProperties(textBoxName, Color.Gray, "Введите наименование задачи...");
+            SetProperties(textBoxDescription, Color.Gray, "Введите текстовое описание задачи...");
+            SetProperties(textBoxFilePath, Color.Gray, "Путь к графическому описанию задачи...");
+            InitialFormParams();
         }
 
         private void buttonOpenFile_Click(object sender, EventArgs e)
@@ -79,52 +37,23 @@ namespace DistanceStudy.Forms.Teacher
                 labelHereGraphic.Text = "";
             }
         }
-        // Событие активации текстового поля
-        private void textBoxFilePath_Enter(object sender, EventArgs e)
-        {
-            if (textBoxFilePath.Text == "Путь к графическому описанию задачи...")
-            {
-                textBoxFilePath.Text = string.Empty;
-                textBoxFilePath.ForeColor = Color.Black;
-            }
-        }
-        // Событие, срабатывающее при переходе управления к другому контролу
-        private void textBoxFilePath_Leave(object sender, EventArgs e)
-        {
-            if (textBoxFilePath.Text == string.Empty)
-            {
-                textBoxFilePath.ForeColor = Color.Gray;
-                textBoxFilePath.Text = "Путь к графическому описанию задачи...";
-            }
-        }
+
         private void buttonAcceptTask_Click(object sender, EventArgs e)
         {
             _formCreateAlgorithm = new FormCreateAlgorithm();
             _formCreateAlgorithm.Show();
         }
-        /// <summary>
-        /// При масштабировании основного окна - колонки также перерисовываются под новый размер
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+
         private void FormCreateTask_Resize(object sender, EventArgs e)
         {
             dataGridViewDefault.Columns[2].Width = dataGridViewDefault.Width - dataGridViewDefault.Columns[0].Width;
         }
-        /// <summary>
-        /// Событие при изменении ширины колонки - масштабирование на весь элемент управления
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+
         private void dataGridViewDefault_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
         {
             dataGridViewDefault.Columns[2].Width = dataGridViewDefault.Width - dataGridViewDefault.Columns[1].Width;
         }
-        /// <summary>
-        /// Событие добавления параметров в задачу
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+
         private void toolStripButtonAddParams_Click(object sender, EventArgs e)
         {
             if (labelParametrsHasNot.Visible)
@@ -140,21 +69,12 @@ namespace DistanceStudy.Forms.Teacher
                 toolStripButtonAddParams.Text = "Добавить параметры";
             }
         }
-        /// <summary>
-        /// Изменение состояния чекбоксов для статуса задачи
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+
         private void radioButtonMain_CheckedChanged(object sender, EventArgs e)
         {
             buttonAcceptTask.Enabled = true;
         }
 
-        /// <summary>
-        /// Изменение текста в текстбоксе для названия задачи
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void textBoxName_TextChanged(object sender, EventArgs e)
         {
             if (textBoxName.Text == string.Empty || textBoxName.Text == "Введите наименование задачи...")
@@ -189,6 +109,58 @@ namespace DistanceStudy.Forms.Teacher
             //DbRepositoryFake.OuterXml = result;
             //DbHelper.AddTaskAlgorithmXml(result);
             //Dispose();
+        }
+
+        #region Появление и исчезновение подсказок при переходе на текстовые поля
+
+        private void textBoxName_Leave(object sender, EventArgs e)
+        {
+            SetProperties(textBoxName, Color.Gray, "Введите наименование задачи...", string.Empty);
+        }
+
+        private void textBoxName_Enter(object sender, EventArgs e)
+        {
+            SetProperties(textBoxName, Color.Black, string.Empty, "Введите наименование задачи...");
+        }
+
+        private void textBoxDescription_Enter(object sender, EventArgs e)
+        {
+            SetProperties(textBoxDescription, Color.Black, string.Empty, "Введите текстовое описание задачи...");
+        }
+
+        private void textBoxDescription_Leave(object sender, EventArgs e)
+        {
+            SetProperties(textBoxDescription, Color.Gray, "Введите текстовое описание задачи...", string.Empty);
+        }
+
+        private void textBoxFilePath_Enter(object sender, EventArgs e)
+        {
+            SetProperties(textBoxFilePath, Color.Black, string.Empty, "Путь к графическому описанию задачи...");
+        }
+
+        private void textBoxFilePath_Leave(object sender, EventArgs e)
+        {
+            SetProperties(textBoxFilePath, Color.Gray, "Путь к графическому описанию задачи...", string.Empty);
+        }
+
+        private void SetProperties(TextBox txtBox, Color color, string text, string compareTxt = "")
+        {
+            if (txtBox.Text == compareTxt)
+            {
+                txtBox.Text = text;
+                txtBox.ForeColor = color;
+            }
+        }
+
+        #endregion
+
+        private void InitialFormParams()
+        {
+            this.MinimumSize = new Size(600, 500);
+            // Изначально датагрид невидим, видно только сообщение о том, что параметры не заданы
+            dataGridViewDefault.Visible = false;
+            // Кнопка создать неактивна по умолчанию
+            buttonAcceptTask.Enabled = false;
         }
     }
 }

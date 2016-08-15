@@ -6,7 +6,6 @@ namespace DistanceStudy.Classes
     /// <summary>
     /// Контроллер создания экземпляра типа по самому типу (для форм)
     /// </summary>
-    /// <typeparam name="T">Тип создаваемого экземляра</typeparam>
     public static class FormController
     {
         /// <summary>
