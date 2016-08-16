@@ -31,8 +31,9 @@
           <Property Name="TaskId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SubthemaId" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="512" Nullable="false" />
-          <Property Name="Description" Type="nvarchar" MaxLength="512" Nullable="false" />
-          <Property Name="IsReady" Type="tinyint" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="512" />
+          <Property Name="IsReady" Type="bit" Nullable="false" />
+          <Property Name="Image" Type="varbinary" MaxLength="8000" />
         </EntityType>
         <EntityType Name="Task_Algotithm">
           <Key>
@@ -192,8 +193,9 @@
           <Property Name="TaskId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="SubthemaId" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="IsReady" Type="Byte" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="IsReady" Type="Boolean" Nullable="false" />
+          <Property Name="Image" Type="Binary" MaxLength="8000" FixedLength="false" />
           <NavigationProperty Name="SubThema" Relationship="Self.FK_Task_SubThema" FromRole="Task" ToRole="SubThema" />
           <NavigationProperty Name="Task_Algotithm" Relationship="Self.FK_Task_Algotithm_Task" FromRole="Task" ToRole="Task_Algotithm" />
           <NavigationProperty Name="Task_Parametrs" Relationship="Self.FK_Task_Parametrs_Task" FromRole="Task" ToRole="Task_Parametrs" />
@@ -361,6 +363,7 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="IsReady" ColumnName="IsReady" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

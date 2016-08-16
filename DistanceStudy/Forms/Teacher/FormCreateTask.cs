@@ -38,12 +38,6 @@ namespace DistanceStudy.Forms.Teacher
             }
         }
 
-        private void buttonAcceptTask_Click(object sender, EventArgs e)
-        {
-            _formCreateAlgorithm = new FormCreateAlgorithm();
-            _formCreateAlgorithm.Show();
-        }
-
         private void FormCreateTask_Resize(object sender, EventArgs e)
         {
             dataGridViewDefault.Columns[2].Width = dataGridViewDefault.Width - dataGridViewDefault.Columns[0].Width;
@@ -72,19 +66,27 @@ namespace DistanceStudy.Forms.Teacher
 
         private void radioButtonMain_CheckedChanged(object sender, EventArgs e)
         {
-            buttonAcceptTask.Enabled = true;
+            buttonAddAlgorithm.Enabled = true;
         }
 
         private void textBoxName_TextChanged(object sender, EventArgs e)
         {
             if (textBoxName.Text == string.Empty || textBoxName.Text == "Введите наименование задачи...")
             {
-                buttonAcceptTask.Enabled = false;
+                buttonAddAlgorithm.Enabled = false;
+                buttonAccept.Enabled = false;
             }
             else
             {
-                buttonAcceptTask.Enabled = true;
+                buttonAddAlgorithm.Enabled = true;
+                buttonAccept.Enabled = true;
             }
+        }
+
+        private void buttonAddAlgorithm_Click(object sender, EventArgs e)
+        {
+            _formCreateAlgorithm = new FormCreateAlgorithm();
+            _formCreateAlgorithm.Show();
         }
 
         private void toolStripAddGraphicCondition_Click(object sender, EventArgs e)
@@ -160,7 +162,7 @@ namespace DistanceStudy.Forms.Teacher
             // Изначально датагрид невидим, видно только сообщение о том, что параметры не заданы
             dataGridViewDefault.Visible = false;
             // Кнопка создать неактивна по умолчанию
-            buttonAcceptTask.Enabled = false;
+            buttonAddAlgorithm.Enabled = false;
         }
     }
 }
