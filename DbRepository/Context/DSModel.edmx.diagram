@@ -4,19 +4,19 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f8a4a2cbcec14105b5756e838359da44" Name="Diagram1">
+      <Diagram DiagramId="9621dbc95ffd40f79642491ddffff993" Name="Diagram1">
         <EntityTypeShape EntityType="DistanceStudyModel.Permission" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
         <EntityTypeShape EntityType="DistanceStudyModel.SubThema" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DistanceStudyModel.Task" Width="1.5" PointX="5.25" PointY="2.125" IsExpanded="true" />
         <EntityTypeShape EntityType="DistanceStudyModel.Task_Algotithm" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="DistanceStudyModel.Task_Parametrs" Width="1.5" PointX="7.5" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="DistanceStudyModel.Task" Width="1.5" PointX="5.25" PointY="2.125" IsExpanded="true" />
         <EntityTypeShape EntityType="DistanceStudyModel.Thema" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
         <EntityTypeShape EntityType="DistanceStudyModel.User" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
         <AssociationConnector Association="DistanceStudyModel.FK_Users_Permissions" ManuallyRouted="false" />
         <AssociationConnector Association="DistanceStudyModel.FK_SubThema_Themas" ManuallyRouted="false" />
-        <AssociationConnector Association="DistanceStudyModel.FK_Tasks_Article" ManuallyRouted="false" />
-        <AssociationConnector Association="DistanceStudyModel.FK_Task_Algotithm_Tasks" ManuallyRouted="false" />
-        <AssociationConnector Association="DistanceStudyModel.FK_Task_Parametrs_Tasks" ManuallyRouted="false" />
+        <AssociationConnector Association="DistanceStudyModel.FK_Task_SubThema" ManuallyRouted="false" />
+        <AssociationConnector Association="DistanceStudyModel.FK_Task_Algotithm_Task" ManuallyRouted="false" />
+        <AssociationConnector Association="DistanceStudyModel.FK_Task_Parametrs_Task" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

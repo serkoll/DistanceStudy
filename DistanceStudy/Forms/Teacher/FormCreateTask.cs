@@ -23,9 +23,9 @@ namespace DistanceStudy.Forms.Teacher
 
         private void buttonOpenFile_Click(object sender, EventArgs e)
         {
-            System.Windows.Forms.OpenFileDialog dialog = new System.Windows.Forms.OpenFileDialog();
+            OpenFileDialog dialog = new OpenFileDialog();
             dialog.Filter = "All files (*.bmp)|*.bmp;";
-            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (dialog.ShowDialog() == DialogResult.OK)
             {
                 dialog.Dispose();
                 textBoxFilePath.Text = dialog.FileName;
