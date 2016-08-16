@@ -50,14 +50,19 @@ namespace DistanceStudy.Forms.Teacher
             {
                 SetButtonAndNodeProperties(e.Node, true, true, true);
             }
+            if (me.Button.Equals(MouseButtons.Left) && treeView_thema.SelectedNode.Parent?.Parent != null)
+            {
+                SetButtonAndNodeProperties(e.Node, true, true, true, false);
+            }
         }
 
-        private void SetButtonAndNodeProperties(TreeNode treeNode, bool edit = false, bool delete = false, bool copy = false)
+        private void SetButtonAndNodeProperties(TreeNode treeNode, bool edit = false, bool delete = false, bool copy = false, bool create = true)
         {
             treeView_thema.SelectedNode = treeNode;
             edittoolStripButton.Enabled = edit;
             deletetoolStripButton.Enabled = delete;
             copyToolStripButton.Enabled = copy;
+            CreateButton.Enabled = create;
         }
 
         private void deletetoolStripButton_Click(object sender, EventArgs e)
