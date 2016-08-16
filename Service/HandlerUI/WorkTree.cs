@@ -7,6 +7,7 @@ using DbRepository.Classes.Repository;
 using DbRepository.Context;
 using Microsoft.CSharp.RuntimeBinder;
 using Service.Services;
+using System.Drawing;
 
 namespace Service.HandlerUI
 {
@@ -36,6 +37,7 @@ namespace Service.HandlerUI
             _tree = tree;
             _themaService = new ThemaService();
             _subthemaService = new SubthemaService();
+            _taskService = new TaskService();
         }
 
         /// <summary>
@@ -170,10 +172,13 @@ namespace Service.HandlerUI
         {
             _themaList?.Clear();
             _subthemaList?.Clear();
+            _taskList?.Clear();
             var dbThema = new ThemaRepository();
             _themaList = dbThema.GetAll();
             var dbSubthema = new SubthemaRepository();
             _subthemaList = dbSubthema.GetAll();
+            var dbTask = new TaskRepository();
+            _taskList = dbTask.GetAll();
         }
 
         /// <summary>
@@ -199,7 +204,33 @@ namespace Service.HandlerUI
             {
                 var index = _tree.Nodes.Count - 1;
                 _tree.Nodes[index].Nodes.Add(subthema.Name);
+                AddTasksFromSubthemaToTree(subthema, _tree.Nodes[index].Nodes);
             }
+        }
+
+        /// <summary>
+        /// Добавление задач под подтему
+        /// </summary>
+        /// <param name="item">Подтема, в которую добавляются задачи</param>
+        private void AddTasksFromSubthemaToTree(SubThema item, TreeNodeCollection targetNodes)
+        {
+            var tasks = _taskList.Where(c => c.SubthemaId.Equals(item.SubthemaId));
+            foreach (var task in tasks)
+            {
+                var index = targetNodes.Count - 1;
+                targetNodes[index].Nodes.Add(task.Name);
+                SetColorForTaskNode(task, targetNodes[index].LastNode);
+            }
+        }
+
+        /// <summary>
+        /// Установить цвет узла в зависимости от готовности задачи
+        /// </summary>
+        /// <param name="task">Задача</param>
+        /// <param name="node">Узел задачи</param>
+        private void SetColorForTaskNode(Task task, TreeNode node)
+        {
+            node.ForeColor = (task.IsReady) ? Color.Green : Color.Red;
         }
 
         /// <summary>
