@@ -27,6 +27,8 @@ namespace Service.HandlerUI
         private readonly SubthemaService _subthemaService;
         // Сервис по работе с задачами
         private readonly TaskService _taskService;
+        // Узел для копирования
+        private TreeNode _sourceNode { get; set; }
 
         /// <summary>
         /// Конструктор. Заполняет из БД дерево темами, подтемами, задачами
@@ -175,6 +177,35 @@ namespace Service.HandlerUI
         {
             var typeString = GetTypeFormNeedToCreateBySelectedNode();
             return Type.GetType($"DistanceStudy.Forms.Teacher.{typeString}, DistanceStudy");
+        }
+
+        /// <summary>
+        /// Инициализация узла для копирования
+        /// </summary>
+        /// <param name="node">Копируемы узел</param>
+        public void SetNodeToCopy(TreeNode node)
+        {
+            _sourceNode = node;
+        }
+
+        /// <summary>
+        /// Вставить скопированный узел
+        /// </summary>
+        public void PastCopiedNode()
+        {
+            if (_sourceNode == null) return;
+            var thema = GetThemaByNode(_sourceNode);
+            if (thema != null)
+            {
+                _themaService.Add(thema.Name, thema.Description, 0);
+                return;
+            }
+            var subthema = GetSubthemaByNode(_sourceNode);
+            if (thema != null)
+            {
+                _subthemaService.Add(thema.Name, thema.Description, 0);
+                return;
+            }
         }
 
         /// <summary>

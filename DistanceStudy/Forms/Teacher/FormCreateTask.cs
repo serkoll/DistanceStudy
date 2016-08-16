@@ -8,8 +8,8 @@ namespace DistanceStudy.Forms.Teacher
 {
     public partial class FormCreateTask : Form
     {
+        // Объект для работы с задачами и деревом объектов
         private WorkTree _wt;
-        private Bitmap _itemBmp;
         private FormCreateAlgorithm _formCreateAlgorithm;
         public FormCreateTask(WorkTree wt)
         {
@@ -100,19 +100,19 @@ namespace DistanceStudy.Forms.Teacher
 
         private void buttonOpenFile_Click(object sender, EventArgs e)
         {
-            OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = "All files (*.bmp)|*.bmp;";
-            if (dialog.ShowDialog() == DialogResult.OK)
-            {
-                dialog.Dispose();
-                textBoxFilePath.Text = dialog.FileName;
-                _itemBmp = new Bitmap(dialog.FileName);
-                pictureBoxImageTask.Image = _itemBmp;
-            }
-            if (_itemBmp != null)
-            {
-                labelHereGraphic.Text = "";
-            }
+            //OpenFileDialog dialog = new OpenFileDialog();
+            //dialog.Filter = "All files (*.bmp)|*.bmp;";
+            //if (dialog.ShowDialog() == DialogResult.OK)
+            //{
+            //    dialog.Dispose();
+            //    textBoxFilePath.Text = dialog.FileName;
+            //    _itemBmp = new Bitmap(dialog.FileName);
+            //    pictureBoxImageTask.Image = _itemBmp;
+            //}
+            //if (_itemBmp != null)
+            //{
+            //    labelHereGraphic.Text = "";
+            //}
         }
 
         private void FormCreateTask_Resize(object sender, EventArgs e)

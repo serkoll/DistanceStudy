@@ -143,6 +143,7 @@
             this.copyToolStripButton.Size = new System.Drawing.Size(108, 36);
             this.copyToolStripButton.Text = "Копировать";
             this.copyToolStripButton.ToolTipText = "Копировать тему, подтему или задачу";
+            this.copyToolStripButton.Click += new System.EventHandler(this.copyToolStripButton_Click);
             // 
             // edittoolStripButton
             // 

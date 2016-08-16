@@ -19,6 +19,7 @@ namespace Service.Services
         /// <param name="name">Имя задачи</param>
         /// <param name="desc">Описание задачи</param>
         /// <param name="bmp">Графическое условие (если есть)</param>
+        /// <param name="subthemaId">К какой подтеме относится задача</param>
         public void Add(string name, string desc, Bitmap bmp, int subthemaId)
         {
             System.IO.MemoryStream stream = new System.IO.MemoryStream();

@@ -72,5 +72,19 @@ namespace DistanceStudy.Forms.Teacher
             method(objId);
             _wt.UpdateTree();
         }
+
+        private void copyToolStripButton_Click(object sender, EventArgs e)
+        {
+            if(copyToolStripButton.Text == "Вставить")
+            {
+                copyToolStripButton.Text = "Копировать";
+                //TODO: implement feature for adding copy with thema - all subthemas and tasks and etc.
+            }
+            else
+            {
+                copyToolStripButton.Text = "Вставить";
+                //_wt.SetNodeToCopy(treeView_thema.SelectedNode);
+            }
+        }
     }
 }
