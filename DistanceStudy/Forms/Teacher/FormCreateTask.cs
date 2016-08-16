@@ -35,6 +35,8 @@ namespace DistanceStudy.Forms.Teacher
 
         private void buttonAccept_Click(object sender, EventArgs e)
         {
+            _wt.CreateTask(textBoxName.Text, textBoxDescription.Text, (Bitmap)pictureBoxImageTask.Image);
+            _wt.UpdateTree();
             //DbRepositoryFake.NameTask = textBoxName.Text;
             //DbRepositoryFake.Description = textBoxDescription.Text;
             //int i = 0;

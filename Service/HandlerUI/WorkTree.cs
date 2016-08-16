@@ -123,6 +123,18 @@ namespace Service.HandlerUI
         }
 
         /// <summary>
+        /// Создание задачи первоначальное
+        /// </summary>
+        /// <param name="name">Имя задачи</param>
+        /// <param name="desc">Описание задачи</param>
+        /// <param name="image">Графическое условие задачи (если есть)</param>
+        public void CreateTask(string name, string desc, Bitmap image)
+        {
+            var subthemaId = GetSubthemaByNode(_tree.SelectedNode).SubthemaId;
+            _taskService.Add(name, desc, image, subthemaId);
+        }
+
+        /// <summary>
         /// Получение из БД тем и подтем, заполнение ими дерева
         /// </summary>
         public void FillTree()
