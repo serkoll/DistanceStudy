@@ -16,12 +16,16 @@ namespace Service.HandlerUI
         private List<Thema> _themaList;
         // Список подтем
         private List<SubThema> _subthemaList;
+        // Список задач
+        private List<Task> _taskList;
         // Текущее дерево
         private readonly TreeView _tree;
-        // Сервис по добавлению тем
+        // Сервис по работе с темами
         private readonly ThemaService _themaService;
-        // Сервис по добавлению тем
+        // Сервис по подтемам
         private readonly SubthemaService _subthemaService;
+        // Сервис по работе с задачами
+        private readonly TaskService _taskService;
 
         /// <summary>
         /// Конструктор. Заполняет из БД дерево темами, подтемами, задачами

@@ -21,68 +21,6 @@ namespace DistanceStudy.Forms.Teacher
             InitialFormParams();
         }
 
-        private void buttonOpenFile_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = "All files (*.bmp)|*.bmp;";
-            if (dialog.ShowDialog() == DialogResult.OK)
-            {
-                dialog.Dispose();
-                textBoxFilePath.Text = dialog.FileName;
-                _itemBmp = new Bitmap(dialog.FileName);
-                pictureBoxImageTask.Image = _itemBmp;
-            }
-            if (_itemBmp != null)
-            {
-                labelHereGraphic.Text = "";
-            }
-        }
-
-        private void FormCreateTask_Resize(object sender, EventArgs e)
-        {
-            dataGridViewDefault.Columns[2].Width = dataGridViewDefault.Width - dataGridViewDefault.Columns[0].Width;
-        }
-
-        private void dataGridViewDefault_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
-        {
-            dataGridViewDefault.Columns[2].Width = dataGridViewDefault.Width - dataGridViewDefault.Columns[1].Width;
-        }
-
-        private void toolStripButtonAddParams_Click(object sender, EventArgs e)
-        {
-            if (labelParametrsHasNot.Visible)
-            {
-                labelParametrsHasNot.Visible = false;
-                dataGridViewDefault.Visible = true;
-                toolStripButtonAddParams.Text = "Удалить параметры";
-            }
-            else
-            {
-                labelParametrsHasNot.Visible = true;
-                dataGridViewDefault.Visible = false;
-                toolStripButtonAddParams.Text = "Добавить параметры";
-            }
-        }
-
-        private void radioButtonMain_CheckedChanged(object sender, EventArgs e)
-        {
-            buttonAddAlgorithm.Enabled = true;
-        }
-
-        private void textBoxName_TextChanged(object sender, EventArgs e)
-        {
-            if (textBoxName.Text == string.Empty || textBoxName.Text == "Введите наименование задачи...")
-            {
-                buttonAddAlgorithm.Enabled = false;
-                buttonAccept.Enabled = false;
-            }
-            else
-            {
-                buttonAddAlgorithm.Enabled = true;
-                buttonAccept.Enabled = true;
-            }
-        }
-
         private void buttonAddAlgorithm_Click(object sender, EventArgs e)
         {
             _formCreateAlgorithm = new FormCreateAlgorithm();
@@ -151,6 +89,72 @@ namespace DistanceStudy.Forms.Teacher
             {
                 txtBox.Text = text;
                 txtBox.ForeColor = color;
+            }
+        }
+
+        #endregion
+
+        #region События изменения размера формы, ввода текста и другие назнчительные UI events
+
+        private void buttonOpenFile_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "All files (*.bmp)|*.bmp;";
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                dialog.Dispose();
+                textBoxFilePath.Text = dialog.FileName;
+                _itemBmp = new Bitmap(dialog.FileName);
+                pictureBoxImageTask.Image = _itemBmp;
+            }
+            if (_itemBmp != null)
+            {
+                labelHereGraphic.Text = "";
+            }
+        }
+
+        private void FormCreateTask_Resize(object sender, EventArgs e)
+        {
+            dataGridViewDefault.Columns[2].Width = dataGridViewDefault.Width - dataGridViewDefault.Columns[0].Width;
+        }
+
+        private void dataGridViewDefault_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
+        {
+            dataGridViewDefault.Columns[2].Width = dataGridViewDefault.Width - dataGridViewDefault.Columns[1].Width;
+        }
+
+        private void toolStripButtonAddParams_Click(object sender, EventArgs e)
+        {
+            if (labelParametrsHasNot.Visible)
+            {
+                labelParametrsHasNot.Visible = false;
+                dataGridViewDefault.Visible = true;
+                toolStripButtonAddParams.Text = "Удалить параметры";
+            }
+            else
+            {
+                labelParametrsHasNot.Visible = true;
+                dataGridViewDefault.Visible = false;
+                toolStripButtonAddParams.Text = "Добавить параметры";
+            }
+        }
+
+        private void radioButtonMain_CheckedChanged(object sender, EventArgs e)
+        {
+            buttonAddAlgorithm.Enabled = true;
+        }
+
+        private void textBoxName_TextChanged(object sender, EventArgs e)
+        {
+            if (textBoxName.Text == string.Empty || textBoxName.Text == "Введите наименование задачи...")
+            {
+                buttonAddAlgorithm.Enabled = false;
+                buttonAccept.Enabled = false;
+            }
+            else
+            {
+                buttonAddAlgorithm.Enabled = true;
+                buttonAccept.Enabled = true;
             }
         }
 
