@@ -7,7 +7,7 @@ using GeometryObjects;
 
 namespace Point3DCntrl
 {
-    class PointsProectionsControl
+    public class PointsProectionsControl
     {
 
         //private Point2D Point2D_Val = new Point2D();
