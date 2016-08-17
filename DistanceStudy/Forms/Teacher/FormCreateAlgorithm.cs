@@ -17,6 +17,9 @@ namespace DistanceStudy.Forms.Teacher
             FillListBoxByCntrlAssembly();
         }
 
+        /// <summary>
+        /// Заполнить листбокс названиями методов из сборки с методами контроля (Point3DCntrl)
+        /// </summary>
         private void FillListBoxByCntrlAssembly()
         {
             PointsProectionsControl pointsPrtcCntrl = new PointsProectionsControl();
@@ -24,17 +27,9 @@ namespace DistanceStudy.Forms.Teacher
             MethodInfo[] mi = t.GetMethods();
             foreach (MethodInfo m in mi)
             {
-                checkedListBoxProectionsControls.Items.Add(m.Name);
+                if (m.DeclaringType.Name.Equals("PointsProectionsControl"))
+                    checkedListBoxProectionsControls.Items.Add(m.Name);
             }
-        }
-
-
-        private void button_Clear_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
         }
     }
 }

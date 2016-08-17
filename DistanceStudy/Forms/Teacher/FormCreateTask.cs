@@ -125,11 +125,11 @@ namespace DistanceStudy.Forms.Teacher
         {
             if (textBoxName.Text == string.Empty || textBoxName.Text == "Введите наименование задачи...")
             {
-                buttonAddAlgorithm.Enabled = false;
+                buttonSave.Enabled = false;
             }
             else
             {
-                buttonAddAlgorithm.Enabled = true;
+                buttonSave.Enabled = true;
             }
         }
 
