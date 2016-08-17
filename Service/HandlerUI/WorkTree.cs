@@ -143,6 +143,17 @@ namespace Service.HandlerUI
         }
 
         /// <summary>
+        /// Получить задачу по имени и описанию
+        /// </summary>
+        /// <param name="name">Имя задачи</param>
+        /// <param name="desc">Описание задачи</param>
+        /// <returns>Объект задачи</returns>
+        public Task GetTaskByNameAndDesc(string name, string desc)
+        {
+            return _taskList.Where(c => c.Name.Equals(name)).FirstOrDefault(c => c.Description.Equals(desc));
+        }
+
+        /// <summary>
         /// Получение из БД тем и подтем, заполнение ими дерева
         /// </summary>
         public void FillTree()
