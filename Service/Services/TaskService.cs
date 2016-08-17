@@ -32,5 +32,14 @@ namespace Service.Services
                 SubthemaId = subthemaId 
             });
         }
+
+        /// <summary>
+        /// Удаление задачи по ИД из БД
+        /// </summary>
+        /// <param name="id">ИД задачи</param>
+        public void Delete(int id)
+        {
+            _taskRep.Delete(id);
+        }
     }
 }

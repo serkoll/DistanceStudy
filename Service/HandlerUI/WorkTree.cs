@@ -119,6 +119,12 @@ namespace Service.HandlerUI
                 id = thema.ThemaId;
                 return _themaService.Delete;
             }
+            if(parent.Parent != null)
+            {
+                var task = GetTaskByNode(_tree.SelectedNode);
+                id = task.TaskId;
+                return _taskService.Delete;
+            }
             var subthema = GetSubthemaByNode(currNode);
             id = subthema.SubthemaId;
             return _subthemaService.Delete;
@@ -294,6 +300,16 @@ namespace Service.HandlerUI
         private SubThema GetSubthemaByNode(TreeNode currNode)
         {
             return _subthemaList.FirstOrDefault(c => c.Name.Equals(currNode.Text));
+        }
+
+        /// <summary>
+        /// Вернуть задачу по узлу в дереве
+        /// </summary>
+        /// <param name="currNode">Узел дерева</param>
+        /// <returns>Задача</returns>
+        private Task GetTaskByNode(TreeNode currNode)
+        {
+            return _taskList.FirstOrDefault(c => c.Name.Equals(currNode.Text));
         }
     }
 }

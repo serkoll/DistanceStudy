@@ -32,5 +32,22 @@ namespace DbRepository.Classes.Repository
                 return db.Set<Task>().ToList();
             }
         }
+
+        /// <summary>
+        /// Удаление задачи по ИД
+        /// </summary>
+        /// <param name="id">ИД удаляемой задачи</param>
+        public void Delete(int id)
+        {
+            using (var db = new DistanceStudyEntities())
+            {
+                var deleted = db.Tasks.Find(id);
+                if (deleted != null)
+                {
+                    db.Tasks.Remove(deleted);
+                    db.SaveChanges();
+                }
+            }
+        }
     }
 }
