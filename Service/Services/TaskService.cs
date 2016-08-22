@@ -41,5 +41,24 @@ namespace Service.Services
         {
             _taskRep.Delete(id);
         }
+
+        /// <summary>
+        /// Добавить алгоритм для текущей задачи
+        /// </summary>
+        /// <param name="id">ИД задачи</param>
+        /// <param name="condition">Метод или перечень методов в алгоритме проверки</param>
+        public void AddAlgorithm(int id, string condition)
+        {
+            _taskRep.AddAlgorithm(id, condition);
+        }
+
+        /// <summary>
+        /// Обновить задачу
+        /// </summary>
+        /// <param name="task">Задача с новыми параметрами</param>
+        public void UpdTask(Task task)
+        {
+            _taskRep.Update(task);
+        }
     }
 }

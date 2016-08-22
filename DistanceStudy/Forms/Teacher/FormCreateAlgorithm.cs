@@ -3,6 +3,7 @@ using Service.HandlerUI;
 using System;
 using System.Reflection;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace DistanceStudy.Forms.Teacher
 {
@@ -10,26 +11,24 @@ namespace DistanceStudy.Forms.Teacher
     {
         // Объект для работы с задачей
         private WorkTask _taskWorker;
+        
         public FormCreateAlgorithm(WorkTask taskWorker)
         {
             _taskWorker = taskWorker;
             InitializeComponent();
-            FillListBoxByCntrlAssembly();
+            _taskWorker?.FillListBoxByCntrlAssembly(checkedListBoxProectionsControls);
         }
 
-        /// <summary>
-        /// Заполнить листбокс названиями методов из сборки с методами контроля (Point3DCntrl)
-        /// </summary>
-        private void FillListBoxByCntrlAssembly()
+        private void buttonAccept_Click(object sender, EventArgs e)
         {
-            PointsProectionsControl pointsPrtcCntrl = new PointsProectionsControl();
-            Type t = pointsPrtcCntrl.GetType();
-            MethodInfo[] mi = t.GetMethods();
-            foreach (MethodInfo m in mi)
-            {
-                if (m.DeclaringType.Name.Equals("PointsProectionsControl"))
-                    checkedListBoxProectionsControls.Items.Add(m.Name);
-            }
+            _taskWorker?.AddAlgothm(checkedListBoxProectionsControls);
+            _taskWorker?.SetTaskStatusToReady();
+            Dispose();
+        }
+
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            Dispose();
         }
     }
 }

@@ -29,29 +29,31 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormCreateAlgorithm));
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.buttonAccept = new System.Windows.Forms.Button();
+            this.buttonCancel = new System.Windows.Forms.Button();
             this.button_Clear = new System.Windows.Forms.Button();
             this.checkedListBoxProectionsControls = new System.Windows.Forms.CheckedListBox();
             this.SuspendLayout();
             // 
-            // button4
+            // buttonAccept
             // 
-            this.button4.Location = new System.Drawing.Point(10, 442);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(90, 23);
-            this.button4.TabIndex = 9;
-            this.button4.Text = "Подтвердить";
-            this.button4.UseVisualStyleBackColor = true;
+            this.buttonAccept.Location = new System.Drawing.Point(10, 442);
+            this.buttonAccept.Name = "buttonAccept";
+            this.buttonAccept.Size = new System.Drawing.Size(90, 23);
+            this.buttonAccept.TabIndex = 9;
+            this.buttonAccept.Text = "Подтвердить";
+            this.buttonAccept.UseVisualStyleBackColor = true;
+            this.buttonAccept.Click += new System.EventHandler(this.buttonAccept_Click);
             // 
-            // button5
+            // buttonCancel
             // 
-            this.button5.Location = new System.Drawing.Point(187, 442);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 10;
-            this.button5.Text = "Отмена";
-            this.button5.UseVisualStyleBackColor = true;
+            this.buttonCancel.Location = new System.Drawing.Point(187, 442);
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Size = new System.Drawing.Size(75, 23);
+            this.buttonCancel.TabIndex = 10;
+            this.buttonCancel.Text = "Отмена";
+            this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // button_Clear
             // 
@@ -77,8 +79,8 @@
             this.ClientSize = new System.Drawing.Size(276, 477);
             this.Controls.Add(this.checkedListBoxProectionsControls);
             this.Controls.Add(this.button_Clear);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
+            this.Controls.Add(this.buttonCancel);
+            this.Controls.Add(this.buttonAccept);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormCreateAlgorithm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -88,8 +90,8 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button buttonAccept;
+        private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Button button_Clear;
         private System.Windows.Forms.CheckedListBox checkedListBoxProectionsControls;
     }

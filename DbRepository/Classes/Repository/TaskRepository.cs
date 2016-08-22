@@ -49,5 +49,44 @@ namespace DbRepository.Classes.Repository
                 }
             }
         }
+
+        /// <summary>
+        /// Добавление алгоритма для опредленной задачи
+        /// </summary>
+        /// <param name="taskId">Задача, которая проверяется алгоритмом</param>
+        /// <param name="condition">Методы проверки в алгоритме</param>
+        public void AddAlgorithm(int taskId, string condition)
+        {
+            using (var db = new DistanceStudyEntities())
+            {
+                db.Task_Algotithm.Add(new DbRepository.Context.Task_Algotithm {
+                    TaskId = taskId,
+                    Condition = condition,
+                    SubGroup = 1,
+                    BlockNumber = 1
+                });
+                db.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// Обновление задачи
+        /// </summary>
+        /// <param name="task">Объект задачи с новыми параметрами</param>
+        public void Update(Task task)
+        {
+            using (var db = new DistanceStudyEntities())
+            {
+                var updated = db.Tasks.Find(task.TaskId);
+                if (updated != null)
+                {
+                    updated.Image = task.Image;
+                    updated.IsReady = task.IsReady;
+                    updated.Name = task.Name;
+                    updated.SubthemaId = task.SubthemaId;
+                    db.SaveChanges();
+                }
+            }
+        }
     }
 }
