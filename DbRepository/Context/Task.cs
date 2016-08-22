@@ -17,24 +17,21 @@ namespace DbRepository.Context
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Task()
         {
+            this.Task_Algotithm = new HashSet<Task_Algotithm>();
             this.Task_Parametrs = new HashSet<Task_Parametrs>();
-            this.Task_Algorithm = new HashSet<Task_Algorithm>();
-            this.User_TaskAlgorithm = new HashSet<User_TaskAlgorithm>();
         }
     
-        public int Id_Task { get; set; }
-        public int Id_SubThema { get; set; }
-        public int Id_Status { get; set; }
+        public int TaskId { get; set; }
+        public int SubthemaId { get; set; }
         public string Name { get; set; }
-        public string Condition { get; set; }
+        public string Description { get; set; }
+        public bool IsReady { get; set; }
+        public byte[] Image { get; set; }
     
-        public virtual AlgorithmStatu AlgorithmStatu { get; set; }
         public virtual SubThema SubThema { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Task_Algotithm> Task_Algotithm { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Task_Parametrs> Task_Parametrs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Task_Algorithm> Task_Algorithm { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<User_TaskAlgorithm> User_TaskAlgorithm { get; set; }
     }
 }

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Authentication;
 using DistanceStudy.Forms.Admin;
 using DistanceStudy.Forms.Teacher;
 using DistanceStudy.Properties;
+using Authentication;
 
 namespace DistanceStudy.Forms
 {
@@ -14,6 +14,9 @@ namespace DistanceStudy.Forms
 
     public partial class AuthenticationForm : Form
     {
+        /// <summary>
+        /// Инициализация форм и словаря для пользователей с определенными правами
+        /// </summary>
         private readonly Dictionary<string, Form> _dictionaryForms; 
         public AuthenticationForm()
         {
@@ -33,10 +36,11 @@ namespace DistanceStudy.Forms
         /// </summary>
         private void buttonCancel_Click(object sender, EventArgs e)
         {
-            GC.Collect();
-            Application.Exit();
+            DeallocMemory();
         }
-        // Событие, возникающее при нажатии на кнопку Далее
+        /// <summary>
+        /// Событие, возникающее при нажатии на кнопку Далее
+        /// </summary>
         private void buttonNext_Click(object sender, EventArgs e)
         {
             AuthenticationModule module = new AuthenticationModule(textLogin.Text, textPassword.Text, _dictionaryForms);
@@ -53,17 +57,17 @@ namespace DistanceStudy.Forms
             }
         }
         /// <summary>
-        /// Кнопка перехода на help для пользователя
-        /// </summary>
-        private void btnHelp_Click(object sender, EventArgs e)
-        {
-            ManualForm formHelp = new ManualForm();
-            formHelp.Show();
-        }
-        /// <summary>
         /// Событие, срабатывающее при закрытии формы -> очистка ресурсов и освобождение памяти
         /// </summary>
         private void AuthenticationForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            DeallocMemory();
+        }
+
+        /// <summary>
+        /// Освобождение памяти приложения и завершение его работы
+        /// </summary>
+        private void DeallocMemory()
         {
             GC.Collect();
             Application.Exit();

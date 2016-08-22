@@ -36,7 +36,7 @@
             this.columnHeaderDesc = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderImage = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.toolStripPanel = new System.Windows.Forms.ToolStrip();
-            this.createToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.CreateButton = new System.Windows.Forms.ToolStripButton();
             this.copyToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.edittoolStripButton = new System.Windows.Forms.ToolStripButton();
             this.exitToolStripButton = new System.Windows.Forms.ToolStripButton();
@@ -75,7 +75,8 @@
             this.treeView_thema.Name = "treeView_thema";
             this.treeView_thema.Size = new System.Drawing.Size(241, 333);
             this.treeView_thema.TabIndex = 0;
-            this.treeView_thema.Click += new System.EventHandler(this.treeView_thema_Click);
+            this.treeView_thema.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView_thema_NodeMouseClick);
+            this.treeView_thema.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.treeView_thema_KeyPress);
             // 
             // listView_thema
             // 
@@ -111,7 +112,7 @@
             // 
             this.toolStripPanel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.toolStripPanel.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.createToolStripButton,
+            this.CreateButton,
             this.copyToolStripButton,
             this.edittoolStripButton,
             this.exitToolStripButton,
@@ -122,16 +123,16 @@
             this.toolStripPanel.TabIndex = 16;
             this.toolStripPanel.Text = "ToolStrip";
             // 
-            // createToolStripButton
+            // CreateButton
             // 
-            this.createToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("createToolStripButton.Image")));
-            this.createToolStripButton.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.createToolStripButton.ImageTransparentColor = System.Drawing.Color.Black;
-            this.createToolStripButton.Name = "createToolStripButton";
-            this.createToolStripButton.Size = new System.Drawing.Size(86, 36);
-            this.createToolStripButton.Text = "Создать";
-            this.createToolStripButton.ToolTipText = "Создание темы, подтемы или задачи";
-            this.createToolStripButton.Click += new System.EventHandler(this.newToolStripButton_Click);
+            this.CreateButton.Image = ((System.Drawing.Image)(resources.GetObject("CreateButton.Image")));
+            this.CreateButton.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.CreateButton.ImageTransparentColor = System.Drawing.Color.Black;
+            this.CreateButton.Name = "CreateButton";
+            this.CreateButton.Size = new System.Drawing.Size(86, 36);
+            this.CreateButton.Text = "Создать";
+            this.CreateButton.ToolTipText = "Создание темы, подтемы или задачи";
+            this.CreateButton.Click += new System.EventHandler(this.CreateButton_Click);
             // 
             // copyToolStripButton
             // 
@@ -142,6 +143,7 @@
             this.copyToolStripButton.Size = new System.Drawing.Size(108, 36);
             this.copyToolStripButton.Text = "Копировать";
             this.copyToolStripButton.ToolTipText = "Копировать тему, подтему или задачу";
+            this.copyToolStripButton.Click += new System.EventHandler(this.copyToolStripButton_Click);
             // 
             // edittoolStripButton
             // 
@@ -164,7 +166,6 @@
             this.exitToolStripButton.Size = new System.Drawing.Size(45, 36);
             this.exitToolStripButton.Text = "Выход";
             this.exitToolStripButton.ToolTipText = "Выход на окно авторизации";
-            this.exitToolStripButton.Click += new System.EventHandler(this.toolStripButtonExit_Click);
             // 
             // deletetoolStripButton
             // 
@@ -195,7 +196,8 @@
             this.Name = "FormMainTeacher";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Добро пожаловать, преподаватель!";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AdministratorForm_FormClosed);
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormMainTeacher_FormClosed);
             this.splitContainerPanel.Panel1.ResumeLayout(false);
             this.splitContainerPanel.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerPanel)).EndInit();
@@ -216,7 +218,7 @@
         public System.Windows.Forms.ColumnHeader columnHeaderName;
         public System.Windows.Forms.ColumnHeader columnHeaderDesc;
         private System.Windows.Forms.ToolStrip toolStripPanel;
-        private System.Windows.Forms.ToolStripButton createToolStripButton;
+        private System.Windows.Forms.ToolStripButton CreateButton;
         private System.Windows.Forms.ToolStripButton copyToolStripButton;
         private System.Windows.Forms.ToolStripButton edittoolStripButton;
         private System.Windows.Forms.ColumnHeader columnHeaderImage;

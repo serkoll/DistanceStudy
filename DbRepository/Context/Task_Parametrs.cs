@@ -14,10 +14,9 @@ namespace DbRepository.Context
     
     public partial class Task_Parametrs
     {
-        public int Id_Parametr { get; set; }
-        public int Id_Task { get; set; }
-        public string Name { get; set; }
-        public string Value { get; set; }
+        public int ParametrId { get; set; }
+        public int TaskId { get; set; }
+        public string XmlSchema { get; set; }
     
         public virtual Task Task { get; set; }
     }

@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DistanceStudy.Forms.Teacher
@@ -87,7 +80,9 @@ namespace DistanceStudy.Forms.Teacher
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Dispose();
+            //DbRepositoryFake.AlghoritmCode = "B";
+            //DbRepositoryFake.SubgroupNumber = 2;
+            //Dispose();
         }
     }
 }

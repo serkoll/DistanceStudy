@@ -56,7 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\GlobalStrings.cs" />
+    <Compile Include="Classes\FormController.cs" />
     <Compile Include="Forms\Admin\FormAdminPanel.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,13 +87,6 @@
     <Compile Include="Forms\Authentication.Designer.cs">
       <DependentUpon>Authentication.cs</DependentUpon>
     </Compile>
-    <Compile Include="Classes\LoadHelpText.cs" />
-    <Compile Include="Forms\ManualForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\ManualForm.Designer.cs">
-      <DependentUpon>ManualForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Classes\Program.cs" />
     <Compile Include="Forms\Teacher\FormMainTeacher.cs">
       <SubType>Form</SubType>
@@ -116,9 +109,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Authentication.resx">
       <DependentUpon>Authentication.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ManualForm.resx">
-      <DependentUpon>ManualForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Teacher\FormMainTeacher.resx">
       <DependentUpon>FormMainTeacher.cs</DependentUpon>
@@ -148,6 +138,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GraphicsModule\GraphicsModule\GraphicsModule.csproj">
+      <Project>{247cb926-7d51-45d6-9e9b-05aa4f4e30d6}</Project>
+      <Name>DrawGL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Service\Service.csproj">
+      <Project>{0ad4d925-6403-4d94-b0ee-8a538c8a88e5}</Project>
+      <Name>Service</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Authentication\Authentication.csproj">
       <Project>{ca86ad9f-c191-4eaf-8997-681237145207}</Project>
       <Name>Authentication</Name>

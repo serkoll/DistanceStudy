@@ -1,4 +1,4 @@
-﻿namespace DistanceStudy.Forms
+﻿namespace DistanceStudy.Forms.Teacher
 {
     partial class FormCreateTask
     {
@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Фактическая", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("Плановая", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup3 = new System.Windows.Forms.ListViewGroup("Фактическая", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup4 = new System.Windows.Forms.ListViewGroup("Плановая", System.Windows.Forms.HorizontalAlignment.Left);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormCreateTask));
             this.splitContainerTextBoxes = new System.Windows.Forms.SplitContainer();
             this.textBoxName = new System.Windows.Forms.TextBox();
@@ -68,12 +68,14 @@
             this.textBoxtimeFactHour = new System.Windows.Forms.TextBox();
             this.labelTimeFact = new System.Windows.Forms.Label();
             this.labelParams = new System.Windows.Forms.Label();
-            this.buttonAcceptTask = new System.Windows.Forms.Button();
+            this.buttonAddAlgorithm = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.panelButtons = new System.Windows.Forms.Panel();
+            this.buttonAccept = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripPanel = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonAddParams = new System.Windows.Forms.ToolStripButton();
+            this.toolStripAddGraphicCondition = new System.Windows.Forms.ToolStripLabel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerTextBoxes)).BeginInit();
             this.splitContainerTextBoxes.Panel1.SuspendLayout();
             this.splitContainerTextBoxes.Panel2.SuspendLayout();
@@ -406,13 +408,13 @@
             this.columnHeaderFact,
             this.columnHeaderPlane});
             this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            listViewGroup1.Header = "Фактическая";
-            listViewGroup1.Name = "listViewGroupFact";
-            listViewGroup2.Header = "Плановая";
-            listViewGroup2.Name = "listViewGroupPlane";
+            listViewGroup3.Header = "Фактическая";
+            listViewGroup3.Name = "listViewGroupFact";
+            listViewGroup4.Header = "Плановая";
+            listViewGroup4.Name = "listViewGroupPlane";
             this.listView1.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup1,
-            listViewGroup2});
+            listViewGroup3,
+            listViewGroup4});
             this.listView1.Location = new System.Drawing.Point(3, 3);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(741, 136);
@@ -529,21 +531,21 @@
             this.labelParams.TabIndex = 3;
             this.labelParams.Text = "Параметры задачи";
             // 
-            // buttonAcceptTask
+            // buttonAddAlgorithm
             // 
-            this.buttonAcceptTask.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonAcceptTask.Location = new System.Drawing.Point(4, 3);
-            this.buttonAcceptTask.Name = "buttonAcceptTask";
-            this.buttonAcceptTask.Size = new System.Drawing.Size(134, 27);
-            this.buttonAcceptTask.TabIndex = 4;
-            this.buttonAcceptTask.Text = "Создать";
-            this.buttonAcceptTask.UseVisualStyleBackColor = true;
-            this.buttonAcceptTask.Click += new System.EventHandler(this.buttonAcceptTask_Click);
+            this.buttonAddAlgorithm.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonAddAlgorithm.Location = new System.Drawing.Point(3, 36);
+            this.buttonAddAlgorithm.Name = "buttonAddAlgorithm";
+            this.buttonAddAlgorithm.Size = new System.Drawing.Size(134, 27);
+            this.buttonAddAlgorithm.TabIndex = 4;
+            this.buttonAddAlgorithm.Text = "Добавить алгоритм";
+            this.buttonAddAlgorithm.UseVisualStyleBackColor = true;
+            this.buttonAddAlgorithm.Click += new System.EventHandler(this.buttonAddAlgorithm_Click);
             // 
             // buttonCancel
             // 
             this.buttonCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonCancel.Location = new System.Drawing.Point(4, 36);
+            this.buttonCancel.Location = new System.Drawing.Point(3, 69);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(134, 27);
             this.buttonCancel.TabIndex = 4;
@@ -553,12 +555,24 @@
             // panelButtons
             // 
             this.panelButtons.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.panelButtons.Controls.Add(this.buttonAcceptTask);
+            this.panelButtons.Controls.Add(this.buttonAccept);
+            this.panelButtons.Controls.Add(this.buttonAddAlgorithm);
             this.panelButtons.Controls.Add(this.buttonCancel);
-            this.panelButtons.Location = new System.Drawing.Point(4, 487);
+            this.panelButtons.Location = new System.Drawing.Point(12, 456);
             this.panelButtons.Name = "panelButtons";
-            this.panelButtons.Size = new System.Drawing.Size(154, 68);
+            this.panelButtons.Size = new System.Drawing.Size(146, 99);
             this.panelButtons.TabIndex = 5;
+            // 
+            // buttonAccept
+            // 
+            this.buttonAccept.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonAccept.Location = new System.Drawing.Point(3, 3);
+            this.buttonAccept.Name = "buttonAccept";
+            this.buttonAccept.Size = new System.Drawing.Size(134, 27);
+            this.buttonAccept.TabIndex = 4;
+            this.buttonAccept.Text = "Подтвердить";
+            this.buttonAccept.UseVisualStyleBackColor = true;
+            this.buttonAccept.Click += new System.EventHandler(this.buttonAccept_Click);
             // 
             // contextMenuStrip1
             // 
@@ -568,7 +582,8 @@
             // toolStripPanel
             // 
             this.toolStripPanel.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButtonAddParams});
+            this.toolStripButtonAddParams,
+            this.toolStripAddGraphicCondition});
             this.toolStripPanel.Location = new System.Drawing.Point(0, 0);
             this.toolStripPanel.Name = "toolStripPanel";
             this.toolStripPanel.Size = new System.Drawing.Size(915, 25);
@@ -584,6 +599,13 @@
             this.toolStripButtonAddParams.Size = new System.Drawing.Size(128, 22);
             this.toolStripButtonAddParams.Text = "Добавить параметры";
             this.toolStripButtonAddParams.Click += new System.EventHandler(this.toolStripButtonAddParams_Click);
+            // 
+            // toolStripAddGraphicCondition
+            // 
+            this.toolStripAddGraphicCondition.Name = "toolStripAddGraphicCondition";
+            this.toolStripAddGraphicCondition.Size = new System.Drawing.Size(165, 22);
+            this.toolStripAddGraphicCondition.Text = "Графическое представление";
+            this.toolStripAddGraphicCondition.Click += new System.EventHandler(this.toolStripAddGraphicCondition_Click);
             // 
             // FormCreateTask
             // 
@@ -645,7 +667,7 @@
         private System.Windows.Forms.Label labelParams;
         private System.Windows.Forms.TabControl tabControlTaskSettings;
         private System.Windows.Forms.TabPage tabPageTime;
-        private System.Windows.Forms.Button buttonAcceptTask;
+        private System.Windows.Forms.Button buttonAddAlgorithm;
         private System.Windows.Forms.Panel panelButtons;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ColumnHeader columnHeaderFact;
@@ -675,6 +697,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnField;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnValue;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDescription;
-
+        private System.Windows.Forms.ToolStripLabel toolStripAddGraphicCondition;
+        private System.Windows.Forms.Button buttonAccept;
     }
 }
