@@ -46,7 +46,22 @@ namespace Service.HandlerUI
         /// Возвращает название типа форма необходимой для создания
         /// </summary>
         /// <returns>Название типа формы</returns>
-        public string GetTypeFormNeedToCreateBySelectedNode()
+        public string GetTypeFormNeedToCreateBySelectedNodeForEdit()
+        {
+            var currNode = _tree.SelectedNode;
+            var parent = _tree.SelectedNode?.Parent;
+            if (parent == null || parent.Parent == null)
+            {
+                return "FormEnterNew";
+            }
+            return "FormCreateTask";
+        }
+
+        /// <summary>
+        /// Возвращает название типа форма необходимой для создания
+        /// </summary>
+        /// <returns>Название типа формы</returns>
+        public string GetTypeFormNeedToCreateBySelectedNodeForCreate()
         {
             var currNode = _tree.SelectedNode;
             var parent = _tree.SelectedNode?.Parent;
@@ -119,7 +134,7 @@ namespace Service.HandlerUI
                 id = thema.ThemaId;
                 return _themaService.Delete;
             }
-            if(parent.Parent != null)
+            if (parent.Parent != null)
             {
                 var task = GetTaskByNode(_tree.SelectedNode);
                 id = task.TaskId;
@@ -180,19 +195,29 @@ namespace Service.HandlerUI
             var currNode = _tree.SelectedNode;
             var parent = _tree.SelectedNode?.Parent;
             if (parent == null)
-            {
                 return GetThemaByNode(currNode);
-            }
-            return GetSubthemaByNode(currNode);
+            if (parent != null && parent.Parent == null)
+                return GetSubthemaByNode(currNode);
+            return GetTaskByNode(currNode);
         }
 
         /// <summary>
         /// Вернуть тип для создаваемой формы (по узлу определяется кака форма должна быть создана)
         /// </summary>
         /// <returns>Тип создаваемой формы</returns>
-        public Type GetTypeForCreatingForm()
+        public Type GetTypeForCreatingFormForEdit()
         {
-            var typeString = GetTypeFormNeedToCreateBySelectedNode();
+            var typeString = GetTypeFormNeedToCreateBySelectedNodeForEdit();
+            return Type.GetType($"DistanceStudy.Forms.Teacher.{typeString}, DistanceStudy");
+        }
+
+        /// <summary>
+        /// Вернуть тип для создаваемой формы (по узлу определяется кака форма должна быть создана)
+        /// </summary>
+        /// <returns>Тип создаваемой формы</returns>
+        public Type GetTypeForCreatingFormForCreate()
+        {
+            var typeString = GetTypeFormNeedToCreateBySelectedNodeForCreate();
             return Type.GetType($"DistanceStudy.Forms.Teacher.{typeString}, DistanceStudy");
         }
 

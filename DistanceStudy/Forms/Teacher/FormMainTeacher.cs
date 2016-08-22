@@ -19,7 +19,7 @@ namespace DistanceStudy.Forms.Teacher
 
         private void CreateButton_Click(object sender, EventArgs e)
         {
-            FormController.CreateFormByType(_wt.GetTypeForCreatingForm(), _wt).Show();
+            FormController.CreateFormByType(_wt.GetTypeForCreatingFormForCreate(), _wt).Show();
         }
 
         private void FormMainTeacher_FormClosed(object sender, FormClosedEventArgs e)
@@ -31,7 +31,7 @@ namespace DistanceStudy.Forms.Teacher
         private void edittoolStripButton_Click(object sender, EventArgs e)
         {
             var obj = _wt.GetObjectBySelectedNode();
-            FormController.CreateFormByType(_wt.GetTypeForCreatingForm(), _wt, obj).Show();
+            FormController.CreateFormByType(_wt.GetTypeForCreatingFormForEdit(), _wt, obj).Show();
         }
 
         private void treeView_thema_KeyPress(object sender, KeyPressEventArgs e)
