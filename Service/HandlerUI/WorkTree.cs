@@ -187,6 +187,7 @@ namespace Service.HandlerUI
         {
             _tree.Nodes.Clear();
             FillTree();
+            _tree.ExpandAll();
         }
 
         /// <summary>
