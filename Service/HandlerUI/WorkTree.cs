@@ -29,6 +29,8 @@ namespace Service.HandlerUI
         private readonly TaskService _taskService;
         // Узел для копирования
         private TreeNode _sourceNode { get; set; }
+        // Буфер выбранного узла
+        public TreeNode SelectedNode { get; set; }
 
         /// <summary>
         /// Конструктор. Заполняет из БД дерево темами, подтемами, задачами
@@ -48,7 +50,7 @@ namespace Service.HandlerUI
         /// <returns>Название типа формы</returns>
         public string GetTypeFormNeedToCreateBySelectedNodeForEdit()
         {
-            var currNode = _tree.SelectedNode;
+            var currNode = SelectedNode;
             var parent = _tree.SelectedNode?.Parent;
             if (parent == null || parent.Parent == null)
             {
@@ -63,7 +65,7 @@ namespace Service.HandlerUI
         /// <returns>Название типа формы</returns>
         public string GetTypeFormNeedToCreateBySelectedNodeForCreate()
         {
-            var currNode = _tree.SelectedNode;
+            var currNode = SelectedNode;
             var parent = _tree.SelectedNode?.Parent;
             if (currNode == null || parent == null)
             {
@@ -78,7 +80,7 @@ namespace Service.HandlerUI
         /// <returns>Метод по добавлению из сервиса</returns>
         public Action<string, string, int[]> GetMethodForCreateNeededObject(out int[] id)
         {
-            var currNode = _tree.SelectedNode;
+            var currNode = SelectedNode;
             id = new int[2];
             if (currNode == null)
             {
@@ -126,7 +128,7 @@ namespace Service.HandlerUI
         /// <returns>метод удаления темы или подтемы</returns>
         public Action<int> GetMethodForDeleteNeededObject(out int id)
         {
-            var currNode = _tree.SelectedNode;
+            var currNode = SelectedNode;
             var parent = _tree.SelectedNode?.Parent;
             if (parent == null)
             {
@@ -136,7 +138,7 @@ namespace Service.HandlerUI
             }
             if (parent.Parent != null)
             {
-                var task = GetTaskByNode(_tree.SelectedNode);
+                var task = GetTaskByNode(currNode);
                 id = task.TaskId;
                 return _taskService.Delete;
             }
@@ -151,10 +153,10 @@ namespace Service.HandlerUI
         /// <param name="name">Имя задачи</param>
         /// <param name="desc">Описание задачи</param>
         /// <param name="image">Графическое условие задачи (если есть)</param>
-        public void CreateTask(string name, string desc, Bitmap image)
+        public void CreateTask(Task task)
         {
             var subthemaId = GetSubthemaByNode(_tree.SelectedNode).SubthemaId;
-            _taskService.Add(name, desc, image, subthemaId);
+            _taskService.Add(task.Name, task.Description, task.Image, subthemaId);
         }
 
         /// <summary>
@@ -192,7 +194,7 @@ namespace Service.HandlerUI
         /// <returns></returns>
         public dynamic GetObjectBySelectedNode()
         {
-            var currNode = _tree.SelectedNode;
+            var currNode = SelectedNode;
             var parent = _tree.SelectedNode?.Parent;
             if (parent == null)
                 return GetThemaByNode(currNode);
@@ -247,6 +249,32 @@ namespace Service.HandlerUI
             {
                 _subthemaService.Add(thema.Name, thema.Description, 0);
                 return;
+            }
+        }
+
+        /// <summary>
+        /// Обновить или добавить задачу в соответствии с параметрами
+        /// </summary>
+        /// <param name="workerTask">Обработчик задач</param>
+        /// <param name="method">Метод, выполняемый над задачей</param>
+        /// <param name="name">Название задачи</param>
+        /// <param name="desc">Описание задачи</param>
+        /// <param name="image">Картинка</param>
+        public void DoOperationWithTaskByCall(ref WorkTask workerTask, Action<Task> method, string name, string desc, Bitmap image)
+        {
+            System.IO.MemoryStream stream = new System.IO.MemoryStream();
+            image?.Save(stream, System.Drawing.Imaging.ImageFormat.Bmp);
+            method(new Task
+            {
+                Name = name,
+                Description = desc,
+                Image = stream.ToArray()
+            });
+            UpdateTree();
+            var createdTask = GetTaskByNameAndDesc(name, desc);
+            if (workerTask == null)
+            {
+                workerTask = new WorkTask(createdTask);
             }
         }
 

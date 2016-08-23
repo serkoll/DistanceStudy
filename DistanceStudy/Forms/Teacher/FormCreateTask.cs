@@ -38,25 +38,13 @@ namespace DistanceStudy.Forms.Teacher
         {
             if(_taskWorker == null)
             {
-                _wt.CreateTask(textBoxName.Text, textBoxDescription.Text, (Bitmap)pictureBoxImageTask.Image);
-                _wt.UpdateTree();
-                var createdTask = _wt.GetTaskByNameAndDesc(textBoxName.Text, textBoxDescription.Text);
-                _taskWorker = new WorkTask(createdTask);
+                _wt.DoOperationWithTaskByCall(ref _taskWorker, _wt.CreateTask, textBoxName.Text, textBoxDescription.Text, (Bitmap)pictureBoxImageTask.Image);
             }
             else
             {
-                var bmp = (Bitmap)pictureBoxImageTask.Image;
-                System.IO.MemoryStream stream = new System.IO.MemoryStream();
-                bmp?.Save(stream, System.Drawing.Imaging.ImageFormat.Bmp);
-                _taskWorker.UpdateCurrentTask(new DbRepository.Context.Task
-                {
-                    Name = textBoxName.Text,
-                    Description = textBoxDescription.Text,
-                    Image = stream?.ToArray()
-                });
-                _wt.UpdateTree();
+                _wt.DoOperationWithTaskByCall(ref _taskWorker, _taskWorker.UpdateCurrentTask, textBoxName.Text, textBoxDescription.Text, (Bitmap)pictureBoxImageTask.Image);
             }
-            ActivateButtonAddAlg();          
+            ActivateButtonAddAlg();
             #region old XML formatting
             //DbRepositoryFake.NameTask = textBoxName.Text;
             //DbRepositoryFake.Description = textBoxDescription.Text;

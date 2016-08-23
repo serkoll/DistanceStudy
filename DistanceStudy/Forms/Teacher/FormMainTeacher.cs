@@ -58,6 +58,7 @@ namespace DistanceStudy.Forms.Teacher
 
         private void SetButtonAndNodeProperties(TreeNode treeNode, bool edit = false, bool delete = false, bool copy = false, bool create = true)
         {
+            _wt.SelectedNode = treeNode;
             treeView_thema.SelectedNode = treeNode;
             edittoolStripButton.Enabled = edit;
             deletetoolStripButton.Enabled = delete;
