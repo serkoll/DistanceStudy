@@ -8,13 +8,11 @@ namespace DistanceStudy.Forms.Teacher
     public partial class FormMainTeacher : Form
     {
         // Объект класса работы с деревом
-        private readonly WorkTree _wt;
+        private WorkTree _wt;
 
         public FormMainTeacher()
         {
             InitializeComponent();
-            _wt = new WorkTree(treeView_thema);
-            _wt.FillTree();
         }
 
         private void CreateButton_Click(object sender, EventArgs e)
@@ -86,6 +84,12 @@ namespace DistanceStudy.Forms.Teacher
                 copyToolStripButton.Text = "Вставить";
                 //_wt.SetNodeToCopy(treeView_thema.SelectedNode);
             }
+        }
+
+        private void FormMainTeacher_Load(object sender, EventArgs e)
+        {
+            _wt = new WorkTree(treeView_thema);
+            _wt.FillTree();
         }
     }
 }

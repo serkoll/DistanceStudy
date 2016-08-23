@@ -8,6 +8,7 @@ using DbRepository.Context;
 using Microsoft.CSharp.RuntimeBinder;
 using Service.Services;
 using System.Drawing;
+using Authentication;
 
 namespace Service.HandlerUI
 {
@@ -330,9 +331,16 @@ namespace Service.HandlerUI
             var tasks = _taskList.Where(c => c.SubthemaId.Equals(item.SubthemaId));
             foreach (var task in tasks)
             {
+                bool isTeacher = false;
+                var userSettings = AuthenticationModule.LoggedUser?.Permission?.IsTeacher;
+                if (userSettings.HasValue)
+                    isTeacher = userSettings.Value;
                 var index = targetNodes.Count - 1;
-                targetNodes[index].Nodes.Add(task.Name);
-                SetColorForTaskNode(task, targetNodes[index].LastNode);
+                if (isTeacher || task.IsReady)
+                {
+                    targetNodes[index].Nodes.Add(task.Name);
+                    SetColorForTaskNode(task, targetNodes[index].LastNode);
+                }  
             }
         }
 
