@@ -1,6 +1,7 @@
 ﻿using DbRepository.Context;
 using Service.Services;
 using System;
+using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
 using XMLFormatter;
@@ -53,6 +54,17 @@ namespace Service.HandlerUI
         public void SetTaskStatusToReady()
         {
             _task.IsReady = true;
+            _taskService.UpdTask(_task);
+        }
+
+        /// <summary>
+        /// Обновить текущую задачу
+        /// </summary>
+        public void UpdateCurrentTask(Task updTask)
+        {
+            _task.Name = updTask.Name;
+            _task.Image = updTask.Image;
+            _task.Description = updTask.Description;
             _taskService.UpdTask(_task);
         }
 

@@ -25,7 +25,7 @@ namespace DistanceStudy.Forms.Teacher
 
         private void buttonAddAlgorithm_Click(object sender, EventArgs e)
         {
-            FormController.CreateFormByType(typeof(FormCreateAlgorithm), _taskWorker).Show();
+            FormController.CreateFormByType(typeof(FormCreateAlgorithm), _taskWorker).ShowDialog();
         }
 
         private void toolStripAddGraphicCondition_Click(object sender, EventArgs e)
@@ -36,11 +36,27 @@ namespace DistanceStudy.Forms.Teacher
 
         private void buttonAccept_Click(object sender, EventArgs e)
         {
-            _wt.CreateTask(textBoxName.Text, textBoxDescription.Text, (Bitmap)pictureBoxImageTask.Image);
-            _wt.UpdateTree();
-            var createdTask = _wt.GetTaskByNameAndDesc(textBoxName.Text, textBoxDescription.Text);
-            _taskWorker = new WorkTask(createdTask);
-            ActivateButtonAddAlg();
+            if(_taskWorker == null)
+            {
+                _wt.CreateTask(textBoxName.Text, textBoxDescription.Text, (Bitmap)pictureBoxImageTask.Image);
+                _wt.UpdateTree();
+                var createdTask = _wt.GetTaskByNameAndDesc(textBoxName.Text, textBoxDescription.Text);
+                _taskWorker = new WorkTask(createdTask);
+            }
+            else
+            {
+                var bmp = (Bitmap)pictureBoxImageTask.Image;
+                System.IO.MemoryStream stream = new System.IO.MemoryStream();
+                bmp?.Save(stream, System.Drawing.Imaging.ImageFormat.Bmp);
+                _taskWorker.UpdateCurrentTask(new DbRepository.Context.Task
+                {
+                    Name = textBoxName.Text,
+                    Description = textBoxDescription.Text,
+                    Image = stream?.ToArray()
+                });
+                _wt.UpdateTree();
+            }
+            ActivateButtonAddAlg();          
             #region old XML formatting
             //DbRepositoryFake.NameTask = textBoxName.Text;
             //DbRepositoryFake.Description = textBoxDescription.Text;
@@ -150,6 +166,11 @@ namespace DistanceStudy.Forms.Teacher
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             Dispose();
+        }
+
+        private void FormCreateTask_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _wt.UpdateTree();
         }
     }
 }

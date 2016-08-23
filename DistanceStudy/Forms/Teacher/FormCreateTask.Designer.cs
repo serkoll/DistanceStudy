@@ -273,6 +273,7 @@
             this.Name = "FormCreateTask";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Создание задачи";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormCreateTask_FormClosing);
             this.splitContainerTextBoxes.Panel1.ResumeLayout(false);
             this.splitContainerTextBoxes.Panel1.PerformLayout();
             this.splitContainerTextBoxes.Panel2.ResumeLayout(false);
