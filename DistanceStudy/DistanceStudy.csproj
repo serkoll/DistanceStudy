@@ -64,6 +64,12 @@
     <Compile Include="Forms\Admin\FormAdminPanel.Designer.cs">
       <DependentUpon>FormAdminPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Student\FormMainStudent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Student\FormMainStudent.Designer.cs">
+      <DependentUpon>FormMainStudent.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Teacher\FormCreateAlgorithm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,6 +104,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\Admin\FormAdminPanel.resx">
       <DependentUpon>FormAdminPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Student\FormMainStudent.resx">
+      <DependentUpon>FormMainStudent.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Teacher\FormCreateAlgorithm.resx">
       <DependentUpon>FormCreateAlgorithm.cs</DependentUpon>
