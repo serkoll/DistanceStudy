@@ -51,6 +51,7 @@
     <Compile Include="HandlerUI\WorkTree.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ControlTask\TaskChecker.cs" />
+    <Compile Include="Services\Solver\TaskSolver.cs" />
     <Compile Include="Services\SubthemaService.cs" />
     <Compile Include="Services\TaskService.cs" />
     <Compile Include="Services\ThemaService.cs" />

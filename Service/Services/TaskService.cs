@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace Service.Services
@@ -11,7 +12,7 @@ namespace Service.Services
     public class TaskService
     {
         // Репозиторий для добавление в БД тем
-        private readonly TaskRepository _taskRep = new TaskRepository();
+        protected readonly TaskRepository _taskRep = new TaskRepository();
 
         /// <summary>
         /// Первоначальное добавление задачи без параметров в бд
@@ -27,7 +28,7 @@ namespace Service.Services
                 Name = name,
                 Description = desc,
                 Image = bmp,
-                SubthemaId = subthemaId 
+                SubthemaId = subthemaId
             });
         }
 
@@ -57,6 +58,18 @@ namespace Service.Services
         public void UpdTask(Task task)
         {
             _taskRep.Update(task);
+        }
+
+        /// <summary>
+        /// Получение всех методов проверки из заданной сборки
+        /// </summary>
+        /// <param name="assemly">Название класса в сборке Point3DCntrl</param>
+        public MethodInfo[] GetAllMethodsFromAssembly(string assemly = "PointsProectionsControl")
+        {
+            Type type = Type.GetType($"Point3DCntrl.{assemly}, Point3DCntrl");
+            var pointsPrtcCntrl = Activator.CreateInstance(type);
+            Type t = pointsPrtcCntrl.GetType();
+            return t.GetMethods();
         }
     }
 }

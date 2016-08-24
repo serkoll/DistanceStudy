@@ -23,7 +23,7 @@ namespace Service.HandlerUI
         {
             _taskService = new TaskService();
             _task = task;
-            GetAllMethodsFromAssembly();
+            mi = _taskService.GetAllMethodsFromAssembly();
         }
 
         /// <summary>
@@ -66,18 +66,6 @@ namespace Service.HandlerUI
             _task.Image = updTask.Image;
             _task.Description = updTask.Description;
             _taskService.UpdTask(_task);
-        }
-
-        /// <summary>
-        /// Получение всех методов проверки из заданной сборки
-        /// </summary>
-        /// <param name="assemly">Название класса в сборке Point3DCntrl</param>
-        private void GetAllMethodsFromAssembly(string assemly = "PointsProectionsControl")
-        {
-            Type type = Type.GetType($"Point3DCntrl.{assemly}, Point3DCntrl");
-            var pointsPrtcCntrl = Activator.CreateInstance(type);
-            Type t = pointsPrtcCntrl.GetType();
-            mi = t.GetMethods();
         }
     }
 }

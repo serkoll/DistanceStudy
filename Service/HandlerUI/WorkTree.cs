@@ -197,7 +197,7 @@ namespace Service.HandlerUI
         public dynamic GetObjectBySelectedNode()
         {
             var currNode = SelectedNode;
-            var parent = _tree.SelectedNode?.Parent;
+            var parent = currNode?.Parent;
             if (parent == null)
                 return GetThemaByNode(currNode);
             if (parent != null && parent.Parent == null)

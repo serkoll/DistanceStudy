@@ -60,13 +60,28 @@ namespace DbRepository.Classes.Repository
         {
             using (var db = new DistanceStudyEntities())
             {
-                db.Task_Algotithm.Add(new DbRepository.Context.Task_Algotithm {
+                db.Task_Algotithm.Add(new DbRepository.Context.Task_Algotithm
+                {
                     TaskId = taskId,
                     Condition = condition,
                     SubGroup = 1,
                     BlockNumber = 1
                 });
                 db.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// Вернуть по объекту задачи набор методов проверки
+        /// </summary>
+        /// <param name="task">Объект задачи</param>
+        /// <returns>Объект алгоритма проверки</returns>
+        public Task_Algotithm GetTaskAlgorithmForTask(Task task)
+        {
+            using (var db = new DistanceStudyEntities())
+            {
+                var getted = db.Task_Algotithm.Where(c => c.TaskId.Equals(task.TaskId));
+                return getted?.FirstOrDefault();
             }
         }
 
