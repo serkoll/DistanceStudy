@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Document>
+  <Description>
+    for each method set rules to initial and solve
+    Initial = 3DPoint, Line3D, 3DPoint
+    User = 3DPoint
+
+    UI(click on needed objects and select it) or textBoxes (enter to fields x,y,z or other params for needed objects)
+    3DPoint, Line3D, 3DPoint -> algorithm added -> save it -> save on XML -> and to data base
+
+
+    student solve
+    нужно построить точку параллельную... -> parse xml -> to UI all objects from xml ->
+    Load 3DPoint, Line3D, 3DPoint -> Click on point -> 3DPoint -> UserParam -> Решить -> done
+  </Description>
+  <Rules>
+    <PointsProectionsControl>
+      <Input_X>
+        <Params>
+          <InitialParams>
+          </InitialParams>
+          <User>
+            Point3D
+          </User>
+        </Params>
+      </Input_X>
+
+      <Input_Y>
+        <Params>
+          <InitialParams>
+          </InitialParams>
+          <User>
+            Point3D
+          </User>
+        </Params>
+      </Input_Y>
+
+      <Input_Z>
+        <Params>
+          <InitialParams>
+          </InitialParams>
+          <User>
+            Point3D
+          </User>
+        </Params>
+      </Input_Z>
+    </PointsProectionsControl>
+  </Rules>
+</Document>

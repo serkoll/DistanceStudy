@@ -65,6 +65,10 @@
       <Project>{5ec8ce36-c3e5-41a4-bf16-3b4b088c6148}</Project>
       <Name>DbRepository</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GraphicsModule\GraphicsModule\GraphicsModule.csproj">
+      <Project>{247cb926-7d51-45d6-9e9b-05aa4f4e30d6}</Project>
+      <Name>GraphicsModule</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Point3DCntrl\Point3DCntrl.csproj">
       <Project>{EDC65B7A-A521-4A52-A533-8DB48EBDD892}</Project>
       <Name>Point3DCntrl</Name>

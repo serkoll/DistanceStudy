@@ -3,28 +3,60 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using GraphicsModule;
+using GeometryObjects;
+using System.Text;
 
 namespace Service.Services.Solver
 {
     public class TaskSolver : TaskService
     {
+        private Dictionary<string, object> initialParams = new Dictionary<string, object>();
+        private Dictionary<string, object> userParams = new Dictionary<string, object>();
+        private Dictionary<string, object> solveParams = new Dictionary<string, object>();
+        private Dictionary<string, string> commentsTrue = new Dictionary<string, string>();
+        private Dictionary<string, string> commentsFalse = new Dictionary<string, string>();
         /// <summary>
         /// Проверка текущей задачи
         /// </summary>
         /// <param name="task">Задача для проверки</param>
-        public void StartCheckTask(Task task)
+        public string StartCheckTask(Task task)
         {
-            Dictionary<string, object> InitialParams = new Dictionary<string, object>();
-            Dictionary<string, object> UserParams = new Dictionary<string, object>();
-            Dictionary<string, object> SolveParams = new Dictionary<string, object>();
-            Dictionary<string, string> CommentsTrue = new Dictionary<string, string>();
-            Dictionary<string, string> CommentsFalse = new Dictionary<string, string>();
-            object classInstance = Activator.CreateInstance(Type.GetType($"Point3DCntrl.PointsProectionsControl, Point3DCntrl"), null);
+            ClearAllDictionaries();
+            StringBuilder sb = new StringBuilder();
+            var classInstance = Activator.CreateInstance(Type.GetType($"Point3DCntrl.PointsProectionsControl, Point3DCntrl"), null);
             var listMethods = GetMethodsFromDbForTask(task);
+            #region Debug options
+
+            // Test feature -> TODO: Remove
+            var point = CollectionsGraphicsObjects.GraphicsObjectsCollection.FirstOrDefault();
+            userParams.Add(nameof(Point3D), point);
             foreach (var c in listMethods)
             {
-                c.Invoke(classInstance, new object[] { InitialParams, UserParams, SolveParams, CommentsTrue, CommentsFalse });
+                c.Invoke(classInstance, new object[] { initialParams, userParams, solveParams, commentsTrue, commentsFalse });
             }
+
+            if (commentsFalse.Any())
+            {
+                sb.Append("Неверно: \n");
+                foreach (var comm in commentsFalse)
+                {
+                    sb.Append(comm).Append("\n");
+                }
+                sb.Append("Задача решена неправильно!");
+            }
+            else
+            {
+                sb.Append("Верно: \n");
+                foreach (var comm in commentsTrue)
+                {
+                    sb.Append(comm).Append("\n");
+                }
+                sb.Append("Поздравляем! Задача решена верно!");
+            }
+
+            #endregion
+            return sb.ToString();
         }
 
         /// <summary>
@@ -50,6 +82,18 @@ namespace Service.Services.Solver
                 }
             }
             return miList;
+        }
+
+        /// <summary>
+        /// Очистить все словари
+        /// </summary>
+        private void ClearAllDictionaries()
+        {
+            initialParams.Clear();
+            userParams.Clear();
+            solveParams.Clear();
+            commentsFalse.Clear();
+            commentsTrue.Clear();
         }
     }
 }

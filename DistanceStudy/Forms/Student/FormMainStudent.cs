@@ -8,7 +8,6 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace DistanceStudy.Forms.Student
@@ -19,6 +18,8 @@ namespace DistanceStudy.Forms.Student
         private WorkTree _wt;
         // Сервис для работы с задачей
         private TaskSolver _solver;
+        // Форма для решения
+        private GraphicsModule.MainForm _graphForm;
         public FormMainStudent()
         {
             InitializeComponent();
@@ -58,11 +59,11 @@ namespace DistanceStudy.Forms.Student
 
         private void toolStripButtonSolve_Click(object sender, EventArgs e)
         {
-            var form = new GraphicsModule.MainForm();
-            form.MdiParent = this;
-            form.Show();
-            form.StartPosition = FormStartPosition.CenterScreen;
-            form.WindowState = FormWindowState.Maximized;
+            _graphForm = new GraphicsModule.MainForm();
+            _graphForm.MdiParent = this;
+            _graphForm.Show();
+            _graphForm.StartPosition = FormStartPosition.CenterScreen;
+            _graphForm.WindowState = FormWindowState.Maximized;
             groupBoxTheory.Visible = false;
             toolStripButtonCheckTask.Visible = true;
             toolStripButtonSolve.Enabled = false;
@@ -71,7 +72,12 @@ namespace DistanceStudy.Forms.Student
 
         private void toolStripButtonCheckTask_Click(object sender, EventArgs e)
         {
-            _solver.StartCheckTask(_wt.GetObjectBySelectedNode());
+            MessageBox.Show(_solver.StartCheckTask(_wt.GetObjectBySelectedNode()));
+            _graphForm.Dispose();
+            groupBoxTheory.Visible = true;
+            toolStripButtonCheckTask.Visible = false;
+            toolStripButtonSolve.Enabled = true;
+            treeView_thema.Enabled = true;
         }
     }
 }

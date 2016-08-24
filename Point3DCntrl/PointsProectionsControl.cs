@@ -33,7 +33,7 @@ namespace Point3DCntrl
             if (UserParams.Count != 0) //Контроль существования объектов в заданном словаре
             {
                 object Object_Val = 0;//Переменная для извлечения объектов        
-                UserParams.TryGetValue(typeof(Point3D).ToString(), out Object_Val);
+                UserParams.TryGetValue(nameof(Point3D), out Object_Val);
                 var point3D = (Point3D)Object_Val;
                 if (point3D != null) //Контроль существования извлеченного объекта
                 {
@@ -61,8 +61,8 @@ namespace Point3DCntrl
             if (UserParams.Count != 0) //Контроль существования объектов в заданном словаре
             {
                 object Object_Val = 0;//Переменная для извлечения объектов        
-                UserParams.TryGetValue(typeof(Point3D).ToString(), out Object_Val);
-                if (Object_Val != null && !Object_Val.Equals("")) //Контроль существования извлеченного объекта
+                UserParams.TryGetValue(nameof(Point3D), out Object_Val);
+                if (Object_Val != null) //Контроль существования извлеченного объекта
                 {
                     CommentsTrue.Add("InputY_t_1", "Значение координаты Y задано"); return true;
                 }
@@ -87,8 +87,8 @@ namespace Point3DCntrl
             if (UserParams.Count != 0) //Контроль существования объектов в заданном словаре
             {
                 object Object_Val = 0;//Переменная для извлечения объектов        
-                UserParams.TryGetValue(typeof(Point3D).ToString(), out Object_Val);
-                if (Object_Val != null && !Object_Val.Equals("")) //Контроль существования извлеченного объекта
+                UserParams.TryGetValue(nameof(Point3D), out Object_Val);
+                if (Object_Val != null) //Контроль существования извлеченного объекта
                 {
                     CommentsTrue.Add("InputZ_t_1", "Значение координаты Z задано"); return true;
                 }
