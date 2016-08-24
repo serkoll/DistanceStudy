@@ -166,6 +166,7 @@
             this.exitToolStripButton.Size = new System.Drawing.Size(45, 36);
             this.exitToolStripButton.Text = "Выход";
             this.exitToolStripButton.ToolTipText = "Выход на окно авторизации";
+            this.exitToolStripButton.Click += new System.EventHandler(this.exitToolStripButton_Click);
             // 
             // deletetoolStripButton
             // 

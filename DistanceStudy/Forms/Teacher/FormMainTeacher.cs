@@ -91,5 +91,11 @@ namespace DistanceStudy.Forms.Teacher
             _wt = new WorkTree(treeView_thema);
             _wt.FillTree();
         }
+
+        private void exitToolStripButton_Click(object sender, EventArgs e)
+        {
+            FormController.CreateFormByType(typeof(AuthenticationForm)).Show();
+            Visible = false;
+        }
     }
 }
