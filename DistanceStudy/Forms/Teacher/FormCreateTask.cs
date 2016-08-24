@@ -1,4 +1,6 @@
-﻿using Service.HandlerUI;
+﻿using DbRepository.Context;
+using DistanceStudy.Classes;
+using Service.HandlerUI;
 using System;
 using System.Drawing;
 using System.Linq;
@@ -10,7 +12,10 @@ namespace DistanceStudy.Forms.Teacher
     {
         // Объект для работы с задачами и деревом объектов
         private WorkTree _wt;
-        private FormCreateAlgorithm _formCreateAlgorithm;
+        // Объект для работы с задачами после создания
+        private WorkTask _taskWorker;
+        // Редактируемый экземпляр
+        private readonly Task _edited = null;
         public FormCreateTask(WorkTree wt)
         {
             _wt = wt;
@@ -21,10 +26,21 @@ namespace DistanceStudy.Forms.Teacher
             InitialFormParams();
         }
 
+        public FormCreateTask(WorkTree wt, Task item)
+        {
+            _wt = wt;
+            _edited = item;
+            _taskWorker = new WorkTask(item);
+            InitializeComponent();
+            SetProperties(textBoxName, Color.Gray, item.Name);
+            SetProperties(textBoxDescription, Color.Gray, item.Description);
+            SetProperties(textBoxFilePath, Color.Gray, "Путь к графическому описанию задачи...");
+            InitialFormParams();
+        }
+
         private void buttonAddAlgorithm_Click(object sender, EventArgs e)
         {
-            _formCreateAlgorithm = new FormCreateAlgorithm();
-            _formCreateAlgorithm.Show();
+            FormController.CreateFormByType(typeof(FormCreateAlgorithm), _taskWorker).ShowDialog();
         }
 
         private void toolStripAddGraphicCondition_Click(object sender, EventArgs e)
@@ -35,8 +51,16 @@ namespace DistanceStudy.Forms.Teacher
 
         private void buttonAccept_Click(object sender, EventArgs e)
         {
-            _wt.CreateTask(textBoxName.Text, textBoxDescription.Text, (Bitmap)pictureBoxImageTask.Image);
-            _wt.UpdateTree();
+            if(_taskWorker == null)
+            {
+                _wt.DoOperationWithTaskByCall(ref _taskWorker, _wt.CreateTask, textBoxName.Text, textBoxDescription.Text, (Bitmap)pictureBoxImageTask.Image);
+            }
+            else
+            {
+                _wt.DoOperationWithTaskByCall(ref _taskWorker, _taskWorker.UpdateCurrentTask, textBoxName.Text, textBoxDescription.Text, (Bitmap)pictureBoxImageTask.Image);
+            }
+            ActivateButtonAddAlg();
+            #region old XML formatting
             //DbRepositoryFake.NameTask = textBoxName.Text;
             //DbRepositoryFake.Description = textBoxDescription.Text;
             //int i = 0;
@@ -51,6 +75,7 @@ namespace DistanceStudy.Forms.Teacher
             //DbRepositoryFake.OuterXml = result;
             //DbHelper.AddTaskAlgorithmXml(result);
             //Dispose();
+            #endregion
         }
 
         #region Появление и исчезновение подсказок при переходе на текстовые поля
@@ -115,48 +140,15 @@ namespace DistanceStudy.Forms.Teacher
             //}
         }
 
-        private void FormCreateTask_Resize(object sender, EventArgs e)
-        {
-            dataGridViewDefault.Columns[2].Width = dataGridViewDefault.Width - dataGridViewDefault.Columns[0].Width;
-        }
-
-        private void dataGridViewDefault_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
-        {
-            dataGridViewDefault.Columns[2].Width = dataGridViewDefault.Width - dataGridViewDefault.Columns[1].Width;
-        }
-
-        private void toolStripButtonAddParams_Click(object sender, EventArgs e)
-        {
-            if (labelParametrsHasNot.Visible)
-            {
-                labelParametrsHasNot.Visible = false;
-                dataGridViewDefault.Visible = true;
-                toolStripButtonAddParams.Text = "Удалить параметры";
-            }
-            else
-            {
-                labelParametrsHasNot.Visible = true;
-                dataGridViewDefault.Visible = false;
-                toolStripButtonAddParams.Text = "Добавить параметры";
-            }
-        }
-
-        private void radioButtonMain_CheckedChanged(object sender, EventArgs e)
-        {
-            buttonAddAlgorithm.Enabled = true;
-        }
-
         private void textBoxName_TextChanged(object sender, EventArgs e)
         {
             if (textBoxName.Text == string.Empty || textBoxName.Text == "Введите наименование задачи...")
             {
-                buttonAddAlgorithm.Enabled = false;
-                buttonAccept.Enabled = false;
+                buttonSave.Enabled = false;
             }
             else
             {
-                buttonAddAlgorithm.Enabled = true;
-                buttonAccept.Enabled = true;
+                buttonSave.Enabled = true;
             }
         }
 
@@ -165,10 +157,23 @@ namespace DistanceStudy.Forms.Teacher
         private void InitialFormParams()
         {
             this.MinimumSize = new Size(600, 500);
-            // Изначально датагрид невидим, видно только сообщение о том, что параметры не заданы
-            dataGridViewDefault.Visible = false;
             // Кнопка создать неактивна по умолчанию
             buttonAddAlgorithm.Enabled = false;
+        }
+
+        private void ActivateButtonAddAlg()
+        {
+            buttonAddAlgorithm.Enabled = true;
+        }
+
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            Dispose();
+        }
+
+        private void FormCreateTask_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _wt.UpdateTree();
         }
     }
 }

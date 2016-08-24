@@ -166,6 +166,7 @@
             this.exitToolStripButton.Size = new System.Drawing.Size(45, 36);
             this.exitToolStripButton.Text = "Выход";
             this.exitToolStripButton.ToolTipText = "Выход на окно авторизации";
+            this.exitToolStripButton.Click += new System.EventHandler(this.exitToolStripButton_Click);
             // 
             // deletetoolStripButton
             // 
@@ -198,6 +199,7 @@
             this.Text = "Добро пожаловать, преподаватель!";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormMainTeacher_FormClosed);
+            this.Load += new System.EventHandler(this.FormMainTeacher_Load);
             this.splitContainerPanel.Panel1.ResumeLayout(false);
             this.splitContainerPanel.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerPanel)).EndInit();

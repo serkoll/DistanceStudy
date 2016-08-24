@@ -80,7 +80,24 @@ namespace DbRepository.Classes.Context
             {
                 foreach (var item in db.Tasks.Where(c => c.SubthemaId.Equals(subthema.SubthemaId)))
                 {
+                    DeleteAlgorithmsFromTask(item);
                     db.Tasks.Remove(item);
+                }
+                db.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// Удаление всех агоритмов из текущей задачи
+        /// </summary>
+        /// <param name="task">Задача, из которой удаляются все алгоритмы</param>
+        private void DeleteAlgorithmsFromTask(Task task)
+        {
+            using (var db = new DistanceStudyEntities())
+            {
+                foreach (var item in db.Task_Algotithm.Where(c => c.TaskId.Equals(task.TaskId)))
+                {
+                    db.Task_Algotithm.Remove(item);
                 }
                 db.SaveChanges();
             }
