@@ -5,6 +5,7 @@ using DistanceStudy.Forms.Admin;
 using DistanceStudy.Forms.Teacher;
 using DistanceStudy.Properties;
 using Authentication;
+using DistanceStudy.Forms.Student;
 
 namespace DistanceStudy.Forms
 {
@@ -23,7 +24,7 @@ namespace DistanceStudy.Forms
             _dictionaryForms = new Dictionary<string, Form>
             {
                 {"teacher", new FormMainTeacher()},
-                {"user", new Form()},
+                {"user", new FormMainStudent()},
                 {"admin", new FormAdminPanel()}
             };
             // Заполнение словаря значениями для соответствующих пользователей

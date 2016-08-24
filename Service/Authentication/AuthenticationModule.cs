@@ -8,7 +8,7 @@ namespace Authentication
     // Модуль отвчающий за аутентификацию пользователей в приложении
     public class AuthenticationModule
     {
-        private readonly User _loggedUser;
+        public static User LoggedUser { get; private set; }
         private readonly Dictionary<string, Form> _dictionaryUsers;
         private readonly UserRepository _db;
 
@@ -31,7 +31,7 @@ namespace Authentication
             if (login != null && password != null)
             {
                 // Возвращает пользователя с таким логином и паролем
-                _loggedUser = _db.GetUserByLoginPassword(login, password);
+                LoggedUser = _db.GetUserByLoginPassword(login, password);
             }
         }
         /// <summary>
@@ -40,12 +40,22 @@ namespace Authentication
         /// <returns>Форма для работы пользователя</returns>
         public Form CreateUserForm()
         {
-            if (_loggedUser != null)
+            if (LoggedUser != null)
             {
-                var permission = _db.GetUserPermission(_loggedUser);
-                return _dictionaryUsers[permission.GroupName];
+                LoggedUser.Permission = _db.GetUserPermission(LoggedUser);
+                return _dictionaryUsers[LoggedUser.Permission.GroupName];
             }
             return null;
         }
+
+        /// <summary>
+        /// Получить права пользователя по объекту пользователя
+        /// </summary>
+        /// <param name="user">Пользователь</param>
+        /// <returns>Права польователя user</returns>
+        //public Permission GetUserPermission(User user)
+        //{
+        //    return _db.GetUserPermission(LoggedUser);
+        //}
     }
 }

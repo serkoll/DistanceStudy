@@ -1,173 +1,46 @@
-﻿using System;
+﻿using DbRepository.Context;
+using DistanceStudy.Classes;
+using Service.HandlerUI;
+using System;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using DistanceStudy.Properties;
-using Service.HandlerUI;
 
 namespace DistanceStudy.Forms.Teacher
 {
     public partial class FormCreateTask : Form
     {
-        // объект работы с деревом
-        private readonly WorkEntity _wt;
-        public FormCreateTask(WorkEntity wt)
+        // Объект для работы с задачами и деревом объектов
+        private WorkTree _wt;
+        // Объект для работы с задачами после создания
+        private WorkTask _taskWorker;
+        // Редактируемый экземпляр
+        private readonly Task _edited = null;
+        public FormCreateTask(WorkTree wt)
         {
             _wt = wt;
             InitializeComponent();
-            textBoxName.ForeColor = Color.Gray;
-            textBoxName.Text = Resources.EnterTaskName;
-
-            textBoxDescription.ForeColor = Color.Gray;
-            textBoxDescription.Text = Resources.EnterTextDescriptionOfTask;
-
-            textBoxFilePath.ForeColor = Color.Gray;
-            textBoxFilePath.Text = Resources.PathToTaskImage;
-            this.MinimumSize = new Size(600, 500);
-            // Изначально датагрид невидим, видно только сообщение о том, что параметры не заданы
-            dataGridViewDefault.Visible = false;
-            // Кнопка создать неактивна по умолчанию
-            buttonAcceptTask.Enabled = false;
-        }
-        // Событие, срабатывающее при переходе управления к другому контролу
-        private void textBoxName_Leave(object sender, EventArgs e)
-        {
-            if (textBoxName.Text == string.Empty)
-            {
-                textBoxName.ForeColor = Color.Gray;
-                textBoxName.Text = Resources.EnterTaskName;
-            }
-        }
-        // Событие активации текстового поля
-        private void textBoxName_Enter(object sender, EventArgs e)
-        {
-            if (textBoxName.Text == Resources.EnterTaskName)
-            {
-                textBoxName.Text = string.Empty;
-                textBoxName.ForeColor = Color.Black;
-            }
-        }
-        // Событие активации текстового поля
-        private void textBoxDescription_Enter(object sender, EventArgs e)
-        {
-            if (textBoxDescription.Text == Resources.EnterTextDescriptionOfTask)
-            {
-                textBoxDescription.Text = string.Empty;
-                textBoxDescription.ForeColor = Color.Black;
-            }
-        }
-        // Событие, срабатывающее при переходе управления к другому контролу
-        private void textBoxDescription_Leave(object sender, EventArgs e)
-        {
-            if (textBoxDescription.Text == string.Empty)
-            {
-                textBoxDescription.ForeColor = Color.Gray;
-                textBoxDescription.Text = Resources.EnterTextDescriptionOfTask;
-            }
+            SetProperties(textBoxName, Color.Gray, "Введите наименование задачи...");
+            SetProperties(textBoxDescription, Color.Gray, "Введите текстовое описание задачи...");
+            SetProperties(textBoxFilePath, Color.Gray, "Путь к графическому описанию задачи...");
+            InitialFormParams();
         }
 
-        private void buttonOpenFile_Click(object sender, EventArgs e)
+        public FormCreateTask(WorkTree wt, Task item)
         {
-            //System.Windows.Forms.OpenFileDialog dialog = new System.Windows.Forms.OpenFileDialog();
-            //dialog.Filter = "All files (*.bmp)|*.bmp;";
-            //if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            //{
-            //    dialog.Dispose();
-            //    textBoxFilePath.Text = dialog.FileName;
-            //    _itemBmp = new Bitmap(dialog.FileName);
-            //    pictureBoxImageTask.Image = _itemBmp;
-            //}
-            //if (_itemBmp != null)
-            //{
-            //    labelHereGraphic.Text = "";
-            //}
-        }
-        // Событие активации текстового поля
-        private void textBoxFilePath_Enter(object sender, EventArgs e)
-        {
-            if (textBoxFilePath.Text == Resources.PathToTaskImage)
-            {
-                textBoxFilePath.Text = string.Empty;
-                textBoxFilePath.ForeColor = Color.Black;
-            }
-        }
-        // Событие, срабатывающее при переходе управления к другому контролу
-        private void textBoxFilePath_Leave(object sender, EventArgs e)
-        {
-            if (textBoxFilePath.Text == string.Empty)
-            {
-                textBoxFilePath.ForeColor = Color.Gray;
-                textBoxFilePath.Text = Resources.PathToTaskImage;
-            }
-        }
-        private void buttonAcceptTask_Click(object sender, EventArgs e)
-        {
-            //_formCreateAlgorithm = new FormCreateAlgorithm();
-            //_formCreateAlgorithm.Show();
-        }
-        /// <summary>
-        /// При масштабировании основного окна - колонки также перерисовываются под новый размер
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void FormCreateTask_Resize(object sender, EventArgs e)
-        {
-            dataGridViewDefault.Columns[2].Width = dataGridViewDefault.Width - dataGridViewDefault.Columns[0].Width;
-        }
-        /// <summary>
-        /// Событие при изменении ширины колонки - масштабирование на весь элемент управления
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void dataGridViewDefault_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
-        {
-            dataGridViewDefault.Columns[2].Width = dataGridViewDefault.Width - dataGridViewDefault.Columns[1].Width;
-        }
-        /// <summary>
-        /// Событие добавления параметров в задачу
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void toolStripButtonAddParams_Click(object sender, EventArgs e)
-        {
-            if (labelParametrsHasNot.Visible)
-            {
-                labelParametrsHasNot.Visible = false;
-                dataGridViewDefault.Visible = true;
-                toolStripButtonAddParams.Text = "Удалить параметры";
-            }
-            else
-            {
-                labelParametrsHasNot.Visible = true;
-                dataGridViewDefault.Visible = false;
-                toolStripButtonAddParams.Text = "Добавить параметры";
-            }
-        }
-        /// <summary>
-        /// Изменение состояния чекбоксов для статуса задачи
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void radioButtonMain_CheckedChanged(object sender, EventArgs e)
-        {
-            buttonAcceptTask.Enabled = true;
+            _wt = wt;
+            _edited = item;
+            _taskWorker = new WorkTask(item);
+            InitializeComponent();
+            SetProperties(textBoxName, Color.Gray, item.Name);
+            SetProperties(textBoxDescription, Color.Gray, item.Description);
+            SetProperties(textBoxFilePath, Color.Gray, "Путь к графическому описанию задачи...");
+            InitialFormParams();
         }
 
-        /// <summary>
-        /// Изменение текста в текстбоксе для названия задачи
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void textBoxName_TextChanged(object sender, EventArgs e)
+        private void buttonAddAlgorithm_Click(object sender, EventArgs e)
         {
-            if (textBoxName.Text == string.Empty || textBoxName.Text == Resources.EnterTaskName)
-            {
-                buttonAcceptTask.Enabled = false;
-            }
-            else
-            {
-                buttonAcceptTask.Enabled = true;
-            }
+            FormController.CreateFormByType(typeof(FormCreateAlgorithm), _taskWorker).ShowDialog();
         }
 
         private void toolStripAddGraphicCondition_Click(object sender, EventArgs e)
@@ -178,6 +51,16 @@ namespace DistanceStudy.Forms.Teacher
 
         private void buttonAccept_Click(object sender, EventArgs e)
         {
+            if(_taskWorker == null)
+            {
+                _wt.DoOperationWithTaskByCall(ref _taskWorker, _wt.CreateTask, textBoxName.Text, textBoxDescription.Text, (Bitmap)pictureBoxImageTask.Image);
+            }
+            else
+            {
+                _wt.DoOperationWithTaskByCall(ref _taskWorker, _taskWorker.UpdateCurrentTask, textBoxName.Text, textBoxDescription.Text, (Bitmap)pictureBoxImageTask.Image);
+            }
+            ActivateButtonAddAlg();
+            #region old XML formatting
             //DbRepositoryFake.NameTask = textBoxName.Text;
             //DbRepositoryFake.Description = textBoxDescription.Text;
             //int i = 0;
@@ -192,6 +75,105 @@ namespace DistanceStudy.Forms.Teacher
             //DbRepositoryFake.OuterXml = result;
             //DbHelper.AddTaskAlgorithmXml(result);
             //Dispose();
+            #endregion
+        }
+
+        #region Появление и исчезновение подсказок при переходе на текстовые поля
+
+        private void textBoxName_Leave(object sender, EventArgs e)
+        {
+            SetProperties(textBoxName, Color.Gray, "Введите наименование задачи...", string.Empty);
+        }
+
+        private void textBoxName_Enter(object sender, EventArgs e)
+        {
+            SetProperties(textBoxName, Color.Black, string.Empty, "Введите наименование задачи...");
+        }
+
+        private void textBoxDescription_Enter(object sender, EventArgs e)
+        {
+            SetProperties(textBoxDescription, Color.Black, string.Empty, "Введите текстовое описание задачи...");
+        }
+
+        private void textBoxDescription_Leave(object sender, EventArgs e)
+        {
+            SetProperties(textBoxDescription, Color.Gray, "Введите текстовое описание задачи...", string.Empty);
+        }
+
+        private void textBoxFilePath_Enter(object sender, EventArgs e)
+        {
+            SetProperties(textBoxFilePath, Color.Black, string.Empty, "Путь к графическому описанию задачи...");
+        }
+
+        private void textBoxFilePath_Leave(object sender, EventArgs e)
+        {
+            SetProperties(textBoxFilePath, Color.Gray, "Путь к графическому описанию задачи...", string.Empty);
+        }
+
+        private void SetProperties(TextBox txtBox, Color color, string text, string compareTxt = "")
+        {
+            if (txtBox.Text == compareTxt)
+            {
+                txtBox.Text = text;
+                txtBox.ForeColor = color;
+            }
+        }
+
+        #endregion
+
+        #region События изменения размера формы, ввода текста и другие назнчительные UI events
+
+        private void buttonOpenFile_Click(object sender, EventArgs e)
+        {
+            //OpenFileDialog dialog = new OpenFileDialog();
+            //dialog.Filter = "All files (*.bmp)|*.bmp;";
+            //if (dialog.ShowDialog() == DialogResult.OK)
+            //{
+            //    dialog.Dispose();
+            //    textBoxFilePath.Text = dialog.FileName;
+            //    _itemBmp = new Bitmap(dialog.FileName);
+            //    pictureBoxImageTask.Image = _itemBmp;
+            //}
+            //if (_itemBmp != null)
+            //{
+            //    labelHereGraphic.Text = "";
+            //}
+        }
+
+        private void textBoxName_TextChanged(object sender, EventArgs e)
+        {
+            if (textBoxName.Text == string.Empty || textBoxName.Text == "Введите наименование задачи...")
+            {
+                buttonSave.Enabled = false;
+            }
+            else
+            {
+                buttonSave.Enabled = true;
+            }
+        }
+
+        #endregion
+
+        private void InitialFormParams()
+        {
+            this.MinimumSize = new Size(600, 500);
+            // Кнопка создать неактивна по умолчанию
+            buttonAddAlgorithm.Enabled = false;
+        }
+
+        private void ActivateButtonAddAlg()
+        {
+            buttonAddAlgorithm.Enabled = true;
+        }
+
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            Dispose();
+        }
+
+        private void FormCreateTask_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _wt.UpdateTree();
         }
     }
 }

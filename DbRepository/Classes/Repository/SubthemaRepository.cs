@@ -63,9 +63,43 @@ namespace DbRepository.Classes.Context
                 var deleted = db.SubThemas.Find(id);
                 if (deleted != null)
                 {
+                    DeleteTasksFromSubthema(deleted);
                     db.SubThemas.Remove(deleted);
                     db.SaveChanges();
                 }
+            }
+        }
+
+        /// <summary>
+        /// Удаление всех заданий из подтемы
+        /// </summary>
+        /// <param name="subthema">Подтема</param>
+        private void DeleteTasksFromSubthema(SubThema subthema)
+        {
+            using (var db = new DistanceStudyEntities())
+            {
+                foreach (var item in db.Tasks.Where(c => c.SubthemaId.Equals(subthema.SubthemaId)))
+                {
+                    DeleteAlgorithmsFromTask(item);
+                    db.Tasks.Remove(item);
+                }
+                db.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// Удаление всех агоритмов из текущей задачи
+        /// </summary>
+        /// <param name="task">Задача, из которой удаляются все алгоритмы</param>
+        private void DeleteAlgorithmsFromTask(Task task)
+        {
+            using (var db = new DistanceStudyEntities())
+            {
+                foreach (var item in db.Task_Algotithm.Where(c => c.TaskId.Equals(task.TaskId)))
+                {
+                    db.Task_Algotithm.Remove(item);
+                }
+                db.SaveChanges();
             }
         }
     }
