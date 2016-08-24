@@ -44,7 +44,7 @@ namespace DbRepository.Classes.Repository
             using (var db = new DistanceStudyEntities())
             {
                 var updated = db.Themas.Find(thema.ThemaId);
-                if(updated != null)
+                if (updated != null)
                 {
                     updated.SubThemas = thema.SubThemas;
                     updated.Name = thema.Name;
@@ -79,9 +79,43 @@ namespace DbRepository.Classes.Repository
         /// <param name="id">ИД темы</param>
         private void DeleteSubthemasFromThemaById(DbSet<SubThema> dbSubthemas, int id)
         {
-            foreach(var item in dbSubthemas.Where(c => c.ThemaId.Equals(id)))
+            foreach (var item in dbSubthemas.Where(c => c.ThemaId.Equals(id)))
             {
+                DeleteTasksFromSubthema(item);
                 dbSubthemas.Remove(item);
+            }
+        }
+
+        /// <summary>
+        /// Удаление всех заданий из подтемы
+        /// </summary>
+        /// <param name="subthema">Подтема</param>
+        private void DeleteTasksFromSubthema(SubThema subthema)
+        {
+            using (var db = new DistanceStudyEntities())
+            {
+                foreach (var item in db.Tasks.Where(c => c.SubthemaId.Equals(subthema.SubthemaId)))
+                {
+                    DeleteAlgorithmsFromTask(item);
+                    db.Tasks.Remove(item);
+                }
+                db.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// Удаление всех агоритмов из текущей задачи
+        /// </summary>
+        /// <param name="task">Задача, из которой удаляются все алгоритмы</param>
+        private void DeleteAlgorithmsFromTask(Task task)
+        {
+            using (var db = new DistanceStudyEntities())
+            {
+                foreach (var item in db.Task_Algotithm.Where(c => c.TaskId.Equals(task.TaskId)))
+                {
+                    db.Task_Algotithm.Remove(item);
+                }
+                db.SaveChanges();
             }
         }
     }

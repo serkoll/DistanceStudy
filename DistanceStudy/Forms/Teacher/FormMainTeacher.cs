@@ -8,18 +8,16 @@ namespace DistanceStudy.Forms.Teacher
     public partial class FormMainTeacher : Form
     {
         // Объект класса работы с деревом
-        private readonly WorkEntity _wt;
+        private WorkTree _wt;
 
         public FormMainTeacher()
         {
             InitializeComponent();
-            _wt = new WorkEntity(treeView_thema);
-            _wt.FillTree();
         }
 
         private void CreateButton_Click(object sender, EventArgs e)
         {
-            FormController.CreateFormByType(_wt.GetTypeForCreatingForm(), _wt).Show();
+            FormController.CreateFormByType(_wt.GetTypeForCreatingFormForCreate(), _wt).ShowDialog();
         }
 
         private void FormMainTeacher_FormClosed(object sender, FormClosedEventArgs e)
@@ -31,7 +29,7 @@ namespace DistanceStudy.Forms.Teacher
         private void edittoolStripButton_Click(object sender, EventArgs e)
         {
             var obj = _wt.GetObjectBySelectedNode();
-            FormController.CreateFormByType(_wt.GetTypeForCreatingForm(), _wt, obj).Show();
+            FormController.CreateFormByType(_wt.GetTypeForCreatingFormForEdit(), _wt, obj).ShowDialog();
         }
 
         private void treeView_thema_KeyPress(object sender, KeyPressEventArgs e)
@@ -50,14 +48,20 @@ namespace DistanceStudy.Forms.Teacher
             {
                 SetButtonAndNodeProperties(e.Node, true, true, true);
             }
+            if (me.Button.Equals(MouseButtons.Left) && treeView_thema.SelectedNode.Parent?.Parent != null)
+            {
+                SetButtonAndNodeProperties(e.Node, true, true, true, false);
+            }
         }
 
-        private void SetButtonAndNodeProperties(TreeNode treeNode, bool edit = false, bool delete = false, bool copy = false)
+        private void SetButtonAndNodeProperties(TreeNode treeNode, bool edit = false, bool delete = false, bool copy = false, bool create = true)
         {
+            _wt.SelectedNode = treeNode;
             treeView_thema.SelectedNode = treeNode;
             edittoolStripButton.Enabled = edit;
             deletetoolStripButton.Enabled = delete;
             copyToolStripButton.Enabled = copy;
+            CreateButton.Enabled = create;
         }
 
         private void deletetoolStripButton_Click(object sender, EventArgs e)
@@ -66,6 +70,32 @@ namespace DistanceStudy.Forms.Teacher
             var method = _wt.GetMethodForDeleteNeededObject(out objId);
             method(objId);
             _wt.UpdateTree();
+        }
+
+        private void copyToolStripButton_Click(object sender, EventArgs e)
+        {
+            if(copyToolStripButton.Text == "Вставить")
+            {
+                copyToolStripButton.Text = "Копировать";
+                //TODO: implement feature for adding copy with thema - all subthemas and tasks and etc.
+            }
+            else
+            {
+                copyToolStripButton.Text = "Вставить";
+                //_wt.SetNodeToCopy(treeView_thema.SelectedNode);
+            }
+        }
+
+        private void FormMainTeacher_Load(object sender, EventArgs e)
+        {
+            _wt = new WorkTree(treeView_thema);
+            _wt.FillTree();
+        }
+
+        private void exitToolStripButton_Click(object sender, EventArgs e)
+        {
+            FormController.CreateFormByType(typeof(AuthenticationForm)).Show();
+            Visible = false;
         }
     }
 }

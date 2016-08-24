@@ -23,9 +23,10 @@ namespace DbRepository.Context
     
         public int TaskId { get; set; }
         public int SubthemaId { get; set; }
-        public int StatusId { get; set; }
         public string Name { get; set; }
-        public string Condition { get; set; }
+        public string Description { get; set; }
+        public bool IsReady { get; set; }
+        public byte[] Image { get; set; }
     
         public virtual SubThema SubThema { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

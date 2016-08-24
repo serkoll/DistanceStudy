@@ -1,12 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Text;
 using System.Xml;
+using System.Windows.Forms;
 
 namespace XMLFormatter
 {
-    public class XmlFormatter
+    public static class XmlFormatter
     {
+        public static string WriteAlgorithm2XmlFromCheckListBox(CheckedListBox.CheckedItemCollection methods)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach(var item in methods)
+            {
+                sb.Append(item).Append(";");
+            }
+            return sb.ToString();
+        } 
         //public string WriteObject2Xml(List<object> list)
         //{
         //    if (list == null)
@@ -48,49 +59,49 @@ namespace XMLFormatter
         //    return doc.OuterXml;
         //}
 
-        public List<object> WriteXml2Object(string outerXml)
-        {
-            List<object> list = new List<object>();
-            XmlDocument xmlDoc = new XmlDocument();
-            xmlDoc.LoadXml(outerXml);
+        //public static List<object> WriteXml2Object(string outerXml)
+        //{
+        //    List<object> list = new List<object>();
+        //    XmlDocument xmlDoc = new XmlDocument();
+        //    xmlDoc.LoadXml(outerXml);
 
-            string xpath = "//DataBase";
-            var nodes = xmlDoc.SelectNodes(xpath);
-            XmlNode node = nodes.Item(0);
-            foreach (XmlNode childrenNode in node.ChildNodes)
-            {
-                switch (childrenNode.Name)
-                {
-                    case "System.Int32":
-                        {
-                            var attr = childrenNode.Attributes;
-                            foreach(var att in attr)
-                            {
-                                list.Add(att);
-                            }
-                            break;
-                        }
-                    case "System.String":
-                        {
-                            var attr = childrenNode.Attributes;
-                            foreach (var att in attr)
-                            {
-                                list.Add(att);
-                            }
-                            break;
-                        }
-                    case "System.Char":
-                        {
-                            var attr = childrenNode.Attributes;
-                            foreach (var att in attr)
-                            {
-                                list.Add(att);
-                            }
-                            break;
-                        }
-                } 
-            }
-            return list;
-        }
+        //    string xpath = "//DataBase";
+        //    var nodes = xmlDoc.SelectNodes(xpath);
+        //    XmlNode node = nodes.Item(0);
+        //    foreach (XmlNode childrenNode in node.ChildNodes)
+        //    {
+        //        switch (childrenNode.Name)
+        //        {
+        //            case "System.Int32":
+        //                {
+        //                    var attr = childrenNode.Attributes;
+        //                    foreach(var att in attr)
+        //                    {
+        //                        list.Add(att);
+        //                    }
+        //                    break;
+        //                }
+        //            case "System.String":
+        //                {
+        //                    var attr = childrenNode.Attributes;
+        //                    foreach (var att in attr)
+        //                    {
+        //                        list.Add(att);
+        //                    }
+        //                    break;
+        //                }
+        //            case "System.Char":
+        //                {
+        //                    var attr = childrenNode.Attributes;
+        //                    foreach (var att in attr)
+        //                    {
+        //                        list.Add(att);
+        //                    }
+        //                    break;
+        //                }
+        //        } 
+        //    }
+        //    return list;
+        //}
     }
 }
