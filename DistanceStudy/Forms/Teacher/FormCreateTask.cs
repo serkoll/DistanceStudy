@@ -1,4 +1,5 @@
-﻿using DistanceStudy.Classes;
+﻿using DbRepository.Context;
+using DistanceStudy.Classes;
 using Service.HandlerUI;
 using System;
 using System.Drawing;
@@ -13,12 +14,26 @@ namespace DistanceStudy.Forms.Teacher
         private WorkTree _wt;
         // Объект для работы с задачами после создания
         private WorkTask _taskWorker;
+        // Редактируемый экземпляр
+        private readonly Task _edited = null;
         public FormCreateTask(WorkTree wt)
         {
             _wt = wt;
             InitializeComponent();
             SetProperties(textBoxName, Color.Gray, "Введите наименование задачи...");
             SetProperties(textBoxDescription, Color.Gray, "Введите текстовое описание задачи...");
+            SetProperties(textBoxFilePath, Color.Gray, "Путь к графическому описанию задачи...");
+            InitialFormParams();
+        }
+
+        public FormCreateTask(WorkTree wt, Task item)
+        {
+            _wt = wt;
+            _edited = item;
+            _taskWorker = new WorkTask(item);
+            InitializeComponent();
+            SetProperties(textBoxName, Color.Gray, item.Name);
+            SetProperties(textBoxDescription, Color.Gray, item.Description);
             SetProperties(textBoxFilePath, Color.Gray, "Путь к графическому описанию задачи...");
             InitialFormParams();
         }
