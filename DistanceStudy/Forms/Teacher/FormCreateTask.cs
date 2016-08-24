@@ -1,4 +1,5 @@
-﻿using DistanceStudy.Classes;
+﻿using DbRepository.Context;
+using DistanceStudy.Classes;
 using Service.HandlerUI;
 using System;
 using System.Drawing;
@@ -23,12 +24,24 @@ namespace DistanceStudy.Forms.Teacher
             InitialFormParams();
         }
 
+        public FormCreateTask(WorkTree wt, Task item)
+        {
+            _wt = wt;
+            _edited = item;
+            _taskWorker = new WorkTask(item);
+            InitializeComponent();
+            SetProperties(textBoxName, Color.Gray, item.Name);
+            SetProperties(textBoxDescription, Color.Gray, item.Description);
+            SetProperties(textBoxFilePath, Color.Gray, "Путь к графическому описанию задачи...");
+            InitialFormParams();
+        }
+
         private void buttonAddAlgorithm_Click(object sender, EventArgs e)
         {
             FormController.CreateFormByType(typeof(FormCreateAlgorithm), _taskWorker).ShowDialog();
         }
 
-        private void toolStripAddGraphicCondition_Click(object sender, EventArgs e)
+        private void buttonAccept_Click(object sender, EventArgs e)
         {
             //DrawG.MainForm mainForm = new MainForm();
             //mainForm.Show();
