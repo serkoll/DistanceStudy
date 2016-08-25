@@ -30,12 +30,6 @@ namespace DistanceStudy.Forms.Teacher
 
         private void buttonAccept_Click(object sender, EventArgs e)
         {
-            //DrawG.MainForm mainForm = new MainForm();
-            //mainForm.Show();
-        }
-
-        private void buttonAccept_Click(object sender, EventArgs e)
-        {
             if(_taskWorker == null)
             {
                 _wt.DoOperationWithTaskByCall(ref _taskWorker, _wt.CreateTask, textBoxName.Text, textBoxDescription.Text, (Bitmap)pictureBoxImageTask.Image);
