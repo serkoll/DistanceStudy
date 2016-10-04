@@ -30,5 +30,10 @@ namespace DistanceStudy.Forms.Teacher
         {
             Dispose();
         }
+
+        private void button_Clear_Click(object sender, EventArgs e)
+        {
+            _taskWorker?.UncheckAllItems(checkedListBoxProectionsControls);
+        }
     }
 }
