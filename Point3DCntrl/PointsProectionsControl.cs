@@ -131,13 +131,13 @@ namespace Point3DCntrl
                         if (Object_Val.GetType().Name == "Point3D")//Контроль типа объекта, извлеченного из словаря
                         {
                             Point3D = (GeometryObjects.Point3D)UserParams["Point3D"]; //Запись объекта в экземпляр класса
-                            Solve = PointsPositionControl.PointMinus(Point3D, PointsPositionControl.Coordinate_Value);//Анализ отрицательности
+                            //Solve = PointsPositionControl.PointMinus(Point3D, PointsPositionControl.Coordinate_Value);//Анализ отрицательности
                             if (!Solve)
                             {
                                 SolveParams.Add("Point3D", Point3D);//Добавление экземпляра 3D точки в словарь решений
                                 CommentsTrue.Add("PointMinus_t_1", "Заданные координаты имеют положительные значения"); //Добавление комментария положительного решения                                                           
                             }
-                            else { SolveCommet_1 += PointsPositionControl.Coordinate_Value; CommentsFalse.Add("PointMinus_f_1", SolveCommet_1 += "имеют отрицательные значения"); }//Добавление комментария отрицательного решения
+                            else { /*SolveCommet_1 += PointsPositionControl.Coordinate_Value;*/ CommentsFalse.Add("PointMinus_f_1", SolveCommet_1 += "имеют отрицательные значения"); }//Добавление комментария отрицательного решения
                             return !Solve;
                         }
                         else { CommentsFalse.Add("PointMinus_f_2", "Тип заданного объекта, не соответсвует типу 'Point3D'"); return false; }
@@ -165,13 +165,13 @@ namespace Point3DCntrl
                         Point3D.Z = Convert.ToDouble(Object_Val);
                     }
                     //else { CommentsFalse.Add("PointMinus_f_6", "Не задано значение координаты Z"); return !Solve; }
-                    Solve = PointsPositionControl.PointMinus(Point3D, GeometryObjects.PointsPositionControl.Coordinate_Value);// Анализ отрицательности
+                    //Solve = PointsPositionControl.PointMinus(Point3D, GeometryObjects.PointsPositionControl.Coordinate_Value);// Анализ отрицательности
                     if (!Solve)
                     {
                         SolveParams.Add("Point3D", Point3D);//Добавление экземпляра решения в словарь решений
                         CommentsTrue.Add("PointMinus_t_1", "Заданные координаты имеют положительные значения");//Добавление комментария положительного решения
                     }
-                    else { SolveCommet_1 += PointsPositionControl.Coordinate_Value; CommentsFalse.Add("PointMinus_f_1", SolveCommet_1 += "имеют отрицательные значения"); }// Добавление комментария отрицательного решения
+                    else { /*SolveCommet_1 += PointsPositionControl.Coordinate_Value;*/ CommentsFalse.Add("PointMinus_f_1", SolveCommet_1 += "имеют отрицательные значения"); }// Добавление комментария отрицательного решения
                     return !Solve;
                 }
                 else { return !Solve; }
