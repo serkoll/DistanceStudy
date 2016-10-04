@@ -63,10 +63,10 @@ namespace Service.Services
         /// <summary>
         /// Получение всех методов проверки из заданной сборки
         /// </summary>
-        /// <param name="assemly">Название класса в сборке Point3DCntrl</param>
-        public MethodInfo[] GetAllMethodsFromAssembly(string assemly = "PointsProectionsControl")
+        /// <param name="assembly">Название класса в сборке Point3DCntrl</param>
+        public MethodInfo[] GetAllMethodsFromAssembly(string assembly = "PointsProectionsControl")
         {
-            Type type = Type.GetType($"Point3DCntrl.{assemly}, Point3DCntrl");
+            Type type = Type.GetType($"Point3DCntrl.{assembly}, Point3DCntrl");
             var pointsPrtcCntrl = Activator.CreateInstance(type);
             Type t = pointsPrtcCntrl.GetType();
             return t.GetMethods();

@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
 using XMLFormatter;
+using static System.Windows.Forms.CheckedListBox;
 
 namespace Service.HandlerUI
 {
@@ -66,6 +67,16 @@ namespace Service.HandlerUI
             _task.Image = updTask.Image;
             _task.Description = updTask.Description;
             _taskService.UpdTask(_task);
+        }
+
+        /// <summary>
+        /// Убрать выделение всех чекбоксов
+        /// </summary>
+        /// <param name="checkedListBox">Список чекбоксов</param>
+        public void UncheckAllItems(CheckedListBox checkedListBox)
+        {
+            for (int i = 0; i < checkedListBox.Items.Count; i++)
+                checkedListBox.SetItemCheckState(i, CheckState.Unchecked);
         }
     }
 }
