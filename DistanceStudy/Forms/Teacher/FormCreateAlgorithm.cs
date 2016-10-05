@@ -35,5 +35,10 @@ namespace DistanceStudy.Forms.Teacher
         {
             _taskWorker?.UncheckAllItems(checkedListBoxProectionsControls);
         }
+
+        private void checkedListBoxProectionsControls_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _taskWorker?.ChangeInfoAboutSelectedItem(checkedListBoxProectionsControls.SelectedItem.ToString(), textBoxDesc, listBoxUserParams, listBoxInitialParams);
+        }
     }
 }

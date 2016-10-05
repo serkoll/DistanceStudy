@@ -78,5 +78,26 @@ namespace Service.HandlerUI
             for (int i = 0; i < checkedListBox.Items.Count; i++)
                 checkedListBox.SetItemCheckState(i, CheckState.Unchecked);
         }
+
+        /// <summary>
+        /// Изменения на форме описательной части выбранного алгоритма
+        /// </summary>
+        /// <param name="selectedMethodName">Выбранный метод</param>
+        /// <param name="textBoxDesc">Описание алгоритма</param>
+        /// <param name="listBoxUserParam">Листбокс с параметрами, которые требуются от пользователя</param>
+        /// <param name="listBoxTeacherParam">Листбокс с параметрами, которые требуется передать для инициализации алгоритма</param>
+        public void ChangeInfoAboutSelectedItem(string selectedMethodName, TextBox textBoxDesc, ListBox listBoxUserParam, ListBox listBoxTeacherParam)
+        {
+            textBoxDesc.Text = string.Empty;
+            listBoxTeacherParam.Items.Clear();
+            listBoxUserParam.Items.Clear();
+            string desc = string.Empty,
+                   userParams = string.Empty,
+                   initParams = string.Empty;
+            XmlFormatter.GetInfoAboutMethodFromXml(selectedMethodName, ref desc, ref userParams, ref initParams);
+            textBoxDesc.Text = desc;
+            listBoxUserParam.Items.Add(userParams);
+            listBoxTeacherParam.Items.Add(initParams);
+        }
     }
 }
