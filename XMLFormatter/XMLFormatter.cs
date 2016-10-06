@@ -19,7 +19,7 @@ namespace XMLFormatter
                 sb.Append(item).Append(";");
             }
             return sb.ToString();
-        } 
+        }
         
         public static void GetInfoAboutMethodFromXml(string methodName, ref string desc, ref string userParams, ref string initParams)
         {
@@ -36,8 +36,8 @@ namespace XMLFormatter
                 if (node.Attributes["name"].Value.Equals(methodName))
                 {
                     desc = node.SelectSingleNode("Description").InnerText;
-                    //userParams = node.SelectSingleNode("InitialParams").InnerText;
-                    //initParams = node.SelectSingleNode("User").InnerText;
+                    initParams = node.LastChild.ChildNodes[0].InnerText;
+                    userParams = node.LastChild.ChildNodes[1].InnerText;
                 }
             }
         }
