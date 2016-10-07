@@ -5,11 +5,9 @@
       <Method name="Input_X">
 		<Description>Контролирует существование значения координаты X</Description>
         <Params>
-          <InitialParams>
-          </InitialParams>
-          <User>
-            Point3D
-          </User>
+          <InitialParams></InitialParams>
+          <User>Point3D</User>
+		  <SolveParams></SolveParams>
         </Params>
       </Method>
 
@@ -21,6 +19,7 @@
           <User>
             Point3D
           </User>
+		  <SolveParams></SolveParams>
         </Params>
       </Method>
 
@@ -32,6 +31,7 @@
           <User>
             Point3D
           </User>
+		  <SolveParams></SolveParams>
         </Params>
       </Method>
 	  
@@ -43,6 +43,7 @@
           <User>
             Point3D
           </User>
+		  <SolveParams></SolveParams>
         </Params>
       </Method>
 	  
@@ -54,6 +55,7 @@
           <User>
             Point3D
           </User>
+		  <SolveParams></SolveParams>
         </Params>
       </Method>
 	  
@@ -65,6 +67,7 @@
           <User>
             Point3D
           </User>
+		  <SolveParams></SolveParams>
         </Params>
       </Method>
 	  
@@ -76,6 +79,7 @@
           <User>
             Point3D
           </User>
+		  <SolveParams></SolveParams>
         </Params>
       </Method>
 	  
@@ -87,6 +91,7 @@
           <User>
             PointOfPlan1X0Y;PointOfPlan2X0Z
           </User>
+		  <SolveParams></SolveParams>
         </Params>
       </Method>
 	  
@@ -98,6 +103,7 @@
           <User>
             PointOfPlan1X0Y;PointOfPlan3Y0Z
           </User>
+		  <SolveParams></SolveParams>
         </Params>
       </Method>
 	  
@@ -109,6 +115,7 @@
           <User>
             PointOfPlan2X0Z;PointOfPlan3Y0Z
           </User>
+		  <SolveParams></SolveParams>
         </Params>
       </Method>
 	  
@@ -120,6 +127,7 @@
           <User>
             PointOfPlan2X0Z
           </User>
+		  <SolveParams></SolveParams>
         </Params>
       </Method>
 	  
@@ -131,6 +139,7 @@
           <User>
             PointOfPlan3Y0Z
           </User>
+		  <SolveParams></SolveParams>
         </Params>
       </Method>
 	  
@@ -142,6 +151,7 @@
           <User>
             PointOfPlan1X0Y
           </User>
+		  <SolveParams></SolveParams>
         </Params>
       </Method>
 	  
@@ -153,6 +163,7 @@
           <User>
             PointOfPlan1X0Y
           </User>
+		  <SolveParams></SolveParams>
         </Params>
       </Method>
 	  
@@ -164,6 +175,7 @@
           <User>
             PointOfPlan1X0Y
           </User>
+		  <SolveParams></SolveParams>
         </Params>
       </Method>
 	  
@@ -175,6 +187,7 @@
           <User>
             PointOfPlan2X0Z
           </User>
+		  <SolveParams></SolveParams>
         </Params>
       </Method>
 	  
@@ -183,9 +196,8 @@
         <Params>
           <InitialParams>
           </InitialParams>
-          <User>
-            PointOfPlan1X0Y,PointOfPlan2X0Z
-          </User>
+          <User>PointOfPlan1X0Y,PointOfPlan2X0Z</User>
+		  <SolveParams></SolveParams>
         </Params>
       </Method>
 	  
@@ -197,6 +209,7 @@
           <User>
             PointOfPlan1X0Y,PointOfPlan3Y0Z
           </User>
+		  <SolveParams></SolveParams>
         </Params>
       </Method>
 	  
@@ -208,6 +221,7 @@
           <User>
             PointOfPlan2X0Z,PointOfPlan3Y0Z
           </User>
+		  <SolveParams></SolveParams>
         </Params>
       </Method>
 	  
@@ -219,6 +233,7 @@
           <User>
             Point3D
           </User>
+		  <SolveParams></SolveParams>
         </Params>
       </Method>
 	  
@@ -230,6 +245,7 @@
           <User>
             Point3D
           </User>
+		  <SolveParams></SolveParams>
         </Params>
       </Method>
 	  
@@ -241,6 +257,25 @@
           <User>
             Point3D
           </User>
+		  <SolveParams></SolveParams>
+        </Params>
+      </Method>
+	  
+	  <Method name="Point3D_Output">
+		<Description>Метод на выходе дает точку.</Description>
+        <Params>
+          <InitialParams></InitialParams>
+          <User>Point3D</User>
+		  <SolveParams>Point3D</SolveParams>
+        </Params>
+      </Method>
+	  
+	  <Method name="Point3D_Input">
+		<Description>Методу на вход нужна точка.</Description>
+        <Params>
+          <InitialParams>Point3D</InitialParams>
+          <User>Point3D</User>
+		  <SolveParams></SolveParams>
         </Params>
       </Method>
     </PointsProectionsControl>

@@ -21,12 +21,12 @@ namespace XMLFormatter
             return sb.ToString();
         }
         
-        public static void GetInfoAboutMethodFromXml(string methodName, ref string desc, ref string userParams, ref string initParams)
+        public static void GetInfoAboutMethodFromXml(string methodName, ref string desc, ref string userParams, ref string initParams, ref string solveParams)
         {
-            ReadXmlByTag(methodName, ref desc, ref userParams, ref initParams);
+            ReadXmlByTag(methodName, ref desc, ref userParams, ref initParams, ref solveParams);
         }
 
-        private static void ReadXmlByTag(string methodName, ref string desc, ref string userParams, ref string initParams)
+        private static void ReadXmlByTag(string methodName, ref string desc, ref string userParams, ref string initParams, ref string solveParams)
         {
             XmlDocument doc = new XmlDocument();
             doc.Load(@"D:\ProjectsVS\DistanceStudy\[MSSQL.DB]\CheckRules.xml");
@@ -38,6 +38,7 @@ namespace XMLFormatter
                     desc = node.SelectSingleNode("Description").InnerText;
                     initParams = node.LastChild.ChildNodes[0].InnerText;
                     userParams = node.LastChild.ChildNodes[1].InnerText;
+                    solveParams = node.LastChild.ChildNodes[2].InnerText;
                 }
             }
         }

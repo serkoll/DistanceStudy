@@ -40,6 +40,19 @@ namespace Service.HandlerUI
         }
 
         /// <summary>
+        /// Заполнить комбобокс названием методов из сборки проверки методами контроля
+        /// </summary>
+        /// <param name="comboBox">Комбобокс с методами</param>
+        public void FillComboBoxByCntrlAssembly(ComboBox comboBox)
+        {
+            foreach (MethodInfo m in mi)
+            {
+                if (m.DeclaringType.Name.Equals("PointsProectionsControl"))
+                    comboBox.Items.Add(m.Name);
+            }
+        }
+        
+        /// <summary>
         /// Добавить алгоритм для текущей задачи
         /// </summary>
         /// <param name="checkedListBoxProectionsControls">Список методов проверки для задачи</param>
@@ -85,19 +98,51 @@ namespace Service.HandlerUI
         /// <param name="selectedMethodName">Выбранный метод</param>
         /// <param name="textBoxDesc">Описание алгоритма</param>
         /// <param name="listBoxUserParam">Листбокс с параметрами, которые требуются от пользователя</param>
-        /// <param name="listBoxTeacherParam">Листбокс с параметрами, которые требуется передать для инициализации алгоритма</param>
-        public void ChangeInfoAboutSelectedItem(string selectedMethodName, TextBox textBoxDesc, ListBox listBoxUserParam, ListBox listBoxTeacherParam)
+        /// <param name="listBoxInitialParam">Листбокс с параметрами, которые требуется передать для инициализации алгоритма</param>
+        public void ChangeInfoAboutSelectedItem(string selectedMethodName, TextBox textBoxDesc, ListBox listBoxUserParam, ListBox listBoxInitialParam, ListBox listBoxSolveParams)
         {
             textBoxDesc.Text = string.Empty;
-            listBoxTeacherParam.Items.Clear();
+            listBoxInitialParam.Items.Clear();
             listBoxUserParam.Items.Clear();
+            listBoxSolveParams.Items.Clear();
             string desc = string.Empty,
                    userParams = string.Empty,
-                   initParams = string.Empty;
-            XmlFormatter.GetInfoAboutMethodFromXml(selectedMethodName, ref desc, ref userParams, ref initParams);
+                   initParams = string.Empty,
+                   solveParams = string.Empty;
+            XmlFormatter.GetInfoAboutMethodFromXml(selectedMethodName, ref desc, ref userParams, ref initParams, ref solveParams);
             textBoxDesc.Text = desc;
             listBoxUserParam.Items.Add(userParams);
-            listBoxTeacherParam.Items.Add(initParams);
+            listBoxInitialParam.Items.Add(initParams);
+            listBoxSolveParams.Items.Add(solveParams);
+        }
+
+        /// <summary>
+        /// Проверка на наличие у данного метода выходных параметров
+        /// </summary>
+        /// <param name="method">Название метода</param>
+        /// <param name="listBoxInitialParams">Лист его выходных параметров</param>
+        /// <returns></returns>
+        public bool CheckItemOnInitialParams(string method, ListBox listBoxInitialParams)
+        {
+            foreach (var item in listBoxInitialParams.Items)
+            {
+                if (item.ToString() != string.Empty)
+                {
+                    return true;
+                }  
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Добавление ссылки для выходных и входных параметров для методов проверки
+        /// </summary>
+        /// <param name="targetMethod">Метод в который необходимы данные</param>
+        /// <param name="sourceMethod">Метод из решения которого они будут взяты</param>
+        /// <param name="param">Тип взятого параметра</param>
+        public void AddReferenceToinitialMethod(string targetMethod, string sourceMethod, string param)
+        {
+            var o = 0;
         }
     }
 }
