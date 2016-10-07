@@ -6,6 +6,7 @@ using System.Reflection;
 using GraphicsModule;
 using GeometryObjects;
 using System.Text;
+using XMLFormatter;
 
 namespace Service.Services.Solver
 {
@@ -32,10 +33,37 @@ namespace Service.Services.Solver
 
             // Test feature -> TODO: Remove
             var graphicObjects = CollectionsGraphicsObjects.GraphicsObjectsCollection;
-            userParams.Add(nameof(Point3D), graphicObjects.FirstOrDefault());
+            string initParam = string.Empty,
+                   userParam = string.Empty,
+                   solveParam = string.Empty,
+                   desc = string.Empty;
+            object objInit = null,
+                objSolve = null;
             foreach (var c in listMethods)
             {
+                XmlFormatter.GetInfoAboutMethodFromXml(c.Name, ref desc, ref userParam, ref initParam, ref solveParam);
+                if (userParam != string.Empty)
+                {
+                    userParams.Add(userParam, graphicObjects.FirstOrDefault());
+                }
+                if (initParam != string.Empty)
+                {
+                    solveParams.TryGetValue(c.Name, out objInit);
+                    if (objInit != null)
+                    {
+                        initialParams.Add(initParam, objInit);
+                    }  
+                }
                 c.Invoke(classInstance, new object[] { initialParams, userParams, solveParams, commentsTrue, commentsFalse });
+                if (solveParam != string.Empty)
+                {
+                    var methodTarget = GetRefMethodNameForKey(task, c.Name);
+                    solveParams.TryGetValue(solveParam, out objSolve);
+                    solveParams.Remove(solveParam);
+                    solveParams.Add(methodTarget, objSolve);
+                }
+                userParams.Clear();
+                initialParams.Clear();
             }
 
             if (commentsFalse.Any())

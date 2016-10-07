@@ -93,6 +93,20 @@ namespace DbRepository.Classes.Repository
         }
 
         /// <summary>
+        /// Получение ссылающихся методов (объекта)
+        /// </summary>
+        /// <param name="task">Задача</param>
+        /// <returns></returns>
+        public Task_MethodRef GetTaskMethodRefByTaskId(Task task, string methodSource)
+        {
+            using (var db = new DistanceStudyEntities())
+            {
+                var getted = db.Task_MethodRef.Where(c => c.IdTask.Equals(task.TaskId)).Where(c => c.SourceMethod.Equals(methodSource));
+                return getted?.FirstOrDefault();
+            }
+        }
+
+        /// <summary>
         /// Вернуть по объекту задачи набор методов проверки
         /// </summary>
         /// <param name="task">Объект задачи</param>

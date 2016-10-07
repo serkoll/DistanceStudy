@@ -1,11 +1,8 @@
-﻿using DbRepository.Context;
-using Service.Services;
-using System;
-using System.Drawing;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Windows.Forms;
+using DbRepository.Context;
+using Service.Services;
 using XMLFormatter;
-using static System.Windows.Forms.CheckedListBox;
 
 namespace Service.HandlerUI
 {

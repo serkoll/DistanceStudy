@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
+﻿using System.IO;
 using System.Text;
 using System.Xml;
 using System.Windows.Forms;
-using System.Xml.Linq;
-using System.Linq;
 
 namespace XMLFormatter
 {
@@ -13,7 +9,7 @@ namespace XMLFormatter
     {
         public static string WriteAlgorithm2XmlFromCheckListBox(CheckedListBox.CheckedItemCollection methods)
         {
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
             foreach(var item in methods)
             {
                 sb.Append(item).Append(";");
@@ -28,18 +24,20 @@ namespace XMLFormatter
 
         private static void ReadXmlByTag(string methodName, ref string desc, ref string userParams, ref string initParams, ref string solveParams)
         {
-            XmlDocument doc = new XmlDocument();
-            doc.Load(@"D:\ProjectsVS\DistanceStudy\[MSSQL.DB]\CheckRules.xml");
-            XmlNodeList nodes = doc.DocumentElement.SelectNodes("/Document/Rules/PointsProectionsControl/Method");
+            var doc = new XmlDocument();
+            var path = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase))));
+            doc.Load($@"{path}\[MSSQL.DB]\CheckRules.xml");
+            var nodes = doc.DocumentElement?.SelectNodes("/Document/Rules/PointsProectionsControl/Method");
+            if (nodes == null) return;
             foreach (XmlNode node in nodes)
             {
-                if (node.Attributes["name"].Value.Equals(methodName))
-                {
-                    desc = node.SelectSingleNode("Description").InnerText;
-                    initParams = node.LastChild.ChildNodes[0].InnerText;
-                    userParams = node.LastChild.ChildNodes[1].InnerText;
-                    solveParams = node.LastChild.ChildNodes[2].InnerText;
-                }
+                if (node.Attributes == null || !node.Attributes["name"].Value.Equals(methodName)) continue;
+                var selectSingleNode = node.SelectSingleNode("Description");
+                if (selectSingleNode != null)
+                    desc = selectSingleNode.InnerText;
+                initParams = node.LastChild.ChildNodes[0].InnerText;
+                userParams = node.LastChild.ChildNodes[1].InnerText;
+                solveParams = node.LastChild.ChildNodes[2].InnerText;
             }
         }
     }

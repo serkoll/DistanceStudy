@@ -1,11 +1,7 @@
 ﻿using DbRepository.Classes.Repository;
 using DbRepository.Context;
 using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace Service.Services
 {
@@ -88,6 +84,17 @@ namespace Service.Services
                 Param = param,
                 IdTask = taskId
             });
+        }
+
+        /// <summary>
+        /// Получение по задаче и методу из которого нужно брать результат - метод, в который результат нужно поместить
+        /// </summary>
+        /// <param name="task">Задача</param>
+        /// <param name="methodSource">Метод, который дает результат</param>
+        /// <returns>Название метода, в который этот результат помещается</returns>
+        public string GetRefMethodNameForKey(Task task, string methodSource)
+        {
+            return _taskRep.GetTaskMethodRefByTaskId(task, methodSource).TargetMethod;
         }
     }
 }

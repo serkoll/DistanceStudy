@@ -1192,12 +1192,12 @@ namespace Point3DCntrl
                 if (point3D != null && point3D_Init != null) //Контроль существования извлеченного объекта
                 {
                     CommentsTrue.Add("Point3D_Input", "Точка # 1 построена");
-                    CommentsTrue.Add("Point3D_Input", "Точка # 2 построена");
+                    CommentsTrue.Add("Point3D_Input_1", "Точка # 2 построена");
                     return true;
                 }
-                else { CommentsFalse.Add("Point3D_Input", "Точка не построена"); return false; }
+                else { CommentsFalse.Add("Point3D_Input_2", "Точка не построена"); return false; }
             }
-            else { CommentsFalse.Add("Point3D_Input", "Точка не построена"); return false; }
+            else { CommentsFalse.Add("Point3D_Input_2", "Точка не построена"); return false; }
         }
 
     }
