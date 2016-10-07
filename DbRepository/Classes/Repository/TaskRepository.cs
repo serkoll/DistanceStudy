@@ -45,6 +45,7 @@ namespace DbRepository.Classes.Repository
                 if (deleted != null)
                 {
                     DeleteAlgorithmsFromTask(deleted);
+                    DeleteRefsMethodsFromTask(deleted);
                     db.Tasks.Remove(deleted);
                     db.SaveChanges();
                 }
@@ -66,6 +67,26 @@ namespace DbRepository.Classes.Repository
                     Condition = condition,
                     SubGroup = 1,
                     BlockNumber = 1
+                });
+                db.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// Добавление ссылок между методами в бд
+        /// </summary>
+        /// <param name="taskId">ид задачи, куда необходимо добавить</param>
+        /// <param name="reference">Объект Task_MethRef, в котором есть нужные параметры</param>
+        public void AddReferenceMethods(int taskId, Task_MethodRef reference)
+        {
+            using (var db = new DistanceStudyEntities())
+            {
+                db.Task_MethodRef.Add(new DbRepository.Context.Task_MethodRef
+                {
+                    IdTask = taskId,
+                    SourceMethod = reference.SourceMethod,
+                    TargetMethod = reference.TargetMethod,
+                    Param = reference.Param
                 });
                 db.SaveChanges();
             }
@@ -116,6 +137,22 @@ namespace DbRepository.Classes.Repository
                 foreach (var item in db.Task_Algotithm.Where(c => c.TaskId.Equals(task.TaskId)))
                 {
                     db.Task_Algotithm.Remove(item);
+                }
+                db.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// Удаление всех ссылок методов с параметрами
+        /// </summary>
+        /// <param name="task">Задача, из которой удаляется</param>
+        private void DeleteRefsMethodsFromTask(Task task)
+        {
+            using (var db = new DistanceStudyEntities())
+            {
+                foreach (var item in db.Task_MethodRef.Where(c => c.IdTask.Equals(task.TaskId)))
+                {
+                    db.Task_MethodRef.Remove(item);
                 }
                 db.SaveChanges();
             }

@@ -16,6 +16,8 @@ namespace Service.Services.Solver
         private Dictionary<string, object> solveParams = new Dictionary<string, object>();
         private Dictionary<string, string> commentsTrue = new Dictionary<string, string>();
         private Dictionary<string, string> commentsFalse = new Dictionary<string, string>();
+
+        private Dictionary<string, object> queueParams = new Dictionary<string, object>();
         /// <summary>
         /// Проверка текущей задачи
         /// </summary>
@@ -29,8 +31,8 @@ namespace Service.Services.Solver
             #region Debug options
 
             // Test feature -> TODO: Remove
-            var point = CollectionsGraphicsObjects.GraphicsObjectsCollection.FirstOrDefault();
-            userParams.Add(nameof(Point3D), point);
+            var graphicObjects = CollectionsGraphicsObjects.GraphicsObjectsCollection;
+            userParams.Add(nameof(Point3D), graphicObjects.FirstOrDefault());
             foreach (var c in listMethods)
             {
                 c.Invoke(classInstance, new object[] { initialParams, userParams, solveParams, commentsTrue, commentsFalse });

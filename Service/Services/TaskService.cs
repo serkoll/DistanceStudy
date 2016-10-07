@@ -71,5 +71,23 @@ namespace Service.Services
             Type t = pointsPrtcCntrl.GetType();
             return t.GetMethods();
         }
+
+        /// <summary>
+        /// Добавление ссылок на методы
+        /// </summary>
+        /// <param name="taskId">ИД задачи</param>
+        /// <param name="targetMethod">Метод для которого нужен параметр</param>
+        /// <param name="sourceMethod">Метод из которого он берется</param>
+        /// <param name="param">Параметр (тип)</param>
+        public void AddReferenceMethods(int taskId, string targetMethod, string sourceMethod, string param)
+        {
+            _taskRep.AddReferenceMethods(taskId, new Task_MethodRef
+            {
+                TargetMethod = targetMethod,
+                SourceMethod = sourceMethod,
+                Param = param,
+                IdTask = taskId
+            });
+        }
     }
 }

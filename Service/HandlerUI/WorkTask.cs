@@ -142,7 +142,7 @@ namespace Service.HandlerUI
         /// <param name="param">Тип взятого параметра</param>
         public void AddReferenceToinitialMethod(string targetMethod, string sourceMethod, string param)
         {
-            var o = 0;
+            _taskService.AddReferenceMethods(_task.TaskId, targetMethod, sourceMethod, param);
         }
     }
 }
