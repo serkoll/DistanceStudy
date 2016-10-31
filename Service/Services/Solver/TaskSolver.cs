@@ -7,6 +7,7 @@ using GraphicsModule;
 using GeometryObjects;
 using System.Text;
 using XMLFormatter;
+using Point3DCntrl;
 
 namespace Service.Services.Solver
 {
@@ -14,7 +15,7 @@ namespace Service.Services.Solver
     {
         private Dictionary<string, object> initialParams = new Dictionary<string, object>();
         private Dictionary<string, object> userParams = new Dictionary<string, object>();
-        private Dictionary<string, object> solveParams = new Dictionary<string, object>();
+        private Dictionary<MethodKey, object> solveParams = new Dictionary<MethodKey, object>();
         private Dictionary<string, string> commentsTrue = new Dictionary<string, string>();
         private Dictionary<string, string> commentsFalse = new Dictionary<string, string>();
 
@@ -39,6 +40,7 @@ namespace Service.Services.Solver
                    desc = string.Empty;
             object objInit = null,
                 objSolve = null;
+            MethodKey key = null;
             foreach (var c in listMethods)
             {
                 XmlFormatter.GetInfoAboutMethodFromXml(c.Name, ref desc, ref userParam, ref initParam, ref solveParam);
@@ -48,7 +50,7 @@ namespace Service.Services.Solver
                 }
                 if (initParam != string.Empty)
                 {
-                    solveParams.TryGetValue(c.Name, out objInit);
+                    solveParams.TryGetValue(key, out objInit);
                     if (objInit != null)
                     {
                         initialParams.Add(initParam, objInit);
@@ -57,10 +59,18 @@ namespace Service.Services.Solver
                 c.Invoke(classInstance, new object[] { initialParams, userParams, solveParams, commentsTrue, commentsFalse });
                 if (solveParam != string.Empty)
                 {
+                    key = new MethodKey
+                    {
+                        MethodName = solveParam
+                    };
                     var methodTarget = GetRefMethodNameForKey(task, c.Name);
-                    solveParams.TryGetValue(solveParam, out objSolve);
-                    solveParams.Remove(solveParam);
-                    solveParams.Add(methodTarget, objSolve);
+                    solveParams.TryGetValue(key, out objSolve);
+                    solveParams.Remove(key);
+                    key = new MethodKey
+                    {
+                        MethodName = methodTarget
+                    };
+                    solveParams.Add(key, objSolve);
                 }
                 userParams.Clear();
                 initialParams.Clear();

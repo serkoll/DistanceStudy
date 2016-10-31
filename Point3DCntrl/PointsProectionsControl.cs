@@ -1151,7 +1151,7 @@ namespace Point3DCntrl
         /// <returns>Возвращает "True", если значение координаты X существует</returns>
         /// <remarks>Комментарии правильного решения: ключи: "InputX_t_1" - "Значение координаты X задано";
         ///          Комментарии ложного решения: ключи: "InputX_f_1" - "Не задано значение координаты X".</remarks>
-        public bool Point3D_Output(Dictionary<string, object> InitialParams, Dictionary<string, object> UserParams, ref Dictionary<string, object> SolveParams, ref Dictionary<string, string> CommentsTrue, ref Dictionary<string, string> CommentsFalse)
+        public bool Point3D_Output(Dictionary<string, object> InitialParams, Dictionary<string, object> UserParams, ref Dictionary<MethodKey, object> SolveParams, ref Dictionary<string, string> CommentsTrue, ref Dictionary<string, string> CommentsFalse)
         {
             if (UserParams.Count != 0) //Контроль существования объектов в заданном словаре
             {
@@ -1161,7 +1161,10 @@ namespace Point3DCntrl
                 if (point3D != null) //Контроль существования извлеченного объекта
                 {
                     CommentsTrue.Add("Point3D_Output", "Точка построена");
-                    SolveParams.Add(nameof(Point3D), point3D);
+                    SolveParams.Add(new MethodKey
+                    {
+                        MethodName = nameof(this.Point3D_Output)
+                    }, point3D);
                     return true;
                 }
                 else { CommentsFalse.Add("Point3D_Output", "Точка не построена"); return false; }
@@ -1180,13 +1183,13 @@ namespace Point3DCntrl
         /// <returns>Возвращает "True", если значение координаты X существует</returns>
         /// <remarks>Комментарии правильного решения: ключи: "InputX_t_1" - "Значение координаты X задано";
         ///          Комментарии ложного решения: ключи: "InputX_f_1" - "Не задано значение координаты X".</remarks>
-        public bool Point3D_Input(Dictionary<string, object> InitialParams, Dictionary<string, object> UserParams, ref Dictionary<string, object> SolveParams, ref Dictionary<string, string> CommentsTrue, ref Dictionary<string, string> CommentsFalse)
+        public bool Point3D_Input(Dictionary<string, object> InitialParams, Dictionary<string, object> UserParams, ref Dictionary<MethodKey, object> SolveParams, ref Dictionary<string, string> CommentsTrue, ref Dictionary<string, string> CommentsFalse)
         {
             if (UserParams.Count != 0) //Контроль существования объектов в заданном словаре
             {
                 object Object_Val = 0, Object_Init = 0;//Переменная для извлечения объектов        
                 UserParams.TryGetValue(nameof(Point3D), out Object_Val);
-                InitialParams.TryGetValue(nameof(Point3D), out Object_Init);
+                InitialParams.TryGetValue(nameof(this.Point3D_Input), out Object_Init);
                 var point3D = (Point3D)Object_Val;
                 var point3D_Init = (Point3D)Object_Init;
                 if (point3D != null && point3D_Init != null) //Контроль существования извлеченного объекта
