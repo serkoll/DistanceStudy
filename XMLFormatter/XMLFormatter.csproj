@@ -48,7 +48,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Geometry\Geometry\Geometry.csproj">
       <Project>{9445D9ED-E7B5-451B-BF93-2265BA1E186A}</Project>
-      <Name>BaseGeometry</Name>
+      <Name>Geometry</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

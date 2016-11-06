@@ -26,7 +26,7 @@ namespace XMLFormatter
         {
             var doc = new XmlDocument();
             var path = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase))));
-            doc.Load($@"{path}\[MSSQL.DB]\CheckRules.xml");
+            doc.Load($@"{path}\Data\CheckRules.xml");
             var nodes = doc.DocumentElement?.SelectNodes("/Document/Rules/PointsProectionsControl/Method");
             if (nodes == null) return;
             foreach (XmlNode node in nodes)

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistanceStudy", "DistanceStudy\DistanceStudy.csproj", "{38077D60-C603-467B-9C53-9C5C3172458B}"
 EndProject
@@ -13,12 +13,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geometry", "Geometry\Geomet
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject", "DrawGL.Test\TestProject.csproj", "{DF7DC90C-A6E8-45A2-9E88-69FCB0C12666}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "[MSSQL.DB]", "[MSSQL.DB]", "{97C7FFB5-2EB2-486D-BA39-1108DA5F6BF9}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{97C7FFB5-2EB2-486D-BA39-1108DA5F6BF9}"
 	ProjectSection(SolutionItems) = preProject
 		[MSSQL.DB]\CheckRules.xml = [MSSQL.DB]\CheckRules.xml
-		[MSSQL.DB]\DistanceStudy.ldf = [MSSQL.DB]\DistanceStudy.ldf
-		[MSSQL.DB]\DistanceStudy.mdf = [MSSQL.DB]\DistanceStudy.mdf
-		[MSSQL.DB]\DistanceStudy_log.ldf = [MSSQL.DB]\DistanceStudy_log.ldf
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{0AD4D925-6403-4D94-B0EE-8A538C8A88E5}"
