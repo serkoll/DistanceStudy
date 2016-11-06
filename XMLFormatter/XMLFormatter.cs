@@ -17,12 +17,12 @@ namespace XMLFormatter
             return sb.ToString();
         }
         
-        public static void GetInfoAboutMethodFromXml(string methodName, ref string desc, ref string userParams, ref string initParams, ref string solveParams)
+        public static void GetInfoAboutMethodFromXml(string methodName, ref string desc, ref string[] userParams, ref string[] initParams, ref string[] solveParams)
         {
             ReadXmlByTag(methodName, ref desc, ref userParams, ref initParams, ref solveParams);
         }
 
-        private static void ReadXmlByTag(string methodName, ref string desc, ref string userParams, ref string initParams, ref string solveParams)
+        private static void ReadXmlByTag(string methodName, ref string desc, ref string[] userParams, ref string[] initParams, ref string[] solveParams)
         {
             var doc = new XmlDocument();
             var path = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase))));
@@ -35,9 +35,9 @@ namespace XMLFormatter
                 var selectSingleNode = node.SelectSingleNode("Description");
                 if (selectSingleNode != null)
                     desc = selectSingleNode.InnerText;
-                initParams = node.LastChild.ChildNodes[0].InnerText;
-                userParams = node.LastChild.ChildNodes[1].InnerText;
-                solveParams = node.LastChild.ChildNodes[2].InnerText;
+                initParams = node.LastChild.ChildNodes[0].InnerText.Split(';');
+                userParams = node.LastChild.ChildNodes[1].InnerText.Split(';');
+                solveParams = node.LastChild.ChildNodes[2].InnerText.Split(';');
             }
         }
     }

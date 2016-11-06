@@ -102,10 +102,10 @@ namespace Service.HandlerUI
             listBoxInitialParam.Items.Clear();
             listBoxUserParam.Items.Clear();
             listBoxSolveParams.Items.Clear();
-            string desc = string.Empty,
-                   userParams = string.Empty,
-                   initParams = string.Empty,
-                   solveParams = string.Empty;
+            string desc = string.Empty;
+            string[] userParams = new string[0],
+                   initParams = new string[0],
+                   solveParams = new string[0];
             XmlFormatter.GetInfoAboutMethodFromXml(selectedMethodName, ref desc, ref userParams, ref initParams, ref solveParams);
             textBoxDesc.Text = desc;
             listBoxUserParam.Items.Add(userParams);

@@ -15,7 +15,7 @@ namespace Service.Services.Solver
     {
         private Dictionary<string, object> initialParams = new Dictionary<string, object>();
         private Dictionary<string, object> userParams = new Dictionary<string, object>();
-        private Dictionary<MethodKey, object> solveParams = new Dictionary<MethodKey, object>();
+        private Dictionary<Task_MethodRef, object> solveParams = new Dictionary<Task_MethodRef, object>();
         private Dictionary<string, string> commentsTrue = new Dictionary<string, string>();
         private Dictionary<string, string> commentsFalse = new Dictionary<string, string>();
 
@@ -34,21 +34,24 @@ namespace Service.Services.Solver
 
             // Test feature -> TODO: Remove
             var graphicObjects = CollectionsGraphicsObjects.GraphicsObjectsCollection;
-            string initParam = string.Empty,
-                   userParam = string.Empty,
-                   solveParam = string.Empty,
-                   desc = string.Empty;
+            string[] initParam = new string[0],
+                userParam = new string[0],
+                solveParam = new string[0];
+            string desc = string.Empty;
             object objInit = null,
                 objSolve = null;
-            MethodKey key = null;
+            Task_MethodRef key = null;
             foreach (var c in listMethods)
             {
                 XmlFormatter.GetInfoAboutMethodFromXml(c.Name, ref desc, ref userParam, ref initParam, ref solveParam);
-                if (userParam != string.Empty)
+                if (userParam.Length > 0 && userParam[0] != string.Empty)
                 {
-                    userParams.Add(userParam, graphicObjects.FirstOrDefault());
+                    for (int i = 0; i < userParam.Length; i++)
+                    {
+                        userParams.Add(userParam[i], graphicObjects[i]);
+                    }
                 }
-                if (initParam != string.Empty)
+                if (initParam.Length > 0 && initParam[0] != string.Empty)
                 {
                     solveParams.TryGetValue(key, out objInit);
                     if (objInit != null)

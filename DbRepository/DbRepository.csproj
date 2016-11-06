@@ -81,6 +81,7 @@
     <Compile Include="Context\Task.cs">
       <DependentUpon>DSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Context\TaskMethodRef.cs" />
     <Compile Include="Context\Task_Algotithm.cs">
       <DependentUpon>DSModel.tt</DependentUpon>
     </Compile>
