@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject", "DrawGL.Test\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{97C7FFB5-2EB2-486D-BA39-1108DA5F6BF9}"
 	ProjectSection(SolutionItems) = preProject
-		[MSSQL.DB]\CheckRules.xml = [MSSQL.DB]\CheckRules.xml
+		Data\CheckRules.xml = Data\CheckRules.xml
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{0AD4D925-6403-4D94-B0EE-8A538C8A88E5}"
