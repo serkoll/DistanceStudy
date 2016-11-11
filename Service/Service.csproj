@@ -54,6 +54,10 @@
     <Compile Include="Services\ThemaService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Formatter\Formatter.csproj">
+      <Project>{c73287a9-9196-436f-a751-747a387aa2ed}</Project>
+      <Name>Formatter</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Geometry\Geometry\Geometry.csproj">
       <Project>{9445d9ed-e7b5-451b-bf93-2265ba1e186a}</Project>
       <Name>Geometry</Name>
@@ -69,10 +73,6 @@
     <ProjectReference Include="..\Point3DCntrl\Point3DCntrl.csproj">
       <Project>{EDC65B7A-A521-4A52-A533-8DB48EBDD892}</Project>
       <Name>Point3DCntrl</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Formatter\Formatter.csproj">
-      <Project>{c73287a9-9196-436f-a751-747a387aa2ed}</Project>
-      <Name>Formatter</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

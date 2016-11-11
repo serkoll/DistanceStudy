@@ -29,6 +29,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphicsModule", "GraphicsM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Point3DCntrl", "Point3DCntrl\Point3DCntrl.csproj", "{EDC65B7A-A521-4A52-A533-8DB48EBDD892}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "JsonObjects", "JsonObjects", "{1B352E44-27AD-41E0-9509-5D412A4DB7D2}"
+	ProjectSection(SolutionItems) = preProject
+		Data\JsonObjects\GraphicObjects.json = Data\JsonObjects\GraphicObjects.json
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -74,5 +79,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1B352E44-27AD-41E0-9509-5D412A4DB7D2} = {97C7FFB5-2EB2-486D-BA39-1108DA5F6BF9}
 	EndGlobalSection
 EndGlobal

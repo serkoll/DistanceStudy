@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DbRepository.Classes.Repository;
 using DbRepository.Context;
 using GeometryObjects;
+using Formatter;
 
 namespace Point3DCntrl
 {
@@ -1155,12 +1156,13 @@ namespace Point3DCntrl
         /// <returns>Возвращает "True", если значение координаты X существует</returns>
         /// <remarks>Комментарии правильного решения: ключи: "InputX_t_1" - "Значение координаты X задано";
         ///          Комментарии ложного решения: ключи: "InputX_f_1" - "Не задано значение координаты X".</remarks>
-        public bool Point3D_Output(DbRepository.Context.Task currentTask, Dictionary<Task_MethodRef, object> initialParams, Dictionary<string, object> userParams, ref Dictionary<Task_MethodRef, object> solveParams, ref Dictionary<string, string> commentsTrue, ref Dictionary<string, string> CommentsFalse)
+        public bool Point3D_Output(DbRepository.Context.Task currentTask, Dictionary<Task_MethodRef, object> initialParams, Dictionary<GraphicKey, object> userParams, ref Dictionary<Task_MethodRef, object> solveParams, ref Dictionary<string, string> commentsTrue, ref Dictionary<string, string> CommentsFalse)
         {
             if (userParams.Count != 0) //Контроль существования объектов в заданном словаре
             {
-                object objectVal;//Переменная для извлечения объектов        
-                userParams.TryGetValue(nameof(Point3D), out objectVal);
+                object objectVal;//Переменная для извлечения объектов
+                var grKey = GetGraphicKeyForType(nameof(Point3D));
+                userParams.TryGetValue(grKey, out objectVal);
                 var point3D = (Point3D)objectVal;
                 if (point3D != null) //Контроль существования извлеченного объекта
                 {
@@ -1174,22 +1176,6 @@ namespace Point3DCntrl
             else { CommentsFalse.Add("Point3D_Output", "Точка не построена"); return false; }
         }
 
-        private Task_MethodRef SetKeyToSolveParams(DbRepository.Context.Task currentTask, string currentMethodName, string typeOfResult)
-        {
-            return TaskRepository.GetTaskMethodRefByTaskId(currentTask)
-                .Where(c => c.Param.Equals(typeOfResult))
-                .Where(c => c.TargetMethod.Equals(currentMethodName))
-                .FirstOrDefault();
-        }
-
-        private Task_MethodRef GetKeyToInitParams(DbRepository.Context.Task currentTask, string sourceMethodName, string typeOfResult)
-        {
-            return TaskRepository.GetTaskMethodRefByTaskId(currentTask)
-                .Where(c => c.Param.Equals(typeOfResult))
-                .Where(c => c.SourceMethod.Equals(sourceMethodName))
-                .FirstOrDefault();
-        }
-
         /// <summary>
         /// Метод на вход требует точку.
         /// </summary>
@@ -1201,12 +1187,12 @@ namespace Point3DCntrl
         /// <returns>Возвращает "True", если значение координаты X существует</returns>
         /// <remarks>Комментарии правильного решения: ключи: "InputX_t_1" - "Значение координаты X задано";
         ///          Комментарии ложного решения: ключи: "InputX_f_1" - "Не задано значение координаты X".</remarks>
-        public bool Point3D_Input(DbRepository.Context.Task currentTask, Dictionary<Task_MethodRef, object> initialParams, Dictionary<string, object> UserParams, ref Dictionary<Task_MethodRef, object> SolveParams, ref Dictionary<string, string> CommentsTrue, ref Dictionary<string, string> CommentsFalse)
+        public bool Point3D_Input(DbRepository.Context.Task currentTask, Dictionary<Task_MethodRef, object> initialParams, Dictionary<GraphicKey, object> UserParams, ref Dictionary<Task_MethodRef, object> SolveParams, ref Dictionary<string, string> CommentsTrue, ref Dictionary<string, string> CommentsFalse)
         {
             if (UserParams.Count != 0) //Контроль существования объектов в заданном словаре
             {
                 object Object_Val = 0, Object_Init = 0;//Переменная для извлечения объектов        
-                UserParams.TryGetValue(nameof(Point3D), out Object_Val);
+                UserParams.TryGetValue(GetGraphicKeyForType(nameof(Point3D)), out Object_Val);
                 var key = GetKeyToInitParams(currentTask, nameof(Point3D_Input), nameof(Point3D));
                 initialParams.TryGetValue(key, out Object_Init);
                 var point3D = (Point3D)Object_Val;
@@ -1220,6 +1206,27 @@ namespace Point3DCntrl
                 else { CommentsFalse.Add("Point3D_Input_2", "Точка не построена"); return false; }
             }
             else { CommentsFalse.Add("Point3D_Input_2", "Точка не построена"); return false; }
+        }
+
+        private GraphicKey GetGraphicKeyForType(string typeOfObject)
+        {
+            return JsonFormatter.GetGraphicKeysFromJson().FirstOrDefault(k => k.TypeName.Equals(typeOfObject));
+        }
+
+        private Task_MethodRef SetKeyToSolveParams(DbRepository.Context.Task currentTask, string currentMethodName, string typeOfResult)
+        {
+            return TaskRepository.GetTaskMethodRefByTaskId(currentTask)
+                .Where(c => c.Param.Equals(typeOfResult))
+                .Where(c => c.SourceMethod.Equals(currentMethodName))
+                .FirstOrDefault();
+        }
+
+        private Task_MethodRef GetKeyToInitParams(DbRepository.Context.Task currentTask, string sourceMethodName, string typeOfResult)
+        {
+            return TaskRepository.GetTaskMethodRefByTaskId(currentTask)
+                .Where(c => c.Param.Equals(typeOfResult))
+                .Where(c => c.TargetMethod.Equals(sourceMethodName))
+                .FirstOrDefault();
         }
 
     }

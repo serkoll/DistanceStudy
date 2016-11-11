@@ -93,6 +93,10 @@
       <Project>{5ec8ce36-c3e5-41a4-bf16-3b4b088c6148}</Project>
       <Name>DbRepository</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Formatter\Formatter.csproj">
+      <Project>{C73287A9-9196-436F-A751-747A387AA2ED}</Project>
+      <Name>Formatter</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

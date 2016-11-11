@@ -11,7 +11,7 @@ namespace DbRepository.Context
 
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            return Id.GetHashCode();
         }
 
         public override bool Equals(object obj)

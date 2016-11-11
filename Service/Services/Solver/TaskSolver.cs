@@ -1,11 +1,9 @@
 ﻿using DbRepository.Context;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 using GraphicsModule;
-using GeometryObjects;
 using System.Text;
 using Point3DCntrl;
 using Formatter;
@@ -15,7 +13,7 @@ namespace Service.Services.Solver
     public class TaskSolver : TaskService
     {
         private Dictionary<Task_MethodRef, object> initialParams = new Dictionary<Task_MethodRef, object>();
-        private Dictionary<string, object> userParams = new Dictionary<string, object>();
+        private Dictionary<GraphicKey, object> userParams = new Dictionary<GraphicKey, object>();
         private Dictionary<Task_MethodRef, object> solveParams = new Dictionary<Task_MethodRef, object>();
         private Dictionary<string, string> commentsTrue = new Dictionary<string, string>();
         private Dictionary<string, string> commentsFalse = new Dictionary<string, string>();
@@ -33,6 +31,7 @@ namespace Service.Services.Solver
             #region Debug options
 
             var graphicObjects = CollectionsGraphicsObjects.GraphicsObjectsCollection;
+            JsonFormatter.WriteObjectsToJson(graphicObjects);
             string[] initParam, userParam, solveParam;
             string desc;
             object objInit = null, objSolve = null;
@@ -52,15 +51,30 @@ namespace Service.Services.Solver
                         }
                     }
                 }
+                solveParams.Clear();
                 if (userParam.Length > 0 && userParam[0] != string.Empty)
                 {
-                    foreach (var item in graphicObjects)
+                    for (int i = 0; i < graphicObjects.Count; i++)
                     {
-                        
+                        for (int j = 0; j < userParam.Length; j++)
+                        {
+                            if (graphicObjects[i].GetType().Name.Equals(userParam[i]))
+                            {
+                                var keys = JsonFormatter.GetGraphicKeysFromJson().Where(k => k.TypeName.Equals(userParam[j]));
+                                foreach (var key in keys)
+                                {
+                                    if (!userParams.ContainsKey(key))
+                                    {
+                                        userParams.Add(key, graphicObjects[i]);
+                                        break;
+                                    } 
+                                }
+                                graphicObjects.Remove(graphicObjects[i]);
+                            } 
+                        }
                     }
                 }
-                c.Invoke(classInstance, new object[] { initialParams, userParams, solveParams, commentsTrue, commentsFalse });
-                userParams.Clear();
+                c.Invoke(classInstance, new object[] { task, initialParams, userParams, solveParams, commentsTrue, commentsFalse });
                 initialParams.Clear();
             }
 
@@ -110,17 +124,6 @@ namespace Service.Services.Solver
                 }
             }
             return miList;
-        }
-
-        private void GetUserParamValues(string[] userParam, Collection<object> graphicObjects)
-        {
-            if (userParam?.Length > 0 && userParam[0] != string.Empty)
-            {
-                for (int i = 0; i < userParam.Length; i++)
-                {
-                    userParams.Add(userParam[i], graphicObjects[i]);
-                }
-            }
         }
 
         /// <summary>
