@@ -1,17 +1,7 @@
-﻿using System;
-using System.Configuration;
-
-namespace DbRepository.Classes.Context
+﻿namespace DbRepository.Classes.Repository
 {
     public class ErrorMessagesDb
     {
-        private readonly string _connectionString;
-
-        public ErrorMessagesDb()
-        {
-            //_connectionString = ConfigurationManager.ConnectionStrings["DistanceStudyDB"].ConnectionString;
-        }
-
         /// <summary>
         /// Метод возвращает сообщение об ошибке по коду из бд
         /// </summary>

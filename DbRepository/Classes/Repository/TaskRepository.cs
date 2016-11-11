@@ -1,8 +1,6 @@
-﻿using DbRepository.Context;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using DbRepository.Context;
 
 namespace DbRepository.Classes.Repository
 {
@@ -61,7 +59,7 @@ namespace DbRepository.Classes.Repository
         {
             using (var db = new DistanceStudyEntities())
             {
-                db.Task_Algotithm.Add(new DbRepository.Context.Task_Algotithm
+                db.Task_Algotithm.Add(new Task_Algotithm
                 {
                     TaskId = taskId,
                     Condition = condition,
@@ -81,7 +79,7 @@ namespace DbRepository.Classes.Repository
         {
             using (var db = new DistanceStudyEntities())
             {
-                db.Task_MethodRef.Add(new DbRepository.Context.Task_MethodRef
+                db.Task_MethodRef.Add(new Task_MethodRef
                 {
                     IdTask = taskId,
                     SourceMethod = reference.SourceMethod,

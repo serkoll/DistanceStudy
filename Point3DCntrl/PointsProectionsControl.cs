@@ -5,14 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using DbRepository.Classes.Repository;
 using DbRepository.Context;
-using GeometryObjects;
 using Formatter;
+using GeometryObjects;
 
 namespace Point3DCntrl
 {
+    /// <summary>
+    /// Методы проверки задач
+    /// </summary>
     public class PointsProectionsControl
     {
-        private TaskRepository TaskRepository { get; set; } = new TaskRepository();
+        private TaskRepository TaskRepository { get; } = new TaskRepository();
 
         //private Point2D Point2D_Val = new Point2D();
         //private GeometryObjects.Point3D Point3D_Val = new GeometryObjects.Point3D();
@@ -599,6 +602,7 @@ namespace Point3DCntrl
         ///                                                  "PointsOfPlan1_P2_t_2" - "3D точка, соответсвующая заданной фронтальной проекции, принадлежит горизонтальной плоскости проекций".
         ///          Комментарии ложного решения: ключи: "PointsOfPlan1_P2_f_1" - "Не задана фронтальная проекция точки";
         ///                                              "PointsOfPlan1_P2_f_2" - "3D точка, соответсвующая заданной фронтальной проекции, не принадлежит горизонтальной плоскости проекций".
+        /// </remarks>
         public bool Point2_OfPlan1X0Y(Dictionary<string, object> InitialParams, Dictionary<string, object> UserParams, ref Dictionary<string, object> SolveParams, ref Dictionary<string, string> CommentsTrue, ref Dictionary<string, string> CommentsFalse)
         {
             bool Solve = false;
@@ -683,6 +687,7 @@ namespace Point3DCntrl
         ///                                                  "PointsOfPlan2_P1_t_2" - "3D точка, соответсвующая заданной горизонтальной проекции, принадлежит фронтальной плоскости проекций".
         ///          Комментарии ложного решения: ключи: "PointsOfPlan2_P1_f_1" - "Не задана горизонтальная проекция точки";
         ///                                              "PointsOfPlan2_P1_f_2" - "3D точка, соответсвующая заданной горизонтальной проекции, не принадлежит фронтальной плоскости проекций".
+        /// </remarks>
         public bool Point1_OfPlan2X0Z(Dictionary<string, object> InitialParams, Dictionary<string, object> UserParams, ref Dictionary<string, object> SolveParams, ref Dictionary<string, string> CommentsTrue, ref Dictionary<string, string> CommentsFalse)
         {
             bool Solve = false;
@@ -1152,11 +1157,11 @@ namespace Point3DCntrl
         /// <param name="userParams">Параметры, введенные пользователем: построена ли точка.</param>
         /// <param name="solveParams">Параметры решения Point3D</param>
         /// <param name="commentsTrue">Комментарии правильного решения</param>
-        /// <param name="CommentsFalse">Комментарии неправильно решения</param>
+        /// <param name="commentsFalse">Комментарии неправильно решения</param>
         /// <returns>Возвращает "True", если значение координаты X существует</returns>
         /// <remarks>Комментарии правильного решения: ключи: "InputX_t_1" - "Значение координаты X задано";
         ///          Комментарии ложного решения: ключи: "InputX_f_1" - "Не задано значение координаты X".</remarks>
-        public bool Point3D_Output(DbRepository.Context.Task currentTask, Dictionary<Task_MethodRef, object> initialParams, Dictionary<GraphicKey, object> userParams, ref Dictionary<Task_MethodRef, object> solveParams, ref Dictionary<string, string> commentsTrue, ref Dictionary<string, string> CommentsFalse)
+        public bool Point3D_Output(DbRepository.Context.Task currentTask, Dictionary<Task_MethodRef, object> initialParams, Dictionary<GraphicKey, object> userParams, ref Dictionary<Task_MethodRef, object> solveParams, ref Dictionary<string, string> commentsTrue, ref Dictionary<string, string> commentsFalse)
         {
             if (userParams.Count != 0) //Контроль существования объектов в заданном словаре
             {
@@ -1171,41 +1176,46 @@ namespace Point3DCntrl
                     solveParams.Add(key, point3D);
                     return true;
                 }
-                else { CommentsFalse.Add("Point3D_Output", "Точка не построена"); return false; }
+                commentsFalse.Add("Point3D_Output", "Точка не построена");
+                return false;
             }
-            else { CommentsFalse.Add("Point3D_Output", "Точка не построена"); return false; }
+            commentsFalse.Add("Point3D_Output", "Точка не построена");
+            return false;
         }
 
         /// <summary>
         /// Метод на вход требует точку.
         /// </summary>
-        /// <param name="InitialParams">Точка Point3D</param>
-        /// <param name="UserParams">Точка</param>
-        /// <param name="SolveParams">Параметры решения (не добавляются)</param>
-        /// <param name="CommentsTrue">Комментарии правильного решения</param>
-        /// <param name="CommentsFalse">Комментарии неправильно решения</param>
+        /// <param name="initialParams">Пармаметры инициализации из других методов</param>
+        /// <param name="userParams">Параметры введённые студентом</param>
+        /// <param name="solveParams">Параметры решения (не добавляются)</param>
+        /// <param name="commentsTrue">Комментарии правильного решения</param>
+        /// <param name="commentsFalse">Комментарии неправильно решения</param>
+        /// <param name="currentTask"></param>
         /// <returns>Возвращает "True", если значение координаты X существует</returns>
         /// <remarks>Комментарии правильного решения: ключи: "InputX_t_1" - "Значение координаты X задано";
         ///          Комментарии ложного решения: ключи: "InputX_f_1" - "Не задано значение координаты X".</remarks>
-        public bool Point3D_Input(DbRepository.Context.Task currentTask, Dictionary<Task_MethodRef, object> initialParams, Dictionary<GraphicKey, object> UserParams, ref Dictionary<Task_MethodRef, object> SolveParams, ref Dictionary<string, string> CommentsTrue, ref Dictionary<string, string> CommentsFalse)
+        public bool Point3D_Input(DbRepository.Context.Task currentTask, Dictionary<Task_MethodRef, object> initialParams, Dictionary<GraphicKey, object> userParams, ref Dictionary<Task_MethodRef, object> solveParams, ref Dictionary<string, string> commentsTrue, ref Dictionary<string, string> commentsFalse)
         {
-            if (UserParams.Count != 0) //Контроль существования объектов в заданном словаре
+            if (userParams.Count != 0) //Контроль существования объектов в заданном словаре
             {
-                object Object_Val = 0, Object_Init = 0;//Переменная для извлечения объектов        
-                UserParams.TryGetValue(GetGraphicKeyForType(nameof(Point3D)), out Object_Val);
+                object objectVal = 0, objectInit = 0;//Переменная для извлечения объектов        
+                userParams.TryGetValue(GetGraphicKeyForType(nameof(Point3D)), out objectVal);
                 var key = GetKeyToInitParams(currentTask, nameof(Point3D_Input), nameof(Point3D));
-                initialParams.TryGetValue(key, out Object_Init);
-                var point3D = (Point3D)Object_Val;
-                var point3D_Init = (Point3D)Object_Init;
-                if (point3D != null && point3D_Init != null) //Контроль существования извлеченного объекта
+                initialParams.TryGetValue(key, out objectInit);
+                var point3D = (Point3D)objectVal;
+                var point3DInit = (Point3D)objectInit;
+                if (point3D != null && point3DInit != null) //Контроль существования извлеченного объекта
                 {
-                    CommentsTrue.Add("Point3D_Input", "Точка # 1 построена");
-                    CommentsTrue.Add("Point3D_Input_1", "Точка # 2 построена");
+                    commentsTrue.Add("Point3D_Input", "Точка # 1 построена");
+                    commentsTrue.Add("Point3D_Input_1", "Точка # 2 построена");
                     return true;
                 }
-                else { CommentsFalse.Add("Point3D_Input_2", "Точка не построена"); return false; }
+                commentsFalse.Add("Point3D_Input_2", "Точка не построена");
+                return false;
             }
-            else { CommentsFalse.Add("Point3D_Input_2", "Точка не построена"); return false; }
+            commentsFalse.Add("Point3D_Input_2", "Точка не построена");
+            return false;
         }
 
         private GraphicKey GetGraphicKeyForType(string typeOfObject)
@@ -1217,16 +1227,14 @@ namespace Point3DCntrl
         {
             return TaskRepository.GetTaskMethodRefByTaskId(currentTask)
                 .Where(c => c.Param.Equals(typeOfResult))
-                .Where(c => c.SourceMethod.Equals(currentMethodName))
-                .FirstOrDefault();
+                .FirstOrDefault(c => c.SourceMethod.Equals(currentMethodName));
         }
 
         private Task_MethodRef GetKeyToInitParams(DbRepository.Context.Task currentTask, string sourceMethodName, string typeOfResult)
         {
             return TaskRepository.GetTaskMethodRefByTaskId(currentTask)
                 .Where(c => c.Param.Equals(typeOfResult))
-                .Where(c => c.TargetMethod.Equals(sourceMethodName))
-                .FirstOrDefault();
+                .FirstOrDefault(c => c.TargetMethod.Equals(sourceMethodName));
         }
 
     }

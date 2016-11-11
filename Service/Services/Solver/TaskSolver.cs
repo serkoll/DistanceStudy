@@ -1,12 +1,12 @@
-﻿using DbRepository.Context;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using GraphicsModule;
 using System.Text;
-using Point3DCntrl;
+using DbRepository.Context;
 using Formatter;
+using GraphicsModule;
+using Point3DCntrl;
 
 namespace Service.Services.Solver
 {
@@ -25,59 +25,24 @@ namespace Service.Services.Solver
         public string StartCheckTask(Task task)
         {
             ClearAllDictionaries();
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
             var classInstance = Activator.CreateInstance(Type.GetType($"Point3DCntrl.PointsProectionsControl, Point3DCntrl"), null);
             var listMethods = GetMethodsFromDbForTask(task);
-            #region Debug options
 
             var graphicObjects = CollectionsGraphicsObjects.GraphicsObjectsCollection;
             JsonFormatter.WriteObjectsToJson(graphicObjects);
-            string[] initParam, userParam, solveParam;
-            string desc;
-            object objInit = null, objSolve = null;
             foreach (var c in listMethods)
             {
+                string desc;
+                string[] initParam;
+                string[] solveParam;
+                string[] userParam;
                 XmlFormatter.GetInfoAboutMethodFromXml(c.Name, out desc, out userParam, out initParam, out solveParam);                
-                if (initParam.Length > 0 && initParam[0] != string.Empty)
-                {
-                    // получаем список доступных ключей для текущей задачи
-                    var keys = _taskRep.GetTaskMethodRefByTaskId(task);
-                    foreach (var item in keys)
-                    {
-                        solveParams.TryGetValue(item, out objInit);
-                        if (objInit != null)
-                        {
-                            initialParams.Add(item, objInit);
-                        }
-                    }
-                }
-                solveParams.Clear();
-                if (userParam.Length > 0 && userParam[0] != string.Empty)
-                {
-                    for (int i = 0; i < graphicObjects.Count; i++)
-                    {
-                        for (int j = 0; j < userParam.Length; j++)
-                        {
-                            if (graphicObjects[i].GetType().Name.Equals(userParam[i]))
-                            {
-                                var keys = JsonFormatter.GetGraphicKeysFromJson().Where(k => k.TypeName.Equals(userParam[j]));
-                                foreach (var key in keys)
-                                {
-                                    if (!userParams.ContainsKey(key))
-                                    {
-                                        userParams.Add(key, graphicObjects[i]);
-                                        break;
-                                    } 
-                                }
-                                graphicObjects.Remove(graphicObjects[i]);
-                            } 
-                        }
-                    }
-                }
+                ResolveKeyDependencyFromSolveToInit(task, initParam);
+                ResolveKeyDependencyUserParam(userParam, graphicObjects);
                 c.Invoke(classInstance, new object[] { task, initialParams, userParams, solveParams, commentsTrue, commentsFalse });
                 initialParams.Clear();
             }
-
             if (commentsFalse.Any())
             {
                 sb.Append("Неверно: \n");
@@ -96,9 +61,70 @@ namespace Service.Services.Solver
                 }
                 sb.Append("Поздравляем! Задача решена верно!");
             }
-
-            #endregion
             return sb.ToString();
+        }
+
+        /// <summary>
+        /// Метод извлекает объекты из коллекции графических объектов
+        /// и ставит в соответствие ключ для извлечения в проверке
+        /// </summary>
+        /// <param name="userParam">Параметры введенные студентом</param>
+        /// <param name="graphicObjects">Графические объекты</param>
+        private void ResolveKeyDependencyUserParam(string[] userParam, IList<object> graphicObjects)
+        {
+            // проверка на необходимость параметров от студента
+            if (userParam.Length > 0 && userParam[0] != string.Empty)
+            {
+                for (int i = 0; i < graphicObjects.Count; i++)
+                {
+                    for (int j = 0; j < userParam.Length; j++)
+                    {
+                        // проверка на соответствие типа графического объекта типу необходимому от пользователя
+                        if (graphicObjects[i].GetType().Name.Equals(userParam[i]))
+                        {
+                            // получение ключа для данного типа объекта
+                            var keys = JsonFormatter.GetGraphicKeysFromJson().Where(k => k.TypeName.Equals(userParam[j]));
+                            foreach (var key in keys)
+                            {
+                                // если в словаре нет объекта, то добавить
+                                if (!userParams.ContainsKey(key))
+                                {
+                                    userParams.Add(key, graphicObjects[i]);
+                                    break;
+                                }
+                            }
+                            // очищаем объект, который добавили в словарь
+                            graphicObjects.Remove(graphicObjects[i]);
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Метод получает доступные ключи для задачи и перемещает значения по ключу
+        /// из списка с объектами solve в список init для другого метода
+        /// </summary>
+        /// <param name="task">Текущая задача</param>
+        /// <param name="initParam">Параметры инициализации для метода</param>
+        private void ResolveKeyDependencyFromSolveToInit(Task task, IReadOnlyList<string> initParam)
+        {
+            // проверка на существование параметров инициализации
+            if (initParam.Count > 0 && initParam[0] != string.Empty)
+            {
+                // получаем список доступных ключей для текущей задачи
+                var keys = _taskRep.GetTaskMethodRefByTaskId(task);
+                foreach (var item in keys)
+                {
+                    object objInit;
+                    // забрать из решений объект по ключу нужный текущему методу
+                    solveParams.TryGetValue(item, out objInit);
+                    if (objInit != null)
+                    {
+                        initialParams.Add(item, objInit);
+                    }
+                }
+            }
         }
 
         /// <summary>

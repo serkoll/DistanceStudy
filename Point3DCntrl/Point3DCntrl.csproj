@@ -94,7 +94,7 @@
       <Name>DbRepository</Name>
     </ProjectReference>
     <ProjectReference Include="..\Formatter\Formatter.csproj">
-      <Project>{C73287A9-9196-436F-A751-747A387AA2ED}</Project>
+      <Project>{c73287a9-9196-436f-a751-747a387aa2ed}</Project>
       <Name>Formatter</Name>
     </ProjectReference>
   </ItemGroup>
