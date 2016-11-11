@@ -4,7 +4,7 @@ using System.Text;
 using System.Xml;
 using System.Windows.Forms;
 
-namespace XMLFormatter
+namespace Formatter
 {
     public static class XmlFormatter
     {

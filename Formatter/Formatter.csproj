@@ -7,8 +7,8 @@
     <ProjectGuid>{C73287A9-9196-436F-A751-747A387AA2ED}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>XMLFormatter</RootNamespace>
-    <AssemblyName>XMLFormatter</AssemblyName>
+    <RootNamespace>Formatter</RootNamespace>
+    <AssemblyName>Formatter</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using DbRepository.Context;
 using Service.Services;
-using XMLFormatter;
+using Formatter;
 
 namespace Service.HandlerUI
 {
@@ -106,11 +106,11 @@ namespace Service.HandlerUI
             string[] userParams = new string[0],
                    initParams = new string[0],
                    solveParams = new string[0];
-            XmlFormatter.GetInfoAboutMethodFromXml(selectedMethodName, ref desc, ref userParams, ref initParams, ref solveParams);
+            XmlFormatter.GetInfoAboutMethodFromXml(selectedMethodName, out desc, out userParams, out initParams, out solveParams);
             textBoxDesc.Text = desc;
-            listBoxUserParam.Items.Add(userParams);
-            listBoxInitialParam.Items.Add(initParams);
-            listBoxSolveParams.Items.Add(solveParams);
+            AddParamsToListBox(listBoxInitialParam, initParams);
+            AddParamsToListBox(listBoxUserParam, userParams);
+            AddParamsToListBox(listBoxSolveParams, solveParams);
         }
 
         /// <summary>
@@ -140,6 +140,19 @@ namespace Service.HandlerUI
         public void AddReferenceToinitialMethod(string targetMethod, string sourceMethod, string param)
         {
             _taskService.AddReferenceMethods(_task.TaskId, targetMethod, sourceMethod, param);
+        }
+
+        /// <summary>
+        /// Добавление списка параметров в листбоксы
+        /// </summary>
+        /// <param name="listBox">Лист бокс</param>
+        /// <param name="parameters">Список текстовых параметров</param>
+        private void AddParamsToListBox(ListBox listBox, string[] parameters)
+        {
+            for (int i = 0; i < parameters.Length; i++)
+            {
+                listBox.Items.Add(parameters[i]);
+            }
         }
     }
 }

@@ -7,8 +7,8 @@ using System.Reflection;
 using GraphicsModule;
 using GeometryObjects;
 using System.Text;
-using XMLFormatter;
 using Point3DCntrl;
+using Formatter;
 
 namespace Service.Services.Solver
 {
@@ -50,6 +50,13 @@ namespace Service.Services.Solver
                         {
                             initialParams.Add(item, objInit);
                         }
+                    }
+                }
+                if (userParam.Length > 0 && userParam[0] != string.Empty)
+                {
+                    foreach (var item in graphicObjects)
+                    {
+                        
                     }
                 }
                 c.Invoke(classInstance, new object[] { initialParams, userParams, solveParams, commentsTrue, commentsFalse });

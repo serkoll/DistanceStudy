@@ -41,9 +41,6 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="XMLFormatter">
-      <HintPath>..\XMLFormatter\bin\Debug\XMLFormatter.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Authentication\AuthenticationModule.cs" />
@@ -72,6 +69,10 @@
     <ProjectReference Include="..\Point3DCntrl\Point3DCntrl.csproj">
       <Project>{EDC65B7A-A521-4A52-A533-8DB48EBDD892}</Project>
       <Name>Point3DCntrl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Formatter\Formatter.csproj">
+      <Project>{c73287a9-9196-436f-a751-747a387aa2ed}</Project>
+      <Name>Formatter</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
