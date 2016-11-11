@@ -1,6 +1,7 @@
 ﻿using DbRepository.Classes.Repository;
 using DbRepository.Context;
 using System;
+using System.Linq;
 using System.Reflection;
 
 namespace Service.Services
@@ -94,7 +95,10 @@ namespace Service.Services
         /// <returns>Название метода, в который этот результат помещается</returns>
         public string GetRefMethodNameForKey(Task task, string methodSource)
         {
-            return _taskRep.GetTaskMethodRefByTaskId(task, methodSource).TargetMethod;
+            var taskMethodRef = _taskRep.GetTaskMethodRefByTaskId(task).FirstOrDefault(c => c.SourceMethod.Equals(methodSource));
+            if (taskMethodRef != null)
+                return taskMethodRef.TargetMethod;
+            return string.Empty;
         }
     }
 }

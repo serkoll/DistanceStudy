@@ -97,12 +97,12 @@ namespace DbRepository.Classes.Repository
         /// </summary>
         /// <param name="task">Задача</param>
         /// <returns></returns>
-        public Task_MethodRef GetTaskMethodRefByTaskId(Task task, string methodSource)
+        public List<Task_MethodRef> GetTaskMethodRefByTaskId(Task task)
         {
             using (var db = new DistanceStudyEntities())
             {
-                var getted = db.Task_MethodRef.Where(c => c.IdTask.Equals(task.TaskId)).Where(c => c.SourceMethod.Equals(methodSource));
-                return getted?.FirstOrDefault();
+                var getted = db.Task_MethodRef.Where(c => c.IdTask.Equals(task.TaskId));
+                return getted.ToList();
             }
         }
 

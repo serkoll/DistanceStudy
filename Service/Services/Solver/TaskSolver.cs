@@ -1,6 +1,7 @@
 ﻿using DbRepository.Context;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 using GraphicsModule;
@@ -13,13 +14,12 @@ namespace Service.Services.Solver
 {
     public class TaskSolver : TaskService
     {
-        private Dictionary<string, object> initialParams = new Dictionary<string, object>();
+        private Dictionary<Task_MethodRef, object> initialParams = new Dictionary<Task_MethodRef, object>();
         private Dictionary<string, object> userParams = new Dictionary<string, object>();
         private Dictionary<Task_MethodRef, object> solveParams = new Dictionary<Task_MethodRef, object>();
         private Dictionary<string, string> commentsTrue = new Dictionary<string, string>();
         private Dictionary<string, string> commentsFalse = new Dictionary<string, string>();
 
-        private Dictionary<string, object> queueParams = new Dictionary<string, object>();
         /// <summary>
         /// Проверка текущей задачи
         /// </summary>
@@ -32,49 +32,27 @@ namespace Service.Services.Solver
             var listMethods = GetMethodsFromDbForTask(task);
             #region Debug options
 
-            // Test feature -> TODO: Remove
             var graphicObjects = CollectionsGraphicsObjects.GraphicsObjectsCollection;
-            string[] initParam = new string[0],
-                userParam = new string[0],
-                solveParam = new string[0];
-            string desc = string.Empty;
-            object objInit = null,
-                objSolve = null;
-            Task_MethodRef key = null;
+            string[] initParam, userParam, solveParam;
+            string desc;
+            object objInit = null, objSolve = null;
             foreach (var c in listMethods)
             {
-                XmlFormatter.GetInfoAboutMethodFromXml(c.Name, ref desc, ref userParam, ref initParam, ref solveParam);
-                if (userParam.Length > 0 && userParam[0] != string.Empty)
-                {
-                    for (int i = 0; i < userParam.Length; i++)
-                    {
-                        userParams.Add(userParam[i], graphicObjects[i]);
-                    }
-                }
+                XmlFormatter.GetInfoAboutMethodFromXml(c.Name, out desc, out userParam, out initParam, out solveParam);                
                 if (initParam.Length > 0 && initParam[0] != string.Empty)
                 {
-                    solveParams.TryGetValue(key, out objInit);
-                    if (objInit != null)
+                    // получаем список доступных ключей для текущей задачи
+                    var keys = _taskRep.GetTaskMethodRefByTaskId(task);
+                    foreach (var item in keys)
                     {
-                        initialParams.Add(initParam, objInit);
-                    }  
+                        solveParams.TryGetValue(item, out objInit);
+                        if (objInit != null)
+                        {
+                            initialParams.Add(item, objInit);
+                        }
+                    }
                 }
                 c.Invoke(classInstance, new object[] { initialParams, userParams, solveParams, commentsTrue, commentsFalse });
-                if (solveParam != string.Empty)
-                {
-                    key = new MethodKey
-                    {
-                        MethodName = solveParam
-                    };
-                    var methodTarget = GetRefMethodNameForKey(task, c.Name);
-                    solveParams.TryGetValue(key, out objSolve);
-                    solveParams.Remove(key);
-                    key = new MethodKey
-                    {
-                        MethodName = methodTarget
-                    };
-                    solveParams.Add(key, objSolve);
-                }
                 userParams.Clear();
                 initialParams.Clear();
             }
@@ -115,7 +93,7 @@ namespace Service.Services.Solver
             string[] methNames = algorithm?.Condition.Split(';');
             foreach (var item in mi)
             {
-                for (int i = 0; i < methNames.Count(); i++)
+                for (int i = 0; i < methNames?.Count(); i++)
                 {
                     if (item.Name.Equals(methNames[i]))
                     {
@@ -125,6 +103,17 @@ namespace Service.Services.Solver
                 }
             }
             return miList;
+        }
+
+        private void GetUserParamValues(string[] userParam, Collection<object> graphicObjects)
+        {
+            if (userParam?.Length > 0 && userParam[0] != string.Empty)
+            {
+                for (int i = 0; i < userParam.Length; i++)
+                {
+                    userParams.Add(userParam[i], graphicObjects[i]);
+                }
+            }
         }
 
         /// <summary>

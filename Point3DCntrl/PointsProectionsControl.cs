@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DbRepository.Classes.Repository;
+using DbRepository.Context;
 using GeometryObjects;
 
 namespace Point3DCntrl
 {
     public class PointsProectionsControl
     {
+        private TaskRepository TaskRepository { get; set; } = new TaskRepository();
 
         //private Point2D Point2D_Val = new Point2D();
         //private GeometryObjects.Point3D Point3D_Val = new GeometryObjects.Point3D();
@@ -1143,28 +1146,26 @@ namespace Point3DCntrl
         /// <summary>
         /// Метод на выходе дает точку.
         /// </summary>
-        /// <param name="InitialParams">Входные параметры (не используются)</param>
-        /// <param name="UserParams">Параметры, введенные пользователем: построена ли точка.</param>
-        /// <param name="SolveParams">Параметры решения Point3D</param>
-        /// <param name="CommentsTrue">Комментарии правильного решения</param>
+        /// <param name="currentTask">Текущая задача</param>
+        /// <param name="initialParams">Входные параметры (не используются)</param>
+        /// <param name="userParams">Параметры, введенные пользователем: построена ли точка.</param>
+        /// <param name="solveParams">Параметры решения Point3D</param>
+        /// <param name="commentsTrue">Комментарии правильного решения</param>
         /// <param name="CommentsFalse">Комментарии неправильно решения</param>
         /// <returns>Возвращает "True", если значение координаты X существует</returns>
         /// <remarks>Комментарии правильного решения: ключи: "InputX_t_1" - "Значение координаты X задано";
         ///          Комментарии ложного решения: ключи: "InputX_f_1" - "Не задано значение координаты X".</remarks>
-        public bool Point3D_Output(Dictionary<string, object> InitialParams, Dictionary<string, object> UserParams, ref Dictionary<MethodKey, object> SolveParams, ref Dictionary<string, string> CommentsTrue, ref Dictionary<string, string> CommentsFalse)
+        public bool Point3D_Output(DbRepository.Context.Task currentTask, Dictionary<Task_MethodRef, object> initialParams, Dictionary<string, object> userParams, ref Dictionary<Task_MethodRef, object> solveParams, ref Dictionary<string, string> commentsTrue, ref Dictionary<string, string> CommentsFalse)
         {
-            if (UserParams.Count != 0) //Контроль существования объектов в заданном словаре
+            if (userParams.Count != 0) //Контроль существования объектов в заданном словаре
             {
-                object Object_Val = 0;//Переменная для извлечения объектов        
-                UserParams.TryGetValue(nameof(Point3D), out Object_Val);
-                var point3D = (Point3D)Object_Val;
+                object objectVal;//Переменная для извлечения объектов        
+                userParams.TryGetValue(nameof(Point3D), out objectVal);
+                var point3D = (Point3D)objectVal;
                 if (point3D != null) //Контроль существования извлеченного объекта
                 {
-                    CommentsTrue.Add("Point3D_Output", "Точка построена");
-                    SolveParams.Add(new MethodKey
-                    {
-                        MethodName = nameof(this.Point3D_Output)
-                    }, point3D);
+                    commentsTrue.Add("Point3D_Output", "Точка построена");
+                    TaskRepository.GetTaskMethodRefByTaskId(currentTask);
                     return true;
                 }
                 else { CommentsFalse.Add("Point3D_Output", "Точка не построена"); return false; }

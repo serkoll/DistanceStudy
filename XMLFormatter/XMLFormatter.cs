@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Text;
 using System.Xml;
 using System.Windows.Forms;
@@ -17,13 +18,17 @@ namespace XMLFormatter
             return sb.ToString();
         }
         
-        public static void GetInfoAboutMethodFromXml(string methodName, ref string desc, ref string[] userParams, ref string[] initParams, ref string[] solveParams)
+        public static void GetInfoAboutMethodFromXml(string methodName, out string desc, out string[] userParams, out string[] initParams, out string[] solveParams)
         {
-            ReadXmlByTag(methodName, ref desc, ref userParams, ref initParams, ref solveParams);
+            ReadXmlByTag(methodName, out desc, out userParams, out initParams, out solveParams);
         }
 
-        private static void ReadXmlByTag(string methodName, ref string desc, ref string[] userParams, ref string[] initParams, ref string[] solveParams)
+        private static void ReadXmlByTag(string methodName, out string desc, out string[] userParams, out string[] initParams, out string[] solveParams)
         {
+            desc = string.Empty;
+            userParams = new string[0];
+            initParams = new string[0];
+            solveParams = new string[0];
             var doc = new XmlDocument();
             var path = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase))));
             doc.Load($@"{path}\Data\CheckRules.xml");
