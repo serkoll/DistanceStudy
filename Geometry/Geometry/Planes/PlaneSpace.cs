@@ -134,154 +134,154 @@ namespace GeometryObjects
 
         public PlaneSpace(Line3D Line, Point3D Point)
         {
-            //Конструктор задания плоскости точкой и прямой
-            //Переменная для работы с контролем прямой
-            Point3D BasePoint = new Point3D();
-            //Контроль взаимного положения точки и прямой + контроль корректности задания прямой
-            //Если точка принадлежит прямой
-            if (LinePositionControl.PointOfLine(Point, Line) == true)
-            {
-                Interaction.MsgBox("Не удается задать плоскость по точке и прямой." + Constants.vbCrLf + "Точка не должна принадлежать прямой.", MsgBoxStyle.Exclamation, "Конструктор задания плоскости по точке и прямой");
-                //PlaneCentre = Nothing : A = Nothing : B = Nothing : C = Nothing : D = Nothing
-                PlaneSpaceNon();
-            }
-            else
-            {
-                BasePoint = Line.GetPoint(10);
-                //Задание некоторой точки на прямой
-                PlaneSpaceCreation(Line.Point_0, BasePoint, Point);
-                //Расчет коэффициентов плоскости
-            }
+            ////Конструктор задания плоскости точкой и прямой
+            ////Переменная для работы с контролем прямой
+            //Point3D BasePoint = new Point3D();
+            ////Контроль взаимного положения точки и прямой + контроль корректности задания прямой
+            ////Если точка принадлежит прямой
+            //if (LinePositionControl.PointOfLine(Point, Line) == true)
+            //{
+            //    Interaction.MsgBox("Не удается задать плоскость по точке и прямой." + Constants.vbCrLf + "Точка не должна принадлежать прямой.", MsgBoxStyle.Exclamation, "Конструктор задания плоскости по точке и прямой");
+            //    //PlaneCentre = Nothing : A = Nothing : B = Nothing : C = Nothing : D = Nothing
+            //    PlaneSpaceNon();
+            //}
+            //else
+            //{
+            //    BasePoint = Line.GetPoint(10);
+            //    //Задание некоторой точки на прямой
+            //    PlaneSpaceCreation(Line.Point0, BasePoint, Point);
+            //    //Расчет коэффициентов плоскости
+            //}
         }
 
         public PlaneSpace(Line3D Line1, Line3D Line2)
         {
-            //Конструктор задания плоскости двумя прямыми
-            //"Overloads PlaneSpaceCreation"
-            dynamic LinesVal = default(Line3D);
-            Line3D IntersectLines = new Line3D();
+            ////Конструктор задания плоскости двумя прямыми
+            ////"Overloads PlaneSpaceCreation"
+            //dynamic LinesVal = default(Line3D);
+            //Line3D IntersectLines = new Line3D();
 
 
-            dynamic BasePoint1 = default(Point3D);
-            dynamic BasePoint2 = default(Point3D);
-            dynamic PtIntersectLines = default(Point3D);
-            Point3D PointVar = new Point3D();
-            //Контроль взаимного положения прямых + контроль корректности задания прямых
-            //Если прямые пересекаются
-            if (LinePositionControl.LineToLineIntersect(Line1, Line2) == true)
-            {
-                //'Первый способ по трем точкам, принадлежащим прямым (менее точный)
-                //'Проверка совпадения базовых точек прямых
-                //If PointVar.PointsIsPoints(Line1.Point_0, Line2.Point_0) = True Then 'Если базовые точки совпадают
-                //    'Задание новых точек на прямых
-                //    BasePoint1 = Line1.GetPoint(1)
-                //    BasePoint2 = Line2.GetPoint(-1)
-                //    MyClass.PlaneSpaceCreation(Line1.Point_0, BasePoint1, BasePoint2) 'Расчет коэффициентов плоскости
-                //Else  'Если базовые точки не совпадают
-                //    BasePoint1 = Line1.GetPoint(1) 'Задание третьей точки на первой прямой
-                //    'Контроль совпадения заданной третьей точки и базовой точки второй прямой
-                //    If PointVar.PointsIsPoints(BasePoint1, Line2.Point_0) = True Then 'Если заданная третья точка совпадает с базовой точкой 
-                //        BasePoint2 = Line2.GetPoint(1) 'Задание третьей точки на второй прямой
-                //        MyClass.PlaneSpaceCreation(Line1.Point_0, Line2.Point_0, BasePoint2) 'Расчет коэффициентов плоскости
-                //    End If
-                //    MyClass.PlaneSpaceCreation(Line1.Point_0, Line2.Point_0, BasePoint1) 'Расчет коэффициентов плоскости
-                //End If
-                //Второй способ - по двум пересекающимся прямым и точке (пересечения прямых)
-                PtIntersectLines = LinesCalculator.LinesIntersectPoint(Line1, Line2);
-                this.ParallelePlaneTo2LineFromPoint(PtIntersectLines, Line1, Line2);
-                //Если прямые параллельны
-            }
-            else if (LinePositionControl.LineToLineParallel(Line1, Line2) == true)
-            {
-                //Первый способ - по трем точкам (плохо работает)
-                //BasePoint2 = Line2.GetPoint(1) 'Задание некоторой точки на второй прямой
-                //MyClass.PlaneSpaceCreation(Line1.Point_0, Line2.Point_0, BasePoint2) 'Расчет коэффициентов плоскости
-                //Второй способ - по двум параллельным прямым и точке
-                IntersectLines.PerpendicularPointToLine(Line2, Line1.Point_0);
-                ParallelePlaneTo2LineFromPoint(Line1.Point_0, Line1, IntersectLines);
-                //Если прямые совпадают
-            }
-            else if (LinePositionControl.LinesIsLines(Line1, Line2) == true)
-            {
-                Interaction.MsgBox("Не удается задать плоскость по двум прямым." + Constants.vbCrLf + "Заданные прямые совпадают.", MsgBoxStyle.Exclamation, "Конструктор задания плоскости по двум прямым");
-                //PlaneCentre = Nothing : A = Nothing : B = Nothing : C = Nothing : D = Nothing
-                PlaneSpaceNon();
-                //Если прямые скрещиваются
-            }
-            else
-            {
-                Microsoft.VisualBasic.MsgBoxResult msgRes = new Microsoft.VisualBasic.MsgBoxResult();
-                msgRes = Interaction.MsgBox("Заданные прямые скрещиваются." + Constants.vbCrLf + "Для построения плоскости необходимо указать одну из заданных прямых." + Constants.vbCrLf + "При этом указанная прямая будет принадлежать задаваемой плоскости," + Constants.vbCrLf + "а другая прямоая будет параллельна этой плоскости." + Constants.vbCrLf + "Если первая прямая     - нажмите «Ok»" + Constants.vbCrLf + "Если вторая            - нажмите «No»" + Constants.vbCrLf + "Не задавать плоскость  - нажмите «Cancel»", MsgBoxStyle.YesNoCancel, "Конструктор задания плоскости по двум прямым");
-                //PlaneCentre = Nothing : A = Nothing : B = Nothing : C = Nothing : D = Nothing
-                if (msgRes == Microsoft.VisualBasic.MsgBoxResult.Yes)
-                {
-                    ParallelePlaneTo2LineFromPoint(Line1.Point_0, Line1, Line2);
-                }
-                else if (msgRes == MsgBoxResult.No)
-                {
-                    ParallelePlaneTo2LineFromPoint(Line2.Point_0, Line1, Line2);
-                }
-                else if (msgRes == MsgBoxResult.Cancel)
-                {
-                    PlaneSpaceNon();
-                }
-            }
-            //Коррекция коэффициентов плоскости решением системы линейных уравнений
-            //!!!!!!!!!!!!!!!!!!!!!!!!!
-            //!!!!!!!!!!!!!!!!!!!!!!!!!
+            //dynamic BasePoint1 = default(Point3D);
+            //dynamic BasePoint2 = default(Point3D);
+            //dynamic PtIntersectLines = default(Point3D);
+            //Point3D PointVar = new Point3D();
+            ////Контроль взаимного положения прямых + контроль корректности задания прямых
+            ////Если прямые пересекаются
+            //if (LinePositionControl.LineToLineIntersect(Line1, Line2) == true)
+            //{
+            //    //'Первый способ по трем точкам, принадлежащим прямым (менее точный)
+            //    //'Проверка совпадения базовых точек прямых
+            //    //If PointVar.PointsIsPoints(Line1.Point_0, Line2.Point_0) = True Then 'Если базовые точки совпадают
+            //    //    'Задание новых точек на прямых
+            //    //    BasePoint1 = Line1.GetPoint(1)
+            //    //    BasePoint2 = Line2.GetPoint(-1)
+            //    //    MyClass.PlaneSpaceCreation(Line1.Point_0, BasePoint1, BasePoint2) 'Расчет коэффициентов плоскости
+            //    //Else  'Если базовые точки не совпадают
+            //    //    BasePoint1 = Line1.GetPoint(1) 'Задание третьей точки на первой прямой
+            //    //    'Контроль совпадения заданной третьей точки и базовой точки второй прямой
+            //    //    If PointVar.PointsIsPoints(BasePoint1, Line2.Point_0) = True Then 'Если заданная третья точка совпадает с базовой точкой 
+            //    //        BasePoint2 = Line2.GetPoint(1) 'Задание третьей точки на второй прямой
+            //    //        MyClass.PlaneSpaceCreation(Line1.Point_0, Line2.Point_0, BasePoint2) 'Расчет коэффициентов плоскости
+            //    //    End If
+            //    //    MyClass.PlaneSpaceCreation(Line1.Point_0, Line2.Point_0, BasePoint1) 'Расчет коэффициентов плоскости
+            //    //End If
+            //    //Второй способ - по двум пересекающимся прямым и точке (пересечения прямых)
+            //    PtIntersectLines = LinesCalculator.LinesIntersectPoint(Line1, Line2);
+            //    this.ParallelePlaneTo2LineFromPoint(PtIntersectLines, Line1, Line2);
+            //    //Если прямые параллельны
+            //}
+            //else if (LinePositionControl.LineToLineParallel(Line1, Line2) == true)
+            //{
+            //    //Первый способ - по трем точкам (плохо работает)
+            //    //BasePoint2 = Line2.GetPoint(1) 'Задание некоторой точки на второй прямой
+            //    //MyClass.PlaneSpaceCreation(Line1.Point_0, Line2.Point_0, BasePoint2) 'Расчет коэффициентов плоскости
+            //    //Второй способ - по двум параллельным прямым и точке
+            //    //IntersectLines.PerpendicularPointToLine(Line2, Line1.Point0);
+            //    ParallelePlaneTo2LineFromPoint(Line1.Point0, Line1, IntersectLines);
+            //    //Если прямые совпадают
+            //}
+            //else if (LinePositionControl.LinesIsLines(Line1, Line2) == true)
+            //{
+            //    Interaction.MsgBox("Не удается задать плоскость по двум прямым." + Constants.vbCrLf + "Заданные прямые совпадают.", MsgBoxStyle.Exclamation, "Конструктор задания плоскости по двум прямым");
+            //    //PlaneCentre = Nothing : A = Nothing : B = Nothing : C = Nothing : D = Nothing
+            //    PlaneSpaceNon();
+            //    //Если прямые скрещиваются
+            //}
+            //else
+            //{
+            //    Microsoft.VisualBasic.MsgBoxResult msgRes = new Microsoft.VisualBasic.MsgBoxResult();
+            //    msgRes = Interaction.MsgBox("Заданные прямые скрещиваются." + Constants.vbCrLf + "Для построения плоскости необходимо указать одну из заданных прямых." + Constants.vbCrLf + "При этом указанная прямая будет принадлежать задаваемой плоскости," + Constants.vbCrLf + "а другая прямоая будет параллельна этой плоскости." + Constants.vbCrLf + "Если первая прямая     - нажмите «Ok»" + Constants.vbCrLf + "Если вторая            - нажмите «No»" + Constants.vbCrLf + "Не задавать плоскость  - нажмите «Cancel»", MsgBoxStyle.YesNoCancel, "Конструктор задания плоскости по двум прямым");
+            //    //PlaneCentre = Nothing : A = Nothing : B = Nothing : C = Nothing : D = Nothing
+            //    if (msgRes == Microsoft.VisualBasic.MsgBoxResult.Yes)
+            //    {
+            //        ParallelePlaneTo2LineFromPoint(Line1.Point0, Line1, Line2);
+            //    }
+            //    else if (msgRes == MsgBoxResult.No)
+            //    {
+            //        ParallelePlaneTo2LineFromPoint(Line2.Point0, Line1, Line2);
+            //    }
+            //    else if (msgRes == MsgBoxResult.Cancel)
+            //    {
+            //        PlaneSpaceNon();
+            //    }
+            //}
+            ////Коррекция коэффициентов плоскости решением системы линейных уравнений
+            ////!!!!!!!!!!!!!!!!!!!!!!!!!
+            ////!!!!!!!!!!!!!!!!!!!!!!!!!
         }
 
         public PlaneSpace(Line3D Line1, Line3D Line2, Line3D Line3)
         {
-            //Конструктор задания плоскости тремя прямыми
-            Line3D LinesVal = new Line3D();
-            //Переменная для работы с прямой
-            //Переменная для работы с расчетом прямой
+            ////Конструктор задания плоскости тремя прямыми
+            //Line3D LinesVal = new Line3D();
+            ////Переменная для работы с прямой
+            ////Переменная для работы с расчетом прямой
 
-            dynamic BasePoint1 = default(Point3D);
-            dynamic BasePoint2 = default(Point3D);
-            Point3D BasePoint3 = new Point3D();
-            //Контроль взаимного положения прямых + контроль корректности задания прямых
-            //Если любые из заданных прямых скрещиваются
-            if (LinePositionControl.LineToLineCrossing(Line1, Line2) == true | LinePositionControl.LineToLineCrossing(Line1, Line3) == true | LinePositionControl.LineToLineCrossing(Line2, Line3) == true)
-            {
-                Interaction.MsgBox("Не удается задать плоскость по трем прямым." + Constants.vbCrLf + "Заданные прямые скрещиваются.", MsgBoxStyle.Critical, "Конструктор задания плоскости по трем прямым");
-                //PlaneCentre = Nothing : A = Nothing : B = Nothing : C = Nothing : D = Nothing
-                PlaneSpaceNon();
-                return;
-                //Если все заданные прямые совпадают
-            }
-            else if (LinePositionControl.LinesIsLines(Line1, Line2) == true & LinePositionControl.LinesIsLines(Line2, Line2) == true)
-            {
-                Interaction.MsgBox("Не удается задать плоскость по трем прямым." + Constants.vbCrLf + "Все заданные прямые совпадают.", MsgBoxStyle.Critical, "Конструктор задания плоскости по трем прямым");
-                //PlaneCentre = Nothing : A = Nothing : B = Nothing : C = Nothing : D = Nothing
-                PlaneSpaceNon();
-                return;
-                //Если любые из заданных прямых параллельны друг другу
-            }
-            else if (LinePositionControl.LineToLineParallel(Line1, Line2) == true | LinePositionControl.LineToLineParallel(Line1, Line3) == true | LinePositionControl.LineToLineParallel(Line2, Line3) == true)
-            {
-                //Если 1-я и 2-я параллельны 3-й и совпадают друг с другом
-                if (LinePositionControl.LinesIsLines(Line1, Line2) == true)
-                {
-                    PlaneSpaceCreation(Line1, Line3);
-                    //Если 1-я и 3-я параллельны 2-й и совпадают друг с другом или если 2-я и 3-я параллельны 1-й и совпадают друг с другом
-                }
-                else
-                {
-                    PlaneSpaceCreation(Line1, Line2);
-                }
-            }
-            else
-            {
-                BasePoint1 = LinesCalculator.LinesIntersectPoint(Line1, Line2);
-                BasePoint2 = LinesCalculator.LinesIntersectPoint(Line1, Line3);
-                BasePoint3 = LinesCalculator.LinesIntersectPoint(Line2, Line3);
-                this.PlaneSpaceCreation(BasePoint1, BasePoint2, BasePoint3);
-                //Коррекция коэффициентов плоскости решением системы линейных уравнений
-                //!!!!!!!!!!!!!!!!!!!!!!!!!
-                //!!!!!!!!!!!!!!!!!!!!!!!!!
-            }
+            //dynamic BasePoint1 = default(Point3D);
+            //dynamic BasePoint2 = default(Point3D);
+            //Point3D BasePoint3 = new Point3D();
+            ////Контроль взаимного положения прямых + контроль корректности задания прямых
+            ////Если любые из заданных прямых скрещиваются
+            //if (LinePositionControl.LineToLineCrossing(Line1, Line2) == true | LinePositionControl.LineToLineCrossing(Line1, Line3) == true | LinePositionControl.LineToLineCrossing(Line2, Line3) == true)
+            //{
+            //    Interaction.MsgBox("Не удается задать плоскость по трем прямым." + Constants.vbCrLf + "Заданные прямые скрещиваются.", MsgBoxStyle.Critical, "Конструктор задания плоскости по трем прямым");
+            //    //PlaneCentre = Nothing : A = Nothing : B = Nothing : C = Nothing : D = Nothing
+            //    PlaneSpaceNon();
+            //    return;
+            //    //Если все заданные прямые совпадают
+            //}
+            //else if (LinePositionControl.LinesIsLines(Line1, Line2) == true & LinePositionControl.LinesIsLines(Line2, Line2) == true)
+            //{
+            //    Interaction.MsgBox("Не удается задать плоскость по трем прямым." + Constants.vbCrLf + "Все заданные прямые совпадают.", MsgBoxStyle.Critical, "Конструктор задания плоскости по трем прямым");
+            //    //PlaneCentre = Nothing : A = Nothing : B = Nothing : C = Nothing : D = Nothing
+            //    PlaneSpaceNon();
+            //    return;
+            //    //Если любые из заданных прямых параллельны друг другу
+            //}
+            //else if (LinePositionControl.LineToLineParallel(Line1, Line2) == true | LinePositionControl.LineToLineParallel(Line1, Line3) == true | LinePositionControl.LineToLineParallel(Line2, Line3) == true)
+            //{
+            //    //Если 1-я и 2-я параллельны 3-й и совпадают друг с другом
+            //    if (LinePositionControl.LinesIsLines(Line1, Line2) == true)
+            //    {
+            //        PlaneSpaceCreation(Line1, Line3);
+            //        //Если 1-я и 3-я параллельны 2-й и совпадают друг с другом или если 2-я и 3-я параллельны 1-й и совпадают друг с другом
+            //    }
+            //    else
+            //    {
+            //        PlaneSpaceCreation(Line1, Line2);
+            //    }
+            //}
+            //else
+            //{
+            //    //BasePoint1 = LinesCalculator.LinesIntersectPoint(Line1, Line2);
+            //    //BasePoint2 = LinesCalculator.LinesIntersectPoint(Line1, Line3);
+            //    //BasePoint3 = LinesCalculator.LinesIntersectPoint(Line2, Line3);
+            //    this.PlaneSpaceCreation(BasePoint1, BasePoint2, BasePoint3);
+            //    //Коррекция коэффициентов плоскости решением системы линейных уравнений
+            //    //!!!!!!!!!!!!!!!!!!!!!!!!!
+            //    //!!!!!!!!!!!!!!!!!!!!!!!!!
+            //}
         }
 
         protected void PlaneSpaceNon()
@@ -502,7 +502,7 @@ namespace GeometryObjects
             NormalVectorEndPt.X = Plane.A;
             NormalVectorEndPt.Y = Plane.B;
             NormalVectorEndPt.Z = Plane.C;
-            NormalVector.LineBy2Points(FrameCentre3D, NormalVectorEndPt);
+           // NormalVector.LineBy2Points(FrameCentre3D, NormalVectorEndPt);
             return NormalVector;
         }
 
@@ -815,7 +815,7 @@ namespace GeometryObjects
                 //NormalVectorEndPt.x = Plane.A : NormalVectorEndPt.y = Plane.B : NormalVectorEndPt.z = Plane.C
                 //NormalVector.LineBy2Points(FrameCentre3D, NormalVectorEndPt)
                 //PerpendicularLine.ParallelPointToLine(NormalVector, Point) 'Работает (II способ. Авторский. Проверен.)
-                PerpendicularLine.Point_0 = Point;
+                PerpendicularLine.Point0 = Point;
                 //I способ (по книге)
                 PerpendicularLine.kx = Plane.A;
                 PerpendicularLine.ky = Plane.B;
@@ -889,7 +889,7 @@ namespace GeometryObjects
             dynamic ProectionPtToPlan = default(Point3D);
             Point3D PointVar = new Point3D();
             //Точка на прямой и ее проекция на заданную плоскость
-            GeometryObjects.PointCalculator PointCalculator_Var = new GeometryObjects.PointCalculator();
+            //GeometryObjects.PointCalculator PointCalculator_Var = new GeometryObjects.PointCalculator();
             //Точка на прямой и ее проекция на заданную плоскость
 
             //Dim Perpendiculare As New BaseGeometryYVP.GeomObjects.Lines.Line3D 'Перпендикуляр из заданной прямой на плоскость 
@@ -903,7 +903,7 @@ namespace GeometryObjects
             {
                 LinePt = Line.GetPoint(10);
                 ProectionPtToPlan = this.ProectionPointOnPlane(LinePt, Plane);
-                DistLineToPlan = PointCalculator_Var.PointDistantion(LinePt, ProectionPtToPlan);
+                //DistLineToPlan = PointCalculator_Var.PointDistantion(LinePt, ProectionPtToPlan);
                 //Расчет расстояния между точкой на прямой и ее проекции на заданную плоскость
                 return DistLineToPlan;
             }
@@ -997,7 +997,7 @@ namespace GeometryObjects
             //Возвращаяет "-1", если точка на противаположной стороне (s < 0), а возвращаяет "0" в случае, если точка принадлежит плоскости (s = 0)
             double S = 0;
             Point3D PtVar = new Point3D();
-            GeometryObjects.PointsPositionControl PointControl_Val = new GeometryObjects.PointsPositionControl();
+            //GeometryObjects.PointsPositionControl PointControl_Val = new GeometryObjects.PointsPositionControl();
             //Переменная для работы с контролем точек
 
             //Контроль корректности задания плоскости
@@ -1007,34 +1007,35 @@ namespace GeometryObjects
                 //       MsgBoxStyle.Exclamation, "Функция определения положения 3D точки отностительно плоскости")
                 return null;
             }
+            return null;
             //Контроль совпадения заданной и базовой точки
-            if (PointControl_Val.PointsIsPoints(Point, Plane.PlaneCentre) == true)
-            {
-                return 0;
-            }
-            else
-            {
-                S = Plane.A * Point.X + Plane.B * Point.Y + Plane.C * Point.Z + Plane.D;
-                //If S > 0 Then
-                //    Return 1
-                //ElseIf S < 0 Then
-                //    Return -1
-                //Else
-                //    Return 0
-                //End If
-                if (S > 0.0001)
-                {
-                    return 1;
-                }
-                else if (S < -0.0001)
-                {
-                    return -1;
-                }
-                else
-                {
-                    return 0;
-                }
-            }
+            //if (PointControl_Val.PointsIsPoints(Point, Plane.PlaneCentre) == true)
+            //{
+            //    return 0;
+            //}
+            //else
+            //{
+            //    S = Plane.A * Point.X + Plane.B * Point.Y + Plane.C * Point.Z + Plane.D;
+            //    //If S > 0 Then
+            //    //    Return 1
+            //    //ElseIf S < 0 Then
+            //    //    Return -1
+            //    //Else
+            //    //    Return 0
+            //    //End If
+            //    if (S > 0.0001)
+            //    {
+            //        return 1;
+            //    }
+            //    else if (S < -0.0001)
+            //    {
+            //        return -1;
+            //    }
+            //    else
+            //    {
+            //        return 0;
+            //    }
+            //}
         }
 
         public bool LineOfPlan(Line3D Line, PlaneSpace Plane)
@@ -1053,7 +1054,7 @@ namespace GeometryObjects
             //Расчет
             s = Plane.A * Line.kx + Plane.B * Line.ky + Plane.C * Line.kz;
             //Прямая либо параллельна либо инцидентна плоскости
-            g = Plane.A * Line.Point_0.X + Plane.B * Line.Point_0.Y + Plane.C * Line.Point_0.Z + Plane.D;
+            g = Plane.A * Line.Point0.X + Plane.B * Line.Point0.Y + Plane.C * Line.Point0.Z + Plane.D;
             //Точка прямой принадлежит плоскости
             //If s=0 And g= 0 Then
             if (Math.Abs(s) <= SolveErrorPl & Math.Abs(g) <= SolveErrorPl)
@@ -1206,7 +1207,7 @@ namespace GeometryObjects
             //Контроль инцидентности заданных прямой и плоскости
             SinAngle1 = Plane.A * Line.kx + Plane.B * Line.ky + Plane.C * Line.kz;
             //Прямая либо параллельна либо инцидентна плоскости
-            g = Plane.A * Line.Point_0.X + Plane.B * Line.Point_0.Y + Plane.C * Line.Point_0.Z + Plane.D;
+            g = Plane.A * Line.Point0.X + Plane.B * Line.Point0.Y + Plane.C * Line.Point0.Z + Plane.D;
             //Точка прямой принадлежит плоскости
             //Если точка принадлежит плоскости
             if (SinAngle1 == 0 & g == 0)
@@ -1257,7 +1258,7 @@ namespace GeometryObjects
             //' ''    Exit Function
             //' ''End If
             //Расчет
-            g = Plane.A * Line.Point_0.X + Plane.B * Line.Point_0.Y + Plane.C * Line.Point_0.Z + Plane.D;
+            g = Plane.A * Line.Point0.X + Plane.B * Line.Point0.Y + Plane.C * Line.Point0.Z + Plane.D;
             s = Plane.A * Line.kx + Plane.B * Line.ky + Plane.C * Line.kz;
             if (LineToPlanParallele(Line, Plane) == true)
             {
@@ -1276,7 +1277,7 @@ namespace GeometryObjects
             else if (s != 0)
             {
                 t = -g / s;
-                return (new Point3D(Line.Point_0.X + Line.kx * t, Line.Point_0.Y + Line.ky * t, Line.Point_0.Z + Line.kz * t));
+                return (new Point3D(Line.Point0.X + Line.kx * t, Line.Point0.Y + Line.ky * t, Line.Point0.Z + Line.kz * t));
             }
             else
             {
@@ -1464,7 +1465,7 @@ namespace GeometryObjects
             //' ''    Exit Function
             //' ''End If
             s = Plane.A * Line.kx + Plane.B * Line.ky + Plane.C * Line.kz;
-            g = Plane.A * Line.Point_0.X + Plane.B * Line.Point_0.Y + Plane.C * Line.Point_0.Z + Plane.D;
+            g = Plane.A * Line.Point0.X + Plane.B * Line.Point0.Y + Plane.C * Line.Point0.Z + Plane.D;
             //If s = 0 And g <> 0 Then
             if (Math.Abs(s) <= SolveErrorPl & (g < -SolveErrorPl | g > SolveErrorPl))
             {
@@ -1539,592 +1540,589 @@ namespace GeometryObjects
         }
 
         //========================= Расчет квадранта плоскости, в котором находится точка или ее проекция ===============================
-        public int NumQuarterPlaneByPoint(Point3D Point, Line3D Axis1_X, Line3D Axis2_Y, Int16 DirectionAxis1_X, Int16 DirectionAxis2_Y)
-        {
-            //Функция возвращает номер квадранта плоскости, заданной первой и второй (X и Y) осями, в котором находится заданная точка или ее проекция.
-            //1 если точка находится в первом квадранте, 2 - во втором, 3 - в третьем, 4 - в четвертом, 0 - в точке пересечения осей
-            //12 - на оси 1 (X) сверху от оси 2 (Y), 23 - на оси 2 (Y) слева от оси 1 (X)
-            //34 - на оси 1 (X) снизу от оси 2 (Y), 14 - на оси 2 (Y) справа от оси 1 (X)
-            //Направления осей (DirectionAxisi_N): 1 - ось базиса направлена вправо, 2 - влево, 3 - вверх, 4 - вниз,
+        //public int NumQuarterPlaneByPoint(Point3D Point, Line3D Axis1_X, Line3D Axis2_Y, Int16 DirectionAxis1_X, Int16 DirectionAxis2_Y)
+        //{
+        //    //Функция возвращает номер квадранта плоскости, заданной первой и второй (X и Y) осями, в котором находится заданная точка или ее проекция.
+        //    //1 если точка находится в первом квадранте, 2 - во втором, 3 - в третьем, 4 - в четвертом, 0 - в точке пересечения осей
+        //    //12 - на оси 1 (X) сверху от оси 2 (Y), 23 - на оси 2 (Y) слева от оси 1 (X)
+        //    //34 - на оси 1 (X) снизу от оси 2 (Y), 14 - на оси 2 (Y) справа от оси 1 (X)
+        //    //Направления осей (DirectionAxisi_N): 1 - ось базиса направлена вправо, 2 - влево, 3 - вверх, 4 - вниз,
 
-            Line3D LineVar = new Line3D();
-            //Переменная для работы с контролем прямой
+        //    Line3D LineVar = new Line3D();
+        //    //Переменная для работы с контролем прямой
 
-            //=======================================================================
-            //Контроль корректности задания осей
-            //Контроль пересечения осей
-            if (LinePositionControl.LineToLineIntersect(Axis1_X, Axis2_Y) == false)
-            {
-                Interaction.MsgBox("Заданные оси плоскости не пересекаются", MsgBoxStyle.Critical, "Расчет номера квадранта плоскости, заданной двумя осями, в котором находится заданная точка или ее проекция");
+        //    //=======================================================================
+        //    //Контроль корректности задания осей
+        //    //Контроль пересечения осей
+        //    //if (LinePositionControl.LineToLineIntersect(Axis1_X, Axis2_Y) == false)
+        //    {
+        //        Interaction.MsgBox("Заданные оси плоскости не пересекаются", MsgBoxStyle.Critical, "Расчет номера квадранта плоскости, заданной двумя осями, в котором находится заданная точка или ее проекция");
 
-                //===========!!!!!!!!!!!!!!Обработать (ВЕРНУТЬ) ошибку !!!!!!!!!!!!!==================
+        //        //===========!!!!!!!!!!!!!!Обработать (ВЕРНУТЬ) ошибку !!!!!!!!!!!!!==================
 
-                return -100;
-            }
-            //Контроль перпендикулярности осей
-            if (LinePositionControl.LineToLinePerpendiculare(Axis1_X, Axis2_Y) == false)
-            {
-                Interaction.MsgBox("Заданные оси плоскости не перпендикулярны друг другу", MsgBoxStyle.Critical, "Расчет номера квадранта плоскости, заданной двумя осями, в котором находится заданная точка или ее проекция");
+        //        return -100;
+        //    }
+        //    //Контроль перпендикулярности осей
+        //    //if (LinePositionControl.LineToLinePerpendiculare(Axis1_X, Axis2_Y) == false)
+        //    {
+        //        Interaction.MsgBox("Заданные оси плоскости не перпендикулярны друг другу", MsgBoxStyle.Critical, "Расчет номера квадранта плоскости, заданной двумя осями, в котором находится заданная точка или ее проекция");
 
-                //===========!!!!!!!!!!!!!!Обработать (ВЕРНУТЬ) ошибку !!!!!!!!!!!!!==================
+        //        //===========!!!!!!!!!!!!!!Обработать (ВЕРНУТЬ) ошибку !!!!!!!!!!!!!==================
 
-                return -100;
-            }
+        //        return -100;
+        //    }
 
-            //Контроль корректности задания направления осей
-            if (DirectionAxis1_X == DirectionAxis2_Y | DirectionAxis1_X == 1 & DirectionAxis2_Y == 2 | DirectionAxis1_X == 2 & DirectionAxis2_Y == 1 | DirectionAxis1_X == 3 & DirectionAxis2_Y == 4 | DirectionAxis1_X == 4 & DirectionAxis2_Y == 3)
-            {
-                Interaction.MsgBox("Направления заданных осей плоскости совпадают или не задают плоскость", MsgBoxStyle.Critical, "Расчет номера квадранта плоскости, заданной двумя осями, в котором находится заданная точка или ее проекция");
+        //    //Контроль корректности задания направления осей
+        //    if (DirectionAxis1_X == DirectionAxis2_Y | DirectionAxis1_X == 1 & DirectionAxis2_Y == 2 | DirectionAxis1_X == 2 & DirectionAxis2_Y == 1 | DirectionAxis1_X == 3 & DirectionAxis2_Y == 4 | DirectionAxis1_X == 4 & DirectionAxis2_Y == 3)
+        //    {
+        //        Interaction.MsgBox("Направления заданных осей плоскости совпадают или не задают плоскость", MsgBoxStyle.Critical, "Расчет номера квадранта плоскости, заданной двумя осями, в котором находится заданная точка или ее проекция");
 
-                //===========!!!!!!!!!!!!!!Обработать (ВЕРНУТЬ) ошибку !!!!!!!!!!!!!==================
+        //        //===========!!!!!!!!!!!!!!Обработать (ВЕРНУТЬ) ошибку !!!!!!!!!!!!!==================
 
-                return -100;
-            }
-            //=======================================================================
-            //Контроль принадлежности заданной точки первой оси
-            dynamic LinePtToAxis1 = default(Line3D);
-            Line3D LineVarX = new Line3D();
-            Point3D ProePointToAxis1 = new Point3D();
-            if (LinePositionControl.PointOfLine(Point, Axis1_X) == false)
-            {
-                //Построение проекции заданной точки на первую (X) ось
-                LinePtToAxis1.PerpendicularPointToLine(Axis1_X, Point);
-                //перпендикуляр из заданной точки на первую (X) ось
-                ProePointToAxis1 = LinesCalculator.LinesIntersectPoint(Axis1_X, LinePtToAxis1);
-                //Проекция заданной точки на первую (X) ось
-            }
-            else
-            {
-                ProePointToAxis1 = Point;
-            }
-            //Контроль принадлежности заданной точки второй оси
-            dynamic LinePtToAxis2 = default(Line3D);
-            Line3D LineVarY = new Line3D();
-            Point3D ProePointToAxis2 = new Point3D();
-            if (LinePositionControl.PointOfLine(Point, Axis2_Y) == false)
-            {
-                //Построение проекции заданной точки на вторую (Y) ось
-                LinePtToAxis2.PerpendicularPointToLine(Axis2_Y, Point);
-                //Перпендикуляр из заданной точки на вторую (Y) ось
-                ProePointToAxis2 = LinesCalculator.LinesIntersectPoint(Axis2_Y, LinePtToAxis2);
-                //Проекция заданной точки на вторую (Y) ось
-            }
-            else
-            {
-                ProePointToAxis2 = Point;
-            }
-            //=======================================================================
-            //Расчет положения найденных проекций заданной точки относительно точки пересечения осей (по параметрам t1 и t2 для обоих осей) 
-            //Перенос базовых точек осей в точку пересечения осей
-            dynamic NewAxis1 = default(Line3D);
-            dynamic NewAxis2 = default(Line3D);
-            Line3D LineVarNew = new Line3D();
+        //        return -100;
+        //    }
+        //    //=======================================================================
+        //    //Контроль принадлежности заданной точки первой оси
+        //    dynamic LinePtToAxis1 = default(Line3D);
+        //    Line3D LineVarX = new Line3D();
+        //    Point3D ProePointToAxis1 = new Point3D();
+        //   // if (LinePositionControl.PointOfLine(Point, Axis1_X) == false)
+        //        //Построение проекции заданной точки на первую (X) ось
+        //        //LinePtToAxis1.PerpendicularPointToLine(Axis1_X, Point);
+        //        //перпендикуляр из заданной точки на первую (X) ось
+        //     //   ProePointToAxis1 = LinesCalculator.LinesIntersectPoint(Axis1_X, LinePtToAxis1);
+        //        //Проекция заданной точки на первую (X) ось
+        //    else
+        //    {
+        //        ProePointToAxis1 = Point;
+        //    }
+        //    //Контроль принадлежности заданной точки второй оси
+        //    dynamic LinePtToAxis2 = default(Line3D);
+        //    Line3D LineVarY = new Line3D();
+        //    Point3D ProePointToAxis2 = new Point3D();
 
-            NewAxis1.ParallelPointToLine(Axis1_X, LinesCalculator.LinesIntersectPoint(Axis1_X, Axis2_Y));
-            NewAxis2.ParallelPointToLine(Axis2_Y, LinesCalculator.LinesIntersectPoint(Axis1_X, Axis2_Y));
-            //Расчет параметров t1 и t2 для обоих осей по положению проекций заданной точки на каждую ось
-            double t1 = 0;
-            double t2 = 0;
-            t1 = LineVarNew.GetLine_t(ProePointToAxis1, NewAxis1);
-            t2 = LineVarNew.GetLine_t(ProePointToAxis2, NewAxis2);
-            //Контроль задания направляения осей
-            //X вправо, Y вверх
-            if (DirectionAxis1_X == 1 & DirectionAxis2_Y == 3)
-            {
-                goto CalcCase1;
-                //X вправо, Y вниз
-            }
-            else if (DirectionAxis1_X == 1 & DirectionAxis2_Y == 4)
-            {
-                goto CalcCase2;
-                //X влево, Y вверх
-            }
-            else if (DirectionAxis1_X == 2 & DirectionAxis2_Y == 3)
-            {
-                goto CalcCase3;
-                //X влево, Y вниз
-            }
-            else if (DirectionAxis1_X == 2 & DirectionAxis2_Y == 4)
-            {
-                goto CalcCase4;
-                //X вверх, Y вправо
-            }
-            else if (DirectionAxis1_X == 3 & DirectionAxis2_Y == 1)
-            {
-                goto CalcCase5;
-                //X вверх, Y влево
-            }
-            else if (DirectionAxis1_X == 3 & DirectionAxis2_Y == 2)
-            {
-                goto CalcCase6;
-                //X вниз, Y вправо
-            }
-            else if (DirectionAxis1_X == 4 & DirectionAxis2_Y == 1)
-            {
-                goto CalcCase7;
-                //X вниз, Y влево
-            }
-            else if (DirectionAxis1_X == 4 & DirectionAxis2_Y == 2)
-            {
-                goto CalcCase8;
-            }
-            else
-            {
-                Interaction.MsgBox("Ошибка расчета квадранта плоскости, в котором находится проекция заданной точки." + Constants.vbCrLf + "Не корректно заданы направления осей плоскости.", MsgBoxStyle.Critical, "Расчет номера квадранта плоскости, заданной двумя осями, в котором находится заданная точка или ее проекция");
+        //   // if (LinePositionControl.PointOfLine(Point, Axis2_Y) == false)
+        //        //Построение проекции заданной точки на вторую (Y) ось
+        //        //LinePtToAxis2.PerpendicularPointToLine(Axis2_Y, Point);
+        //        //Перпендикуляр из заданной точки на вторую (Y) ось
+        //        //ProePointToAxis2 = LinesCalculator.LinesIntersectPoint(Axis2_Y, LinePtToAxis2);
+        //        //Проекция заданной точки на вторую (Y) ось
+        //    else
+        //    {
+        //        ProePointToAxis2 = Point;
+        //    }
+        //    //=======================================================================
+        //    //Расчет положения найденных проекций заданной точки относительно точки пересечения осей (по параметрам t1 и t2 для обоих осей) 
+        //    //Перенос базовых точек осей в точку пересечения осей
+        //    dynamic NewAxis1 = default(Line3D);
+        //    dynamic NewAxis2 = default(Line3D);
+        //    Line3D LineVarNew = new Line3D();
 
-                //!!!!!!!!!!!!!!!!! ВЕРНУТЬ ОШИБКУ !!!!!!!!!!!!!!!!!!!!
-                return -100;
-                //!!!!!!!!!!!!!!!!! ВЕРНУТЬ ОШИБКУ !!!!!!!!!!!!!!!!!!!!
-            }
-        CalcCase1:
-            //Расчет квадранта
-            if (t1 > 0 & t2 > 0)
-            {
-                return 1;
-                //Первый квадрант
-            }
-            else if (t1 < 0 & t2 > 0)
-            {
-                return 2;
-                //Второй квадрант
-            }
-            else if (t1 < 0 & t2 < 0)
-            {
-                return 3;
-                //Третий квадрант
-            }
-            else if (t1 > 0 & t2 < 0)
-            {
-                return 4;
-                //Четвертый квадрант
-            }
-            else if (t1 == 0 & t2 == 0)
-            {
-                return 0;
-                //Точка пересечения осей
-            }
-            else if (t1 == 0 & t2 > 0)
-            {
-                return 12;
-                //Ось 2 (Y) сверху от оси 1 (X)
-            }
-            else if (t1 == 0 & t2 < 0)
-            {
-                return 34;
-                //Ось 2 (Y) снизу от оси 1 (X)
-            }
-            else if (t1 > 0 & t2 == 0)
-            {
-                return 14;
-                //Ось 1 (X) справа от оси 2 (Y)
-            }
-            else if (t1 < 0 & t2 == 0)
-            {
-                return 23;
-                //Ось 1 (X) слева от оси 2 (Y)
-            }
-            else
-            {
-                Interaction.MsgBox("Ошибка расчета квадранта плоскости, в котором находится проекция заданной точки." + Constants.vbCrLf + "Не удается рассчитать числовые множители (t) для осей, задающих плоскость базиса.", MsgBoxStyle.Critical, "Расчет номера квадранта плоскости, заданной двумя осями, в котором находится заданная точка или ее проекция");
+        //    //NewAxis1.ParallelPointToLine(Axis1_X, LinesCalculator.LinesIntersectPoint(Axis1_X, Axis2_Y));
+        //    //NewAxis2.ParallelPointToLine(Axis2_Y, LinesCalculator.LinesIntersectPoint(Axis1_X, Axis2_Y));
+        //    //Расчет параметров t1 и t2 для обоих осей по положению проекций заданной точки на каждую ось
+        //    double t1 = 0;
+        //    double t2 = 0;
+        //    //t1 = LineVarNew.GetLine(ProePointToAxis1, NewAxis1);
+        //   // t2 = LineVarNew.GetLine(ProePointToAxis2, NewAxis2);
+        //    //Контроль задания направляения осей
+        //    //X вправо, Y вверх
+        //    if (DirectionAxis1_X == 1 & DirectionAxis2_Y == 3)
+        //    {
+        //        goto CalcCase1;
+        //        //X вправо, Y вниз
+        //    }
+        //    else if (DirectionAxis1_X == 1 & DirectionAxis2_Y == 4)
+        //    {
+        //        goto CalcCase2;
+        //        //X влево, Y вверх
+        //    }
+        //    else if (DirectionAxis1_X == 2 & DirectionAxis2_Y == 3)
+        //    {
+        //        goto CalcCase3;
+        //        //X влево, Y вниз
+        //    }
+        //    else if (DirectionAxis1_X == 2 & DirectionAxis2_Y == 4)
+        //    {
+        //        goto CalcCase4;
+        //        //X вверх, Y вправо
+        //    }
+        //    else if (DirectionAxis1_X == 3 & DirectionAxis2_Y == 1)
+        //    {
+        //        goto CalcCase5;
+        //        //X вверх, Y влево
+        //    }
+        //    else if (DirectionAxis1_X == 3 & DirectionAxis2_Y == 2)
+        //    {
+        //        goto CalcCase6;
+        //        //X вниз, Y вправо
+        //    }
+        //    else if (DirectionAxis1_X == 4 & DirectionAxis2_Y == 1)
+        //    {
+        //        goto CalcCase7;
+        //        //X вниз, Y влево
+        //    }
+        //    else if (DirectionAxis1_X == 4 & DirectionAxis2_Y == 2)
+        //    {
+        //        goto CalcCase8;
+        //    }
+        //    else
+        //    {
+        //        Interaction.MsgBox("Ошибка расчета квадранта плоскости, в котором находится проекция заданной точки." + Constants.vbCrLf + "Не корректно заданы направления осей плоскости.", MsgBoxStyle.Critical, "Расчет номера квадранта плоскости, заданной двумя осями, в котором находится заданная точка или ее проекция");
 
-                //!!!!!!!!!!!!!!!!! ВЕРНУТЬ ОШИБКУ !!!!!!!!!!!!!!!!!!!!
-                return -100;
-                //!!!!!!!!!!!!!!!!! ВЕРНУТЬ ОШИБКУ !!!!!!!!!!!!!!!!!!!!
+        //        //!!!!!!!!!!!!!!!!! ВЕРНУТЬ ОШИБКУ !!!!!!!!!!!!!!!!!!!!
+        //        return -100;
+        //        //!!!!!!!!!!!!!!!!! ВЕРНУТЬ ОШИБКУ !!!!!!!!!!!!!!!!!!!!
+        //    }
+        //CalcCase1:
+        //    //Расчет квадранта
+        //    if (t1 > 0 & t2 > 0)
+        //    {
+        //        return 1;
+        //        //Первый квадрант
+        //    }
+        //    else if (t1 < 0 & t2 > 0)
+        //    {
+        //        return 2;
+        //        //Второй квадрант
+        //    }
+        //    else if (t1 < 0 & t2 < 0)
+        //    {
+        //        return 3;
+        //        //Третий квадрант
+        //    }
+        //    else if (t1 > 0 & t2 < 0)
+        //    {
+        //        return 4;
+        //        //Четвертый квадрант
+        //    }
+        //    else if (t1 == 0 & t2 == 0)
+        //    {
+        //        return 0;
+        //        //Точка пересечения осей
+        //    }
+        //    else if (t1 == 0 & t2 > 0)
+        //    {
+        //        return 12;
+        //        //Ось 2 (Y) сверху от оси 1 (X)
+        //    }
+        //    else if (t1 == 0 & t2 < 0)
+        //    {
+        //        return 34;
+        //        //Ось 2 (Y) снизу от оси 1 (X)
+        //    }
+        //    else if (t1 > 0 & t2 == 0)
+        //    {
+        //        return 14;
+        //        //Ось 1 (X) справа от оси 2 (Y)
+        //    }
+        //    else if (t1 < 0 & t2 == 0)
+        //    {
+        //        return 23;
+        //        //Ось 1 (X) слева от оси 2 (Y)
+        //    }
+        //    else
+        //    {
+        //        Interaction.MsgBox("Ошибка расчета квадранта плоскости, в котором находится проекция заданной точки." + Constants.vbCrLf + "Не удается рассчитать числовые множители (t) для осей, задающих плоскость базиса.", MsgBoxStyle.Critical, "Расчет номера квадранта плоскости, заданной двумя осями, в котором находится заданная точка или ее проекция");
 
-            }
-        CalcCase2:
-            //Расчет квадранта
-            if (t1 > 0 & t2 > 0)
-            {
-                return 4;
-                //Четвертый квадрант
-            }
-            else if (t1 < 0 & t2 > 0)
-            {
-                return 3;
-                //Третий квадрант
-            }
-            else if (t1 < 0 & t2 < 0)
-            {
-                return 2;
-                //Второй квадрант
-            }
-            else if (t1 > 0 & t2 < 0)
-            {
-                return 1;
-                //Первый квадрант
-            }
-            else if (t1 == 0 & t2 == 0)
-            {
-                return 0;
-                //Точка пересечения осей
-            }
-            else if (t1 == 0 & t2 > 0)
-            {
-                return 34;
-                //Ось 2 (Y) снизу от оси 1 (X)
-            }
-            else if (t1 == 0 & t2 < 0)
-            {
-                return 12;
-                //Ось 2 (Y) сверху от оси 1 (X)
-            }
-            else if (t1 > 0 & t2 == 0)
-            {
-                return 14;
-                //Ось 1 (X) справа от оси 2 (Y)
-            }
-            else if (t1 < 0 & t2 == 0)
-            {
-                return 23;
-                //Ось 1 (X) слева от оси 2 (Y)
-            }
-            else
-            {
-                Interaction.MsgBox("Ошибка расчета квадранта плоскости, в котором находится проекция заданной точки." + Constants.vbCrLf + "Не удается рассчитать числовые множители (t) для осей, задающих плоскость базиса.", MsgBoxStyle.Critical, "Расчет номера квадранта плоскости, заданной двумя осями, в котором находится заданная точка или ее проекция");
+        //        //!!!!!!!!!!!!!!!!! ВЕРНУТЬ ОШИБКУ !!!!!!!!!!!!!!!!!!!!
+        //        return -100;
+        //        //!!!!!!!!!!!!!!!!! ВЕРНУТЬ ОШИБКУ !!!!!!!!!!!!!!!!!!!!
 
-                //!!!!!!!!!!!!!!!!! ВЕРНУТЬ ОШИБКУ !!!!!!!!!!!!!!!!!!!!
-                return -100;
-                //!!!!!!!!!!!!!!!!! ВЕРНУТЬ ОШИБКУ !!!!!!!!!!!!!!!!!!!!
+        //    }
+        //CalcCase2:
+        //    //Расчет квадранта
+        //    if (t1 > 0 & t2 > 0)
+        //    {
+        //        return 4;
+        //        //Четвертый квадрант
+        //    }
+        //    else if (t1 < 0 & t2 > 0)
+        //    {
+        //        return 3;
+        //        //Третий квадрант
+        //    }
+        //    else if (t1 < 0 & t2 < 0)
+        //    {
+        //        return 2;
+        //        //Второй квадрант
+        //    }
+        //    else if (t1 > 0 & t2 < 0)
+        //    {
+        //        return 1;
+        //        //Первый квадрант
+        //    }
+        //    else if (t1 == 0 & t2 == 0)
+        //    {
+        //        return 0;
+        //        //Точка пересечения осей
+        //    }
+        //    else if (t1 == 0 & t2 > 0)
+        //    {
+        //        return 34;
+        //        //Ось 2 (Y) снизу от оси 1 (X)
+        //    }
+        //    else if (t1 == 0 & t2 < 0)
+        //    {
+        //        return 12;
+        //        //Ось 2 (Y) сверху от оси 1 (X)
+        //    }
+        //    else if (t1 > 0 & t2 == 0)
+        //    {
+        //        return 14;
+        //        //Ось 1 (X) справа от оси 2 (Y)
+        //    }
+        //    else if (t1 < 0 & t2 == 0)
+        //    {
+        //        return 23;
+        //        //Ось 1 (X) слева от оси 2 (Y)
+        //    }
+        //    else
+        //    {
+        //        Interaction.MsgBox("Ошибка расчета квадранта плоскости, в котором находится проекция заданной точки." + Constants.vbCrLf + "Не удается рассчитать числовые множители (t) для осей, задающих плоскость базиса.", MsgBoxStyle.Critical, "Расчет номера квадранта плоскости, заданной двумя осями, в котором находится заданная точка или ее проекция");
 
-            }
-        CalcCase3:
-            //Расчет квадранта
-            if (t1 > 0 & t2 > 0)
-            {
-                return 2;
-                //Второй квадрант
-            }
-            else if (t1 < 0 & t2 > 0)
-            {
-                return 1;
-                //Первый квадрант
-            }
-            else if (t1 < 0 & t2 < 0)
-            {
-                return 4;
-                //Четвертый квадрант
-            }
-            else if (t1 > 0 & t2 < 0)
-            {
-                return 3;
-                //Третий квадрант
-            }
-            else if (t1 == 0 & t2 == 0)
-            {
-                return 0;
-                //Точка пересечения осей
-            }
-            else if (t1 == 0 & t2 > 0)
-            {
-                return 12;
-                //Ось 2 (Y) сверху от оси 1 (X)
-            }
-            else if (t1 == 0 & t2 < 0)
-            {
-                return 34;
-                //Ось 2 (Y) снизу от оси 1 (X)
-            }
-            else if (t1 > 0 & t2 == 0)
-            {
-                return 23;
-                //Ось 1 (X) слева от оси 2 (Y)
-            }
-            else if (t1 < 0 & t2 == 0)
-            {
-                return 14;
-                //Ось 1 (X) справа от оси 2 (Y)
-            }
-            else
-            {
-                Interaction.MsgBox("Ошибка расчета квадранта плоскости, в котором находится проекция заданной точки." + Constants.vbCrLf + "Не удается рассчитать числовые множители (t) для осей, задающих плоскость базиса.", MsgBoxStyle.Critical, "Расчет номера квадранта плоскости, заданной двумя осями, в котором находится заданная точка или ее проекция");
+        //        //!!!!!!!!!!!!!!!!! ВЕРНУТЬ ОШИБКУ !!!!!!!!!!!!!!!!!!!!
+        //        return -100;
+        //        //!!!!!!!!!!!!!!!!! ВЕРНУТЬ ОШИБКУ !!!!!!!!!!!!!!!!!!!!
 
-                //!!!!!!!!!!!!!!!!! ВЕРНУТЬ ОШИБКУ !!!!!!!!!!!!!!!!!!!!
-                return -100;
-                //!!!!!!!!!!!!!!!!! ВЕРНУТЬ ОШИБКУ !!!!!!!!!!!!!!!!!!!!
+        //    }
+        //CalcCase3:
+        //    //Расчет квадранта
+        //    if (t1 > 0 & t2 > 0)
+        //    {
+        //        return 2;
+        //        //Второй квадрант
+        //    }
+        //    else if (t1 < 0 & t2 > 0)
+        //    {
+        //        return 1;
+        //        //Первый квадрант
+        //    }
+        //    else if (t1 < 0 & t2 < 0)
+        //    {
+        //        return 4;
+        //        //Четвертый квадрант
+        //    }
+        //    else if (t1 > 0 & t2 < 0)
+        //    {
+        //        return 3;
+        //        //Третий квадрант
+        //    }
+        //    else if (t1 == 0 & t2 == 0)
+        //    {
+        //        return 0;
+        //        //Точка пересечения осей
+        //    }
+        //    else if (t1 == 0 & t2 > 0)
+        //    {
+        //        return 12;
+        //        //Ось 2 (Y) сверху от оси 1 (X)
+        //    }
+        //    else if (t1 == 0 & t2 < 0)
+        //    {
+        //        return 34;
+        //        //Ось 2 (Y) снизу от оси 1 (X)
+        //    }
+        //    else if (t1 > 0 & t2 == 0)
+        //    {
+        //        return 23;
+        //        //Ось 1 (X) слева от оси 2 (Y)
+        //    }
+        //    else if (t1 < 0 & t2 == 0)
+        //    {
+        //        return 14;
+        //        //Ось 1 (X) справа от оси 2 (Y)
+        //    }
+        //    else
+        //    {
+        //        Interaction.MsgBox("Ошибка расчета квадранта плоскости, в котором находится проекция заданной точки." + Constants.vbCrLf + "Не удается рассчитать числовые множители (t) для осей, задающих плоскость базиса.", MsgBoxStyle.Critical, "Расчет номера квадранта плоскости, заданной двумя осями, в котором находится заданная точка или ее проекция");
 
-            }
-        CalcCase4:
-            //Расчет квадранта
-            if (t1 > 0 & t2 > 0)
-            {
-                return 3;
-                //Третий квадрант
-            }
-            else if (t1 < 0 & t2 > 0)
-            {
-                return 4;
-                //Четвертый квадрант
-            }
-            else if (t1 < 0 & t2 < 0)
-            {
-                return 1;
-                //Первый квадрант
-            }
-            else if (t1 > 0 & t2 < 0)
-            {
-                return 2;
-                //Второй квадрант
-            }
-            else if (t1 == 0 & t2 == 0)
-            {
-                return 0;
-                //Точка пересечения осей
-            }
-            else if (t1 == 0 & t2 > 0)
-            {
-                return 34;
-                //Ось 2 (Y) снизу от оси 1 (X)
-            }
-            else if (t1 == 0 & t2 < 0)
-            {
-                return 12;
-                //Ось 2 (Y) сверху от оси 1 (X)
-            }
-            else if (t1 > 0 & t2 == 0)
-            {
-                return 23;
-                //Ось 1 (X) слева от оси 2 (Y)
-            }
-            else if (t1 < 0 & t2 == 0)
-            {
-                return 14;
-                //Ось 1 (X) справа от оси 2 (Y)
-            }
-            else
-            {
-                Interaction.MsgBox("Ошибка расчета квадранта плоскости, в котором находится проекция заданной точки." + Constants.vbCrLf + "Не удается рассчитать числовые множители (t) для осей, задающих плоскость базиса.", MsgBoxStyle.Critical, "Расчет номера квадранта плоскости, заданной двумя осями, в котором находится заданная точка или ее проекция");
+        //        //!!!!!!!!!!!!!!!!! ВЕРНУТЬ ОШИБКУ !!!!!!!!!!!!!!!!!!!!
+        //        return -100;
+        //        //!!!!!!!!!!!!!!!!! ВЕРНУТЬ ОШИБКУ !!!!!!!!!!!!!!!!!!!!
 
-                //!!!!!!!!!!!!!!!!! ВЕРНУТЬ ОШИБКУ !!!!!!!!!!!!!!!!!!!!
-                return -100;
-                //!!!!!!!!!!!!!!!!! ВЕРНУТЬ ОШИБКУ !!!!!!!!!!!!!!!!!!!!
+        //    }
+        //CalcCase4:
+        //    //Расчет квадранта
+        //    if (t1 > 0 & t2 > 0)
+        //    {
+        //        return 3;
+        //        //Третий квадрант
+        //    }
+        //    else if (t1 < 0 & t2 > 0)
+        //    {
+        //        return 4;
+        //        //Четвертый квадрант
+        //    }
+        //    else if (t1 < 0 & t2 < 0)
+        //    {
+        //        return 1;
+        //        //Первый квадрант
+        //    }
+        //    else if (t1 > 0 & t2 < 0)
+        //    {
+        //        return 2;
+        //        //Второй квадрант
+        //    }
+        //    else if (t1 == 0 & t2 == 0)
+        //    {
+        //        return 0;
+        //        //Точка пересечения осей
+        //    }
+        //    else if (t1 == 0 & t2 > 0)
+        //    {
+        //        return 34;
+        //        //Ось 2 (Y) снизу от оси 1 (X)
+        //    }
+        //    else if (t1 == 0 & t2 < 0)
+        //    {
+        //        return 12;
+        //        //Ось 2 (Y) сверху от оси 1 (X)
+        //    }
+        //    else if (t1 > 0 & t2 == 0)
+        //    {
+        //        return 23;
+        //        //Ось 1 (X) слева от оси 2 (Y)
+        //    }
+        //    else if (t1 < 0 & t2 == 0)
+        //    {
+        //        return 14;
+        //        //Ось 1 (X) справа от оси 2 (Y)
+        //    }
+        //    else
+        //    {
+        //        Interaction.MsgBox("Ошибка расчета квадранта плоскости, в котором находится проекция заданной точки." + Constants.vbCrLf + "Не удается рассчитать числовые множители (t) для осей, задающих плоскость базиса.", MsgBoxStyle.Critical, "Расчет номера квадранта плоскости, заданной двумя осями, в котором находится заданная точка или ее проекция");
 
-            }
-        CalcCase5:
-            //Расчет квадранта
-            if (t1 > 0 & t2 > 0)
-            {
-                return 1;
-                //Первый квадрант
-            }
-            else if (t1 < 0 & t2 > 0)
-            {
-                return 4;
-                //Четвертый квадрант
-            }
-            else if (t1 < 0 & t2 < 0)
-            {
-                return 3;
-                //Третий квадрант
-            }
-            else if (t1 > 0 & t2 < 0)
-            {
-                return 2;
-                //Второй квадрант
-            }
-            else if (t1 == 0 & t2 == 0)
-            {
-                return 0;
-                //Точка пересечения осей
-            }
-            else if (t1 == 0 & t2 > 0)
-            {
-                return 14;
-                //Ось 2 (Y) справа от оси 1 (X)
-            }
-            else if (t1 == 0 & t2 < 0)
-            {
-                return 23;
-                //Ось 2 (Y) слева от оси 1 (X)
-            }
-            else if (t1 > 0 & t2 == 0)
-            {
-                return 12;
-                //Ось 1 (X) сверху от оси 2 (Y)
-            }
-            else if (t1 < 0 & t2 == 0)
-            {
-                return 34;
-                //Ось 1 (X) снизу от оси 2 (Y)
-            }
-            else
-            {
-                Interaction.MsgBox("Ошибка расчета квадранта плоскости, в котором находится проекция заданной точки." + Constants.vbCrLf + "Не удается рассчитать числовые множители (t) для осей, задающих плоскость базиса.", MsgBoxStyle.Critical, "Расчет номера квадранта плоскости, заданной двумя осями, в котором находится заданная точка или ее проекция");
+        //        //!!!!!!!!!!!!!!!!! ВЕРНУТЬ ОШИБКУ !!!!!!!!!!!!!!!!!!!!
+        //        return -100;
+        //        //!!!!!!!!!!!!!!!!! ВЕРНУТЬ ОШИБКУ !!!!!!!!!!!!!!!!!!!!
 
-                //!!!!!!!!!!!!!!!!! ВЕРНУТЬ ОШИБКУ !!!!!!!!!!!!!!!!!!!!
-                return -100;
-                //!!!!!!!!!!!!!!!!! ВЕРНУТЬ ОШИБКУ !!!!!!!!!!!!!!!!!!!!
+        //    }
+        //CalcCase5:
+        //    //Расчет квадранта
+        //    if (t1 > 0 & t2 > 0)
+        //    {
+        //        return 1;
+        //        //Первый квадрант
+        //    }
+        //    else if (t1 < 0 & t2 > 0)
+        //    {
+        //        return 4;
+        //        //Четвертый квадрант
+        //    }
+        //    else if (t1 < 0 & t2 < 0)
+        //    {
+        //        return 3;
+        //        //Третий квадрант
+        //    }
+        //    else if (t1 > 0 & t2 < 0)
+        //    {
+        //        return 2;
+        //        //Второй квадрант
+        //    }
+        //    else if (t1 == 0 & t2 == 0)
+        //    {
+        //        return 0;
+        //        //Точка пересечения осей
+        //    }
+        //    else if (t1 == 0 & t2 > 0)
+        //    {
+        //        return 14;
+        //        //Ось 2 (Y) справа от оси 1 (X)
+        //    }
+        //    else if (t1 == 0 & t2 < 0)
+        //    {
+        //        return 23;
+        //        //Ось 2 (Y) слева от оси 1 (X)
+        //    }
+        //    else if (t1 > 0 & t2 == 0)
+        //    {
+        //        return 12;
+        //        //Ось 1 (X) сверху от оси 2 (Y)
+        //    }
+        //    else if (t1 < 0 & t2 == 0)
+        //    {
+        //        return 34;
+        //        //Ось 1 (X) снизу от оси 2 (Y)
+        //    }
+        //    else
+        //    {
+        //        Interaction.MsgBox("Ошибка расчета квадранта плоскости, в котором находится проекция заданной точки." + Constants.vbCrLf + "Не удается рассчитать числовые множители (t) для осей, задающих плоскость базиса.", MsgBoxStyle.Critical, "Расчет номера квадранта плоскости, заданной двумя осями, в котором находится заданная точка или ее проекция");
 
-            }
-        CalcCase6:
-            //Расчет квадранта
-            if (t1 > 0 & t2 > 0)
-            {
-                return 2;
-                //Второй квадрант
-            }
-            else if (t1 < 0 & t2 > 0)
-            {
-                return 3;
-                //Третий квадрант
-            }
-            else if (t1 < 0 & t2 < 0)
-            {
-                return 4;
-                //Четвертый квадрант
-            }
-            else if (t1 > 0 & t2 < 0)
-            {
-                return 1;
-                //Первый квадрант
-            }
-            else if (t1 == 0 & t2 == 0)
-            {
-                return 0;
-                //Точка пересечения осей
-            }
-            else if (t1 == 0 & t2 > 0)
-            {
-                return 23;
-                //Ось 2 (Y) слева от оси 1 (X)
-            }
-            else if (t1 == 0 & t2 < 0)
-            {
-                return 14;
-                //Ось 2 (Y) справа от оси 1 (X)
-            }
-            else if (t1 > 0 & t2 == 0)
-            {
-                return 12;
-                //Ось 1 (X) сверху от оси 2 (Y)
-            }
-            else if (t1 < 0 & t2 == 0)
-            {
-                return 34;
-                //Ось 1 (X) снизу от оси 2 (Y)
-            }
-            else
-            {
-                Interaction.MsgBox("Ошибка расчета квадранта плоскости, в котором находится проекция заданной точки." + Constants.vbCrLf + "Не удается рассчитать числовые множители (t) для осей, задающих плоскость базиса.", MsgBoxStyle.Critical, "Расчет номера квадранта плоскости, заданной двумя осями, в котором находится заданная точка или ее проекция");
+        //        //!!!!!!!!!!!!!!!!! ВЕРНУТЬ ОШИБКУ !!!!!!!!!!!!!!!!!!!!
+        //        return -100;
+        //        //!!!!!!!!!!!!!!!!! ВЕРНУТЬ ОШИБКУ !!!!!!!!!!!!!!!!!!!!
 
-                //!!!!!!!!!!!!!!!!! ВЕРНУТЬ ОШИБКУ !!!!!!!!!!!!!!!!!!!!
-                return -100;
-                //!!!!!!!!!!!!!!!!! ВЕРНУТЬ ОШИБКУ !!!!!!!!!!!!!!!!!!!!
+        //    }
+        //CalcCase6:
+        //    //Расчет квадранта
+        //    if (t1 > 0 & t2 > 0)
+        //    {
+        //        return 2;
+        //        //Второй квадрант
+        //    }
+        //    else if (t1 < 0 & t2 > 0)
+        //    {
+        //        return 3;
+        //        //Третий квадрант
+        //    }
+        //    else if (t1 < 0 & t2 < 0)
+        //    {
+        //        return 4;
+        //        //Четвертый квадрант
+        //    }
+        //    else if (t1 > 0 & t2 < 0)
+        //    {
+        //        return 1;
+        //        //Первый квадрант
+        //    }
+        //    else if (t1 == 0 & t2 == 0)
+        //    {
+        //        return 0;
+        //        //Точка пересечения осей
+        //    }
+        //    else if (t1 == 0 & t2 > 0)
+        //    {
+        //        return 23;
+        //        //Ось 2 (Y) слева от оси 1 (X)
+        //    }
+        //    else if (t1 == 0 & t2 < 0)
+        //    {
+        //        return 14;
+        //        //Ось 2 (Y) справа от оси 1 (X)
+        //    }
+        //    else if (t1 > 0 & t2 == 0)
+        //    {
+        //        return 12;
+        //        //Ось 1 (X) сверху от оси 2 (Y)
+        //    }
+        //    else if (t1 < 0 & t2 == 0)
+        //    {
+        //        return 34;
+        //        //Ось 1 (X) снизу от оси 2 (Y)
+        //    }
+        //    else
+        //    {
+        //        Interaction.MsgBox("Ошибка расчета квадранта плоскости, в котором находится проекция заданной точки." + Constants.vbCrLf + "Не удается рассчитать числовые множители (t) для осей, задающих плоскость базиса.", MsgBoxStyle.Critical, "Расчет номера квадранта плоскости, заданной двумя осями, в котором находится заданная точка или ее проекция");
 
-            }
-        CalcCase7:
-            //Расчет квадранта
-            if (t1 > 0 & t2 > 0)
-            {
-                return 4;
-                //Четвертый квадрант
-            }
-            else if (t1 < 0 & t2 > 0)
-            {
-                return 1;
-                //Первый квадрант
-            }
-            else if (t1 < 0 & t2 < 0)
-            {
-                return 2;
-                //Второй квадрант
-            }
-            else if (t1 > 0 & t2 < 0)
-            {
-                return 3;
-                //Третий квадрант
-            }
-            else if (t1 == 0 & t2 == 0)
-            {
-                return 0;
-                //Точка пересечения осей
-            }
-            else if (t1 == 0 & t2 > 0)
-            {
-                return 14;
-                //Ось 2 (Y) справа от оси 1 (X)
-            }
-            else if (t1 == 0 & t2 < 0)
-            {
-                return 23;
-                //Ось 2 (Y) слева от оси 1 (X)
-            }
-            else if (t1 > 0 & t2 == 0)
-            {
-                return 34;
-                //Ось 1 (X) снизу от оси 2 (Y)
-            }
-            else if (t1 < 0 & t2 == 0)
-            {
-                return 12;
-                //Ось 1 (X) сверху от оси 2 (Y)
-            }
-            else
-            {
-                Interaction.MsgBox("Ошибка расчета квадранта плоскости, в котором находится проекция заданной точки." + Constants.vbCrLf + "Не удается рассчитать числовые множители (t) для осей, задающих плоскость базиса.", MsgBoxStyle.Critical, "Расчет номера квадранта плоскости, заданной двумя осями, в котором находится заданная точка или ее проекция");
+        //        //!!!!!!!!!!!!!!!!! ВЕРНУТЬ ОШИБКУ !!!!!!!!!!!!!!!!!!!!
+        //        return -100;
+        //        //!!!!!!!!!!!!!!!!! ВЕРНУТЬ ОШИБКУ !!!!!!!!!!!!!!!!!!!!
 
-                //!!!!!!!!!!!!!!!!! ВЕРНУТЬ ОШИБКУ !!!!!!!!!!!!!!!!!!!!
-                return -100;
-                //!!!!!!!!!!!!!!!!! ВЕРНУТЬ ОШИБКУ !!!!!!!!!!!!!!!!!!!!
+        //    }
+        //CalcCase7:
+        //    //Расчет квадранта
+        //    if (t1 > 0 & t2 > 0)
+        //    {
+        //        return 4;
+        //        //Четвертый квадрант
+        //    }
+        //    else if (t1 < 0 & t2 > 0)
+        //    {
+        //        return 1;
+        //        //Первый квадрант
+        //    }
+        //    else if (t1 < 0 & t2 < 0)
+        //    {
+        //        return 2;
+        //        //Второй квадрант
+        //    }
+        //    else if (t1 > 0 & t2 < 0)
+        //    {
+        //        return 3;
+        //        //Третий квадрант
+        //    }
+        //    else if (t1 == 0 & t2 == 0)
+        //    {
+        //        return 0;
+        //        //Точка пересечения осей
+        //    }
+        //    else if (t1 == 0 & t2 > 0)
+        //    {
+        //        return 14;
+        //        //Ось 2 (Y) справа от оси 1 (X)
+        //    }
+        //    else if (t1 == 0 & t2 < 0)
+        //    {
+        //        return 23;
+        //        //Ось 2 (Y) слева от оси 1 (X)
+        //    }
+        //    else if (t1 > 0 & t2 == 0)
+        //    {
+        //        return 34;
+        //        //Ось 1 (X) снизу от оси 2 (Y)
+        //    }
+        //    else if (t1 < 0 & t2 == 0)
+        //    {
+        //        return 12;
+        //        //Ось 1 (X) сверху от оси 2 (Y)
+        //    }
+        //    else
+        //    {
+        //        Interaction.MsgBox("Ошибка расчета квадранта плоскости, в котором находится проекция заданной точки." + Constants.vbCrLf + "Не удается рассчитать числовые множители (t) для осей, задающих плоскость базиса.", MsgBoxStyle.Critical, "Расчет номера квадранта плоскости, заданной двумя осями, в котором находится заданная точка или ее проекция");
 
-            }
-        CalcCase8:
-            //Расчет квадранта
-            if (t1 > 0 & t2 > 0)
-            {
-                return 3;
-                //Третий квадрант
-            }
-            else if (t1 < 0 & t2 > 0)
-            {
-                return 2;
-                //Второй квадрант
-            }
-            else if (t1 < 0 & t2 < 0)
-            {
-                return 1;
-                //Первый квадрант
-            }
-            else if (t1 > 0 & t2 < 0)
-            {
-                return 4;
-                //Четвертый квадрант
-            }
-            else if (t1 == 0 & t2 == 0)
-            {
-                return 0;
-                //Точка пересечения осей
-            }
-            else if (t1 == 0 & t2 > 0)
-            {
-                return 23;
-                //Ось 2 (Y) слева от оси 1 (X)
-            }
-            else if (t1 == 0 & t2 < 0)
-            {
-                return 14;
-                //Ось 2 (Y) справа от оси 1 (X)
-            }
-            else if (t1 > 0 & t2 == 0)
-            {
-                return 34;
-                //Ось 1 (X) снизу от оси 2 (Y)
-            }
-            else if (t1 < 0 & t2 == 0)
-            {
-                return 12;
-                //Ось 1 (X) сверху от оси 2 (Y)
-            }
-            else
-            {
-                Interaction.MsgBox("Ошибка расчета квадранта плоскости, в котором находится проекция заданной точки." + Constants.vbCrLf + "Не удается рассчитать числовые множители (t) для осей, задающих плоскость базиса.", MsgBoxStyle.Critical, "Расчет номера квадранта плоскости, заданной двумя осями, в котором находится заданная точка или ее проекция");
+        //        //!!!!!!!!!!!!!!!!! ВЕРНУТЬ ОШИБКУ !!!!!!!!!!!!!!!!!!!!
+        //        return -100;
+        //        //!!!!!!!!!!!!!!!!! ВЕРНУТЬ ОШИБКУ !!!!!!!!!!!!!!!!!!!!
 
-                //!!!!!!!!!!!!!!!!! ВЕРНУТЬ ОШИБКУ !!!!!!!!!!!!!!!!!!!!
-                return -100;
-                //!!!!!!!!!!!!!!!!! ВЕРНУТЬ ОШИБКУ !!!!!!!!!!!!!!!!!!!!
+        //    }
+        //CalcCase8:
+        //    //Расчет квадранта
+        //    if (t1 > 0 & t2 > 0)
+        //    {
+        //        return 3;
+        //        //Третий квадрант
+        //    }
+        //    else if (t1 < 0 & t2 > 0)
+        //    {
+        //        return 2;
+        //        //Второй квадрант
+        //    }
+        //    else if (t1 < 0 & t2 < 0)
+        //    {
+        //        return 1;
+        //        //Первый квадрант
+        //    }
+        //    else if (t1 > 0 & t2 < 0)
+        //    {
+        //        return 4;
+        //        //Четвертый квадрант
+        //    }
+        //    else if (t1 == 0 & t2 == 0)
+        //    {
+        //        return 0;
+        //        //Точка пересечения осей
+        //    }
+        //    else if (t1 == 0 & t2 > 0)
+        //    {
+        //        return 23;
+        //        //Ось 2 (Y) слева от оси 1 (X)
+        //    }
+        //    else if (t1 == 0 & t2 < 0)
+        //    {
+        //        return 14;
+        //        //Ось 2 (Y) справа от оси 1 (X)
+        //    }
+        //    else if (t1 > 0 & t2 == 0)
+        //    {
+        //        return 34;
+        //        //Ось 1 (X) снизу от оси 2 (Y)
+        //    }
+        //    else if (t1 < 0 & t2 == 0)
+        //    {
+        //        return 12;
+        //        //Ось 1 (X) сверху от оси 2 (Y)
+        //    }
+        //    else
+        //    {
+        //        Interaction.MsgBox("Ошибка расчета квадранта плоскости, в котором находится проекция заданной точки." + Constants.vbCrLf + "Не удается рассчитать числовые множители (t) для осей, задающих плоскость базиса.", MsgBoxStyle.Critical, "Расчет номера квадранта плоскости, заданной двумя осями, в котором находится заданная точка или ее проекция");
 
-            }
-        }
+        //        //!!!!!!!!!!!!!!!!! ВЕРНУТЬ ОШИБКУ !!!!!!!!!!!!!!!!!!!!
+        //        return -100;
+        //        //!!!!!!!!!!!!!!!!! ВЕРНУТЬ ОШИБКУ !!!!!!!!!!!!!!!!!!!!
+
+        //    }
+        //}
 
         //'Private Sub LineByTwoPlans(ByVal Plane1 As BaseGeometryYVP.GeomObjects.PlaneSpace, ByVal Plane2 As BaseGeometryYVP.GeomObjects.PlaneSpace)
         //'    'Конструктор возвращает значения коэффициентов 3D прямой, заданной двумя плоскостями
