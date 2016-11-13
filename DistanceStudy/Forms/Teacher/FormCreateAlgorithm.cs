@@ -1,88 +1,67 @@
-﻿using System;
+﻿using Point3DCntrl;
+using Service.HandlerUI;
+using System;
+using System.Reflection;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace DistanceStudy.Forms.Teacher
 {
     public partial class FormCreateAlgorithm : Form
     {
-        public FormCreateAlgorithm()
+        // Объект для работы с задачей
+        private WorkTask _taskWorker;
+
+        public FormCreateAlgorithm(WorkTask taskWorker)
         {
+            _taskWorker = taskWorker;
             InitializeComponent();
-            listBox1.Enabled = false;
-            listBox2.Enabled = false;
-            listBox3.Enabled = false;
+            _taskWorker?.FillListBoxByCntrlAssembly(checkedListBoxProectionsControls);
+            _taskWorker?.FillComboBoxByCntrlAssembly(comboBoxInputParam);
         }
 
-        private void checkBoxBase_CheckedChanged(object sender, EventArgs e)
+        private void buttonAccept_Click(object sender, EventArgs e)
         {
-            if (!checkBoxBase.Checked)
-            {
-                listBox1.Enabled = false;
-                listBox1.SelectedItem = null;
-            }
-            else
-            {
-                listBox1.Enabled = true;
-            }
+            _taskWorker?.AddAlgothm(checkedListBoxProectionsControls);
+            _taskWorker?.SetTaskStatusToReady();
+            Dispose();
         }
 
-        private void checkBoxMain_CheckedChanged(object sender, EventArgs e)
+        private void buttonCancel_Click(object sender, EventArgs e)
         {
-            if (!checkBoxMain.Checked)
-            {
-                listBox2.Enabled = false;
-                listBox2.SelectedItem = null;
-            }
-            else
-            {
-                listBox2.Enabled = true;
-            }
-        }
-
-        private void checkBoxProizv_CheckedChanged(object sender, EventArgs e)
-        {
-            if (!checkBoxProizv.Checked)
-            {
-                listBox3.Enabled = false;
-                listBox3.SelectedItem = null;
-            }
-            else
-            {
-                listBox3.Enabled = true;
-            }
-        }
-
-        private void buttonAddToSelected_Click(object sender, EventArgs e)
-        {
-            if (checkBoxBase.Checked)
-            {
-                listBox4.Items.Add(listBox1.SelectedItem);
-                listBox1.Items.Remove(listBox1.SelectedItem);
-            }
-            if (checkBoxMain.Checked)
-            {
-                listBox5.Items.Add(listBox2.SelectedItem);
-                listBox2.Items.Remove(listBox2.SelectedItem);
-            }
-            if (checkBoxProizv.Checked)
-            {
-                listBox6.Items.Add(listBox3.SelectedItem);
-                listBox3.Items.Remove(listBox3.SelectedItem);
-            }
+            Dispose();
         }
 
         private void button_Clear_Click(object sender, EventArgs e)
         {
-            listBox6.Items.Clear();
-            listBox4.Items.Clear();
-            listBox5.Items.Clear();
+            _taskWorker?.UncheckAllItems(checkedListBoxProectionsControls);
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void checkedListBoxProectionsControls_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //DbRepositoryFake.AlghoritmCode = "B";
-            //DbRepositoryFake.SubgroupNumber = 2;
-            //Dispose();
+            _taskWorker?.ChangeInfoAboutSelectedItem(checkedListBoxProectionsControls.SelectedItem.ToString(), textBoxDesc, listBoxUserParams, listBoxInitialParams, listBoxSolveParmas);
+        }
+
+        private void checkedListBoxProectionsControls_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            if (e.CurrentValue.Equals(CheckState.Unchecked) && _taskWorker.CheckItemOnInitialParams(checkedListBoxProectionsControls.SelectedItem.ToString(), listBoxInitialParams))
+                ChangeVisibleControlsComboLabelBtn(buttonAcceptRefMethod, labelEnterInputParam, comboBoxInputParam, checkedListBoxProectionsControls, true, true, true, false);
+            else
+                ChangeVisibleControlsComboLabelBtn(buttonAcceptRefMethod, labelEnterInputParam, comboBoxInputParam, checkedListBoxProectionsControls, false, false, false, true);
+        }
+
+        private void ChangeVisibleControlsComboLabelBtn(Button btn, Label label, ComboBox cmbBox, CheckedListBox checkedlistBox, bool btnVis, bool labelVis, bool cmbBoxVis, bool listBoxEnabled)
+        {
+            btn.Visible = btnVis;
+            label.Visible = labelVis;
+            cmbBox.Visible = cmbBoxVis;
+            checkedlistBox.Enabled = listBoxEnabled;
+        }
+
+        private void buttonAcceptRefMethod_Click(object sender, EventArgs e)
+        {
+            _taskWorker.AddReferenceToinitialMethod(checkedListBoxProectionsControls.SelectedItem?.ToString(), comboBoxInputParam.SelectedItem?.ToString(), listBoxInitialParams.SelectedItem?.ToString());
+            ChangeVisibleControlsComboLabelBtn(buttonAcceptRefMethod, labelEnterInputParam, comboBoxInputParam, checkedListBoxProectionsControls, false, false, false, true);
         }
     }
 }

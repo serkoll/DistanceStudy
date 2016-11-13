@@ -29,176 +29,48 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormCreateAlgorithm));
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.checkBoxBase = new System.Windows.Forms.CheckBox();
-            this.listBox2 = new System.Windows.Forms.ListBox();
-            this.listBox3 = new System.Windows.Forms.ListBox();
-            this.checkBoxMain = new System.Windows.Forms.CheckBox();
-            this.checkBoxProizv = new System.Windows.Forms.CheckBox();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.listBox4 = new System.Windows.Forms.ListBox();
-            this.listBox5 = new System.Windows.Forms.ListBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.buttonAddToSelected = new System.Windows.Forms.Button();
-            this.listBox6 = new System.Windows.Forms.ListBox();
+            this.buttonAccept = new System.Windows.Forms.Button();
+            this.buttonCancel = new System.Windows.Forms.Button();
             this.button_Clear = new System.Windows.Forms.Button();
-            this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
+            this.checkedListBoxProectionsControls = new System.Windows.Forms.CheckedListBox();
+            this.groupBoxInfo = new System.Windows.Forms.GroupBox();
+            this.buttonAcceptRefMethod = new System.Windows.Forms.Button();
+            this.comboBoxInputParam = new System.Windows.Forms.ComboBox();
+            this.labelEnterInputParam = new System.Windows.Forms.Label();
+            this.listBoxSolveParmas = new System.Windows.Forms.ListBox();
+            this.labelSolveRes = new System.Windows.Forms.Label();
+            this.listBoxInitialParams = new System.Windows.Forms.ListBox();
+            this.textBoxDesc = new System.Windows.Forms.TextBox();
+            this.listBoxUserParams = new System.Windows.Forms.ListBox();
+            this.labelTeacherParams = new System.Windows.Forms.Label();
+            this.labelUserParams = new System.Windows.Forms.Label();
+            this.labelDesc = new System.Windows.Forms.Label();
+            this.groupBoxInfo.SuspendLayout();
             this.SuspendLayout();
             // 
-            // listBox1
+            // buttonAccept
             // 
-            this.listBox1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Items.AddRange(new object[] {
-            "Точка",
-            "Точка 2",
-            "Линия 1",
-            "Линия 2"});
-            this.listBox1.Location = new System.Drawing.Point(1, 0);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(180, 208);
-            this.listBox1.TabIndex = 0;
+            this.buttonAccept.Location = new System.Drawing.Point(10, 442);
+            this.buttonAccept.Name = "buttonAccept";
+            this.buttonAccept.Size = new System.Drawing.Size(90, 23);
+            this.buttonAccept.TabIndex = 9;
+            this.buttonAccept.Text = "Подтвердить";
+            this.buttonAccept.UseVisualStyleBackColor = true;
+            this.buttonAccept.Click += new System.EventHandler(this.buttonAccept_Click);
             // 
-            // checkBoxBase
+            // buttonCancel
             // 
-            this.checkBoxBase.AutoSize = true;
-            this.checkBoxBase.Location = new System.Drawing.Point(49, 3);
-            this.checkBoxBase.Name = "checkBoxBase";
-            this.checkBoxBase.Size = new System.Drawing.Size(71, 17);
-            this.checkBoxBase.TabIndex = 1;
-            this.checkBoxBase.Text = "Базовый";
-            this.checkBoxBase.UseVisualStyleBackColor = true;
-            this.checkBoxBase.CheckedChanged += new System.EventHandler(this.checkBoxBase_CheckedChanged);
-            // 
-            // listBox2
-            // 
-            this.listBox2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.Items.AddRange(new object[] {
-            "Отрезок",
-            "Отрезок 2",
-            "Отрезок 3"});
-            this.listBox2.Location = new System.Drawing.Point(181, 0);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(180, 208);
-            this.listBox2.TabIndex = 2;
-            // 
-            // listBox3
-            // 
-            this.listBox3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.listBox3.FormattingEnabled = true;
-            this.listBox3.Items.AddRange(new object[] {
-            "Линия и отрезок",
-            "Плоскость и линия",
-            "Плоскость и плоскость"});
-            this.listBox3.Location = new System.Drawing.Point(361, 0);
-            this.listBox3.Name = "listBox3";
-            this.listBox3.Size = new System.Drawing.Size(186, 208);
-            this.listBox3.TabIndex = 3;
-            // 
-            // checkBoxMain
-            // 
-            this.checkBoxMain.AutoSize = true;
-            this.checkBoxMain.Location = new System.Drawing.Point(221, 4);
-            this.checkBoxMain.Name = "checkBoxMain";
-            this.checkBoxMain.Size = new System.Drawing.Size(76, 17);
-            this.checkBoxMain.TabIndex = 4;
-            this.checkBoxMain.Text = "Основной";
-            this.checkBoxMain.UseVisualStyleBackColor = true;
-            this.checkBoxMain.CheckedChanged += new System.EventHandler(this.checkBoxMain_CheckedChanged);
-            // 
-            // checkBoxProizv
-            // 
-            this.checkBoxProizv.AutoSize = true;
-            this.checkBoxProizv.Location = new System.Drawing.Point(389, 4);
-            this.checkBoxProizv.Name = "checkBoxProizv";
-            this.checkBoxProizv.Size = new System.Drawing.Size(96, 17);
-            this.checkBoxProizv.TabIndex = 5;
-            this.checkBoxProizv.Text = "Производный";
-            this.checkBoxProizv.UseVisualStyleBackColor = true;
-            this.checkBoxProizv.CheckedChanged += new System.EventHandler(this.checkBoxProizv_CheckedChanged);
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(0, 442);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(90, 23);
-            this.button4.TabIndex = 9;
-            this.button4.Text = "Подтвердить";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(544, 442);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 10;
-            this.button5.Text = "Отмена";
-            this.button5.UseVisualStyleBackColor = true;
-            // 
-            // listBox4
-            // 
-            this.listBox4.FormattingEnabled = true;
-            this.listBox4.Location = new System.Drawing.Point(0, 325);
-            this.listBox4.Name = "listBox4";
-            this.listBox4.Size = new System.Drawing.Size(178, 95);
-            this.listBox4.TabIndex = 12;
-            // 
-            // listBox5
-            // 
-            this.listBox5.FormattingEnabled = true;
-            this.listBox5.Location = new System.Drawing.Point(184, 325);
-            this.listBox5.Name = "listBox5";
-            this.listBox5.Size = new System.Drawing.Size(177, 95);
-            this.listBox5.TabIndex = 13;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.listBox1);
-            this.panel1.Controls.Add(this.listBox2);
-            this.panel1.Controls.Add(this.listBox3);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 24);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(547, 208);
-            this.panel1.TabIndex = 14;
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.checkBoxMain);
-            this.panel2.Controls.Add(this.checkBoxProizv);
-            this.panel2.Controls.Add(this.checkBoxBase);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(547, 24);
-            this.panel2.TabIndex = 15;
-            // 
-            // buttonAddToSelected
-            // 
-            this.buttonAddToSelected.Location = new System.Drawing.Point(3, 238);
-            this.buttonAddToSelected.Name = "buttonAddToSelected";
-            this.buttonAddToSelected.Size = new System.Drawing.Size(75, 23);
-            this.buttonAddToSelected.TabIndex = 16;
-            this.buttonAddToSelected.Text = "Добавить";
-            this.buttonAddToSelected.UseVisualStyleBackColor = true;
-            this.buttonAddToSelected.Click += new System.EventHandler(this.buttonAddToSelected_Click);
-            // 
-            // listBox6
-            // 
-            this.listBox6.FormattingEnabled = true;
-            this.listBox6.Location = new System.Drawing.Point(369, 325);
-            this.listBox6.Name = "listBox6";
-            this.listBox6.Size = new System.Drawing.Size(178, 95);
-            this.listBox6.TabIndex = 17;
+            this.buttonCancel.Location = new System.Drawing.Point(187, 442);
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Size = new System.Drawing.Size(75, 23);
+            this.buttonCancel.TabIndex = 10;
+            this.buttonCancel.Text = "Отмена";
+            this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // button_Clear
             // 
-            this.button_Clear.Location = new System.Drawing.Point(96, 442);
+            this.button_Clear.Location = new System.Drawing.Point(106, 442);
             this.button_Clear.Name = "button_Clear";
             this.button_Clear.Size = new System.Drawing.Size(75, 23);
             this.button_Clear.TabIndex = 18;
@@ -206,47 +78,177 @@
             this.button_Clear.UseVisualStyleBackColor = true;
             this.button_Clear.Click += new System.EventHandler(this.button_Clear_Click);
             // 
+            // checkedListBoxProectionsControls
+            // 
+            this.checkedListBoxProectionsControls.FormattingEnabled = true;
+            this.checkedListBoxProectionsControls.Location = new System.Drawing.Point(12, 12);
+            this.checkedListBoxProectionsControls.Name = "checkedListBoxProectionsControls";
+            this.checkedListBoxProectionsControls.Size = new System.Drawing.Size(250, 409);
+            this.checkedListBoxProectionsControls.TabIndex = 19;
+            this.checkedListBoxProectionsControls.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxProectionsControls_ItemCheck);
+            this.checkedListBoxProectionsControls.SelectedIndexChanged += new System.EventHandler(this.checkedListBoxProectionsControls_SelectedIndexChanged);
+            // 
+            // groupBoxInfo
+            // 
+            this.groupBoxInfo.Controls.Add(this.buttonAcceptRefMethod);
+            this.groupBoxInfo.Controls.Add(this.comboBoxInputParam);
+            this.groupBoxInfo.Controls.Add(this.labelEnterInputParam);
+            this.groupBoxInfo.Controls.Add(this.listBoxSolveParmas);
+            this.groupBoxInfo.Controls.Add(this.labelSolveRes);
+            this.groupBoxInfo.Controls.Add(this.listBoxInitialParams);
+            this.groupBoxInfo.Controls.Add(this.textBoxDesc);
+            this.groupBoxInfo.Controls.Add(this.listBoxUserParams);
+            this.groupBoxInfo.Controls.Add(this.labelTeacherParams);
+            this.groupBoxInfo.Controls.Add(this.labelUserParams);
+            this.groupBoxInfo.Controls.Add(this.labelDesc);
+            this.groupBoxInfo.Location = new System.Drawing.Point(269, 13);
+            this.groupBoxInfo.Name = "groupBoxInfo";
+            this.groupBoxInfo.Size = new System.Drawing.Size(239, 408);
+            this.groupBoxInfo.TabIndex = 20;
+            this.groupBoxInfo.TabStop = false;
+            this.groupBoxInfo.Text = "Информация об алгоритме";
+            // 
+            // buttonAcceptRefMethod
+            // 
+            this.buttonAcceptRefMethod.Location = new System.Drawing.Point(9, 379);
+            this.buttonAcceptRefMethod.Name = "buttonAcceptRefMethod";
+            this.buttonAcceptRefMethod.Size = new System.Drawing.Size(224, 23);
+            this.buttonAcceptRefMethod.TabIndex = 10;
+            this.buttonAcceptRefMethod.Text = "Подтвердить";
+            this.buttonAcceptRefMethod.UseVisualStyleBackColor = true;
+            this.buttonAcceptRefMethod.Visible = false;
+            this.buttonAcceptRefMethod.Click += new System.EventHandler(this.buttonAcceptRefMethod_Click);
+            // 
+            // comboBoxInputParam
+            // 
+            this.comboBoxInputParam.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxInputParam.FormattingEnabled = true;
+            this.comboBoxInputParam.Location = new System.Drawing.Point(9, 352);
+            this.comboBoxInputParam.Name = "comboBoxInputParam";
+            this.comboBoxInputParam.Size = new System.Drawing.Size(224, 21);
+            this.comboBoxInputParam.TabIndex = 9;
+            this.comboBoxInputParam.Visible = false;
+            // 
+            // labelEnterInputParam
+            // 
+            this.labelEnterInputParam.AutoSize = true;
+            this.labelEnterInputParam.Location = new System.Drawing.Point(9, 320);
+            this.labelEnterInputParam.Name = "labelEnterInputParam";
+            this.labelEnterInputParam.Size = new System.Drawing.Size(129, 13);
+            this.labelEnterInputParam.TabIndex = 8;
+            this.labelEnterInputParam.Text = "Входные параметры из:";
+            this.labelEnterInputParam.Visible = false;
+            // 
+            // listBoxSolveParmas
+            // 
+            this.listBoxSolveParmas.FormattingEnabled = true;
+            this.listBoxSolveParmas.Location = new System.Drawing.Point(9, 261);
+            this.listBoxSolveParmas.Name = "listBoxSolveParmas";
+            this.listBoxSolveParmas.SelectionMode = System.Windows.Forms.SelectionMode.None;
+            this.listBoxSolveParmas.Size = new System.Drawing.Size(224, 56);
+            this.listBoxSolveParmas.TabIndex = 7;
+            // 
+            // labelSolveRes
+            // 
+            this.labelSolveRes.AutoSize = true;
+            this.labelSolveRes.Location = new System.Drawing.Point(9, 244);
+            this.labelSolveRes.Name = "labelSolveRes";
+            this.labelSolveRes.Size = new System.Drawing.Size(114, 13);
+            this.labelSolveRes.TabIndex = 6;
+            this.labelSolveRes.Text = "Результаты решения";
+            // 
+            // listBoxInitialParams
+            // 
+            this.listBoxInitialParams.FormattingEnabled = true;
+            this.listBoxInitialParams.Location = new System.Drawing.Point(9, 180);
+            this.listBoxInitialParams.Name = "listBoxInitialParams";
+            this.listBoxInitialParams.Size = new System.Drawing.Size(224, 56);
+            this.listBoxInitialParams.TabIndex = 5;
+            // 
+            // textBoxDesc
+            // 
+            this.textBoxDesc.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.textBoxDesc.Location = new System.Drawing.Point(7, 33);
+            this.textBoxDesc.Multiline = true;
+            this.textBoxDesc.Name = "textBoxDesc";
+            this.textBoxDesc.ReadOnly = true;
+            this.textBoxDesc.Size = new System.Drawing.Size(223, 53);
+            this.textBoxDesc.TabIndex = 4;
+            // 
+            // listBoxUserParams
+            // 
+            this.listBoxUserParams.FormattingEnabled = true;
+            this.listBoxUserParams.Location = new System.Drawing.Point(9, 105);
+            this.listBoxUserParams.Name = "listBoxUserParams";
+            this.listBoxUserParams.SelectionMode = System.Windows.Forms.SelectionMode.None;
+            this.listBoxUserParams.Size = new System.Drawing.Size(224, 56);
+            this.listBoxUserParams.TabIndex = 3;
+            // 
+            // labelTeacherParams
+            // 
+            this.labelTeacherParams.AutoSize = true;
+            this.labelTeacherParams.Location = new System.Drawing.Point(6, 164);
+            this.labelTeacherParams.Name = "labelTeacherParams";
+            this.labelTeacherParams.Size = new System.Drawing.Size(147, 13);
+            this.labelTeacherParams.TabIndex = 2;
+            this.labelTeacherParams.Text = "Параметры инициализации";
+            // 
+            // labelUserParams
+            // 
+            this.labelUserParams.AutoSize = true;
+            this.labelUserParams.Location = new System.Drawing.Point(6, 89);
+            this.labelUserParams.Name = "labelUserParams";
+            this.labelUserParams.Size = new System.Drawing.Size(154, 13);
+            this.labelUserParams.TabIndex = 1;
+            this.labelUserParams.Text = "Параметры от пользователя";
+            // 
+            // labelDesc
+            // 
+            this.labelDesc.AutoSize = true;
+            this.labelDesc.Location = new System.Drawing.Point(6, 16);
+            this.labelDesc.Name = "labelDesc";
+            this.labelDesc.Size = new System.Drawing.Size(57, 13);
+            this.labelDesc.TabIndex = 0;
+            this.labelDesc.Text = "Описание";
+            // 
             // FormCreateAlgorithm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(547, 477);
+            this.ClientSize = new System.Drawing.Size(511, 477);
+            this.Controls.Add(this.groupBoxInfo);
+            this.Controls.Add(this.checkedListBoxProectionsControls);
             this.Controls.Add(this.button_Clear);
-            this.Controls.Add(this.listBox6);
-            this.Controls.Add(this.buttonAddToSelected);
-            this.Controls.Add(this.listBox5);
-            this.Controls.Add(this.listBox4);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.buttonCancel);
+            this.Controls.Add(this.buttonAccept);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "FormCreateAlgorithm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Создание алгоритма";
-            this.panel1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
+            this.groupBoxInfo.ResumeLayout(false);
+            this.groupBoxInfo.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.CheckBox checkBoxBase;
-        private System.Windows.Forms.ListBox listBox2;
-        private System.Windows.Forms.ListBox listBox3;
-        private System.Windows.Forms.CheckBox checkBoxMain;
-        private System.Windows.Forms.CheckBox checkBoxProizv;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.ListBox listBox4;
-        private System.Windows.Forms.ListBox listBox5;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button buttonAddToSelected;
-        private System.Windows.Forms.ListBox listBox6;
+        private System.Windows.Forms.Button buttonAccept;
+        private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Button button_Clear;
+        private System.Windows.Forms.CheckedListBox checkedListBoxProectionsControls;
+        private System.Windows.Forms.GroupBox groupBoxInfo;
+        private System.Windows.Forms.Label labelTeacherParams;
+        private System.Windows.Forms.Label labelUserParams;
+        private System.Windows.Forms.Label labelDesc;
+        private System.Windows.Forms.TextBox textBoxDesc;
+        private System.Windows.Forms.ListBox listBoxUserParams;
+        private System.Windows.Forms.ListBox listBoxInitialParams;
+        private System.Windows.Forms.ListBox listBoxSolveParmas;
+        private System.Windows.Forms.Label labelSolveRes;
+        private System.Windows.Forms.Label labelEnterInputParam;
+        private System.Windows.Forms.ComboBox comboBoxInputParam;
+        private System.Windows.Forms.Button buttonAcceptRefMethod;
     }
 }

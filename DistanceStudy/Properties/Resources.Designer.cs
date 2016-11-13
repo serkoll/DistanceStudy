@@ -119,12 +119,39 @@ namespace DistanceStudy.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Введите наименование задачи....
+        /// </summary>
+        internal static string EnterTaskName {
+            get {
+                return ResourceManager.GetString("EnterTaskName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Введите текстовое описание задачи....
+        /// </summary>
+        internal static string EnterTextDescriptionOfTask {
+            get {
+                return ResourceManager.GetString("EnterTextDescriptionOfTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap exit {
             get {
                 object obj = ResourceManager.GetObject("exit", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Путь к графическому описанию задачи....
+        /// </summary>
+        internal static string PathToTaskImage {
+            get {
+                return ResourceManager.GetString("PathToTaskImage", resourceCulture);
             }
         }
         

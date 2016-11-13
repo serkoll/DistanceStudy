@@ -5,7 +5,7 @@ namespace GraphicsModule
     /// <summary>
     /// Обеспечивает доступ и управление отрисованными графическими объектами
     /// </summary>
-    static class CollectionsGraphicsObjects
+    public static class CollectionsGraphicsObjects
     {
         /// <summary>
         /// Коллекция графическиъ объектов

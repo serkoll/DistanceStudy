@@ -29,6 +29,7 @@ namespace DbRepository.Context
         public virtual DbSet<SubThema> SubThemas { get; set; }
         public virtual DbSet<Task> Tasks { get; set; }
         public virtual DbSet<Task_Algotithm> Task_Algotithm { get; set; }
+        public virtual DbSet<Task_MethodRef> Task_MethodRef { get; set; }
         public virtual DbSet<Task_Parametrs> Task_Parametrs { get; set; }
         public virtual DbSet<Thema> Themas { get; set; }
         public virtual DbSet<User> Users { get; set; }

@@ -16,20 +16,20 @@ namespace DistanceStudy.Forms.Teacher
         /// Инициализация компонентов формы и задание начальным
         /// текстам подсказок серого цвета
         /// </summary>
-        public FormEnterNew(WorkTree workTree)
+        public FormEnterNew(WorkTree workEntity)
         {
-            _wt = workTree;
+            _wt = workEntity;
             InitializeComponent();
-            InitControlValues(Color.Black, Color.Gray, string.Empty, string.Empty, new Size(600, 500), false);
+            InitControlValues(Color.Black, Color.Black, string.Empty, string.Empty, new Size(600, 500), false);
         }
 
         /// <summary>
         /// Инициализация конструктора для редактирования темы/подтемы
         /// </summary>
-        public FormEnterNew(WorkTree workTree, dynamic item)
+        public FormEnterNew(WorkTree workEntity, dynamic item)
         {
             _edited = item;
-            _wt = workTree;
+            _wt = workEntity;
             InitializeComponent();
             InitControlValues(Color.Black, (item.Description == null) ? Color.Gray : Color.Black, _edited.Name, _edited.Description, new Size(600, 500), true);
         }

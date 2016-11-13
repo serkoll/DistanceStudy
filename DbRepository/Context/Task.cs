@@ -18,6 +18,7 @@ namespace DbRepository.Context
         public Task()
         {
             this.Task_Algotithm = new HashSet<Task_Algotithm>();
+            this.Task_MethodRef = new HashSet<Task_MethodRef>();
             this.Task_Parametrs = new HashSet<Task_Parametrs>();
         }
     
@@ -31,6 +32,8 @@ namespace DbRepository.Context
         public virtual SubThema SubThema { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Task_Algotithm> Task_Algotithm { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Task_MethodRef> Task_MethodRef { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Task_Parametrs> Task_Parametrs { get; set; }
     }

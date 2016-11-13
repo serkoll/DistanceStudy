@@ -142,4 +142,13 @@
   <data name="WrongPasswordOrLogin" xml:space="preserve">
     <value>Неверный логин или пароль!</value>
   </data>
+  <data name="EnterTaskName" xml:space="preserve">
+    <value>Введите наименование задачи...</value>
+  </data>
+  <data name="EnterTextDescriptionOfTask" xml:space="preserve">
+    <value>Введите текстовое описание задачи...</value>
+  </data>
+  <data name="PathToTaskImage" xml:space="preserve">
+    <value>Путь к графическому описанию задачи...</value>
+  </data>
 </root>
