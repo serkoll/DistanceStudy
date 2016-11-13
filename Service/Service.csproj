@@ -57,16 +57,16 @@
       <Project>{c73287a9-9196-436f-a751-747a387aa2ed}</Project>
       <Name>Formatter</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Geometry\Geometry\Geometry.csproj">
-      <Project>{9445d9ed-e7b5-451b-bf93-2265ba1e186a}</Project>
-      <Name>Geometry</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DbRepository\DbRepository.csproj">
       <Project>{5ec8ce36-c3e5-41a4-bf16-3b4b088c6148}</Project>
       <Name>DbRepository</Name>
     </ProjectReference>
-    <ProjectReference Include="..\GraphicsModule\GraphicsModule\GraphicsModule.csproj">
-      <Project>{247cb926-7d51-45d6-9e9b-05aa4f4e30d6}</Project>
+    <ProjectReference Include="..\GraphicsModule.Geometry\GraphicsModule.Geometry.csproj">
+      <Project>{9445d9ed-e7b5-451b-bf93-2265ba1e186a}</Project>
+      <Name>GraphicsModule.Geometry</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GraphicsModule\GraphicsModule.csproj">
+      <Project>{247CB926-7D51-45D6-9E9B-05AA4F4E30D6}</Project>
       <Name>GraphicsModule</Name>
     </ProjectReference>
     <ProjectReference Include="..\Point3DCntrl\Point3DCntrl.csproj">

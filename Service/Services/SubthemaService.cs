@@ -1,4 +1,4 @@
-﻿using DbRepository.Classes.Context;
+﻿using DbRepository.Classes.Repository;
 using DbRepository.Context;
 
 namespace Service.Services

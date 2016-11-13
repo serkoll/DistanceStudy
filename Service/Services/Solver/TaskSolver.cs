@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using DbRepository.Classes.Keys;
 using DbRepository.Context;
 using Formatter;
-using GeometryObjects;
 using GraphicsModule;
-using Point3DCntrl;
+using GraphicsModule.Geometry.Objects;
 
 namespace Service.Services.Solver
 {

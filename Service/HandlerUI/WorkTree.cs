@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using DbRepository.Classes.Context;
 using DbRepository.Classes.Repository;
 using DbRepository.Context;
 using Microsoft.CSharp.RuntimeBinder;
 using Service.Services;
 using System.Drawing;
-using Authentication;
+using Service.Authentication;
 
 namespace Service.HandlerUI
 {

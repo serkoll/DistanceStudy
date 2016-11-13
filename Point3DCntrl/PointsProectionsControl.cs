@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DbRepository.Classes.Keys;
 using DbRepository.Classes.Repository;
 using DbRepository.Context;
 using Formatter;
-using GeometryObjects;
+using GraphicsModule.Geometry.Objects.Point;
 
 namespace Point3DCntrl
 {

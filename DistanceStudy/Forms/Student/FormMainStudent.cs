@@ -1,15 +1,8 @@
-﻿using DbRepository.Context;
-using Service.HandlerUI;
-using Service.Services;
-using Service.Services.Solver;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
+﻿using System;
 using System.Windows.Forms;
-using DrawGLFormTest;
+using GraphicModule.Form;
+using Service.HandlerUI;
+using Service.Services.Solver;
 
 namespace DistanceStudy.Forms.Student
 {
