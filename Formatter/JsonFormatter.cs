@@ -5,12 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using GeometryObjects;
 
 namespace Formatter
 {
     public static class JsonFormatter
     {
-        public static void WriteObjectsToJson(Collection<object> coll)
+        public static void WriteObjectsToJson(Collection<IObject> coll)
         {
             var fullPath = GetPathToJsonFile();
             var guid = Guid.NewGuid();
