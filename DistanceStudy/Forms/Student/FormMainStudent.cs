@@ -10,6 +10,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
+
 namespace DistanceStudy.Forms.Student
 {
     public partial class FormMainStudent : Form
@@ -19,7 +20,7 @@ namespace DistanceStudy.Forms.Student
         // Сервис для работы с задачей
         private TaskSolver _solver;
         // Форма для решения
-        private GraphicsModule.MainForm _graphForm;
+        private DrawGLFormTest.Form1 _graphForm;
         public FormMainStudent()
         {
             InitializeComponent();
@@ -59,7 +60,7 @@ namespace DistanceStudy.Forms.Student
 
         private void toolStripButtonSolve_Click(object sender, EventArgs e)
         {
-            _graphForm = new GraphicsModule.MainForm();
+            _graphForm = new DrawGLFormTest.Form1();
             _graphForm.MdiParent = this;
             _graphForm.Show();
             _graphForm.StartPosition = FormStartPosition.CenterScreen;

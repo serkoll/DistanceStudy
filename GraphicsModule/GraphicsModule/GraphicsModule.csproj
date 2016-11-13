@@ -7,7 +7,7 @@
     <ProjectGuid>{247CB926-7D51-45D6-9E9B-05AA4F4E30D6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GrahpicsModule</RootNamespace>
+    <RootNamespace>GraphicsModule</RootNamespace>
     <AssemblyName>GraphicsModule</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -30,9 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DrawYVP_DefaultSettings">
-      <HintPath>..\..\DLL\DrawYVP_DefaultSettings.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -46,41 +43,63 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Axis\AxisCalculation.cs" />
-    <Compile Include="Axis\Axis.cs" />
-    <Compile Include="Collections\CollectionGraphicsObjects.cs" />
-    <Compile Include="Collections\CollectionGraphicsObjectsTools.cs" />
-    <Compile Include="DrawObjects\DrawOperations.cs" />
-    <Compile Include="Cursors\CursorTools.cs" />
+    <Compile Include="Background\Axis.cs" />
+    <Compile Include="Canvas.cs" />
+    <Compile Include="Controls\Menu\LineMenuSelector.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Menu\LineMenuSelector.Designer.cs">
+      <DependentUpon>LineMenuSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Menu\PointMenuSelector.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Menu\PointMenuSelector.Designer.cs">
+      <DependentUpon>PointMenuSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Menu\SegmentMenuSelector.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Menu\SegmentMenuSelector.Designer.cs">
+      <DependentUpon>SegmentMenuSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CreateObjects\Points.cs" />
+    <Compile Include="CreateObjects\Segments.cs" />
+    <Compile Include="Operations\IOperation.cs" />
+    <Compile Include="CreateObjects\ICreate.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Settings\DefaultSettings.cs" />
-    <Compile Include="DrawObjects\DrawExternalObjects.cs" />
-    <Compile Include="DrawObjects\DrawObjectsToGraphics.cs" />
-    <Compile Include="DrawObjects\DrawObjectsToPictureBox.cs" />
-    <Compile Include="Forms\MainForm.cs">
-      <SubType>Form</SubType>
+    <Compile Include="CreateObjects\Lines.cs" />
+    <Compile Include="Storage.cs" />
+    <Compile Include="Controls\GraphicsControl.cs">
+      <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <Compile Include="Controls\GraphicsControl.Designer.cs">
+      <DependentUpon>GraphicsControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="DrawObjects\GraphicsTools.cs" />
-    <Compile Include="Grid\GridCalculation.cs" />
-    <Compile Include="Grid\Grid.cs" />
-    <Compile Include="LinkLine\LinkLine.cs" />
+    <Compile Include="Cursors\CursorMove.cs" />
+    <Compile Include="Operations\Operations.cs" />
+    <Compile Include="Background\Grid.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PropertyLine\PropertyLine2D.cs" />
-    <Compile Include="PropertyLine\PropertyLine3D.cs" />
-    <Compile Include="PropertyLine\PropertyLineProjections.cs" />
-    <Compile Include="PropertyPoint\PropertyPoint.cs" />
-    <Compile Include="PropertyPoint\PropertyPoint3D.cs" />
+    <Compile Include="Settings\AxisS.cs" />
+    <Compile Include="Settings\GridS.cs" />
+    <Compile Include="Settings\Settings.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Forms\MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\GraphicsControl.resx">
+      <DependentUpon>GraphicsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Menu\LineMenuSelector.resx">
+      <DependentUpon>LineMenuSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Menu\PointMenuSelector.resx">
+      <DependentUpon>PointMenuSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Menu\segmentMenuSelector.resx">
+      <DependentUpon>SegmentMenuSelector.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -88,96 +107,36 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Icons\128x128\3Dотрезок.ico" />
-    <Content Include="Icons\128x128\3Dточка.ico" />
-    <Content Include="Icons\128x128\куб+оси3D.ico" />
-    <Content Include="Icons\128x128\многоугольник1б.ico" />
-    <Content Include="Icons\128x128\многоугольник2б.ico" />
-    <Content Include="Icons\128x128\многоугольник3б.ico" />
-    <Content Include="Icons\128x128\окружность1.ico" />
-    <Content Include="Icons\128x128\окружность1б.ico" />
-    <Content Include="Icons\128x128\окружность2.ico" />
-    <Content Include="Icons\128x128\окружность2б.ico" />
-    <Content Include="Icons\128x128\окружность3.ico" />
-    <Content Include="Icons\128x128\окружность3б.ico" />
-    <Content Include="Icons\128x128\оси.ico" />
-    <Content Include="Icons\128x128\оси3D.ico" />
-    <Content Include="Icons\128x128\отрезок1.ico" />
-    <Content Include="Icons\128x128\отрезок2.ico" />
-    <Content Include="Icons\128x128\отрезок3.ico" />
-    <Content Include="Icons\128x128\Проекция1.ico" />
-    <Content Include="Icons\128x128\Проекция2.ico" />
-    <Content Include="Icons\128x128\Проекция3.ico" />
-    <Content Include="Icons\128x128\Проекция3D1.ico" />
-    <Content Include="Icons\128x128\Проекция3D2.ico" />
-    <Content Include="Icons\128x128\Проекция3D3.ico" />
-    <Content Include="Icons\128x128\Проекция3Dотрезка.ico" />
-    <Content Include="Icons\128x128\проекция3Dточки.ico" />
-    <Content Include="Icons\128x128\точка1.ico" />
-    <Content Include="Icons\128x128\точка2.ico" />
-    <Content Include="Icons\128x128\точка3.ico" />
-    <Content Include="Icons\32x32\3Dотрезок.ico" />
-    <Content Include="Icons\32x32\3Dточка.ico" />
-    <Content Include="Icons\32x32\куб+оси3D.ico" />
-    <Content Include="Icons\32x32\многоугольник1б.ico" />
-    <Content Include="Icons\32x32\многоугольник2б.ico" />
-    <Content Include="Icons\32x32\многоугольник3б.ico" />
-    <Content Include="Icons\32x32\окружность1.ico" />
-    <Content Include="Icons\32x32\окружность1б.ico" />
-    <Content Include="Icons\32x32\окружность2.ico" />
-    <Content Include="Icons\32x32\окружность2б.ico" />
-    <Content Include="Icons\32x32\окружность3.ico" />
-    <Content Include="Icons\32x32\окружность3б.ico" />
-    <Content Include="Icons\32x32\оси.ico" />
-    <Content Include="Icons\32x32\оси3D.ico" />
-    <Content Include="Icons\32x32\отрезок1.ico" />
-    <Content Include="Icons\32x32\отрезок2.ico" />
-    <Content Include="Icons\32x32\отрезок3.ico" />
-    <Content Include="Icons\32x32\Проекция1.ico" />
-    <Content Include="Icons\32x32\Проекция2.ico" />
-    <Content Include="Icons\32x32\Проекция3.ico" />
-    <Content Include="Icons\32x32\Проекция3D1.ico" />
-    <Content Include="Icons\32x32\Проекция3D2.ico" />
-    <Content Include="Icons\32x32\Проекция3D3.ico" />
-    <Content Include="Icons\32x32\Проекция3Dотрезка.ico" />
-    <Content Include="Icons\32x32\проекция3Dточки.ico" />
-    <Content Include="Icons\32x32\точка1.ico" />
-    <Content Include="Icons\32x32\точка2.ico" />
-    <Content Include="Icons\32x32\точка3.ico" />
-    <Content Include="Icons\64x64\3Dотрезок.ico" />
-    <Content Include="Icons\64x64\3Dточка.ico" />
-    <Content Include="Icons\64x64\куб+оси3D.ico" />
-    <Content Include="Icons\64x64\многоугольник1б.ico" />
-    <Content Include="Icons\64x64\многоугольник2б.ico" />
-    <Content Include="Icons\64x64\многоугольник3б.ico" />
-    <Content Include="Icons\64x64\окружность1.ico" />
-    <Content Include="Icons\64x64\окружность1б.ico" />
-    <Content Include="Icons\64x64\окружность2.ico" />
-    <Content Include="Icons\64x64\окружность2б.ico" />
-    <Content Include="Icons\64x64\окружность3.ico" />
-    <Content Include="Icons\64x64\окружность3б.ico" />
-    <Content Include="Icons\64x64\оси.ico" />
-    <Content Include="Icons\64x64\оси3D.ico" />
-    <Content Include="Icons\64x64\отрезок1.ico" />
-    <Content Include="Icons\64x64\отрезок2.ico" />
-    <Content Include="Icons\64x64\отрезок3.ico" />
-    <Content Include="Icons\64x64\Проекция1.ico" />
-    <Content Include="Icons\64x64\Проекция2.ico" />
-    <Content Include="Icons\64x64\Проекция3.ico" />
-    <Content Include="Icons\64x64\Проекция3D1.ico" />
-    <Content Include="Icons\64x64\Проекция3D2.ico" />
-    <Content Include="Icons\64x64\Проекция3D3.ico" />
-    <Content Include="Icons\64x64\Проекция3Dотрезка.ico" />
-    <Content Include="Icons\64x64\проекция3Dточки.ico" />
-    <Content Include="Icons\64x64\точка1.ico" />
-    <Content Include="Icons\64x64\точка2.ico" />
-    <Content Include="Icons\64x64\точка3.ico" />
+    <None Include="Icons\Lines\line3D.ico" />
+    <None Include="Icons\Points\dot3D.ico" />
+    <None Include="Icons\Lines\line.ico" />
+    <None Include="Icons\Lines\lineY0Z.ico" />
+    <None Include="Icons\Lines\lineX0Z.ico" />
+    <None Include="Icons\Lines\lineX0Y.ico" />
+    <None Include="Icons\Points\dotY0Z.ico" />
+    <None Include="Icons\Points\dotX0Z.ico" />
+    <None Include="Icons\Points\dotX0Y.ico" />
+    <None Include="Icons\Points\dot.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\DrawYVP_DefaultSettings_0712%2715\DrawYVP_DefaultSettings\DrawYVP_DefaultSettings.csproj">
+      <Project>{66bbf14a-cd8a-4d39-b29e-b5dba32de604}</Project>
+      <Name>DrawYVP_DefaultSettings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DrawYVP_DefaultSettings_0712%2715\DrawYVP_DefaultSettings\SettingsG\SettingsG\SettingsG.csproj">
+      <Project>{fa7a373a-2140-4f47-b5dd-e4819bf1093e}</Project>
+      <Name>SettingsG</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Geometry\Geometry\Geometry.csproj">
       <Project>{9445d9ed-e7b5-451b-bf93-2265ba1e186a}</Project>
       <Name>Geometry</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Icons\Segments\Segment3D.ico" />
+    <Content Include="Icons\Segments\SegmentX0Y.ico" />
+    <Content Include="Icons\Segments\SegmentX0Z.ico" />
+    <Content Include="Icons\Segments\SegmentY0Z.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

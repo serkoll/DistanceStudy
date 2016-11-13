@@ -29,7 +29,7 @@ namespace Service.Services.Solver
             var classInstance = Activator.CreateInstance(Type.GetType($"Point3DCntrl.PointsProectionsControl, Point3DCntrl"), null);
             var listMethods = GetMethodsFromDbForTask(task);
 
-            var graphicObjects = CollectionsGraphicsObjects.GraphicsObjectsCollection;
+            var graphicObjects = new System.Collections.ObjectModel.Collection<object>(); // CollectionsGraphicsObjects.GraphicsObjectsCollection; //чек
             JsonFormatter.WriteObjectsToJson(graphicObjects);
             foreach (var c in listMethods)
             {

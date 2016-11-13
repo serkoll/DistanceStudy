@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace DrawGL.Test
+namespace DrawGLFormTest
 {
     static class Program
     {
@@ -16,7 +13,7 @@ namespace DrawGL.Test
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new GraphicsModule.MainForm());
+            Application.Run(new Form1());
         }
     }
 }

@@ -148,6 +148,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DrawGL.Test\TestProject.csproj">
+      <Project>{df7dc90c-a6e8-45a2-9e88-69fcb0c12666}</Project>
+      <Name>TestProject</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GraphicsModule\GraphicsModule\GraphicsModule.csproj">
       <Project>{247cb926-7d51-45d6-9e9b-05aa4f4e30d6}</Project>
       <Name>GraphicsModule</Name>

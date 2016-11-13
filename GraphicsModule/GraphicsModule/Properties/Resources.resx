@@ -117,4 +117,47 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="line" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Icons\Lines\line.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dotX0Y" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Icons\Points\dotX0Y.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="lineX0Z" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Icons\Lines\lineX0Z.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dotX0Z" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Icons\Points\dotX0Z.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="lineY0Z" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Icons\Lines\lineY0Z.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dotY0Z" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Icons\Points\dotY0Z.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dot" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Icons\Points\dot.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="line3D" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Icons\Lines\line3D.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="lineX0Y" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Icons\Lines\lineX0Y.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dot3D" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Icons\Points\dot3D.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Segment3D" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Icons\Segments\Segment3D.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SegmentX0Y" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Icons\Segments\SegmentX0Y.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SegmentX0Z" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Icons\Segments\SegmentX0Z.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SegmentY0Z" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Icons\Segments\SegmentY0Z.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

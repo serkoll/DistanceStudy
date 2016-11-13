@@ -124,7 +124,6 @@ namespace Point3DCntrl
             bool Solve = true;//Значение "True", т.к. при обнаружении отрицательного значения PointsPositionControl_Val.PointMinus(Point3D_Solve, GeometryObjects.PointsPositionControl.Coordinate_Value) возвращает "True"
             string SolveCommet_1 = "Координаты:";
             Point3D Point3D = new Point3D();
-            PointsPositionControl PointsPositionControl = new PointsPositionControl();
             if (UserParams.Count != 0) //Контроль существования объектов в заданном словаре
             {
                 object Object_Val = 0;//Переменная для извлечения объектов              
@@ -207,7 +206,7 @@ namespace Point3DCntrl
         {
             bool Solve = false;
             //string SolveCommet_1 = ""
-            PointOfPlan1X0Y PointOfPlan1X0Y = new PointOfPlan1X0Y();
+            PointOfPlane1X0Y PointOfPlan1X0Y = new PointOfPlane1X0Y();
 
             if (UserParams.Count != 0) //Контроль существования объектов в заданном словаре
             {
@@ -275,7 +274,7 @@ namespace Point3DCntrl
         public bool PointOfPlan2X0Z_ByXZ(Dictionary<string, object> InitialParams, Dictionary<string, object> UserParams, ref Dictionary<string, object> SolveParams, ref Dictionary<string, string> CommentsTrue, ref Dictionary<string, string> CommentsFalse)
         {
             bool Solve = false;
-            PointOfPlan2X0Z PointOfPlan2X0Z = new PointOfPlan2X0Z();
+            PointOfPlane2X0Z PointOfPlan2X0Z = new PointOfPlane2X0Z();
             if (UserParams.Count != 0) //Контроль существования объектов в заданном словаре
             {
                 object Object_Val = 0;//Переменная для извлечения объектов 
@@ -341,7 +340,7 @@ namespace Point3DCntrl
         public bool PointOfPlan3Y0Z_ByYZ(Dictionary<string, object> InitialParams, Dictionary<string, object> UserParams, ref Dictionary<string, object> SolveParams, ref Dictionary<string, string> CommentsTrue, ref Dictionary<string, string> CommentsFalse)
         {
             bool Solve = false;
-            PointOfPlan3Y0Z PointOfPlan3Y0Z = new PointOfPlan3Y0Z();
+            PointOfPlane3Y0Z PointOfPlan3Y0Z = new PointOfPlane3Y0Z();
             if (UserParams.Count != 0) //Контроль существования объектов в заданном словаре
             {
                 object Object_Val = 0;//Переменная для извлечения объектов 
@@ -409,9 +408,9 @@ namespace Point3DCntrl
             bool Solve = false;
             //string SolveCommet_1 = "";
             Point3D Point3D = new Point3D();
-            PointOfPlan1X0Y PointOfPlan1X0Y = new PointOfPlan1X0Y();
-            PointOfPlan2X0Z PointOfPlan2X0Z = new PointOfPlan2X0Z();
-            ErrObject ErrorPoint3D = new ErrObject();
+            PointOfPlane1X0Y PointOfPlan1X0Y = new PointOfPlane1X0Y();
+            PointOfPlane2X0Z PointOfPlan2X0Z = new PointOfPlane2X0Z();
+            // ErrObject ErrorPoint3D = new ErrObject();
             if (UserParams.Count != 0) //Контроль существования объектов в заданном словаре
             {
                 object Object_Val = 0;//Переменная для извлечения объектов                
@@ -420,7 +419,7 @@ namespace Point3DCntrl
                     UserParams.TryGetValue("PointOfPlan1X0Y", out Object_Val);
                     if (Object_Val != null && !Object_Val.Equals(""))//Контроль существования извлеченного объекта "X"
                     {
-                        PointOfPlan1X0Y = (PointOfPlan1X0Y)UserParams["PointOfPlan1X0Y"]; Solve = true; //Запись объекта в экземпляр класса
+                        PointOfPlan1X0Y = (PointOfPlane1X0Y)UserParams["PointOfPlan1X0Y"]; Solve = true; //Запись объекта в экземпляр класса
                         CommentsTrue.Add("PointOfPlans_1X0Y_2X0Z_t_1", "Заданы значения координат горизонтальной проекции точки");
                     }
                     else { CommentsFalse.Add("PointOfPlans_1X0Y_2X0Z_f_1", "Не заданы значения координат горизонтальной проекции точки"); }//Добавление комментария отрицательного решения  
@@ -432,7 +431,7 @@ namespace Point3DCntrl
                     UserParams.TryGetValue("PointOfPlan2X0Z", out Object_Val);
                     if (Object_Val != null && !Object_Val.Equals(""))//Контроль существования извлеченного объекта "Y"
                     {
-                        PointOfPlan2X0Z = (PointOfPlan2X0Z)UserParams["PointOfPlan2X0Z"]; //Запись объекта в экземпляр класса
+                        PointOfPlan2X0Z = (PointOfPlane2X0Z)UserParams["PointOfPlan2X0Z"]; //Запись объекта в экземпляр класса
                         CommentsTrue.Add("PointOfPlans_1X0Y_2X0Z_t_2", "Заданы значения координат фронтальной проекции точки");
                     }
                     else { CommentsFalse.Add("PointOfPlans_1X0Y_2X0Z_f_2", "Не заданы значения координат фронтальной проекции точки"); Solve = false; }//Добавление комментария отрицательного решения  
@@ -445,7 +444,7 @@ namespace Point3DCntrl
                 Solve = Equals(PointOfPlan1X0Y.X, PointOfPlan2X0Z.X);//Анализ соответсвия
                 if (Solve == true)
                 {
-                    Point3D = Point3D.CreatePoint3DBy2Proections12(PointOfPlan1X0Y, PointOfPlan2X0Z, ref ErrorPoint3D, false);//Создание экземпляра объекта 'Point3D'
+                    Point3D = new Point3D(PointOfPlan1X0Y, PointOfPlan2X0Z);//Создание экземпляра объекта 'Point3D' //чек
                     SolveParams.Add("Point3D", Point3D);//Добавление экземпляра решения в словарь решений
                     CommentsTrue.Add("PointOfPlans_1X0Y_2X0Z_t_3", "Координаты горизонтальной и фронтальной проекций точки заданы верно");
                 }
@@ -476,9 +475,9 @@ namespace Point3DCntrl
         {
             bool Solve = false;
             Point3D Point3D = new Point3D();
-            PointOfPlan1X0Y PointOfPlan1X0Y = new PointOfPlan1X0Y();
-            PointOfPlan3Y0Z PointOfPlan3Y0Z = new PointOfPlan3Y0Z();
-            ErrObject ErrorPoint3D = new ErrObject();
+            PointOfPlane1X0Y PointOfPlan1X0Y = new PointOfPlane1X0Y();
+            PointOfPlane3Y0Z PointOfPlan3Y0Z = new PointOfPlane3Y0Z();
+            //ErrObject ErrorPoint3D = new ErrObject();
             if (UserParams.Count != 0) //Контроль существования объектов в заданном словаре
             {
                 object Object_Val = 0;//Переменная для извлечения объектов                
@@ -487,7 +486,7 @@ namespace Point3DCntrl
                     UserParams.TryGetValue("PointOfPlan1X0Y", out Object_Val);
                     if (Object_Val != null && !Object_Val.Equals(""))//Контроль существования извлеченного объекта
                     {
-                        PointOfPlan1X0Y = (PointOfPlan1X0Y)UserParams["PointOfPlan1X0Y"]; Solve = true; //Запись объекта в экземпляр класса
+                        PointOfPlan1X0Y = (PointOfPlane1X0Y)UserParams["PointOfPlan1X0Y"]; Solve = true; //Запись объекта в экземпляр класса
                         CommentsTrue.Add("PointOfPlans_1X0Y_3Y0Z_t_1", "Заданы значения координат горизонтальной проекции точки");
                     }
                     else { CommentsFalse.Add("PointOfPlans_1X0Y_3Y0Z_f_1", "Не заданы значения координат горизонтальной проекции точки"); }//Добавление комментария отрицательного решения  
@@ -499,7 +498,7 @@ namespace Point3DCntrl
                     UserParams.TryGetValue("PointOfPlan3Y0Z", out Object_Val);
                     if (Object_Val != null && !Object_Val.Equals(""))//Контроль существования извлеченного объекта
                     {
-                        PointOfPlan3Y0Z = (PointOfPlan3Y0Z)UserParams["PointOfPlan3Y0Z"]; //Запись объекта в экземпляр класса
+                        PointOfPlan3Y0Z = (PointOfPlane3Y0Z)UserParams["PointOfPlan3Y0Z"]; //Запись объекта в экземпляр класса
                         CommentsTrue.Add("PointOfPlans_1X0Y_3Y0Z_t_2", "Заданы значения координат профильной проекции точки");
                     }
                     else { CommentsFalse.Add("PointOfPlans_1X0Y_3Y0Z_f_2", "Не заданы значения координат профильной проекции точки"); Solve = false; }//Добавление комментария отрицательного решения  
@@ -512,7 +511,7 @@ namespace Point3DCntrl
                 Solve = Equals(PointOfPlan1X0Y.Y, PointOfPlan3Y0Z.Y);//Анализ соответсвия
                 if (Solve == true)
                 {
-                    Point3D = Point3D.CreatePoint3DBy2Proections13(PointOfPlan1X0Y, PointOfPlan3Y0Z, ref ErrorPoint3D, false);//Создание экземпляра объекта 'Point3D'
+                    Point3D = new Point3D(PointOfPlan1X0Y, PointOfPlan3Y0Z);//Создание экземпляра объекта 'Point3D' //чек
                     SolveParams.Add("Point3D", Point3D);//Добавление экземпляра решения в словарь решений
                     CommentsTrue.Add("PointOfPlans_1X0Y_3Y0Z_t_3", "Координаты горизонтальной и профильной проекций точки заданы верно");
                 }
@@ -543,9 +542,9 @@ namespace Point3DCntrl
         {
             bool Solve = false;
             Point3D Point3D = new Point3D();
-            PointOfPlan2X0Z PointOfPlan2X0Z = new PointOfPlan2X0Z();
-            PointOfPlan3Y0Z PointOfPlan3Y0Z = new PointOfPlan3Y0Z();
-            ErrObject ErrorPoint3D = new ErrObject();
+            PointOfPlane2X0Z PointOfPlan2X0Z = new PointOfPlane2X0Z();
+            PointOfPlane3Y0Z PointOfPlan3Y0Z = new PointOfPlane3Y0Z();
+            //ErrObject ErrorPoint3D = new ErrObject();
             if (UserParams.Count != 0) //Контроль существования объектов в заданном словаре
             {
                 object Object_Val = 0;//Переменная для извлечения объектов                
@@ -554,7 +553,7 @@ namespace Point3DCntrl
                     UserParams.TryGetValue("PointOfPlan2X0Z", out Object_Val);
                     if (Object_Val != null && !Object_Val.Equals(""))//Контроль существования извлеченного объекта
                     {
-                        PointOfPlan2X0Z = (PointOfPlan2X0Z)UserParams["PointOfPlan2X0Z"]; Solve = true; //Запись объекта в экземпляр класса
+                        PointOfPlan2X0Z = (PointOfPlane2X0Z)UserParams["PointOfPlan2X0Z"]; Solve = true; //Запись объекта в экземпляр класса
                         CommentsTrue.Add("PointOfPlans_2X0Z_3Y0Z_t_1", "Заданы значения координат фронтальной проекции точки");
                     }
                     else { CommentsFalse.Add("PointOfPlans_2X0Z_3Y0Z_f_1", "Не заданы значения координат фронтальной проекции точки"); }//Добавление комментария отрицательного решения  
@@ -566,7 +565,7 @@ namespace Point3DCntrl
                     UserParams.TryGetValue("PointOfPlan3Y0Z", out Object_Val);
                     if (Object_Val != null && !Object_Val.Equals(""))//Контроль существования извлеченного объекта
                     {
-                        PointOfPlan3Y0Z = (PointOfPlan3Y0Z)UserParams["PointOfPlan3Y0Z"]; //Запись объекта в экземпляр класса
+                        PointOfPlan3Y0Z = (PointOfPlane3Y0Z)UserParams["PointOfPlan3Y0Z"]; //Запись объекта в экземпляр класса
                         CommentsTrue.Add("PointOfPlans_2X0Z_3Y0Z_t_2", "Заданы значения координат профильной проекции точки");
                     }
                     else { CommentsFalse.Add("PointOfPlans_2X0Z_3Y0Z_f_2", "Не заданы значения координат профильной проекции точки"); Solve = false; }//Добавление комментария отрицательного решения  
@@ -579,7 +578,7 @@ namespace Point3DCntrl
                 Solve = Equals(PointOfPlan2X0Z.Z, PointOfPlan3Y0Z.Z);//Анализ соответсвия
                 if (Solve == true)
                 {
-                    Point3D = Point3D.CreatePoint3DBy2Proections23(PointOfPlan2X0Z, PointOfPlan3Y0Z, ref ErrorPoint3D, false);//Создание экземпляра объекта 'Point3D'
+                    Point3D = new Point3D(PointOfPlan2X0Z, PointOfPlan3Y0Z);//Создание экземпляра объекта 'Point3D' //чек
                     SolveParams.Add("Point3D", Point3D);//Добавление экземпляра решения в словарь решений
                     CommentsTrue.Add("PointOfPlans_2X0Z_3Y0Z_t_3", "Координаты фронтальной и профильной проекций точки заданы верно");
                 }
@@ -608,14 +607,14 @@ namespace Point3DCntrl
             bool Solve = false;
             if (UserParams.Count != 0) //Контроль существования объектов в заданном словаре
             {
-                PointOfPlan2X0Z PointOfPlan2X0Z = new PointOfPlan2X0Z();
+                PointOfPlane2X0Z PointOfPlan2X0Z = new PointOfPlane2X0Z();
                 object Object_Val = 0;//Переменная для извлечения объектов                
                 if (UserParams.ContainsKey("PointOfPlan2X0Z"))
                 {
                     UserParams.TryGetValue("PointOfPlan2X0Z", out Object_Val);
                     if (Object_Val != null && !Object_Val.Equals(""))//Контроль существования извлеченного объекта
                     {
-                        PointOfPlan2X0Z = (PointOfPlan2X0Z)UserParams["PointOfPlan2X0Z"]; //Запись объекта в экземпляр класса
+                        PointOfPlan2X0Z = (PointOfPlane2X0Z)UserParams["PointOfPlan2X0Z"]; //Запись объекта в экземпляр класса
                         CommentsTrue.Add("PointsOfPlan1_P2_t_1", "Задана фронтальная проекция точки");
                         if (PointOfPlan2X0Z.Z == 0)
                         {
@@ -650,14 +649,14 @@ namespace Point3DCntrl
             bool Solve = false;
             if (UserParams.Count != 0) //Контроль существования объектов в заданном словаре
             {
-                PointOfPlan3Y0Z PointOfPlan3Y0Z = new PointOfPlan3Y0Z();
+                PointOfPlane3Y0Z PointOfPlan3Y0Z = new PointOfPlane3Y0Z();
                 object Object_Val = 0;//Переменная для извлечения объектов                
                 if (UserParams.ContainsKey("PointOfPlan3Y0Z"))
                 {
                     UserParams.TryGetValue("PointOfPlan3Y0Z", out Object_Val);
                     if (Object_Val != null && !Object_Val.Equals(""))//Контроль существования извлеченного объекта
                     {
-                        PointOfPlan3Y0Z = (PointOfPlan3Y0Z)UserParams["PointOfPlan3Y0Z"]; //Запись объекта в экземпляр класса
+                        PointOfPlan3Y0Z = (PointOfPlane3Y0Z)UserParams["PointOfPlan3Y0Z"]; //Запись объекта в экземпляр класса
                         CommentsTrue.Add("PointsOfPlan1_P3_t_1", "Задана профильная проекция точки");
                         if (PointOfPlan3Y0Z.Z == 0)
                         {
@@ -693,14 +692,14 @@ namespace Point3DCntrl
             bool Solve = false;
             if (UserParams.Count != 0) //Контроль существования объектов в заданном словаре
             {
-                PointOfPlan1X0Y PointOfPlan1X0Y = new PointOfPlan1X0Y();
+                PointOfPlane1X0Y PointOfPlan1X0Y = new PointOfPlane1X0Y();
                 object Object_Val = 0;//Переменная для извлечения объектов                
                 if (UserParams.ContainsKey("PointOfPlan1X0Y"))
                 {
                     UserParams.TryGetValue("PointOfPlan1X0Y", out Object_Val);
                     if (Object_Val != null && !Object_Val.Equals(""))//Контроль существования извлеченного объекта
                     {
-                        PointOfPlan1X0Y = (PointOfPlan1X0Y)UserParams["PointOfPlan1X0Y"]; //Запись объекта в экземпляр класса
+                        PointOfPlan1X0Y = (PointOfPlane1X0Y)UserParams["PointOfPlan1X0Y"]; //Запись объекта в экземпляр класса
                         CommentsTrue.Add("PointsOfPlan2_P1_t_1", "Задана горизонтальная проекция точки");
                         if (PointOfPlan1X0Y.Y == 0)
                         {
@@ -735,14 +734,14 @@ namespace Point3DCntrl
             bool Solve = false;
             if (UserParams.Count != 0) //Контроль существования объектов в заданном словаре
             {
-                PointOfPlan3Y0Z PointOfPlan3Y0Z = new PointOfPlan3Y0Z();
+                PointOfPlane3Y0Z PointOfPlan3Y0Z = new PointOfPlane3Y0Z();
                 object Object_Val = 0;//Переменная для извлечения объектов                
                 if (UserParams.ContainsKey("PointOfPlan3Y0Z"))
                 {
                     UserParams.TryGetValue("PointOfPlan3Y0Z", out Object_Val);
                     if (Object_Val != null && !Object_Val.Equals(""))//Контроль существования извлеченного объекта
                     {
-                        PointOfPlan3Y0Z = (PointOfPlan3Y0Z)UserParams["PointOfPlan3Y0Z"]; //Запись объекта в экземпляр класса
+                        PointOfPlan3Y0Z = (PointOfPlane3Y0Z)UserParams["PointOfPlan3Y0Z"]; //Запись объекта в экземпляр класса
                         CommentsTrue.Add("PointsOfPlan2_P3_t_1", "Задана профильная проекция точки");
                         if (PointOfPlan3Y0Z.Y == 0)
                         {
@@ -777,14 +776,14 @@ namespace Point3DCntrl
             bool Solve = false;
             if (UserParams.Count != 0) //Контроль существования объектов в заданном словаре
             {
-                PointOfPlan1X0Y PointOfPlan1X0Y = new PointOfPlan1X0Y();
+                PointOfPlane1X0Y PointOfPlan1X0Y = new PointOfPlane1X0Y();
                 object Object_Val = 0;//Переменная для извлечения объектов                
                 if (UserParams.ContainsKey("PointOfPlan1X0Y"))
                 {
                     UserParams.TryGetValue("PointOfPlan1X0Y", out Object_Val);
                     if (Object_Val != null && !Object_Val.Equals(""))//Контроль существования извлеченного объекта
                     {
-                        PointOfPlan1X0Y = (PointOfPlan1X0Y)UserParams["PointOfPlan1X0Y"]; //Запись объекта в экземпляр класса
+                        PointOfPlan1X0Y = (PointOfPlane1X0Y)UserParams["PointOfPlan1X0Y"]; //Запись объекта в экземпляр класса
                         CommentsTrue.Add("PointsOfPlan3_P1_t_1", "Задана горизонтальная проекция точки");
                         if (PointOfPlan1X0Y.X == 0)
                         {
@@ -819,14 +818,14 @@ namespace Point3DCntrl
             bool Solve = false;
             if (UserParams.Count != 0) //Контроль существования объектов в заданном словаре
             {
-                PointOfPlan2X0Z PointOfPlan2X0Z = new PointOfPlan2X0Z();
+                PointOfPlane2X0Z PointOfPlan2X0Z = new PointOfPlane2X0Z();
                 object Object_Val = 0;//Переменная для извлечения объектов                
                 if (UserParams.ContainsKey("PointOfPlan2X0Z"))
                 {
                     UserParams.TryGetValue("PointOfPlan2X0Z", out Object_Val);
                     if (Object_Val != null && !Object_Val.Equals(""))//Контроль существования извлеченного объекта
                     {
-                        PointOfPlan2X0Z = (PointOfPlan2X0Z)UserParams["PointOfPlan2X0Z"]; //Запись объекта в экземпляр класса
+                        PointOfPlan2X0Z = (PointOfPlane2X0Z)UserParams["PointOfPlan2X0Z"]; //Запись объекта в экземпляр класса
                         CommentsTrue.Add("PointsOfPlan3_P2_t_1", "Задана фронтальная проекция точки");
                         if (PointOfPlan2X0Z.X == 0)
                         {
@@ -868,11 +867,11 @@ namespace Point3DCntrl
                 object Object_Val = 0;//Переменная для извлечения объектов                
                 if (UserParams.ContainsKey("PointOfPlan1X0Y"))
                 {
-                    PointOfPlan1X0Y PointOfPlan1X0Y = new PointOfPlan1X0Y();
+                    PointOfPlane1X0Y PointOfPlan1X0Y = new PointOfPlane1X0Y();
                     UserParams.TryGetValue("PointOfPlan1X0Y", out Object_Val);
                     if (Object_Val != null && !Object_Val.Equals(""))//Контроль существования извлеченного объекта
                     {
-                        PointOfPlan1X0Y = (PointOfPlan1X0Y)UserParams["PointOfPlan1X0Y"]; //Запись объекта в экземпляр класса
+                        PointOfPlan1X0Y = (PointOfPlane1X0Y)UserParams["PointOfPlan1X0Y"]; //Запись объекта в экземпляр класса
                         CommentsTrue.Add("PointsP1P2_OfX_t_1", "Задана горизонтальная проекция точки");
                         if (PointOfPlan1X0Y.X == 0)
                         {
@@ -884,11 +883,11 @@ namespace Point3DCntrl
                 }
                 else if (UserParams.ContainsKey("PointOfPlan2X0Z"))
                 {
-                    PointOfPlan2X0Z PointOfPlan2X0Z = new PointOfPlan2X0Z();
+                    PointOfPlane2X0Z PointOfPlan2X0Z = new PointOfPlane2X0Z();
                     UserParams.TryGetValue("PointOfPlan2X0Z", out Object_Val);
                     if (Object_Val != null && !Object_Val.Equals(""))//Контроль существования извлеченного объекта
                     {
-                        PointOfPlan2X0Z = (PointOfPlan2X0Z)UserParams["PointOfPlan2X0Z"]; //Запись объекта в экземпляр класса
+                        PointOfPlan2X0Z = (PointOfPlane2X0Z)UserParams["PointOfPlan2X0Z"]; //Запись объекта в экземпляр класса
                         CommentsTrue.Add("PointsP1P2_OfX_t_3", "Задана фронтальная проекция точки");
                         if (PointOfPlan2X0Z.X == 0)
                         {
@@ -929,11 +928,11 @@ namespace Point3DCntrl
                 object Object_Val = 0;//Переменная для извлечения объектов                
                 if (UserParams.ContainsKey("PointOfPlan1X0Y"))
                 {
-                    PointOfPlan1X0Y PointOfPlan1X0Y = new PointOfPlan1X0Y();
+                    PointOfPlane1X0Y PointOfPlan1X0Y = new PointOfPlane1X0Y();
                     UserParams.TryGetValue("PointOfPlan1X0Y", out Object_Val);
                     if (Object_Val != null && !Object_Val.Equals(""))//Контроль существования извлеченного объекта
                     {
-                        PointOfPlan1X0Y = (PointOfPlan1X0Y)UserParams["PointOfPlan1X0Y"]; //Запись объекта в экземпляр класса
+                        PointOfPlan1X0Y = (PointOfPlane1X0Y)UserParams["PointOfPlan1X0Y"]; //Запись объекта в экземпляр класса
                         CommentsTrue.Add("PointsP1P3_OfY_t_1", "Задана горизонтальная проекция точки");
                         if (PointOfPlan1X0Y.Y == 0)
                         {
@@ -945,11 +944,11 @@ namespace Point3DCntrl
                 }
                 else if (UserParams.ContainsKey("PointOfPlan3Y0Z"))
                 {
-                    PointOfPlan3Y0Z PointOfPlan3Y0Z = new PointOfPlan3Y0Z();
+                    PointOfPlane3Y0Z PointOfPlan3Y0Z = new PointOfPlane3Y0Z();
                     UserParams.TryGetValue("PointOfPlan3Y0Z", out Object_Val);
                     if (Object_Val != null && !Object_Val.Equals(""))//Контроль существования извлеченного объекта
                     {
-                        PointOfPlan3Y0Z = (PointOfPlan3Y0Z)UserParams["PointOfPlan3Y0Z"]; //Запись объекта в экземпляр класса
+                        PointOfPlan3Y0Z = (PointOfPlane3Y0Z)UserParams["PointOfPlan3Y0Z"]; //Запись объекта в экземпляр класса
                         CommentsTrue.Add("PointsP1P3_OfY_t_3", "Задана профильная проекция точки");
                         if (PointOfPlan3Y0Z.Y == 0)
                         {
@@ -990,11 +989,11 @@ namespace Point3DCntrl
                 object Object_Val = 0;//Переменная для извлечения объектов                
                 if (UserParams.ContainsKey("PointOfPlan2X0Z"))
                 {
-                    PointOfPlan2X0Z PointOfPlan2X0Z = new PointOfPlan2X0Z();
+                    PointOfPlane2X0Z PointOfPlan2X0Z = new PointOfPlane2X0Z();
                     UserParams.TryGetValue("PointOfPlan2X0Z", out Object_Val);
                     if (Object_Val != null && !Object_Val.Equals(""))//Контроль существования извлеченного объекта
                     {
-                        PointOfPlan2X0Z = (PointOfPlan2X0Z)UserParams["PointOfPlan2X0Z"]; //Запись объекта в экземпляр класса
+                        PointOfPlan2X0Z = (PointOfPlane2X0Z)UserParams["PointOfPlan2X0Z"]; //Запись объекта в экземпляр класса
                         CommentsTrue.Add("PointsP2P3_OfZ_t_1", "Задана фронтальная проекция точки");
                         if (PointOfPlan2X0Z.Z == 0)
                         {
@@ -1006,11 +1005,11 @@ namespace Point3DCntrl
                 }
                 else if (UserParams.ContainsKey("PointOfPlan3Y0Z"))
                 {
-                    PointOfPlan3Y0Z PointOfPlan3Y0Z = new PointOfPlan3Y0Z();
+                    PointOfPlane3Y0Z PointOfPlan3Y0Z = new PointOfPlane3Y0Z();
                     UserParams.TryGetValue("PointOfPlan3Y0Z", out Object_Val);
                     if (Object_Val != null && !Object_Val.Equals(""))//Контроль существования извлеченного объекта
                     {
-                        PointOfPlan3Y0Z = (PointOfPlan3Y0Z)UserParams["PointOfPlan3Y0Z"]; //Запись объекта в экземпляр класса
+                        PointOfPlan3Y0Z = (PointOfPlane3Y0Z)UserParams["PointOfPlan3Y0Z"]; //Запись объекта в экземпляр класса
                         CommentsTrue.Add("PointsP2P3_OfZ_t_3", "Задана профильная проекция точки");
                         if (PointOfPlan3Y0Z.Z == 0)
                         {
