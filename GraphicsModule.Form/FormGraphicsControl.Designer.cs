@@ -1,8 +1,8 @@
 ﻿using GraphicsModule.Controls;
 
-namespace GraphicModule.Form
+namespace GraphicsModule.Form
 {
-    partial class Form1
+    partial class FormGraphicsControl
     {
         /// <summary>
         /// Required designer variable.
@@ -42,14 +42,14 @@ namespace GraphicModule.Form
             this.graphicsControl1.Size = new System.Drawing.Size(1182, 613);
             this.graphicsControl1.TabIndex = 0;
             // 
-            // Form1
+            // FormGraphicsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1182, 613);
             this.Controls.Add(this.graphicsControl1);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "FormGraphicsControl";
+            this.Text = "FormGraphicsControl";
             this.ResumeLayout(false);
             this.PerformLayout();
 
