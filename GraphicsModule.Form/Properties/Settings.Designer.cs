@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GraphicModule.Form.Properties {
+namespace GraphicsModule.Form.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

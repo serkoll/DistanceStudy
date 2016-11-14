@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using GraphicModule.Form;
+using GraphicsModule.Form;
 using Service.HandlerUI;
 using Service.Services.Solver;
 
@@ -13,7 +13,7 @@ namespace DistanceStudy.Forms.Student
         // Сервис для работы с задачей
         private TaskSolver _solver;
         // Форма для решения
-        private Form1 _graphForm;
+        private FormGraphicsControl _graphForm;
         public FormMainStudent()
         {
             InitializeComponent();
@@ -53,7 +53,7 @@ namespace DistanceStudy.Forms.Student
 
         private void toolStripButtonSolve_Click(object sender, EventArgs e)
         {
-            _graphForm = new Form1();
+            _graphForm = new FormGraphicsControl();
             _graphForm.MdiParent = this;
             _graphForm.Show();
             _graphForm.StartPosition = FormStartPosition.CenterScreen;
@@ -66,7 +66,7 @@ namespace DistanceStudy.Forms.Student
 
         private void toolStripButtonCheckTask_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(_solver.StartCheckTask(_wt.GetObjectBySelectedNode()));
+            MessageBox.Show(_solver.StartCheckTask(_wt.GetObjectBySelectedNode(), _graphForm.Export()));
             _graphForm.Dispose();
             groupBoxTheory.Visible = true;
             toolStripButtonCheckTask.Visible = false;

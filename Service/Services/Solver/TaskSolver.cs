@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using DbRepository.Classes.Keys;
 using DbRepository.Context;
 using Formatter;
-using GraphicsModule;
 using GraphicsModule.Geometry.Objects;
 
 namespace Service.Services.Solver
@@ -23,15 +23,13 @@ namespace Service.Services.Solver
         /// Проверка текущей задачи
         /// </summary>
         /// <param name="task">Задача для проверки</param>
-        public string StartCheckTask(Task task)
+        public string StartCheckTask(Task task, Collection<IObject> graphicObjects)
         {
             ClearAllDictionaries();
             var sb = new StringBuilder();
             var classInstance = Activator.CreateInstance(Type.GetType($"Point3DCntrl.PointsProectionsControl, Point3DCntrl"), null);
             var listMethods = GetMethodsFromDbForTask(task);
 
-            var stor = new Storage();
-            var graphicObjects = new Storage().Objects;
             JsonFormatter.WriteObjectsToJson(graphicObjects);
             foreach (var c in listMethods)
             {
