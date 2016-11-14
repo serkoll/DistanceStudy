@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Forms;
-using Authentication;
 using DistanceStudy.Forms.Admin;
 using DistanceStudy.Forms.Teacher;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Service.Authentication;
 
 namespace DistanceStudy.Test
 {

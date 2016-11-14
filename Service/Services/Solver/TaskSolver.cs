@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using DbRepository.Classes.Keys;
 using DbRepository.Context;
 using Formatter;
 using GraphicsModule;
-using Point3DCntrl;
+using GraphicsModule.Geometry.Objects;
 
 namespace Service.Services.Solver
 {
@@ -29,7 +30,8 @@ namespace Service.Services.Solver
             var classInstance = Activator.CreateInstance(Type.GetType($"Point3DCntrl.PointsProectionsControl, Point3DCntrl"), null);
             var listMethods = GetMethodsFromDbForTask(task);
 
-            var graphicObjects = new System.Collections.ObjectModel.Collection<object>(); // CollectionsGraphicsObjects.GraphicsObjectsCollection; //чек
+            var stor = new Storage();
+            var graphicObjects = new Storage().Objects;
             JsonFormatter.WriteObjectsToJson(graphicObjects);
             foreach (var c in listMethods)
             {
@@ -70,7 +72,7 @@ namespace Service.Services.Solver
         /// </summary>
         /// <param name="userParam">Параметры введенные студентом</param>
         /// <param name="graphicObjects">Графические объекты</param>
-        private void ResolveKeyDependencyUserParam(string[] userParam, IList<object> graphicObjects)
+        private void ResolveKeyDependencyUserParam(string[] userParam, IList<IObject> graphicObjects)
         {
             // проверка на необходимость параметров от студента
             if (userParam.Length > 0 && userParam[0] != string.Empty)

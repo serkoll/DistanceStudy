@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using DbRepository.Classes.Context;
 using DbRepository.Classes.Repository;
 using DbRepository.Context;
 using Microsoft.CSharp.RuntimeBinder;
 using Service.Services;
 using System.Drawing;
-using Authentication;
+using Service.Authentication;
 
 namespace Service.HandlerUI
 {
@@ -29,7 +28,7 @@ namespace Service.HandlerUI
         // Сервис по работе с задачами
         private readonly TaskService _taskService;
         // Узел для копирования
-        private TreeNode _sourceNode { get; set; }
+        private TreeNode SourceNode { get; set; }
         // Буфер выбранного узла
         public TreeNode SelectedNode { get; set; }
 
@@ -51,9 +50,8 @@ namespace Service.HandlerUI
         /// <returns>Название типа формы</returns>
         public string GetTypeFormNeedToCreateBySelectedNodeForEdit()
         {
-            var currNode = SelectedNode;
             var parent = _tree.SelectedNode?.Parent;
-            if (parent == null || parent.Parent == null)
+            if (parent?.Parent == null)
             {
                 return "FormEnterNew";
             }
@@ -117,7 +115,7 @@ namespace Service.HandlerUI
             }
             catch (RuntimeBinderException)
             {
-                MessageBox.Show("GetMethodForUpdateNeededObject");
+                MessageBox.Show(@"GetMethodForUpdateNeededObject");
             }
             return null;
         }
@@ -151,9 +149,6 @@ namespace Service.HandlerUI
         /// <summary>
         /// Создание задачи первоначальное
         /// </summary>
-        /// <param name="name">Имя задачи</param>
-        /// <param name="desc">Описание задачи</param>
-        /// <param name="image">Графическое условие задачи (если есть)</param>
         public void CreateTask(Task task)
         {
             var subthemaId = GetSubthemaByNode(_tree.SelectedNode).SubthemaId;
@@ -200,7 +195,7 @@ namespace Service.HandlerUI
             var parent = currNode?.Parent;
             if (parent == null)
                 return GetThemaByNode(currNode);
-            if (parent != null && parent.Parent == null)
+            if (parent.Parent == null)
                 return GetSubthemaByNode(currNode);
             return GetTaskByNode(currNode);
         }
@@ -231,7 +226,7 @@ namespace Service.HandlerUI
         /// <param name="node">Копируемы узел</param>
         public void SetNodeToCopy(TreeNode node)
         {
-            _sourceNode = node;
+            SourceNode = node;
         }
 
         /// <summary>
@@ -239,19 +234,14 @@ namespace Service.HandlerUI
         /// </summary>
         public void PastCopiedNode()
         {
-            if (_sourceNode == null) return;
-            var thema = GetThemaByNode(_sourceNode);
+            if (SourceNode == null) return;
+            var thema = GetThemaByNode(SourceNode);
             if (thema != null)
             {
                 _themaService.Add(thema.Name, thema.Description, 0);
                 return;
             }
-            var subthema = GetSubthemaByNode(_sourceNode);
-            if (thema != null)
-            {
-                _subthemaService.Add(thema.Name, thema.Description, 0);
-                return;
-            }
+            GetSubthemaByNode(SourceNode);
         }
 
         /// <summary>
@@ -327,6 +317,7 @@ namespace Service.HandlerUI
         /// Добавление задач под подтему
         /// </summary>
         /// <param name="item">Подтема, в которую добавляются задачи</param>
+        /// <param name="targetNodes">Узел, в который добавляем</param>
         private void AddTasksFromSubthemaToTree(SubThema item, TreeNodeCollection targetNodes)
         {
             var tasks = _taskList.Where(c => c.SubthemaId.Equals(item.SubthemaId));

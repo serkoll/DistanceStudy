@@ -1,4 +1,6 @@
-﻿using System.Reflection;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
 using DbRepository.Context;
 using Service.Services;
@@ -12,16 +14,16 @@ namespace Service.HandlerUI
     public class WorkTask
     {
         // Сервис работы с задачами
-        private TaskService _taskService;
+        private readonly TaskService _taskService;
         // Активная задача
-        private Task _task;
+        private readonly Task _task;
         // Методы проверки задач
-        private MethodInfo[] mi;
+        private readonly MethodInfo[] _mi;
         public WorkTask(Task task)
         {
             _taskService = new TaskService();
             _task = task;
-            mi = _taskService.GetAllMethodsFromAssembly();
+            _mi = _taskService.GetAllMethodsFromAssembly();
         }
 
         /// <summary>
@@ -29,10 +31,9 @@ namespace Service.HandlerUI
         /// </summary>
         public void FillListBoxByCntrlAssembly(CheckedListBox checkedListBoxProectionsControls)
         {
-            foreach (MethodInfo m in mi)
+            foreach (MethodInfo m in _mi.Where(m => m.DeclaringType != null && m.DeclaringType.Name.Equals("PointsProectionsControl")))
             {
-                if (m.DeclaringType.Name.Equals("PointsProectionsControl"))
-                    checkedListBoxProectionsControls.Items.Add(m.Name);
+                checkedListBoxProectionsControls.Items.Add(m.Name);
             }
         }
 
@@ -42,10 +43,12 @@ namespace Service.HandlerUI
         /// <param name="comboBox">Комбобокс с методами</param>
         public void FillComboBoxByCntrlAssembly(ComboBox comboBox)
         {
-            foreach (MethodInfo m in mi)
+            foreach (MethodInfo m in _mi)
             {
-                if (m.DeclaringType.Name.Equals("PointsProectionsControl"))
+                if (m.DeclaringType != null && m.DeclaringType.Name.Equals("PointsProectionsControl"))
+                {
                     comboBox.Items.Add(m.Name);
+                }
             }
         }
         
@@ -96,16 +99,17 @@ namespace Service.HandlerUI
         /// <param name="textBoxDesc">Описание алгоритма</param>
         /// <param name="listBoxUserParam">Листбокс с параметрами, которые требуются от пользователя</param>
         /// <param name="listBoxInitialParam">Листбокс с параметрами, которые требуется передать для инициализации алгоритма</param>
+        /// <param name="listBoxSolveParams">Листобокс с параметрами решений на выходе</param>
         public void ChangeInfoAboutSelectedItem(string selectedMethodName, TextBox textBoxDesc, ListBox listBoxUserParam, ListBox listBoxInitialParam, ListBox listBoxSolveParams)
         {
             textBoxDesc.Text = string.Empty;
             listBoxInitialParam.Items.Clear();
             listBoxUserParam.Items.Clear();
             listBoxSolveParams.Items.Clear();
-            string desc = string.Empty;
-            string[] userParams = new string[0],
-                   initParams = new string[0],
-                   solveParams = new string[0];
+            string desc;
+            string[] userParams,
+                   initParams,
+                   solveParams;
             XmlFormatter.GetInfoAboutMethodFromXml(selectedMethodName, out desc, out userParams, out initParams, out solveParams);
             textBoxDesc.Text = desc;
             AddParamsToListBox(listBoxInitialParam, initParams);
@@ -121,14 +125,7 @@ namespace Service.HandlerUI
         /// <returns></returns>
         public bool CheckItemOnInitialParams(string method, ListBox listBoxInitialParams)
         {
-            foreach (var item in listBoxInitialParams.Items)
-            {
-                if (item.ToString() != string.Empty)
-                {
-                    return true;
-                }  
-            }
-            return false;
+            return listBoxInitialParams.Items.Cast<object>().Any(item => item.ToString() != string.Empty);
         }
 
         /// <summary>
@@ -147,11 +144,11 @@ namespace Service.HandlerUI
         /// </summary>
         /// <param name="listBox">Лист бокс</param>
         /// <param name="parameters">Список текстовых параметров</param>
-        private void AddParamsToListBox(ListBox listBox, string[] parameters)
+        private void AddParamsToListBox(ListBox listBox, IEnumerable<string> parameters)
         {
-            for (int i = 0; i < parameters.Length; i++)
+            foreach (var t in parameters)
             {
-                listBox.Items.Add(parameters[i]);
+                listBox.Items.Add(t);
             }
         }
     }

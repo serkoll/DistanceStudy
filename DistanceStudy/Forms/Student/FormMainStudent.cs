@@ -1,15 +1,8 @@
-﻿using DbRepository.Context;
-using Service.HandlerUI;
-using Service.Services;
-using Service.Services.Solver;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
+﻿using System;
 using System.Windows.Forms;
-
+using GraphicModule.Form;
+using Service.HandlerUI;
+using Service.Services.Solver;
 
 namespace DistanceStudy.Forms.Student
 {
@@ -20,7 +13,7 @@ namespace DistanceStudy.Forms.Student
         // Сервис для работы с задачей
         private TaskSolver _solver;
         // Форма для решения
-        private DrawGLFormTest.Form1 _graphForm;
+        private Form1 _graphForm;
         public FormMainStudent()
         {
             InitializeComponent();
@@ -60,7 +53,7 @@ namespace DistanceStudy.Forms.Student
 
         private void toolStripButtonSolve_Click(object sender, EventArgs e)
         {
-            _graphForm = new DrawGLFormTest.Form1();
+            _graphForm = new Form1();
             _graphForm.MdiParent = this;
             _graphForm.Show();
             _graphForm.StartPosition = FormStartPosition.CenterScreen;

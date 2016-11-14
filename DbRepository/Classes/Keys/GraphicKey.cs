@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Point3DCntrl
+namespace DbRepository.Classes.Keys
 {
     public class GraphicKey : IEquatable<GraphicKey>
     {

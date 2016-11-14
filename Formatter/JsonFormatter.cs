@@ -1,16 +1,17 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Point3DCntrl;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using DbRepository.Classes.Keys;
+using GraphicsModule.Geometry.Objects;
 
 namespace Formatter
 {
     public static class JsonFormatter
     {
-        public static void WriteObjectsToJson(Collection<object> coll)
+        public static void WriteObjectsToJson(Collection<IObject> coll)
         {
             var fullPath = GetPathToJsonFile();
             var guid = Guid.NewGuid();

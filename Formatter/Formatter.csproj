@@ -55,9 +55,9 @@
       <Project>{5EC8CE36-C3E5-41A4-BF16-3B4B088C6148}</Project>
       <Name>DbRepository</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Geometry\Geometry\Geometry.csproj">
-      <Project>{9445D9ED-E7B5-451B-BF93-2265BA1E186A}</Project>
-      <Name>Geometry</Name>
+    <ProjectReference Include="..\GraphicsModule.Geometry\GraphicsModule.Geometry.csproj">
+      <Project>{9445d9ed-e7b5-451b-bf93-2265ba1e186a}</Project>
+      <Name>GraphicsModule.Geometry</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

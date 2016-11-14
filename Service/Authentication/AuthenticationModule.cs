@@ -3,7 +3,7 @@ using System.Windows.Forms;
 using DbRepository.Classes.Repository;
 using DbRepository.Context;
 
-namespace Authentication
+namespace Service.Authentication
 {
     // Модуль отвчающий за аутентификацию пользователей в приложении
     public class AuthenticationModule

@@ -1,16 +1,13 @@
-﻿using Point3DCntrl;
-using Service.HandlerUI;
-using System;
-using System.Reflection;
+﻿using System;
 using System.Windows.Forms;
-using System.Linq;
+using Service.HandlerUI;
 
 namespace DistanceStudy.Forms.Teacher
 {
     public partial class FormCreateAlgorithm : Form
     {
         // Объект для работы с задачей
-        private WorkTask _taskWorker;
+        private readonly WorkTask _taskWorker;
 
         public FormCreateAlgorithm(WorkTask taskWorker)
         {

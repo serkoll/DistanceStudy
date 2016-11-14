@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Keys\GraphicKey.cs" />
+    <Compile Include="Classes\Keys\TaskMethodRef.cs" />
     <Compile Include="Classes\Repository\ErrorMessagesDb.cs" />
     <Compile Include="Classes\Repository\SubthemaRepository.cs" />
     <Compile Include="Classes\Repository\TaskRepository.cs" />
@@ -82,7 +83,6 @@
     <Compile Include="Context\Task.cs">
       <DependentUpon>DSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Classes\Keys\TaskMethodRef.cs" />
     <Compile Include="Context\Task_Algotithm.cs">
       <DependentUpon>DSModel.tt</DependentUpon>
     </Compile>
