@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Collections.ObjectModel;
 using GraphicsModule.CreateObjects;
 using GraphicsModule.Cursors;
 using GraphicsModule.Operations;
+using GraphicsModule.Geometry.Objects;
 
 namespace GraphicsModule.Controls
 {
@@ -61,17 +63,25 @@ namespace GraphicsModule.Controls
             Controls.Add(ptMenuSelector); //Добавляем к контролам компонента
             Controls.Add(lnMenuSelector); //Добавляем к контролам компонента
             Controls.Add(sgMenuSelector);
-        }
-        /// <summary>
-        /// Загрузка формы
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void GraphicsControl_Load(object sender, EventArgs e)
-        {
             _canvas = new Canvas(_settings, MainPictureBox); // Инициализируем полотно отрисовки
             _storage = new Storage(); // инициализируем хранилище графических объектов
-            var rc = _canvas.Graphics.ClipBounds;
+        }
+        /// <summary>
+        /// Импорт графических объектов
+        /// </summary>
+        /// <param name="coll"></param>
+        public void ImportObjects(Collection<IObject> coll)
+        {
+            _storage.Objects = coll;
+            _canvas.ReDraw(_storage);
+        }
+        /// <summary>
+        /// Экспорт графических объектов
+        /// </summary>
+        /// <returns></returns>
+        public Collection<IObject> ExportObjects()
+        {
+            return _storage.Objects;
         }
         /// <summary>
         /// Скрывает выпадающее меню для графических примитивов
