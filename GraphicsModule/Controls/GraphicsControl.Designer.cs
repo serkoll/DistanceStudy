@@ -499,7 +499,6 @@ namespace GraphicsModule.Controls
             this.DoubleBuffered = true;
             this.Name = "GraphicsControl";
             this.Size = new System.Drawing.Size(1232, 593);
-            this.Load += new System.EventHandler(this.GraphicsControl_Load);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyUp);
             this.baseTableLayoutPanel.ResumeLayout(false);
             this.baseTableLayoutPanel.PerformLayout();
