@@ -12,7 +12,7 @@ namespace GraphicsModule.Geometry.Objects.Line
         public PointOfPlane3Y0Z Point0 { get; set; }
         public PointOfPlane3Y0Z Point1 { get; set; }
         public List<PointF> pts { get; set; }
-        private LineDrawCalc calc;
+        private LineDrawCalc _calc;
         public double ky { get; set; }
         public double kz { get; set; }
         public LineOfPlane3Y0Z()
@@ -41,8 +41,8 @@ namespace GraphicsModule.Geometry.Objects.Line
             Point1 = pt1;
             ky = pt1.Y - pt0.Y;
             kz = pt1.Z - pt0.Z;
-            calc = new LineDrawCalc(frameCenter, rc);
-            pts = calc.CalculatePointsForDraw(this);
+            _calc = new LineDrawCalc(frameCenter, rc);
+            pts = _calc.CalculatePointsForDraw(this);
         }
         
         public LineOfPlane3Y0Z(Line3D line)
@@ -66,20 +66,17 @@ namespace GraphicsModule.Geometry.Objects.Line
         }
         public void CalculatePointsForDraw()
         {
-            pts = calc.CalculatePointsForDraw(this);
+            pts = _calc.CalculatePointsForDraw(this);
         }
         public void CalculatePointsForDraw(System.Drawing.Point frameCenter, RectangleF rc)
         {
-            calc = new LineDrawCalc(frameCenter, rc);
-            pts = calc.CalculatePointsForDraw(this);
+            _calc = new LineDrawCalc(frameCenter, rc);
+            pts = _calc.CalculatePointsForDraw(this);
         }
         public bool IsSelected(System.Drawing.Point mscoords, float ptR, System.Drawing.Point frameCenter, double distance)
         {
             var ln = DeterminePosition.ForLineProjection(this, frameCenter);
-            if (Analyze.Analyze.LinesPos.IncidenceOfPoint(mscoords, ln, 35 * distance))
-                return true;
-            else
-                return false;
+            return Analyze.Analyze.LinesPos.IncidenceOfPoint(mscoords, ln, 35 * distance);
         }
     }
 }

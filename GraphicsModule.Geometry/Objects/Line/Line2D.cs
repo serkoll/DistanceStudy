@@ -67,25 +67,21 @@ namespace GraphicsModule.Geometry.Objects.Line
         public Line2D(Point2D pt1, Point2D pt2)
         {
             //Контроль совпадения заданных точек
-            if (!Analyze.Analyze.PointPos.Coincidence(pt1, pt2))
-            {
-                Point0 = pt1;
-                Point1 = pt2;
-                kx = pt2.X - pt1.X;
-                ky = pt2.Y - pt1.Y;
-            }
+            if (Analyze.Analyze.PointPos.Coincidence(pt1, pt2)) return;
+            Point0 = pt1;
+            Point1 = pt2;
+            kx = pt2.X - pt1.X;
+            ky = pt2.Y - pt1.Y;
         }
         public Line2D(Point2D pt1, Point2D pt2, PictureBox pb)
         {
             //Контроль совпадения заданных точек
-            if (!Analyze.Analyze.PointPos.Coincidence(pt1, pt2))
-            {
-                Point0 = pt1;
-                Point1 = pt2;
-                kx = pt2.X - pt1.X;
-                ky = pt2.Y - pt1.Y;
-                CalculatePointsForDraw(pb);
-            }
+            if (Analyze.Analyze.PointPos.Coincidence(pt1, pt2)) return;
+            Point0 = pt1;
+            Point1 = pt2;
+            kx = pt2.X - pt1.X;
+            ky = pt2.Y - pt1.Y;
+            CalculatePointsForDraw(pb);
         }
 
         //====================================================================================================
@@ -148,41 +144,27 @@ namespace GraphicsModule.Geometry.Objects.Line
                 pts.Add(new PointF(pb.Width, (float)Point0.Y));
             }
             //y=0
-            float x = (float)(-Point0.Y * kx / ky + Point0.X);
+            var x = (float)(-Point0.Y * kx / ky + Point0.X);
             if (x > 0) pts.Add(new PointF(x, 0));
             //y=max
             x = (float)((pb.Height - Point0.Y) * kx / ky + Point0.X);
             if (x < pb.Width) pts.Add(new PointF(x, pb.Height));
-            if (CheckListState(pts))
-            {
-                //x = 0
-                var y = (float)(-Point0.X * ky / kx + Point0.Y);
-                if (y > 0) pts.Add(new PointF(0, y));
-                if (CheckListState(pts))
-                {
-                    //x = max
-                    y = (int)((pb.Width - Point0.X) * ky / kx + Point0.Y);
-                    pts.Add(new PointF(pb.Width, y));
-                }
-            }
+            if (!CheckListState(pts)) return;
+            //x = 0
+            var y = (float)(-Point0.X * ky / kx + Point0.Y);
+            if (y > 0) pts.Add(new PointF(0, y));
+            if (!CheckListState(pts)) return;
+            //x = max
+            y = (int)((pb.Width - Point0.X) * ky / kx + Point0.Y);
+            pts.Add(new PointF(pb.Width, y));
         }
         private bool CheckListState(List<PointF> lst)
         {
-            if (lst.Count < 2)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return lst.Count < 2;
         }
         public bool IsSelected(System.Drawing.Point mscoords, float ptR, System.Drawing.Point frameCenter, double distance)
         {
-            if (Analyze.Analyze.LinesPos.IncidenceOfPoint(mscoords, this, 35 * distance))
-                return true;
-            else
-                return false;
+            return Analyze.Analyze.LinesPos.IncidenceOfPoint(mscoords, this, 35 * distance);
         }
     }
 }

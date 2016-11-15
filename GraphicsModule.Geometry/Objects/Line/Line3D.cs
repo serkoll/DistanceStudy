@@ -49,24 +49,21 @@ namespace GraphicsModule.Geometry.Objects.Line
         }
         public static Line3D Create(Collection<IObject> lst)
         {
-            if (lst[0].GetType().Name == "LineOfPlane1X0Y")
+            if (lst[0].GetType() == typeof(LineOfPlane1X0Y))
             {
-                if (lst[1].GetType().Name == "LineOfPlane2X0Z")
-                    return new Line3D((LineOfPlane1X0Y)lst[0], (LineOfPlane2X0Z)lst[1]);
-                else
-                    return new Line3D((LineOfPlane1X0Y)lst[0], (LineOfPlane3Y0Z)lst[1]);
+                return lst[1].GetType() == typeof(LineOfPlane2X0Z) ? 
+                    new Line3D((LineOfPlane1X0Y)lst[0], (LineOfPlane2X0Z)lst[1]) :
+                    new Line3D((LineOfPlane1X0Y)lst[0], (LineOfPlane3Y0Z)lst[1]);
             }
-            else if (lst[0].GetType().Name == "LineOfPlane2X0Z")
+            if (lst[0].GetType() == typeof(LineOfPlane2X0Z))
             {
-                if (lst[1].GetType().Name == "LineOfPlane1X0Y")
-                    return new Line3D((LineOfPlane1X0Y)lst[1], (LineOfPlane2X0Z)lst[0]);
-                else
-                    return new Line3D((LineOfPlane2X0Z)lst[0], (LineOfPlane3Y0Z)lst[1]);
+                return lst[1].GetType() == typeof(LineOfPlane1X0Y) ? 
+                    new Line3D((LineOfPlane1X0Y)lst[1], (LineOfPlane2X0Z)lst[0]) : 
+                    new Line3D((LineOfPlane2X0Z)lst[0], (LineOfPlane3Y0Z)lst[1]);
             }
-            else if (lst[1].GetType().Name == "LineOfPlane1X0Y")
-                return new Line3D((LineOfPlane1X0Y)lst[1], (LineOfPlane3Y0Z)lst[0]);
-            else
-                return new Line3D((LineOfPlane2X0Z)lst[1], (LineOfPlane3Y0Z)lst[0]);
+            return lst[1].GetType() == typeof(LineOfPlane1X0Y) ? 
+                new Line3D((LineOfPlane1X0Y)lst[1], (LineOfPlane3Y0Z)lst[0]) : 
+                new Line3D((LineOfPlane2X0Z)lst[1], (LineOfPlane3Y0Z)lst[0]);
         }
         /// <summary> Задает 3D точку, заданную двумя (горизонтальной и фронтальной) проекциями</summary>
         /// <remarks> При неправильном заднии проекций возвращает "Nothing" </remarks>
@@ -206,16 +203,9 @@ namespace GraphicsModule.Geometry.Objects.Line
         }
         public bool IsSelected(System.Drawing.Point mscoords, float ptR, System.Drawing.Point frameCenter, double distance)
         {
-            if (LineOfPlane1X0Y.IsSelected(mscoords, ptR, frameCenter, distance) ||
-               LineOfPlane2X0Z.IsSelected(mscoords, ptR, frameCenter, distance) ||
-               LineOfPlane3Y0Z.IsSelected(mscoords, ptR, frameCenter, distance))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return LineOfPlane1X0Y.IsSelected(mscoords, ptR, frameCenter, distance) ||
+                   LineOfPlane2X0Z.IsSelected(mscoords, ptR, frameCenter, distance) ||
+                   LineOfPlane3Y0Z.IsSelected(mscoords, ptR, frameCenter, distance);
         }
         private void CalculatePointsForDraw(System.Drawing.Point frameCenter, RectangleF rc1, RectangleF rc2, RectangleF rc3)
         {
