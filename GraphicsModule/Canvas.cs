@@ -8,8 +8,8 @@ namespace GraphicsModule
 {
     public class Canvas
     {
-        public PictureBox pb { get; set; }
-        public Settings.Settings st { get; set; }
+        public PictureBox PicBox { get; set; }
+        public Settings.Settings St { get; set; }
         public Bitmap Mainbmp { get; set; }
         public Graphics Graphics { get; set; }
         public Grid Grid { get; set; }
@@ -17,11 +17,11 @@ namespace GraphicsModule
         public RectangleF PlaneX0Y { get; set; }
         public RectangleF PlaneX0Z { get; set; }
         public RectangleF PlaneY0Z { get; set; }
-        public Canvas(Settings.Settings st, PictureBox pb)
+        public Canvas(Settings.Settings st, PictureBox picBox)
         {
-            this.pb = pb;
-            this.st = st;
-            Mainbmp = new Bitmap(pb.ClientSize.Width, pb.ClientSize.Height, PixelFormat.Format24bppRgb);
+            PicBox = picBox;
+            St = st;
+            Mainbmp = new Bitmap(picBox.ClientSize.Width, picBox.ClientSize.Height, PixelFormat.Format24bppRgb);
             Mainbmp.MakeTransparent();
             Graphics = Graphics.FromImage(Mainbmp);
             Grid = new Grid(st);
@@ -32,17 +32,17 @@ namespace GraphicsModule
             {
                 Axis.AddAxisToGraphics(Grid.Center, Graphics);
             }
-            PlaneX0Y = new RectangleF(0, pb.Height / 2, pb.Width / 2, pb.Height / 2);
-            PlaneX0Z = new RectangleF(0, 0, pb.Width / 2, pb.Height / 2);
-            PlaneY0Z = new Rectangle(pb.Width / 2, 0, pb.Width / 2, pb.Height / 2);
-            pb.Image = (Image)Mainbmp.Clone();
-            pb.Refresh();
+            PlaneX0Y = new RectangleF(0, picBox.Height / 2, picBox.Width / 2, picBox.Height / 2);
+            PlaneX0Z = new RectangleF(0, 0, picBox.Width / 2, picBox.Height / 2);
+            PlaneY0Z = new RectangleF(picBox.Width / 2, 0, picBox.Width / 2, picBox.Height / 2);
+            picBox.Image = (Image)Mainbmp.Clone();
+            picBox.Refresh();
         }
         
         public void Update()
         {
-            pb.Image = (Image)Mainbmp.Clone();
-            pb.Refresh();
+            PicBox.Image = (Image)Mainbmp.Clone();
+            PicBox.Refresh();
         }
         public void Update(PictureBox pb)
         {
@@ -68,20 +68,20 @@ namespace GraphicsModule
         }
         public void ReDraw(Storage strg)
         {
-            Mainbmp = new Bitmap(pb.ClientSize.Width, pb.ClientSize.Height, PixelFormat.Format24bppRgb);
+            Mainbmp = new Bitmap(PicBox.ClientSize.Width, PicBox.ClientSize.Height, PixelFormat.Format24bppRgb);
             Mainbmp.MakeTransparent();
             Graphics = Graphics.FromImage(Mainbmp);
             Grid.CreateGridToGraphics(Graphics);
             Axis.CalculateByGrid(Grid.Knots);
-            if (st.AxisS.IsDraw)
+            if (St.AxisS.IsDraw)
             {
                 Axis.AddAxisToGraphics(Grid.Center, Graphics);
             }
 
-            strg.DrawObjects(st, Grid.Center, Graphics);
+            strg.DrawObjects(St, Grid.Center, Graphics);
 
-            pb.Image = (Image)Mainbmp.Clone();
-            pb.Refresh();
+            PicBox.Image = (Image)Mainbmp.Clone();
+            PicBox.Refresh();
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Drawing;
 using GraphicsModule.Geometry;
 using GraphicsModule.Geometry.Analyze;
@@ -25,19 +24,16 @@ namespace GraphicsModule.CreateObjects
             {
                 strg.TempObjects.Add(ptOfPlane);
                 strg.DrawLastAddedToTempObjects(setting, frameCenter, can.Graphics);
-                return;
             }
             else
             {
-                if (!Analyze.PointPos.Coincidence((Point2D)strg.TempObjects[0], new Point2D(pt)))
-                {
-                    _source = new Line2D((Point2D)strg.TempObjects[0], new Point2D(pt), can.pb);
-                    strg.AddToCollection(_source);
-                    _source = null;
-                    strg.TempObjects.Clear();
-                    can.ReDraw(strg);
-                    strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
-                }
+                if (Analyze.PointPos.Coincidence((Point2D) strg.TempObjects[0], new Point2D(pt))) return;
+                _source = new Line2D((Point2D)strg.TempObjects[0], new Point2D(pt), can.PicBox);
+                strg.AddToCollection(_source);
+                _source = null;
+                strg.TempObjects.Clear();
+                can.ReDraw(strg);
+                strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
             }
         }
     }
@@ -56,19 +52,17 @@ namespace GraphicsModule.CreateObjects
                 {
                     strg.TempObjects.Add(ptOfPlane);
                     strg.DrawLastAddedToTempObjects(setting, frameCenter, can.Graphics);
-                    return;
                 }
                 else
                 {
-                    if (!Analyze.PointPos.Coincidence((PointOfPlane1X0Y)strg.TempObjects[0], new PointOfPlane1X0Y(pt, frameCenter)))
-                    {
-                        _source = new SegmentOfPlane1X0Y((PointOfPlane1X0Y)strg.TempObjects[0], new PointOfPlane1X0Y(pt, frameCenter));
-                        strg.AddToCollection(_source);
-                        _source = null;
-                        strg.TempObjects.Clear();
-                        can.ReDraw(strg);
-                        strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
-                    }
+                    if (Analyze.PointPos.Coincidence((PointOfPlane1X0Y) strg.TempObjects[0],
+                        new PointOfPlane1X0Y(pt, frameCenter))) return;
+                    _source = new SegmentOfPlane1X0Y((PointOfPlane1X0Y)strg.TempObjects[0], new PointOfPlane1X0Y(pt, frameCenter));
+                    strg.AddToCollection(_source);
+                    _source = null;
+                    strg.TempObjects.Clear();
+                    can.ReDraw(strg);
+                    strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
                 }
             }
         }
@@ -88,19 +82,16 @@ namespace GraphicsModule.CreateObjects
                 {
                     strg.TempObjects.Add(ptOfPlane);
                     strg.DrawLastAddedToTempObjects(setting, frameCenter, can.Graphics);
-                    return;
                 }
                 else
                 {
-                    if (!Analyze.PointPos.Coincidence((PointOfPlane2X0Z)strg.TempObjects[0], new PointOfPlane2X0Z(pt, frameCenter)))
-                    {
-                        _source = new SegmentOfPlane2X0Z((PointOfPlane2X0Z)strg.TempObjects[0], new PointOfPlane2X0Z(pt, frameCenter));
-                        strg.AddToCollection(_source);
-                        _source = null;
-                        strg.TempObjects.Clear();
-                        can.ReDraw(strg);
-                        strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
-                    }
+                    if (Analyze.PointPos.Coincidence((PointOfPlane2X0Z) strg.TempObjects[0], new PointOfPlane2X0Z(pt, frameCenter))) return;
+                    _source = new SegmentOfPlane2X0Z((PointOfPlane2X0Z)strg.TempObjects[0], new PointOfPlane2X0Z(pt, frameCenter));
+                    strg.AddToCollection(_source);
+                    _source = null;
+                    strg.TempObjects.Clear();
+                    can.ReDraw(strg);
+                    strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
                 }
             }
         }
@@ -120,19 +111,16 @@ namespace GraphicsModule.CreateObjects
                 {
                     strg.TempObjects.Add(ptOfPlane);
                     strg.DrawLastAddedToTempObjects(setting, frameCenter, can.Graphics);
-                    return;
                 }
                 else
                 {
-                    if (!Analyze.PointPos.Coincidence((PointOfPlane3Y0Z)strg.TempObjects[0], new PointOfPlane3Y0Z(pt, frameCenter)))
-                    {
-                        _source = new SegmentOfPlane3Y0Z((PointOfPlane3Y0Z)strg.TempObjects[0], new PointOfPlane3Y0Z(pt, frameCenter));
-                        strg.AddToCollection(_source);
-                        _source = null;
-                        strg.TempObjects.Clear();
-                        can.ReDraw(strg);
-                        strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
-                    }
+                    if (Analyze.PointPos.Coincidence((PointOfPlane3Y0Z) strg.TempObjects[0], new PointOfPlane3Y0Z(pt, frameCenter))) return;
+                    _source = new SegmentOfPlane3Y0Z((PointOfPlane3Y0Z)strg.TempObjects[0], new PointOfPlane3Y0Z(pt, frameCenter));
+                    strg.AddToCollection(_source);
+                    _source = null;
+                    strg.TempObjects.Clear();
+                    can.ReDraw(strg);
+                    strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
                 }
             }
         }
@@ -142,52 +130,45 @@ namespace GraphicsModule.CreateObjects
     /// </summary>
     public class CreateSegment3D : ICreate
     {
-        private IObject tempLineOfPlane = null;
+        private IObject _tempLineOfPlane;
         private Segment3D _source;
         public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
         {
             var ptOfPlane = TypeOf.PointOfPlane(pt, frameCenter);
             if (strg.TempObjects.Count == 0)
             {
-                if (tempLineOfPlane == null)
+                if (_tempLineOfPlane == null)
                 {
                     strg.TempObjects.Add(ptOfPlane);
                     strg.DrawLastAddedToTempObjects(setting, frameCenter, can.Graphics);
-                    return;
                 }
                 else
                 {
-                    if (IsInOnePlane(tempLineOfPlane, ptOfPlane)) return;
-                    if (IsOnLinkLine(tempLineOfPlane, ptOfPlane))
-                    {
-                        strg.TempObjects.Add(ptOfPlane);
-                        strg.DrawLastAddedToTempObjects(setting, frameCenter, can.Graphics);
-                        return;
-                    }
+                    if (IsInOnePlane(_tempLineOfPlane, ptOfPlane)) return;
+                    if (!IsOnLinkLine(_tempLineOfPlane, ptOfPlane)) return;
+                    strg.TempObjects.Add(ptOfPlane);
+                    strg.DrawLastAddedToTempObjects(setting, frameCenter, can.Graphics);
                 }
             }
             else
             {
-                if (Object.ReferenceEquals(strg.TempObjects[0].GetType(), ptOfPlane.GetType()) && (tempLineOfPlane == null))
+                if (ReferenceEquals(strg.TempObjects[0].GetType(), ptOfPlane.GetType()) && (_tempLineOfPlane == null))
                 {
                     strg.TempObjects.Add(ptOfPlane);
-                    tempLineOfPlane = CreateSegmentOfPlane(strg.TempObjects, setting, frameCenter, can);
+                    _tempLineOfPlane = CreateSegmentOfPlane(strg.TempObjects, setting, frameCenter, can);
                     strg.TempObjects.Clear();
                     can.ReDraw(strg);
-                    tempLineOfPlane.Draw(setting, frameCenter, can.Graphics);
-                    return;
+                    _tempLineOfPlane.Draw(setting, frameCenter, can.Graphics);
                 }
-                else if (IsOnLinkLine(tempLineOfPlane, ptOfPlane))
+                else if (IsOnLinkLine(_tempLineOfPlane, ptOfPlane))
                 {
                     strg.TempObjects.Add(ptOfPlane);
-                    if (IsSegment3DCreatable(tempLineOfPlane, CreateSegmentOfPlane(strg.TempObjects, setting, frameCenter, can), setting, frameCenter, can))
-                    {
-                        strg.TempObjects.Clear();
-                        tempLineOfPlane = null;
-                        strg.Objects.Add(_source);
-                        can.ReDraw(strg);
-                        strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
-                    }
+                    if (!IsSegment3DCreatable(_tempLineOfPlane, CreateSegmentOfPlane(strg.TempObjects, setting, frameCenter, can), setting, frameCenter, can)) return;
+                    strg.TempObjects.Clear();
+                    _tempLineOfPlane = null;
+                    strg.Objects.Add(_source);
+                    can.ReDraw(strg);
+                    strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
                 }
             }
         }
@@ -296,69 +277,27 @@ namespace GraphicsModule.CreateObjects
         #region IsOnLinkLine
         protected bool IsOnLinkLine12(SegmentOfPlane1X0Y lnproj, PointOfPlane2X0Z ptproj)
         {
-            if (lnproj.Point0.X == ptproj.X || lnproj.Point1.X == ptproj.X)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return lnproj.Point0.X == ptproj.X || lnproj.Point1.X == ptproj.X;
         }
         protected bool IsOnLinkLine13(SegmentOfPlane1X0Y lnproj, PointOfPlane3Y0Z ptproj)
         {
-            if (lnproj.Point0.Y == ptproj.Y || lnproj.Point1.Y == ptproj.Y)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return lnproj.Point0.Y == ptproj.Y || lnproj.Point1.Y == ptproj.Y;
         }
         protected bool IsOnLinkLine21(SegmentOfPlane2X0Z lnproj, PointOfPlane1X0Y ptproj)
         {
-            if (lnproj.Point0.X == ptproj.X || lnproj.Point1.X == ptproj.X)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return lnproj.Point0.X == ptproj.X || lnproj.Point1.X == ptproj.X;
         }
         protected bool IsOnLinkLine23(SegmentOfPlane2X0Z lnproj, PointOfPlane3Y0Z ptproj)
         {
-            if (lnproj.Point0.Z == ptproj.Z || lnproj.Point1.Z == ptproj.Z)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return lnproj.Point0.Z == ptproj.Z || lnproj.Point1.Z == ptproj.Z;
         }
         protected bool IsOnLinkLine31(SegmentOfPlane3Y0Z lnproj, PointOfPlane1X0Y ptproj)
         {
-            if (lnproj.Point0.Y == ptproj.Y || lnproj.Point1.Y == ptproj.Y)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return lnproj.Point0.Y == ptproj.Y || lnproj.Point1.Y == ptproj.Y;
         }
         protected bool IsOnLinkLine32(SegmentOfPlane3Y0Z lnproj, PointOfPlane2X0Z ptproj)
         {
-            if (lnproj.Point0.Z == ptproj.Z || lnproj.Point1.Z == ptproj.Z)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return lnproj.Point0.Z == ptproj.Z || lnproj.Point1.Z == ptproj.Z;
         }
         #endregion
     }
@@ -370,7 +309,7 @@ namespace GraphicsModule.CreateObjects
             new SelectSegmentOfPlane().Execute(pt, strg, can);
             if (strg.SelectedObjects.Count > 1)
             {
-                if (Object.ReferenceEquals(strg.SelectedObjects[0].GetType(), strg.SelectedObjects[1].GetType()))
+                if (ReferenceEquals(strg.SelectedObjects[0].GetType(), strg.SelectedObjects[1].GetType()))
                 {
                     strg.SelectedObjects.Remove(strg.SelectedObjects[0]);
                     can.ReDraw(strg);
@@ -385,19 +324,16 @@ namespace GraphicsModule.CreateObjects
                     strg.AddToCollection(_source);
                     _source = null;
                     strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
-                    return;
                 }
                 else
                 {
                     strg.SelectedObjects.RemoveAt(strg.SelectedObjects.Count - 1);
                     can.ReDraw(strg);
-                    return;
                 }
             }
             else
             {
                 can.ReDraw(strg);
-                return;
             }
         }
     }
