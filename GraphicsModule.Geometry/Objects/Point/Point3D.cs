@@ -23,7 +23,6 @@ namespace GraphicsModule.Geometry.Objects.Point
         /// <remarks>Исходные координаты точки: X=0; Y=0; Z=0</remarks>
         public Point3D()
         {
-            new Point2D();
             Z = 0;
             InitializePointsOfPlane();
         }
@@ -54,48 +53,33 @@ namespace GraphicsModule.Geometry.Objects.Point
         }
         public static Point3D Create(Collection<IObject> lst)
         {
-            if (lst[0].GetType().Name == "PointOfPlane1X0Y")
+            if (lst[0].GetType() == typeof(PointOfPlane1X0Y))
             {
-                if (lst[1].GetType().Name == "PointOfPlane2X0Z")
-                    return CreateByPointOfPlane1and2((PointOfPlane1X0Y)lst[0], (PointOfPlane2X0Z)lst[1]);
-                else
-                    return CreateByPointOfPlane1and3((PointOfPlane1X0Y)lst[0], (PointOfPlane3Y0Z)lst[1]);
+                return lst[1].GetType() == typeof(PointOfPlane2X0Z) ?
+                    CreateByPointOfPlane1and2((PointOfPlane1X0Y)lst[0], (PointOfPlane2X0Z)lst[1]) :
+                    CreateByPointOfPlane1and3((PointOfPlane1X0Y)lst[0], (PointOfPlane3Y0Z)lst[1]);
             }
-            else if (lst[0].GetType().Name == "PointOfPlane2X0Z")
+            if (lst[0].GetType() == typeof(PointOfPlane2X0Z))
             {
-                if (lst[1].GetType().Name == "PointOfPlane1X0Y")
-                    return CreateByPointOfPlane1and2((PointOfPlane1X0Y)lst[1], (PointOfPlane2X0Z)lst[0]);
-                else
-                    return CreateByPointOfPlane2and3((PointOfPlane2X0Z)lst[0], (PointOfPlane3Y0Z)lst[1]);
+                return lst[1].GetType() == typeof(PointOfPlane1X0Y) ?
+                    CreateByPointOfPlane1and2((PointOfPlane1X0Y)lst[1], (PointOfPlane2X0Z)lst[0]) :
+                    CreateByPointOfPlane2and3((PointOfPlane2X0Z)lst[0], (PointOfPlane3Y0Z)lst[1]);
             }
-            else if (lst[1].GetType().Name == "PointOfPlane1X0Y")
-                return CreateByPointOfPlane1and3((PointOfPlane1X0Y)lst[1], (PointOfPlane3Y0Z)lst[0]);
-            else
-                return CreateByPointOfPlane2and3((PointOfPlane2X0Z)lst[1], (PointOfPlane3Y0Z)lst[0]);
+            return lst[1].GetType() == typeof(PointOfPlane1X0Y) ? 
+                CreateByPointOfPlane1and3((PointOfPlane1X0Y)lst[1], (PointOfPlane3Y0Z)lst[0]) : 
+                CreateByPointOfPlane2and3((PointOfPlane2X0Z)lst[1], (PointOfPlane3Y0Z)lst[0]);
         }
         private static Point3D CreateByPointOfPlane1and2(PointOfPlane1X0Y pt1, PointOfPlane2X0Z pt2)
         {
-            if (pt1.X == pt2.X)
-            {
-                return new Point3D(pt1, pt2);
-            }
-            else return null;
+            return pt1.X == pt2.X ? new Point3D(pt1, pt2) : null;
         }
         private static Point3D CreateByPointOfPlane1and3(PointOfPlane1X0Y pt1, PointOfPlane3Y0Z pt3)
         {
-            if (pt1.Y == pt3.Y)
-            {
-                return new Point3D(pt1, pt3);
-            }
-            else return null;
+            return pt1.Y == pt3.Y ? new Point3D(pt1, pt3) : null;
         }
         private static Point3D CreateByPointOfPlane2and3(PointOfPlane2X0Z pt2, PointOfPlane3Y0Z pt3)
         {
-            if (pt2.Z == pt3.Z)
-            {
-                return new Point3D(pt2, pt3);
-            }
-            else return null;
+            return pt2.Z == pt3.Z ? new Point3D(pt2, pt3) : null;
         }
         public void InitializePointsOfPlane()
         {
@@ -167,11 +151,8 @@ namespace GraphicsModule.Geometry.Objects.Point
         }
         public bool IsSelected(System.Drawing.Point mscoords, float ptR, System.Drawing.Point frameCenter, double distance)
         {
-            double[] dst = Calculate.Distance(mscoords, ptR, frameCenter, this);
-            if (dst[0] < distance || dst[1] < distance || dst[2] < distance)
-                return true;
-            else
-                return false;
+            var dst = Calculate.Distance(mscoords, ptR, frameCenter, this);
+            return dst[0] < distance || dst[1] < distance || dst[2] < distance;
         }
     }
 }

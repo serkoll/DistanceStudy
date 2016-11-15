@@ -17,7 +17,7 @@ namespace GraphicsModule.Geometry.Objects.Point
 
         /// <summary>Инициализирует новый экземпляр двумерной проекции точки с указанными координатами</summary>
         /// <remarks></remarks>
-        public PointOfPlane3Y0Z(double Y, double Z) { this.Y = Y; this.Z = Z; }//Конструктор, устанавливающий пользовательские значения координат 2D точки
+        public PointOfPlane3Y0Z(double y, double z) { Y = y; Z = z; }//Конструктор, устанавливающий пользовательские значения координат 2D точки
         public PointOfPlane3Y0Z(System.Drawing.Point pt, System.Drawing.Point center)
         {
             Y = pt.X - center.X;
@@ -29,14 +29,7 @@ namespace GraphicsModule.Geometry.Objects.Point
         public static bool Creatable(System.Drawing.Point pt, System.Drawing.Point frameCenter)
         {
             var temp = new System.Drawing.Point(pt.X - frameCenter.X, pt.Y - frameCenter.Y);
-            if (temp.X >= 0 & temp.Y <= 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return temp.X >= 0 && temp.Y <= 0;
         }
         /// <summary>Получает или задает координату Y двумерной проекции точки</summary>
         /// <remarks></remarks>
@@ -101,10 +94,7 @@ namespace GraphicsModule.Geometry.Objects.Point
         }
         public bool IsSelected(System.Drawing.Point mscoords, float ptR, System.Drawing.Point frameCenter, double distance)
         {
-            if (Calculate.Distance(mscoords, ptR, frameCenter, this) < distance)
-                return true;
-            else
-                return false;
+            return Calculate.Distance(mscoords, ptR, frameCenter, this) < distance;
         }
     }
 }
