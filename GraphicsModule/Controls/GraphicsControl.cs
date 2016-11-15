@@ -37,7 +37,7 @@ namespace GraphicsModule.Controls
         /// <summary>
         /// Класс настроек
         /// </summary>
-        private Setting.Settings _settings;
+        private Settings.Settings _settings;
         /// <summary>
         /// Текущее инициализированное правило создания объека
         /// </summary>
@@ -56,7 +56,7 @@ namespace GraphicsModule.Controls
         public GraphicsControl()
         {
             InitializeComponent();
-            _settings = new Setting.Settings(); //Получаем экземпляр настроек
+            _settings = new Settings.Settings(); //Получаем экземпляр настроек
             ptMenuSelector = new Controls.Menu.PointMenuSelector(MainPictureBox); //Создаем меню вариантов для точек
             lnMenuSelector = new Controls.Menu.LineMenuSelector(MainPictureBox); //Создаем меню вариантов для линий
             sgMenuSelector = new Controls.Menu.SegmentMenuSelector(MainPictureBox);

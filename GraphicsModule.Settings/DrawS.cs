@@ -1,7 +1,6 @@
 ﻿using System.Drawing;
-using GraphicsModule.Geometry.Settings;
 
-namespace GraphicsModule.Geometry.Settingss
+namespace GraphicsModule.Settings
 {
     public class DrawS
     {

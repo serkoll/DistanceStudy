@@ -6,8 +6,8 @@ using GraphicsModule.Geometry.Analyze;
 using GraphicsModule.Geometry.Objects;
 using GraphicsModule.Geometry.Objects.Line;
 using GraphicsModule.Geometry.Objects.Point;
-using GraphicsModule.Geometry.Settingss;
 using GraphicsModule.Operations;
+using GraphicsModule.Settings;
 
 namespace GraphicsModule.CreateObjects
 {
@@ -17,13 +17,13 @@ namespace GraphicsModule.CreateObjects
     public class CreateLine2D : ICreate
     {
         private Line2D _source;
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
+        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas can, DrawS settings, Storage strg)
         {
             var ptOfPlane = new Point2D(pt);
             if (strg.TempObjects.Count == 0)
             {
                 strg.TempObjects.Add(ptOfPlane);
-                strg.DrawLastAddedToTempObjects(setting, frameCenter, can.Graphics);
+                strg.DrawLastAddedToTempObjects(settings, frameCenter, can.Graphics);
                 return;
             }
             else
@@ -35,7 +35,7 @@ namespace GraphicsModule.CreateObjects
                     _source = null;
                     strg.TempObjects.Clear();
                     can.ReDraw(strg);
-                    strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
+                    strg.DrawLastAddedToObjects(settings, frameCenter, can.Graphics);
                 }
             }
         }

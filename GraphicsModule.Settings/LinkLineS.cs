@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace GraphicsModule.Geometry.Settings
+namespace GraphicsModule.Settings
 {
     public class LinkLineS
     {

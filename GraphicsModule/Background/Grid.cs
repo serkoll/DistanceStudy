@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Drawing;
-using GraphicsModule.Setting;
+using GraphicsModule.Settings;
 
 namespace GraphicsModule.Background
 {
@@ -29,7 +29,7 @@ namespace GraphicsModule.Background
         /// <summary>
         /// Получает значение переключателя сетки
         /// </summary>
-        public Grid(Setting.Settings settings)
+        public Grid(Settings.Settings settings)
         {
             Setting = settings.GridS;
         }

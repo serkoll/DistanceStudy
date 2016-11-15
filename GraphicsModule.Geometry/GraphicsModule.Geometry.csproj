@@ -60,14 +60,12 @@
     <Compile Include="Objects\Segment\SegmentOfPlane2X0Z.cs" />
     <Compile Include="Objects\Segment\SegmentOfPlane3Y0Z.cs" />
     <Compile Include="TypeOf.cs" />
-    <Compile Include="Settingss\DrawS.cs" />
     <Compile Include="EquationsSysEvalution\EquationsSysCalc.cs" />
     <Compile Include="EquationsSysEvalution\SluGaussSolve.cs" />
     <Compile Include="Objects\IObject.cs" />
     <Compile Include="Objects\Point\IPointOfPlane.cs" />
     <Compile Include="Objects\Line\Line2D.cs" />
     <Compile Include="Objects\Line\Line3D.cs" />
-    <Compile Include="Settingss\LinkLineS.cs" />
     <Compile Include="Objects\Line\LineOfPlane1X0Y.cs" />
     <Compile Include="Objects\Line\LineOfPlane2X0Z.cs" />
     <Compile Include="Objects\Line\LineOfPlane3Y0Z.cs" />
@@ -83,6 +81,12 @@
     <Compile Include="Objects\Point\PointOfPlane2X0Z.cs" />
     <Compile Include="Objects\Point\PointOfPlane3Y0Z.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GraphicsModule.Settings\GraphicsModule.Settings.csproj">
+      <Project>{fa7a373a-2140-4f47-b5dd-e4819bf1093e}</Project>
+      <Name>GraphicsModule.Settings</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

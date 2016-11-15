@@ -7,8 +7,8 @@ using GraphicsModule.Geometry.Objects;
 using GraphicsModule.Geometry.Objects.Line;
 using GraphicsModule.Geometry.Objects.Point;
 using GraphicsModule.Geometry.Objects.Segment;
-using GraphicsModule.Geometry.Settingss;
 using GraphicsModule.Operations;
+using GraphicsModule.Settings;
 
 namespace GraphicsModule.CreateObjects
 {

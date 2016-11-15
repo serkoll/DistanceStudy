@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
 using System.Drawing.Imaging;
 using GraphicsModule.Background;
@@ -14,7 +9,7 @@ namespace GraphicsModule
     public class Canvas
     {
         public PictureBox pb { get; set; }
-        public Setting.Settings st { get; set; }
+        public Settings.Settings st { get; set; }
         public Bitmap Mainbmp { get; set; }
         public Graphics Graphics { get; set; }
         public Grid Grid { get; set; }
@@ -22,7 +17,7 @@ namespace GraphicsModule
         public RectangleF PlaneX0Y { get; set; }
         public RectangleF PlaneX0Z { get; set; }
         public RectangleF PlaneY0Z { get; set; }
-        public Canvas(Setting.Settings st, PictureBox pb)
+        public Canvas(Settings.Settings st, PictureBox pb)
         {
             this.pb = pb;
             this.st = st;
@@ -54,7 +49,7 @@ namespace GraphicsModule
             pb.Image = (Image)Mainbmp.Clone();
             pb.Refresh();
         }
-        public void ReDraw(Setting.Settings st, Storage strg, PictureBox pb)
+        public void ReDraw(Settings.Settings st, Storage strg, PictureBox pb)
         {
             Mainbmp = new Bitmap(pb.ClientSize.Width, pb.ClientSize.Height, PixelFormat.Format24bppRgb);
             Mainbmp.MakeTransparent();

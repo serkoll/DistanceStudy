@@ -1,5 +1,5 @@
 ﻿using System.Drawing;
-using GraphicsModule.Setting;
+using GraphicsModule.Settings;
 
 namespace GraphicsModule.Background
 {
@@ -23,7 +23,7 @@ namespace GraphicsModule.Background
         /// <summary>
         /// Конструкто по умолчанию, инициализирует переменные для работы с классом, расчитывающим оси, и с классом настроек осей
         /// </summary>
-        public Axis(Setting.Settings settings)
+        public Axis(Settings.Settings settings)
         {
             Setting = settings.AxisS;
         }

@@ -2,8 +2,8 @@
 using System.Drawing;
 using GraphicsModule.Geometry;
 using GraphicsModule.Geometry.Objects.Point;
-using GraphicsModule.Geometry.Settingss;
 using GraphicsModule.Operations;
+using GraphicsModule.Settings;
 
 namespace GraphicsModule.CreateObjects
 {

@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Drawing;
 using GraphicsModule.Geometry.Objects;
-using GraphicsModule.Geometry.Settingss;
+using GraphicsModule.Settings;
 
 namespace GraphicsModule
 {
@@ -56,10 +55,11 @@ namespace GraphicsModule
             DeletedObjects.Clear();
             TempObjects.Clear();
         }
+
         /// <summary>
         /// Добавляет объект в коллекцию графическиъ объектов
         /// </summary>
-        /// <param name="objectSource"></param>
+        /// <param name="source"></param>
         public void AddToCollection(IObject source)
         {
             if (source != null)
@@ -73,7 +73,7 @@ namespace GraphicsModule
         /// <param name="st">Настройки</param>
         /// <param name="frameCenter">Центр системы координат</param>
         /// <param name="g">Целевой Graphics</param>
-        public void DrawObjects(Setting.Settings st, Point frameCenter, Graphics g)
+        public void DrawObjects(Settings.Settings st, Point frameCenter, Graphics g)
         {
             foreach(IObject ob in Objects)
             {

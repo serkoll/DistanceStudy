@@ -1,6 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using GraphicsModule.Settings;
+using System.Collections.ObjectModel;
 using System.Drawing;
-using GraphicsModule.Geometry.Settingss;
 
 namespace GraphicsModule.Geometry.Objects.Point
 {
