@@ -32,9 +32,9 @@ namespace GraphicsModule
             {
                 Axis.AddAxisToGraphics(Grid.Center, Graphics);
             }
-            PlaneX0Y = new RectangleF(0, picBox.Height / 2, picBox.Width / 2, picBox.Height / 2);
-            PlaneX0Z = new RectangleF(0, 0, picBox.Width / 2, picBox.Height / 2);
-            PlaneY0Z = new RectangleF(picBox.Width / 2, 0, picBox.Width / 2, picBox.Height / 2);
+            PlaneX0Y = new RectangleF(0, Grid.Center.Y, Grid.Center.X, Grid.Center.Y);
+            PlaneX0Z = new RectangleF(0, 0, Grid.Center.X, Grid.Center.Y);
+            PlaneY0Z = new RectangleF(Grid.Center.X, 0, Grid.Center.X, Grid.Center.Y);
             picBox.Image = (Image)Mainbmp.Clone();
             picBox.Refresh();
         }

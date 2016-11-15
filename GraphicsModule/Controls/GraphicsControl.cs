@@ -17,15 +17,15 @@ namespace GraphicsModule.Controls
         /// <summary>
         /// Меню создания точек
         /// </summary>
-        private Controls.Menu.PointMenuSelector ptMenuSelector;
+        private readonly Menu.PointMenuSelector _ptMenuSelector;
         /// <summary>
         /// Меню создания линий
         /// </summary>
-        private Controls.Menu.LineMenuSelector lnMenuSelector;
+        private readonly Menu.LineMenuSelector _lnMenuSelector;
         /// <summary>
         /// Меню создания отрезков
         /// </summary>
-        private Controls.Menu.SegmentMenuSelector sgMenuSelector;
+        private readonly Menu.SegmentMenuSelector _sgMenuSelector;
         /// <summary>
         /// Полотно отрисовки
         /// </summary>
@@ -57,12 +57,12 @@ namespace GraphicsModule.Controls
         {
             InitializeComponent();
             _settings = new Settings.Settings(); //Получаем экземпляр настроек
-            ptMenuSelector = new Controls.Menu.PointMenuSelector(MainPictureBox); //Создаем меню вариантов для точек
-            lnMenuSelector = new Controls.Menu.LineMenuSelector(MainPictureBox); //Создаем меню вариантов для линий
-            sgMenuSelector = new Controls.Menu.SegmentMenuSelector(MainPictureBox);
-            Controls.Add(ptMenuSelector); //Добавляем к контролам компонента
-            Controls.Add(lnMenuSelector); //Добавляем к контролам компонента
-            Controls.Add(sgMenuSelector);
+            _ptMenuSelector = new Menu.PointMenuSelector(MainPictureBox); //Создаем меню вариантов для точек
+            _lnMenuSelector = new Menu.LineMenuSelector(MainPictureBox); //Создаем меню вариантов для линий
+            _sgMenuSelector = new Menu.SegmentMenuSelector(MainPictureBox);
+            Controls.Add(_ptMenuSelector); //Добавляем к контролам компонента
+            Controls.Add(_lnMenuSelector); //Добавляем к контролам компонента
+            Controls.Add(_sgMenuSelector);
             _canvas = new Canvas(_settings, MainPictureBox); // Инициализируем полотно отрисовки
             _storage = new Storage(); // инициализируем хранилище графических объектов
         }
@@ -88,9 +88,9 @@ namespace GraphicsModule.Controls
         /// </summary>
         private void HideMenus()
         {
-            ptMenuSelector.Visible = false;
-            lnMenuSelector.Visible = false;
-            sgMenuSelector.Visible = false;
+            _ptMenuSelector.Visible = false;
+            _lnMenuSelector.Visible = false;
+            _sgMenuSelector.Visible = false;
         }
         /// <summary>
         /// Включение/выключение привязки к сетке
@@ -150,9 +150,9 @@ namespace GraphicsModule.Controls
         /// <param name="e"></param>
         private void buttonPointsMenu_Click(object sender, EventArgs e)
         {
-            ptMenuSelector.Location = new Point(graphicsToolBarStrip.Size.Width, graphicsToolBarStrip.Location.Y);
-            ptMenuSelector.Visible = true;
-            ptMenuSelector.BringToFront();
+            _ptMenuSelector.Location = new Point(graphicsToolBarStrip.Size.Width, graphicsToolBarStrip.Location.Y);
+            _ptMenuSelector.Visible = true;
+            _ptMenuSelector.BringToFront();
         }
         /// <summary>
         /// Вызов контекстного меню линий
@@ -161,9 +161,9 @@ namespace GraphicsModule.Controls
         /// <param name="e"></param>
         private void lnPointsMenu_Click(object sender, EventArgs e)
         {
-            lnMenuSelector.Location = new Point(graphicsToolBarStrip.Size.Width, graphicsToolBarStrip.Location.Y + buttonPointsMenu.Size.Height);
-            lnMenuSelector.Visible = true;
-            lnMenuSelector.BringToFront();
+            _lnMenuSelector.Location = new Point(graphicsToolBarStrip.Size.Width, graphicsToolBarStrip.Location.Y + buttonPointsMenu.Size.Height);
+            _lnMenuSelector.Visible = true;
+            _lnMenuSelector.BringToFront();
         }
         /// <summary>
         /// Включить/выключить сетку
@@ -292,7 +292,7 @@ namespace GraphicsModule.Controls
         /// <param name="e"></param>
         private void buttonSettings_Click(object sender, EventArgs e)
         {
-            var f = new GraphicsModule.Settings.Forms.SettingsForm();
+            var f = new Settings.Forms.SettingsForm();
             f.ShowDialog();
         }
         /// <summary>
@@ -312,9 +312,9 @@ namespace GraphicsModule.Controls
         }
         private void buttonSegmentMenu_Click(object sender, EventArgs e)
         {
-            sgMenuSelector.Location = new Point(graphicsToolBarStrip.Size.Width, graphicsToolBarStrip.Location.Y + buttonPointsMenu.Size.Height + buttonLinesMenu.Size.Height);
-            sgMenuSelector.Visible = true;
-            sgMenuSelector.BringToFront();
+            _sgMenuSelector.Location = new Point(graphicsToolBarStrip.Size.Width, graphicsToolBarStrip.Location.Y + buttonPointsMenu.Size.Height + buttonLinesMenu.Size.Height);
+            _sgMenuSelector.Visible = true;
+            _sgMenuSelector.BringToFront();
         }
     }
 }

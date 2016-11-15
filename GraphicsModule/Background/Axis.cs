@@ -28,49 +28,6 @@ namespace GraphicsModule.Background
             Setting = settings.AxisS;
         }
         /// <summary>
-        /// Рассчитывает концевые точки ортоганальных 2D осей с началом в центре заданной сетки узловых точек
-        /// </summary>
-        /// <param name="gridKnotPoints"></param>
-        /// <returns>Возвращает массив 4-х концевых точек ортоганальных 2D осей</returns>
-        /// <remarks>Первые две точки задают горизонтальную ось. Вторые две точки задают вертикальную ось</remarks>
-        private Point[] CalculateAxis(Point[,] gridKnotPoints)
-        {
-            var axisPoints = new Point[4];
-            var grigGorizLeft = new Point();
-            var grigGorizRight = new Point();
-            var grigVertUp = new Point();
-            var grigVertDown = new Point();
-
-            var ptCenterI = gridKnotPoints.GetUpperBound(1) / 2;
-            var ptCenterJ = gridKnotPoints.GetUpperBound(0) / 2;
-
-            var ptGrid = (Point)gridKnotPoints.GetValue(ptCenterJ, 0);
-            grigGorizLeft.X = ptGrid.X;
-            grigGorizLeft.Y = ptGrid.Y;
-            axisPoints[0] = grigGorizLeft;
-
-            ptGrid = (Point)gridKnotPoints.GetValue(ptCenterJ, gridKnotPoints.GetUpperBound(1));
-
-            grigGorizRight.X = ptGrid.X;
-            grigGorizRight.Y = ptGrid.Y;
-            axisPoints[1] = grigGorizRight;
-
-            ptGrid = (Point)gridKnotPoints.GetValue(0, ptCenterI);
-
-            grigVertUp.X = ptGrid.X;
-            grigVertUp.Y = ptGrid.Y;
-            axisPoints[2] = grigVertUp;
-
-            ptGrid = (Point)gridKnotPoints.GetValue(gridKnotPoints.GetUpperBound(0), ptCenterI);
-
-            grigVertDown.X = ptGrid.X;
-            grigVertDown.Y = ptGrid.Y;
-            axisPoints[3] = grigVertDown;
-
-            return axisPoints;
-        }
-
-        /// <summary>
         /// Отрисовка оси (любой) координат в заданном Graphics
         /// </summary>
         /// <param name="axisFinitePoint">Концевая точка оси</param>
@@ -135,7 +92,38 @@ namespace GraphicsModule.Background
         /// <remarks>0-я точка - крайняя левая средняя; 1-я - крайняя правая средняя; 2-я - верхняя средняя средняя; 3-я - нижняя средняя средняя.</remarks>
         public void CalculateByGrid(Point[,] gridKnotPoints)
         {
-            FinitePoints = CalculateAxis(gridKnotPoints);
+            FinitePoints = new Point[4];
+            var grigGorizLeft = new Point();
+            var grigGorizRight = new Point();
+            var grigVertUp = new Point();
+            var grigVertDown = new Point();
+
+            var ptCenterI = gridKnotPoints.GetUpperBound(1) / 2;
+            var ptCenterJ = gridKnotPoints.GetUpperBound(0) / 2;
+
+            var ptGrid = (Point)gridKnotPoints.GetValue(ptCenterJ, 0);
+            grigGorizLeft.X = ptGrid.X;
+            grigGorizLeft.Y = ptGrid.Y;
+            FinitePoints[0] = grigGorizLeft;
+
+            ptGrid = (Point)gridKnotPoints.GetValue(ptCenterJ, gridKnotPoints.GetUpperBound(1));
+
+            grigGorizRight.X = ptGrid.X;
+            grigGorizRight.Y = ptGrid.Y;
+            FinitePoints[1] = grigGorizRight;
+
+            ptGrid = (Point)gridKnotPoints.GetValue(0, ptCenterI);
+
+            grigVertUp.X = ptGrid.X;
+            grigVertUp.Y = ptGrid.Y;
+            FinitePoints[2] = grigVertUp;
+
+            ptGrid = (Point)gridKnotPoints.GetValue(gridKnotPoints.GetUpperBound(0), ptCenterI);
+
+            grigVertDown.X = ptGrid.X;
+            grigVertDown.Y = ptGrid.Y;
+            FinitePoints[3] = grigVertDown;
+
         }
         /// <summary>
         /// Добавляет оси на поверхность Graphics

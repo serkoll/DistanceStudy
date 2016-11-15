@@ -49,6 +49,7 @@ namespace GraphicsModule.Controls
             this.graphicsToolBarStrip = new System.Windows.Forms.ToolStrip();
             this.buttonPointsMenu = new System.Windows.Forms.ToolStripButton();
             this.buttonLinesMenu = new System.Windows.Forms.ToolStripButton();
+            this.buttonSegmentMenu = new System.Windows.Forms.ToolStripButton();
             this.basicToolBarStrip = new System.Windows.Forms.ToolStrip();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.buttonCopy = new System.Windows.Forms.ToolStripButton();
@@ -72,7 +73,6 @@ namespace GraphicsModule.Controls
             this.окнаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainPictureBox = new System.Windows.Forms.PictureBox();
-            this.buttonSegmentMenu = new System.Windows.Forms.ToolStripButton();
             this.baseTableLayoutPanel.SuspendLayout();
             this.workspaceOperationsStatusStrip1.SuspendLayout();
             this.statusStrip2.SuspendLayout();
@@ -109,7 +109,7 @@ namespace GraphicsModule.Controls
             this.baseTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.baseTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
             this.baseTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.baseTableLayoutPanel.Size = new System.Drawing.Size(1232, 593);
+            this.baseTableLayoutPanel.Size = new System.Drawing.Size(1239, 593);
             this.baseTableLayoutPanel.TabIndex = 7;
             // 
             // workspaceOperationsStatusStrip1
@@ -129,7 +129,7 @@ namespace GraphicsModule.Controls
             this.labelExternalEntitiy});
             this.workspaceOperationsStatusStrip1.Location = new System.Drawing.Point(0, 568);
             this.workspaceOperationsStatusStrip1.Name = "workspaceOperationsStatusStrip1";
-            this.workspaceOperationsStatusStrip1.Size = new System.Drawing.Size(1232, 25);
+            this.workspaceOperationsStatusStrip1.Size = new System.Drawing.Size(1239, 25);
             this.workspaceOperationsStatusStrip1.SizingGrip = false;
             this.workspaceOperationsStatusStrip1.TabIndex = 11;
             this.workspaceOperationsStatusStrip1.Text = "statusStrip1";
@@ -222,7 +222,7 @@ namespace GraphicsModule.Controls
             this.toolStripStatusLabel_Help});
             this.statusStrip2.Location = new System.Drawing.Point(33, 541);
             this.statusStrip2.Name = "statusStrip2";
-            this.statusStrip2.Size = new System.Drawing.Size(1199, 27);
+            this.statusStrip2.Size = new System.Drawing.Size(1206, 27);
             this.statusStrip2.SizingGrip = false;
             this.statusStrip2.TabIndex = 10;
             this.statusStrip2.Text = "statusStrip2";
@@ -270,6 +270,16 @@ namespace GraphicsModule.Controls
             this.buttonLinesMenu.Text = "Прямая";
             this.buttonLinesMenu.Click += new System.EventHandler(this.lnPointsMenu_Click);
             // 
+            // buttonSegmentMenu
+            // 
+            this.buttonSegmentMenu.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonSegmentMenu.Image = ((System.Drawing.Image)(resources.GetObject("buttonSegmentMenu.Image")));
+            this.buttonSegmentMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonSegmentMenu.Name = "buttonSegmentMenu";
+            this.buttonSegmentMenu.Size = new System.Drawing.Size(34, 36);
+            this.buttonSegmentMenu.Text = "Отрезок";
+            this.buttonSegmentMenu.Click += new System.EventHandler(this.buttonSegmentMenu_Click);
+            // 
             // basicToolBarStrip
             // 
             this.basicToolBarStrip.BackColor = System.Drawing.SystemColors.Control;
@@ -293,7 +303,7 @@ namespace GraphicsModule.Controls
             this.toolStripSeparator3});
             this.basicToolBarStrip.Location = new System.Drawing.Point(0, 25);
             this.basicToolBarStrip.Name = "basicToolBarStrip";
-            this.basicToolBarStrip.Size = new System.Drawing.Size(1232, 30);
+            this.basicToolBarStrip.Size = new System.Drawing.Size(1239, 30);
             this.basicToolBarStrip.TabIndex = 2;
             this.basicToolBarStrip.Text = "toolStrip1";
             // 
@@ -420,7 +430,7 @@ namespace GraphicsModule.Controls
             this.справкаToolStripMenuItem});
             this.MainMenu.Location = new System.Drawing.Point(0, 0);
             this.MainMenu.Name = "MainMenu";
-            this.MainMenu.Size = new System.Drawing.Size(1232, 25);
+            this.MainMenu.Size = new System.Drawing.Size(1239, 25);
             this.MainMenu.TabIndex = 1;
             this.MainMenu.Text = "menuStrip1";
             // 
@@ -474,21 +484,11 @@ namespace GraphicsModule.Controls
             this.MainPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainPictureBox.Location = new System.Drawing.Point(36, 58);
             this.MainPictureBox.Name = "MainPictureBox";
-            this.MainPictureBox.Size = new System.Drawing.Size(1193, 480);
+            this.MainPictureBox.Size = new System.Drawing.Size(1200, 480);
             this.MainPictureBox.TabIndex = 6;
             this.MainPictureBox.TabStop = false;
             this.MainPictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainPictureBox_MouseDown);
             this.MainPictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MainPictureBox_MouseMove);
-            // 
-            // buttonSegmentMenu
-            // 
-            this.buttonSegmentMenu.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.buttonSegmentMenu.Image = ((System.Drawing.Image)(resources.GetObject("buttonSegmentMenu.Image")));
-            this.buttonSegmentMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.buttonSegmentMenu.Name = "buttonSegmentMenu";
-            this.buttonSegmentMenu.Size = new System.Drawing.Size(34, 36);
-            this.buttonSegmentMenu.Text = "Отрезок";
-            this.buttonSegmentMenu.Click += new System.EventHandler(this.buttonSegmentMenu_Click);
             // 
             // GraphicsControl
             // 
@@ -498,7 +498,7 @@ namespace GraphicsModule.Controls
             this.Controls.Add(this.baseTableLayoutPanel);
             this.DoubleBuffered = true;
             this.Name = "GraphicsControl";
-            this.Size = new System.Drawing.Size(1232, 593);
+            this.Size = new System.Drawing.Size(1239, 593);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyUp);
             this.baseTableLayoutPanel.ResumeLayout(false);
             this.baseTableLayoutPanel.PerformLayout();
