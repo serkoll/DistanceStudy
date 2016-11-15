@@ -33,7 +33,7 @@ namespace GraphicsModule.Geometry
         }
         public static double[] Distance(Point mscoords, float ptR, Point frameCenter, Point3D pt)
         {
-            return new double[] { Distance(mscoords, ptR, frameCenter, pt.PointOfPlane1X0Y),
+            return new[] { Distance(mscoords, ptR, frameCenter, pt.PointOfPlane1X0Y),
                                   Distance(mscoords, ptR, frameCenter, pt.PointOfPlane2X0Z),
                                   Distance(mscoords, ptR, frameCenter, pt.PointOfPlane3Y0Z)};
         }

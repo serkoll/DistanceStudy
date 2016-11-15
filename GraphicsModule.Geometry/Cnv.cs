@@ -94,7 +94,6 @@ namespace GraphicsModule.Geometry
             return new Point3D(pt, z);
         }
         #endregion
-
         #region Lines
         public static Line2D ToLine2D(LineOfPlane1X0Y linePr)
         {

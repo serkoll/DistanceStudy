@@ -12,15 +12,11 @@ namespace GraphicsModule.Geometry
             {
                 return new PointOfPlane1X0Y(pt, frameCenter);
             }
-            else if (PointOfPlane2X0Z.Creatable(pt, frameCenter))
+            if (PointOfPlane2X0Z.Creatable(pt, frameCenter))
             {
                 return new PointOfPlane2X0Z(pt, frameCenter);
             }
-            else if (PointOfPlane3Y0Z.Creatable(pt, frameCenter))
-            {
-                return new PointOfPlane3Y0Z(pt, frameCenter);
-            }
-            else return null;
+            return PointOfPlane3Y0Z.Creatable(pt, frameCenter) ? new PointOfPlane3Y0Z(pt, frameCenter) : null;
         }
     }
 }
