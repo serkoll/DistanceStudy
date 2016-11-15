@@ -56,15 +56,12 @@ namespace GraphicsModule.Controls
         public GraphicsControl()
         {
             InitializeComponent();
-            _settings = new Settings.Settings(); //Получаем экземпляр настроек
             _ptMenuSelector = new Menu.PointMenuSelector(MainPictureBox); //Создаем меню вариантов для точек
             _lnMenuSelector = new Menu.LineMenuSelector(MainPictureBox); //Создаем меню вариантов для линий
             _sgMenuSelector = new Menu.SegmentMenuSelector(MainPictureBox);
             Controls.Add(_ptMenuSelector); //Добавляем к контролам компонента
             Controls.Add(_lnMenuSelector); //Добавляем к контролам компонента
             Controls.Add(_sgMenuSelector);
-            _canvas = new Canvas(_settings, MainPictureBox); // Инициализируем полотно отрисовки
-            _storage = new Storage(); // инициализируем хранилище графических объектов
         }
         /// <summary>
         /// Импорт графических объектов
@@ -122,7 +119,7 @@ namespace GraphicsModule.Controls
             var mousecoords = MainPictureBox.PointToClient(MousePosition);  //Получаем координаты курсора мыши
             if (SetObject != null) //Контроль существования объекта
             {
-                SetObject.AddToStorageAndDraw(mousecoords, _canvas.Grid.Center, _canvas, _settings.DrawS, _storage); //Отрисовываем объект и добавляем его в коллекцию объектов
+                SetObject.AddToStorageAndDraw(mousecoords, _canvas.Grid.CenterPoint, _canvas, _settings.DrawS, _storage); //Отрисовываем объект и добавляем его в коллекцию объектов
                 _canvas.Update(); //Перерисовывам полотно
             }
             if (Operations != null) //Наличие операции над объектами
@@ -140,8 +137,8 @@ namespace GraphicsModule.Controls
         {
             crMove.CursorPointToGridMove(_canvas); // Привязка к сетке
             // Отображение координат текущего положения курсора
-            labelValueX.Text = (MainPictureBox.PointToClient(Cursor.Position).X - _canvas.Grid.Center.X).ToString();
-            labelValueY.Text = (MainPictureBox.PointToClient(Cursor.Position).Y - _canvas.Grid.Center.X).ToString();
+            labelValueX.Text = (MainPictureBox.PointToClient(Cursor.Position).X - _canvas.Grid.CenterPoint.X).ToString();
+            labelValueY.Text = (MainPictureBox.PointToClient(Cursor.Position).Y - _canvas.Grid.CenterPoint.X).ToString();
         }
         /// <summary>
         /// Вызов контекстного меню точек
@@ -175,13 +172,13 @@ namespace GraphicsModule.Controls
             if (labelStatusGrid.BorderStyle == Border3DStyle.RaisedInner)
             {
                 labelStatusGrid.BorderStyle = Border3DStyle.SunkenOuter;
-                _canvas.Grid.Setting.IsDraw = true;
+                _canvas.St.GridS.IsDraw = true;
                 _canvas.ReDraw(_settings, _storage, MainPictureBox);
             }
             else
             {
                 labelStatusGrid.BorderStyle = Border3DStyle.RaisedInner;
-                _canvas.Grid.Setting.IsDraw = false;
+                _canvas.St.GridS.IsDraw = false;
                 _canvas.ReDraw(_settings, _storage, MainPictureBox);
             }
         }
@@ -195,13 +192,13 @@ namespace GraphicsModule.Controls
             if (labelSatusAxis.BorderStyle == Border3DStyle.RaisedInner)
             {
                 labelSatusAxis.BorderStyle = Border3DStyle.SunkenOuter;
-                _canvas.Axis.Setting.IsDraw = true;
+                _canvas.St.AxisS.IsDraw = true;
                 _canvas.ReDraw(_settings, _storage, MainPictureBox);
             }
             else
             {
                 labelSatusAxis.BorderStyle = Border3DStyle.RaisedInner;
-                _canvas.Axis.Setting.IsDraw = false;
+                _canvas.St.AxisS.IsDraw = false;
                 _canvas.ReDraw(_settings, _storage, MainPictureBox);
             }
         }
@@ -315,6 +312,13 @@ namespace GraphicsModule.Controls
             _sgMenuSelector.Location = new Point(graphicsToolBarStrip.Size.Width, graphicsToolBarStrip.Location.Y + buttonPointsMenu.Size.Height + buttonLinesMenu.Size.Height);
             _sgMenuSelector.Visible = true;
             _sgMenuSelector.BringToFront();
+        }
+
+        private void GraphicsControl_Load(object sender, EventArgs e)
+        {
+            _settings = new Settings.Settings(); //Получаем экземпляр настроек
+            _canvas = new Canvas(_settings, MainPictureBox); // Инициализируем полотно отрисовки
+            _storage = new Storage(); // инициализируем хранилище графических объектов
         }
     }
 }

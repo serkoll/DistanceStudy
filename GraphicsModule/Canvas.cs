@@ -24,19 +24,18 @@ namespace GraphicsModule
             Mainbmp = new Bitmap(picBox.ClientSize.Width, picBox.ClientSize.Height, PixelFormat.Format24bppRgb);
             Mainbmp.MakeTransparent();
             Graphics = Graphics.FromImage(Mainbmp);
-            Grid = new Grid(st);
-            Axis = new Axis(st);
-            Grid.CreateGridToGraphics(Graphics);
-            Axis.CalculateByGrid(Grid.Knots);
-            if (st.AxisS.IsDraw)
-            {
-                Axis.AddAxisToGraphics(Grid.Center, Graphics);
-            }
-            PlaneX0Y = new RectangleF(0, Grid.Center.Y, Grid.Center.X, Grid.Center.Y);
-            PlaneX0Z = new RectangleF(0, 0, Grid.Center.X, Grid.Center.Y);
-            PlaneY0Z = new RectangleF(Grid.Center.X, 0, Grid.Center.X, Grid.Center.Y);
+            Grid = new Grid(St.GridS, Graphics);
+            Axis = new Axis(Graphics);
+
+            Grid.DrawGrid(st.GridS, Graphics);
+            Axis.DrawAxis(st.AxisS, Graphics);
+
+            PlaneX0Y = new RectangleF(0, Grid.CenterPoint.Y, Grid.CenterPoint.X, Grid.CenterPoint.Y);
+            PlaneX0Z = new RectangleF(0, 0, Grid.CenterPoint.X, Grid.CenterPoint.Y);
+            PlaneY0Z = new RectangleF(Grid.CenterPoint.X, 0, Grid.CenterPoint.X, Grid.CenterPoint.Y);
             picBox.Image = (Image)Mainbmp.Clone();
             picBox.Refresh();
+            picBox.Invalidate();
         }
         
         public void Update()
@@ -54,14 +53,13 @@ namespace GraphicsModule
             Mainbmp = new Bitmap(pb.ClientSize.Width, pb.ClientSize.Height, PixelFormat.Format24bppRgb);
             Mainbmp.MakeTransparent();
             Graphics = Graphics.FromImage(Mainbmp);
-            Grid.CreateGridToGraphics(Graphics);
-            Axis.CalculateByGrid(Grid.Knots);
-            if (st.AxisS.IsDraw)
-            {
-                Axis.AddAxisToGraphics(Grid.Center, Graphics);
-            }
+            Grid = new Grid(St.GridS, Graphics);
+            Axis = new Axis(Graphics);
 
-            strg.DrawObjects(st, Grid.Center, Graphics);
+            Grid.DrawGrid(st.GridS, Graphics);
+            Axis.DrawAxis(st.AxisS, Graphics);
+
+            strg.DrawObjects(st, Grid.CenterPoint, Graphics);
 
             pb.Image = (Image)Mainbmp.Clone();
             pb.Refresh();
@@ -71,14 +69,13 @@ namespace GraphicsModule
             Mainbmp = new Bitmap(PicBox.ClientSize.Width, PicBox.ClientSize.Height, PixelFormat.Format24bppRgb);
             Mainbmp.MakeTransparent();
             Graphics = Graphics.FromImage(Mainbmp);
-            Grid.CreateGridToGraphics(Graphics);
-            Axis.CalculateByGrid(Grid.Knots);
-            if (St.AxisS.IsDraw)
-            {
-                Axis.AddAxisToGraphics(Grid.Center, Graphics);
-            }
+            Grid = new Grid(St.GridS, Graphics);
+            Axis = new Axis(Graphics);
 
-            strg.DrawObjects(St, Grid.Center, Graphics);
+            Grid.DrawGrid(St.GridS, Graphics);
+            Axis.DrawAxis(St.AxisS, Graphics);
+
+            strg.DrawObjects(St, Grid.CenterPoint, Graphics);
 
             PicBox.Image = (Image)Mainbmp.Clone();
             PicBox.Refresh();
