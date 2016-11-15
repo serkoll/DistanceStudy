@@ -3,7 +3,7 @@ using GraphicsModule.Settings;
 
 namespace GraphicsModule.Geometry.Objects.Segment
 {
-    interface ISegmentOfPlane
+    internal interface ISegmentOfPlane
     {
         void DrawSegmentOnly(DrawS st, System.Drawing.Point framecenter, Graphics g);
     }

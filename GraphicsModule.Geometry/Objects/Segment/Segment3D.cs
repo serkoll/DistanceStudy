@@ -49,24 +49,21 @@ namespace GraphicsModule.Geometry.Objects.Segment
         }
         public static Segment3D Create(Collection<IObject> lst)
         {
-            if (lst[0].GetType().Name == "SegmentOfPlane1X0Y")
+            if (lst[0].GetType() == typeof(SegmentOfPlane1X0Y))
             {
-                if (lst[1].GetType().Name == "SegmentOfPlane2X0Z")
-                    return new Segment3D((SegmentOfPlane1X0Y)lst[0], (SegmentOfPlane2X0Z)lst[1]);
-                else
-                    return new Segment3D((SegmentOfPlane1X0Y)lst[0], (SegmentOfPlane3Y0Z)lst[1]);
+                return lst[1].GetType() == typeof(SegmentOfPlane2X0Z) ? 
+                    new Segment3D((SegmentOfPlane1X0Y)lst[0], (SegmentOfPlane2X0Z)lst[1]) : 
+                    new Segment3D((SegmentOfPlane1X0Y)lst[0], (SegmentOfPlane3Y0Z)lst[1]);
             }
-            else if (lst[0].GetType().Name == "SegmentOfPlane2X0Z")
+            if (lst[0].GetType() == typeof(SegmentOfPlane2X0Z))
             {
-                if (lst[1].GetType().Name == "SegmentOfPlane1X0Y")
-                    return new Segment3D((SegmentOfPlane1X0Y)lst[1], (SegmentOfPlane2X0Z)lst[0]);
-                else
-                    return new Segment3D((SegmentOfPlane2X0Z)lst[0], (SegmentOfPlane3Y0Z)lst[1]);
+                return lst[1].GetType() == typeof(SegmentOfPlane1X0Y) ? 
+                    new Segment3D((SegmentOfPlane1X0Y)lst[1], (SegmentOfPlane2X0Z)lst[0]) : 
+                    new Segment3D((SegmentOfPlane2X0Z)lst[0], (SegmentOfPlane3Y0Z)lst[1]);
             }
-            else if (lst[1].GetType().Name == "SegmentOfPlane1X0Y")
-                return new Segment3D((SegmentOfPlane1X0Y)lst[1], (SegmentOfPlane3Y0Z)lst[0]);
-            else
-                return new Segment3D((SegmentOfPlane2X0Z)lst[1], (SegmentOfPlane3Y0Z)lst[0]);
+            return lst[1].GetType() == typeof(SegmentOfPlane1X0Y) ? 
+                new Segment3D((SegmentOfPlane1X0Y)lst[1], (SegmentOfPlane3Y0Z)lst[0]) : 
+                new Segment3D((SegmentOfPlane2X0Z)lst[1], (SegmentOfPlane3Y0Z)lst[0]);
         }
         /// <summary> Задает 3D точку, заданную двумя (горизонтальной и фронтальной) проекциями</summary>
         /// <remarks> При неправильном заднии проекций возвращает "Nothing" </remarks>
@@ -206,16 +203,9 @@ namespace GraphicsModule.Geometry.Objects.Segment
         }
         public bool IsSelected(System.Drawing.Point mscoords, float ptR, System.Drawing.Point frameCenter, double distance)
         {
-            if (SegmentOfPlane1X0Y.IsSelected(mscoords, ptR, frameCenter, distance) ||
-                SegmentOfPlane2X0Z.IsSelected(mscoords, ptR, frameCenter, distance) ||
-                SegmentOfPlane3Y0Z.IsSelected(mscoords, ptR, frameCenter, distance))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return SegmentOfPlane1X0Y.IsSelected(mscoords, ptR, frameCenter, distance) ||
+                   SegmentOfPlane2X0Z.IsSelected(mscoords, ptR, frameCenter, distance) ||
+                   SegmentOfPlane3Y0Z.IsSelected(mscoords, ptR, frameCenter, distance);
         }
     }
 }

@@ -64,10 +64,7 @@ namespace GraphicsModule.Geometry.Objects.Segment
         public bool IsSelected(System.Drawing.Point mscoords, float ptR, System.Drawing.Point frameCenter, double distance)
         {
             var sg = DeterminePosition.ForSegmentProjection(this, frameCenter);
-            if (Analyze.Analyze.SegmentPos.IncidenceOfPoint(mscoords, sg, 35 * distance))
-                return true;
-            else
-                return false;
+            return Analyze.Analyze.SegmentPos.IncidenceOfPoint(mscoords, sg, 35 * distance);
         }
 
     }
