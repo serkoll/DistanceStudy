@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Drawing;
-using GraphicsModule.Geometry.Objects.Line;
-using GraphicsModule.Geometry.Objects.Point;
-using GraphicsModule.Geometry.Objects.Segment;
+using GraphicsModule.Geometry.Objects.Lines;
+using GraphicsModule.Geometry.Objects.Points;
+using GraphicsModule.Geometry.Objects.Segments;
 
 namespace GraphicsModule.Geometry
 {

@@ -1,5 +1,5 @@
 ﻿using System;
-using GraphicsModule.Geometry.Objects.Point;
+using GraphicsModule.Geometry.Objects.Points;
 
 namespace GraphicsModule.Geometry.Analyze
 {

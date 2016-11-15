@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using GraphicsModule.Settings;
 
-namespace GraphicsModule.Geometry.Objects.Point
+namespace GraphicsModule.Geometry.Objects.Points
 {
     //<summary>Класс для расчета параметров 2D точки</summary>
     //<remarks>Copyright © Polozkov V. Yury 2015</remarks>

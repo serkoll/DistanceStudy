@@ -7,7 +7,7 @@ using DbRepository.Classes.Keys;
 using DbRepository.Classes.Repository;
 using DbRepository.Context;
 using Formatter;
-using GraphicsModule.Geometry.Objects.Point;
+using GraphicsModule.Geometry.Objects.Points;
 
 namespace Point3DCntrl
 {

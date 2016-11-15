@@ -1,8 +1,8 @@
 ﻿using System.Drawing;
-using GraphicsModule.Geometry.Objects.Point;
+using GraphicsModule.Geometry.Objects.Points;
 using GraphicsModule.Settings;
 
-namespace GraphicsModule.Geometry.Objects.Segment
+namespace GraphicsModule.Geometry.Objects.Segments
 {
     /// <summary>Класс для расчета параметров проекции 3D линии на X0Z плоскость проекций</summary>
     /// <remarks>Copyright © Polozkov V. Yury, 2015</remarks>

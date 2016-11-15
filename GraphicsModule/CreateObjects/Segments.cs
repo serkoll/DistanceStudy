@@ -3,9 +3,9 @@ using System.Drawing;
 using GraphicsModule.Geometry;
 using GraphicsModule.Geometry.Analyze;
 using GraphicsModule.Geometry.Objects;
-using GraphicsModule.Geometry.Objects.Line;
-using GraphicsModule.Geometry.Objects.Point;
-using GraphicsModule.Geometry.Objects.Segment;
+using GraphicsModule.Geometry.Objects.Lines;
+using GraphicsModule.Geometry.Objects.Points;
+using GraphicsModule.Geometry.Objects.Segments;
 using GraphicsModule.Operations;
 using GraphicsModule.Settings;
 

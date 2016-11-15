@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using GraphicsModule.Settings;
 
-namespace GraphicsModule.Geometry.Objects.Segment
+namespace GraphicsModule.Geometry.Objects.Segments
 {
     internal interface ISegmentOfPlane
     {

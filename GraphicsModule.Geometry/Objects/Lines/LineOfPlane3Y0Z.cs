@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
-using GraphicsModule.Geometry.Objects.Point;
+using GraphicsModule.Geometry.Objects.Points;
 using GraphicsModule.Settings;
 
-namespace GraphicsModule.Geometry.Objects.Line
+namespace GraphicsModule.Geometry.Objects.Lines
 {
     /// <summary>Класс для расчета параметров проекции 3D линии на Y0Z плоскость проекций</summary>
     /// <remarks>Copyright © Polozkov V. Yury, 2015</remarks>

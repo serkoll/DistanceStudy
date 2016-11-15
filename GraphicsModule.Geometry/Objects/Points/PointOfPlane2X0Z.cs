@@ -2,7 +2,7 @@
 using System.Drawing;
 using GraphicsModule.Settings;
 
-namespace GraphicsModule.Geometry.Objects.Point
+namespace GraphicsModule.Geometry.Objects.Points
 {
     /// <summary>Класс для расчета параметров проекции 3D точки на X0Z плоскость проекций</summary>
     /// <remarks>Copyright © Polozkov V. Yury, 2013</remarks>

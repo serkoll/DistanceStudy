@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
-using GraphicsModule.Geometry.Objects.Point;
-using GraphicsModule.Geometry.Objects.Segment;
+using GraphicsModule.Geometry.Objects.Points;
+using GraphicsModule.Geometry.Objects.Segments;
 using GraphicsModule.Geometry.Planes;
 
 namespace GraphicsModule.Geometry.Analyze

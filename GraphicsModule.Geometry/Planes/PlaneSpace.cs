@@ -1,7 +1,7 @@
 ﻿using System;
 using GraphicsModule.Geometry.EquationsSysEvalution;
-using GraphicsModule.Geometry.Objects.Line;
-using GraphicsModule.Geometry.Objects.Point;
+using GraphicsModule.Geometry.Objects.Lines;
+using GraphicsModule.Geometry.Objects.Points;
 using Microsoft.VisualBasic;
 
 namespace GraphicsModule.Geometry.Planes

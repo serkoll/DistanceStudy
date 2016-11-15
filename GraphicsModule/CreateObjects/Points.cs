@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 using GraphicsModule.Geometry;
-using GraphicsModule.Geometry.Objects.Point;
+using GraphicsModule.Geometry.Objects.Points;
 using GraphicsModule.Operations;
 using GraphicsModule.Settings;
 

@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Linq;
 
-namespace GraphicsModule.Geometry.Objects.Line
+namespace GraphicsModule.Geometry.Objects.Lines
 {
     public class LineDrawCalc
     {
