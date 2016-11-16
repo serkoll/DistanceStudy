@@ -1,9 +1,8 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using GraphicsModule.Geometry;
-using GraphicsModule.Geometry.Objects.Point;
-using GraphicsModule.Geometry.Settingss;
+using GraphicsModule.Geometry.Objects.Points;
 using GraphicsModule.Operations;
+using GraphicsModule.Settings;
 
 namespace GraphicsModule.CreateObjects
 {
@@ -28,13 +27,10 @@ namespace GraphicsModule.CreateObjects
         private PointOfPlane1X0Y _source;
         public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
         {
-            if (PointOfPlane1X0Y.Creatable(pt, frameCenter))
-            {
-                _source = new PointOfPlane1X0Y(pt, frameCenter);
-                strg.AddToCollection(_source);
-                strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
-            }
-            else return;
+            if (!PointOfPlane1X0Y.Creatable(pt, frameCenter)) return;
+            _source = new PointOfPlane1X0Y(pt, frameCenter);
+            strg.AddToCollection(_source);
+            strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
         }
     }
     /// <summary>
@@ -82,11 +78,10 @@ namespace GraphicsModule.CreateObjects
             {
                 strg.TempObjects.Add(ptOfPlane);
                 strg.DrawLastAddedToTempObjects(setting, frameCenter, can.Graphics);
-                return;
             }
             else
             {
-                if (Object.ReferenceEquals(strg.TempObjects[0].GetType(), ptOfPlane.GetType()))
+                if (ReferenceEquals(strg.TempObjects[0].GetType(), ptOfPlane.GetType()))
                 {
                     strg.TempObjects.Clear();
                     can.ReDraw(strg);
@@ -102,12 +97,10 @@ namespace GraphicsModule.CreateObjects
                     strg.AddToCollection(_source);
                     _source = null;
                     strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
-                    return;
                 }
                 else
                 {
                     strg.TempObjects.RemoveAt(strg.TempObjects.Count - 1);
-                    return;
                 }
             }
         }
@@ -123,7 +116,7 @@ namespace GraphicsModule.CreateObjects
             new SelectPointOfPlane().Execute(pt, strg, can);
             if (strg.SelectedObjects.Count > 1)
             {
-                if (Object.ReferenceEquals(strg.SelectedObjects[0].GetType(), strg.SelectedObjects[1].GetType()))
+                if (ReferenceEquals(strg.SelectedObjects[0].GetType(), strg.SelectedObjects[1].GetType()))
                 {
                     strg.SelectedObjects.Remove(strg.SelectedObjects[0]);
                     can.ReDraw(strg);
@@ -138,19 +131,16 @@ namespace GraphicsModule.CreateObjects
                     strg.AddToCollection(_source);
                     _source = null;
                     strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
-                    return;
                 }
                 else
                 {
                     strg.SelectedObjects.RemoveAt(strg.SelectedObjects.Count - 1);
                     can.ReDraw(strg);
-                    return;
                 }
             }
             else
             {
                 can.ReDraw(strg);
-                return;
             }
         }
     }

@@ -12,7 +12,7 @@ namespace GraphicsModule.Operations
         {
             foreach (IObject obj in strg.Objects)
             {
-                if (obj.IsSelected(mousecoords, can.st.SelectedDrawS.RadiusPoints, can.Grid.Center, 5))
+                if (obj.IsSelected(mousecoords, can.St.SelectedDrawS.RadiusPoints, can.Grid.CenterPoint, 5))
                 {
                     strg.SelectedObjects.Add(obj);
                     can.ReDraw(strg);
@@ -31,7 +31,7 @@ namespace GraphicsModule.Operations
             foreach (IObject obj in strg.Objects)
             {
                 var type = obj.GetType().GetInterfaces();
-                if (obj.IsSelected(mousecoords, can.st.SelectedDrawS.RadiusPoints, can.Grid.Center, 5) && (type[1].Name == "IPointOfPlane"))
+                if (obj.IsSelected(mousecoords, can.St.SelectedDrawS.RadiusPoints, can.Grid.CenterPoint, 5) && (type[1].Name == "IPointOfPlane"))
                 {
                     strg.SelectedObjects.Add(obj);
                     can.ReDraw(strg);
@@ -50,7 +50,7 @@ namespace GraphicsModule.Operations
             foreach (IObject obj in strg.Objects)
             {
                 var type = obj.GetType().GetInterfaces();
-                if (obj.IsSelected(mousecoords, can.st.SelectedDrawS.RadiusPoints, can.Grid.Center, 5) && (type[1].Name == "ILineOfPlane"))
+                if (obj.IsSelected(mousecoords, can.St.SelectedDrawS.RadiusPoints, can.Grid.CenterPoint, 5) && (type[1].Name == "ILineOfPlane"))
                 {
                     strg.SelectedObjects.Add(obj);
                     can.ReDraw(strg);
@@ -66,7 +66,7 @@ namespace GraphicsModule.Operations
             foreach (IObject obj in strg.Objects)
             {
                 var type = obj.GetType().GetInterfaces();
-                if (obj.IsSelected(mousecoords, can.st.SelectedDrawS.RadiusPoints, can.Grid.Center, 5) && (type[1].Name == "ISegmentOfPlane"))
+                if (obj.IsSelected(mousecoords, can.St.SelectedDrawS.RadiusPoints, can.Grid.CenterPoint, 5) && (type[1].Name == "ISegmentOfPlane"))
                 {
                     strg.SelectedObjects.Add(obj);
                     can.ReDraw(strg);
@@ -99,7 +99,7 @@ namespace GraphicsModule.Operations
         {
             foreach (IObject obj in strg.Objects)
             {
-                if (obj.IsSelected(mousecoords, can.st.SelectedDrawS.RadiusPoints, can.Grid.Center, 5))
+                if (obj.IsSelected(mousecoords, can.St.SelectedDrawS.RadiusPoints, can.Grid.CenterPoint, 5))
                 {
                     strg.Objects.Remove(obj);
                     can.ReDraw(strg);
@@ -114,7 +114,7 @@ namespace GraphicsModule.Operations
         {
             foreach (IObject obj in strg.Objects)
             {
-                if (obj.IsSelected(mousecoords, can.st.SelectedDrawS.RadiusPoints, can.Grid.Center, 5))
+                if (obj.IsSelected(mousecoords, can.St.SelectedDrawS.RadiusPoints, can.Grid.CenterPoint, 5))
                 {
                     strg.CopiedObjects.Add(obj);
                     can.ReDraw(strg);

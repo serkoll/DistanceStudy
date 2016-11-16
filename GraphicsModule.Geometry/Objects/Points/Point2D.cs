@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
-using GraphicsModule.Geometry.Settingss;
+using GraphicsModule.Settings;
 
-namespace GraphicsModule.Geometry.Objects.Point
+namespace GraphicsModule.Geometry.Objects.Points
 {
     //<summary>Класс для расчета параметров 2D точки</summary>
     //<remarks>Copyright © Polozkov V. Yury 2015</remarks>
@@ -53,10 +53,7 @@ namespace GraphicsModule.Geometry.Objects.Point
         }
         public bool IsSelected(System.Drawing.Point mscoords, float ptR, System.Drawing.Point frameCenter, double distance)
         {
-            if (Calculate.Distance(mscoords, this) < distance)
-                return true;
-            else
-                return false;
+            return Calculate.Distance(mscoords, this) < distance;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
-using GraphicsModule.Setting;
+using System.Windows.Forms;
+using GraphicsModule.Settings;
 
 namespace GraphicsModule.Background
 {
@@ -21,17 +22,39 @@ namespace GraphicsModule.Background
         /// Размер сетки по ширине (координата X в пространстве рисунка, направлена вправо)
         /// </summary>
         public int Width { get; set; }
+        public int StepOnWidth { get; set; }
+        public int StepOnHeight { get; set; }
         /// <summary>
         /// Центральная точка сетки
         /// </summary>
-        public Point Center { get; set; }
-        public GridS Setting { get; set; }
-        /// <summary>
-        /// Получает значение переключателя сетки
-        /// </summary>
-        public Grid(Setting.Settings settings)
+        public Point CenterPoint { get; set; }
+
+        public Grid(GridS sett, Graphics g)
         {
-            Setting = settings.GridS;
+            StepOnWidth = sett.StepOfWidth;
+            StepOnHeight = sett.StepOfHeight;
+            Height = (int)g.VisibleClipBounds.Size.Height;
+            Width = (int)g.VisibleClipBounds.Size.Width;
+            CenterPoint = new Point(Width/2, Height/2);
+            CalculateKnotsPoints();
+        }
+
+        public void CalculateKnotsPoints()
+        {
+            var xDim = (int)Math.Floor((double)(Width - CenterPoint.X)/StepOnWidth);
+            var yDim = (int)Math.Floor((double)(Height - CenterPoint.Y)/StepOnHeight);
+
+            Knots = new Point[yDim * 2 + 1, xDim * 2 + 1];
+            Knots[0, 0] = new Point(CenterPoint.X - xDim*StepOnWidth, CenterPoint.Y - yDim*StepOnHeight);
+
+            for (var i = 0; i <= yDim * 2; i++)
+            {
+                for (var j = 0; j <= xDim * 2; j++)
+                {
+                    if((i != 0) || (j != 0))
+                    Knots[i,j] = new Point(Knots[0, 0].X + j*StepOnWidth, Knots[0, 0].Y + i * StepOnHeight);
+                }
+            }
         }
         /// <summary>
         /// Возвращает массив координат узловых точек координатной сетки
@@ -43,23 +66,22 @@ namespace GraphicsModule.Background
         /// <returns></returns>
         public Point[,] CalculateGrid(int gridHeight, int gridWidth, int gridHeighStep, int gridWidthStep)
         {
-            Point[,] GridPoints = new Point[(int)(Math.Floor((double)(gridHeight / gridHeighStep))) + 1, (int)(Math.Floor((double)(gridWidth / gridWidthStep))) + 1];
-            Point DrawGridPoint = new Point();
-            int iArr = 0, jArr = 0;
-            for (int i = 0; i <= GridPoints.GetUpperBound(0) * gridHeighStep; i += gridHeighStep)
+            var gridPoints = new Point[(int)(Math.Floor((double)(gridHeight / gridHeighStep))) + 1, (int)(Math.Floor((double)(gridWidth / gridWidthStep))) + 1];
+            var drawGridPoint = new Point();
+            var iArr = 0;
+            for (var i = 0; i <= gridPoints.GetUpperBound(0) * gridHeighStep; i += gridHeighStep)
             {
                 iArr++;
-                jArr = 0;
-                for (int j = 0; j <= GridPoints.GetUpperBound(1) * gridWidthStep; j += gridWidthStep)
+                var jArr = 0;
+                for (var j = 0; j <= gridPoints.GetUpperBound(1) * gridWidthStep; j += gridWidthStep)
                 {
-                    DrawGridPoint.X = j;
-                    DrawGridPoint.Y = i;
+                    drawGridPoint.X = j;
+                    drawGridPoint.Y = i;
                     jArr++;
-                    GridPoints[iArr - 1, jArr - 1] = DrawGridPoint;
+                    gridPoints[iArr - 1, jArr - 1] = drawGridPoint;
                 }
             }
-            
-            return GridPoints;
+            return gridPoints;
         }
         /// <summary>
         /// Возвращает центральную узловую точку координатной сетки
@@ -71,68 +93,75 @@ namespace GraphicsModule.Background
         /// <returns></returns>
         public Point CalculateGridCenter(int gridHeight, int gridWidth, int gridHeighStep, int gridWidthStep)
         {
-            Point PtCenterGrid = new Point();
-            Point[,] GridPoints = CalculateGrid(gridHeight, gridWidth, gridHeighStep, gridWidthStep);
-            Point PtCenterGridArr;
-            PtCenterGridArr = (Point)GridPoints.GetValue((int)(GridPoints.GetUpperBound(0) / 2), (int)(GridPoints.GetUpperBound(1) / 2));
-            PtCenterGrid.X = PtCenterGridArr.X;
-            PtCenterGrid.Y = PtCenterGridArr.Y;
-            return PtCenterGrid;
+            var ptCenterGrid = new Point();
+            var gridPoints = CalculateGrid(gridHeight, gridWidth, gridHeighStep, gridWidthStep);
+            var ptCenterGridArr = (Point)gridPoints.GetValue(gridPoints.GetUpperBound(0) / 2, gridPoints.GetUpperBound(1) / 2);
+            ptCenterGrid.X = ptCenterGridArr.X;
+            ptCenterGrid.Y = ptCenterGridArr.Y;
+            return ptCenterGrid;
         }
         /// <summary>
         /// Возвращает центральную узловую точку координатной сетки
         /// </summary>
-        /// <param name="GridKnotPoints">Массив узловых точек координатной сетки</param>
+        /// <param name="gridKnotPoints">Массив узловых точек координатной сетки</param>
         /// <returns></returns>
-        public Point CalculateGridCenter(Point[,] GridKnotPoints)
+        public Point CalculateGridCenter(Point[,] gridKnotPoints)
         {
-            Point PtCenterGrid = new Point();
-            Point PtCenterGridArr = (Point)GridKnotPoints.GetValue((int)(GridKnotPoints.GetUpperBound(0) / 2), (int)(GridKnotPoints.GetUpperBound(1) / 2));
-            PtCenterGrid.X = PtCenterGridArr.X;
-            PtCenterGrid.Y = PtCenterGridArr.Y;
-            return PtCenterGrid;
+            var ptCenterGrid = new Point();
+            var ptCenterGridArr = (Point)gridKnotPoints.GetValue(gridKnotPoints.GetUpperBound(0) / 2, gridKnotPoints.GetUpperBound(1) / 2);
+            ptCenterGrid.X = ptCenterGridArr.X;
+            ptCenterGrid.Y = ptCenterGridArr.Y;
+            return ptCenterGrid;
         }
         /// <summary>
         /// Возвращает узловую точку координатной сетки
         /// </summary>
-        /// <param name="GridKnotPoints">Массив узловых точек координатной сетки</param>
+        /// <param name="gridKnotPoints">Массив узловых точек координатной сетки</param>
         /// <param name="iGrid">Номер точки по столбцу</param>
         /// <param name="jGrid">Номер точки по строке</param>
         /// <returns></returns>
-        public Point GetGridKnotPoint(Point[,] GridKnotPoints, int iGrid, int jGrid)
+        public Point GetGridKnotPoint(Point[,] gridKnotPoints, int iGrid, int jGrid)
         {
-            Point GridKnotPoint = new Point();
-            Point GridKnotPointArr = (Point)GridKnotPoints.GetValue(iGrid, jGrid);
-            GridKnotPoint.X = GridKnotPointArr.X;
-            GridKnotPoint.Y = GridKnotPointArr.Y;
-            return GridKnotPoint;
+            var gridKnotPoint = new Point();
+            var gridKnotPointArr = (Point)gridKnotPoints.GetValue(iGrid, jGrid);
+            gridKnotPoint.X = gridKnotPointArr.X;
+            gridKnotPoint.Y = gridKnotPointArr.Y;
+            return gridKnotPoint;
         }
+
         /// <summary>
         /// Задает сетку на поверхности Graphics с учетом установленных по умолчанию параметров шага по вертикали и горизонтали, радиуса и цвета узловых точек сетки
         /// </summary>
         /// <param name="g">Заданная поверхность рисования</param>
         /// <remarks>Расчитывает и задает сетку с учетом размеров заданной поверхности рисования Graphics</remarks>
-        public void CreateGridToGraphics(Graphics g)
+        //public void CreateGridToGraphics(Graphics g)
+        //{
+        //    if (Height == 0 || Width == 0)
+        //    {
+        //        Height = (int)g.VisibleClipBounds.Size.Height;
+        //        Width = (int)g.VisibleClipBounds.Size.Width;
+        //        Knots = CalculateGrid(Height, Width, Setting.StepOfHeight, Setting.StepOfWidth);
+        //        CenterPoint = CalculateGridCenter(Knots);
+        //        if (Setting.IsDraw)
+        //        {
+        //            DrawGrid(Knots, Setting.PointsColor, Setting.PointsSize, g);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        Knots = CalculateGrid(Height, Width, Setting.StepOfHeight, Setting.StepOfWidth);
+        //        CenterPoint = CalculateGridCenter(Knots);
+        //        if (Setting.IsDraw)
+        //        {
+        //            DrawGrid(Knots, Setting.PointsColor, Setting.PointsSize, g);
+        //        }
+        //    }
+        //}
+        public void DrawGrid(GridS sett, Graphics g)
         {
-            if (Height == 0 || Width == 0)
+            if (sett.IsDraw)
             {
-                Height = (int)g.VisibleClipBounds.Size.Height;
-                Width = (int)g.VisibleClipBounds.Size.Width;
-                Knots = CalculateGrid(Height, Width, Setting.StepOfHeight, Setting.StepOfWidth);
-                Center = CalculateGridCenter(Knots);
-                if (Setting.IsDraw)
-                {
-                    DrawGrid(Knots, Setting.PointsColor, Setting.PointsSize, g);
-                }
-            }
-            else
-            {
-                Knots = CalculateGrid(Height, Width, Setting.StepOfHeight, Setting.StepOfWidth);
-                Center = CalculateGridCenter(Knots);
-                if (Setting.IsDraw)
-                {
-                    DrawGrid(Knots, Setting.PointsColor, Setting.PointsSize, g);
-                }
+                DrawGrid(Knots, sett.PointsColor, sett.PointsSize, g);
             }
         }
         /// <summary>
@@ -154,45 +183,6 @@ namespace GraphicsModule.Background
                 }
             }
         }
-        /// <summary>
-        /// Отрисовывает массив узловых точек сетки в заданном PictureBox
-        /// </summary>
-        /// <param name="gridKnotPoints">Заданный массив узловых точек сетки</param>
-        /// <param name="pictureBox">Заданный PictureBox</param>
-        /// <param name="pointColor">Заданный цвет узловых точек сетки</param>
-        /// <param name="pointRadius">Размер узловых точек сетки</param>
-        public void DrawGrid(int[,] gridKnotPoints, System.Windows.Forms.PictureBox pictureBox, Color pointColor, int pointRadius)
-        {
-            var grPoint = new Point();
-            var Pens = new Pen(pointColor, pointRadius);
-            var centerX = pictureBox.ClientRectangle.Width / 2;
-            var centerY = pictureBox.ClientRectangle.Height / 2;
-            for (int i = 0; i < gridKnotPoints.GetUpperBound(0); i++)
-            {
-                grPoint.X = (int)(centerX + gridKnotPoints[i, 0]);
-                grPoint.Y = (int)(centerY + gridKnotPoints[i, 1]);
-                pictureBox.CreateGraphics().DrawEllipse(Pens, (int)(grPoint.X - pointRadius / 2), (int)(grPoint.Y - pointRadius / 2), pointRadius, pointRadius);
-            }
-        }
-        /// <summary>
-        /// Задает массив узловых точек сетки в заданном Image
-        /// </summary>
-        /// <param name="gridKnotPoints">Заданный массив узловых точек сетки</param>
-        /// <param name="imageSource">Заданный Image</param>
-        /// <param name="knotPointColor">Заданный цвет узловых точек сетки</param>
-        /// <param name="knotPointRadius">Размер узловых точек сетки</param>
-        public void DrawGrid(Point[,] gridKnotPoints, Image imageSource, Color knotPointColor, int knotPointRadius)
-        {
-            var graphics = Graphics.FromImage(imageSource);
-            var pen = new Pen(knotPointColor, knotPointRadius);
-            for (int i = 0; i < gridKnotPoints.GetUpperBound(0); i++)
-            {
-                for (int j = 0; j < gridKnotPoints.GetUpperBound(1); j++)
-                {
-                    var gridPoint = GetGridKnotPoint(gridKnotPoints, i, j);
-                    graphics.DrawPie(pen, gridPoint.Y, gridPoint.X, knotPointRadius, knotPointRadius, 0, 360);
-                }
-            }
-        }
+
     }
 }

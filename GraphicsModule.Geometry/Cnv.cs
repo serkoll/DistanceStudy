@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Drawing;
-using GraphicsModule.Geometry.Objects.Line;
-using GraphicsModule.Geometry.Objects.Point;
-using GraphicsModule.Geometry.Objects.Segment;
+using GraphicsModule.Geometry.Objects.Lines;
+using GraphicsModule.Geometry.Objects.Points;
+using GraphicsModule.Geometry.Objects.Segments;
 
 namespace GraphicsModule.Geometry
 {
@@ -94,7 +94,6 @@ namespace GraphicsModule.Geometry
             return new Point3D(pt, z);
         }
         #endregion
-
         #region Lines
         public static Line2D ToLine2D(LineOfPlane1X0Y linePr)
         {

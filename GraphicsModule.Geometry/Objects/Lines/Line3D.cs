@@ -1,20 +1,19 @@
 ﻿using System.Collections.ObjectModel;
 using System.Drawing;
-using GraphicsModule.Geometry.Objects.Point;
-using GraphicsModule.Geometry.Settings;
-using GraphicsModule.Geometry.Settingss;
+using GraphicsModule.Geometry.Objects.Points;
+using GraphicsModule.Settings;
 
-namespace GraphicsModule.Geometry.Objects.Segment
+namespace GraphicsModule.Geometry.Objects.Lines
 {
     /// <summary>Класс для задания и расчета параметров 3D прямой</summary>
     /// <remarks>Copyright © Polozkov V. Yury, 2015</remarks>
-    public class Segment3D : IObject
+    public class Line3D : IObject
     {
         public Point3D Point0 { get; set; }
         public Point3D Point1 { get; set; }
-        public SegmentOfPlane1X0Y SegmentOfPlane1X0Y { get; set; }
-        public SegmentOfPlane2X0Z SegmentOfPlane2X0Z { get; set; }
-        public SegmentOfPlane3Y0Z SegmentOfPlane3Y0Z { get; set; }
+        public LineOfPlane1X0Y LineOfPlane1X0Y { get; set; }
+        public LineOfPlane2X0Z LineOfPlane2X0Z { get; set; }
+        public LineOfPlane3Y0Z LineOfPlane3Y0Z { get; set; }
         public double kx { get; set; }
         public double ky { get; set; }
         public double kz { get; set; }
@@ -38,7 +37,7 @@ namespace GraphicsModule.Geometry.Objects.Segment
         /// <remarks>Исходные координаты базовой точки прямой равны нулю.
         /// Исходные коэффициенты канонического уравнения прямой: kx=1; ky=0; kz=0.
         /// </remarks>
-        public Segment3D()
+        public Line3D()
         {
             Point0 = new Point3D(0, 0, 0);
             kx = 1;
@@ -48,32 +47,29 @@ namespace GraphicsModule.Geometry.Objects.Segment
             Point1.Y = ky + Point0.Y;
             Point1.Z = kz + Point0.Z;
         }
-        public static Segment3D Create(Collection<IObject> lst)
+        public static Line3D Create(Collection<IObject> lst)
         {
-            if (lst[0].GetType().Name == "SegmentOfPlane1X0Y")
+            if (lst[0].GetType() == typeof(LineOfPlane1X0Y))
             {
-                if (lst[1].GetType().Name == "SegmentOfPlane2X0Z")
-                    return new Segment3D((SegmentOfPlane1X0Y)lst[0], (SegmentOfPlane2X0Z)lst[1]);
-                else
-                    return new Segment3D((SegmentOfPlane1X0Y)lst[0], (SegmentOfPlane3Y0Z)lst[1]);
+                return lst[1].GetType() == typeof(LineOfPlane2X0Z) ? 
+                    new Line3D((LineOfPlane1X0Y)lst[0], (LineOfPlane2X0Z)lst[1]) :
+                    new Line3D((LineOfPlane1X0Y)lst[0], (LineOfPlane3Y0Z)lst[1]);
             }
-            else if (lst[0].GetType().Name == "SegmentOfPlane2X0Z")
+            if (lst[0].GetType() == typeof(LineOfPlane2X0Z))
             {
-                if (lst[1].GetType().Name == "SegmentOfPlane1X0Y")
-                    return new Segment3D((SegmentOfPlane1X0Y)lst[1], (SegmentOfPlane2X0Z)lst[0]);
-                else
-                    return new Segment3D((SegmentOfPlane2X0Z)lst[0], (SegmentOfPlane3Y0Z)lst[1]);
+                return lst[1].GetType() == typeof(LineOfPlane1X0Y) ? 
+                    new Line3D((LineOfPlane1X0Y)lst[1], (LineOfPlane2X0Z)lst[0]) : 
+                    new Line3D((LineOfPlane2X0Z)lst[0], (LineOfPlane3Y0Z)lst[1]);
             }
-            else if (lst[1].GetType().Name == "SegmentOfPlane1X0Y")
-                return new Segment3D((SegmentOfPlane1X0Y)lst[1], (SegmentOfPlane3Y0Z)lst[0]);
-            else
-                return new Segment3D((SegmentOfPlane2X0Z)lst[1], (SegmentOfPlane3Y0Z)lst[0]);
+            return lst[1].GetType() == typeof(LineOfPlane1X0Y) ? 
+                new Line3D((LineOfPlane1X0Y)lst[1], (LineOfPlane3Y0Z)lst[0]) : 
+                new Line3D((LineOfPlane2X0Z)lst[1], (LineOfPlane3Y0Z)lst[0]);
         }
         /// <summary> Задает 3D точку, заданную двумя (горизонтальной и фронтальной) проекциями</summary>
         /// <remarks> При неправильном заднии проекций возвращает "Nothing" </remarks>
         /// <param name="pointPi1"> Горизонтальная проекция 3D точки</param>
         /// <param name="pointPi2"> Фронтальная проекция 3D точки</param>
-        public Segment3D(SegmentOfPlane1X0Y linePi1, SegmentOfPlane2X0Z linePi2)
+        public Line3D(LineOfPlane1X0Y linePi1, LineOfPlane2X0Z linePi2)
         {
             Point0 = new Point3D();
             Point1 = new Point3D();
@@ -86,9 +82,9 @@ namespace GraphicsModule.Geometry.Objects.Segment
                 Point1.X = linePi1.Point1.X;
                 Point1.Y = linePi1.Point1.Y;
                 Point1.Z = linePi2.Point1.Z;
-                SegmentOfPlane1X0Y = linePi1;
-                SegmentOfPlane2X0Z = linePi2;
-                SegmentOfPlane3Y0Z = new SegmentOfPlane3Y0Z(new PointOfPlane3Y0Z(linePi1.Point0.Y, linePi2.Point0.Z), new PointOfPlane3Y0Z(linePi1.Point1.Y, linePi2.Point1.Z));
+                LineOfPlane1X0Y = linePi1;
+                LineOfPlane2X0Z = linePi2;
+                LineOfPlane3Y0Z = new LineOfPlane3Y0Z(new PointOfPlane3Y0Z(linePi1.Point0.Y, linePi2.Point0.Z), new PointOfPlane3Y0Z(linePi1.Point1.Y, linePi2.Point1.Z));
                 Point0.InitializePointsOfPlane();
                 Point1.InitializePointsOfPlane();
             }
@@ -103,16 +99,16 @@ namespace GraphicsModule.Geometry.Objects.Segment
                 Point1.Z = linePi2.Point1.Z;
                 Point0.InitializePointsOfPlane();
                 Point1.InitializePointsOfPlane();
-                SegmentOfPlane1X0Y = linePi1;
-                SegmentOfPlane2X0Z = linePi2;
-                SegmentOfPlane3Y0Z = new SegmentOfPlane3Y0Z(new PointOfPlane3Y0Z(linePi1.Point1.Y, linePi2.Point0.Z), new PointOfPlane3Y0Z(linePi1.Point0.Y, linePi2.Point1.Z));
+                LineOfPlane1X0Y = linePi1;
+                LineOfPlane2X0Z = linePi2;
+                LineOfPlane3Y0Z = new LineOfPlane3Y0Z(new PointOfPlane3Y0Z(linePi1.Point1.Y, linePi2.Point0.Z), new PointOfPlane3Y0Z(linePi1.Point0.Y, linePi2.Point1.Z));
             }
         }
         /// <summary> Задает 3D точку, заданную двумя (горизонтальной и профильной) проекциями</summary>
         /// <remarks> При неправильном заднии проекций возвращает "Nothing" </remarks>
         /// <param name="pointPi1"> Горизонтальная проекция 3D точки</param>
         /// <param name="linePi3"> Профильная проекция 3D точки</param>
-        public Segment3D(SegmentOfPlane1X0Y linePi1, SegmentOfPlane3Y0Z linePi3)
+        public Line3D(LineOfPlane1X0Y linePi1, LineOfPlane3Y0Z linePi3)
         {
             Point0 = new Point3D();
             Point1 = new Point3D();
@@ -127,9 +123,9 @@ namespace GraphicsModule.Geometry.Objects.Segment
                 Point1.Z = linePi3.Point1.Z;
                 Point0.InitializePointsOfPlane();
                 Point1.InitializePointsOfPlane();
-                SegmentOfPlane1X0Y = linePi1;
-                SegmentOfPlane2X0Z = new SegmentOfPlane2X0Z(new PointOfPlane2X0Z(linePi1.Point0.X, linePi3.Point0.Z), new PointOfPlane2X0Z(linePi1.Point1.X, linePi3.Point1.Z));
-                SegmentOfPlane3Y0Z = linePi3;
+                LineOfPlane1X0Y = linePi1;
+                LineOfPlane2X0Z = new LineOfPlane2X0Z(new PointOfPlane2X0Z(linePi1.Point0.X, linePi3.Point0.Z), new PointOfPlane2X0Z(linePi1.Point1.X, linePi3.Point1.Z));
+                LineOfPlane3Y0Z = linePi3;
             }
             else if (linePi1.Point0.Y == linePi3.Point1.Y &&
                      linePi1.Point1.Y == linePi3.Point0.Y)
@@ -142,16 +138,16 @@ namespace GraphicsModule.Geometry.Objects.Segment
                 Point1.Z = linePi3.Point0.Z;
                 Point0.InitializePointsOfPlane();
                 Point1.InitializePointsOfPlane();
-                SegmentOfPlane1X0Y = linePi1;
-                SegmentOfPlane2X0Z = new SegmentOfPlane2X0Z(new PointOfPlane2X0Z(linePi1.Point0.X, linePi3.Point1.Z), new PointOfPlane2X0Z(linePi1.Point1.X, linePi3.Point0.Z));
-                SegmentOfPlane3Y0Z = linePi3;
+                LineOfPlane1X0Y = linePi1;
+                LineOfPlane2X0Z = new LineOfPlane2X0Z(new PointOfPlane2X0Z(linePi1.Point0.X, linePi3.Point1.Z), new PointOfPlane2X0Z(linePi1.Point1.X, linePi3.Point0.Z));
+                LineOfPlane3Y0Z = linePi3;
             }
         }
         /// <summary> Задает 3D точку, заданную двумя (фронтальной и профильной) проекциями</summary>
         /// <remarks> При неправильном заднии проекций возвращает "Nothing" </remarks>
         /// <param name="pointPi2"> Фронтальня проекция 3D точки</param>
         /// <param name="pointPi3"> Профильная проекция 3D точки</param>
-        public Segment3D(SegmentOfPlane2X0Z linePi2, SegmentOfPlane3Y0Z linePi3)
+        public Line3D(LineOfPlane2X0Z linePi2, LineOfPlane3Y0Z linePi3)
         {
             Point0 = new Point3D();
             Point1 = new Point3D();
@@ -166,9 +162,9 @@ namespace GraphicsModule.Geometry.Objects.Segment
                 Point1.Z = linePi2.Point1.Z;
                 Point0.InitializePointsOfPlane();
                 Point1.InitializePointsOfPlane();
-                SegmentOfPlane1X0Y = new SegmentOfPlane1X0Y(new PointOfPlane1X0Y(linePi2.Point0.X, linePi3.Point0.Y), new PointOfPlane1X0Y(linePi2.Point1.X, linePi3.Point1.Y));
-                SegmentOfPlane2X0Z = linePi2;
-                SegmentOfPlane3Y0Z = linePi3;
+                LineOfPlane1X0Y = new LineOfPlane1X0Y(new PointOfPlane1X0Y(linePi2.Point0.X, linePi3.Point0.Y), new PointOfPlane1X0Y(linePi2.Point1.X, linePi3.Point1.Y));
+                LineOfPlane2X0Z = linePi2;
+                LineOfPlane3Y0Z = linePi3;
             }
             else if (linePi2.Point1.Z == linePi3.Point0.Z &&
                     linePi2.Point0.Z == linePi3.Point1.Z)
@@ -181,16 +177,16 @@ namespace GraphicsModule.Geometry.Objects.Segment
                 Point1.Z = linePi2.Point1.Z;
                 Point0.InitializePointsOfPlane();
                 Point1.InitializePointsOfPlane();
-                SegmentOfPlane1X0Y = new SegmentOfPlane1X0Y(new PointOfPlane1X0Y(linePi2.Point0.X, linePi3.Point1.Y), new PointOfPlane1X0Y(linePi2.Point1.X, linePi3.Point0.Y));
-                SegmentOfPlane2X0Z = linePi2;
-                SegmentOfPlane3Y0Z = linePi3;
+                LineOfPlane1X0Y = new LineOfPlane1X0Y(new PointOfPlane1X0Y(linePi2.Point0.X, linePi3.Point1.Y), new PointOfPlane1X0Y(linePi2.Point1.X, linePi3.Point0.Y));
+                LineOfPlane2X0Z = linePi2;
+                LineOfPlane3Y0Z = linePi3;
             }
         }
         public void Draw(DrawS st, System.Drawing.Point frameCenter, Graphics g)
         {
-            SegmentOfPlane1X0Y.DrawSegmentOnly(st, frameCenter, g);
-            SegmentOfPlane2X0Z.DrawSegmentOnly(st, frameCenter, g);
-            SegmentOfPlane3Y0Z.DrawSegmentOnly(st, frameCenter, g);
+            LineOfPlane1X0Y.DrawLineOnly(st, frameCenter, g);
+            LineOfPlane2X0Z.DrawLineOnly(st, frameCenter, g);
+            LineOfPlane3Y0Z.DrawLineOnly(st, frameCenter, g);
             if (st.LinkLineSettings.IsDraw)
             {
                 DrawLinkLine(st.LinkLineSettings.LinkLineX0YToX, st.LinkLineSettings.LinkLineX0YToY, st.LinkLineSettings.LinkLineX0ZToX, st.LinkLineSettings.LinkLineX0ZToZ,
@@ -207,15 +203,82 @@ namespace GraphicsModule.Geometry.Objects.Segment
         }
         public bool IsSelected(System.Drawing.Point mscoords, float ptR, System.Drawing.Point frameCenter, double distance)
         {
-            if (SegmentOfPlane1X0Y.IsSelected(mscoords, ptR, frameCenter, distance) ||
-                SegmentOfPlane2X0Z.IsSelected(mscoords, ptR, frameCenter, distance) ||
-                SegmentOfPlane3Y0Z.IsSelected(mscoords, ptR, frameCenter, distance))
+            return LineOfPlane1X0Y.IsSelected(mscoords, ptR, frameCenter, distance) ||
+                   LineOfPlane2X0Z.IsSelected(mscoords, ptR, frameCenter, distance) ||
+                   LineOfPlane3Y0Z.IsSelected(mscoords, ptR, frameCenter, distance);
+        }
+        private void CalculatePointsForDraw(System.Drawing.Point frameCenter, RectangleF rc1, RectangleF rc2, RectangleF rc3)
+        {
+            LineOfPlane1X0Y.CalculatePointsForDraw(frameCenter, rc1);
+            LineOfPlane2X0Z.CalculatePointsForDraw(frameCenter, rc2);
+            LineOfPlane3Y0Z.CalculatePointsForDraw(frameCenter, rc3);
+        }
+        public void SpecifyBoundaryPoints(System.Drawing.Point frameCenter, RectangleF rc1, RectangleF rc2, RectangleF rc3)
+        {
+            CalculatePointsForDraw(frameCenter, rc1, rc2, rc3);
+            CutLineX0YtoX0Z(frameCenter, rc1);
+            CutLineX0ZtoX0Y(frameCenter, rc1);
+            CutLineX0ZtoY0Z(frameCenter, rc1);
+            CutLineY0ZtoX0Z(frameCenter, rc1);
+        }
+        private void CutLineX0YtoX0Z(System.Drawing.Point frameCenter, RectangleF rc)
+        {
+            if((LineOfPlane1X0Y.pts[0].X > LineOfPlane2X0Z.pts[0].X) && (LineOfPlane1X0Y.pts[0].Y == rc.Top))
             {
-                return true;
+                var ln = new Line2D(new Point2D(LineOfPlane1X0Y.pts[0].X, LineOfPlane1X0Y.pts[0].Y),
+                                    new Point2D(LineOfPlane1X0Y.pts[0].X, LineOfPlane1X0Y.pts[0].Y - 10));
+                LineOfPlane2X0Z.pts[0] = Calculate.IntersectionPoint(ln, LineOfPlane2X0Z, frameCenter);
             }
-            else
+            if(LineOfPlane1X0Y.pts[1].X < LineOfPlane2X0Z.pts[1].X && (LineOfPlane1X0Y.pts[1].Y == rc.Top))
             {
-                return false;
+                var ln = new Line2D(new Point2D(LineOfPlane1X0Y.pts[1].X, LineOfPlane1X0Y.pts[1].Y),
+                                    new Point2D(LineOfPlane1X0Y.pts[1].X, LineOfPlane1X0Y.pts[1].Y - 10));
+                LineOfPlane2X0Z.pts[1] = Calculate.IntersectionPoint(ln, LineOfPlane2X0Z, frameCenter);
+            }
+        }
+        private void CutLineX0ZtoX0Y(System.Drawing.Point frameCenter, RectangleF rc)
+        {
+            if ((LineOfPlane2X0Z.pts[0].X > LineOfPlane1X0Y.pts[0].X) && (LineOfPlane2X0Z.pts[0].Y == rc.Top))
+            {
+                var ln = new Line2D(new Point2D(LineOfPlane2X0Z.pts[0].X, LineOfPlane2X0Z.pts[0].Y),
+                                    new Point2D(LineOfPlane2X0Z.pts[0].X, LineOfPlane2X0Z.pts[0].Y - 10));
+                LineOfPlane1X0Y.pts[0] = Calculate.IntersectionPoint(ln, LineOfPlane1X0Y, frameCenter);
+            }
+            if ((LineOfPlane2X0Z.pts[1].X < LineOfPlane1X0Y.pts[1].X) && (LineOfPlane2X0Z.pts[1].Y == rc.Top))
+            {
+                var ln = new Line2D(new Point2D(LineOfPlane2X0Z.pts[1].X, LineOfPlane2X0Z.pts[1].Y),
+                                    new Point2D(LineOfPlane2X0Z.pts[1].X, LineOfPlane2X0Z.pts[1].Y - 10));
+                LineOfPlane1X0Y.pts[1] = Calculate.IntersectionPoint(ln, LineOfPlane1X0Y, frameCenter);
+            }
+        }
+        private void CutLineX0ZtoY0Z(System.Drawing.Point frameCenter, RectangleF rc)
+        {
+            if ((LineOfPlane2X0Z.pts[0].Y < LineOfPlane3Y0Z.pts[0].Y) && (LineOfPlane2X0Z.pts[0].X == rc.Right))
+            {
+                var ln = new Line2D(new Point2D(LineOfPlane2X0Z.pts[0].X, LineOfPlane2X0Z.pts[0].Y),
+                                    new Point2D(LineOfPlane2X0Z.pts[0].X - 10, LineOfPlane2X0Z.pts[0].Y));
+                LineOfPlane3Y0Z.pts[0] = Calculate.IntersectionPoint(ln, LineOfPlane3Y0Z, frameCenter);
+            }
+            if((LineOfPlane2X0Z.pts[1].Y > LineOfPlane3Y0Z.pts[1].Y) && (LineOfPlane2X0Z.pts[1].X == rc.Right))
+            {
+                var ln = new Line2D(new Point2D(LineOfPlane2X0Z.pts[1].X, LineOfPlane2X0Z.pts[1].Y),
+                                    new Point2D(LineOfPlane2X0Z.pts[1].X - 10, LineOfPlane2X0Z.pts[1].Y));
+                LineOfPlane3Y0Z.pts[1] = Calculate.IntersectionPoint(ln, LineOfPlane3Y0Z, frameCenter);
+            }
+        }
+        private void CutLineY0ZtoX0Z(System.Drawing.Point frameCenter, RectangleF rc)
+        {
+            if ((LineOfPlane3Y0Z.pts[0].Y > LineOfPlane2X0Z.pts[0].Y) && (LineOfPlane3Y0Z.pts[0].X == rc.Right))
+            {
+                var ln = new Line2D(new Point2D(LineOfPlane3Y0Z.pts[0].X, LineOfPlane3Y0Z.pts[0].Y),
+                                    new Point2D(LineOfPlane3Y0Z.pts[0].X - 10, LineOfPlane3Y0Z.pts[0].Y));
+                LineOfPlane2X0Z.pts[0] = Calculate.IntersectionPoint(ln, LineOfPlane2X0Z, frameCenter);
+            }
+            if ((LineOfPlane3Y0Z.pts[1].Y > LineOfPlane2X0Z.pts[1].Y) && (LineOfPlane3Y0Z.pts[1].X == rc.Right))
+            {
+                var ln = new Line2D(new Point2D(LineOfPlane3Y0Z.pts[1].X, LineOfPlane3Y0Z.pts[1].Y),
+                                    new Point2D(LineOfPlane3Y0Z.pts[1].X - 10, LineOfPlane3Y0Z.pts[1].Y));
+                LineOfPlane2X0Z.pts[1] = Calculate.IntersectionPoint(ln, LineOfPlane2X0Z, frameCenter);
             }
         }
     }

@@ -1,10 +1,9 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
-using GraphicsModule.Geometry.Objects.Point;
-using GraphicsModule.Geometry.Settings;
-using GraphicsModule.Geometry.Settingss;
+using GraphicsModule.Geometry.Objects.Points;
+using GraphicsModule.Settings;
 
-namespace GraphicsModule.Geometry.Objects.Segment
+namespace GraphicsModule.Geometry.Objects.Segments
 {
     /// <summary>Класс для задания и расчета параметров 2D прямой</summary>
     /// <remarks>Copyright © Polozkov V. Yury, 2015</remarks>
@@ -64,24 +63,20 @@ namespace GraphicsModule.Geometry.Objects.Segment
         public Segment2D(Point2D pt1, Point2D pt2)
         {
             //Контроль совпадения заданных точек
-            if (!Analyze.Analyze.PointPos.Coincidence(pt1, pt2))
-            {
-                Point0 = pt1;
-                Point1 = pt2;
-                kx = pt2.X - pt1.X;
-                ky = pt2.Y - pt1.Y;
-            }
+            if (Analyze.Analyze.PointPos.Coincidence(pt1, pt2)) return;
+            Point0 = pt1;
+            Point1 = pt2;
+            kx = pt2.X - pt1.X;
+            ky = pt2.Y - pt1.Y;
         }
         public Segment2D(Point2D pt1, Point2D pt2, PictureBox pb)
         {
             //Контроль совпадения заданных точек
-            if (!Analyze.Analyze.PointPos.Coincidence(pt1, pt2))
-            {
-                Point0 = pt1;
-                Point1 = pt2;
-                kx = pt2.X - pt1.X;
-                ky = pt2.Y - pt1.Y;
-            }
+            if (Analyze.Analyze.PointPos.Coincidence(pt1, pt2)) return;
+            Point0 = pt1;
+            Point1 = pt2;
+            kx = pt2.X - pt1.X;
+            ky = pt2.Y - pt1.Y;
         }
         public void Draw(DrawS st, System.Drawing.Point framecenter, Graphics g)
         {
@@ -92,10 +87,7 @@ namespace GraphicsModule.Geometry.Objects.Segment
         }
         public bool IsSelected(System.Drawing.Point mscoords, float ptR, System.Drawing.Point frameCenter, double distance)
         {
-            if (Analyze.Analyze.SegmentPos.IncidenceOfPoint(mscoords, this, 35 * distance))
-                return true;
-            else
-                return false;
+            return Analyze.Analyze.SegmentPos.IncidenceOfPoint(mscoords, this, 35 * distance);
         }
     }
 }

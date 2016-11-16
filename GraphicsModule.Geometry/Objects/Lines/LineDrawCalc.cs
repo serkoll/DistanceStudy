@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Linq;
 
-namespace GraphicsModule.Geometry.Objects.Line
+namespace GraphicsModule.Geometry.Objects.Lines
 {
     public class LineDrawCalc
     {
@@ -40,29 +40,17 @@ namespace GraphicsModule.Geometry.Objects.Line
             cvalue = (float)((rc.Bottom - ln.Point0.Y) * ln.kx / ln.ky + ln.Point0.X);
             if (cvalue > rc.Left && cvalue < rc.Right) pts.Add(new PointF(cvalue, rc.Bottom));
             pts = pts.OrderBy(point => point.X).ToList();
-            if (CheckListState(pts))
-            {
-                //x = 0
-                cvalue = (float)((rc.Left - ln.Point0.X) * ln.ky / ln.kx + ln.Point0.Y);
-                if (cvalue > rc.Top && cvalue < rc.Bottom) pts.Add(new PointF(rc.Left, cvalue));
-                pts = pts.OrderBy(point => point.X).ToList();
-                if (CheckListState(pts))
-                {
-                    //x = max
-                    cvalue = (float)((rc.Right - ln.Point0.X) * ln.ky / ln.kx + ln.Point0.Y);
-                    pts.Add(new PointF(rc.Right, cvalue));
-                    pts = pts.OrderBy(point => point.X).ToList();
-                    return pts;
-                }
-                else
-                {
-                    return pts;
-                }
-            }
-            else
-            {
-                return pts;
-            }
+            if (!CheckListState(pts)) return pts;
+            //x = 0
+            cvalue = (float)((rc.Left - ln.Point0.X) * ln.ky / ln.kx + ln.Point0.Y);
+            if (cvalue > rc.Top && cvalue < rc.Bottom) pts.Add(new PointF(rc.Left, cvalue));
+            pts = pts.OrderBy(point => point.X).ToList();
+            if (!CheckListState(pts)) return pts;
+            //x = max
+            cvalue = (float)((rc.Right - ln.Point0.X) * ln.ky / ln.kx + ln.Point0.Y);
+            pts.Add(new PointF(rc.Right, cvalue));
+            pts = pts.OrderBy(point => point.X).ToList();
+            return pts;
         }
         public List<PointF> CalculatePointsForDraw(LineOfPlane2X0Z ln2)
         {
@@ -91,29 +79,17 @@ namespace GraphicsModule.Geometry.Objects.Line
             cvalue = (float)((rc.Bottom - ln.Point0.Y) * ln.kx / ln.ky + ln.Point0.X);
             if (cvalue > rc.Left && cvalue < rc.Right) pts.Add(new PointF(cvalue, rc.Bottom));
             pts = pts.OrderBy(point => point.X).ToList();
-            if (CheckListState(pts))
-            {
+            if (!CheckListState(pts)) return pts;
                 //x = 0
                 cvalue = (float)((rc.Left - ln.Point0.X) * ln.ky / ln.kx + ln.Point0.Y);
                 if (cvalue > rc.Top && cvalue < rc.Bottom) pts.Add(new PointF(rc.Left, cvalue));
                 pts = pts.OrderBy(point => point.X).ToList();
-                if (CheckListState(pts))
-                {
+                if (!CheckListState(pts)) return pts;
                     //x = max
                     cvalue = (float)((rc.Right - ln.Point0.X) * ln.ky / ln.kx + ln.Point0.Y);
                     pts.Add(new PointF(rc.Right, cvalue));
                     pts = pts.OrderBy(point => point.X).ToList();
                     return pts;
-                }
-                else
-                {
-                    return pts;
-                }
-            }
-            else
-            {
-                return pts;
-            }
         }
         public List<PointF> CalculatePointsForDraw(LineOfPlane3Y0Z ln3)
         {
@@ -142,29 +118,17 @@ namespace GraphicsModule.Geometry.Objects.Line
             cvalue = (float)((rc.Bottom - ln.Point0.Y) * ln.kx / ln.ky + ln.Point0.X);
             if (cvalue > rc.Left && cvalue < rc.Right) pts.Add(new PointF(cvalue, rc.Bottom));
             pts = pts.OrderBy(point => point.X).ToList();
-            if (CheckListState(pts))
-            {
+            if (!CheckListState(pts)) return pts;
                 //x = 0
                 cvalue = (float)((rc.Left - ln.Point0.X) * ln.ky / ln.kx + ln.Point0.Y);
                 if (cvalue > rc.Top && cvalue < rc.Bottom) pts.Add(new PointF(rc.Left, cvalue));
                 pts = pts.OrderBy(point => point.X).ToList();
-                if (CheckListState(pts))
-                {
+                if (!CheckListState(pts)) return pts;
                     //x = max
                     cvalue = (float)((rc.Right - ln.Point0.X) * ln.ky / ln.kx + ln.Point0.Y);
                     pts.Add(new PointF(rc.Right, cvalue));
                     pts = pts.OrderBy(point => point.X).ToList();
                     return pts;
-                }
-                else
-                {
-                    return pts;
-                }
-            }
-            else
-            {
-                return pts;
-            }
         }
         private bool CheckListState(List<PointF> lst)
         {
@@ -172,11 +136,8 @@ namespace GraphicsModule.Geometry.Objects.Line
             {
                 return true;
             }
-            else
-            {
-                lst = lst.OrderBy(point => point.X).ToList();
-                return false;
-            }
+            lst = lst.OrderBy(point => point.X).ToList();
+            return false;
         }
     }
 }

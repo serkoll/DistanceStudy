@@ -1,9 +1,8 @@
 ﻿using System.Drawing;
-using GraphicsModule.Geometry.Objects.Point;
-using GraphicsModule.Geometry.Settings;
-using GraphicsModule.Geometry.Settingss;
+using GraphicsModule.Geometry.Objects.Points;
+using GraphicsModule.Settings;
 
-namespace GraphicsModule.Geometry.Objects.Segment
+namespace GraphicsModule.Geometry.Objects.Segments
 {
     /// <summary>Класс для расчета параметров проекции 3D линии на X0Z плоскость проекций</summary>
     /// <remarks>Copyright © Polozkov V. Yury, 2015</remarks>
@@ -61,10 +60,7 @@ namespace GraphicsModule.Geometry.Objects.Segment
         public bool IsSelected(System.Drawing.Point mscoords, float ptR, System.Drawing.Point frameCenter, double distance)
         {
             var sg = DeterminePosition.ForSegmentProjection(this, frameCenter);
-            if (Analyze.Analyze.SegmentPos.IncidenceOfPoint(mscoords, sg, 35 * distance))
-                return true;
-            else
-                return false;
+            return Analyze.Analyze.SegmentPos.IncidenceOfPoint(mscoords, sg, 35 * distance);
         }
     }
 }

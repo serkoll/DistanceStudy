@@ -1,5 +1,5 @@
 ﻿using System.Drawing;
-using GraphicsModule.Geometry.Settingss;
+using GraphicsModule.Settings;
 
 namespace GraphicsModule.CreateObjects
 {

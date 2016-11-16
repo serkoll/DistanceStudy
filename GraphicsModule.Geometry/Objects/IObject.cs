@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
-using GraphicsModule.Geometry.Settings;
-using GraphicsModule.Geometry.Settingss;
+using GraphicsModule.Settings;
+
 
 namespace GraphicsModule.Geometry.Objects
 {
