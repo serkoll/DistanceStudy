@@ -63,14 +63,9 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AuthenticationTest.cs" />
-    <Compile Include="ControlTaskTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Geometry\Geometry\Geometry.csproj">
-      <Project>{9445d9ed-e7b5-451b-bf93-2265ba1e186a}</Project>
-      <Name>BaseGeometry</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DbRepository\DbRepository.csproj">
       <Project>{5ec8ce36-c3e5-41a4-bf16-3b4b088c6148}</Project>
       <Name>DbRepository</Name>

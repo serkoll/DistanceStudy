@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using DbRepository.Context;
 using System.Linq;
-using DbRepository.Classes.Repository;
+using DbRepository.Context;
 
-namespace DbRepository.Classes.Context
+namespace DbRepository.Classes.Repository
 {
     public class SubthemaRepository
     {

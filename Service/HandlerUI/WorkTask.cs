@@ -1,11 +1,10 @@
-﻿using DbRepository.Context;
-using Service.Services;
-using System;
-using System.Drawing;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
-using XMLFormatter;
-using static System.Windows.Forms.CheckedListBox;
+using DbRepository.Context;
+using Service.Services;
+using Formatter;
 
 namespace Service.HandlerUI
 {
@@ -15,16 +14,16 @@ namespace Service.HandlerUI
     public class WorkTask
     {
         // Сервис работы с задачами
-        private TaskService _taskService;
+        private readonly TaskService _taskService;
         // Активная задача
-        private Task _task;
+        private readonly Task _task;
         // Методы проверки задач
-        private MethodInfo[] mi;
+        private readonly MethodInfo[] _mi;
         public WorkTask(Task task)
         {
             _taskService = new TaskService();
             _task = task;
-            mi = _taskService.GetAllMethodsFromAssembly();
+            _mi = _taskService.GetAllMethodsFromAssembly();
         }
 
         /// <summary>
@@ -32,13 +31,27 @@ namespace Service.HandlerUI
         /// </summary>
         public void FillListBoxByCntrlAssembly(CheckedListBox checkedListBoxProectionsControls)
         {
-            foreach (MethodInfo m in mi)
+            foreach (MethodInfo m in _mi.Where(m => m.DeclaringType != null && m.DeclaringType.Name.Equals("PointsProectionsControl")))
             {
-                if (m.DeclaringType.Name.Equals("PointsProectionsControl"))
-                    checkedListBoxProectionsControls.Items.Add(m.Name);
+                checkedListBoxProectionsControls.Items.Add(m.Name);
             }
         }
 
+        /// <summary>
+        /// Заполнить комбобокс названием методов из сборки проверки методами контроля
+        /// </summary>
+        /// <param name="comboBox">Комбобокс с методами</param>
+        public void FillComboBoxByCntrlAssembly(ComboBox comboBox)
+        {
+            foreach (MethodInfo m in _mi)
+            {
+                if (m.DeclaringType != null && m.DeclaringType.Name.Equals("PointsProectionsControl"))
+                {
+                    comboBox.Items.Add(m.Name);
+                }
+            }
+        }
+        
         /// <summary>
         /// Добавить алгоритм для текущей задачи
         /// </summary>
@@ -77,6 +90,66 @@ namespace Service.HandlerUI
         {
             for (int i = 0; i < checkedListBox.Items.Count; i++)
                 checkedListBox.SetItemCheckState(i, CheckState.Unchecked);
+        }
+
+        /// <summary>
+        /// Изменения на форме описательной части выбранного алгоритма
+        /// </summary>
+        /// <param name="selectedMethodName">Выбранный метод</param>
+        /// <param name="textBoxDesc">Описание алгоритма</param>
+        /// <param name="listBoxUserParam">Листбокс с параметрами, которые требуются от пользователя</param>
+        /// <param name="listBoxInitialParam">Листбокс с параметрами, которые требуется передать для инициализации алгоритма</param>
+        /// <param name="listBoxSolveParams">Листобокс с параметрами решений на выходе</param>
+        public void ChangeInfoAboutSelectedItem(string selectedMethodName, TextBox textBoxDesc, ListBox listBoxUserParam, ListBox listBoxInitialParam, ListBox listBoxSolveParams)
+        {
+            textBoxDesc.Text = string.Empty;
+            listBoxInitialParam.Items.Clear();
+            listBoxUserParam.Items.Clear();
+            listBoxSolveParams.Items.Clear();
+            string desc;
+            string[] userParams,
+                   initParams,
+                   solveParams;
+            XmlFormatter.GetInfoAboutMethodFromXml(selectedMethodName, out desc, out userParams, out initParams, out solveParams);
+            textBoxDesc.Text = desc;
+            AddParamsToListBox(listBoxInitialParam, initParams);
+            AddParamsToListBox(listBoxUserParam, userParams);
+            AddParamsToListBox(listBoxSolveParams, solveParams);
+        }
+
+        /// <summary>
+        /// Проверка на наличие у данного метода выходных параметров
+        /// </summary>
+        /// <param name="method">Название метода</param>
+        /// <param name="listBoxInitialParams">Лист его выходных параметров</param>
+        /// <returns></returns>
+        public bool CheckItemOnInitialParams(string method, ListBox listBoxInitialParams)
+        {
+            return listBoxInitialParams.Items.Cast<object>().Any(item => item.ToString() != string.Empty);
+        }
+
+        /// <summary>
+        /// Добавление ссылки для выходных и входных параметров для методов проверки
+        /// </summary>
+        /// <param name="targetMethod">Метод в который необходимы данные</param>
+        /// <param name="sourceMethod">Метод из решения которого они будут взяты</param>
+        /// <param name="param">Тип взятого параметра</param>
+        public void AddReferenceToinitialMethod(string targetMethod, string sourceMethod, string param)
+        {
+            _taskService.AddReferenceMethods(_task.TaskId, targetMethod, sourceMethod, param);
+        }
+
+        /// <summary>
+        /// Добавление списка параметров в листбоксы
+        /// </summary>
+        /// <param name="listBox">Лист бокс</param>
+        /// <param name="parameters">Список текстовых параметров</param>
+        private void AddParamsToListBox(ListBox listBox, IEnumerable<string> parameters)
+        {
+            foreach (var t in parameters)
+            {
+                listBox.Items.Add(t);
+            }
         }
     }
 }

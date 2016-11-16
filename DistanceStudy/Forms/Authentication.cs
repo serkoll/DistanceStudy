@@ -4,8 +4,8 @@ using System.Windows.Forms;
 using DistanceStudy.Forms.Admin;
 using DistanceStudy.Forms.Teacher;
 using DistanceStudy.Properties;
-using Authentication;
 using DistanceStudy.Forms.Student;
+using Service.Authentication;
 
 namespace DistanceStudy.Forms
 {

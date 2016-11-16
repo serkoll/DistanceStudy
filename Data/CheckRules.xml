@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Document>
+  <Rules>
+    <PointsProectionsControl>
+      <Method name="Input_X">
+        <Description>Контролирует существование значения координаты X</Description>
+        <Params>
+          <InitialParams></InitialParams>
+          <User>Point3D</User>
+          <SolveParams></SolveParams>
+        </Params>
+      </Method>
+
+      <Method name="Input_Y">
+        <Description>Контролирует существование значения координаты Y</Description>
+        <Params>
+          <InitialParams></InitialParams>
+          <User>Point3D</User>
+          <SolveParams></SolveParams>
+        </Params>
+      </Method>
+
+      <Method name="Input_Z">
+        <Description>Контролирует существование значения координаты Z</Description>
+        <Params>
+          <InitialParams></InitialParams>
+          <User>Point3D</User>
+          <SolveParams></SolveParams>
+        </Params>
+      </Method>
+
+      <Method name="PointMinus">
+        <Description>Контролирует отсутсвие отрицательных значений координат X, Y, Z</Description>
+        <Params>
+          <InitialParams></InitialParams>
+          <User>Point3D</User>
+          <SolveParams></SolveParams>
+        </Params>
+      </Method>
+
+      <Method name="PointOfPlan1X0Y_ByXY">
+        <Description>Контроль задания координат горизонтальной проекции точки (P1).</Description>
+        <Params>
+          <InitialParams></InitialParams>
+          <User>Point3D</User>
+          <SolveParams></SolveParams>
+        </Params>
+      </Method>
+
+      <Method name="PointOfPlan2X0Z_ByXZ">
+        <Description>Контроль задания координат фронтальной проекции точки (P2).</Description>
+        <Params>
+          <InitialParams></InitialParams>
+          <User>Point3D</User>
+          <SolveParams></SolveParams>
+        </Params>
+      </Method>
+
+      <Method name="PointOfPlan3Y0Z_ByYZ">
+        <Description>Контроль задания координат профильной проекции точки (P3).</Description>
+        <Params>
+          <InitialParams></InitialParams>
+          <User>Point3D</User>
+          <SolveParams></SolveParams>
+        </Params>
+      </Method>
+
+      <Method name="Point3D_ByP1P2">
+        <Description>Контроль соответсвия координат горизонтальной и фронтальной проекций точки (P1, P2).</Description>
+        <Params>
+          <InitialParams></InitialParams>
+          <User>PointOfPlan1X0Y;PointOfPlan2X0Z</User>
+          <SolveParams></SolveParams>
+        </Params>
+      </Method>
+
+      <Method name="Point3D_ByP1P3">
+        <Description>Контроль соответсвия координат горизонтальной и профильной проекций точки (P1, P3).</Description>
+        <Params>
+          <InitialParams></InitialParams>
+          <User>PointOfPlan1X0Y;PointOfPlan3Y0Z</User>
+          <SolveParams></SolveParams>
+        </Params>
+      </Method>
+
+      <Method name="Point3D_ByP2P3">
+        <Description>Контроль соответсвия координат фронтальной и профильной проекций точки (P2, P3).</Description>
+        <Params>
+          <InitialParams></InitialParams>
+          <User>PointOfPlan2X0Z;PointOfPlan3Y0Z</User>
+          <SolveParams></SolveParams>
+        </Params>
+      </Method>
+
+      <Method name="Point2_OfPlan1X0Y">
+        <Description>Контроль принадлежности горизонтальной плоскости проекций 3D точки, заданной фронтальной проекцией (P2).</Description>
+        <Params>
+          <InitialParams></InitialParams>
+          <User>PointOfPlan2X0Z</User>
+          <SolveParams></SolveParams>
+        </Params>
+      </Method>
+
+      <Method name="Point3_OfPlan1X0Y">
+        <Description>Контроль принадлежности горизонтальной плоскости проекций 3D точки, заданной профильной проекцией (P3).</Description>
+        <Params>
+          <InitialParams></InitialParams>
+          <User>PointOfPlan3Y0Z</User>
+          <SolveParams></SolveParams>
+        </Params>
+      </Method>
+
+      <Method name="Point1_OfPlan2X0Z">
+        <Description>Контроль принадлежности фронтальной плоскости проекций 3D точки, заданной горизонтальной проекцией (P1).</Description>
+        <Params>
+          <InitialParams></InitialParams>
+          <User>PointOfPlan1X0Y</User>
+          <SolveParams></SolveParams>
+        </Params>
+      </Method>
+
+      <Method name="Point3_OfPlan2X0Z">
+        <Description>Контроль принадлежности фронтальной плоскости проекций 3D точки, заданной профильной проекцией (P3).</Description>
+        <Params>
+          <InitialParams></InitialParams>
+          <User>PointOfPlan1X0Y</User>
+          <SolveParams></SolveParams>
+        </Params>
+      </Method>
+
+      <Method name="Point1_OfPlan3Y0Z">
+        <Description>Контроль принадлежности горизонтальной плоскости проекций 3D точки, заданной профильной проекцией (P3).</Description>
+        <Params>
+          <InitialParams></InitialParams>
+          <User>PointOfPlan1X0Y</User>
+          <SolveParams></SolveParams>
+        </Params>
+      </Method>
+
+      <Method name="Point2_OfPlan3Y0Z">
+        <Description>Контроль принадлежности фронтальной плоскости проекций 3D точки, заданной профильной проекцией (P3).</Description>
+        <Params>
+          <InitialParams></InitialParams>
+          <User>PointOfPlan2X0Z</User>
+          <SolveParams></SolveParams>
+        </Params>
+      </Method>
+
+      <Method name="PointsP1P2_Of0X">
+        <Description>Контроль принадлежности горизонтальной или фронтальной проекции (P1 или P2) оси 0Х.</Description>
+        <Params>
+          <InitialParams></InitialParams>
+          <User>PointOfPlan1X0Y;PointOfPlan2X0Z</User>
+          <SolveParams></SolveParams>
+        </Params>
+      </Method>
+
+      <Method name="PointsP1P3_Of0Y">
+        <Description>Контроль принадлежности горизонтальной или профильной проекции (P1 или P3) оси 0Y.</Description>
+        <Params>
+          <InitialParams></InitialParams>
+          <User>PointOfPlan1X0Y;PointOfPlan3Y0Z</User>
+          <SolveParams></SolveParams>
+        </Params>
+      </Method>
+
+      <Method name="PointsP2P3_Of0Z">
+        <Description>Контроль принадлежности фронтальной или профильной проекции (P2 или P3) оси 0Z.</Description>
+        <Params>
+          <InitialParams></InitialParams>
+          <User>PointOfPlan2X0Z;PointOfPlan3Y0Z</User>
+          <SolveParams></SolveParams>
+        </Params>
+      </Method>
+
+      <Method name="Point3D_OfPlan1X0Y">
+        <Description>Контроль принадлежности 3D точки горизонтальной плоскости проекции (Х0Y).</Description>
+        <Params>
+          <InitialParams></InitialParams>
+          <User>Point3D</User>
+          <SolveParams></SolveParams>
+        </Params>
+      </Method>
+
+      <Method name="Point3D_OfPlan2X0Z">
+        <Description>Контроль принадлежности 3D точки фронтальной плоскости проекции (Х0Z).</Description>
+        <Params>
+          <InitialParams></InitialParams>
+          <User>Point3D</User>
+          <SolveParams></SolveParams>
+        </Params>
+      </Method>
+
+      <Method name="Point3D_OfPlan3Y0Z">
+        <Description>Контроль принадлежности 3D точки профильной плоскости проекции (Y0Z).</Description>
+        <Params>
+          <InitialParams></InitialParams>
+          <User>Point3D</User>
+          <SolveParams></SolveParams>
+        </Params>
+      </Method>
+
+      <Method name="Point3D_Output">
+        <Description>Метод на выходе дает точку.</Description>
+        <Params>
+          <InitialParams></InitialParams>
+          <User>Point3D</User>
+          <SolveParams>Point3D</SolveParams>
+        </Params>
+      </Method>
+
+      <Method name="Point3D_Input">
+        <Description>Методу на вход нужна точка.</Description>
+        <Params>
+          <InitialParams>Point3D</InitialParams>
+          <User>Point3D</User>
+          <SolveParams></SolveParams>
+        </Params>
+      </Method>
+    </PointsProectionsControl>
+  </Rules>
+</Document>

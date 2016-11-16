@@ -1,8 +1,7 @@
-﻿using DbRepository.Context;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using DbRepository.Context;
+using DbRepository.Classes.Keys;
 
 namespace DbRepository.Classes.Repository
 {
@@ -45,6 +44,7 @@ namespace DbRepository.Classes.Repository
                 if (deleted != null)
                 {
                     DeleteAlgorithmsFromTask(deleted);
+                    DeleteRefsMethodsFromTask(deleted);
                     db.Tasks.Remove(deleted);
                     db.SaveChanges();
                 }
@@ -60,7 +60,7 @@ namespace DbRepository.Classes.Repository
         {
             using (var db = new DistanceStudyEntities())
             {
-                db.Task_Algotithm.Add(new DbRepository.Context.Task_Algotithm
+                db.Task_Algotithm.Add(new Task_Algotithm
                 {
                     TaskId = taskId,
                     Condition = condition,
@@ -68,6 +68,40 @@ namespace DbRepository.Classes.Repository
                     BlockNumber = 1
                 });
                 db.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// Добавление ссылок между методами в бд
+        /// </summary>
+        /// <param name="taskId">ид задачи, куда необходимо добавить</param>
+        /// <param name="reference">Объект Task_MethRef, в котором есть нужные параметры</param>
+        public void AddReferenceMethods(int taskId, Task_MethodRef reference)
+        {
+            using (var db = new DistanceStudyEntities())
+            {
+                db.Task_MethodRef.Add(new Task_MethodRef
+                {
+                    IdTask = taskId,
+                    SourceMethod = reference.SourceMethod,
+                    TargetMethod = reference.TargetMethod,
+                    Param = reference.Param
+                });
+                db.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// Получение ссылающихся методов (объекта)
+        /// </summary>
+        /// <param name="task">Задача</param>
+        /// <returns></returns>
+        public List<Task_MethodRef> GetTaskMethodRefByTaskId(Task task)
+        {
+            using (var db = new DistanceStudyEntities())
+            {
+                var getted = db.Task_MethodRef.Where(c => c.IdTask.Equals(task.TaskId));
+                return getted.ToList();
             }
         }
 
@@ -116,6 +150,22 @@ namespace DbRepository.Classes.Repository
                 foreach (var item in db.Task_Algotithm.Where(c => c.TaskId.Equals(task.TaskId)))
                 {
                     db.Task_Algotithm.Remove(item);
+                }
+                db.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// Удаление всех ссылок методов с параметрами
+        /// </summary>
+        /// <param name="task">Задача, из которой удаляется</param>
+        private void DeleteRefsMethodsFromTask(Task task)
+        {
+            using (var db = new DistanceStudyEntities())
+            {
+                foreach (var item in db.Task_MethodRef.Where(c => c.IdTask.Equals(task.TaskId)))
+                {
+                    db.Task_MethodRef.Remove(item);
                 }
                 db.SaveChanges();
             }

@@ -1,14 +1,8 @@
-﻿using DbRepository.Context;
-using Service.HandlerUI;
-using Service.Services;
-using Service.Services.Solver;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
+﻿using System;
 using System.Windows.Forms;
+using GraphicsModule.Form;
+using Service.HandlerUI;
+using Service.Services.Solver;
 
 namespace DistanceStudy.Forms.Student
 {
@@ -19,7 +13,7 @@ namespace DistanceStudy.Forms.Student
         // Сервис для работы с задачей
         private TaskSolver _solver;
         // Форма для решения
-        private GraphicsModule.MainForm _graphForm;
+        private FormGraphicsControl _graphForm;
         public FormMainStudent()
         {
             InitializeComponent();
@@ -59,7 +53,7 @@ namespace DistanceStudy.Forms.Student
 
         private void toolStripButtonSolve_Click(object sender, EventArgs e)
         {
-            _graphForm = new GraphicsModule.MainForm();
+            _graphForm = new FormGraphicsControl();
             _graphForm.MdiParent = this;
             _graphForm.Show();
             _graphForm.StartPosition = FormStartPosition.CenterScreen;
@@ -72,7 +66,7 @@ namespace DistanceStudy.Forms.Student
 
         private void toolStripButtonCheckTask_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(_solver.StartCheckTask(_wt.GetObjectBySelectedNode()));
+            MessageBox.Show(_solver.StartCheckTask(_wt.GetObjectBySelectedNode(), _graphForm.Export()));
             _graphForm.Dispose();
             groupBoxTheory.Visible = true;
             toolStripButtonCheckTask.Visible = false;

@@ -45,6 +45,16 @@
           <Property Name="BlockNumber" Type="int" Nullable="false" />
           <Property Name="Condition" Type="nvarchar" MaxLength="512" Nullable="false" />
         </EntityType>
+        <EntityType Name="Task_MethodRef">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TargetMethod" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SourceMethod" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Param" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdTask" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Task_Parametrs">
           <Key>
             <PropertyRef Name="ParametrId" />
@@ -94,6 +104,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Task_MethodRef_Task">
+          <End Role="Task" Type="Self.Task" Multiplicity="1" />
+          <End Role="Task_MethodRef" Type="Self.Task_MethodRef" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="TaskId" />
+            </Principal>
+            <Dependent Role="Task_MethodRef">
+              <PropertyRef Name="IdTask" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Task_Parametrs_Task">
           <End Role="Task" Type="Self.Task" Multiplicity="1" />
           <End Role="Task_Parametrs" Type="Self.Task_Parametrs" Multiplicity="*" />
@@ -135,6 +157,7 @@
           <EntitySet Name="SubThema" EntityType="Self.SubThema" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Task" EntityType="Self.Task" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Task_Algotithm" EntityType="Self.Task_Algotithm" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Task_MethodRef" EntityType="Self.Task_MethodRef" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Task_Parametrs" EntityType="Self.Task_Parametrs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Themas" EntityType="Self.Themas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
@@ -145,6 +168,10 @@
           <AssociationSet Name="FK_Task_Algotithm_Task" Association="Self.FK_Task_Algotithm_Task">
             <End Role="Task" EntitySet="Task" />
             <End Role="Task_Algotithm" EntitySet="Task_Algotithm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_MethodRef_Task" Association="Self.FK_Task_MethodRef_Task">
+            <End Role="Task" EntitySet="Task" />
+            <End Role="Task_MethodRef" EntitySet="Task_MethodRef" />
           </AssociationSet>
           <AssociationSet Name="FK_Task_Parametrs_Task" Association="Self.FK_Task_Parametrs_Task">
             <End Role="Task" EntitySet="Task" />
@@ -198,6 +225,7 @@
           <Property Name="Image" Type="Binary" MaxLength="8000" FixedLength="false" />
           <NavigationProperty Name="SubThema" Relationship="Self.FK_Task_SubThema" FromRole="Task" ToRole="SubThema" />
           <NavigationProperty Name="Task_Algotithm" Relationship="Self.FK_Task_Algotithm_Task" FromRole="Task" ToRole="Task_Algotithm" />
+          <NavigationProperty Name="Task_MethodRef" Relationship="Self.FK_Task_MethodRef_Task" FromRole="Task" ToRole="Task_MethodRef" />
           <NavigationProperty Name="Task_Parametrs" Relationship="Self.FK_Task_Parametrs_Task" FromRole="Task" ToRole="Task_Parametrs" />
         </EntityType>
         <EntityType Name="Task_Algotithm">
@@ -210,6 +238,17 @@
           <Property Name="BlockNumber" Type="Int32" Nullable="false" />
           <Property Name="Condition" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Task" Relationship="Self.FK_Task_Algotithm_Task" FromRole="Task_Algotithm" ToRole="Task" />
+        </EntityType>
+        <EntityType Name="Task_MethodRef">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TargetMethod" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SourceMethod" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Param" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdTask" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Task" Relationship="Self.FK_Task_MethodRef_Task" FromRole="Task_MethodRef" ToRole="Task" />
         </EntityType>
         <EntityType Name="Task_Parametrs">
           <Key>
@@ -287,6 +326,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Task_MethodRef_Task">
+          <End Role="Task" Type="Self.Task" Multiplicity="1" />
+          <End Role="Task_MethodRef" Type="Self.Task_MethodRef" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="TaskId" />
+            </Principal>
+            <Dependent Role="Task_MethodRef">
+              <PropertyRef Name="IdTask" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Task_Parametrs_Task">
           <End Role="Task" Type="Self.Task" Multiplicity="1" />
           <End Role="Task_Parametrs" Type="Self.Task_Parametrs" Multiplicity="*" />
@@ -304,6 +355,7 @@
           <EntitySet Name="SubThemas" EntityType="Self.SubThema" />
           <EntitySet Name="Tasks" EntityType="Self.Task" />
           <EntitySet Name="Task_Algotithm" EntityType="Self.Task_Algotithm" />
+          <EntitySet Name="Task_MethodRef" EntityType="Self.Task_MethodRef" />
           <EntitySet Name="Task_Parametrs" EntityType="Self.Task_Parametrs" />
           <EntitySet Name="Themas" EntityType="Self.Thema" />
           <EntitySet Name="Users" EntityType="Self.User" />
@@ -322,6 +374,10 @@
           <AssociationSet Name="FK_Task_Algotithm_Task" Association="Self.FK_Task_Algotithm_Task">
             <End Role="Task" EntitySet="Tasks" />
             <End Role="Task_Algotithm" EntitySet="Task_Algotithm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_MethodRef_Task" Association="Self.FK_Task_MethodRef_Task">
+            <End Role="Task" EntitySet="Tasks" />
+            <End Role="Task_MethodRef" EntitySet="Task_MethodRef" />
           </AssociationSet>
           <AssociationSet Name="FK_Task_Parametrs_Task" Association="Self.FK_Task_Parametrs_Task">
             <End Role="Task" EntitySet="Tasks" />
@@ -375,6 +431,17 @@
                 <ScalarProperty Name="SubGroup" ColumnName="SubGroup" />
                 <ScalarProperty Name="BlockNumber" ColumnName="BlockNumber" />
                 <ScalarProperty Name="Condition" ColumnName="Condition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Task_MethodRef">
+            <EntityTypeMapping TypeName="DistanceStudyModel.Task_MethodRef">
+              <MappingFragment StoreEntitySet="Task_MethodRef">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TargetMethod" ColumnName="TargetMethod" />
+                <ScalarProperty Name="SourceMethod" ColumnName="SourceMethod" />
+                <ScalarProperty Name="Param" ColumnName="Param" />
+                <ScalarProperty Name="IdTask" ColumnName="IdTask" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
