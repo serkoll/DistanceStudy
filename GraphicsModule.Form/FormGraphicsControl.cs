@@ -17,5 +17,10 @@ namespace GraphicsModule.Form
         {
             graphicsControl1.ImportObjects(obj);
         }
+
+        public Collection<IObject> ExportSelected()
+        {
+            return graphicsControl1.ExportSelected();
+        }
     }
 }

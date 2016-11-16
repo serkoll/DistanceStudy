@@ -80,6 +80,11 @@ namespace GraphicsModule.Controls
         {
             return _storage.Objects;
         }
+
+        public Collection<IObject> ExportSelected()
+        {
+            return _storage.SelectedObjects;
+        }
         /// <summary>
         /// Скрывает выпадающее меню для графических примитивов
         /// </summary>
