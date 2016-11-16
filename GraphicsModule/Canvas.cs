@@ -3,7 +3,6 @@ using System.Windows.Forms;
 using System.Drawing.Imaging;
 using GraphicsModule.Background;
 
-
 namespace GraphicsModule
 {
     public class Canvas
@@ -35,7 +34,6 @@ namespace GraphicsModule
             PlaneY0Z = new RectangleF(Grid.CenterPoint.X, 0, Grid.CenterPoint.X, Grid.CenterPoint.Y);
             picBox.Image = (Image)Mainbmp.Clone();
             picBox.Refresh();
-            picBox.Invalidate();
         }
         
         public void Update()

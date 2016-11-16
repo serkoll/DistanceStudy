@@ -175,57 +175,55 @@ namespace GraphicsModule.CreateObjects
         }
         protected bool IsLine3DCreatable(IObject ln1, IObject ln2, DrawS st, Point frameCenter, Canvas can)
         {
-            if(ln1.GetType().Name == "LineOfPlane1X0Y" && ln2.GetType().Name == "LineOfPlane2X0Z")
+            if (ln1 == null) return false;
+            if(ln1.GetType() == typeof(LineOfPlane1X0Y) && ln2.GetType() == typeof(LineOfPlane2X0Z))
             {
                 _source = new Line3D((LineOfPlane1X0Y)ln1, (LineOfPlane2X0Z)ln2);
                 _source.SpecifyBoundaryPoints(frameCenter, can.PlaneX0Y, can.PlaneX0Z, can.PlaneY0Z);
                 return true;
             }
-            else if (ln1.GetType().Name == "LineOfPlane1X0Y" && ln2.GetType().Name == "LineOfPlane3Y0Z")
+            if (ln1.GetType() == typeof(LineOfPlane1X0Y) && ln2.GetType() == typeof(LineOfPlane3Y0Z))
             {
                 _source = new Line3D((LineOfPlane1X0Y)ln1, (LineOfPlane3Y0Z)ln2);
                 _source.SpecifyBoundaryPoints(frameCenter, can.PlaneX0Y, can.PlaneX0Z, can.PlaneY0Z);
                 return true;
             }
-            else if (ln1.GetType().Name == "LineOfPlane2X0Z" && ln2.GetType().Name == "LineOfPlane1X0Y")
+            if (ln1.GetType() == typeof(LineOfPlane2X0Z) && ln2.GetType() == typeof(LineOfPlane1X0Y))
             {
                 _source = new Line3D((LineOfPlane1X0Y)ln2, (LineOfPlane2X0Z)ln1);
                 _source.SpecifyBoundaryPoints(frameCenter, can.PlaneX0Y, can.PlaneX0Z, can.PlaneY0Z);
                 return true;
             }
-            else if (ln1.GetType().Name == "LineOfPlane2X0Z" && ln2.GetType().Name == "LineOfPlane3Y0Z")
+            if (ln1.GetType() == typeof(LineOfPlane2X0Z) && ln2.GetType() == typeof(LineOfPlane3Y0Z))
             {
                 _source = new Line3D((LineOfPlane2X0Z)ln1, (LineOfPlane3Y0Z)ln2);
                 _source.SpecifyBoundaryPoints(frameCenter, can.PlaneX0Y, can.PlaneX0Z, can.PlaneY0Z);
                 return true;
 
             }
-            else if (ln1.GetType().Name == "LineOfPlane3Y0Z" && ln2.GetType().Name == "LineOfPlane1X0Y")
+            if (ln1.GetType() == typeof(LineOfPlane3Y0Z) && ln2.GetType() == typeof(LineOfPlane1X0Y))
             {
                 _source = new Line3D((LineOfPlane1X0Y)ln2, (LineOfPlane3Y0Z)ln1);
                 _source.SpecifyBoundaryPoints(frameCenter, can.PlaneX0Y, can.PlaneX0Z, can.PlaneY0Z);
                 return true;
             }
-            else if (ln1.GetType().Name == "LineOfPlane3Y0Z" && ln2.GetType().Name == "LineOfPlane2X0Z")
+            if (ln1.GetType() == typeof(LineOfPlane3Y0Z) && ln2.GetType() == typeof(LineOfPlane2X0Z))
             {
                 _source = new Line3D((LineOfPlane2X0Z)ln2, (LineOfPlane3Y0Z)ln1);
                 _source.SpecifyBoundaryPoints(frameCenter, can.PlaneX0Y, can.PlaneX0Z, can.PlaneY0Z);
                 return true;
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
         protected IObject CreateLineOfPlane(Collection<IObject> obj, DrawS st, Point frameCenter, Canvas can)
         {
-            if (obj[0].GetType().Name == "PointOfPlane1X0Y")
+            if (obj[0].GetType() == typeof(PointOfPlane1X0Y))
             {
                 var source = new LineOfPlane1X0Y((PointOfPlane1X0Y)obj[0], (PointOfPlane1X0Y)obj[1]);
                 source.CalculatePointsForDraw(frameCenter, can.PlaneX0Y);
                 return source;
             }
-            else if (obj[0].GetType().Name == "PointOfPlane2X0Z")
+            if (obj[0].GetType() == typeof(PointOfPlane2X0Z))
             {
                 var source = new LineOfPlane2X0Z((PointOfPlane2X0Z)obj[0], (PointOfPlane2X0Z)obj[1]);
                 source.CalculatePointsForDraw(frameCenter, can.PlaneX0Z);
@@ -240,51 +238,47 @@ namespace GraphicsModule.CreateObjects
         }
         protected bool IsInOnePlane(IObject lnproj, IObject ptproj)
         {
-            if (lnproj.GetType().Name == "LineOfPlane1X0Y" && ptproj.GetType().Name == "PointOfPlane1X0Y")
+            if (lnproj.GetType() == typeof(LineOfPlane1X0Y) && ptproj.GetType() == typeof(PointOfPlane1X0Y))
             {
                 return true;
             }
-            else if (lnproj.GetType().Name == "LineOfPlane2X0Z" && ptproj.GetType().Name == "PointOfPlane2X0Z")
+            if (lnproj.GetType() == typeof(LineOfPlane2X0Z) && ptproj.GetType() == typeof(PointOfPlane2X0Z))
             {
                 return true;
             }
-            else if (lnproj.GetType().Name == "LineOfPlane3Y0Z" && ptproj.GetType().Name == "PointOfPlane3Y0Z")
+            if (lnproj.GetType() == typeof(LineOfPlane3Y0Z) && ptproj.GetType() == typeof(PointOfPlane3Y0Z))
             {
                 return true;
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
         protected bool IsOnLinkLine(IObject lnproj, IObject ptproj)
         {
-            if (lnproj.GetType().Name == "LineOfPlane1X0Y" && ptproj.GetType().Name == "PointOfPlane2X0Z")
+            if (lnproj.GetType()== typeof(LineOfPlane1X0Y) && ptproj.GetType() == typeof(PointOfPlane2X0Z))
             {
                 return IsOnLinkLine12((LineOfPlane1X0Y)lnproj, (PointOfPlane2X0Z)ptproj);
             }
-            else if (lnproj.GetType().Name == "LineOfPlane1X0Y" && ptproj.GetType().Name == "PointOfPlane3Y0Z")
+            if (lnproj.GetType() == typeof(LineOfPlane1X0Y) && ptproj.GetType() == typeof(PointOfPlane3Y0Z))
             {
                 return IsOnLinkLine13((LineOfPlane1X0Y)lnproj, (PointOfPlane3Y0Z)ptproj);
             }
-            else if (lnproj.GetType().Name == "LineOfPlane2X0Z" && ptproj.GetType().Name == "PointOfPlane1X0Y")
+            if (lnproj.GetType() == typeof(LineOfPlane2X0Z) && ptproj.GetType() == typeof(PointOfPlane1X0Y))
             {
                 return IsOnLinkLine21((LineOfPlane2X0Z)lnproj, (PointOfPlane1X0Y)ptproj);
             }
-            else if (lnproj.GetType().Name == "LineOfPlane2X0Z" && ptproj.GetType().Name == "PointOfPlane3Y0Z")
+            if (lnproj.GetType() == typeof(LineOfPlane2X0Z) && ptproj.GetType() == typeof(PointOfPlane3Y0Z))
             {
                 return IsOnLinkLine23((LineOfPlane2X0Z)lnproj, (PointOfPlane3Y0Z)ptproj);
             }
-            else if (lnproj.GetType().Name == "LineOfPlane3Y0Z" && ptproj.GetType().Name == "PointOfPlane1X0Y")
+            if (lnproj.GetType() == typeof(LineOfPlane3Y0Z) && ptproj.GetType() == typeof(PointOfPlane1X0Y))
             {
                 return IsOnLinkLine31((LineOfPlane3Y0Z)lnproj, (PointOfPlane1X0Y)ptproj);
             }
-            else if (lnproj.GetType().Name == "LineOfPlane3Y0Z" && ptproj.GetType().Name == "PointOfPlane2X0Z")
+            if (lnproj.GetType() == typeof(LineOfPlane3Y0Z) && ptproj.GetType() == typeof(PointOfPlane2X0Z))
             {
                 return IsOnLinkLine32((LineOfPlane3Y0Z)lnproj, (PointOfPlane2X0Z)ptproj);
             }
-            else
-                return false;
+            return false;
         }
 
         #region IsOnLinkLine
