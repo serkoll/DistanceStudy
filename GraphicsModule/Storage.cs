@@ -43,6 +43,16 @@ namespace GraphicsModule
             DeletedObjects = new Collection<IObject>();
             TempObjects = new Collection<IObject>();
         }
+
+        public Storage(Collection<IObject> objects)
+        {
+            Objects = new Collection<IObject>(objects);
+            SelectedObjects = new Collection<IObject>();
+            CopiedObjects = new Collection<IObject>();
+            PastedObjects = new Collection<IObject>();
+            DeletedObjects = new Collection<IObject>();
+            TempObjects = new Collection<IObject>();
+        }
         /// <summary>
         /// Очищает все коллекции
         /// </summary>
