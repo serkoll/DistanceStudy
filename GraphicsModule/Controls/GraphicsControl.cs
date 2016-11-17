@@ -69,7 +69,7 @@ namespace GraphicsModule.Controls
         /// <param name="coll"></param>
         public void ImportObjects(Collection<IObject> coll)
         {
-            //if(_storage == null) _storage = new Storage();
+            if(_storage == null) _storage = new Storage();
             _storage.Objects = coll;
             _canvas.ReDraw(_storage);
         }

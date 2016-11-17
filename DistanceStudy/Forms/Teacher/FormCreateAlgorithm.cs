@@ -42,23 +42,25 @@ namespace DistanceStudy.Forms.Teacher
         private void checkedListBoxProectionsControls_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             if (e.CurrentValue.Equals(CheckState.Unchecked) && _taskWorker.CheckItemOnInitialParams(checkedListBoxProectionsControls.SelectedItem.ToString(), listBoxInitialParams))
-                ChangeVisibleControlsComboLabelBtn(buttonAcceptRefMethod, labelEnterInputParam, comboBoxInputParam, checkedListBoxProectionsControls, true, true, true, false);
+                ChangeVisibleControlsComboLabelBtn(buttonAcceptRefMethod, labelEnterInputParam, comboBoxInputParam, checkedListBoxProectionsControls, radioButtonGraphic, radioButtonMethod, true, true, true, false, true, true);
             else
-                ChangeVisibleControlsComboLabelBtn(buttonAcceptRefMethod, labelEnterInputParam, comboBoxInputParam, checkedListBoxProectionsControls, false, false, false, true);
+                ChangeVisibleControlsComboLabelBtn(buttonAcceptRefMethod, labelEnterInputParam, comboBoxInputParam, checkedListBoxProectionsControls, radioButtonGraphic, radioButtonMethod, false, false, false, true, false, false);
         }
 
-        private void ChangeVisibleControlsComboLabelBtn(Button btn, Label label, ComboBox cmbBox, CheckedListBox checkedlistBox, bool btnVis, bool labelVis, bool cmbBoxVis, bool listBoxEnabled)
+        private void ChangeVisibleControlsComboLabelBtn(Button btn, Label label, ComboBox cmbBox, CheckedListBox checkedlistBox, RadioButton rbtn1, RadioButton rbtn2, bool btnVis, bool labelVis, bool cmbBoxVis, bool listBoxEnabled, bool rbtn1Visible, bool rbtn2Visible)
         {
             btn.Visible = btnVis;
             label.Visible = labelVis;
             cmbBox.Visible = cmbBoxVis;
             checkedlistBox.Enabled = listBoxEnabled;
+            radioButtonGraphic.Visible = rbtn1Visible;
+            radioButtonMethod.Visible = rbtn2Visible;
         }
 
         private void buttonAcceptRefMethod_Click(object sender, EventArgs e)
         {
             _taskWorker.AddReferenceToinitialMethod(checkedListBoxProectionsControls.SelectedItem?.ToString(), comboBoxInputParam.SelectedItem?.ToString(), listBoxInitialParams.SelectedItem?.ToString());
-            ChangeVisibleControlsComboLabelBtn(buttonAcceptRefMethod, labelEnterInputParam, comboBoxInputParam, checkedListBoxProectionsControls, false, false, false, true);
+            ChangeVisibleControlsComboLabelBtn(buttonAcceptRefMethod, labelEnterInputParam, comboBoxInputParam, checkedListBoxProectionsControls, radioButtonGraphic, radioButtonMethod, false, false, false, true, false, false);
         }
     }
 }

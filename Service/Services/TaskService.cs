@@ -39,6 +39,7 @@ namespace Service.Services
         public void Delete(int id)
         {
             _taskRep.Delete(id);
+            JsonFormatter.DeleteTaskJsonById(id);
         }
 
         /// <summary>

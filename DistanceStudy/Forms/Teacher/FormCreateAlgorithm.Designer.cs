@@ -45,6 +45,8 @@
             this.labelTeacherParams = new System.Windows.Forms.Label();
             this.labelUserParams = new System.Windows.Forms.Label();
             this.labelDesc = new System.Windows.Forms.Label();
+            this.radioButtonGraphic = new System.Windows.Forms.RadioButton();
+            this.radioButtonMethod = new System.Windows.Forms.RadioButton();
             this.groupBoxInfo.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -90,6 +92,8 @@
             // 
             // groupBoxInfo
             // 
+            this.groupBoxInfo.Controls.Add(this.radioButtonMethod);
+            this.groupBoxInfo.Controls.Add(this.radioButtonGraphic);
             this.groupBoxInfo.Controls.Add(this.buttonAcceptRefMethod);
             this.groupBoxInfo.Controls.Add(this.comboBoxInputParam);
             this.groupBoxInfo.Controls.Add(this.labelEnterInputParam);
@@ -103,14 +107,14 @@
             this.groupBoxInfo.Controls.Add(this.labelDesc);
             this.groupBoxInfo.Location = new System.Drawing.Point(269, 13);
             this.groupBoxInfo.Name = "groupBoxInfo";
-            this.groupBoxInfo.Size = new System.Drawing.Size(239, 408);
+            this.groupBoxInfo.Size = new System.Drawing.Size(239, 452);
             this.groupBoxInfo.TabIndex = 20;
             this.groupBoxInfo.TabStop = false;
             this.groupBoxInfo.Text = "Информация об алгоритме";
             // 
             // buttonAcceptRefMethod
             // 
-            this.buttonAcceptRefMethod.Location = new System.Drawing.Point(9, 379);
+            this.buttonAcceptRefMethod.Location = new System.Drawing.Point(7, 414);
             this.buttonAcceptRefMethod.Name = "buttonAcceptRefMethod";
             this.buttonAcceptRefMethod.Size = new System.Drawing.Size(224, 23);
             this.buttonAcceptRefMethod.TabIndex = 10;
@@ -123,7 +127,7 @@
             // 
             this.comboBoxInputParam.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxInputParam.FormattingEnabled = true;
-            this.comboBoxInputParam.Location = new System.Drawing.Point(9, 352);
+            this.comboBoxInputParam.Location = new System.Drawing.Point(7, 387);
             this.comboBoxInputParam.Name = "comboBoxInputParam";
             this.comboBoxInputParam.Size = new System.Drawing.Size(224, 21);
             this.comboBoxInputParam.TabIndex = 9;
@@ -211,6 +215,30 @@
             this.labelDesc.TabIndex = 0;
             this.labelDesc.Text = "Описание";
             // 
+            // radioButtonGraphic
+            // 
+            this.radioButtonGraphic.AutoSize = true;
+            this.radioButtonGraphic.Location = new System.Drawing.Point(12, 336);
+            this.radioButtonGraphic.Name = "radioButtonGraphic";
+            this.radioButtonGraphic.Size = new System.Drawing.Size(104, 17);
+            this.radioButtonGraphic.TabIndex = 11;
+            this.radioButtonGraphic.Text = "Представления";
+            this.radioButtonGraphic.UseVisualStyleBackColor = true;
+            this.radioButtonGraphic.Visible = false;
+            // 
+            // radioButtonMethod
+            // 
+            this.radioButtonMethod.AutoSize = true;
+            this.radioButtonMethod.Checked = true;
+            this.radioButtonMethod.Location = new System.Drawing.Point(12, 359);
+            this.radioButtonMethod.Name = "radioButtonMethod";
+            this.radioButtonMethod.Size = new System.Drawing.Size(63, 17);
+            this.radioButtonMethod.TabIndex = 12;
+            this.radioButtonMethod.TabStop = true;
+            this.radioButtonMethod.Text = "Метода";
+            this.radioButtonMethod.UseVisualStyleBackColor = true;
+            this.radioButtonMethod.Visible = false;
+            // 
             // FormCreateAlgorithm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -250,5 +278,7 @@
         private System.Windows.Forms.Label labelEnterInputParam;
         private System.Windows.Forms.ComboBox comboBoxInputParam;
         private System.Windows.Forms.Button buttonAcceptRefMethod;
+        private System.Windows.Forms.RadioButton radioButtonMethod;
+        private System.Windows.Forms.RadioButton radioButtonGraphic;
     }
 }

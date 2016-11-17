@@ -47,14 +47,13 @@ namespace Formatter
         {
             var taskName = taskId.ToString();
             var fullPath = GetPathToJsonFile();
-            var list = new List<GraphicKey>();
             var coll = new Collection<IObject>();
             try
             {
                 using (StreamReader r = new StreamReader($@"{fullPath}\{taskName}.json"))
                 {
                     string json = r.ReadToEnd();
-                    list = JsonConvert.DeserializeObject<List<GraphicKey>>(json, new JsonSerializerSettings
+                    var list = JsonConvert.DeserializeObject<List<GraphicKey>>(json, new JsonSerializerSettings
                     {
                         TypeNameHandling = TypeNameHandling.Objects
                     });
@@ -66,6 +65,13 @@ namespace Formatter
             }
             catch (FileNotFoundException){}
             return coll;
+        }
+
+        public static void DeleteTaskJsonById(int taskId)
+        {
+            var taskName = taskId.ToString();
+            var fullPath = GetPathToJsonFile();
+            File.Delete($@"{fullPath}\{taskName}.json");
         }
 
         private static string GetPathToJsonFile()
