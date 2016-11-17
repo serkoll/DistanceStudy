@@ -59,8 +59,6 @@ namespace GraphicsModule.Controls
             _ptMenuSelector = new Menu.PointMenuSelector(MainPictureBox); //Создаем меню вариантов для точек
             _lnMenuSelector = new Menu.LineMenuSelector(MainPictureBox); //Создаем меню вариантов для линий
             _sgMenuSelector = new Menu.SegmentMenuSelector(MainPictureBox);
-            _settings = new Settings.Settings(); //Получаем экземпляр настроек
-            _storage = new Storage(); // инициализируем хранилище графических объекто в
             Controls.Add(_ptMenuSelector); //Добавляем к контролам компонента
             Controls.Add(_lnMenuSelector); //Добавляем к контролам компонента
             Controls.Add(_sgMenuSelector);
@@ -73,6 +71,7 @@ namespace GraphicsModule.Controls
         {
             if(_storage == null) _storage = new Storage();
             _storage.Objects = coll;
+            _canvas.ReDraw(_storage);
         }
         /// <summary>
         /// Экспорт графических объектов
@@ -323,7 +322,9 @@ namespace GraphicsModule.Controls
 
         private void GraphicsControl_Load(object sender, EventArgs e)
         {
+            _settings = new Settings.Settings(); //Получаем экземпляр настроек
             _canvas = new Canvas(_settings, MainPictureBox); // Инициализируем полотно отрисовки
+            if(_storage == null) _storage = new Storage(); // инициализируем хранилище графических объектов
         }
     }
 }
