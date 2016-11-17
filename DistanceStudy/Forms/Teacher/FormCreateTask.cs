@@ -5,6 +5,7 @@ using System;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using DbRepository.Context;
 
 namespace DistanceStudy.Forms.Teacher
 {
@@ -20,6 +21,17 @@ namespace DistanceStudy.Forms.Teacher
             InitializeComponent();
             SetProperties(textBoxName, Color.Gray, "Введите наименование задачи...");
             SetProperties(textBoxDescription, Color.Gray, "Введите текстовое описание задачи...");
+            SetProperties(textBoxFilePath, Color.Gray, "Путь к графическому описанию задачи...");
+            InitialFormParams();
+        }
+
+        public FormCreateTask(WorkTree wt, Task task)
+        {
+            _wt = wt;
+            _taskWorker = new WorkTask(task);
+            InitializeComponent();
+            SetProperties(textBoxName, Color.Black, task.Name);
+            SetProperties(textBoxDescription, Color.Black, task.Description);
             SetProperties(textBoxFilePath, Color.Gray, "Путь к графическому описанию задачи...");
             InitialFormParams();
         }
@@ -159,15 +171,18 @@ namespace DistanceStudy.Forms.Teacher
 
         private void toolStripAddGraphicCondition_Click(object sender, EventArgs e)
         {
-            FormGraphicsControl formGraphics = (FormGraphicsControl)FormController.CreateFormByType(typeof(FormGraphicsControl));
+            var formGraphics = (FormGraphicsControl)FormController.CreateFormByType(typeof(FormGraphicsControl));
             var coll = _taskWorker.GetGraphicsObjectsFromJsonTaskRelated();
-            formGraphics.Import(coll);
-            formGraphics.Show();
+            formGraphics.Load += (s, ev) =>
+            {
+                formGraphics.Import(coll);
+            };
             formGraphics.FormClosing += (s, ev) =>
             {
                 var collGraphObj = formGraphics.Export();
                 _taskWorker?.AddGraphicsObjectsToJsonTaskRelated(collGraphObj);
             };
+            formGraphics.ShowDialog();
         }
     }
 }
