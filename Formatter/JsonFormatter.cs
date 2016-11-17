@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,21 +10,24 @@ namespace Formatter
 {
     public static class JsonFormatter
     {
-        public static void WriteObjectsToJson(Collection<IObject> coll)
+        public static void WriteObjectsToJson(Collection<IObject> coll, string fileName = "GraphicObjects")
         {
             var fullPath = GetPathToJsonFile();
-            var guid = Guid.NewGuid();
-            JArray jo = new JArray();
-            List<object> listGraphObjects = new List<object>();
+            List<GraphicKey> listGraphObjects = new List<GraphicKey>();
             foreach (var item in coll)
             {
-                JObject jobj = new JObject();
-                jobj.Add("Guid", Guid.NewGuid());
-                jobj.Add("TypeName", item.GetType().Name);
-                jo.Add(jobj);
+                listGraphObjects.Add(new GraphicKey
+                {
+                    Guid = Guid.NewGuid(),
+                    GraphicObject = item
+                });
             }
-            string json = JsonConvert.SerializeObject(jo, Formatting.Indented);
-            System.IO.File.WriteAllText($@"{fullPath}\GraphicObjects.json", json);
+            string json = JsonConvert.SerializeObject(listGraphObjects.ToArray(), Formatting.Indented, new JsonSerializerSettings
+            {
+                TypeNameHandling = TypeNameHandling.Objects,
+                TypeNameAssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Simple
+            });
+            System.IO.File.WriteAllText($@"{fullPath}\{fileName}.json", json);
         }
 
         public static List<GraphicKey> GetGraphicKeysFromJson()
@@ -34,8 +36,36 @@ namespace Formatter
             using (StreamReader r = new StreamReader($@"{fullPath}\GraphicObjects.json"))
             {
                 string json = r.ReadToEnd();
-                return JsonConvert.DeserializeObject<List<GraphicKey>>(json);
+                return JsonConvert.DeserializeObject<List<GraphicKey>>(json, new JsonSerializerSettings
+                {
+                    TypeNameHandling = TypeNameHandling.Objects
+                });
             }
+        }
+
+        public static Collection<IObject> GetObjectsForTaskFromJson(int taskId)
+        {
+            var taskName = taskId.ToString();
+            var fullPath = GetPathToJsonFile();
+            var list = new List<GraphicKey>();
+            var coll = new Collection<IObject>();
+            try
+            {
+                using (StreamReader r = new StreamReader($@"{fullPath}\{taskName}.json"))
+                {
+                    string json = r.ReadToEnd();
+                    list = JsonConvert.DeserializeObject<List<GraphicKey>>(json, new JsonSerializerSettings
+                    {
+                        TypeNameHandling = TypeNameHandling.Objects
+                    });
+                    foreach (var key in list)
+                    {
+                        coll.Add(key.GraphicObject);
+                    }
+                }
+            }
+            catch (FileNotFoundException){}
+            return coll;
         }
 
         private static string GetPathToJsonFile()

@@ -5,6 +5,8 @@ using System.Windows.Forms;
 using DbRepository.Context;
 using Service.Services;
 using Formatter;
+using GraphicsModule.Geometry.Objects;
+using System.Collections.ObjectModel;
 
 namespace Service.HandlerUI
 {
@@ -137,6 +139,24 @@ namespace Service.HandlerUI
         public void AddReferenceToinitialMethod(string targetMethod, string sourceMethod, string param)
         {
             _taskService.AddReferenceMethods(_task.TaskId, targetMethod, sourceMethod, param);
+        }
+
+        /// <summary>
+        /// Экспорт графических объектов из формы преподавателя в json
+        /// </summary>
+        /// <param name="coll">Коллекция объектов</param>
+        public void AddGraphicsObjectsToJsonTaskRelated(Collection<IObject> coll)
+        {
+            _taskService.AddGraphicObjectsForTask(_task.TaskId, coll);
+        }
+
+        /// <summary>
+        /// Получить графические объекты по таск Id
+        /// </summary>
+        /// <returns>Графические объекты из сервиса</returns>
+        public Collection<IObject> GetGraphicsObjectsFromJsonTaskRelated()
+        {
+            return _taskService.GetGraphicObjectsForTask(_task.TaskId);
         }
 
         /// <summary>

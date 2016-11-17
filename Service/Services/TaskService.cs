@@ -1,6 +1,9 @@
 ﻿using DbRepository.Classes.Repository;
 using DbRepository.Context;
+using Formatter;
+using GraphicsModule.Geometry.Objects;
 using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 
@@ -99,6 +102,27 @@ namespace Service.Services
             if (taskMethodRef != null)
                 return taskMethodRef.TargetMethod;
             return string.Empty;
+        }
+
+        /// <summary>
+        /// Добавление экспортированных из контрола объектов
+        /// </summary>
+        /// <param name="taskId">Id задачи, к которой подвязаны графические объекты</param>
+        /// <param name="coll">Коллекция графических оъектов</param>
+        public void AddGraphicObjectsForTask(int taskId, Collection<IObject> coll)
+        {
+            if (coll.Any())
+                JsonFormatter.WriteObjectsToJson(coll, taskId.ToString());
+        }
+
+        /// <summary>
+        /// Получение графических объектов из json файла привязанного к taskId
+        /// </summary>
+        /// <param name="taskId">ID текущей задачи</param>
+        /// <returns></returns>
+        public Collection<IObject> GetGraphicObjectsForTask(int taskId)
+        {
+            return JsonFormatter.GetObjectsForTaskFromJson(taskId);
         }
     }
 }

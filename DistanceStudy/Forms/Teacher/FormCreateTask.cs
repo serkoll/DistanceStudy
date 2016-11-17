@@ -1,9 +1,11 @@
 ﻿using DistanceStudy.Classes;
+using GraphicsModule.Form;
 using Service.HandlerUI;
 using System;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using DbRepository.Context;
 
 namespace DistanceStudy.Forms.Teacher
 {
@@ -23,6 +25,17 @@ namespace DistanceStudy.Forms.Teacher
             InitialFormParams();
         }
 
+        public FormCreateTask(WorkTree wt, Task task)
+        {
+            _wt = wt;
+            _taskWorker = new WorkTask(task);
+            InitializeComponent();
+            SetProperties(textBoxName, Color.Black, task.Name);
+            SetProperties(textBoxDescription, Color.Black, task.Description);
+            SetProperties(textBoxFilePath, Color.Gray, "Путь к графическому описанию задачи...");
+            InitialFormParams();
+        }
+
         private void buttonAddAlgorithm_Click(object sender, EventArgs e)
         {
             FormController.CreateFormByType(typeof(FormCreateAlgorithm), _taskWorker).ShowDialog();
@@ -38,7 +51,7 @@ namespace DistanceStudy.Forms.Teacher
             {
                 _wt.DoOperationWithTaskByCall(ref _taskWorker, _taskWorker.UpdateCurrentTask, textBoxName.Text, textBoxDescription.Text, (Bitmap)pictureBoxImageTask.Image);
             }
-            ActivateButtonAddAlg();
+            ActivateButtonAddAlgAndGraphicParam();
             #region old XML formatting
             //DbRepositoryFake.NameTask = textBoxName.Text;
             //DbRepositoryFake.Description = textBoxDescription.Text;
@@ -140,9 +153,10 @@ namespace DistanceStudy.Forms.Teacher
             buttonAddAlgorithm.Enabled = false;
         }
 
-        private void ActivateButtonAddAlg()
+        private void ActivateButtonAddAlgAndGraphicParam()
         {
             buttonAddAlgorithm.Enabled = true;
+            toolStripAddGraphicCondition.Enabled = true;
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
@@ -153,6 +167,22 @@ namespace DistanceStudy.Forms.Teacher
         private void FormCreateTask_FormClosing(object sender, FormClosingEventArgs e)
         {
             _wt.UpdateTree();
+        }
+
+        private void toolStripAddGraphicCondition_Click(object sender, EventArgs e)
+        {
+            var formGraphics = (FormGraphicsControl)FormController.CreateFormByType(typeof(FormGraphicsControl));
+            var coll = _taskWorker.GetGraphicsObjectsFromJsonTaskRelated();
+            formGraphics.Load += (s, ev) =>
+            {
+                formGraphics.Import(coll);
+            };
+            formGraphics.FormClosing += (s, ev) =>
+            {
+                var collGraphObj = formGraphics.Export();
+                _taskWorker?.AddGraphicsObjectsToJsonTaskRelated(collGraphObj);
+            };
+            formGraphics.ShowDialog();
         }
     }
 }

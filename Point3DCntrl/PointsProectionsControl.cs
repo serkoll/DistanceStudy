@@ -1221,7 +1221,7 @@ namespace Point3DCntrl
 
         private GraphicKey GetGraphicKeyForType(string typeOfObject)
         {
-            return JsonFormatter.GetGraphicKeysFromJson().FirstOrDefault(k => k.TypeName.Equals(typeOfObject));
+            return JsonFormatter.GetGraphicKeysFromJson().FirstOrDefault(k => k.GraphicObject.GetType().Name.Equals(typeOfObject));
         }
 
         private Task_MethodRef SetKeyToSolveParams(DbRepository.Context.Task currentTask, string currentMethodName, string typeOfResult)
