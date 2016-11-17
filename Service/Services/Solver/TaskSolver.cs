@@ -80,10 +80,10 @@ namespace Service.Services.Solver
                     for (int j = 0; j < userParam.Length; j++)
                     {
                         // проверка на соответствие типа графического объекта типу необходимому от пользователя
-                        if (graphicObjects[i].GetType().Name.Equals(userParam[i]))
+                        if (graphicObjects[i].GetType().Name.Equals(userParam[j]))
                         {
                             // получение ключа для данного типа объекта
-                            var keys = JsonFormatter.GetGraphicKeysFromJson().Where(k => k.TypeName.Equals(userParam[j]));
+                            var keys = JsonFormatter.GetGraphicKeysFromJson().Where(k => k.GraphicObject.GetType().Name.Equals(userParam[j]));
                             foreach (var key in keys)
                             {
                                 // если в словаре нет объекта, то добавить

@@ -1,10 +1,52 @@
 [
   {
-    "Guid": "3cdc4f6f-e03d-4707-a739-d65495f08db7",
-    "TypeName": "Point3D"
+    "$type": "DbRepository.Classes.Keys.GraphicKey, DbRepository",
+    "Guid": "57563a19-fe37-4f84-ad37-7fa14145d817",
+    "GraphicObject": {
+      "$type": "GraphicsModule.Geometry.Objects.Points.Point3D, GraphicsModule.Geometry",
+      "X": 408.0,
+      "Y": 100.0,
+      "Z": 147.0,
+      "PointOfPlane1X0Y": {
+        "$type": "GraphicsModule.Geometry.Objects.Points.PointOfPlane1X0Y, GraphicsModule.Geometry",
+        "X": 408.0,
+        "Y": 100.0
+      },
+      "PointOfPlane2X0Z": {
+        "$type": "GraphicsModule.Geometry.Objects.Points.PointOfPlane2X0Z, GraphicsModule.Geometry",
+        "X": 408.0,
+        "Z": 147.0
+      },
+      "PointOfPlane3Y0Z": {
+        "$type": "GraphicsModule.Geometry.Objects.Points.PointOfPlane3Y0Z, GraphicsModule.Geometry",
+        "Y": 100.0,
+        "Z": 147.0
+      }
+    }
   },
   {
-    "Guid": "d19393fc-dccc-4f4b-90af-79382be14f2c",
-    "TypeName": "Point3D"
+    "$type": "DbRepository.Classes.Keys.GraphicKey, DbRepository",
+    "Guid": "0214a241-22f4-4710-9307-2c10b5768cd6",
+    "GraphicObject": {
+      "$type": "GraphicsModule.Geometry.Objects.Points.Point3D, GraphicsModule.Geometry",
+      "X": 81.0,
+      "Y": 98.0,
+      "Z": 126.0,
+      "PointOfPlane1X0Y": {
+        "$type": "GraphicsModule.Geometry.Objects.Points.PointOfPlane1X0Y, GraphicsModule.Geometry",
+        "X": 81.0,
+        "Y": 98.0
+      },
+      "PointOfPlane2X0Z": {
+        "$type": "GraphicsModule.Geometry.Objects.Points.PointOfPlane2X0Z, GraphicsModule.Geometry",
+        "X": 81.0,
+        "Z": 126.0
+      },
+      "PointOfPlane3Y0Z": {
+        "$type": "GraphicsModule.Geometry.Objects.Points.PointOfPlane3Y0Z, GraphicsModule.Geometry",
+        "Y": 98.0,
+        "Z": 126.0
+      }
+    }
   }
 ]

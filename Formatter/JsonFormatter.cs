@@ -14,17 +14,20 @@ namespace Formatter
         public static void WriteObjectsToJson(Collection<IObject> coll)
         {
             var fullPath = GetPathToJsonFile();
-            var guid = Guid.NewGuid();
-            JArray jo = new JArray();
-            List<object> listGraphObjects = new List<object>();
+            List<GraphicKey> listGraphObjects = new List<GraphicKey>();
             foreach (var item in coll)
             {
-                JObject jobj = new JObject();
-                jobj.Add("Guid", Guid.NewGuid());
-                jobj.Add("TypeName", item.GetType().Name);
-                jo.Add(jobj);
+                listGraphObjects.Add(new GraphicKey
+                {
+                    Guid = Guid.NewGuid(),
+                    GraphicObject = item
+                });
             }
-            string json = JsonConvert.SerializeObject(jo, Formatting.Indented);
+            string json = JsonConvert.SerializeObject(listGraphObjects.ToArray(), Formatting.Indented, new JsonSerializerSettings
+            {
+                TypeNameHandling = TypeNameHandling.Objects,
+                TypeNameAssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Simple
+            });
             System.IO.File.WriteAllText($@"{fullPath}\GraphicObjects.json", json);
         }
 
@@ -34,7 +37,10 @@ namespace Formatter
             using (StreamReader r = new StreamReader($@"{fullPath}\GraphicObjects.json"))
             {
                 string json = r.ReadToEnd();
-                return JsonConvert.DeserializeObject<List<GraphicKey>>(json);
+                return JsonConvert.DeserializeObject<List<GraphicKey>>(json, new JsonSerializerSettings
+                {
+                    TypeNameHandling = TypeNameHandling.Objects
+                });
             }
         }
 

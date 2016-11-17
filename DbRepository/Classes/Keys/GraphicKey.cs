@@ -1,14 +1,17 @@
-﻿using System;
+﻿using GraphicsModule.Geometry.Objects;
+using System;
 
 namespace DbRepository.Classes.Keys
 {
     public class GraphicKey : IEquatable<GraphicKey>
     {
         public Guid Guid { get; set; }
-        public string TypeName { get; set; }
+        public IObject GraphicObject { get; set; }
         public bool Equals(GraphicKey other)
         {
-            return (other.Guid.Equals(Guid));
+            if (other != null)
+                return (other.Guid.Equals(Guid));
+            return false;
         }
         public override int GetHashCode()
         {
