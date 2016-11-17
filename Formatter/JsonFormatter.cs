@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,7 +10,7 @@ namespace Formatter
 {
     public static class JsonFormatter
     {
-        public static void WriteObjectsToJson(Collection<IObject> coll)
+        public static void WriteObjectsToJson(Collection<IObject> coll, string fileName = "GraphicObjects")
         {
             var fullPath = GetPathToJsonFile();
             List<GraphicKey> listGraphObjects = new List<GraphicKey>();
@@ -28,7 +27,7 @@ namespace Formatter
                 TypeNameHandling = TypeNameHandling.Objects,
                 TypeNameAssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Simple
             });
-            System.IO.File.WriteAllText($@"{fullPath}\GraphicObjects.json", json);
+            System.IO.File.WriteAllText($@"{fullPath}\{fileName}.json", json);
         }
 
         public static List<GraphicKey> GetGraphicKeysFromJson()
@@ -42,6 +41,31 @@ namespace Formatter
                     TypeNameHandling = TypeNameHandling.Objects
                 });
             }
+        }
+
+        public static Collection<IObject> GetObjectsForTaskFromJson(int taskId)
+        {
+            var taskName = taskId.ToString();
+            var fullPath = GetPathToJsonFile();
+            var list = new List<GraphicKey>();
+            var coll = new Collection<IObject>();
+            try
+            {
+                using (StreamReader r = new StreamReader($@"{fullPath}\{taskName}.json"))
+                {
+                    string json = r.ReadToEnd();
+                    list = JsonConvert.DeserializeObject<List<GraphicKey>>(json, new JsonSerializerSettings
+                    {
+                        TypeNameHandling = TypeNameHandling.Objects
+                    });
+                    foreach (var key in list)
+                    {
+                        coll.Add(key.GraphicObject);
+                    }
+                }
+            }
+            catch (FileNotFoundException){}
+            return coll;
         }
 
         private static string GetPathToJsonFile()

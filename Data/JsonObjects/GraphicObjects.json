@@ -1,51 +1,51 @@
 [
   {
     "$type": "DbRepository.Classes.Keys.GraphicKey, DbRepository",
-    "Guid": "57563a19-fe37-4f84-ad37-7fa14145d817",
+    "Guid": "65a1c5f8-3e94-4d6e-8b64-194c3129bd10",
     "GraphicObject": {
       "$type": "GraphicsModule.Geometry.Objects.Points.Point3D, GraphicsModule.Geometry",
-      "X": 408.0,
-      "Y": 100.0,
-      "Z": 147.0,
+      "X": 173.0,
+      "Y": 97.0,
+      "Z": 87.0,
       "PointOfPlane1X0Y": {
         "$type": "GraphicsModule.Geometry.Objects.Points.PointOfPlane1X0Y, GraphicsModule.Geometry",
-        "X": 408.0,
-        "Y": 100.0
+        "X": 173.0,
+        "Y": 97.0
       },
       "PointOfPlane2X0Z": {
         "$type": "GraphicsModule.Geometry.Objects.Points.PointOfPlane2X0Z, GraphicsModule.Geometry",
-        "X": 408.0,
-        "Z": 147.0
+        "X": 173.0,
+        "Z": 87.0
       },
       "PointOfPlane3Y0Z": {
         "$type": "GraphicsModule.Geometry.Objects.Points.PointOfPlane3Y0Z, GraphicsModule.Geometry",
-        "Y": 100.0,
-        "Z": 147.0
+        "Y": 97.0,
+        "Z": 87.0
       }
     }
   },
   {
     "$type": "DbRepository.Classes.Keys.GraphicKey, DbRepository",
-    "Guid": "0214a241-22f4-4710-9307-2c10b5768cd6",
+    "Guid": "c3fe34c1-28fd-4267-b470-4dc9a6ba438b",
     "GraphicObject": {
       "$type": "GraphicsModule.Geometry.Objects.Points.Point3D, GraphicsModule.Geometry",
-      "X": 81.0,
-      "Y": 98.0,
-      "Z": 126.0,
+      "X": 293.0,
+      "Y": 157.0,
+      "Z": 336.0,
       "PointOfPlane1X0Y": {
         "$type": "GraphicsModule.Geometry.Objects.Points.PointOfPlane1X0Y, GraphicsModule.Geometry",
-        "X": 81.0,
-        "Y": 98.0
+        "X": 293.0,
+        "Y": 157.0
       },
       "PointOfPlane2X0Z": {
         "$type": "GraphicsModule.Geometry.Objects.Points.PointOfPlane2X0Z, GraphicsModule.Geometry",
-        "X": 81.0,
-        "Z": 126.0
+        "X": 293.0,
+        "Z": 336.0
       },
       "PointOfPlane3Y0Z": {
         "$type": "GraphicsModule.Geometry.Objects.Points.PointOfPlane3Y0Z, GraphicsModule.Geometry",
-        "Y": 98.0,
-        "Z": 126.0
+        "Y": 157.0,
+        "Z": 336.0
       }
     }
   }
