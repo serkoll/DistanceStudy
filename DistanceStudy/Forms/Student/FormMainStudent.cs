@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using GraphicsModule.Form;
 using Service.HandlerUI;
 using Service.Services.Solver;
+using Formatter;
 
 namespace DistanceStudy.Forms.Student
 {
@@ -55,6 +56,12 @@ namespace DistanceStudy.Forms.Student
         {
             _graphForm = new FormGraphicsControl();
             _graphForm.MdiParent = this;
+            _graphForm.Load += (s, ev) =>
+            {
+                var obj = _wt.GetObjectBySelectedNode();
+                var coll = JsonFormatter.GetObjectsForTaskFromJson(obj.TaskId);
+                _graphForm.Import(coll);
+            };
             _graphForm.Show();
             _graphForm.StartPosition = FormStartPosition.CenterScreen;
             _graphForm.WindowState = FormWindowState.Maximized;

@@ -67,6 +67,26 @@ namespace Formatter
             return coll;
         }
 
+        public static List<GraphicKey> GetGraphicKeysForTaskFromJson(int taskId)
+        {
+            var taskName = taskId.ToString();
+            var fullPath = GetPathToJsonFile();
+            var list = new List<GraphicKey>();
+            try
+            {
+                using (StreamReader r = new StreamReader($@"{fullPath}\{taskName}.json"))
+                {
+                    string json = r.ReadToEnd();
+                    list = JsonConvert.DeserializeObject<List<GraphicKey>>(json, new JsonSerializerSettings
+                    {
+                        TypeNameHandling = TypeNameHandling.Objects
+                    });
+                }
+            }
+            catch (FileNotFoundException) { }
+            return list;
+        }
+
         public static void DeleteTaskJsonById(int taskId)
         {
             var taskName = taskId.ToString();

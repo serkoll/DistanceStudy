@@ -117,6 +117,13 @@ namespace Service.Services.Solver
                 foreach (var item in keys)
                 {
                     object objInit;
+                    var jsonGraphKey = JsonFormatter.GetGraphicKeysForTaskFromJson(task.TaskId).FirstOrDefault(c => c.Guid.ToString().Equals(item.SourceMethod));
+                    if (jsonGraphKey != null)
+                    {
+                        objInit = JsonFormatter.GetObjectsForTaskFromJson(task.TaskId).FirstOrDefault(c => c.GetType().Name.Equals(jsonGraphKey.GraphicObject.GetType().Name));
+                        initialParams.Add(item, objInit);
+                        continue;
+                    }
                     // забрать из решений объект по ключу нужный текущему методу
                     solveParams.TryGetValue(item, out objInit);
                     if (objInit != null)

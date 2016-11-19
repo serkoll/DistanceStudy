@@ -1,51 +1,51 @@
 [
   {
     "$type": "DbRepository.Classes.Keys.GraphicKey, DbRepository",
-    "Guid": "65a1c5f8-3e94-4d6e-8b64-194c3129bd10",
+    "Guid": "919e2872-6acd-4de2-b3f5-4eb2c6578f9a",
     "GraphicObject": {
       "$type": "GraphicsModule.Geometry.Objects.Points.Point3D, GraphicsModule.Geometry",
-      "X": 173.0,
-      "Y": 97.0,
-      "Z": 87.0,
+      "X": 113.0,
+      "Y": 114.0,
+      "Z": 113.0,
       "PointOfPlane1X0Y": {
         "$type": "GraphicsModule.Geometry.Objects.Points.PointOfPlane1X0Y, GraphicsModule.Geometry",
-        "X": 173.0,
-        "Y": 97.0
+        "X": 113.0,
+        "Y": 114.0
       },
       "PointOfPlane2X0Z": {
         "$type": "GraphicsModule.Geometry.Objects.Points.PointOfPlane2X0Z, GraphicsModule.Geometry",
-        "X": 173.0,
-        "Z": 87.0
+        "X": 113.0,
+        "Z": 113.0
       },
       "PointOfPlane3Y0Z": {
         "$type": "GraphicsModule.Geometry.Objects.Points.PointOfPlane3Y0Z, GraphicsModule.Geometry",
-        "Y": 97.0,
-        "Z": 87.0
+        "Y": 114.0,
+        "Z": 113.0
       }
     }
   },
   {
     "$type": "DbRepository.Classes.Keys.GraphicKey, DbRepository",
-    "Guid": "c3fe34c1-28fd-4267-b470-4dc9a6ba438b",
+    "Guid": "27eb0fa7-7459-4567-8f97-4cd58801faed",
     "GraphicObject": {
       "$type": "GraphicsModule.Geometry.Objects.Points.Point3D, GraphicsModule.Geometry",
-      "X": 293.0,
-      "Y": 157.0,
-      "Z": 336.0,
+      "X": 75.0,
+      "Y": 100.0,
+      "Z": 169.0,
       "PointOfPlane1X0Y": {
         "$type": "GraphicsModule.Geometry.Objects.Points.PointOfPlane1X0Y, GraphicsModule.Geometry",
-        "X": 293.0,
-        "Y": 157.0
+        "X": 75.0,
+        "Y": 100.0
       },
       "PointOfPlane2X0Z": {
         "$type": "GraphicsModule.Geometry.Objects.Points.PointOfPlane2X0Z, GraphicsModule.Geometry",
-        "X": 293.0,
-        "Z": 336.0
+        "X": 75.0,
+        "Z": 169.0
       },
       "PointOfPlane3Y0Z": {
         "$type": "GraphicsModule.Geometry.Objects.Points.PointOfPlane3Y0Z, GraphicsModule.Geometry",
-        "Y": 157.0,
-        "Z": 336.0
+        "Y": 100.0,
+        "Z": 169.0
       }
     }
   }

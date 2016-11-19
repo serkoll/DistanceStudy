@@ -34,6 +34,8 @@
             this.button_Clear = new System.Windows.Forms.Button();
             this.checkedListBoxProectionsControls = new System.Windows.Forms.CheckedListBox();
             this.groupBoxInfo = new System.Windows.Forms.GroupBox();
+            this.radioButtonMethod = new System.Windows.Forms.RadioButton();
+            this.radioButtonGraphic = new System.Windows.Forms.RadioButton();
             this.buttonAcceptRefMethod = new System.Windows.Forms.Button();
             this.comboBoxInputParam = new System.Windows.Forms.ComboBox();
             this.labelEnterInputParam = new System.Windows.Forms.Label();
@@ -45,8 +47,6 @@
             this.labelTeacherParams = new System.Windows.Forms.Label();
             this.labelUserParams = new System.Windows.Forms.Label();
             this.labelDesc = new System.Windows.Forms.Label();
-            this.radioButtonGraphic = new System.Windows.Forms.RadioButton();
-            this.radioButtonMethod = new System.Windows.Forms.RadioButton();
             this.groupBoxInfo.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -111,6 +111,31 @@
             this.groupBoxInfo.TabIndex = 20;
             this.groupBoxInfo.TabStop = false;
             this.groupBoxInfo.Text = "Информация об алгоритме";
+            // 
+            // radioButtonMethod
+            // 
+            this.radioButtonMethod.AutoSize = true;
+            this.radioButtonMethod.Checked = true;
+            this.radioButtonMethod.Location = new System.Drawing.Point(12, 359);
+            this.radioButtonMethod.Name = "radioButtonMethod";
+            this.radioButtonMethod.Size = new System.Drawing.Size(63, 17);
+            this.radioButtonMethod.TabIndex = 12;
+            this.radioButtonMethod.TabStop = true;
+            this.radioButtonMethod.Text = "Метода";
+            this.radioButtonMethod.UseVisualStyleBackColor = true;
+            this.radioButtonMethod.Visible = false;
+            // 
+            // radioButtonGraphic
+            // 
+            this.radioButtonGraphic.AutoSize = true;
+            this.radioButtonGraphic.Location = new System.Drawing.Point(12, 336);
+            this.radioButtonGraphic.Name = "radioButtonGraphic";
+            this.radioButtonGraphic.Size = new System.Drawing.Size(104, 17);
+            this.radioButtonGraphic.TabIndex = 11;
+            this.radioButtonGraphic.Text = "Представления";
+            this.radioButtonGraphic.UseVisualStyleBackColor = true;
+            this.radioButtonGraphic.Visible = false;
+            this.radioButtonGraphic.CheckedChanged += new System.EventHandler(this.radioButtonGraphic_CheckedChanged);
             // 
             // buttonAcceptRefMethod
             // 
@@ -214,30 +239,6 @@
             this.labelDesc.Size = new System.Drawing.Size(57, 13);
             this.labelDesc.TabIndex = 0;
             this.labelDesc.Text = "Описание";
-            // 
-            // radioButtonGraphic
-            // 
-            this.radioButtonGraphic.AutoSize = true;
-            this.radioButtonGraphic.Location = new System.Drawing.Point(12, 336);
-            this.radioButtonGraphic.Name = "radioButtonGraphic";
-            this.radioButtonGraphic.Size = new System.Drawing.Size(104, 17);
-            this.radioButtonGraphic.TabIndex = 11;
-            this.radioButtonGraphic.Text = "Представления";
-            this.radioButtonGraphic.UseVisualStyleBackColor = true;
-            this.radioButtonGraphic.Visible = false;
-            // 
-            // radioButtonMethod
-            // 
-            this.radioButtonMethod.AutoSize = true;
-            this.radioButtonMethod.Checked = true;
-            this.radioButtonMethod.Location = new System.Drawing.Point(12, 359);
-            this.radioButtonMethod.Name = "radioButtonMethod";
-            this.radioButtonMethod.Size = new System.Drawing.Size(63, 17);
-            this.radioButtonMethod.TabIndex = 12;
-            this.radioButtonMethod.TabStop = true;
-            this.radioButtonMethod.Text = "Метода";
-            this.radioButtonMethod.UseVisualStyleBackColor = true;
-            this.radioButtonMethod.Visible = false;
             // 
             // FormCreateAlgorithm
             // 
