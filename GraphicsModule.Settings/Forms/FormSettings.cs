@@ -25,6 +25,9 @@ namespace GraphicsModule.Settings.Forms
         {
             switch (e.Node.Text)
             {
+                case "Общие":
+                    labelTitle.Text = @"Общие настройки";
+                    break;
                 case "Прямая":
                     groupBoxControls.Controls.Clear();
                     groupBoxControls.Controls.Add(_stLine);

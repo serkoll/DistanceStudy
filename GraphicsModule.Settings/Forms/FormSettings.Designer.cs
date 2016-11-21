@@ -28,24 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("Общие");
-            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Точка");
-            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("Прямая");
-            System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("Отрезок");
-            System.Windows.Forms.TreeNode treeNode23 = new System.Windows.Forms.TreeNode("Примитивы", new System.Windows.Forms.TreeNode[] {
-            treeNode20,
-            treeNode21,
-            treeNode22});
-            System.Windows.Forms.TreeNode treeNode24 = new System.Windows.Forms.TreeNode("Сетка");
-            System.Windows.Forms.TreeNode treeNode25 = new System.Windows.Forms.TreeNode("Оси");
-            System.Windows.Forms.TreeNode treeNode26 = new System.Windows.Forms.TreeNode("Курсор");
-            System.Windows.Forms.TreeNode treeNode27 = new System.Windows.Forms.TreeNode("Фон");
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Общие");
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Точка");
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Прямая");
+            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Отрезок");
+            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Примитивы", new System.Windows.Forms.TreeNode[] {
+            treeNode11,
+            treeNode12,
+            treeNode13});
+            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Сетка");
+            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Оси");
+            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Курсор");
+            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Фон");
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.treeView = new System.Windows.Forms.TreeView();
-            this.groupBoxControls = new System.Windows.Forms.GroupBox();
-            this.buttonOK = new System.Windows.Forms.Button();
-            this.buttonCancel = new System.Windows.Forms.Button();
             this.labelTitle = new System.Windows.Forms.Label();
+            this.groupBoxControls = new System.Windows.Forms.GroupBox();
+            this.buttonCancel = new System.Windows.Forms.Button();
+            this.buttonOK = new System.Windows.Forms.Button();
             this.tableLayoutPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -54,8 +54,8 @@
             this.tableLayoutPanel.ColumnCount = 4;
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 65F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 65F));
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 85F));
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 85F));
             this.tableLayoutPanel.Controls.Add(this.treeView, 0, 0);
             this.tableLayoutPanel.Controls.Add(this.labelTitle, 1, 0);
             this.tableLayoutPanel.Controls.Add(this.groupBoxControls, 0, 1);
@@ -80,68 +80,35 @@
             this.treeView.ForeColor = System.Drawing.SystemColors.ControlText;
             this.treeView.Location = new System.Drawing.Point(3, 3);
             this.treeView.Name = "treeView";
-            treeNode19.Name = "NodeGeneral";
-            treeNode19.Text = "Общие";
-            treeNode20.Name = "NodePoint";
-            treeNode20.Text = "Точка";
-            treeNode21.Name = "NodeLine";
-            treeNode21.Text = "Прямая";
-            treeNode22.Name = "NodeSegment";
-            treeNode22.Text = "Отрезок";
-            treeNode23.Name = "NodeObjects";
-            treeNode23.Text = "Примитивы";
-            treeNode24.Name = "NodeGrid";
-            treeNode24.Text = "Сетка";
-            treeNode25.Name = "NodeAxis";
-            treeNode25.Text = "Оси";
-            treeNode26.Name = "NodeCursor";
-            treeNode26.Text = "Курсор";
-            treeNode27.Name = "NodeBackground";
-            treeNode27.Text = "Фон";
+            treeNode10.Name = "NodeGeneral";
+            treeNode10.Text = "Общие";
+            treeNode11.Name = "NodePoint";
+            treeNode11.Text = "Точка";
+            treeNode12.Name = "NodeLine";
+            treeNode12.Text = "Прямая";
+            treeNode13.Name = "NodeSegment";
+            treeNode13.Text = "Отрезок";
+            treeNode14.Name = "NodeObjects";
+            treeNode14.Text = "Примитивы";
+            treeNode15.Name = "NodeGrid";
+            treeNode15.Text = "Сетка";
+            treeNode16.Name = "NodeAxis";
+            treeNode16.Text = "Оси";
+            treeNode17.Name = "NodeCursor";
+            treeNode17.Text = "Курсор";
+            treeNode18.Name = "NodeBackground";
+            treeNode18.Text = "Фон";
             this.treeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode19,
-            treeNode23,
-            treeNode24,
-            treeNode25,
-            treeNode26,
-            treeNode27});
+            treeNode10,
+            treeNode14,
+            treeNode15,
+            treeNode16,
+            treeNode17,
+            treeNode18});
             this.tableLayoutPanel.SetRowSpan(this.treeView, 4);
-            this.treeView.Size = new System.Drawing.Size(99, 318);
+            this.treeView.Size = new System.Drawing.Size(91, 318);
             this.treeView.TabIndex = 0;
             this.treeView.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseClick);
-            // 
-            // groupBoxControls
-            // 
-            this.tableLayoutPanel.SetColumnSpan(this.groupBoxControls, 3);
-            this.groupBoxControls.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxControls.Location = new System.Drawing.Point(108, 33);
-            this.groupBoxControls.Name = "groupBoxControls";
-            this.tableLayoutPanel.SetRowSpan(this.groupBoxControls, 2);
-            this.groupBoxControls.Size = new System.Drawing.Size(547, 258);
-            this.groupBoxControls.TabIndex = 2;
-            this.groupBoxControls.TabStop = false;
-            // 
-            // buttonOK
-            // 
-            this.buttonOK.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonOK.Location = new System.Drawing.Point(530, 297);
-            this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Size = new System.Drawing.Size(59, 24);
-            this.buttonOK.TabIndex = 3;
-            this.buttonOK.Text = "OK";
-            this.buttonOK.UseVisualStyleBackColor = true;
-            this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
-            // 
-            // buttonCancel
-            // 
-            this.buttonCancel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonCancel.Location = new System.Drawing.Point(595, 297);
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(60, 24);
-            this.buttonCancel.TabIndex = 4;
-            this.buttonCancel.Text = "Отмена";
-            this.buttonCancel.UseVisualStyleBackColor = true;
-            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // labelTitle
             // 
@@ -149,12 +116,45 @@
             this.labelTitle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tableLayoutPanel.SetColumnSpan(this.labelTitle, 3);
             this.labelTitle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelTitle.Location = new System.Drawing.Point(108, 0);
+            this.labelTitle.Location = new System.Drawing.Point(100, 0);
             this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(547, 30);
+            this.labelTitle.Size = new System.Drawing.Size(555, 30);
             this.labelTitle.TabIndex = 1;
-            this.labelTitle.Text = "labelTitle";
+            this.labelTitle.Text = "Общие настройки";
             this.labelTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // groupBoxControls
+            // 
+            this.tableLayoutPanel.SetColumnSpan(this.groupBoxControls, 3);
+            this.groupBoxControls.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBoxControls.Location = new System.Drawing.Point(100, 33);
+            this.groupBoxControls.Name = "groupBoxControls";
+            this.tableLayoutPanel.SetRowSpan(this.groupBoxControls, 2);
+            this.groupBoxControls.Size = new System.Drawing.Size(555, 258);
+            this.groupBoxControls.TabIndex = 2;
+            this.groupBoxControls.TabStop = false;
+            // 
+            // buttonCancel
+            // 
+            this.buttonCancel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonCancel.Location = new System.Drawing.Point(575, 297);
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Size = new System.Drawing.Size(80, 24);
+            this.buttonCancel.TabIndex = 4;
+            this.buttonCancel.Text = "Отмена";
+            this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            // 
+            // buttonOK
+            // 
+            this.buttonOK.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonOK.Location = new System.Drawing.Point(490, 297);
+            this.buttonOK.Name = "buttonOK";
+            this.buttonOK.Size = new System.Drawing.Size(79, 24);
+            this.buttonOK.TabIndex = 3;
+            this.buttonOK.Text = "OK";
+            this.buttonOK.UseVisualStyleBackColor = true;
+            this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
             // FormSettings
             // 

@@ -7,6 +7,7 @@ using GraphicsModule.Cursors;
 using GraphicsModule.Operations;
 using GraphicsModule.Geometry.Objects;
 using System.IO;
+using GraphicsModule.Settings.Forms;
 
 namespace GraphicsModule.Controls
 {
@@ -65,11 +66,13 @@ namespace GraphicsModule.Controls
             if (File.Exists(_settingsFileName))
             {
                 _settings = new Settings.Settings().Deserialize(_settingsFileName); //Получаем экземпляр настроек
+                FormSettings.ValueS = _settings;
             }
             else
             {
                 _settings = new Settings.Settings();
                 _settings.Serialize(_settingsFileName);
+                FormSettings.ValueS = _settings;
             }
 
             _ptMenuSelector = new Menu.PointMenuSelector(MainPictureBox); //Создаем меню вариантов для точек

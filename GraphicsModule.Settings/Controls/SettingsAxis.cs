@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Forms;
+using GraphicsModule.Settings.Forms;
 
 namespace GraphicsModule.Settings.Controls
 {
@@ -11,6 +12,9 @@ namespace GraphicsModule.Settings.Controls
         {
             InitializeComponent();
             AxisS = new AxisS();
+            colorBoxX.BackColor = FormSettings.ValueS.AxisS.ColorX;
+            colorBoxY.BackColor = FormSettings.ValueS.AxisS.ColorY;
+            colorBoxZ.BackColor = FormSettings.ValueS.AxisS.ColorZ;
         }
 
         private void colorBoxX_Click(object sender, EventArgs e)

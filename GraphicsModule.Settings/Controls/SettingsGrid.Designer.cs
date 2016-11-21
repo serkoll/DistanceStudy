@@ -89,6 +89,8 @@
             // CheckBox1_FlagDrawGrid
             // 
             this.CheckBox1_FlagDrawGrid.AutoSize = true;
+            this.CheckBox1_FlagDrawGrid.Checked = true;
+            this.CheckBox1_FlagDrawGrid.CheckState = System.Windows.Forms.CheckState.Checked;
             this.CheckBox1_FlagDrawGrid.Location = new System.Drawing.Point(220, 11);
             this.CheckBox1_FlagDrawGrid.Name = "CheckBox1_FlagDrawGrid";
             this.CheckBox1_FlagDrawGrid.Size = new System.Drawing.Size(75, 17);
@@ -108,7 +110,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 169);
+            this.label1.Location = new System.Drawing.Point(3, 163);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(177, 13);
             this.label1.TabIndex = 39;
@@ -127,37 +129,39 @@
             // 
             this.gridStep1Box.FormattingEnabled = true;
             this.gridStep1Box.Items.AddRange(new object[] {
-            "1,000",
-            "1,250",
-            "2,500",
-            "5,000",
-            "10,000",
-            "12,500",
-            "25,000",
-            "50,000",
-            "100,000"});
+            "1",
+            "1",
+            "2",
+            "5",
+            "10",
+            "12",
+            "25",
+            "50",
+            "100"});
             this.gridStep1Box.Location = new System.Drawing.Point(220, 160);
             this.gridStep1Box.Name = "gridStep1Box";
-            this.gridStep1Box.Size = new System.Drawing.Size(121, 21);
+            this.gridStep1Box.Size = new System.Drawing.Size(75, 21);
             this.gridStep1Box.TabIndex = 41;
+            this.gridStep1Box.Text = "10";
             // 
             // gridStep2Box
             // 
             this.gridStep2Box.FormattingEnabled = true;
             this.gridStep2Box.Items.AddRange(new object[] {
-            "1,000",
-            "1,250",
-            "2,500",
-            "5,000",
-            "10,000",
-            "12,500",
-            "25,000",
-            "50,000",
-            "100,000"});
-            this.gridStep2Box.Location = new System.Drawing.Point(220, 199);
+            "1",
+            "1",
+            "2",
+            "5",
+            "10",
+            "12",
+            "25",
+            "50",
+            "100"});
+            this.gridStep2Box.Location = new System.Drawing.Point(220, 200);
             this.gridStep2Box.Name = "gridStep2Box";
-            this.gridStep2Box.Size = new System.Drawing.Size(121, 21);
+            this.gridStep2Box.Size = new System.Drawing.Size(75, 21);
             this.gridStep2Box.TabIndex = 42;
+            this.gridStep2Box.Text = "10";
             // 
             // Label8
             // 
