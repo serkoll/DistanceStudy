@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.IO;
+using System.Windows.Forms;
 using GraphicsModule.Settings.Controls;
 
 namespace GraphicsModule.Settings.Forms
@@ -14,12 +15,10 @@ namespace GraphicsModule.Settings.Forms
         private readonly SettingsPoint _stPoint = new SettingsPoint();
         private readonly SettingsSegment _stSegment = new SettingsSegment();
         private readonly string fName = "config.cfg";
-        public static Settings ValueS = new Settings();
+        public static Settings ValueS;
         public FormSettings()
         {
             InitializeComponent();
-            ValueS.Serialize(fName);
-            var a = ValueS.Deserialize(fName);
         }
 
         private void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
