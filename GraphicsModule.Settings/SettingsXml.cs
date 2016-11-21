@@ -82,9 +82,9 @@ namespace GraphicsModule.Settings
 
             if (settingsLink1.checkBox1.Checked)
             {
-                settingsLink1.link1ColorBox.BackColor = settingsAxis1.colorBox1.BackColor;
-                settingsLink1.link2ColorBox.BackColor = settingsAxis1.colorBox2.BackColor;
-                settingsLink1.link3ColorBox.BackColor = settingsAxis1.colorBox3.BackColor;
+                settingsLink1.link1ColorBox.BackColor = settingsAxis1.colorBoxX.BackColor;
+                settingsLink1.link2ColorBox.BackColor = settingsAxis1.colorBoxY.BackColor;
+                settingsLink1.link3ColorBox.BackColor = settingsAxis1.colorBoxZ.BackColor;
             }
         }
 
@@ -92,17 +92,17 @@ namespace GraphicsModule.Settings
         {
             _tag = "Axis";
             
-            settingsAxis1.CheckBox1_FlagDrawAxisX.Checked = bool.Parse(GetElement(0,_tag).Value);
-            settingsAxis1.CheckBox2_FlagDrawAxisY.Checked = bool.Parse(GetElement(1,_tag).Value);
-            settingsAxis1.CheckBox3_FlagDrawAxisZ.Checked = bool.Parse(GetElement(2,_tag).Value);
+            settingsAxis1.CheckBoxFlagDrawAxisX.Checked = bool.Parse(GetElement(0,_tag).Value);
+            settingsAxis1.CheckBoxFlagDrawAxisY.Checked = bool.Parse(GetElement(1,_tag).Value);
+            settingsAxis1.CheckBoxFlagDrawAxisZ.Checked = bool.Parse(GetElement(2,_tag).Value);
             settingsAxis1.axis1NameBox.Text = GetElement(3,_tag).Value;
             settingsAxis1.axis2NameBox.Text = GetElement(4,_tag).Value;
             settingsAxis1.axis3NameBox.Text = GetElement(5,_tag).Value;
             settingsAxis1.NumericUpDown2_AxisWidth.Value = decimal.Parse(GetElement(6,_tag).Value);
             //settingsAxis1.ListBox1_TypeArrowAxis.SelectedItem = GetElement(7,_tag).Value;
-            settingsAxis1.colorBox1.BackColor = ColorTranslator.FromWin32(int.Parse(GetElement(8,_tag).Value));
-            settingsAxis1.colorBox2.BackColor = ColorTranslator.FromWin32(int.Parse(GetElement(9,_tag).Value));
-            settingsAxis1.colorBox3.BackColor = ColorTranslator.FromWin32(int.Parse(GetElement(10,_tag).Value));
+            settingsAxis1.colorBoxX.BackColor = ColorTranslator.FromWin32(int.Parse(GetElement(8,_tag).Value));
+            settingsAxis1.colorBoxY.BackColor = ColorTranslator.FromWin32(int.Parse(GetElement(9,_tag).Value));
+            settingsAxis1.colorBoxZ.BackColor = ColorTranslator.FromWin32(int.Parse(GetElement(10,_tag).Value));
         }
 
         public void InitializeSettingsGridControl(SettingsGrid settingsGrid1)
@@ -159,9 +159,9 @@ namespace GraphicsModule.Settings
         public void SaveSettingsAxis(SettingsAxis settingsAxis1)
         {
             _tag = "Axis";
-            GetElement(0,_tag).Value = settingsAxis1.CheckBox1_FlagDrawAxisX.Checked.ToString();
-            GetElement(1,_tag).Value = settingsAxis1.CheckBox2_FlagDrawAxisY.Checked.ToString();
-            GetElement(2,_tag).Value = settingsAxis1.CheckBox3_FlagDrawAxisZ.Checked.ToString();
+            GetElement(0,_tag).Value = settingsAxis1.CheckBoxFlagDrawAxisX.Checked.ToString();
+            GetElement(1,_tag).Value = settingsAxis1.CheckBoxFlagDrawAxisY.Checked.ToString();
+            GetElement(2,_tag).Value = settingsAxis1.CheckBoxFlagDrawAxisZ.Checked.ToString();
 
             GetElement(3,_tag).Value = settingsAxis1.axis1NameBox.Text;
             GetElement(4,_tag).Value = settingsAxis1.axis2NameBox.Text;
@@ -171,9 +171,9 @@ namespace GraphicsModule.Settings
 
             //GetElement(7,_tag).Value = settingsAxis1.ListBox1_TypeArrowAxis.SelectedItem.ToString();
 
-            GetElement(8,_tag).Value = ColorTranslator.ToWin32(settingsAxis1.colorBox1.BackColor).ToString();
-            GetElement(9,_tag).Value = ColorTranslator.ToWin32(settingsAxis1.colorBox2.BackColor).ToString();
-            GetElement(10,_tag).Value = ColorTranslator.ToWin32(settingsAxis1.colorBox3.BackColor).ToString();
+            GetElement(8,_tag).Value = ColorTranslator.ToWin32(settingsAxis1.colorBoxX.BackColor).ToString();
+            GetElement(9,_tag).Value = ColorTranslator.ToWin32(settingsAxis1.colorBoxY.BackColor).ToString();
+            GetElement(10,_tag).Value = ColorTranslator.ToWin32(settingsAxis1.colorBoxZ.BackColor).ToString();
         }
 
         public void SaveSettingsCursor(SettingsCursor settingsCursor1)

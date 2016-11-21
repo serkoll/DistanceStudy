@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.CheckBox2_FlagDrawAxisY = new System.Windows.Forms.CheckBox();
-            this.CheckBox3_FlagDrawAxisZ = new System.Windows.Forms.CheckBox();
-            this.CheckBox1_FlagDrawAxisX = new System.Windows.Forms.CheckBox();
+            this.CheckBoxFlagDrawAxisY = new System.Windows.Forms.CheckBox();
+            this.CheckBoxFlagDrawAxisZ = new System.Windows.Forms.CheckBox();
+            this.CheckBoxFlagDrawAxisX = new System.Windows.Forms.CheckBox();
             this.Label14 = new System.Windows.Forms.Label();
             this.Label15 = new System.Windows.Forms.Label();
             this.Label13 = new System.Windows.Forms.Label();
@@ -39,13 +39,13 @@
             this.Label9 = new System.Windows.Forms.Label();
             this.Label8 = new System.Windows.Forms.Label();
             this.GroupBox1_AxisColor = new System.Windows.Forms.GroupBox();
-            this.colorBox3 = new System.Windows.Forms.PictureBox();
-            this.colorBox2 = new System.Windows.Forms.PictureBox();
-            this.colorBox1 = new System.Windows.Forms.PictureBox();
+            this.colorBoxZ = new System.Windows.Forms.PictureBox();
+            this.colorBoxY = new System.Windows.Forms.PictureBox();
+            this.colorBoxX = new System.Windows.Forms.PictureBox();
             this.Label10 = new System.Windows.Forms.Label();
-            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.colorDialog2 = new System.Windows.Forms.ColorDialog();
-            this.colorDialog3 = new System.Windows.Forms.ColorDialog();
+            this.colorDialogX = new System.Windows.Forms.ColorDialog();
+            this.colorDialogY = new System.Windows.Forms.ColorDialog();
+            this.colorDialogZ = new System.Windows.Forms.ColorDialog();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -54,64 +54,70 @@
             this.axis3NameBox = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.NumericUpDown2_AxisWidth)).BeginInit();
             this.GroupBox1_AxisColor.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.colorBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.colorBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.colorBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.colorBoxZ)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.colorBoxY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.colorBoxX)).BeginInit();
             this.SuspendLayout();
             // 
-            // CheckBox2_FlagDrawAxisY
+            // CheckBoxFlagDrawAxisY
             // 
-            this.CheckBox2_FlagDrawAxisY.AutoSize = true;
-            this.CheckBox2_FlagDrawAxisY.Location = new System.Drawing.Point(147, 37);
-            this.CheckBox2_FlagDrawAxisY.Name = "CheckBox2_FlagDrawAxisY";
-            this.CheckBox2_FlagDrawAxisY.Size = new System.Drawing.Size(15, 14);
-            this.CheckBox2_FlagDrawAxisY.TabIndex = 19;
-            this.CheckBox2_FlagDrawAxisY.UseVisualStyleBackColor = true;
+            this.CheckBoxFlagDrawAxisY.AutoSize = true;
+            this.CheckBoxFlagDrawAxisY.Checked = true;
+            this.CheckBoxFlagDrawAxisY.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.CheckBoxFlagDrawAxisY.Location = new System.Drawing.Point(147, 37);
+            this.CheckBoxFlagDrawAxisY.Name = "CheckBoxFlagDrawAxisY";
+            this.CheckBoxFlagDrawAxisY.Size = new System.Drawing.Size(15, 14);
+            this.CheckBoxFlagDrawAxisY.TabIndex = 19;
+            this.CheckBoxFlagDrawAxisY.UseVisualStyleBackColor = true;
             // 
-            // CheckBox3_FlagDrawAxisZ
+            // CheckBoxFlagDrawAxisZ
             // 
-            this.CheckBox3_FlagDrawAxisZ.AutoSize = true;
-            this.CheckBox3_FlagDrawAxisZ.Location = new System.Drawing.Point(147, 62);
-            this.CheckBox3_FlagDrawAxisZ.Name = "CheckBox3_FlagDrawAxisZ";
-            this.CheckBox3_FlagDrawAxisZ.Size = new System.Drawing.Size(15, 14);
-            this.CheckBox3_FlagDrawAxisZ.TabIndex = 20;
-            this.CheckBox3_FlagDrawAxisZ.UseVisualStyleBackColor = true;
+            this.CheckBoxFlagDrawAxisZ.AutoSize = true;
+            this.CheckBoxFlagDrawAxisZ.Checked = true;
+            this.CheckBoxFlagDrawAxisZ.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.CheckBoxFlagDrawAxisZ.Location = new System.Drawing.Point(147, 62);
+            this.CheckBoxFlagDrawAxisZ.Name = "CheckBoxFlagDrawAxisZ";
+            this.CheckBoxFlagDrawAxisZ.Size = new System.Drawing.Size(15, 14);
+            this.CheckBoxFlagDrawAxisZ.TabIndex = 20;
+            this.CheckBoxFlagDrawAxisZ.UseVisualStyleBackColor = true;
             // 
-            // CheckBox1_FlagDrawAxisX
+            // CheckBoxFlagDrawAxisX
             // 
-            this.CheckBox1_FlagDrawAxisX.AutoSize = true;
-            this.CheckBox1_FlagDrawAxisX.Location = new System.Drawing.Point(147, 13);
-            this.CheckBox1_FlagDrawAxisX.Name = "CheckBox1_FlagDrawAxisX";
-            this.CheckBox1_FlagDrawAxisX.Size = new System.Drawing.Size(15, 14);
-            this.CheckBox1_FlagDrawAxisX.TabIndex = 21;
-            this.CheckBox1_FlagDrawAxisX.UseVisualStyleBackColor = true;
+            this.CheckBoxFlagDrawAxisX.AutoSize = true;
+            this.CheckBoxFlagDrawAxisX.Checked = true;
+            this.CheckBoxFlagDrawAxisX.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.CheckBoxFlagDrawAxisX.Location = new System.Drawing.Point(147, 13);
+            this.CheckBoxFlagDrawAxisX.Name = "CheckBoxFlagDrawAxisX";
+            this.CheckBoxFlagDrawAxisX.Size = new System.Drawing.Size(15, 14);
+            this.CheckBoxFlagDrawAxisX.TabIndex = 21;
+            this.CheckBoxFlagDrawAxisX.UseVisualStyleBackColor = true;
             // 
             // Label14
             // 
             this.Label14.AutoSize = true;
             this.Label14.Location = new System.Drawing.Point(3, 37);
             this.Label14.Name = "Label14";
-            this.Label14.Size = new System.Drawing.Size(106, 13);
+            this.Label14.Size = new System.Drawing.Size(115, 13);
             this.Label14.TabIndex = 22;
-            this.Label14.Text = "Отображение оси 2";
+            this.Label14.Text = "Отображение оси OY";
             // 
             // Label15
             // 
             this.Label15.AutoSize = true;
             this.Label15.Location = new System.Drawing.Point(3, 62);
             this.Label15.Name = "Label15";
-            this.Label15.Size = new System.Drawing.Size(106, 13);
+            this.Label15.Size = new System.Drawing.Size(115, 13);
             this.Label15.TabIndex = 23;
-            this.Label15.Text = "Отображение оси 3";
+            this.Label15.Text = "Отображение оси OY";
             // 
             // Label13
             // 
             this.Label13.AutoSize = true;
             this.Label13.Location = new System.Drawing.Point(3, 13);
             this.Label13.Name = "Label13";
-            this.Label13.Size = new System.Drawing.Size(106, 13);
+            this.Label13.Size = new System.Drawing.Size(115, 13);
             this.Label13.TabIndex = 24;
-            this.Label13.Text = "Отображение оси 1";
+            this.Label13.Text = "Отображение оси OX";
             // 
             // NumericUpDown2_AxisWidth
             // 
@@ -137,26 +143,26 @@
             // Label9
             // 
             this.Label9.AutoSize = true;
-            this.Label9.Location = new System.Drawing.Point(15, 56);
+            this.Label9.Location = new System.Drawing.Point(6, 56);
             this.Label9.Name = "Label9";
-            this.Label9.Size = new System.Drawing.Size(62, 13);
+            this.Label9.Size = new System.Drawing.Size(71, 13);
             this.Label9.TabIndex = 14;
-            this.Label9.Text = "Цвет оси 2";
+            this.Label9.Text = "Цвет оси OY";
             // 
             // Label8
             // 
             this.Label8.AutoSize = true;
-            this.Label8.Location = new System.Drawing.Point(15, 19);
+            this.Label8.Location = new System.Drawing.Point(6, 19);
             this.Label8.Name = "Label8";
-            this.Label8.Size = new System.Drawing.Size(62, 13);
+            this.Label8.Size = new System.Drawing.Size(71, 13);
             this.Label8.TabIndex = 14;
-            this.Label8.Text = "Цвет оси 1";
+            this.Label8.Text = "Цвет оси OX";
             // 
             // GroupBox1_AxisColor
             // 
-            this.GroupBox1_AxisColor.Controls.Add(this.colorBox3);
-            this.GroupBox1_AxisColor.Controls.Add(this.colorBox2);
-            this.GroupBox1_AxisColor.Controls.Add(this.colorBox1);
+            this.GroupBox1_AxisColor.Controls.Add(this.colorBoxZ);
+            this.GroupBox1_AxisColor.Controls.Add(this.colorBoxY);
+            this.GroupBox1_AxisColor.Controls.Add(this.colorBoxX);
             this.GroupBox1_AxisColor.Controls.Add(this.Label10);
             this.GroupBox1_AxisColor.Controls.Add(this.Label9);
             this.GroupBox1_AxisColor.Controls.Add(this.Label8);
@@ -167,71 +173,71 @@
             this.GroupBox1_AxisColor.TabStop = false;
             this.GroupBox1_AxisColor.Text = "Цвет осей";
             // 
-            // colorBox3
+            // colorBoxZ
             // 
-            this.colorBox3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.colorBox3.Location = new System.Drawing.Point(182, 93);
-            this.colorBox3.Name = "colorBox3";
-            this.colorBox3.Size = new System.Drawing.Size(25, 23);
-            this.colorBox3.TabIndex = 26;
-            this.colorBox3.TabStop = false;
-            this.colorBox3.Click += new System.EventHandler(this.colorBox3_Click);
+            this.colorBoxZ.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.colorBoxZ.Location = new System.Drawing.Point(182, 93);
+            this.colorBoxZ.Name = "colorBoxZ";
+            this.colorBoxZ.Size = new System.Drawing.Size(25, 23);
+            this.colorBoxZ.TabIndex = 26;
+            this.colorBoxZ.TabStop = false;
+            this.colorBoxZ.Click += new System.EventHandler(this.colorBoxZ_Click);
             // 
-            // colorBox2
+            // colorBoxY
             // 
-            this.colorBox2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.colorBox2.Location = new System.Drawing.Point(182, 56);
-            this.colorBox2.Name = "colorBox2";
-            this.colorBox2.Size = new System.Drawing.Size(25, 23);
-            this.colorBox2.TabIndex = 25;
-            this.colorBox2.TabStop = false;
-            this.colorBox2.Click += new System.EventHandler(this.colorBox2_Click);
+            this.colorBoxY.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.colorBoxY.Location = new System.Drawing.Point(182, 56);
+            this.colorBoxY.Name = "colorBoxY";
+            this.colorBoxY.Size = new System.Drawing.Size(25, 23);
+            this.colorBoxY.TabIndex = 25;
+            this.colorBoxY.TabStop = false;
+            this.colorBoxY.Click += new System.EventHandler(this.colorBoxY_Click);
             // 
-            // colorBox1
+            // colorBoxX
             // 
-            this.colorBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.colorBox1.Location = new System.Drawing.Point(182, 19);
-            this.colorBox1.Name = "colorBox1";
-            this.colorBox1.Size = new System.Drawing.Size(25, 23);
-            this.colorBox1.TabIndex = 24;
-            this.colorBox1.TabStop = false;
-            this.colorBox1.Click += new System.EventHandler(this.colorBox1_Click);
+            this.colorBoxX.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.colorBoxX.Location = new System.Drawing.Point(182, 19);
+            this.colorBoxX.Name = "colorBoxX";
+            this.colorBoxX.Size = new System.Drawing.Size(25, 23);
+            this.colorBoxX.TabIndex = 24;
+            this.colorBoxX.TabStop = false;
+            this.colorBoxX.Click += new System.EventHandler(this.colorBoxX_Click);
             // 
             // Label10
             // 
             this.Label10.AutoSize = true;
-            this.Label10.Location = new System.Drawing.Point(15, 93);
+            this.Label10.Location = new System.Drawing.Point(6, 93);
             this.Label10.Name = "Label10";
-            this.Label10.Size = new System.Drawing.Size(62, 13);
+            this.Label10.Size = new System.Drawing.Size(71, 13);
             this.Label10.TabIndex = 14;
-            this.Label10.Text = "Цвет оси 3";
+            this.Label10.Text = "Цвет оси OZ";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(185, 13);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(87, 13);
+            this.label1.Size = new System.Drawing.Size(96, 13);
             this.label1.TabIndex = 31;
-            this.label1.Text = "Название оси 1";
+            this.label1.Text = "Название оси OX";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(185, 37);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(87, 13);
+            this.label2.Size = new System.Drawing.Size(96, 13);
             this.label2.TabIndex = 32;
-            this.label2.Text = "Название оси 2";
+            this.label2.Text = "Название оси OY";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(185, 62);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(87, 13);
+            this.label3.Size = new System.Drawing.Size(96, 13);
             this.label3.TabIndex = 33;
-            this.label3.Text = "Название оси 3";
+            this.label3.Text = "Название оси OZ";
             // 
             // axis1NameBox
             // 
@@ -291,9 +297,9 @@
             this.Controls.Add(this.GroupBox1_AxisColor);
             this.Controls.Add(this.NumericUpDown2_AxisWidth);
             this.Controls.Add(this.Label12);
-            this.Controls.Add(this.CheckBox2_FlagDrawAxisY);
-            this.Controls.Add(this.CheckBox3_FlagDrawAxisZ);
-            this.Controls.Add(this.CheckBox1_FlagDrawAxisX);
+            this.Controls.Add(this.CheckBoxFlagDrawAxisY);
+            this.Controls.Add(this.CheckBoxFlagDrawAxisZ);
+            this.Controls.Add(this.CheckBoxFlagDrawAxisX);
             this.Controls.Add(this.Label14);
             this.Controls.Add(this.Label15);
             this.Controls.Add(this.Label13);
@@ -302,9 +308,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.NumericUpDown2_AxisWidth)).EndInit();
             this.GroupBox1_AxisColor.ResumeLayout(false);
             this.GroupBox1_AxisColor.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.colorBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.colorBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.colorBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.colorBoxZ)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.colorBoxY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.colorBoxX)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -312,9 +318,9 @@
 
         #endregion
 
-        public System.Windows.Forms.CheckBox CheckBox2_FlagDrawAxisY;
-        public System.Windows.Forms.CheckBox CheckBox3_FlagDrawAxisZ;
-        public System.Windows.Forms.CheckBox CheckBox1_FlagDrawAxisX;
+        public System.Windows.Forms.CheckBox CheckBoxFlagDrawAxisY;
+        public System.Windows.Forms.CheckBox CheckBoxFlagDrawAxisZ;
+        public System.Windows.Forms.CheckBox CheckBoxFlagDrawAxisX;
         internal System.Windows.Forms.Label Label14;
         internal System.Windows.Forms.Label Label15;
         internal System.Windows.Forms.Label Label13;
@@ -324,17 +330,17 @@
         internal System.Windows.Forms.Label Label8;
         public System.Windows.Forms.GroupBox GroupBox1_AxisColor;
         internal System.Windows.Forms.Label Label10;
-        public System.Windows.Forms.ColorDialog colorDialog1;
-        public System.Windows.Forms.ColorDialog colorDialog2;
-        public System.Windows.Forms.ColorDialog colorDialog3;
+        public System.Windows.Forms.ColorDialog colorDialogX;
+        public System.Windows.Forms.ColorDialog colorDialogY;
+        public System.Windows.Forms.ColorDialog colorDialogZ;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         public System.Windows.Forms.ComboBox axis1NameBox;
         public System.Windows.Forms.ComboBox axis2NameBox;
         public System.Windows.Forms.ComboBox axis3NameBox;
-        public System.Windows.Forms.PictureBox colorBox3;
-        public System.Windows.Forms.PictureBox colorBox2;
-        public System.Windows.Forms.PictureBox colorBox1;
+        public System.Windows.Forms.PictureBox colorBoxZ;
+        public System.Windows.Forms.PictureBox colorBoxY;
+        public System.Windows.Forms.PictureBox colorBoxX;
     }
 }

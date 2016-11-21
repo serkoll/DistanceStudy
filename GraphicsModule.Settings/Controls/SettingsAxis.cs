@@ -10,22 +10,22 @@ namespace GraphicsModule.Settings.Controls
             InitializeComponent();
         }
 
-        private void colorBox1_Click(object sender, EventArgs e)
+        private void colorBoxX_Click(object sender, EventArgs e)
         {
-            if (colorDialog1.ShowDialog() == DialogResult.OK)
-                colorBox1.BackColor = colorDialog1.Color;
+            if (colorDialogX.ShowDialog() == DialogResult.OK)
+                colorBoxX.BackColor = colorDialogX.Color;
         }
 
-        private void colorBox2_Click(object sender, EventArgs e)
+        private void colorBoxY_Click(object sender, EventArgs e)
         {
-            if (colorDialog2.ShowDialog() == DialogResult.OK)
-                colorBox2.BackColor = colorDialog2.Color;
+            if (colorDialogY.ShowDialog() == DialogResult.OK)
+                colorBoxY.BackColor = colorDialogY.Color;
         }
 
-        private void colorBox3_Click(object sender, EventArgs e)
+        private void colorBoxZ_Click(object sender, EventArgs e)
         {
-            if (colorDialog3.ShowDialog() == DialogResult.OK)
-                colorBox3.BackColor = colorDialog3.Color;
+            if (colorDialogZ.ShowDialog() == DialogResult.OK)
+                colorBoxZ.BackColor = colorDialogZ.Color;
         }
 
         private void axis1NameBox_SelectedIndexChanged(object sender, EventArgs e)
