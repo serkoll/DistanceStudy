@@ -4,9 +4,9 @@ using System.Drawing;
 using System.Windows.Forms;
 using GraphicsModule.Settings.Cursors;
 
-namespace GraphicsModule.Settings
+namespace GraphicsModule.Settings.Controls
 {
-    public partial class SettingCursor : UserControl
+    public partial class SettingsCursor : UserControl
     {
         private readonly List<Button> _buttons;
         internal readonly List<ColorDialog> ColorDialogs;
@@ -14,7 +14,7 @@ namespace GraphicsModule.Settings
         public List<PictureBox> CursorBoxes;
         public List<PictureBox> ColorBase; 
 
-        public SettingCursor()
+        public SettingsCursor()
         {
             InitializeComponent();
             ColorBase = new List<PictureBox>

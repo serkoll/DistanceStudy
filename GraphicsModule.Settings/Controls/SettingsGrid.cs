@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace GraphicsModule.Settings
+namespace GraphicsModule.Settings.Controls
 {
-    public partial class SettingGrid : UserControl
+    public partial class SettingsGrid : UserControl
     {
-        public SettingGrid()
+        public SettingsGrid()
         {
             InitializeComponent();
         }
@@ -19,5 +19,6 @@ namespace GraphicsModule.Settings
             if (colorDialog1.ShowDialog() == DialogResult.OK)
                 colorEdge.BackColor = colorDialog1.Color;
         }
+
     }
 }

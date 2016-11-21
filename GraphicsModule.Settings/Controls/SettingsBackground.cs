@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace GraphicsModule.Settings
+namespace GraphicsModule.Settings.Controls
 {
-    public partial class SettingBackground : UserControl
+    public partial class SettingsBackground : UserControl
     {
-        public SettingBackground()
+        public SettingsBackground()
         {
             InitializeComponent();
         }

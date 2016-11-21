@@ -1,6 +1,6 @@
-﻿namespace GraphicsModule.Settings
+﻿namespace GraphicsModule.Settings.Controls
 {
-    partial class SettingSegment
+    partial class SettingsSegment
     {
         /// <summary> 
         /// Required designer variable.
@@ -33,8 +33,6 @@
             this.colorLabel = new System.Windows.Forms.Label();
             this.lineWidth = new System.Windows.Forms.Label();
             this.segmentWidth = new System.Windows.Forms.NumericUpDown();
-            this.styleWidthList = new System.Windows.Forms.ListBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -76,7 +74,7 @@
             // endPointsOnOff
             // 
             this.endPointsOnOff.AutoSize = true;
-            this.endPointsOnOff.Location = new System.Drawing.Point(53, 213);
+            this.endPointsOnOff.Location = new System.Drawing.Point(6, 68);
             this.endPointsOnOff.Name = "endPointsOnOff";
             this.endPointsOnOff.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.endPointsOnOff.Size = new System.Drawing.Size(193, 17);
@@ -88,7 +86,7 @@
             // 
             this.segmentColorBox.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.segmentColorBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.segmentColorBox.Location = new System.Drawing.Point(232, 165);
+            this.segmentColorBox.Location = new System.Drawing.Point(185, 37);
             this.segmentColorBox.Name = "segmentColorBox";
             this.segmentColorBox.Size = new System.Drawing.Size(25, 25);
             this.segmentColorBox.TabIndex = 8;
@@ -97,7 +95,7 @@
             // colorLabel
             // 
             this.colorLabel.AutoSize = true;
-            this.colorLabel.Location = new System.Drawing.Point(50, 172);
+            this.colorLabel.Location = new System.Drawing.Point(3, 44);
             this.colorLabel.Name = "colorLabel";
             this.colorLabel.Size = new System.Drawing.Size(32, 13);
             this.colorLabel.TabIndex = 7;
@@ -106,7 +104,7 @@
             // lineWidth
             // 
             this.lineWidth.AutoSize = true;
-            this.lineWidth.Location = new System.Drawing.Point(50, 35);
+            this.lineWidth.Location = new System.Drawing.Point(3, 10);
             this.lineWidth.Name = "lineWidth";
             this.lineWidth.Size = new System.Drawing.Size(53, 13);
             this.lineWidth.TabIndex = 6;
@@ -114,38 +112,17 @@
             // 
             // segmentWidth
             // 
-            this.segmentWidth.Location = new System.Drawing.Point(232, 33);
+            this.segmentWidth.Location = new System.Drawing.Point(185, 8);
             this.segmentWidth.Name = "segmentWidth";
             this.segmentWidth.Size = new System.Drawing.Size(42, 20);
             this.segmentWidth.TabIndex = 5;
             // 
-            // styleWidthList
-            // 
-            this.styleWidthList.FormattingEnabled = true;
-            this.styleWidthList.Items.AddRange(new object[] {
-            "style1",
-            "style2",
-            "style3"});
-            this.styleWidthList.Location = new System.Drawing.Point(232, 59);
-            this.styleWidthList.Name = "styleWidthList";
-            this.styleWidthList.Size = new System.Drawing.Size(120, 95);
-            this.styleWidthList.TabIndex = 10;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(50, 59);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(37, 13);
-            this.label1.TabIndex = 11;
-            this.label1.Text = "Стиль";
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.tabControl1);
-            this.groupBox1.Location = new System.Drawing.Point(53, 254);
+            this.groupBox1.Location = new System.Drawing.Point(6, 91);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(420, 228);
+            this.groupBox1.Size = new System.Drawing.Size(420, 187);
             this.groupBox1.TabIndex = 12;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Проекции";
@@ -158,7 +135,7 @@
             this.tabControl1.Location = new System.Drawing.Point(6, 19);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(408, 209);
+            this.tabControl1.Size = new System.Drawing.Size(408, 169);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -172,7 +149,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(400, 183);
+            this.tabPage1.Size = new System.Drawing.Size(400, 143);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "1-я проекция";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -215,7 +192,7 @@
             "icon3"});
             this.iconsSegment1stPlaneList.Location = new System.Drawing.Point(103, 63);
             this.iconsSegment1stPlaneList.Name = "iconsSegment1stPlaneList";
-            this.iconsSegment1stPlaneList.Size = new System.Drawing.Size(107, 95);
+            this.iconsSegment1stPlaneList.Size = new System.Drawing.Size(107, 69);
             this.iconsSegment1stPlaneList.TabIndex = 21;
             // 
             // colorSegment1stPlaneBox
@@ -292,7 +269,7 @@
             "icon3"});
             this.iconsSegment2ndPlaneBox.Location = new System.Drawing.Point(103, 63);
             this.iconsSegment2ndPlaneBox.Name = "iconsSegment2ndPlaneBox";
-            this.iconsSegment2ndPlaneBox.Size = new System.Drawing.Size(107, 95);
+            this.iconsSegment2ndPlaneBox.Size = new System.Drawing.Size(107, 69);
             this.iconsSegment2ndPlaneBox.TabIndex = 21;
             // 
             // colorSegment2ndPlaneBox
@@ -369,7 +346,7 @@
             "icon3"});
             this.iconsSegment3rdPlaneBox.Location = new System.Drawing.Point(103, 63);
             this.iconsSegment3rdPlaneBox.Name = "iconsSegment3rdPlaneBox";
-            this.iconsSegment3rdPlaneBox.Size = new System.Drawing.Size(107, 95);
+            this.iconsSegment3rdPlaneBox.Size = new System.Drawing.Size(107, 69);
             this.iconsSegment3rdPlaneBox.TabIndex = 21;
             // 
             // colorSegment3rdPlaneBox
@@ -392,20 +369,18 @@
             this.label10.TabIndex = 19;
             this.label10.Text = "Цвет";
             // 
-            // SettingSegment
+            // SettingsSegment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.styleWidthList);
             this.Controls.Add(this.endPointsOnOff);
             this.Controls.Add(this.segmentColorBox);
             this.Controls.Add(this.colorLabel);
             this.Controls.Add(this.lineWidth);
             this.Controls.Add(this.segmentWidth);
-            this.Name = "SettingSegment";
-            this.Size = new System.Drawing.Size(569, 503);
+            this.Name = "SettingsSegment";
+            this.Size = new System.Drawing.Size(451, 288);
             ((System.ComponentModel.ISupportInitialize)(this.segmentColorBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.segmentWidth)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -431,8 +406,6 @@
         private System.Windows.Forms.Label colorLabel;
         private System.Windows.Forms.Label lineWidth;
         public System.Windows.Forms.NumericUpDown segmentWidth;
-        private System.Windows.Forms.ListBox styleWidthList;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;

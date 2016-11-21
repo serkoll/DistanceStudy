@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace GraphicsModule.Settings
+namespace GraphicsModule.Settings.Controls
 {
-    public partial class SettingAxis : UserControl
+    public partial class SettingsAxis : UserControl
     {
-        public SettingAxis()
+        public SettingsAxis()
         {
             InitializeComponent();
         }

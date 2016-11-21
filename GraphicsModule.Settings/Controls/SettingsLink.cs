@@ -2,13 +2,13 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace GraphicsModule.Settings
+namespace GraphicsModule.Settings.Controls
 {
-    public partial class SettingLink : UserControl
+    public partial class SettingsLink : UserControl
     {
         private readonly SettingsXml _xml;
 
-        public SettingLink()
+        public SettingsLink()
         {
             _xml = new SettingsXml();
             InitializeComponent();

@@ -1,24 +1,30 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace GraphicsModule.Settings
+namespace GraphicsModule.Settings.Controls
 {
-    public partial class Setting3DPoint : UserControl
+    public partial class SettingsPoint : UserControl
     {
-        public Setting3DPoint()
+        public SettingsPoint()
         {
             InitializeComponent();
         }
 
+        private void pointColorBox_Click(object sender, EventArgs e)
+        {
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                pointColorBox.BackColor = colorDialog1.Color;
+            }
+        }
         private void name1stPlaneBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (name1stPlaneBox.SelectedIndex==name1stPlaneBox.Items.IndexOf(name1stPlaneBox.SelectedItem))
+            if (name1stPlaneBox.SelectedIndex == name1stPlaneBox.Items.IndexOf(name1stPlaneBox.SelectedItem))
             {
                 name2ndPlaneBox.SelectedIndex = name1stPlaneBox.SelectedIndex;
                 name3rdPlaneBox.SelectedIndex = name1stPlaneBox.SelectedIndex;
             }
         }
-
         private void name2ndPlaneBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (name2ndPlaneBox.SelectedIndex == name2ndPlaneBox.Items.IndexOf(name2ndPlaneBox.SelectedItem))
@@ -30,13 +36,12 @@ namespace GraphicsModule.Settings
 
         private void name3rdPlaneBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (name3rdPlaneBox.SelectedIndex==name3rdPlaneBox.Items.IndexOf(name3rdPlaneBox.SelectedItem))
+            if (name3rdPlaneBox.SelectedIndex == name3rdPlaneBox.Items.IndexOf(name3rdPlaneBox.SelectedItem))
             {
                 name1stPlaneBox.SelectedIndex = name3rdPlaneBox.SelectedIndex;
                 name2ndPlaneBox.SelectedIndex = name3rdPlaneBox.SelectedIndex;
             }
         }
-
         private void color1stPlaneBox_Click(object sender, EventArgs e)
         {
             if (color1stPlaneDialog.ShowDialog() == DialogResult.OK)
@@ -51,8 +56,7 @@ namespace GraphicsModule.Settings
 
         private void color3rdPlaneBox_Click(object sender, EventArgs e)
         {
-            if (color3rdPlaneDialog.ShowDialog() == DialogResult.OK)
-                color3rdPlaneBox.BackColor = color3rdPlaneDialog.Color;
+
         }
     }
 }

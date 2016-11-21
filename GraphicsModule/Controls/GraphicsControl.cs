@@ -295,7 +295,7 @@ namespace GraphicsModule.Controls
         /// <param name="e"></param>
         private void buttonSettings_Click(object sender, EventArgs e)
         {
-            var f = new Settings.Forms.SettingsForm();
+            var f = new Settings.Forms.FormSettings();
             f.ShowDialog();
         }
         /// <summary>

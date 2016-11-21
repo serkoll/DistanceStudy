@@ -1,6 +1,6 @@
-﻿namespace GraphicsModule.Settings
+﻿namespace GraphicsModule.Settings.Controls
 {
-    partial class SettingGrid
+    partial class SettingsGrid
     {
         /// <summary> 
         /// Required designer variable.
@@ -51,7 +51,7 @@
             this.ListBox1_TypePointsGrid.Items.AddRange(new object[] {
             "PathToImage",
             "Erf"});
-            this.ListBox1_TypePointsGrid.Location = new System.Drawing.Point(372, 141);
+            this.ListBox1_TypePointsGrid.Location = new System.Drawing.Point(220, 104);
             this.ListBox1_TypePointsGrid.Name = "ListBox1_TypePointsGrid";
             this.ListBox1_TypePointsGrid.Size = new System.Drawing.Size(81, 30);
             this.ListBox1_TypePointsGrid.TabIndex = 38;
@@ -59,7 +59,7 @@
             // Label11
             // 
             this.Label11.AutoSize = true;
-            this.Label11.Location = new System.Drawing.Point(44, 141);
+            this.Label11.Location = new System.Drawing.Point(3, 104);
             this.Label11.Name = "Label11";
             this.Label11.Size = new System.Drawing.Size(122, 13);
             this.Label11.TabIndex = 37;
@@ -67,7 +67,7 @@
             // 
             // NumericUpDown2_PointsWidth
             // 
-            this.NumericUpDown2_PointsWidth.Location = new System.Drawing.Point(372, 92);
+            this.NumericUpDown2_PointsWidth.Location = new System.Drawing.Point(220, 55);
             this.NumericUpDown2_PointsWidth.Name = "NumericUpDown2_PointsWidth";
             this.NumericUpDown2_PointsWidth.Size = new System.Drawing.Size(53, 20);
             this.NumericUpDown2_PointsWidth.TabIndex = 36;
@@ -80,7 +80,7 @@
             // Label12
             // 
             this.Label12.AutoSize = true;
-            this.Label12.Location = new System.Drawing.Point(44, 92);
+            this.Label12.Location = new System.Drawing.Point(3, 55);
             this.Label12.Name = "Label12";
             this.Label12.Size = new System.Drawing.Size(133, 13);
             this.Label12.TabIndex = 35;
@@ -89,7 +89,7 @@
             // CheckBox1_FlagDrawGrid
             // 
             this.CheckBox1_FlagDrawGrid.AutoSize = true;
-            this.CheckBox1_FlagDrawGrid.Location = new System.Drawing.Point(372, 48);
+            this.CheckBox1_FlagDrawGrid.Location = new System.Drawing.Point(220, 11);
             this.CheckBox1_FlagDrawGrid.Name = "CheckBox1_FlagDrawGrid";
             this.CheckBox1_FlagDrawGrid.Size = new System.Drawing.Size(75, 17);
             this.CheckBox1_FlagDrawGrid.TabIndex = 31;
@@ -99,7 +99,7 @@
             // Label13
             // 
             this.Label13.AutoSize = true;
-            this.Label13.Location = new System.Drawing.Point(44, 48);
+            this.Label13.Location = new System.Drawing.Point(3, 11);
             this.Label13.Name = "Label13";
             this.Label13.Size = new System.Drawing.Size(108, 13);
             this.Label13.TabIndex = 34;
@@ -108,7 +108,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(44, 206);
+            this.label1.Location = new System.Drawing.Point(3, 169);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(177, 13);
             this.label1.TabIndex = 39;
@@ -117,7 +117,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(44, 245);
+            this.label2.Location = new System.Drawing.Point(3, 208);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(166, 13);
             this.label2.TabIndex = 40;
@@ -136,7 +136,7 @@
             "25,000",
             "50,000",
             "100,000"});
-            this.gridStep1Box.Location = new System.Drawing.Point(372, 197);
+            this.gridStep1Box.Location = new System.Drawing.Point(220, 160);
             this.gridStep1Box.Name = "gridStep1Box";
             this.gridStep1Box.Size = new System.Drawing.Size(121, 21);
             this.gridStep1Box.TabIndex = 41;
@@ -154,7 +154,7 @@
             "25,000",
             "50,000",
             "100,000"});
-            this.gridStep2Box.Location = new System.Drawing.Point(372, 236);
+            this.gridStep2Box.Location = new System.Drawing.Point(220, 199);
             this.gridStep2Box.Name = "gridStep2Box";
             this.gridStep2Box.Size = new System.Drawing.Size(121, 21);
             this.gridStep2Box.TabIndex = 42;
@@ -162,7 +162,7 @@
             // Label8
             // 
             this.Label8.AutoSize = true;
-            this.Label8.Location = new System.Drawing.Point(44, 291);
+            this.Label8.Location = new System.Drawing.Point(3, 254);
             this.Label8.Name = "Label8";
             this.Label8.Size = new System.Drawing.Size(95, 13);
             this.Label8.TabIndex = 43;
@@ -172,7 +172,7 @@
             // 
             this.colorEdge.BackColor = System.Drawing.Color.White;
             this.colorEdge.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.colorEdge.Location = new System.Drawing.Point(372, 279);
+            this.colorEdge.Location = new System.Drawing.Point(220, 242);
             this.colorEdge.Name = "colorEdge";
             this.colorEdge.Size = new System.Drawing.Size(39, 35);
             this.colorEdge.TabIndex = 45;
@@ -180,7 +180,7 @@
             this.colorEdge.Click += new System.EventHandler(this.colorEdge_Click);
             this.colorEdge.Paint += new System.Windows.Forms.PaintEventHandler(this.colorEdge_Paint);
             // 
-            // SettingGrid
+            // SettingsGrid
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -196,8 +196,8 @@
             this.Controls.Add(this.Label12);
             this.Controls.Add(this.CheckBox1_FlagDrawGrid);
             this.Controls.Add(this.Label13);
-            this.Name = "SettingGrid";
-            this.Size = new System.Drawing.Size(657, 513);
+            this.Name = "SettingsGrid";
+            this.Size = new System.Drawing.Size(451, 288);
             ((System.ComponentModel.ISupportInitialize)(this.NumericUpDown2_PointsWidth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.colorEdge)).EndInit();
             this.ResumeLayout(false);
