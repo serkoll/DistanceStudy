@@ -34,7 +34,7 @@
             this.Label14 = new System.Windows.Forms.Label();
             this.Label15 = new System.Windows.Forms.Label();
             this.Label13 = new System.Windows.Forms.Label();
-            this.NumericUpDown2_AxisWidth = new System.Windows.Forms.NumericUpDown();
+            this.NumericUpDownAxisWidth = new System.Windows.Forms.NumericUpDown();
             this.Label12 = new System.Windows.Forms.Label();
             this.Label9 = new System.Windows.Forms.Label();
             this.Label8 = new System.Windows.Forms.Label();
@@ -52,7 +52,7 @@
             this.axis1NameBox = new System.Windows.Forms.ComboBox();
             this.axis2NameBox = new System.Windows.Forms.ComboBox();
             this.axis3NameBox = new System.Windows.Forms.ComboBox();
-            ((System.ComponentModel.ISupportInitialize)(this.NumericUpDown2_AxisWidth)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownAxisWidth)).BeginInit();
             this.GroupBox1_AxisColor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.colorBoxZ)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.colorBoxY)).BeginInit();
@@ -69,6 +69,7 @@
             this.CheckBoxFlagDrawAxisY.Size = new System.Drawing.Size(15, 14);
             this.CheckBoxFlagDrawAxisY.TabIndex = 19;
             this.CheckBoxFlagDrawAxisY.UseVisualStyleBackColor = true;
+            this.CheckBoxFlagDrawAxisY.CheckedChanged += new System.EventHandler(this.CheckBoxFlagDrawAxisY_CheckedChanged);
             // 
             // CheckBoxFlagDrawAxisZ
             // 
@@ -80,6 +81,7 @@
             this.CheckBoxFlagDrawAxisZ.Size = new System.Drawing.Size(15, 14);
             this.CheckBoxFlagDrawAxisZ.TabIndex = 20;
             this.CheckBoxFlagDrawAxisZ.UseVisualStyleBackColor = true;
+            this.CheckBoxFlagDrawAxisZ.CheckedChanged += new System.EventHandler(this.CheckBoxFlagDrawAxisZ_CheckedChanged);
             // 
             // CheckBoxFlagDrawAxisX
             // 
@@ -91,6 +93,7 @@
             this.CheckBoxFlagDrawAxisX.Size = new System.Drawing.Size(15, 14);
             this.CheckBoxFlagDrawAxisX.TabIndex = 21;
             this.CheckBoxFlagDrawAxisX.UseVisualStyleBackColor = true;
+            this.CheckBoxFlagDrawAxisX.CheckedChanged += new System.EventHandler(this.CheckBoxFlagDrawAxisX_CheckedChanged);
             // 
             // Label14
             // 
@@ -119,17 +122,18 @@
             this.Label13.TabIndex = 24;
             this.Label13.Text = "Отображение оси OX";
             // 
-            // NumericUpDown2_AxisWidth
+            // NumericUpDownAxisWidth
             // 
-            this.NumericUpDown2_AxisWidth.Location = new System.Drawing.Point(188, 98);
-            this.NumericUpDown2_AxisWidth.Name = "NumericUpDown2_AxisWidth";
-            this.NumericUpDown2_AxisWidth.Size = new System.Drawing.Size(53, 20);
-            this.NumericUpDown2_AxisWidth.TabIndex = 26;
-            this.NumericUpDown2_AxisWidth.Value = new decimal(new int[] {
+            this.NumericUpDownAxisWidth.Location = new System.Drawing.Point(188, 98);
+            this.NumericUpDownAxisWidth.Name = "NumericUpDownAxisWidth";
+            this.NumericUpDownAxisWidth.Size = new System.Drawing.Size(53, 20);
+            this.NumericUpDownAxisWidth.TabIndex = 26;
+            this.NumericUpDownAxisWidth.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
+            this.NumericUpDownAxisWidth.ValueChanged += new System.EventHandler(this.NumericUpDownAxisWidth_ValueChanged);
             // 
             // Label12
             // 
@@ -295,7 +299,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.GroupBox1_AxisColor);
-            this.Controls.Add(this.NumericUpDown2_AxisWidth);
+            this.Controls.Add(this.NumericUpDownAxisWidth);
             this.Controls.Add(this.Label12);
             this.Controls.Add(this.CheckBoxFlagDrawAxisY);
             this.Controls.Add(this.CheckBoxFlagDrawAxisZ);
@@ -305,7 +309,7 @@
             this.Controls.Add(this.Label13);
             this.Name = "SettingsAxis";
             this.Size = new System.Drawing.Size(451, 288);
-            ((System.ComponentModel.ISupportInitialize)(this.NumericUpDown2_AxisWidth)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownAxisWidth)).EndInit();
             this.GroupBox1_AxisColor.ResumeLayout(false);
             this.GroupBox1_AxisColor.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.colorBoxZ)).EndInit();
@@ -324,7 +328,7 @@
         internal System.Windows.Forms.Label Label14;
         internal System.Windows.Forms.Label Label15;
         internal System.Windows.Forms.Label Label13;
-        public System.Windows.Forms.NumericUpDown NumericUpDown2_AxisWidth;
+        public System.Windows.Forms.NumericUpDown NumericUpDownAxisWidth;
         internal System.Windows.Forms.Label Label12;
         internal System.Windows.Forms.Label Label9;
         internal System.Windows.Forms.Label Label8;

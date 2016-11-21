@@ -15,5 +15,13 @@ namespace GraphicsModule.Settings
             DrawS = new DrawS();
             SelectedDrawS = new DrawS(new Pen(Brushes.Orange, 4), new Pen(Brushes.Orange, 1), new Pen(Brushes.Orange, 1), new Pen(Brushes.Orange, 1), new Pen(Brushes.Orange, 1), 2, 1);
         }
+
+        public Settings(AxisS axisS, GridS gridS, DrawS drawS, DrawS selectedDrawS)
+        {
+            GridS = gridS;
+            AxisS = axisS;
+            DrawS = drawS;
+            SelectedDrawS = SelectedDrawS;
+        }
     }
 }

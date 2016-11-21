@@ -13,6 +13,7 @@ namespace GraphicsModule.Settings.Forms
         private readonly SettingsLink _stLink = new SettingsLink();
         private readonly SettingsPoint _stPoint = new SettingsPoint();
         private readonly SettingsSegment _stSegment = new SettingsSegment();
+        public static Settings ValueS = new Settings();
         public FormSettings()
         {
             InitializeComponent();
@@ -71,6 +72,16 @@ namespace GraphicsModule.Settings.Forms
                     labelTitle.Text = @"Настройки отрезка";
                     break;
             }
+        }
+
+        private void buttonOK_Click(object sender, System.EventArgs e)
+        {
+            ValueS.AxisS = _stAxis.AxisS;
+            Close();
+        }
+        private void buttonCancel_Click(object sender, System.EventArgs e)
+        {
+            Close();
         }
     }
 }

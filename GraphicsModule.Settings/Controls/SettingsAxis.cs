@@ -1,31 +1,43 @@
 ﻿using System;
+using System.Globalization;
 using System.Windows.Forms;
 
 namespace GraphicsModule.Settings.Controls
 {
     public partial class SettingsAxis : UserControl
     {
+        public AxisS AxisS { get; set; }
         public SettingsAxis()
         {
             InitializeComponent();
+            AxisS = new AxisS();
         }
 
         private void colorBoxX_Click(object sender, EventArgs e)
         {
             if (colorDialogX.ShowDialog() == DialogResult.OK)
+            {
                 colorBoxX.BackColor = colorDialogX.Color;
+                AxisS.ColorX = colorDialogX.Color;
+            }
         }
 
         private void colorBoxY_Click(object sender, EventArgs e)
         {
             if (colorDialogY.ShowDialog() == DialogResult.OK)
+            {
                 colorBoxY.BackColor = colorDialogY.Color;
+                AxisS.ColorY = colorDialogY.Color;
+            }
         }
 
         private void colorBoxZ_Click(object sender, EventArgs e)
         {
             if (colorDialogZ.ShowDialog() == DialogResult.OK)
+            {
                 colorBoxZ.BackColor = colorDialogZ.Color;
+                AxisS.ColorZ = colorDialogZ.Color;
+            }
         }
 
         private void axis1NameBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -53,6 +65,26 @@ namespace GraphicsModule.Settings.Controls
                 axis1NameBox.SelectedIndex = axis3NameBox.SelectedIndex;
                 axis2NameBox.SelectedIndex = axis3NameBox.SelectedIndex;
             }
+        }
+
+        private void CheckBoxFlagDrawAxisX_CheckedChanged(object sender, EventArgs e)
+        {
+            AxisS.FlagDrawX = CheckBoxFlagDrawAxisX.Checked;
+        }
+
+        private void CheckBoxFlagDrawAxisY_CheckedChanged(object sender, EventArgs e)
+        {
+            AxisS.FlagDrawY = CheckBoxFlagDrawAxisY.Checked;
+        }
+
+        private void CheckBoxFlagDrawAxisZ_CheckedChanged(object sender, EventArgs e)
+        {
+            AxisS.FlagDrawZ = CheckBoxFlagDrawAxisZ.Checked;
+        }
+
+        private void NumericUpDownAxisWidth_ValueChanged(object sender, EventArgs e)
+        {
+            AxisS.Width = Convert.ToInt32(NumericUpDownAxisWidth.Value.ToString(CultureInfo.InvariantCulture));
         }
     }
 }

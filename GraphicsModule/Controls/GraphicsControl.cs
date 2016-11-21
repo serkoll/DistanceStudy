@@ -297,6 +297,7 @@ namespace GraphicsModule.Controls
         {
             var f = new Settings.Forms.FormSettings();
             f.ShowDialog();
+            _canvas.ReDraw(_storage);
         }
         /// <summary>
         /// Копирование объектов
@@ -322,7 +323,7 @@ namespace GraphicsModule.Controls
 
         private void GraphicsControl_Load(object sender, EventArgs e)
         {
-            _settings = new Settings.Settings(); //Получаем экземпляр настроек
+            _settings = Settings.Forms.FormSettings.ValueS; //Получаем экземпляр настроек
             _canvas = new Canvas(_settings, MainPictureBox); // Инициализируем полотно отрисовки
             if(_storage == null) _storage = new Storage(); // инициализируем хранилище графических объектов
         }

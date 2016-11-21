@@ -98,7 +98,7 @@ namespace GraphicsModule.Settings
             settingsAxis1.axis1NameBox.Text = GetElement(3,_tag).Value;
             settingsAxis1.axis2NameBox.Text = GetElement(4,_tag).Value;
             settingsAxis1.axis3NameBox.Text = GetElement(5,_tag).Value;
-            settingsAxis1.NumericUpDown2_AxisWidth.Value = decimal.Parse(GetElement(6,_tag).Value);
+            settingsAxis1.NumericUpDownAxisWidth.Value = decimal.Parse(GetElement(6,_tag).Value);
             //settingsAxis1.ListBox1_TypeArrowAxis.SelectedItem = GetElement(7,_tag).Value;
             settingsAxis1.colorBoxX.BackColor = ColorTranslator.FromWin32(int.Parse(GetElement(8,_tag).Value));
             settingsAxis1.colorBoxY.BackColor = ColorTranslator.FromWin32(int.Parse(GetElement(9,_tag).Value));
@@ -167,7 +167,7 @@ namespace GraphicsModule.Settings
             GetElement(4,_tag).Value = settingsAxis1.axis2NameBox.Text;
             GetElement(5,_tag).Value = settingsAxis1.axis3NameBox.Text;
 
-            GetElement(6,_tag).Value = settingsAxis1.NumericUpDown2_AxisWidth.Value.ToString(CultureInfo.InvariantCulture);
+            GetElement(6,_tag).Value = settingsAxis1.NumericUpDownAxisWidth.Value.ToString(CultureInfo.InvariantCulture);
 
             //GetElement(7,_tag).Value = settingsAxis1.ListBox1_TypeArrowAxis.SelectedItem.ToString();
 
