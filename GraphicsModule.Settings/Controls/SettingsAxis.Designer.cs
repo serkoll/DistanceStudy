@@ -172,7 +172,7 @@
             this.GroupBox1_AxisColor.Controls.Add(this.Label8);
             this.GroupBox1_AxisColor.Location = new System.Drawing.Point(6, 124);
             this.GroupBox1_AxisColor.Name = "GroupBox1_AxisColor";
-            this.GroupBox1_AxisColor.Size = new System.Drawing.Size(346, 149);
+            this.GroupBox1_AxisColor.Size = new System.Drawing.Size(346, 131);
             this.GroupBox1_AxisColor.TabIndex = 30;
             this.GroupBox1_AxisColor.TabStop = false;
             this.GroupBox1_AxisColor.Text = "Цвет осей";
@@ -219,7 +219,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(185, 13);
+            this.label1.Location = new System.Drawing.Point(343, 14);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(96, 13);
             this.label1.TabIndex = 31;
@@ -228,7 +228,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(185, 37);
+            this.label2.Location = new System.Drawing.Point(343, 38);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(96, 13);
             this.label2.TabIndex = 32;
@@ -237,7 +237,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(185, 62);
+            this.label3.Location = new System.Drawing.Point(343, 63);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(96, 13);
             this.label3.TabIndex = 33;
@@ -252,7 +252,7 @@
             "X",
             "x",
             "1"});
-            this.axis1NameBox.Location = new System.Drawing.Point(290, 10);
+            this.axis1NameBox.Location = new System.Drawing.Point(448, 11);
             this.axis1NameBox.Name = "axis1NameBox";
             this.axis1NameBox.Size = new System.Drawing.Size(45, 21);
             this.axis1NameBox.TabIndex = 34;
@@ -267,7 +267,7 @@
             "Y",
             "y",
             "2"});
-            this.axis2NameBox.Location = new System.Drawing.Point(290, 34);
+            this.axis2NameBox.Location = new System.Drawing.Point(448, 35);
             this.axis2NameBox.Name = "axis2NameBox";
             this.axis2NameBox.Size = new System.Drawing.Size(45, 21);
             this.axis2NameBox.TabIndex = 35;
@@ -282,7 +282,7 @@
             "Z",
             "z",
             "3"});
-            this.axis3NameBox.Location = new System.Drawing.Point(290, 59);
+            this.axis3NameBox.Location = new System.Drawing.Point(448, 60);
             this.axis3NameBox.Name = "axis3NameBox";
             this.axis3NameBox.Size = new System.Drawing.Size(45, 21);
             this.axis3NameBox.TabIndex = 36;
@@ -308,7 +308,7 @@
             this.Controls.Add(this.Label15);
             this.Controls.Add(this.Label13);
             this.Name = "SettingsAxis";
-            this.Size = new System.Drawing.Size(451, 288);
+            this.Size = new System.Drawing.Size(555, 258);
             ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownAxisWidth)).EndInit();
             this.GroupBox1_AxisColor.ResumeLayout(false);
             this.GroupBox1_AxisColor.PerformLayout();

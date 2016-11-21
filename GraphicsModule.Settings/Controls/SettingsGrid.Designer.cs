@@ -30,18 +30,18 @@
         {
             this.ListBox1_TypePointsGrid = new System.Windows.Forms.ListBox();
             this.Label11 = new System.Windows.Forms.Label();
-            this.NumericUpDown2_PointsWidth = new System.Windows.Forms.NumericUpDown();
+            this.NumericUpDownPointsSize = new System.Windows.Forms.NumericUpDown();
             this.Label12 = new System.Windows.Forms.Label();
-            this.CheckBox1_FlagDrawGrid = new System.Windows.Forms.CheckBox();
+            this.CheckBoxFlagDrawGrid = new System.Windows.Forms.CheckBox();
             this.Label13 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.gridStep1Box = new System.Windows.Forms.ComboBox();
-            this.gridStep2Box = new System.Windows.Forms.ComboBox();
+            this.gridStepOfWidth = new System.Windows.Forms.ComboBox();
+            this.gridStepOfHeight = new System.Windows.Forms.ComboBox();
             this.Label8 = new System.Windows.Forms.Label();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.colorEdge = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.NumericUpDown2_PointsWidth)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownPointsSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.colorEdge)).BeginInit();
             this.SuspendLayout();
             // 
@@ -53,7 +53,7 @@
             "Erf"});
             this.ListBox1_TypePointsGrid.Location = new System.Drawing.Point(220, 104);
             this.ListBox1_TypePointsGrid.Name = "ListBox1_TypePointsGrid";
-            this.ListBox1_TypePointsGrid.Size = new System.Drawing.Size(81, 30);
+            this.ListBox1_TypePointsGrid.Size = new System.Drawing.Size(75, 30);
             this.ListBox1_TypePointsGrid.TabIndex = 38;
             // 
             // Label11
@@ -65,17 +65,18 @@
             this.Label11.TabIndex = 37;
             this.Label11.Text = "Тип (знак) точек сетки";
             // 
-            // NumericUpDown2_PointsWidth
+            // NumericUpDownPointsSize
             // 
-            this.NumericUpDown2_PointsWidth.Location = new System.Drawing.Point(220, 55);
-            this.NumericUpDown2_PointsWidth.Name = "NumericUpDown2_PointsWidth";
-            this.NumericUpDown2_PointsWidth.Size = new System.Drawing.Size(53, 20);
-            this.NumericUpDown2_PointsWidth.TabIndex = 36;
-            this.NumericUpDown2_PointsWidth.Value = new decimal(new int[] {
+            this.NumericUpDownPointsSize.Location = new System.Drawing.Point(220, 55);
+            this.NumericUpDownPointsSize.Name = "NumericUpDownPointsSize";
+            this.NumericUpDownPointsSize.Size = new System.Drawing.Size(53, 20);
+            this.NumericUpDownPointsSize.TabIndex = 36;
+            this.NumericUpDownPointsSize.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
+            this.NumericUpDownPointsSize.ValueChanged += new System.EventHandler(this.NumericUpDown2_PointsWidth_ValueChanged);
             // 
             // Label12
             // 
@@ -86,17 +87,18 @@
             this.Label12.TabIndex = 35;
             this.Label12.Text = "Размер точек сетки, пкс";
             // 
-            // CheckBox1_FlagDrawGrid
+            // CheckBoxFlagDrawGrid
             // 
-            this.CheckBox1_FlagDrawGrid.AutoSize = true;
-            this.CheckBox1_FlagDrawGrid.Checked = true;
-            this.CheckBox1_FlagDrawGrid.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CheckBox1_FlagDrawGrid.Location = new System.Drawing.Point(220, 11);
-            this.CheckBox1_FlagDrawGrid.Name = "CheckBox1_FlagDrawGrid";
-            this.CheckBox1_FlagDrawGrid.Size = new System.Drawing.Size(75, 17);
-            this.CheckBox1_FlagDrawGrid.TabIndex = 31;
-            this.CheckBox1_FlagDrawGrid.Text = "Включить";
-            this.CheckBox1_FlagDrawGrid.UseVisualStyleBackColor = true;
+            this.CheckBoxFlagDrawGrid.AutoSize = true;
+            this.CheckBoxFlagDrawGrid.Checked = true;
+            this.CheckBoxFlagDrawGrid.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.CheckBoxFlagDrawGrid.Location = new System.Drawing.Point(220, 11);
+            this.CheckBoxFlagDrawGrid.Name = "CheckBoxFlagDrawGrid";
+            this.CheckBoxFlagDrawGrid.Size = new System.Drawing.Size(75, 17);
+            this.CheckBoxFlagDrawGrid.TabIndex = 31;
+            this.CheckBoxFlagDrawGrid.Text = "Включить";
+            this.CheckBoxFlagDrawGrid.UseVisualStyleBackColor = true;
+            this.CheckBoxFlagDrawGrid.CheckedChanged += new System.EventHandler(this.CheckBox1_FlagDrawGrid_CheckedChanged);
             // 
             // Label13
             // 
@@ -119,16 +121,16 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 208);
+            this.label2.Location = new System.Drawing.Point(3, 203);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(166, 13);
             this.label2.TabIndex = 40;
             this.label2.Text = "Шаг сетки по вертикали (ось 2)";
             // 
-            // gridStep1Box
+            // gridStepOfWidth
             // 
-            this.gridStep1Box.FormattingEnabled = true;
-            this.gridStep1Box.Items.AddRange(new object[] {
+            this.gridStepOfWidth.FormattingEnabled = true;
+            this.gridStepOfWidth.Items.AddRange(new object[] {
             "1",
             "1",
             "2",
@@ -138,16 +140,16 @@
             "25",
             "50",
             "100"});
-            this.gridStep1Box.Location = new System.Drawing.Point(220, 160);
-            this.gridStep1Box.Name = "gridStep1Box";
-            this.gridStep1Box.Size = new System.Drawing.Size(75, 21);
-            this.gridStep1Box.TabIndex = 41;
-            this.gridStep1Box.Text = "10";
+            this.gridStepOfWidth.Location = new System.Drawing.Point(220, 160);
+            this.gridStepOfWidth.Name = "gridStepOfWidth";
+            this.gridStepOfWidth.Size = new System.Drawing.Size(75, 21);
+            this.gridStepOfWidth.TabIndex = 41;
+            this.gridStepOfWidth.SelectedIndexChanged += new System.EventHandler(this.gridStep1Box_SelectedIndexChanged);
             // 
-            // gridStep2Box
+            // gridStepOfHeight
             // 
-            this.gridStep2Box.FormattingEnabled = true;
-            this.gridStep2Box.Items.AddRange(new object[] {
+            this.gridStepOfHeight.FormattingEnabled = true;
+            this.gridStepOfHeight.Items.AddRange(new object[] {
             "1",
             "1",
             "2",
@@ -157,16 +159,16 @@
             "25",
             "50",
             "100"});
-            this.gridStep2Box.Location = new System.Drawing.Point(220, 200);
-            this.gridStep2Box.Name = "gridStep2Box";
-            this.gridStep2Box.Size = new System.Drawing.Size(75, 21);
-            this.gridStep2Box.TabIndex = 42;
-            this.gridStep2Box.Text = "10";
+            this.gridStepOfHeight.Location = new System.Drawing.Point(220, 200);
+            this.gridStepOfHeight.Name = "gridStepOfHeight";
+            this.gridStepOfHeight.Size = new System.Drawing.Size(75, 21);
+            this.gridStepOfHeight.TabIndex = 42;
+            this.gridStepOfHeight.SelectedIndexChanged += new System.EventHandler(this.gridStepOfHeight_SelectedIndexChanged);
             // 
             // Label8
             // 
             this.Label8.AutoSize = true;
-            this.Label8.Location = new System.Drawing.Point(3, 254);
+            this.Label8.Location = new System.Drawing.Point(328, 12);
             this.Label8.Name = "Label8";
             this.Label8.Size = new System.Drawing.Size(95, 13);
             this.Label8.TabIndex = 43;
@@ -176,13 +178,12 @@
             // 
             this.colorEdge.BackColor = System.Drawing.Color.White;
             this.colorEdge.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.colorEdge.Location = new System.Drawing.Point(220, 242);
+            this.colorEdge.Location = new System.Drawing.Point(354, 33);
             this.colorEdge.Name = "colorEdge";
             this.colorEdge.Size = new System.Drawing.Size(39, 35);
             this.colorEdge.TabIndex = 45;
             this.colorEdge.TabStop = false;
             this.colorEdge.Click += new System.EventHandler(this.colorEdge_Click);
-            this.colorEdge.Paint += new System.Windows.Forms.PaintEventHandler(this.colorEdge_Paint);
             // 
             // SettingsGrid
             // 
@@ -190,19 +191,19 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.colorEdge);
             this.Controls.Add(this.Label8);
-            this.Controls.Add(this.gridStep2Box);
-            this.Controls.Add(this.gridStep1Box);
+            this.Controls.Add(this.gridStepOfHeight);
+            this.Controls.Add(this.gridStepOfWidth);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ListBox1_TypePointsGrid);
             this.Controls.Add(this.Label11);
-            this.Controls.Add(this.NumericUpDown2_PointsWidth);
+            this.Controls.Add(this.NumericUpDownPointsSize);
             this.Controls.Add(this.Label12);
-            this.Controls.Add(this.CheckBox1_FlagDrawGrid);
+            this.Controls.Add(this.CheckBoxFlagDrawGrid);
             this.Controls.Add(this.Label13);
             this.Name = "SettingsGrid";
-            this.Size = new System.Drawing.Size(451, 288);
-            ((System.ComponentModel.ISupportInitialize)(this.NumericUpDown2_PointsWidth)).EndInit();
+            this.Size = new System.Drawing.Size(555, 258);
+            ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownPointsSize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.colorEdge)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -213,14 +214,14 @@
 
         public System.Windows.Forms.ListBox ListBox1_TypePointsGrid;
         internal System.Windows.Forms.Label Label11;
-        public System.Windows.Forms.NumericUpDown NumericUpDown2_PointsWidth;
+        public System.Windows.Forms.NumericUpDown NumericUpDownPointsSize;
         internal System.Windows.Forms.Label Label12;
-        public System.Windows.Forms.CheckBox CheckBox1_FlagDrawGrid;
+        public System.Windows.Forms.CheckBox CheckBoxFlagDrawGrid;
         internal System.Windows.Forms.Label Label13;
         internal System.Windows.Forms.Label label1;
         internal System.Windows.Forms.Label label2;
-        public System.Windows.Forms.ComboBox gridStep1Box;
-        public System.Windows.Forms.ComboBox gridStep2Box;
+        public System.Windows.Forms.ComboBox gridStepOfWidth;
+        public System.Windows.Forms.ComboBox gridStepOfHeight;
         internal System.Windows.Forms.Label Label8;
         public System.Windows.Forms.ColorDialog colorDialog1;
         public System.Windows.Forms.PictureBox colorEdge;

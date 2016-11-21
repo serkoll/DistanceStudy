@@ -11,7 +11,11 @@ namespace GraphicsModule.Settings.Controls
         public SettingsAxis()
         {
             InitializeComponent();
-            AxisS = new AxisS();
+            AxisS = FormSettings.ValueS.AxisS;
+            CheckBoxFlagDrawAxisX.Checked = AxisS.FlagDrawX;
+            CheckBoxFlagDrawAxisY.Checked = AxisS.FlagDrawY;
+            CheckBoxFlagDrawAxisZ.Checked = AxisS.FlagDrawZ;
+            NumericUpDownAxisWidth.Value = AxisS.Width;
             colorBoxX.BackColor = FormSettings.ValueS.AxisS.ColorX;
             colorBoxY.BackColor = FormSettings.ValueS.AxisS.ColorY;
             colorBoxZ.BackColor = FormSettings.ValueS.AxisS.ColorZ;
