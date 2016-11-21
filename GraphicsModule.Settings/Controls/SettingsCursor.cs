@@ -31,8 +31,6 @@ namespace GraphicsModule.Settings.Controls
             ColorDialogs = new List<ColorDialog> { addOnColor, crossColor, starColor, circleColor, envelopeColor, triangleColor, squareColor };
             Cursors = new List<Cursors.Cursor> { new AddOnPoint(), new Cross(), new Star(), new Circle(), new Envelope(), new Triangle(), new Square() };
             CursorBoxes = new List<PictureBox> { addOnBox, crossBox, starBox, circleBox, envelopeBox, triangleBox, squareBox };
-            var settings = new SettingsXml();
-            settings.InitializeSettingsCursor(this);
             foreach (var cursorBox in CursorBoxes)
             {
                 cursorBox.Refresh();

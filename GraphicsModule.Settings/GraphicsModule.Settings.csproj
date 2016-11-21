@@ -79,6 +79,7 @@
     <Compile Include="Controls\SettingsGrid.Designer.cs">
       <DependentUpon>SettingsGrid.cs</DependentUpon>
     </Compile>
+    <Compile Include="PenSerialize.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controls\SettingsAxis.cs">
       <SubType>UserControl</SubType>
@@ -106,11 +107,9 @@
     </Compile>
     <Compile Include="DrawS.cs" />
     <Compile Include="LinkLineS.cs" />
-    <Compile Include="SettingsXml.cs" />
     <Compile Include="AxisS.cs" />
     <Compile Include="GridS.cs" />
     <Compile Include="Settings.cs" />
-    <Compile Include="XmlRead.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Forms\FormSettings.resx">

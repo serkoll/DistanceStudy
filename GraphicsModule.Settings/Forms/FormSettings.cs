@@ -13,10 +13,13 @@ namespace GraphicsModule.Settings.Forms
         private readonly SettingsLink _stLink = new SettingsLink();
         private readonly SettingsPoint _stPoint = new SettingsPoint();
         private readonly SettingsSegment _stSegment = new SettingsSegment();
+        private readonly string fName = "config.cfg";
         public static Settings ValueS = new Settings();
         public FormSettings()
         {
             InitializeComponent();
+            ValueS.Serialize(fName);
+            var a = ValueS.Deserialize(fName);
         }
 
         private void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
