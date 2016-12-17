@@ -73,6 +73,8 @@ namespace GraphicsModule.Controls
             this.окнаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainPictureBox = new System.Windows.Forms.PictureBox();
+            this.импортToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.solidWorksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.baseTableLayoutPanel.SuspendLayout();
             this.workspaceOperationsStatusStrip1.SuspendLayout();
             this.statusStrip2.SuspendLayout();
@@ -427,7 +429,8 @@ namespace GraphicsModule.Controls
             this.инструментыToolStripMenuItem,
             this.buttonSettings,
             this.окнаToolStripMenuItem,
-            this.справкаToolStripMenuItem});
+            this.справкаToolStripMenuItem,
+            this.импортToolStripMenuItem});
             this.MainMenu.Location = new System.Drawing.Point(0, 0);
             this.MainMenu.Name = "MainMenu";
             this.MainMenu.Size = new System.Drawing.Size(1239, 25);
@@ -489,6 +492,21 @@ namespace GraphicsModule.Controls
             this.MainPictureBox.TabStop = false;
             this.MainPictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainPictureBox_MouseDown);
             this.MainPictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MainPictureBox_MouseMove);
+            // 
+            // импортToolStripMenuItem
+            // 
+            this.импортToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.solidWorksToolStripMenuItem});
+            this.импортToolStripMenuItem.Name = "импортToolStripMenuItem";
+            this.импортToolStripMenuItem.Size = new System.Drawing.Size(63, 21);
+            this.импортToolStripMenuItem.Text = "Импорт";
+            // 
+            // solidWorksToolStripMenuItem
+            // 
+            this.solidWorksToolStripMenuItem.Name = "solidWorksToolStripMenuItem";
+            this.solidWorksToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.solidWorksToolStripMenuItem.Text = "SolidWorks";
+            this.solidWorksToolStripMenuItem.Click += new System.EventHandler(this.solidWorksToolStripMenuItem_Click);
             // 
             // GraphicsControl
             // 
@@ -561,6 +579,8 @@ namespace GraphicsModule.Controls
         public System.Windows.Forms.PictureBox MainPictureBox;
         private ToolStripButton buttonPointsMenu;
         private ToolStripButton buttonSegmentMenu;
+        private ToolStripMenuItem импортToolStripMenuItem;
+        private ToolStripMenuItem solidWorksToolStripMenuItem;
     }
 
 

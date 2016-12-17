@@ -346,6 +346,20 @@ namespace GraphicsModule.Controls
             _canvas = new Canvas(_settings, MainPictureBox); // Инициализируем полотно отрисовки
             if(_storage == null) _storage = new Storage(); // инициализируем хранилище графических объектов
         }
+
+        private void solidWorksToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var SldWorksObject = new SolidworksInteraction.SldWorksInteraction();
+            if (SldWorksObject.Connect())
+            {
+                SldWorksObject.SetActiveDocument();
+                SldWorksObject.ImportCollectionToActiveDoc(_storage.Objects);
+            }
+            else
+            {
+                MessageBox.Show("Не удалось подключиться к SolidWorks");
+            }
+        }
     }
 }
 

@@ -14,6 +14,7 @@ using System.Collections.ObjectModel;
 using System.Runtime.InteropServices;
 using GraphicsModule.Geometry.Objects;
 using GraphicsModule.Geometry.Objects.Points;
+using GraphicsModule.Geometry.Background;
 
 namespace GraphicsModule.SolidworksInteraction
 {
@@ -26,14 +27,15 @@ namespace GraphicsModule.SolidworksInteraction
         }
         public bool Connect()
         {
-            if((_swApp = (SldWorks)Marshal.GetActiveObject("SldWorks.Application")) == null)
+            try
             {
-                return false;
-            }
-            else
-            {
+                _swApp = (SldWorks)Marshal.GetActiveObject("SldWorks.Application");
                 return true;
             }
+            catch(COMException)
+            {
+                return false;
+            }   
         }
         public void SetActiveDocument()
         {
@@ -41,18 +43,24 @@ namespace GraphicsModule.SolidworksInteraction
                 _swApp.NewPart();
             _swModel = _swApp.IActiveDoc2;
         }
-        public void ImportCollectionToActiveDoc(Collection<IObject> objects )
+        public void ImportCollectionToActiveDoc(Collection<IObject> objects)
         {
+            if (objects.Count == 0) return;
             _swModel.Extension.SelectByID2("", "FACE", -3.14573861840017E-02, 1.44077058280914E-02, 0.03, false, 0, null, 0);
-            _swModel.SketchManager.InsertSketch(true); //вставил эскиз в режиме редактирования 
+            _swModel.SketchManager.InsertSketch(true);
             foreach (IObject obj in objects)
             {
-                if(obj.GetType() == typeof(Point3D))
+                if (obj.GetType() == typeof(Point3D))
                 {
                     var point = (Point3D)obj;
                     _swModel.SketchManager.CreatePoint(point.X, point.Y, point.Z);
                 }
             }
+        }
+        public void ImportAxis(Axis axis)
+        {
+            _swModel.Extension.SelectByID2("", "FACE", -3.14573861840017E-02, 1.44077058280914E-02, 0.03, false, 0, null, 0);
+            _swModel.SketchManager.InsertSketch(true);
         }
     }
 }

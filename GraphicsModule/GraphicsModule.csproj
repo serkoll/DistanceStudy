@@ -43,8 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Background\Axis.cs" />
-    <Compile Include="Background\Grid.cs" />
     <Compile Include="Canvas.cs" />
     <Compile Include="Controls\GraphicsControl.cs">
       <SubType>UserControl</SubType>
@@ -128,6 +126,10 @@
     <ProjectReference Include="..\GraphicsModule.Settings\GraphicsModule.Settings.csproj">
       <Project>{fa7a373a-2140-4f47-b5dd-e4819bf1093e}</Project>
       <Name>GraphicsModule.Settings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GraphicsModule.SolidworksInteraction\GraphicsModule.SolidworksInteraction.csproj">
+      <Project>{fb1ff034-ecea-4dd1-911f-3c4f384c3723}</Project>
+      <Name>GraphicsModule.SolidworksInteraction</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

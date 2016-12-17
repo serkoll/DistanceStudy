@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 using System.Drawing.Imaging;
-using GraphicsModule.Background;
+using GraphicsModule.Geometry.Background;
 
 namespace GraphicsModule
 {
