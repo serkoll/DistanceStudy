@@ -1,15 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SolidWorks.Interop.sldworks;
-using SolidWorks.Interop.swcommands;
-using SolidWorks.Interop.swconst;
-using System.Diagnostics;
+﻿using SolidWorks.Interop.sldworks;
 using System.Collections.ObjectModel;
 using System.Runtime.InteropServices;
 using GraphicsModule.Geometry.Objects;
@@ -43,7 +32,7 @@ namespace GraphicsModule.SolidworksInteraction
                 _swApp.NewPart();
             _swModel = _swApp.IActiveDoc2;
         }
-        public void ImportCollectionToActiveDoc(Collection<IObject> objects)
+        public void ImportCollectionToActiveDoc(Collection<IObject> objects, Settings.DrawS ds)
         {
             if (objects.Count == 0) return;
             _swModel.Extension.SelectByID2("", "FACE", -3.14573861840017E-02, 1.44077058280914E-02, 0.03, false, 0, null, 0);
@@ -53,14 +42,38 @@ namespace GraphicsModule.SolidworksInteraction
                 if (obj.GetType() == typeof(Point3D))
                 {
                     var point = (Point3D)obj;
-                    _swModel.SketchManager.CreatePoint(point.X, point.Y, point.Z);
+                    //_swModel.SketchManager.CreatePoint(point.X, point.Y, point.Z);
+                    _swModel.SketchManager.CreateCircleByRadius(point.X, point.Y, point.Z, ds.RadiusPoints*10);
                 }
             }
+            _swModel.ClearSelection2(true);
         }
         public void ImportAxis(Axis axis)
         {
             _swModel.Extension.SelectByID2("", "FACE", -3.14573861840017E-02, 1.44077058280914E-02, 0.03, false, 0, null, 0);
             _swModel.SketchManager.InsertSketch(true);
+            for (int i = 0; i < axis.FinitePoints.Length; i++)
+            {
+                _swModel.SketchManager.CreatePoint(axis.FinitePoints[i].X, axis.FinitePoints[i].X, 0);
+                _swModel.SketchManager.InsertSketch(true);
+                //_swModel.InsertSketch2(true);
+            }
+            _swModel.ClearSelection2(true);
+        }
+        public void ImportGrid(Grid grid)
+        {
+            _swModel.Extension.SelectByID2("", "FACE", -3.14573861840017E-02, 1.44077058280914E-02, 0.03, false, 0, null, 0);
+            _swModel.SketchManager.InsertSketch(true);
+            for (int i = 0; i < grid.Knots.GetLength(0); i++)
+            {
+                for (int j = 0; j < grid.Knots.GetLength(1); j++)
+                {
+                    _swModel.SketchManager.CreatePoint(grid.Knots[i,j].X, grid.Knots[i,j].Y, 0);
+                    //_swModel.SketchManager.InsertSketch(true);
+                    //_swModel.InsertSketch2(true);
+                }
+            }
+            _swModel.ClearSelection2(true);
         }
     }
 }
