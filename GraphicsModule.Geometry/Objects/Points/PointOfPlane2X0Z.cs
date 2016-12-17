@@ -53,7 +53,7 @@ namespace GraphicsModule.Geometry.Objects.Points
             Draw(st.PenPoints, st.RadiusPoints, frameCenter, g);
             if (st.LinkLineSettings.IsDraw)
             {
-                DrawLinkLine(st.LinkLineSettings.LinkLineX0ZToX, st.LinkLineSettings.LinkLineX0ZToZ, true, true, true, true, frameCenter, g);
+                DrawLinkLine(st.LinkLineSettings.PenLinkLineX0ZtoX, st.LinkLineSettings.PenLinkLineX0ZtoZ, true, true, true, true, frameCenter, g);
             }
         }
         public void DrawPointsOnly(DrawS st, System.Drawing.Point frameCenter, Graphics g)

@@ -49,111 +49,96 @@
     <Compile Include="Cursors\Square.cs" />
     <Compile Include="Cursors\Star.cs" />
     <Compile Include="Cursors\Triangle.cs" />
-    <Compile Include="Forms\SettingsForm.cs">
+    <Compile Include="Forms\FormSettings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\SettingsForm.Designer.cs">
-      <DependentUpon>SettingsForm.cs</DependentUpon>
+    <Compile Include="Forms\FormSettings.Designer.cs">
+      <DependentUpon>FormSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\SettingBackground.cs">
+    <Compile Include="Controls\SettingsBackground.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\SettingBackground.Designer.cs">
-      <DependentUpon>SettingBackground.cs</DependentUpon>
+    <Compile Include="Controls\SettingsBackground.Designer.cs">
+      <DependentUpon>SettingsBackground.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\SettingPoint.cs">
+    <Compile Include="Controls\SettingsPoint.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\SettingPoint.Designer.cs">
-      <DependentUpon>SettingPoint.cs</DependentUpon>
+    <Compile Include="Controls\SettingsPoint.Designer.cs">
+      <DependentUpon>SettingsPoint.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Setting3DPoint.cs">
+    <Compile Include="Controls\SettingsCursor.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Setting3DPoint.Designer.cs">
-      <DependentUpon>Setting3DPoint.cs</DependentUpon>
+    <Compile Include="Controls\SettingsCursor.Designer.cs">
+      <DependentUpon>SettingsCursor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\SettingCursor.cs">
+    <Compile Include="Controls\SettingsGrid.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\SettingCursor.Designer.cs">
-      <DependentUpon>SettingCursor.cs</DependentUpon>
+    <Compile Include="Controls\SettingsGrid.Designer.cs">
+      <DependentUpon>SettingsGrid.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\SettingGrid.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\SettingGrid.Designer.cs">
-      <DependentUpon>SettingGrid.cs</DependentUpon>
-    </Compile>
+    <Compile Include="PenSerialize.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Controls\SettingAxis.cs">
+    <Compile Include="Controls\SettingsAxis.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\SettingAxis.Designer.cs">
-      <DependentUpon>SettingAxis.cs</DependentUpon>
+    <Compile Include="Controls\SettingsAxis.Designer.cs">
+      <DependentUpon>SettingsAxis.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\SettingLine.cs">
+    <Compile Include="Controls\SettingsLine.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\SettingLine.Designer.cs">
-      <DependentUpon>SettingLine.cs</DependentUpon>
+    <Compile Include="Controls\SettingsLine.Designer.cs">
+      <DependentUpon>SettingsLine.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\SettingLink.cs">
+    <Compile Include="Controls\SettingsLink.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\SettingLink.Designer.cs">
-      <DependentUpon>SettingLink.cs</DependentUpon>
+    <Compile Include="Controls\SettingsLink.Designer.cs">
+      <DependentUpon>SettingsLink.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\SettingSegment.cs">
+    <Compile Include="Controls\SettingsSegment.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\SettingSegment.Designer.cs">
-      <DependentUpon>SettingSegment.cs</DependentUpon>
+    <Compile Include="Controls\SettingsSegment.Designer.cs">
+      <DependentUpon>SettingsSegment.cs</DependentUpon>
     </Compile>
     <Compile Include="DrawS.cs" />
     <Compile Include="LinkLineS.cs" />
-    <Compile Include="SettingsXml.cs" />
     <Compile Include="AxisS.cs" />
     <Compile Include="GridS.cs" />
     <Compile Include="Settings.cs" />
-    <Compile Include="XmlRead.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Forms\SettingsForm.resx">
-      <DependentUpon>SettingsForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FormSettings.resx">
+      <DependentUpon>FormSettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\SettingBackground.resx">
-      <DependentUpon>SettingBackground.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\SettingsBackground.resx">
+      <DependentUpon>SettingsBackground.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\SettingPoint.resx">
-      <DependentUpon>SettingPoint.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\SettingsPoint.resx">
+      <DependentUpon>SettingsPoint.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Setting3DPoint.resx">
-      <DependentUpon>Setting3DPoint.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\SettingsCursor.resx">
+      <DependentUpon>SettingsCursor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\SettingCursor.resx">
-      <DependentUpon>SettingCursor.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\SettingsGrid.resx">
+      <DependentUpon>SettingsGrid.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\SettingGrid.resx">
-      <DependentUpon>SettingGrid.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\SettingsAxis.resx">
+      <DependentUpon>SettingsAxis.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\SettingAxis.resx">
-      <DependentUpon>SettingAxis.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\SettingsLine.resx">
+      <DependentUpon>SettingsLine.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\SettingLine.resx">
-      <DependentUpon>SettingLine.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\SettingsLink.resx">
+      <DependentUpon>SettingsLink.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\SettingLink.resx">
-      <DependentUpon>SettingLink.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\SettingsSegment.resx">
+      <DependentUpon>SettingsSegment.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\SettingSegment.resx">
-      <DependentUpon>SettingSegment.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Forms\settings.xml">
-      <SubType>Designer</SubType>
-    </Content>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

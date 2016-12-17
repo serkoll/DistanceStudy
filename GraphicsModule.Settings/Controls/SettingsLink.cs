@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Drawing;
 using System.Windows.Forms;
 
-namespace GraphicsModule.Settings
+namespace GraphicsModule.Settings.Controls
 {
-    public partial class SettingLink : UserControl
+    public partial class SettingsLink : UserControl
     {
-        private readonly SettingsXml _xml;
-
-        public SettingLink()
+        public SettingsLink()
         {
-            _xml = new SettingsXml();
             InitializeComponent();
         }
         private void link1ColorBox_Click(object sender, EventArgs e)
@@ -41,17 +37,9 @@ namespace GraphicsModule.Settings
         {
             if (checkBox1.Checked)
             {
-                _xml._tag = "Axis";
-                link1ColorBox.BackColor = ColorTranslator.FromWin32(int.Parse(_xml.GetElement(8, _xml._tag).Value));
-                link2ColorBox.BackColor = ColorTranslator.FromWin32(int.Parse(_xml.GetElement(9, _xml._tag).Value));
-                link3ColorBox.BackColor = ColorTranslator.FromWin32(int.Parse(_xml.GetElement(10, _xml._tag).Value));
             }
             else
             {
-                _xml._tag = "Link";
-                link1ColorBox.BackColor = ColorTranslator.FromWin32(int.Parse(_xml.GetElement(3, _xml._tag).Value));
-                link2ColorBox.BackColor = ColorTranslator.FromWin32(int.Parse(_xml.GetElement(4, _xml._tag).Value));
-                link3ColorBox.BackColor = ColorTranslator.FromWin32(int.Parse(_xml.GetElement(5, _xml._tag).Value));
             }
         }
     }

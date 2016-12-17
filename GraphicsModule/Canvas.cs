@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 using System.Drawing.Imaging;
-using GraphicsModule.Background;
+using GraphicsModule.Geometry.Background;
 
 namespace GraphicsModule
 {
@@ -74,6 +74,8 @@ namespace GraphicsModule
             Axis.DrawAxis(St.AxisS, Graphics);
 
             strg.DrawObjects(St, Grid.CenterPoint, Graphics);
+
+            //PicBox.BackColor = St.
 
             PicBox.Image = (Image)Mainbmp.Clone();
             PicBox.Refresh();

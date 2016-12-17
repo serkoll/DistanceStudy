@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using GraphicsModule.Settings;
 
-namespace GraphicsModule.Background
+namespace GraphicsModule.Geometry.Background
 {
     /// <summary>
     /// Класс, содержащий инструменты задания и отрисовки СЕТКИ
