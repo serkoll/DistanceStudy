@@ -81,7 +81,7 @@ namespace GraphicsModule.Settings.Forms
 
         private void buttonOK_Click(object sender, System.EventArgs e)
         {
-            ValueS.AxisS = _stAxis.AxisS;
+            ValueS.Serialize(fName);
             Close();
         }
         private void buttonCancel_Click(object sender, System.EventArgs e)
