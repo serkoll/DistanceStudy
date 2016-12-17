@@ -1,6 +1,6 @@
-﻿namespace GraphicsModule.Settings
+﻿namespace GraphicsModule.Settings.Controls
 {
-    partial class SettingCursor
+    partial class SettingsCursor
     {
         /// <summary> 
         /// Required designer variable.
@@ -269,7 +269,7 @@
             this.pictureBox7.TabStop = false;
             this.pictureBox7.Visible = false;
             // 
-            // SettingCursor
+            // SettingsCursor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -294,8 +294,8 @@
             this.Controls.Add(this.starButton);
             this.Controls.Add(this.crossButton);
             this.Controls.Add(this.addOnButton);
-            this.Name = "SettingCursor";
-            this.Size = new System.Drawing.Size(430, 315);
+            this.Name = "SettingsCursor";
+            this.Size = new System.Drawing.Size(451, 288);
             this.Click += new System.EventHandler(this.cursorButton_Click);
             ((System.ComponentModel.ISupportInitialize)(this.addOnBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.crossBox)).EndInit();

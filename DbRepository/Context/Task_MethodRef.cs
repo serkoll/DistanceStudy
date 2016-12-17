@@ -19,7 +19,7 @@ namespace DbRepository.Context
         public string SourceMethod { get; set; }
         public string Param { get; set; }
         public int IdTask { get; set; }
-    
+
         public virtual Task Task { get; set; }
     }
 }

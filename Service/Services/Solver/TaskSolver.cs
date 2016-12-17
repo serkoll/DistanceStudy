@@ -8,6 +8,7 @@ using DbRepository.Classes.Keys;
 using DbRepository.Context;
 using Formatter;
 using GraphicsModule.Geometry.Objects;
+using Point3DCntrl;
 
 namespace Service.Services.Solver
 {
@@ -18,6 +19,7 @@ namespace Service.Services.Solver
         private Dictionary<Task_MethodRef, object> solveParams = new Dictionary<Task_MethodRef, object>();
         private Dictionary<string, string> commentsTrue = new Dictionary<string, string>();
         private Dictionary<string, string> commentsFalse = new Dictionary<string, string>();
+        private List<bool> solveResults = new List<bool>(); 
 
         /// <summary>
         /// Проверка текущей задачи
@@ -29,7 +31,6 @@ namespace Service.Services.Solver
             var sb = new StringBuilder();
             var classInstance = Activator.CreateInstance(Type.GetType($"Point3DCntrl.PointsProectionsControl, Point3DCntrl"), null);
             var listMethods = GetMethodsFromDbForTask(task);
-
             JsonFormatter.WriteObjectsToJson(graphicObjects);
             foreach (var c in listMethods)
             {
@@ -40,27 +41,51 @@ namespace Service.Services.Solver
                 XmlFormatter.GetInfoAboutMethodFromXml(c.Name, out desc, out userParam, out initParam, out solveParam);                
                 ResolveKeyDependencyFromSolveToInit(task, initParam);
                 ResolveKeyDependencyUserParam(userParam, graphicObjects);
-                c.Invoke(classInstance, new object[] { task, initialParams, userParams, solveParams, commentsTrue, commentsFalse });
+                var result = (bool)c.Invoke(classInstance, new object[] { task, TempInversionMethod.IsInversed, initialParams, userParams, solveParams, commentsTrue, commentsFalse });
+                solveResults.Add(result);
                 initialParams.Clear();
             }
-            if (commentsFalse.Any())
+            if (solveResults.Any(c => c.Equals(false)))
             {
                 sb.Append("Неверно: \n");
-                foreach (var comm in commentsFalse)
+                if (TempInversionMethod.IsInversed)
                 {
-                    sb.Append(comm).Append("\n");
+                    foreach (var comm in commentsFalse)
+                    {
+                        sb.Append(comm).Append("\n");
+                    }
+                    sb.Append("Задача решена неправильно!");
                 }
-                sb.Append("Задача решена неправильно!");
+                else
+                {
+                    foreach (var comm in commentsTrue)
+                    {
+                        sb.Append(comm).Append("\n");
+                    }
+                    sb.Append("Задача решена неправильно!");
+                }  
             }
             else
             {
                 sb.Append("Верно: \n");
-                foreach (var comm in commentsTrue)
+                if (TempInversionMethod.IsInversed)
                 {
-                    sb.Append(comm).Append("\n");
+                    foreach (var comm in commentsFalse)
+                    {
+                        sb.Append(comm).Append("\n");
+                    }
+                    sb.Append("Поздравляем! Задача решена верно!");
                 }
-                sb.Append("Поздравляем! Задача решена верно!");
+                else
+                {
+                    foreach (var comm in commentsTrue)
+                    {
+                        sb.Append(comm).Append("\n");
+                    }
+                    sb.Append("Поздравляем! Задача решена верно!");
+                }   
             }
+            solveResults.Clear();
             return sb.ToString();
         }
 
@@ -117,6 +142,13 @@ namespace Service.Services.Solver
                 foreach (var item in keys)
                 {
                     object objInit;
+                    var jsonGraphKey = JsonFormatter.GetGraphicKeysForTaskFromJson(task.TaskId).FirstOrDefault(c => c.Guid.ToString().Equals(item.SourceMethod));
+                    if (jsonGraphKey != null)
+                    {
+                        objInit = JsonFormatter.GetObjectsForTaskFromJson(task.TaskId).FirstOrDefault(c => c.GetType().Name.Equals(jsonGraphKey.GraphicObject.GetType().Name));
+                        initialParams.Add(item, objInit);
+                        continue;
+                    }
                     // забрать из решений объект по ключу нужный текущему методу
                     solveParams.TryGetValue(item, out objInit);
                     if (objInit != null)

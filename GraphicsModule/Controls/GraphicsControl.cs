@@ -6,6 +6,8 @@ using GraphicsModule.CreateObjects;
 using GraphicsModule.Cursors;
 using GraphicsModule.Operations;
 using GraphicsModule.Geometry.Objects;
+using System.IO;
+using GraphicsModule.Settings.Forms;
 
 namespace GraphicsModule.Controls
 {
@@ -51,17 +53,35 @@ namespace GraphicsModule.Controls
         /// </summary>
         private CursorOnGridMove crMove = new CursorOnGridMove();
         /// <summary>
+        /// 
+        /// </summary>
+        private readonly string _settingsFileName = "config.cfg";
+        /// <summary>
         /// Инициализация контрола
         /// </summary>
         public GraphicsControl()
         {
             InitializeComponent();
+
+            if (File.Exists(_settingsFileName))
+            {
+                _settings = new Settings.Settings().Deserialize(_settingsFileName); //Получаем экземпляр настроек
+                FormSettings.ValueS = _settings;
+            }
+            else
+            {
+                _settings = new Settings.Settings();
+                _settings.Serialize(_settingsFileName);
+                FormSettings.ValueS = _settings;
+            }
+
             _ptMenuSelector = new Menu.PointMenuSelector(MainPictureBox); //Создаем меню вариантов для точек
             _lnMenuSelector = new Menu.LineMenuSelector(MainPictureBox); //Создаем меню вариантов для линий
             _sgMenuSelector = new Menu.SegmentMenuSelector(MainPictureBox);
             Controls.Add(_ptMenuSelector); //Добавляем к контролам компонента
             Controls.Add(_lnMenuSelector); //Добавляем к контролам компонента
             Controls.Add(_sgMenuSelector);
+
         }
         /// <summary>
         /// Импорт графических объектов
@@ -69,7 +89,7 @@ namespace GraphicsModule.Controls
         /// <param name="coll"></param>
         public void ImportObjects(Collection<IObject> coll)
         {
-            //if(_storage == null) _storage = new Storage();
+            if(_storage == null) _storage = new Storage();
             _storage.Objects = coll;
             _canvas.ReDraw(_storage);
         }
@@ -295,8 +315,9 @@ namespace GraphicsModule.Controls
         /// <param name="e"></param>
         private void buttonSettings_Click(object sender, EventArgs e)
         {
-            var f = new Settings.Forms.SettingsForm();
+            var f = new Settings.Forms.FormSettings();
             f.ShowDialog();
+            _canvas.ReDraw(_storage);
         }
         /// <summary>
         /// Копирование объектов
@@ -322,9 +343,24 @@ namespace GraphicsModule.Controls
 
         private void GraphicsControl_Load(object sender, EventArgs e)
         {
-            _settings = new Settings.Settings(); //Получаем экземпляр настроек
             _canvas = new Canvas(_settings, MainPictureBox); // Инициализируем полотно отрисовки
             if(_storage == null) _storage = new Storage(); // инициализируем хранилище графических объектов
+        }
+
+        private void solidWorksToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var SldWorksObject = new SolidworksInteraction.SldWorksInteraction();
+            if (SldWorksObject.Connect())
+            {
+                SldWorksObject.SetActiveDocument();
+                SldWorksObject.ImportGrid(_canvas.Grid);
+                SldWorksObject.ImportAxis(_canvas.Axis);
+                SldWorksObject.ImportCollectionToActiveDoc(_storage.Objects, _canvas.St.DrawS);
+            }
+            else
+            {
+                MessageBox.Show("Не удалось подключиться к SolidWorks");
+            }
         }
     }
 }

@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using GraphicsModule.Settings;
 
-namespace GraphicsModule.Background
+namespace GraphicsModule.Geometry.Background
 {
     /// <summary>
     /// Класс, содержащий инструменты задания и отрисовки ОСЕЙ
@@ -56,50 +56,15 @@ namespace GraphicsModule.Background
         }
         private void DrawAxisYHor(AxisS sett, Graphics g)
         {
-            DrawAxis(FinitePoints[1], Center, sett.ColorX, sett.Width, g);
+            DrawAxis(FinitePoints[1], Center, sett.ColorY, sett.Width, g);
         }
         private void DrawAxisYVert(AxisS sett, Graphics g)
         {
-            DrawAxis(FinitePoints[3], Center, sett.ColorX, sett.Width, g);
+            DrawAxis(FinitePoints[3], Center, sett.ColorY, sett.Width, g);
         }
         private void DrawAxisZ(AxisS sett, Graphics g)
         {
-            DrawAxis(FinitePoints[2], Center, sett.ColorX, sett.Width, g);
+            DrawAxis(FinitePoints[2], Center, sett.ColorZ, sett.Width, g);
         }
-        //public void CalculateFinitePointsByGrid(Point[,] gridKnotPoints)
-        //{
-        //    FinitePoints = new Point[4];
-        //    var grigGorizLeft = new Point();
-        //    var grigGorizRight = new Point();
-        //    var grigVertUp = new Point();
-        //    var grigVertDown = new Point();
-
-        //    var ptCenterI = gridKnotPoints.GetUpperBound(1) / 2;
-        //    var ptCenterJ = gridKnotPoints.GetUpperBound(0) / 2;
-
-        //    var ptGrid = (Point)gridKnotPoints.GetValue(ptCenterJ, 0);
-        //    grigGorizLeft.X = ptGrid.X;
-        //    grigGorizLeft.Y = ptGrid.Y;
-        //    FinitePoints[0] = grigGorizLeft;
-
-        //    ptGrid = (Point)gridKnotPoints.GetValue(ptCenterJ, gridKnotPoints.GetUpperBound(1));
-
-        //    grigGorizRight.X = ptGrid.X;
-        //    grigGorizRight.Y = ptGrid.Y;
-        //    FinitePoints[1] = grigGorizRight;
-
-        //    ptGrid = (Point)gridKnotPoints.GetValue(0, ptCenterI);
-
-        //    grigVertUp.X = ptGrid.X;
-        //    grigVertUp.Y = ptGrid.Y;
-        //    FinitePoints[2] = grigVertUp;
-
-        //    ptGrid = (Point)gridKnotPoints.GetValue(gridKnotPoints.GetUpperBound(0), ptCenterI);
-
-        //    grigVertDown.X = ptGrid.X;
-        //    grigVertDown.Y = ptGrid.Y;
-        //    FinitePoints[3] = grigVertDown;
-
-        //}
     }
 }

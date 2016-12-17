@@ -3,9 +3,11 @@ using DbRepository.Context;
 using Formatter;
 using GraphicsModule.Geometry.Objects;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
+using DbRepository.Classes.Keys;
 
 namespace Service.Services
 {
@@ -39,6 +41,7 @@ namespace Service.Services
         public void Delete(int id)
         {
             _taskRep.Delete(id);
+            JsonFormatter.DeleteTaskJsonById(id);
         }
 
         /// <summary>
@@ -123,6 +126,11 @@ namespace Service.Services
         public Collection<IObject> GetGraphicObjectsForTask(int taskId)
         {
             return JsonFormatter.GetObjectsForTaskFromJson(taskId);
+        }
+
+        public List<GraphicKey> GetGraphicKeysForTask(int taskId)
+        {
+            return JsonFormatter.GetGraphicKeysForTaskFromJson(taskId);
         }
     }
 }

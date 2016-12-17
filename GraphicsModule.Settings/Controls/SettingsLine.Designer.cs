@@ -1,6 +1,6 @@
-﻿namespace GraphicsModule.Settings
+﻿namespace GraphicsModule.Settings.Controls
 {
-    partial class SettingLine
+    partial class SettingsLine
     {
         /// <summary> 
         /// Required designer variable.
@@ -70,15 +70,20 @@
             // 
             // lineWidthUpDown
             // 
-            this.lineWidthUpDown.Location = new System.Drawing.Point(233, 35);
+            this.lineWidthUpDown.Location = new System.Drawing.Point(185, 8);
             this.lineWidthUpDown.Name = "lineWidthUpDown";
             this.lineWidthUpDown.Size = new System.Drawing.Size(42, 20);
             this.lineWidthUpDown.TabIndex = 0;
+            this.lineWidthUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // lineWidth
             // 
             this.lineWidth.AutoSize = true;
-            this.lineWidth.Location = new System.Drawing.Point(51, 37);
+            this.lineWidth.Location = new System.Drawing.Point(3, 10);
             this.lineWidth.Name = "lineWidth";
             this.lineWidth.Size = new System.Drawing.Size(53, 13);
             this.lineWidth.TabIndex = 1;
@@ -87,7 +92,7 @@
             // colorLabel
             // 
             this.colorLabel.AutoSize = true;
-            this.colorLabel.Location = new System.Drawing.Point(51, 70);
+            this.colorLabel.Location = new System.Drawing.Point(3, 43);
             this.colorLabel.Name = "colorLabel";
             this.colorLabel.Size = new System.Drawing.Size(32, 13);
             this.colorLabel.TabIndex = 2;
@@ -97,7 +102,7 @@
             // 
             this.lineColorBox.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.lineColorBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lineColorBox.Location = new System.Drawing.Point(233, 65);
+            this.lineColorBox.Location = new System.Drawing.Point(185, 38);
             this.lineColorBox.Name = "lineColorBox";
             this.lineColorBox.Size = new System.Drawing.Size(25, 25);
             this.lineColorBox.TabIndex = 3;
@@ -106,7 +111,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(54, 107);
+            this.checkBox1.Location = new System.Drawing.Point(6, 69);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.checkBox1.Size = new System.Drawing.Size(195, 17);
@@ -117,9 +122,9 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.tabControl1);
-            this.groupBox1.Location = new System.Drawing.Point(54, 140);
+            this.groupBox1.Location = new System.Drawing.Point(6, 92);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(420, 232);
+            this.groupBox1.Size = new System.Drawing.Size(420, 188);
             this.groupBox1.TabIndex = 13;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Проекции";
@@ -132,7 +137,7 @@
             this.tabControl1.Location = new System.Drawing.Point(6, 19);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(408, 209);
+            this.tabControl1.Size = new System.Drawing.Size(408, 164);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -146,7 +151,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(400, 183);
+            this.tabPage1.Size = new System.Drawing.Size(400, 138);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "1-я проекция";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -190,7 +195,7 @@
             "icon3"});
             this.iconsLine1stPlaneList.Location = new System.Drawing.Point(103, 63);
             this.iconsLine1stPlaneList.Name = "iconsLine1stPlaneList";
-            this.iconsLine1stPlaneList.Size = new System.Drawing.Size(107, 95);
+            this.iconsLine1stPlaneList.Size = new System.Drawing.Size(107, 69);
             this.iconsLine1stPlaneList.TabIndex = 21;
             // 
             // colorLine1stPlaneBox
@@ -223,7 +228,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(400, 183);
+            this.tabPage2.Size = new System.Drawing.Size(400, 138);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "2-я проекция";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -267,7 +272,7 @@
             "icon3"});
             this.iconsLine2ndPlaneBox.Location = new System.Drawing.Point(103, 63);
             this.iconsLine2ndPlaneBox.Name = "iconsLine2ndPlaneBox";
-            this.iconsLine2ndPlaneBox.Size = new System.Drawing.Size(107, 95);
+            this.iconsLine2ndPlaneBox.Size = new System.Drawing.Size(107, 69);
             this.iconsLine2ndPlaneBox.TabIndex = 21;
             // 
             // colorLine2ndPlaneBox
@@ -300,7 +305,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(400, 183);
+            this.tabPage3.Size = new System.Drawing.Size(400, 138);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "3-я проекция";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -344,7 +349,7 @@
             "icon3"});
             this.iconsLine3rdPlaneBox.Location = new System.Drawing.Point(103, 63);
             this.iconsLine3rdPlaneBox.Name = "iconsLine3rdPlaneBox";
-            this.iconsLine3rdPlaneBox.Size = new System.Drawing.Size(107, 95);
+            this.iconsLine3rdPlaneBox.Size = new System.Drawing.Size(107, 69);
             this.iconsLine3rdPlaneBox.TabIndex = 21;
             // 
             // colorLine3rdPlaneBox
@@ -366,7 +371,7 @@
             this.label10.TabIndex = 19;
             this.label10.Text = "Цвет";
             // 
-            // SettingLine
+            // SettingsLine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -376,8 +381,8 @@
             this.Controls.Add(this.colorLabel);
             this.Controls.Add(this.lineWidth);
             this.Controls.Add(this.lineWidthUpDown);
-            this.Name = "SettingLine";
-            this.Size = new System.Drawing.Size(496, 375);
+            this.Name = "SettingsLine";
+            this.Size = new System.Drawing.Size(451, 288);
             ((System.ComponentModel.ISupportInitialize)(this.lineWidthUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lineColorBox)).EndInit();
             this.groupBox1.ResumeLayout(false);

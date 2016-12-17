@@ -48,6 +48,8 @@
     <Compile Include="Analyze\LinesPosition.cs" />
     <Compile Include="Analyze\PointsPosition.cs" />
     <Compile Include="Analyze\SegmentPosition.cs" />
+    <Compile Include="Background\Axis.cs" />
+    <Compile Include="Background\Grid.cs" />
     <Compile Include="Calculate.cs" />
     <Compile Include="Cnv.cs" />
     <Compile Include="DeterminePosition.cs" />

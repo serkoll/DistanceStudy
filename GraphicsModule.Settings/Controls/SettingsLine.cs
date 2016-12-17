@@ -1,10 +1,10 @@
 ﻿using System.Windows.Forms;
 
-namespace GraphicsModule.Settings
+namespace GraphicsModule.Settings.Controls
 {
-    public partial class SettingLine : UserControl
+    public partial class SettingsLine : UserControl
     {
-        public SettingLine()
+        public SettingsLine()
         {
             InitializeComponent();
         }

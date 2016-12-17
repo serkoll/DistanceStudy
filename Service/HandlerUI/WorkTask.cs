@@ -7,6 +7,7 @@ using Service.Services;
 using Formatter;
 using GraphicsModule.Geometry.Objects;
 using System.Collections.ObjectModel;
+using DbRepository.Classes.Keys;
 
 namespace Service.HandlerUI
 {
@@ -157,6 +158,11 @@ namespace Service.HandlerUI
         public Collection<IObject> GetGraphicsObjectsFromJsonTaskRelated()
         {
             return _taskService.GetGraphicObjectsForTask(_task.TaskId);
+        }
+
+        public List<GraphicKey> GetGraphicsKeysFromJsonTaskRelated()
+        {
+            return _taskService.GetGraphicKeysForTask(_task.TaskId);
         }
 
         /// <summary>
