@@ -12,6 +12,7 @@ namespace GraphicsModule.SolidworksInteraction
     {
         private SldWorks _swApp;
         private IModelDoc2 _swModel;
+        private const double k = 1000;
         public SldWorksInteraction()
         {
         }
@@ -22,10 +23,10 @@ namespace GraphicsModule.SolidworksInteraction
                 _swApp = (SldWorks)Marshal.GetActiveObject("SldWorks.Application");
                 return true;
             }
-            catch(COMException)
+            catch (COMException)
             {
                 return false;
-            }   
+            }
         }
         public void SetActiveDocument()
         {
@@ -33,6 +34,9 @@ namespace GraphicsModule.SolidworksInteraction
                 _swApp.NewPart();
             _swModel = _swApp.IActiveDoc2;
             _swModel.SketchManager.Insert3DSketch(true);
+            _swModel.SetAddToDB(false);
+            //_swModel.SetDisplayWhenAdded(false);
+            //_swModel.Visible = false;
         }
         public void ImportCollectionToActiveDoc(Collection<IObject> objects, Settings.DrawS ds)
         {
@@ -42,32 +46,30 @@ namespace GraphicsModule.SolidworksInteraction
                 if (obj.GetType() == typeof(Point3D))
                 {
                     var point = (Point3D)obj;
-                    _swModel.SketchManager.CreatePoint(point.X, point.Y, point.Z);
+                    _swModel.SketchManager.CreatePoint(point.X / k, point.Y / k, point.Z / k);
                 }
-                if(obj.GetType() == typeof(Segment3D))
+                if (obj.GetType() == typeof(Segment3D))
                 {
                     var segment = (Segment3D)obj;
-                    _swModel.SketchManager.CreateLine(segment.Point0.X, segment.Point0.Y, segment.Point0.Z, segment.Point1.X, segment.Point1.Y, segment.Point1.Z);
+                    _swModel.SketchManager.CreateLine(segment.Point0.X/ k, segment.Point0.Y / k, segment.Point0.Z / k, segment.Point1.X/ k, segment.Point1.Y / k, segment.Point1.Z / k);
                 }
             }
         }
         public void ImportAxis(Axis axis)
         {
-            _swModel.SketchManager.CreateLine(-axis.FinitePoints[1].X, 0, 0, axis.FinitePoints[1].X, 0, 0);
-            _swModel.SketchManager.CreateLine(0, -axis.FinitePoints[3].Y, 0, 0, axis.FinitePoints[3].Y, 0);
-            _swModel.SketchManager.CreateLine(0, 0, -axis.FinitePoints[3].Y, 0, 0, axis.FinitePoints[3].Y);
+            _swModel.SketchManager.CreateLine(-axis.FinitePoints[1].X / k, 0, 0, axis.FinitePoints[1].X / k, 0, 0);
+            _swModel.SketchManager.CreateLine(0, -axis.FinitePoints[3].Y / k, 0, 0, axis.FinitePoints[3].Y / k, 0);
+            _swModel.SketchManager.CreateLine(0, 0, -axis.FinitePoints[3].Y / k, 0, 0, axis.FinitePoints[3].Y / k);
         }
         public void ImportGrid(Grid grid)
         {
-            _swModel.SketchManager.Insert3DSketch(true);
-            for (int i = 0; i < grid.Knots.GetLength(0); i++)
-            {
-                for (int j = 0; j < grid.Knots.GetLength(1); j++)
-                {
-                    _swModel.SketchManager.CreatePoint(grid.Knots[i,j].X, grid.Knots[i,j].Y, 0);
-                }
-            }
-            _swModel.ClearSelection2(true);
+            //for (int i = 0; i < grid.Knots.GetLength(0) / 2; i++)
+            //{
+            //    for (int j = 0; j < grid.Knots.GetLength(1) / 2; j++)
+            //    {
+            //        _swModel.SketchManager.CreatePoint((grid.Knots[i, j].X - grid.CenterPoint.X) / k, 0, (grid.Knots[i, j].Y - grid.CenterPoint.Y) / k);
+            //    }
+            //}
         }
     }
 }
