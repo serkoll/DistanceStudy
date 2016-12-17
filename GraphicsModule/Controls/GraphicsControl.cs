@@ -356,6 +356,7 @@ namespace GraphicsModule.Controls
                 //SldWorksObject.ImportGrid(_canvas.Grid);
                 //SldWorksObject.ImportAxis(_canvas.Axis);
                 SldWorksObject.ImportCollectionToActiveDoc(_storage.Objects, _canvas.St.DrawS);
+                SldWorksObject.ImportAxis(_canvas.Axis);
             }
             else
             {

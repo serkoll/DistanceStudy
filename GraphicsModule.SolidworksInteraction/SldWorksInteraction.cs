@@ -32,20 +32,17 @@ namespace GraphicsModule.SolidworksInteraction
             if (_swApp.IActiveDoc == null)
                 _swApp.NewPart();
             _swModel = _swApp.IActiveDoc2;
+            _swModel.SketchManager.Insert3DSketch(true);
         }
         public void ImportCollectionToActiveDoc(Collection<IObject> objects, Settings.DrawS ds)
         {
             if (objects.Count == 0) return;
-            //_swModel.Extension.SelectByID2("", "FACE", -3.14573861840017E-02, 1.44077058280914E-02, 0.03, false, 0, null, 0);
-            _swModel.SketchManager.Insert3DSketch(true);
             foreach (IObject obj in objects)
             {
                 if (obj.GetType() == typeof(Point3D))
                 {
                     var point = (Point3D)obj;
                     _swModel.SketchManager.CreatePoint(point.X, point.Y, point.Z);
-                    //_swModel.SketchManager.CreateCircleByRadius(point.X, point.Y, point.Z, ds.RadiusPoints*10);
-                    //_swModel.SketchManager.RotateOrCopy3DAboutXYZ(false, 0, false, 0, 0, 0, 0, 360, 0);
                 }
                 if(obj.GetType() == typeof(Segment3D))
                 {
@@ -53,21 +50,15 @@ namespace GraphicsModule.SolidworksInteraction
                     _swModel.SketchManager.CreateLine(segment.Point0.X, segment.Point0.Y, segment.Point0.Z, segment.Point1.X, segment.Point1.Y, segment.Point1.Z);
                 }
             }
-            _swModel.ClearSelection2(true);
         }
         public void ImportAxis(Axis axis)
         {
-            _swModel.Extension.SelectByID2("", "FACE", -3.14573861840017E-02, 1.44077058280914E-02, 0.03, false, 0, null, 0);
-            _swModel.SketchManager.Insert3DSketch(true);
-            _swModel.SketchManager.CreatePoint(axis.FinitePoints[0].X, axis.FinitePoints[0].Y, 0);
-            _swModel.SketchManager.CreatePoint(axis.FinitePoints[0].X, axis.FinitePoints[0].Y, 0);
-            _swModel.SketchManager.CreatePoint(axis.FinitePoints[0].X, axis.FinitePoints[0].Y, 0);
-            _swModel.SketchManager.CreatePoint(axis.FinitePoints[0].X, axis.FinitePoints[0].Y, 0);
-            _swModel.ClearSelection2(true);
+            _swModel.SketchManager.CreateLine(-axis.FinitePoints[1].X, 0, 0, axis.FinitePoints[1].X, 0, 0);
+            _swModel.SketchManager.CreateLine(0, -axis.FinitePoints[3].Y, 0, 0, axis.FinitePoints[3].Y, 0);
+            _swModel.SketchManager.CreateLine(0, 0, -axis.FinitePoints[3].Y, 0, 0, axis.FinitePoints[3].Y);
         }
         public void ImportGrid(Grid grid)
         {
-            _swModel.Extension.SelectByID2("", "FACE", -3.14573861840017E-02, 1.44077058280914E-02, 0.03, false, 0, null, 0);
             _swModel.SketchManager.Insert3DSketch(true);
             for (int i = 0; i < grid.Knots.GetLength(0); i++)
             {
