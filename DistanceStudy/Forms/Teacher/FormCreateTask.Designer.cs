@@ -257,9 +257,11 @@
             // 
             // toolStripAddGraphicCondition
             // 
+            this.toolStripAddGraphicCondition.Enabled = false;
             this.toolStripAddGraphicCondition.Name = "toolStripAddGraphicCondition";
             this.toolStripAddGraphicCondition.Size = new System.Drawing.Size(165, 22);
             this.toolStripAddGraphicCondition.Text = "Графическое представление";
+            this.toolStripAddGraphicCondition.Click += new System.EventHandler(this.toolStripAddGraphicCondition_Click);
             // 
             // FormCreateTask
             // 

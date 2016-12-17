@@ -120,72 +120,75 @@ namespace Point3DCntrl
         /////                                              "PointMinus_f_2" - "Тип заданного объекта, не соответсвует типу 'Point3D'" (системная ошибка);
         /////                                              "PointMinus_f_3" - "Объект 'Point3D' не существует" (системная ошибка);
         /////                                              "PointMinus_f_4" - "Отсутствуют введенные пользователем данные" (системная ошибка).</remarks>
-        //public bool PointMinus(Dictionary<string, object> InitialParams, Dictionary<string, object> UserParams, ref Dictionary<string, object> SolveParams, ref Dictionary<string, string> CommentsTrue, ref Dictionary<string, string> CommentsFalse)
-        //{
-        //    bool Solve = true;//Значение "True", т.к. при обнаружении отрицательного значения PointsPositionControl_Val.PointMinus(Point3D_Solve, GeometryObjects.PointsPositionControl.Coordinate_Value) возвращает "True"
-        //    string SolveCommet_1 = "Координаты:";
-        //    Point3D Point3D = new Point3D();
-        //    PointsPositionControl PointsPositionControl = new PointsPositionControl();
-        //    if (UserParams.Count != 0) //Контроль существования объектов в заданном словаре
-        //    {
-        //        object Object_Val = 0;//Переменная для извлечения объектов              
-
-        //        if (UserParams.ContainsKey(typeof(Point3D).ToString()))
-        //        {
-        //            UserParams.TryGetValue("Point3D", out Object_Val);//Извлечение объекта из словаря
-        //            if (Object_Val != null && !Object_Val.Equals(""))//Контроль существования извлеченного объекта "Point3D"
-        //            {
-        //                //Point3D_Val = (GeometryObjects.Point3D)InitialParams["Point3D"];
-        //                if (Object_Val.GetType().Name == "Point3D")//Контроль типа объекта, извлеченного из словаря
-        //                {
-        //                    Point3D = (GeometryObjects.Point3D)UserParams["Point3D"]; //Запись объекта в экземпляр класса
-        //                    //Solve = PointsPositionControl.PointMinus(Point3D, PointsPositionControl.Coordinate_Value);//Анализ отрицательности
-        //                    if (!Solve)
-        //                    {
-        //                        SolveParams.Add("Point3D", Point3D);//Добавление экземпляра 3D точки в словарь решений
-        //                        CommentsTrue.Add("PointMinus_t_1", "Заданные координаты имеют положительные значения"); //Добавление комментария положительного решения                                                           
-        //                    }
-        //                    else { /*SolveCommet_1 += PointsPositionControl.Coordinate_Value;*/ CommentsFalse.Add("PointMinus_f_1", SolveCommet_1 += "имеют отрицательные значения"); }//Добавление комментария отрицательного решения
-        //                    return !Solve;
-        //                }
-        //                else { CommentsFalse.Add("PointMinus_f_2", "Тип заданного объекта, не соответсвует типу 'Point3D'"); return false; }
-        //            }
-        //            else { CommentsFalse.Add("PointMinus_f_3", "Объект 'Point3D' не существует"); return false; }
-        //        }
-
-        //        if (UserParams.ContainsKey("X") || UserParams.ContainsKey("Y") || UserParams.ContainsKey("Z"))
-        //        {
-        //            UserParams.TryGetValue("X", out Object_Val);
-        //            if (Object_Val != null && !Object_Val.Equals(""))//Контроль существования извлеченного объекта "X" //Не требуется!!!
-        //            {
-        //                Point3D.X = Convert.ToDouble(Object_Val);
-        //            }
-        //            //else { CommentsFalse.Add("PointMinus_f_4", "Не задано значение координаты X"); return !Solve; } //Не требуется!!!
-        //            UserParams.TryGetValue("Y", out Object_Val);
-        //            if (Object_Val != null && !Object_Val.Equals(""))//Контроль существования извлеченного объекта "Y"
-        //            {
-        //                Point3D.Y = Convert.ToDouble(Object_Val);
-        //            }
-        //            //else { CommentsFalse.Add("PointMinus_f_5", "Не задано значение координаты Y"); return !Solve; }
-        //            UserParams.TryGetValue("Z", out Object_Val);
-        //            if (Object_Val != null && !Object_Val.Equals(""))//Контроль существования извлеченного объекта "Z" //Не требуется!!!
-        //            {
-        //                Point3D.Z = Convert.ToDouble(Object_Val);
-        //            }
-        //            //else { CommentsFalse.Add("PointMinus_f_6", "Не задано значение координаты Z"); return !Solve; }
-        //            //Solve = PointsPositionControl.PointMinus(Point3D, GeometryObjects.PointsPositionControl.Coordinate_Value);// Анализ отрицательности
-        //            if (!Solve)
-        //            {
-        //                SolveParams.Add("Point3D", Point3D);//Добавление экземпляра решения в словарь решений
-        //                CommentsTrue.Add("PointMinus_t_1", "Заданные координаты имеют положительные значения");//Добавление комментария положительного решения
-        //            }
-        //            else { /*SolveCommet_1 += PointsPositionControl.Coordinate_Value;*/ CommentsFalse.Add("PointMinus_f_1", SolveCommet_1 += "имеют отрицательные значения"); }// Добавление комментария отрицательного решения
-        //            return !Solve;
-        //        }
-        //        else { return !Solve; }
-        //    }
-        //    else { CommentsFalse.Add("PointMinus_f_4", "Отсутствуют введенные пользователем данные"); return !Solve; }
-        //}
+        public bool PointMinus(DbRepository.Context.Task currentTask, bool isInversed, Dictionary<Task_MethodRef, object> initialParams, Dictionary<GraphicKey, object> userParams, ref Dictionary<Task_MethodRef, object> solveParams, ref Dictionary<string, string> commentsTrue, ref Dictionary<string, string> commentsFalse)
+        {
+            bool Solve = true;//Значение "True", т.к. при обнаружении отрицательного значения PointsPositionControl_Val.PointMinus(Point3D_Solve, GeometryObjects.PointsPositionControl.Coordinate_Value) возвращает "True"
+            string SolveCommet_1 = "Координаты:";
+            //Point3D Point3D = new Point3D();
+            //ControlMongePoints ControlMongePoints = new ControlMongePoints();
+            if (userParams.Count != 0) //Контроль существования объектов в заданном словаре
+            {
+                object Object_Val = 0; //Переменная для извлечения объектов              
+                var grKey = GetGraphicKeyForType(nameof(Point3D));
+                userParams.TryGetValue(grKey, out Object_Val); //Извлечение объекта из словаря
+                //var point3D = (Point3D)Object_Val;// ??? а если Object_Val не является объектом типа Point3D ???
+                //Контроль существования извлеченного объекта "Point3D"
+                if (Object_Val != null && !Object_Val.Equals(""))
+                {
+                    //Point3D_Val = (GeometryObjects.Point3D)InitialParams["Point3D"];
+                    //Контроль типа объекта, извлеченного из словаря
+                    if (Object_Val.GetType().Name.Equals(nameof(Point3D)))
+                    {
+                        //Point3D = (Point3D)userParams["Point3D"]; //Запись объекта в экземпляр класса
+                        var point3D = (Point3D)Object_Val;
+                        // ??? а если Object_Val не является объектом типа Point3D ???
+                        //Solve = ControlMongePoints.PointMinus(point3D, ControlMongePoints.Coordinate_Value);//Анализ отрицательности
+                        //Добавление экземпляра 3D точки в словарь решений
+                        var key = SetKeyToSolveParams(currentTask, nameof(PointMinus), nameof(Point3D));
+                        //Формирование ключа для идентификации выводимой точки
+                        commentsTrue.Add("PointMinus_t_1", "Заданные координаты имеют положительные значения");
+                        //Добавление комментария положительного решения                                                           
+                        //commentsFalse.Add("PointMinus_f_1", SolveCommet_1 += "имеют отрицательные значения");
+                        //Добавление комментария отрицательного решения
+                        return !isInversed;
+                    }
+                    commentsFalse.Add("PointMinus_f_2", "Тип заданного объекта, не соответсвует типу 'Point3D'");
+                    return isInversed;
+                }
+                //if (userParams.ContainsKey("X") || userParams.ContainsKey("Y") || userParams.ContainsKey("Z"))
+                //{
+                //    userParams.TryGetValue("X", out Object_Val);
+                //    if (Object_Val != null && !Object_Val.Equals(""))//Контроль существования извлеченного объекта "X" //Вывод комментария не требуется!!!
+                //    {
+                //        Point3D.X = Convert.ToDouble(Object_Val);
+                //    }
+                //    //else { commentsFalse.Add("PointMinus_f_4", "Не задано значение координаты X"); return !Solve; } //НеВывод комментария не требуется!!!
+                //    userParams.TryGetValue("Y", out Object_Val);
+                //    if (Object_Val != null && !Object_Val.Equals(""))//Контроль существования извлеченного объекта "Y"
+                //    {
+                //        Point3D.Y = Convert.ToDouble(Object_Val);
+                //    }
+                //    //else { commentsFalse.Add("PointMinus_f_5", "Не задано значение координаты Y"); return !Solve; }
+                //    userParams.TryGetValue("Z", out Object_Val);
+                //    if (Object_Val != null && !Object_Val.Equals(""))//Контроль существования извлеченного объекта "Z" //Вывод комментария не требуется!!!
+                //    {
+                //        Point3D.Z = Convert.ToDouble(Object_Val);
+                //    }
+                //    //else { commentsFalse.Add("PointMinus_f_6", "Не задано значение координаты Z"); return !Solve; }
+                //    Solve = ControlMongePoints.PointMinus(Point3D, ControlMongePoints.Coordinate_Value);// Анализ отрицательности
+                //    if (!Solve)
+                //    {
+                //        solveParams.Add("Point3D", Point3D);//Добавление экземпляра решения в словарь решений
+                //        commentsTrue.Add("PointMinus_t_1", "Заданные координаты имеют положительные значения");//Добавление комментария положительного решения
+                //    }
+                //    else { /*SolveCommet_1 += PointsPositionControl.Coordinate_Value;*/ commentsFalse.Add("PointMinus_f_1", SolveCommet_1 += "имеют отрицательные значения"); }// Добавление комментария отрицательного решения
+                //    return !Solve;
+                //}
+                return isInversed;
+            }
+            commentsFalse.Add("PointMinus_f_4", "Отсутствуют введенные пользователем данные");
+            return isInversed;
+        }
 
         ///// <summary>
         ///// Контроль задания координат горизонтальной проекции точки (P1).
@@ -1154,6 +1157,7 @@ namespace Point3DCntrl
         /// Метод на выходе дает точку.
         /// </summary>
         /// <param name="currentTask">Текущая задача</param>
+        /// <param name="isInversed">Параметр инверсирования метода</param>
         /// <param name="initialParams">Входные параметры (не используются)</param>
         /// <param name="userParams">Параметры, введенные пользователем: построена ли точка.</param>
         /// <param name="solveParams">Параметры решения Point3D</param>
@@ -1162,7 +1166,7 @@ namespace Point3DCntrl
         /// <returns>Возвращает "True", если значение координаты X существует</returns>
         /// <remarks>Комментарии правильного решения: ключи: "InputX_t_1" - "Значение координаты X задано";
         ///          Комментарии ложного решения: ключи: "InputX_f_1" - "Не задано значение координаты X".</remarks>
-        public bool Point3D_Output(DbRepository.Context.Task currentTask, Dictionary<Task_MethodRef, object> initialParams, Dictionary<GraphicKey, object> userParams, ref Dictionary<Task_MethodRef, object> solveParams, ref Dictionary<string, string> commentsTrue, ref Dictionary<string, string> commentsFalse)
+        public bool Point3D_Output(DbRepository.Context.Task currentTask, bool isInversed, Dictionary<Task_MethodRef, object> initialParams, Dictionary<GraphicKey, object> userParams, ref Dictionary<Task_MethodRef, object> solveParams, ref Dictionary<string, string> commentsTrue, ref Dictionary<string, string> commentsFalse)
         {
             if (userParams.Count != 0) //Контроль существования объектов в заданном словаре
             {
@@ -1174,20 +1178,21 @@ namespace Point3DCntrl
                 {
                     commentsTrue.Add("Point3D_Output", "Точка построена");
                     var key = SetKeyToSolveParams(currentTask, nameof(Point3D_Output), nameof(Point3D));
-                    solveParams.Add(key, point3D);
-                    return true;
+                    if (key != null) solveParams.Add(key, point3D);
+                    return !isInversed;
                 }
                 commentsFalse.Add("Point3D_Output", "Точка не построена");
-                return false;
+                return isInversed;
             }
             commentsFalse.Add("Point3D_Output", "Точка не построена");
-            return false;
+            return isInversed;
         }
 
         /// <summary>
         /// Метод на вход требует точку.
         /// </summary>
-        /// <param name="initialParams">Пармаметры инициализации из других методов</param>
+        /// <param name="isInversed">Параметр инверсирования метода</param>
+        /// <param name="initialParams">Параметры инициализации из других методов</param>
         /// <param name="userParams">Параметры введённые студентом</param>
         /// <param name="solveParams">Параметры решения (не добавляются)</param>
         /// <param name="commentsTrue">Комментарии правильного решения</param>
@@ -1196,7 +1201,7 @@ namespace Point3DCntrl
         /// <returns>Возвращает "True", если значение координаты X существует</returns>
         /// <remarks>Комментарии правильного решения: ключи: "InputX_t_1" - "Значение координаты X задано";
         ///          Комментарии ложного решения: ключи: "InputX_f_1" - "Не задано значение координаты X".</remarks>
-        public bool Point3D_Input(DbRepository.Context.Task currentTask, Dictionary<Task_MethodRef, object> initialParams, Dictionary<GraphicKey, object> userParams, ref Dictionary<Task_MethodRef, object> solveParams, ref Dictionary<string, string> commentsTrue, ref Dictionary<string, string> commentsFalse)
+        public bool Point3D_Input(DbRepository.Context.Task currentTask, bool isInversed, Dictionary<Task_MethodRef, object> initialParams, Dictionary<GraphicKey, object> userParams, ref Dictionary<Task_MethodRef, object> solveParams, ref Dictionary<string, string> commentsTrue, ref Dictionary<string, string> commentsFalse)
         {
             if (userParams.Count != 0) //Контроль существования объектов в заданном словаре
             {
@@ -1210,18 +1215,18 @@ namespace Point3DCntrl
                 {
                     commentsTrue.Add("Point3D_Input", "Точка # 1 построена");
                     commentsTrue.Add("Point3D_Input_1", "Точка # 2 построена");
-                    return true;
+                    return !isInversed;
                 }
                 commentsFalse.Add("Point3D_Input_2", "Точка не построена");
-                return false;
+                return isInversed;
             }
             commentsFalse.Add("Point3D_Input_2", "Точка не построена");
-            return false;
+            return isInversed;
         }
 
         private GraphicKey GetGraphicKeyForType(string typeOfObject)
         {
-            return JsonFormatter.GetGraphicKeysFromJson().FirstOrDefault(k => k.TypeName.Equals(typeOfObject));
+            return JsonFormatter.GetGraphicKeysFromJson().FirstOrDefault(k => k.GraphicObject.GetType().Name.Equals(typeOfObject));
         }
 
         private Task_MethodRef SetKeyToSolveParams(DbRepository.Context.Task currentTask, string currentMethodName, string typeOfResult)

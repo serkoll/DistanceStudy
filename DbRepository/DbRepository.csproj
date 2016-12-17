@@ -129,6 +129,12 @@
       <LastGenOutput>DSModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GraphicsModule.Geometry\GraphicsModule.Geometry.csproj">
+      <Project>{9445D9ED-E7B5-451B-BF93-2265BA1E186A}</Project>
+      <Name>GraphicsModule.Geometry</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
