@@ -75,8 +75,6 @@ namespace GraphicsModule
 
             strg.DrawObjects(St, Grid.CenterPoint, Graphics);
 
-            //PicBox.BackColor = St.
-
             PicBox.Image = (Image)Mainbmp.Clone();
             PicBox.Refresh();
         }
