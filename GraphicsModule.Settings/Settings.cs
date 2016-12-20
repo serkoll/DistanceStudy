@@ -17,7 +17,7 @@ namespace GraphicsModule.Settings
             GridS = new GridS();
             AxisS = new AxisS();
             DrawS = new DrawS();
-            SelectedDrawS = new DrawS(new Pen(Brushes.Orange, 4), new Pen(Brushes.Orange, 1), new Pen(Brushes.Orange, 1), new Pen(Brushes.Orange, 1), new Pen(Brushes.Orange, 1), 2, 1);
+            SelectedDrawS = new DrawS(new Pen(Brushes.Orange, 4), new Pen(Brushes.Orange, 1), new Pen(Brushes.Orange, 1), new Pen(Brushes.Orange, 1), new Pen(Brushes.Orange, 1), 2, 1, new Font("Times New Roman", 6, FontStyle.Bold), new SolidBrush(Color.Black));
         }
         public Settings(AxisS axisS, GridS gridS, DrawS drawS, DrawS selectedDrawS)
         {
