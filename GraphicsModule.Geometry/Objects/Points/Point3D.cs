@@ -12,7 +12,7 @@ namespace GraphicsModule.Geometry.Objects.Points
         public double X { get; set; }
         public double Y { get; set; }
         public double Z { get; set; }
-
+        public string Name { get; set; }
         public PointOfPlane1X0Y PointOfPlane1X0Y { get; set; }
         /// <summary>Получает или задает координаты проекции 3D точки на плоскость X0Z пространственной системы координат</summary>
         /// <remarks></remarks>
@@ -29,16 +29,53 @@ namespace GraphicsModule.Geometry.Objects.Points
         }
         /// <summary>Инициализирует новый экземпляр 3D точки с указанными координатами</summary>
         /// <remarks></remarks>
-        public Point3D(double X, double Y, double Z) { new Point2D(X, Y); this.Z = Z; InitializePointsOfPlane(); }//Конструктор, устанавливающий пользовательские значения координат 3D точки
+        public Point3D(double x, double y, double z)
+        {
+            X = x;
+            Y = y;
+            Z = z;
+            InitializePointsOfPlane();
+        }
         /// <summary>Инициализирует новый экземпляр 3D точки</summary>
         /// <remarks></remarks>
-        public Point3D(Point3D pt) { new Point2D(pt.X, pt.Y); Z = pt.Z; InitializePointsOfPlane(); }//Конструктор, устанавливающий пользовательские значения координат 3D точки
+        public Point3D(Point3D pt)
+        {
+            X = pt.X;
+            Y = pt.Y;
+            Z = pt.Z;
+            InitializePointsOfPlane();
+        }
+
         /// <summary>Преобразует 2D точку в 3D точку путем добавления третьей координаты</summary>
         /// <remarks></remarks>
-        public Point3D(Point2D pt, double z) { new Point2D(pt.X, pt.Y); Z = z; InitializePointsOfPlane(); }//Конструктор преобразования двумерной точки в трехмерную, с установкой заданного значения третьей координаты (Z)
-        public Point3D(PointOfPlane1X0Y pt1, PointOfPlane2X0Z pt2) { X = pt1.X; Y = pt1.Y; Z = pt2.Z; InitializePointsOfPlane(); }
-        public Point3D(PointOfPlane1X0Y pt1, PointOfPlane3Y0Z pt3) { X = pt1.X; Y = pt1.Y; Z = pt3.Z; InitializePointsOfPlane(); }
-        public Point3D(PointOfPlane2X0Z pt2, PointOfPlane3Y0Z pt3) { X = pt2.X; Y = pt3.Y; Z = pt2.Z; InitializePointsOfPlane(); }
+        public Point3D(Point2D pt, double z)
+        {
+            X = pt.X;
+            Y = pt.Y;
+            Z = z;
+            InitializePointsOfPlane();
+        }
+        public Point3D(PointOfPlane1X0Y pt1, PointOfPlane2X0Z pt2)
+        {
+            X = pt1.X;
+            Y = pt1.Y;
+            Z = pt2.Z;
+            InitializePointsOfPlane();
+        }
+        public Point3D(PointOfPlane1X0Y pt1, PointOfPlane3Y0Z pt3)
+        {
+            X = pt1.X;
+            Y = pt1.Y;
+            Z = pt3.Z;
+            InitializePointsOfPlane();
+        }
+        public Point3D(PointOfPlane2X0Z pt2, PointOfPlane3Y0Z pt3)
+        {
+            X = pt2.X;
+            Y = pt3.Y;
+            Z = pt2.Z;
+            InitializePointsOfPlane();
+        }
         public Point3D(PointOfPlane1X0Y pt1, PointOfPlane2X0Z pt2, PointOfPlane3Y0Z pt3)
         {
             if (pt1 != null & pt2 != null & pt3 == null) new Point3D(pt1, pt2);
@@ -57,28 +94,28 @@ namespace GraphicsModule.Geometry.Objects.Points
             if (lst[0].GetType() == typeof(PointOfPlane1X0Y))
             {
                 return lst[1].GetType() == typeof(PointOfPlane2X0Z) ?
-                    CreateByPointOfPlane1and2((PointOfPlane1X0Y)lst[0], (PointOfPlane2X0Z)lst[1]) :
-                    CreateByPointOfPlane1and3((PointOfPlane1X0Y)lst[0], (PointOfPlane3Y0Z)lst[1]);
+                    CreateByPointOfPlane1And2((PointOfPlane1X0Y)lst[0], (PointOfPlane2X0Z)lst[1]) :
+                    CreateByPointOfPlane1And3((PointOfPlane1X0Y)lst[0], (PointOfPlane3Y0Z)lst[1]);
             }
             if (lst[0].GetType() == typeof(PointOfPlane2X0Z))
             {
                 return lst[1].GetType() == typeof(PointOfPlane1X0Y) ?
-                    CreateByPointOfPlane1and2((PointOfPlane1X0Y)lst[1], (PointOfPlane2X0Z)lst[0]) :
-                    CreateByPointOfPlane2and3((PointOfPlane2X0Z)lst[0], (PointOfPlane3Y0Z)lst[1]);
+                    CreateByPointOfPlane1And2((PointOfPlane1X0Y)lst[1], (PointOfPlane2X0Z)lst[0]) :
+                    CreateByPointOfPlane2And3((PointOfPlane2X0Z)lst[0], (PointOfPlane3Y0Z)lst[1]);
             }
-            return lst[1].GetType() == typeof(PointOfPlane1X0Y) ? 
-                CreateByPointOfPlane1and3((PointOfPlane1X0Y)lst[1], (PointOfPlane3Y0Z)lst[0]) : 
-                CreateByPointOfPlane2and3((PointOfPlane2X0Z)lst[1], (PointOfPlane3Y0Z)lst[0]);
+            return lst[1].GetType() == typeof(PointOfPlane1X0Y) ?
+                CreateByPointOfPlane1And3((PointOfPlane1X0Y)lst[1], (PointOfPlane3Y0Z)lst[0]) :
+                CreateByPointOfPlane2And3((PointOfPlane2X0Z)lst[1], (PointOfPlane3Y0Z)lst[0]);
         }
-        private static Point3D CreateByPointOfPlane1and2(PointOfPlane1X0Y pt1, PointOfPlane2X0Z pt2)
+        private static Point3D CreateByPointOfPlane1And2(PointOfPlane1X0Y pt1, PointOfPlane2X0Z pt2)
         {
             return pt1.X == pt2.X ? new Point3D(pt1, pt2) : null;
         }
-        private static Point3D CreateByPointOfPlane1and3(PointOfPlane1X0Y pt1, PointOfPlane3Y0Z pt3)
+        private static Point3D CreateByPointOfPlane1And3(PointOfPlane1X0Y pt1, PointOfPlane3Y0Z pt3)
         {
             return pt1.Y == pt3.Y ? new Point3D(pt1, pt3) : null;
         }
-        private static Point3D CreateByPointOfPlane2and3(PointOfPlane2X0Z pt2, PointOfPlane3Y0Z pt3)
+        private static Point3D CreateByPointOfPlane2And3(PointOfPlane2X0Z pt2, PointOfPlane3Y0Z pt3)
         {
             return pt2.Z == pt3.Z ? new Point3D(pt2, pt3) : null;
         }
@@ -88,22 +125,37 @@ namespace GraphicsModule.Geometry.Objects.Points
             PointOfPlane2X0Z = new PointOfPlane2X0Z(X, Z);
             PointOfPlane3Y0Z = new PointOfPlane3Y0Z(Y, Z);
         }
+
+        public void InitializeName(string name)
+        {
+            Name = name;
+            PointOfPlane1X0Y.Name = name;
+            PointOfPlane2X0Z.Name = name;
+            PointOfPlane3Y0Z.Name = name;
+        }
         /// <summary>Передвигает ранее заданную 3D точку
         /// (изменяет коодинаты на указанные величины по осям в 3D)
         /// </summary>
         /// <remarks>Point3D.X += dx; Point3D.Y += dy; Point3D.Z += dz</remarks>
         public void PointMove(double dx, double dy, double dz) { X += dx; Y += dy; Z += dz; }//Конструктор перемещения на указанные величины по осям в 3D 
-        public void Draw(Pen pen, float ptR, System.Drawing.Point frameCenter, Graphics graphics)
+        public void Draw(Pen pen, float ptR, Point frameCenter, Graphics graphics)
         {
             PointOfPlane1X0Y.Draw(pen, ptR, frameCenter, graphics);
             PointOfPlane2X0Z.Draw(pen, ptR, frameCenter, graphics);
             PointOfPlane3Y0Z.Draw(pen, ptR, frameCenter, graphics);
         }
-        public void Draw(DrawS st, System.Drawing.Point frameCenter, Graphics g)
+        public void Draw(DrawS st, Point frameCenter, Graphics g)
         {
             Draw(st.PenPoints, st.RadiusPoints, frameCenter, g);
             DrawLinkLine(st.LinkLineSettings.PenLinkLineX0YtoX, st.LinkLineSettings.PenLinkLineX0YtoY, st.LinkLineSettings.PenLinkLineX0ZtoX, st.LinkLineSettings.PenLinkLineX0ZtoZ,
                          st.LinkLineSettings.PenLinkLineY0ZtoZ, st.LinkLineSettings.PenLinkLineY0ZtoY, frameCenter, ref g);
+            DrawName(st, st.RadiusPoints, frameCenter, g);
+        }
+        public void DrawName(DrawS st, float poitRaduis, Point frameCenter, Graphics graphics)
+        {
+            PointOfPlane1X0Y.DrawName(st, poitRaduis, frameCenter, graphics);
+            PointOfPlane2X0Z.DrawName(st, poitRaduis, frameCenter, graphics);
+            PointOfPlane3Y0Z.DrawName(st, poitRaduis, frameCenter, graphics);
         }
         public void DrawLinkLine(Pen penLinkLineToX, Pen penLinkLinetoY, Pen penLinkLineX0ZtoX, Pen penLinkLineX0ZtoZ, Pen penLinkLineY0ZtoZ, Pen penLinkLineY0ZtoY, System.Drawing.Point frameCenter, ref Graphics graphics)
         {
@@ -150,7 +202,7 @@ namespace GraphicsModule.Geometry.Objects.Points
                 PointOfPlane3Y0Z.DrawLinkLine(penLinkLineY0ZtoZ, penLinkLineY0ZtoY, true, true, false, false, false, frameCenter, graphics); //Отрисовка линий связи Профильной проекции с ограничениями (не отображаются связи от осей до границ плоскотсей проекций и дуга (для дуги устраняется повторная отрисовка))
             }
         }
-        public bool IsSelected(System.Drawing.Point mscoords, float ptR, System.Drawing.Point frameCenter, double distance)
+        public bool IsSelected(Point mscoords, float ptR, Point frameCenter, double distance)
         {
             var dst = Calculate.Distance(mscoords, ptR, frameCenter, this);
             return dst[0] < distance || dst[1] < distance || dst[2] < distance;

@@ -95,6 +95,7 @@ namespace GraphicsModule.CreateObjects
                 {
                     strg.TempObjects.Clear();
                     can.ReDraw(strg);
+                    _source.InitializeName(GraphicsControl.NmGenerator.Generate(_source));
                     strg.AddToCollection(_source);
                     _source = null;
                     strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
@@ -129,6 +130,7 @@ namespace GraphicsModule.CreateObjects
                     strg.Objects.Remove(strg.SelectedObjects[1]);
                     strg.SelectedObjects.Clear();
                     can.ReDraw(strg);
+                    _source.InitializeName(GraphicsControl.NmGenerator.Generate(_source));
                     strg.AddToCollection(_source);
                     _source = null;
                     strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);

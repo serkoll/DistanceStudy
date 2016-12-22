@@ -33,6 +33,7 @@ namespace GraphicsModule
             foreach (IObject obj in strg.Objects)
             {
                 var type = obj.GetType().GetInterfaces();
+                if(type.Length < 2) continue;
                 if (obj.IsSelected(mousecoords, can.St.SelectedDrawS.RadiusPoints, can.Grid.CenterPoint, 5) && (type[1] == typeof(IPointOfPlane)))
                 {
                     strg.SelectedObjects.Add(obj);
