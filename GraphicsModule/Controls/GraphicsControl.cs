@@ -2,9 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using System.Collections.ObjectModel;
-using GraphicsModule.CreateObjects;
 using GraphicsModule.Cursors;
-using GraphicsModule.Geometry.Objects;
 using System.IO;
 using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Interfaces;
@@ -40,7 +38,7 @@ namespace GraphicsModule.Controls
         /// <summary>
         /// Класс настроек
         /// </summary>
-        private Settings.Settings _settings;
+        private readonly Settings.Settings _settings;
         /// <summary>
         /// Текущее инициализированное правило создания объека
         /// </summary>
@@ -50,13 +48,17 @@ namespace GraphicsModule.Controls
         /// </summary>
         public static IOperation Operations;
         /// <summary>
+        /// Генератор имен объектов
+        /// </summary>
+        public static NamesGenerator NmGenerator;
+        /// <summary>
         /// Класс привязки курсора к сетке
         /// </summary>
-        private CursorOnGridMove crMove = new CursorOnGridMove();
+        private readonly CursorOnGridMove _crMove = new CursorOnGridMove();
         /// <summary>
-        /// 
+        /// Путь к настройкам редактора
         /// </summary>
-        private readonly string _settingsFileName = "config.cfg";
+        private const string SettingsFileName = "config.cfg";
         /// <summary>
         /// Инициализация контрола
         /// </summary>
@@ -64,18 +66,18 @@ namespace GraphicsModule.Controls
         {
             InitializeComponent();
 
-            if (File.Exists(_settingsFileName))
+            if (File.Exists(SettingsFileName))
             {
-                _settings = new Settings.Settings().Deserialize(_settingsFileName); //Получаем экземпляр настроек
+                _settings = new Settings.Settings().Deserialize(SettingsFileName); //Получаем экземпляр настроек
                 FormSettings.ValueS = _settings;
             }
             else
             {
                 _settings = new Settings.Settings();
-                _settings.Serialize(_settingsFileName);
+                _settings.Serialize(SettingsFileName);
                 FormSettings.ValueS = _settings;
             }
-
+            NmGenerator = new NamesGenerator(true);
             _ptMenuSelector = new Menu.PointMenuSelector(MainPictureBox); //Создаем меню вариантов для точек
             _lnMenuSelector = new Menu.LineMenuSelector(MainPictureBox); //Создаем меню вариантов для линий
             _sgMenuSelector = new Menu.SegmentMenuSelector(MainPictureBox);
@@ -162,7 +164,7 @@ namespace GraphicsModule.Controls
         /// <param name="e"></param>
         private void MainPictureBox_MouseMove(object sender, MouseEventArgs e)
         {
-            crMove.CursorPointToGridMove(_canvas); // Привязка к сетке
+            _crMove.CursorPointToGridMove(_canvas); // Привязка к сетке
             // Отображение координат текущего положения курсора
             labelValueX.Text = (MainPictureBox.PointToClient(Cursor.Position).X - _canvas.Grid.CenterPoint.X).ToString();
             labelValueY.Text = (MainPictureBox.PointToClient(Cursor.Position).Y - _canvas.Grid.CenterPoint.X).ToString();
@@ -316,7 +318,7 @@ namespace GraphicsModule.Controls
         /// <param name="e"></param>
         private void buttonSettings_Click(object sender, EventArgs e)
         {
-            var f = new Settings.Forms.FormSettings();
+            var f = new FormSettings();
             f.ShowDialog();
             _canvas.ReDraw(_storage);
         }
@@ -350,17 +352,17 @@ namespace GraphicsModule.Controls
 
         private void solidWorksToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var SldWorksObject = new SolidworksInteraction.SldWorksInteraction();
-            if (SldWorksObject.Connect())
+            var sldWorksObject = new SolidworksInteraction.SldWorksInteraction();
+            if (sldWorksObject.Connect())
             {
-                SldWorksObject.SetActiveDocument();
-                SldWorksObject.ImportGrid(_canvas.Grid);
-                SldWorksObject.ImportAxis(_canvas.Axis);
-                SldWorksObject.ImportCollectionToActiveDoc(_storage.Objects, _canvas.St.DrawS);
+                sldWorksObject.SetActiveDocument();
+                sldWorksObject.ImportGrid(_canvas.Grid);
+                sldWorksObject.ImportAxis(_canvas.Axis);
+                sldWorksObject.ImportCollectionToActiveDoc(_storage.Objects, _canvas.St.DrawS);
             }
             else
             {
-                MessageBox.Show("Не удалось подключиться к SolidWorks");
+                MessageBox.Show(@"Не удалось подключиться к SolidWorks");
             }
         }
     }

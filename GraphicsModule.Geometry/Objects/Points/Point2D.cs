@@ -66,6 +66,16 @@ namespace GraphicsModule.Geometry.Objects.Points
             X = pt.X; Y = pt.Y;
         }
         /// <summary>
+        /// Создает экземпляр 2D точки и задает имя
+        /// </summary>
+        /// <param name="pt"></param>
+        /// <param name="name"></param>
+        public Point2D(Point pt, string name)
+        {
+            X = pt.X; Y = pt.Y;
+            Name = name;
+        }
+        /// <summary>
         /// Передвигает ранее заданную 2D точку (изменяет коодинаты на указанные величины по осям в 2D)
         /// </summary>
         /// <param name="dx">Смещение по dx</param>

@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using GraphicsModule.Controls;
 using GraphicsModule.Geometry;
 using GraphicsModule.Geometry.Objects.Points;
 using GraphicsModule.Interfaces;
@@ -14,7 +15,7 @@ namespace GraphicsModule.CreateObjects
         private Point2D _source;
         public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
         {
-            _source = new Point2D(pt);
+            _source = new Point2D(pt, GraphicsControl.NmGenerator.Generate());
             strg.AddToCollection(_source);
             strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
         }

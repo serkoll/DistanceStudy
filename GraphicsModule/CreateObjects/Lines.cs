@@ -3,7 +3,6 @@ using System.Drawing;
 using GraphicsModule.Geometry;
 using GraphicsModule.Geometry.Analyze;
 using GraphicsModule.Geometry.Interfaces;
-using GraphicsModule.Geometry.Objects;
 using GraphicsModule.Geometry.Objects.Lines;
 using GraphicsModule.Geometry.Objects.Points;
 using GraphicsModule.Interfaces;

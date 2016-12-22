@@ -73,7 +73,9 @@
     <Compile Include="CreateObjects\Points.cs" />
     <Compile Include="CreateObjects\Segments.cs" />
     <Compile Include="Cursors\CursorMove.cs" />
+    <Compile Include="Interfaces\INamesGenerator.cs" />
     <Compile Include="Interfaces\IOperation.cs" />
+    <Compile Include="NamesGenerator.cs" />
     <Compile Include="Operations.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
