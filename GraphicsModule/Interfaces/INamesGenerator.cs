@@ -1,7 +1,9 @@
-﻿namespace GraphicsModule.Interfaces
+﻿using GraphicsModule.Geometry.Interfaces;
+
+namespace GraphicsModule.Interfaces
 {
     public interface INamesGenerator
     {
-        string Generate();
+        string Generate(IObject obj);
     }
 }

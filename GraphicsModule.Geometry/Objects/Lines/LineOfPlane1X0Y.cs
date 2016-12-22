@@ -53,7 +53,7 @@ namespace GraphicsModule.Geometry.Objects.Lines
             Point1.X = line.Point1.X;
             Point1.Y = line.Point1.Y;
         }
-        public void Draw(DrawS st, System.Drawing.Point framecenter, Graphics g)
+        public void Draw(DrawS st, Point framecenter, Graphics g)
         {
             
             Point0.Draw(st, framecenter, g);
