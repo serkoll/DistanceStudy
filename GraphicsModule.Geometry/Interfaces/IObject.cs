@@ -1,8 +1,7 @@
 ﻿using System.Drawing;
 using GraphicsModule.Settings;
 
-
-namespace GraphicsModule.Geometry.Objects
+namespace GraphicsModule.Geometry.Interfaces
 {
     public interface IObject
     {

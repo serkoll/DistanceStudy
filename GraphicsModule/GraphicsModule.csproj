@@ -68,13 +68,13 @@
     <Compile Include="Controls\Menu\SegmentMenuSelector.Designer.cs">
       <DependentUpon>SegmentMenuSelector.cs</DependentUpon>
     </Compile>
-    <Compile Include="CreateObjects\ICreate.cs" />
+    <Compile Include="Interfaces\ICreate.cs" />
     <Compile Include="CreateObjects\Lines.cs" />
     <Compile Include="CreateObjects\Points.cs" />
     <Compile Include="CreateObjects\Segments.cs" />
     <Compile Include="Cursors\CursorMove.cs" />
-    <Compile Include="Operations\IOperation.cs" />
-    <Compile Include="Operations\Operations.cs" />
+    <Compile Include="Interfaces\IOperation.cs" />
+    <Compile Include="Operations.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

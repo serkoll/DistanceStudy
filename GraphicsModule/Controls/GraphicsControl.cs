@@ -4,9 +4,10 @@ using System.Windows.Forms;
 using System.Collections.ObjectModel;
 using GraphicsModule.CreateObjects;
 using GraphicsModule.Cursors;
-using GraphicsModule.Operations;
 using GraphicsModule.Geometry.Objects;
 using System.IO;
+using GraphicsModule.Geometry.Interfaces;
+using GraphicsModule.Interfaces;
 using GraphicsModule.Settings.Forms;
 
 namespace GraphicsModule.Controls

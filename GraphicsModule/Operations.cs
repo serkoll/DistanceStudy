@@ -1,7 +1,9 @@
 ﻿using System.Drawing;
+using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Geometry.Objects;
+using GraphicsModule.Interfaces;
 
-namespace GraphicsModule.Operations
+namespace GraphicsModule
 {
     /// <summary>
     /// Выбор объекта и добавление в коллекцию выбранных объектов

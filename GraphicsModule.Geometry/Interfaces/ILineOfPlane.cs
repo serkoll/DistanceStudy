@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using GraphicsModule.Settings;
 
-namespace GraphicsModule.Geometry.Objects.Lines
+namespace GraphicsModule.Geometry.Interfaces
 {
     internal interface ILineOfPlane
     {

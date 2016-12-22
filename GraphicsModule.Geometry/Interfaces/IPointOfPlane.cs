@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace GraphicsModule.Geometry.Objects.Points
+namespace GraphicsModule.Geometry.Interfaces
 {
     public interface IPointOfPlane
     {

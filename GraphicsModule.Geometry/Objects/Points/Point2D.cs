@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Settings;
 
 namespace GraphicsModule.Geometry.Objects.Points

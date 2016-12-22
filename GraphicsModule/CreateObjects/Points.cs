@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using GraphicsModule.Geometry;
 using GraphicsModule.Geometry.Objects.Points;
-using GraphicsModule.Operations;
+using GraphicsModule.Interfaces;
 using GraphicsModule.Settings;
 
 namespace GraphicsModule.CreateObjects
