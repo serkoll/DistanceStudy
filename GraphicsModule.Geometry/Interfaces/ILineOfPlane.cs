@@ -5,6 +5,6 @@ namespace GraphicsModule.Geometry.Interfaces
 {
     internal interface ILineOfPlane
     {
-        void DrawLineOnly(DrawS st, System.Drawing.Point framecenter, Graphics g);
+        void DrawLineOnly(DrawS st, Point framecenter, Graphics g);
     }
 }

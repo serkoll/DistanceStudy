@@ -5,7 +5,7 @@ namespace GraphicsModule.Geometry.Interfaces
 {
     public interface IObject
     {
-        void Draw(DrawS st, System.Drawing.Point frameCenter, Graphics graphics);
-        bool IsSelected(System.Drawing.Point mousecoords, float ptR, System.Drawing.Point frameCenter, double distance);
+        void Draw(DrawS st, Point frameCenter, Graphics graphics);
+        bool IsSelected(Point mousecoords, float ptR, Point frameCenter, double distance);
     }
 }

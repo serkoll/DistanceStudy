@@ -4,6 +4,6 @@ namespace GraphicsModule.Geometry.Interfaces
 {
     public interface IPointOfPlane
     {
-        void Draw(Pen pen, float poitRaduis, System.Drawing.Point frameCenter, Graphics graphics);
+        void Draw(Pen pen, float poitRaduis, Point frameCenter, Graphics graphics);
     }
 }
