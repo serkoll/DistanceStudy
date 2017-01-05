@@ -12,7 +12,7 @@ namespace GraphicsModule.Geometry.Objects.Points
         /// <summary>
         /// Получает или задает координату X точки
         /// </summary>
-        public double X { get; set; }
+        public double X { get; set; } 
         /// <summary>
         /// Получает или задает координату Y точки
         /// </summary>

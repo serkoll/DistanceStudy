@@ -128,9 +128,9 @@ namespace GraphicsModule.CreateObjects
                 {
                     strg.Objects.Remove(strg.SelectedObjects[0]);
                     strg.Objects.Remove(strg.SelectedObjects[1]);
+                    _source.InitializeName(GraphicsControl.NmGenerator.Generate(_source));
                     strg.SelectedObjects.Clear();
                     can.ReDraw(strg);
-                    _source.InitializeName(GraphicsControl.NmGenerator.Generate(_source));
                     strg.AddToCollection(_source);
                     _source = null;
                     strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);

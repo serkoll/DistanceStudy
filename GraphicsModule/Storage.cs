@@ -1,7 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Drawing;
 using GraphicsModule.Geometry.Interfaces;
-using GraphicsModule.Geometry.Objects;
 using GraphicsModule.Settings;
 
 namespace GraphicsModule

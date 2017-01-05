@@ -280,7 +280,6 @@ namespace GraphicsModule.CreateObjects
             }
             return false;
         }
-
         #region IsOnLinkLine
         protected bool IsOnLinkLine12(LineOfPlane1X0Y lnproj, PointOfPlane2X0Z ptproj)
         {
