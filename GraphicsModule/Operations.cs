@@ -16,7 +16,7 @@ namespace GraphicsModule
                 if (obj.IsSelected(mousecoords, can.St.SelectedDrawS.RadiusPoints, can.Grid.CenterPoint, 5))
                 {
                     strg.SelectedObjects.Add(obj);
-                    can.ReDraw(strg);
+                    can.Update(strg);
                     return;
                 }
             }
@@ -36,7 +36,7 @@ namespace GraphicsModule
                 if (obj.IsSelected(mousecoords, can.St.SelectedDrawS.RadiusPoints, can.Grid.CenterPoint, 5) && (type[1] == typeof(IPointOfPlane)))
                 {
                     strg.SelectedObjects.Add(obj);
-                    can.ReDraw(strg);
+                    can.Update(strg);
                     return;
                 }
             }
@@ -55,7 +55,7 @@ namespace GraphicsModule
                 if (obj.IsSelected(mousecoords, can.St.SelectedDrawS.RadiusPoints, can.Grid.CenterPoint, 5) && (type[1].Name == "ILineOfPlane"))
                 {
                     strg.SelectedObjects.Add(obj);
-                    can.ReDraw(strg);
+                    can.Update(strg);
                     return;
                 }
             }
@@ -71,7 +71,7 @@ namespace GraphicsModule
                 if (obj.IsSelected(mousecoords, can.St.SelectedDrawS.RadiusPoints, can.Grid.CenterPoint, 5) && (type[1].Name == "ISegmentOfPlane"))
                 {
                     strg.SelectedObjects.Add(obj);
-                    can.ReDraw(strg);
+                    can.Update(strg);
                     return;
                 }
             }
@@ -89,7 +89,7 @@ namespace GraphicsModule
                 strg.Objects.Remove(obj);
             }
             strg.SelectedObjects.Clear();
-            can.ReDraw(strg);
+            can.Update(strg);
         }
     }
     /// <summary>
@@ -104,7 +104,7 @@ namespace GraphicsModule
                 if (obj.IsSelected(mousecoords, can.St.SelectedDrawS.RadiusPoints, can.Grid.CenterPoint, 5))
                 {
                     strg.Objects.Remove(obj);
-                    can.ReDraw(strg);
+                    can.Update(strg);
                     return;
                 }
             }
@@ -119,7 +119,7 @@ namespace GraphicsModule
                 if (obj.IsSelected(mousecoords, can.St.SelectedDrawS.RadiusPoints, can.Grid.CenterPoint, 5))
                 {
                     strg.CopiedObjects.Add(obj);
-                    can.ReDraw(strg);
+                    can.Update(strg);
                     return;
                 }
             }

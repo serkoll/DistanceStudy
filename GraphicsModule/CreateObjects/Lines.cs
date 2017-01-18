@@ -31,7 +31,7 @@ namespace GraphicsModule.CreateObjects
                 strg.AddToCollection(_source);
                 _source = null;
                 strg.TempObjects.Clear();
-                can.ReDraw(strg);
+                can.Update(strg);
                 strg.DrawLastAddedToObjects(settings, frameCenter, can.Graphics);
             }
         }
@@ -60,7 +60,7 @@ namespace GraphicsModule.CreateObjects
                     strg.AddToCollection(_source);
                     _source = null;
                     strg.TempObjects.Clear();
-                    can.ReDraw(strg);
+                    can.Update(strg);
                     strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
                 }
             }
@@ -90,7 +90,7 @@ namespace GraphicsModule.CreateObjects
                     strg.AddToCollection(_source);
                     _source = null;
                     strg.TempObjects.Clear();
-                    can.ReDraw(strg);
+                    can.Update(strg);
                     strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
                 }
             }
@@ -120,7 +120,7 @@ namespace GraphicsModule.CreateObjects
                     strg.AddToCollection(_source);
                     _source = null;
                     strg.TempObjects.Clear();
-                    can.ReDraw(strg);
+                    can.Update(strg);
                     strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
                 }
             }
@@ -158,7 +158,7 @@ namespace GraphicsModule.CreateObjects
                     strg.TempObjects.Add(ptOfPlane);
                     _tempLineOfPlane = CreateLineOfPlane(strg.TempObjects, setting, frameCenter, can);
                     strg.TempObjects.Clear();
-                    can.ReDraw(strg);
+                    can.Update(strg);
                     _tempLineOfPlane.Draw(setting, frameCenter, can.Graphics);
                 }
                 else if(IsOnLinkLine(_tempLineOfPlane, ptOfPlane))
@@ -168,7 +168,7 @@ namespace GraphicsModule.CreateObjects
                     strg.TempObjects.Clear();
                     _tempLineOfPlane = null;
                     strg.Objects.Add(_source);
-                    can.ReDraw(strg);
+                    can.Update(strg);
                     strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
                 }
             }
@@ -318,7 +318,7 @@ namespace GraphicsModule.CreateObjects
                 if (ReferenceEquals(strg.SelectedObjects[0].GetType(), strg.SelectedObjects[1].GetType()))
                 {
                     strg.SelectedObjects.Remove(strg.SelectedObjects[0]);
-                    can.ReDraw(strg);
+                    can.Update(strg);
                     return;
                 }
                 if ((_source = Line3D.Create(strg.SelectedObjects)) != null)
@@ -327,7 +327,7 @@ namespace GraphicsModule.CreateObjects
                     strg.Objects.Remove(strg.SelectedObjects[0]);
                     strg.Objects.Remove(strg.SelectedObjects[1]);
                     strg.SelectedObjects.Clear();
-                    can.ReDraw(strg);
+                    can.Update(strg);
                     strg.AddToCollection(_source);
                     _source = null;
                     strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
@@ -335,12 +335,12 @@ namespace GraphicsModule.CreateObjects
                 else
                 {
                     strg.SelectedObjects.RemoveAt(strg.SelectedObjects.Count - 1);
-                    can.ReDraw(strg);
+                    can.Update(strg);
                 }
             }
             else
             {
-                can.ReDraw(strg);
+                can.Update(strg);
             }
         }
     }

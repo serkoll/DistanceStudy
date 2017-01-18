@@ -1,8 +1,7 @@
 ﻿using System.Drawing;
-using System.Windows.Forms;
 using GraphicsModule.Settings;
 
-namespace GraphicsModule.Geometry.Background
+namespace GraphicsModule.Geometry.CoordinateSystem
 {
     /// <summary>
     /// Класс, содержащий инструменты задания и отрисовки ОСЕЙ
@@ -18,31 +17,42 @@ namespace GraphicsModule.Geometry.Background
         /// <summary>
         /// Конструкто по умолчанию, инициализирует переменные для работы с классом, расчитывающим оси, и с классом настроек осей
         /// </summary>
-        public Axis(Graphics g)
+        public Axis(Graphics graphics)
         {
-            var x = g.VisibleClipBounds.Size.Width/2;
-            var y = g.VisibleClipBounds.Size.Height/2;
-            Center = new Point((int) x, (int) y);
+            var x = graphics.VisibleClipBounds.Size.Width / 2;
+            var y = graphics.VisibleClipBounds.Size.Height / 2;
+            Center = new Point((int)x, (int)y);
             FinitePoints = new Point[4];
             FinitePoints[0] = new Point(0, Center.Y);
-            FinitePoints[1] = new Point((int) g.VisibleClipBounds.Size.Width, Center.Y);
+            FinitePoints[1] = new Point((int)graphics.VisibleClipBounds.Size.Width, Center.Y);
             FinitePoints[2] = new Point(Center.X, 0);
-            FinitePoints[3] = new Point(Center.X, (int) g.VisibleClipBounds.Size.Height);
+            FinitePoints[3] = new Point(Center.X, (int)graphics.VisibleClipBounds.Size.Height);
         }
-        public void DrawAxis(AxisS sett, Graphics g)
+
+        public Axis(Point centerPoint, Graphics graphics)
         {
-            if (sett.FlagDrawX)
+            Center = new Point(centerPoint.X, centerPoint.Y);
+            FinitePoints = new Point[4];
+            FinitePoints[0] = new Point(0, Center.Y);
+            FinitePoints[1] = new Point((int)graphics.VisibleClipBounds.Size.Width, Center.Y);
+            FinitePoints[2] = new Point(Center.X, 0);
+            FinitePoints[3] = new Point(Center.X, (int)graphics.VisibleClipBounds.Size.Height);
+        }
+        public void DrawAxis(AxisS settings, Graphics g)
+        {
+            if(!settings.IsDraw) return;
+            if (settings.FlagDrawX)
             {
-                DrawAxisX(sett, g);
+                DrawAxisX(settings, g);
             }
-            if (sett.FlagDrawY)
+            if (settings.FlagDrawY)
             {
-                DrawAxisYHor(sett, g);
-                DrawAxisYVert(sett, g);
+                DrawAxisYHor(settings, g);
+                DrawAxisYVert(settings, g);
             }
-            if (sett.FlagDrawZ)
+            if (settings.FlagDrawZ)
             {
-                DrawAxisZ(sett, g);
+                DrawAxisZ(settings, g);
             }
         }
         private void DrawAxis(Point beginPoint, Point endPoint, Color axisColor, int axisWidth, Graphics g)

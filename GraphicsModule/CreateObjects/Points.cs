@@ -85,7 +85,7 @@ namespace GraphicsModule.CreateObjects
                 if (ReferenceEquals(strg.TempObjects[0].GetType(), ptOfPlane.GetType()))
                 {
                     strg.TempObjects.Clear();
-                    can.ReDraw(strg);
+                    can.Update(strg);
                     strg.TempObjects.Add(ptOfPlane);
                     strg.DrawLastAddedToTempObjects(setting, frameCenter, can.Graphics);
                     return;
@@ -94,7 +94,7 @@ namespace GraphicsModule.CreateObjects
                 if ((_source = Point3D.Create(strg.TempObjects)) != null)
                 {
                     strg.TempObjects.Clear();
-                    can.ReDraw(strg);
+                    can.Update(strg);
                     _source.InitializeName(GraphicsControl.NmGenerator.Generate(_source));
                     strg.AddToCollection(_source);
                     _source = null;
@@ -121,7 +121,7 @@ namespace GraphicsModule.CreateObjects
                 if (ReferenceEquals(strg.SelectedObjects[0].GetType(), strg.SelectedObjects[1].GetType()))
                 {
                     strg.SelectedObjects.Remove(strg.SelectedObjects[0]);
-                    can.ReDraw(strg);
+                    can.Update(strg);
                     return;
                 }
                 if ((_source = Point3D.Create(strg.SelectedObjects)) != null)
@@ -130,7 +130,7 @@ namespace GraphicsModule.CreateObjects
                     strg.Objects.Remove(strg.SelectedObjects[1]);
                     _source.InitializeName(GraphicsControl.NmGenerator.Generate(_source));
                     strg.SelectedObjects.Clear();
-                    can.ReDraw(strg);
+                    can.Update(strg);
                     strg.AddToCollection(_source);
                     _source = null;
                     strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
@@ -138,12 +138,12 @@ namespace GraphicsModule.CreateObjects
                 else
                 {
                     strg.SelectedObjects.RemoveAt(strg.SelectedObjects.Count - 1);
-                    can.ReDraw(strg);
+                    can.Update(strg);
                 }
             }
             else
             {
-                can.ReDraw(strg);
+                can.Update(strg);
             }
         }
     }

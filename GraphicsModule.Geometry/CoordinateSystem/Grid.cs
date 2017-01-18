@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Drawing;
-using System.Windows.Forms;
 using GraphicsModule.Settings;
 
-namespace GraphicsModule.Geometry.Background
+namespace GraphicsModule.Geometry.CoordinateSystem
 {
     /// <summary>
     /// Класс, содержащий инструменты задания и отрисовки СЕТКИ
@@ -28,7 +27,6 @@ namespace GraphicsModule.Geometry.Background
         /// Центральная точка сетки
         /// </summary>
         public Point CenterPoint { get; set; }
-
         public Grid(GridS sett, Graphics g)
         {
             StepOnWidth = sett.StepOfWidth;
@@ -38,7 +36,15 @@ namespace GraphicsModule.Geometry.Background
             CenterPoint = new Point(Width/2, Height/2);
             CalculateKnotsPoints();
         }
-
+        public Grid(GridS settings, Point centerPoint, Graphics graphics)
+        {
+            StepOnWidth = settings.StepOfWidth;
+            StepOnHeight = settings.StepOfHeight;
+            Height = (int)graphics.VisibleClipBounds.Size.Height;
+            Width = (int)graphics.VisibleClipBounds.Size.Width;
+            CenterPoint = new Point(centerPoint.X, centerPoint.Y);
+            CalculateKnotsPoints();
+        }
         public void CalculateKnotsPoints()
         {
             var xDim = (int)Math.Floor((double)(Width - CenterPoint.X)/StepOnWidth);

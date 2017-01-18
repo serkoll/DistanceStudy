@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.Runtime.InteropServices;
 using GraphicsModule.Geometry.Objects;
 using GraphicsModule.Geometry.Objects.Points;
-using GraphicsModule.Geometry.Background;
+using GraphicsModule.Geometry.CoordinateSystem;
 using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Geometry.Objects.Segments;
 
