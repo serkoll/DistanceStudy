@@ -8,12 +8,22 @@ namespace GraphicsModule.Settings
     [Serializable]
     public class Settings
     {
+        [XmlIgnore]
+        public Color BackgroundColor { get; set; }
+        [XmlElement("BackgroundColor")]
+        public string ColorXHtml
+        {
+            get { return ColorTranslator.ToHtml(BackgroundColor); }
+            set { BackgroundColor = ColorTranslator.FromHtml(value); }
+        }
+
         public GridS GridS { get; set; }
         public AxisS AxisS { get; set; }
         public DrawS DrawS { get; set; }
         public DrawS SelectedDrawS { get; set; }
         public Settings()
         {
+            BackgroundColor = Color.White;
             GridS = new GridS();
             AxisS = new AxisS();
             DrawS = new DrawS();
@@ -21,6 +31,7 @@ namespace GraphicsModule.Settings
         }
         public Settings(AxisS axisS, GridS gridS, DrawS drawS, DrawS selectedDrawS)
         {
+            BackgroundColor = Color.White;
             GridS = gridS;
             AxisS = axisS;
             DrawS = drawS;

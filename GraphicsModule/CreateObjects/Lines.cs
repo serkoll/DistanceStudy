@@ -56,7 +56,7 @@ namespace GraphicsModule.CreateObjects
                 {
                     if (Analyze.PointPos.Coincidence((PointOfPlane1X0Y) strg.TempObjects[0], new PointOfPlane1X0Y(pt, frameCenter))) return;
                     _source = new LineOfPlane1X0Y((PointOfPlane1X0Y)strg.TempObjects[0], new PointOfPlane1X0Y(pt, frameCenter),
-                        frameCenter, new Rectangle(0, can.PicBox.Height / 2, can.PicBox.Width / 2, can.PicBox.Height / 2));
+                        frameCenter, can.PlaneX0Y);
                     strg.AddToCollection(_source);
                     _source = null;
                     strg.TempObjects.Clear();
@@ -86,7 +86,7 @@ namespace GraphicsModule.CreateObjects
                 {
                     if (Analyze.PointPos.Coincidence((PointOfPlane2X0Z) strg.TempObjects[0], new PointOfPlane2X0Z(pt, frameCenter))) return;
                     _source = new LineOfPlane2X0Z((PointOfPlane2X0Z)strg.TempObjects[0], new PointOfPlane2X0Z(pt, frameCenter),
-                        frameCenter, new Rectangle(0, 0, can.PicBox.Width / 2, can.PicBox.Height / 2));
+                        frameCenter, can.PlaneX0Z);
                     strg.AddToCollection(_source);
                     _source = null;
                     strg.TempObjects.Clear();
@@ -116,7 +116,7 @@ namespace GraphicsModule.CreateObjects
                 {
                     if (Analyze.PointPos.Coincidence((PointOfPlane3Y0Z) strg.TempObjects[0], new PointOfPlane3Y0Z(pt, frameCenter))) return;
                     _source = new LineOfPlane3Y0Z((PointOfPlane3Y0Z)strg.TempObjects[0], new PointOfPlane3Y0Z(pt, frameCenter),
-                        frameCenter, new Rectangle(can.PicBox.Width / 2, 0, can.PicBox.Width / 2, can.PicBox.Height / 2));
+                        frameCenter, can.PlaneY0Z);
                     strg.AddToCollection(_source);
                     _source = null;
                     strg.TempObjects.Clear();

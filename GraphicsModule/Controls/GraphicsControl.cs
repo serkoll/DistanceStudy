@@ -65,7 +65,6 @@ namespace GraphicsModule.Controls
         public GraphicsControl()
         {
             InitializeComponent();
-
             if (File.Exists(SettingsFileName))
             {
                 _settings = new Settings.Settings().Deserialize(SettingsFileName); //Получаем экземпляр настроек
@@ -77,14 +76,14 @@ namespace GraphicsModule.Controls
                 _settings.Serialize(SettingsFileName);
                 FormSettings.ValueS = _settings;
             }
+            MainPictureBox.BackColor = _settings.BackgroundColor;
             NmGenerator = new NamesGenerator(true);
-            _ptMenuSelector = new Menu.PointMenuSelector(MainPictureBox); //Создаем меню вариантов для точек
-            _lnMenuSelector = new Menu.LineMenuSelector(MainPictureBox); //Создаем меню вариантов для линий
-            _sgMenuSelector = new Menu.SegmentMenuSelector(MainPictureBox);
+            _ptMenuSelector = new Menu.PointMenuSelector(MainPictureBox, buttonPointsMenu); //Создаем меню вариантов для точек
+            _lnMenuSelector = new Menu.LineMenuSelector(MainPictureBox, buttonLinesMenu); //Создаем меню вариантов для линий
+            _sgMenuSelector = new Menu.SegmentMenuSelector(MainPictureBox, buttonSegmentMenu); //Создаем меню вариантов для отрезков
             Controls.Add(_ptMenuSelector); //Добавляем к контролам компонента
             Controls.Add(_lnMenuSelector); //Добавляем к контролам компонента
-            Controls.Add(_sgMenuSelector);
-
+            Controls.Add(_sgMenuSelector); //Добавляем к контролам компонента
         }
         /// <summary>
         /// Импорт графических объектов
@@ -104,7 +103,6 @@ namespace GraphicsModule.Controls
         {
             return _storage.Objects;
         }
-
         public Collection<IObject> ExportSelected()
         {
             return _storage.SelectedObjects;
@@ -174,6 +172,7 @@ namespace GraphicsModule.Controls
         /// <param name="e"></param>
         private void buttonPointsMenu_Click(object sender, EventArgs e)
         {
+            HideMenus();
             _ptMenuSelector.Location = new Point(graphicsToolBarStrip.Size.Width, graphicsToolBarStrip.Location.Y);
             _ptMenuSelector.Visible = true;
             _ptMenuSelector.BringToFront();
@@ -185,6 +184,7 @@ namespace GraphicsModule.Controls
         /// <param name="e"></param>
         private void lnPointsMenu_Click(object sender, EventArgs e)
         {
+            HideMenus();
             _lnMenuSelector.Location = new Point(graphicsToolBarStrip.Size.Width, graphicsToolBarStrip.Location.Y + buttonPointsMenu.Size.Height);
             _lnMenuSelector.Visible = true;
             _lnMenuSelector.BringToFront();
@@ -319,6 +319,7 @@ namespace GraphicsModule.Controls
             var f = new FormSettings();
             f.ShowDialog();
             _canvas.Update(_storage);
+            MainPictureBox.BackColor = _settings.BackgroundColor;
         }
         /// <summary>
         /// Копирование объектов
@@ -337,6 +338,7 @@ namespace GraphicsModule.Controls
         }
         private void buttonSegmentMenu_Click(object sender, EventArgs e)
         {
+            HideMenus();
             _sgMenuSelector.Location = new Point(graphicsToolBarStrip.Size.Width, graphicsToolBarStrip.Location.Y + buttonPointsMenu.Size.Height + buttonLinesMenu.Size.Height);
             _sgMenuSelector.Visible = true;
             _sgMenuSelector.BringToFront();
@@ -360,6 +362,12 @@ namespace GraphicsModule.Controls
             {
                 MessageBox.Show(@"Не удалось подключиться к SolidWorks");
             }
+        }
+
+        private void GraphicsControl_Resize(object sender, EventArgs e)
+        { 
+            //if(_storage != null)
+            //_canvas.Update(_storage);
         }
     }
 }

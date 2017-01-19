@@ -57,6 +57,7 @@
     <Compile Include="Interfaces\IObjectOfPlane1X0Y.cs" />
     <Compile Include="Interfaces\IObjectOfPlane2X0Z.cs" />
     <Compile Include="Interfaces\IObjectOfPlane3Y0Z.cs" />
+    <Compile Include="Name.cs" />
     <Compile Include="Objects\Lines\LineDrawCalc.cs" />
     <Compile Include="Interfaces\ISegmentOfPlane.cs" />
     <Compile Include="Objects\Segments\Segment2D.cs" />

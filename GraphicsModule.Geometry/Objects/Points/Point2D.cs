@@ -20,7 +20,7 @@ namespace GraphicsModule.Geometry.Objects.Points
         /// <summary>
         /// Имя точки
         /// </summary>
-        public string Name { get; set; }
+        public Name Name { get; set; }
         /// <summary>
         /// Инициализирует новый экземпляр 2D точки
         /// </summary>
@@ -35,7 +35,7 @@ namespace GraphicsModule.Geometry.Objects.Points
         {
             X = x;
             Y = y;
-            Name = "";
+            Name = new Name();
         }
         /// <summary>
         /// Инициализирует новый экземпляр 2D точки с указанными координатами и именем
@@ -43,11 +43,11 @@ namespace GraphicsModule.Geometry.Objects.Points
         /// <param name="x">Координата X</param>
         /// <param name="y">Координата Y</param>
         /// <param name="name">Имя точки</param>
-        public Point2D(double x, double y, string name)
+        public Point2D(double x, double y, Name name)
         {
             X = x;
             Y = y;
-            Name = name;
+            Name = new Name(name);
         }
         /// <summary>
         /// Копирует  экземпляр 2D точки
@@ -70,10 +70,10 @@ namespace GraphicsModule.Geometry.Objects.Points
         /// </summary>
         /// <param name="pt"></param>
         /// <param name="name"></param>
-        public Point2D(Point pt, string name)
+        public Point2D(Point pt, Name name)
         {
             X = pt.X; Y = pt.Y;
-            Name = name;
+            Name = new Name(name);
         }
         /// <summary>
         /// Передвигает ранее заданную 2D точку (изменяет коодинаты на указанные величины по осям в 2D)
@@ -90,7 +90,7 @@ namespace GraphicsModule.Geometry.Objects.Points
         public void Draw(DrawS st, Point framecenter, Graphics g)
         {
             g.DrawPie(st.PenPoints, (float)X - st.RadiusPoints, (float)Y - st.RadiusPoints, st.RadiusPoints * 2, st.RadiusPoints * 2, 0, 360);
-            g.DrawString(Name, st.TextFont, st.TextBrush, (float)X, (float)Y);
+            g.DrawString(Name.Value, st.TextFont, st.TextBrush, (float)X + Name.Dx, (float)Y + Name.Dy);
         }
         /// <summary>
         /// Проверяет на выбор курсором

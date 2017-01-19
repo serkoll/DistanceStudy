@@ -22,16 +22,15 @@ namespace GraphicsModule.Geometry.CoordinateSystem
             var x = graphics.VisibleClipBounds.Size.Width / 2;
             var y = graphics.VisibleClipBounds.Size.Height / 2;
             Center = new Point((int)x, (int)y);
-            FinitePoints = new Point[4];
-            FinitePoints[0] = new Point(0, Center.Y);
-            FinitePoints[1] = new Point((int)graphics.VisibleClipBounds.Size.Width, Center.Y);
-            FinitePoints[2] = new Point(Center.X, 0);
-            FinitePoints[3] = new Point(Center.X, (int)graphics.VisibleClipBounds.Size.Height);
+            CalculateFinitePoints(graphics);
         }
-
         public Axis(Point centerPoint, Graphics graphics)
         {
             Center = new Point(centerPoint.X, centerPoint.Y);
+            CalculateFinitePoints(graphics);
+        }
+        public void CalculateFinitePoints(Graphics graphics)
+        {
             FinitePoints = new Point[4];
             FinitePoints[0] = new Point(0, Center.Y);
             FinitePoints[1] = new Point((int)graphics.VisibleClipBounds.Size.Width, Center.Y);

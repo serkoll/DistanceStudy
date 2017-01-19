@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using GraphicsModule.Geometry.Interfaces;
@@ -27,7 +28,6 @@ namespace GraphicsModule.Geometry.Objects.Lines
         /// <summary>Получает или задает коэффициент ky канонического уравнения прямой</summary>
         /// <remarks></remarks>
         public double ky { get; set; }
-
         private List<PointF> pts { get; set; }
         /// <summary>
         /// Возвращает значения координат 2D точки, инцидентной ранее заданной 2D прямой по параметру t 
@@ -123,7 +123,7 @@ namespace GraphicsModule.Geometry.Objects.Lines
             return line.ky / line.kx;
 
         }
-        public void Draw(DrawS st, System.Drawing.Point framecenter, Graphics g)
+        public void Draw(DrawS st, Point framecenter, Graphics g)
         {
             g.DrawPie(st.PenPoints, (float)Point0.X - st.RadiusPoints, (float)Point0.Y - st.RadiusPoints, st.RadiusPoints * 2, st.RadiusPoints * 2, 0, 360);
             g.DrawPie(st.PenPoints, (float)Point1.X - st.RadiusPoints, (float)Point1.Y - st.RadiusPoints, st.RadiusPoints * 2, st.RadiusPoints * 2, 0, 360);
@@ -133,12 +133,12 @@ namespace GraphicsModule.Geometry.Objects.Lines
         {
             pts = new List<PointF>();
 
-            if (kx == 0)
+            if (Math.Abs(kx) < 0.0001)
             {
                 pts.Add(new PointF((float)Point0.X, 0));
                 pts.Add(new PointF((float)Point0.X, pb.Height));
             }
-            if (ky == 0)
+            if (Math.Abs(ky) < 0.0001)
             {
                 pts.Add(new PointF(0, (float)Point0.Y));
                 pts.Add(new PointF(pb.Width, (float)Point0.Y));
@@ -162,7 +162,7 @@ namespace GraphicsModule.Geometry.Objects.Lines
         {
             return lst.Count < 2;
         }
-        public bool IsSelected(System.Drawing.Point mscoords, float ptR, System.Drawing.Point frameCenter, double distance)
+        public bool IsSelected(Point mscoords, float ptR, Point frameCenter, double distance)
         {
             return Analyze.Analyze.LinesPos.IncidenceOfPoint(mscoords, this, 35 * distance);
         }

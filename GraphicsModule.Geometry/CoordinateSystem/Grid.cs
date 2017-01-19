@@ -45,6 +45,12 @@ namespace GraphicsModule.Geometry.CoordinateSystem
             CenterPoint = new Point(centerPoint.X, centerPoint.Y);
             CalculateKnotsPoints();
         }
+        public void CalculateKnotsPoints(Graphics graphics)
+        {
+            Height = (int)graphics.VisibleClipBounds.Size.Height;
+            Width = (int)graphics.VisibleClipBounds.Size.Width;
+            CalculateKnotsPoints();
+        }
         public void CalculateKnotsPoints()
         {
             var xDim = (int)Math.Floor((double)(Width - CenterPoint.X)/StepOnWidth);
