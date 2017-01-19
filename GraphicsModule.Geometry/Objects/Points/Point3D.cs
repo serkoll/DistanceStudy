@@ -12,7 +12,7 @@ namespace GraphicsModule.Geometry.Objects.Points
         public double X { get; set; }
         public double Y { get; set; }
         public double Z { get; set; }
-        public string Name { get; set; }
+        public Name Name { get; set; }
         public PointOfPlane1X0Y PointOfPlane1X0Y { get; set; }
         /// <summary>Получает или задает координаты проекции 3D точки на плоскость X0Z пространственной системы координат</summary>
         /// <remarks></remarks>
@@ -126,12 +126,12 @@ namespace GraphicsModule.Geometry.Objects.Points
             PointOfPlane3Y0Z = new PointOfPlane3Y0Z(Y, Z);
         }
 
-        public void InitializeName(string name)
+        public void InitializeName(Name name)
         {
-            Name = name;
-            PointOfPlane1X0Y.Name = name;
-            PointOfPlane2X0Z.Name = name;
-            PointOfPlane3Y0Z.Name = name;
+            Name = new Name(name);
+            PointOfPlane1X0Y.Name = new Name(name);
+            PointOfPlane2X0Z.Name = new Name(name);
+            PointOfPlane3Y0Z.Name = new Name(name);
         }
         /// <summary>Передвигает ранее заданную 3D точку
         /// (изменяет коодинаты на указанные величины по осям в 3D)

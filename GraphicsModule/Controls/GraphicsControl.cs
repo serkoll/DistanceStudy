@@ -77,7 +77,7 @@ namespace GraphicsModule.Controls
                 FormSettings.ValueS = _settings;
             }
             MainPictureBox.BackColor = _settings.BackgroundColor;
-            NmGenerator = new NamesGenerator(true);
+            NmGenerator = new NamesGenerator(true, 0, _settings);
             _ptMenuSelector = new Menu.PointMenuSelector(MainPictureBox, buttonPointsMenu); //Создаем меню вариантов для точек
             _lnMenuSelector = new Menu.LineMenuSelector(MainPictureBox, buttonLinesMenu); //Создаем меню вариантов для линий
             _sgMenuSelector = new Menu.SegmentMenuSelector(MainPictureBox, buttonSegmentMenu); //Создаем меню вариантов для отрезков
@@ -368,6 +368,23 @@ namespace GraphicsModule.Controls
         { 
             //if(_storage != null)
             //_canvas.Update(_storage);
+        }
+        private void левыйВерхнийToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NmGenerator.Position = 0;
+        }
+        private void правыйВерхнийToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NmGenerator.Position = 1;
+        }
+
+        private void левыйНижнийToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NmGenerator.Position = 2;
+        }
+        private void правыйНижнийToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NmGenerator.Position = 3;
         }
     }
 }

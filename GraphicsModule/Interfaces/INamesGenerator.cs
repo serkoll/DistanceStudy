@@ -1,9 +1,10 @@
-﻿using GraphicsModule.Geometry.Interfaces;
+﻿using GraphicsModule.Geometry;
+using GraphicsModule.Geometry.Interfaces;
 
 namespace GraphicsModule.Interfaces
 {
     public interface INamesGenerator
     {
-        string Generate(IObject obj);
+        Name Generate(IObject obj);
     }
 }

@@ -34,7 +34,7 @@ namespace GraphicsModule.Geometry.Objects.Points
         /// <summary>Получает или задает координату Z двумерной проекции точки</summary>
         /// <remarks></remarks>
         public double Z { get; set; }
-        public string Name { get; set; }
+        public Name Name { get; set; }
         /// <summary>Передвигает ранее заданную двумерную проекцию точку
         /// (изменяет коодинаты на указанные величины по осям в 2D)
         /// </summary>
@@ -50,7 +50,7 @@ namespace GraphicsModule.Geometry.Objects.Points
         public void DrawName(DrawS st, float poitRaduis, Point frameCenter, Graphics graphics)
         {
             var ptForDraw = DeterminePosition.ForPointProjection(this, poitRaduis, frameCenter);
-            graphics.DrawString(Name, st.TextFont, st.TextBrush, ptForDraw.X, ptForDraw.Y);
+            graphics.DrawString(Name.Value, st.TextFont, st.TextBrush, ptForDraw.X + Name.Dx, ptForDraw.Y + Name.Dy);
         }
         public void Draw(DrawS st, Point frameCenter, Graphics g)
         {
