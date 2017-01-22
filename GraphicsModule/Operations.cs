@@ -1,7 +1,8 @@
 ﻿using System.Drawing;
-using GraphicsModule.Geometry.Objects;
+using GraphicsModule.Geometry.Interfaces;
+using GraphicsModule.Interfaces;
 
-namespace GraphicsModule.Operations
+namespace GraphicsModule
 {
     /// <summary>
     /// Выбор объекта и добавление в коллекцию выбранных объектов
@@ -15,7 +16,7 @@ namespace GraphicsModule.Operations
                 if (obj.IsSelected(mousecoords, can.St.SelectedDrawS.RadiusPoints, can.Grid.CenterPoint, 5))
                 {
                     strg.SelectedObjects.Add(obj);
-                    can.ReDraw(strg);
+                    can.Update(strg);
                     return;
                 }
             }
@@ -31,10 +32,11 @@ namespace GraphicsModule.Operations
             foreach (IObject obj in strg.Objects)
             {
                 var type = obj.GetType().GetInterfaces();
-                if (obj.IsSelected(mousecoords, can.St.SelectedDrawS.RadiusPoints, can.Grid.CenterPoint, 5) && (type[1].Name == "IPointOfPlane"))
+                if(type.Length < 2) continue;
+                if (obj.IsSelected(mousecoords, can.St.SelectedDrawS.RadiusPoints, can.Grid.CenterPoint, 5) && (type[1] == typeof(IPointOfPlane)))
                 {
                     strg.SelectedObjects.Add(obj);
-                    can.ReDraw(strg);
+                    can.Update(strg);
                     return;
                 }
             }
@@ -53,7 +55,7 @@ namespace GraphicsModule.Operations
                 if (obj.IsSelected(mousecoords, can.St.SelectedDrawS.RadiusPoints, can.Grid.CenterPoint, 5) && (type[1].Name == "ILineOfPlane"))
                 {
                     strg.SelectedObjects.Add(obj);
-                    can.ReDraw(strg);
+                    can.Update(strg);
                     return;
                 }
             }
@@ -69,7 +71,7 @@ namespace GraphicsModule.Operations
                 if (obj.IsSelected(mousecoords, can.St.SelectedDrawS.RadiusPoints, can.Grid.CenterPoint, 5) && (type[1].Name == "ISegmentOfPlane"))
                 {
                     strg.SelectedObjects.Add(obj);
-                    can.ReDraw(strg);
+                    can.Update(strg);
                     return;
                 }
             }
@@ -87,7 +89,7 @@ namespace GraphicsModule.Operations
                 strg.Objects.Remove(obj);
             }
             strg.SelectedObjects.Clear();
-            can.ReDraw(strg);
+            can.Update(strg);
         }
     }
     /// <summary>
@@ -102,7 +104,7 @@ namespace GraphicsModule.Operations
                 if (obj.IsSelected(mousecoords, can.St.SelectedDrawS.RadiusPoints, can.Grid.CenterPoint, 5))
                 {
                     strg.Objects.Remove(obj);
-                    can.ReDraw(strg);
+                    can.Update(strg);
                     return;
                 }
             }
@@ -117,7 +119,7 @@ namespace GraphicsModule.Operations
                 if (obj.IsSelected(mousecoords, can.St.SelectedDrawS.RadiusPoints, can.Grid.CenterPoint, 5))
                 {
                     strg.CopiedObjects.Add(obj);
-                    can.ReDraw(strg);
+                    can.Update(strg);
                     return;
                 }
             }

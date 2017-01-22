@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using GraphicsModule.Settings;
 
-namespace GraphicsModule.CreateObjects
+namespace GraphicsModule.Interfaces
 {
     /// <summary>
     /// Определяет метод создания и отрисовки графического объекта

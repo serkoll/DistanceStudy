@@ -1,57 +1,106 @@
 ﻿using System.Drawing;
+using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Settings;
 
 namespace GraphicsModule.Geometry.Objects.Points
 {
-    //<summary>Класс для расчета параметров 2D точки</summary>
-    //<remarks>Copyright © Polozkov V. Yury 2015</remarks>
+    /// <summary>
+    /// 2D точка
+    /// </summary>
     public class Point2D: IObject
     {
-        //====================================================================================================
-        //================== Методы ввода-вывода (расчета) параметров точки по заданным условиям ==================
-
-        /// <summary>Инициализирует новый экземпляр 2D точки</summary>
-        /// <remarks>Исходные координаты точки: X=0; Y=0</remarks>
+        /// <summary>
+        /// Получает или задает координату X точки
+        /// </summary>
+        public double X { get; set; } 
+        /// <summary>
+        /// Получает или задает координату Y точки
+        /// </summary>
+        public double Y { get; set; }
+        /// <summary>
+        /// Имя точки
+        /// </summary>
+        public Name Name { get; set; }
+        /// <summary>
+        /// Инициализирует новый экземпляр 2D точки
+        /// </summary>
         public Point2D()
         {
-            X = 0; Y = 0;
-        }//Конструктор, устанавливающий исходные значения координат 2D точки
-
+            X = 0;
+            Y = 0;
+        }
         /// <summary>Инициализирует новый экземпляр 2D точки с указанными координатами</summary>
         /// <remarks></remarks>
-        public Point2D(double X, double Y)
+        public Point2D(double x, double y)
         {
-            this.X = X; this.Y = Y;
+            X = x;
+            Y = y;
+            Name = new Name();
         }
-        /// <summary>Инициализирует новый экземпляр 2D точки</summary>
-        /// <remarks></remarks>
+        /// <summary>
+        /// Инициализирует новый экземпляр 2D точки с указанными координатами и именем
+        /// </summary>
+        /// <param name="x">Координата X</param>
+        /// <param name="y">Координата Y</param>
+        /// <param name="name">Имя точки</param>
+        public Point2D(double x, double y, Name name)
+        {
+            X = x;
+            Y = y;
+            Name = new Name(name);
+        }
+        /// <summary>
+        /// Копирует  экземпляр 2D точки
+        /// </summary>
+        /// <param name="pt">2D точка</param>
         public Point2D(Point2D pt)
         {
             X = pt.X; Y = pt.Y;
         }
-        public Point2D(System.Drawing.Point pt)
+        /// <summary>
+        /// Создает экземпляр 2D точки
+        /// </summary>
+        /// <param name="pt">Точка</param>
+        public Point2D(Point pt)
         {
             X = pt.X; Y = pt.Y;
         }
-        //Конструктор, устанавливающий пользовательские значения координат 2D точки
-
-        /// <summary>Получает или задает координату X точки</summary>
-        /// <remarks></remarks>
-        public double X { get; set; }
-
-        /// <summary>Получает или задает координату Y точки</summary>
-        /// <remarks></remarks>
-        public double Y { get; set; }
-        /// <summary>Передвигает ранее заданную 2D точку (изменяет коодинаты на указанные величины по осям в 2D)</summary>
-        /// <remarks>Point3D.X += dx; Point3D.Y += dy</remarks>
-        public void PointMove(double dx, double dy) { X += dx; Y += dy; }//Конструктор перемещения на указанные величины по осям //MyClass.Ptcls.X += dx : MyClass.Ptcls.Y += dy
-
-        //-------------------- Задание  значений координат точки путем конвертирования текста и контроль соответсвия значению "Nothing" -----------------------
-        public void Draw(DrawS st, System.Drawing.Point framecenter, Graphics g)
+        /// <summary>
+        /// Создает экземпляр 2D точки и задает имя
+        /// </summary>
+        /// <param name="pt"></param>
+        /// <param name="name"></param>
+        public Point2D(Point pt, Name name)
+        {
+            X = pt.X; Y = pt.Y;
+            Name = new Name(name);
+        }
+        /// <summary>
+        /// Передвигает ранее заданную 2D точку (изменяет коодинаты на указанные величины по осям в 2D)
+        /// </summary>
+        /// <param name="dx">Смещение по dx</param>
+        /// <param name="dy">Спещение по dy</param>
+        public void PointMove(double dx, double dy) { X += dx; Y += dy; }
+        /// <summary>
+        /// Отрисовывает 2D точку
+        /// </summary>
+        /// <param name="st">Параметры отрисовки графических объектов</param>
+        /// <param name="framecenter">Центр системы координат</param>
+        /// <param name="g">Целевой Graphics</param>
+        public void Draw(DrawS st, Point framecenter, Graphics g)
         {
             g.DrawPie(st.PenPoints, (float)X - st.RadiusPoints, (float)Y - st.RadiusPoints, st.RadiusPoints * 2, st.RadiusPoints * 2, 0, 360);
+            g.DrawString(Name.Value, st.TextFont, st.TextBrush, (float)X + Name.Dx, (float)Y + Name.Dy);
         }
-        public bool IsSelected(System.Drawing.Point mscoords, float ptR, System.Drawing.Point frameCenter, double distance)
+        /// <summary>
+        /// Проверяет на выбор курсором
+        /// </summary>
+        /// <param name="mscoords">Координаты курсора</param>
+        /// <param name="ptR">Радиус точки</param>
+        /// <param name="frameCenter">Центр системы координат</param>
+        /// <param name="distance">Минимальное расстояние до курсора</param>
+        /// <returns>True - выбран, false - нет</returns>
+        public bool IsSelected(Point mscoords, float ptR, Point frameCenter, double distance)
         {
             return Calculate.Distance(mscoords, this) < distance;
         }

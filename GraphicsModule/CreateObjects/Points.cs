@@ -1,7 +1,8 @@
 ﻿using System.Drawing;
+using GraphicsModule.Controls;
 using GraphicsModule.Geometry;
 using GraphicsModule.Geometry.Objects.Points;
-using GraphicsModule.Operations;
+using GraphicsModule.Interfaces;
 using GraphicsModule.Settings;
 
 namespace GraphicsModule.CreateObjects
@@ -15,6 +16,7 @@ namespace GraphicsModule.CreateObjects
         public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
         {
             _source = new Point2D(pt);
+            _source.Name = GraphicsControl.NmGenerator.Generate(_source);
             strg.AddToCollection(_source);
             strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
         }
@@ -29,6 +31,7 @@ namespace GraphicsModule.CreateObjects
         {
             if (!PointOfPlane1X0Y.Creatable(pt, frameCenter)) return;
             _source = new PointOfPlane1X0Y(pt, frameCenter);
+            _source.Name = GraphicsControl.NmGenerator.Generate(_source);
             strg.AddToCollection(_source);
             strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
         }
@@ -41,12 +44,11 @@ namespace GraphicsModule.CreateObjects
         private PointOfPlane2X0Z _source;
         public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
         {
-            if (PointOfPlane2X0Z.Creatable(pt, frameCenter))
-            {
-                _source = new PointOfPlane2X0Z(pt, frameCenter);
-                strg.AddToCollection(_source);
-                strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
-            }
+            if (!PointOfPlane2X0Z.Creatable(pt, frameCenter)) return;
+            _source = new PointOfPlane2X0Z(pt, frameCenter);
+            _source.Name = GraphicsControl.NmGenerator.Generate(_source);
+            strg.AddToCollection(_source);
+            strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
         }
     }
     /// <summary>
@@ -57,12 +59,11 @@ namespace GraphicsModule.CreateObjects
         private PointOfPlane3Y0Z _source;
         public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
         {
-            if (PointOfPlane3Y0Z.Creatable(pt, frameCenter))
-            {
-                _source = new PointOfPlane3Y0Z(pt, frameCenter);
-                strg.AddToCollection(_source);
-                strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
-            }
+            if (!PointOfPlane3Y0Z.Creatable(pt, frameCenter)) return;
+            _source = new PointOfPlane3Y0Z(pt, frameCenter);
+            _source.Name = GraphicsControl.NmGenerator.Generate(_source);
+            strg.AddToCollection(_source);
+            strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
         }
     }
     /// <summary>
@@ -84,7 +85,7 @@ namespace GraphicsModule.CreateObjects
                 if (ReferenceEquals(strg.TempObjects[0].GetType(), ptOfPlane.GetType()))
                 {
                     strg.TempObjects.Clear();
-                    can.ReDraw(strg);
+                    can.Update(strg);
                     strg.TempObjects.Add(ptOfPlane);
                     strg.DrawLastAddedToTempObjects(setting, frameCenter, can.Graphics);
                     return;
@@ -93,7 +94,8 @@ namespace GraphicsModule.CreateObjects
                 if ((_source = Point3D.Create(strg.TempObjects)) != null)
                 {
                     strg.TempObjects.Clear();
-                    can.ReDraw(strg);
+                    can.Update(strg);
+                    _source.InitializeName(GraphicsControl.NmGenerator.Generate(_source));
                     strg.AddToCollection(_source);
                     _source = null;
                     strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
@@ -119,15 +121,16 @@ namespace GraphicsModule.CreateObjects
                 if (ReferenceEquals(strg.SelectedObjects[0].GetType(), strg.SelectedObjects[1].GetType()))
                 {
                     strg.SelectedObjects.Remove(strg.SelectedObjects[0]);
-                    can.ReDraw(strg);
+                    can.Update(strg);
                     return;
                 }
                 if ((_source = Point3D.Create(strg.SelectedObjects)) != null)
                 {
                     strg.Objects.Remove(strg.SelectedObjects[0]);
                     strg.Objects.Remove(strg.SelectedObjects[1]);
+                    _source.InitializeName(GraphicsControl.NmGenerator.Generate(_source));
                     strg.SelectedObjects.Clear();
-                    can.ReDraw(strg);
+                    can.Update(strg);
                     strg.AddToCollection(_source);
                     _source = null;
                     strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
@@ -135,12 +138,12 @@ namespace GraphicsModule.CreateObjects
                 else
                 {
                     strg.SelectedObjects.RemoveAt(strg.SelectedObjects.Count - 1);
-                    can.ReDraw(strg);
+                    can.Update(strg);
                 }
             }
             else
             {
-                can.ReDraw(strg);
+                can.Update(strg);
             }
         }
     }

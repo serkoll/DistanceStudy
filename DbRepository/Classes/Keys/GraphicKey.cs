@@ -1,5 +1,6 @@
 ﻿using GraphicsModule.Geometry.Objects;
 using System;
+using GraphicsModule.Geometry.Interfaces;
 
 namespace DbRepository.Classes.Keys
 {

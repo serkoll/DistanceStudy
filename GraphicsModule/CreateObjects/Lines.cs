@@ -2,10 +2,10 @@
 using System.Drawing;
 using GraphicsModule.Geometry;
 using GraphicsModule.Geometry.Analyze;
-using GraphicsModule.Geometry.Objects;
+using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Geometry.Objects.Lines;
 using GraphicsModule.Geometry.Objects.Points;
-using GraphicsModule.Operations;
+using GraphicsModule.Interfaces;
 using GraphicsModule.Settings;
 
 namespace GraphicsModule.CreateObjects
@@ -31,7 +31,7 @@ namespace GraphicsModule.CreateObjects
                 strg.AddToCollection(_source);
                 _source = null;
                 strg.TempObjects.Clear();
-                can.ReDraw(strg);
+                can.Update(strg);
                 strg.DrawLastAddedToObjects(settings, frameCenter, can.Graphics);
             }
         }
@@ -56,11 +56,11 @@ namespace GraphicsModule.CreateObjects
                 {
                     if (Analyze.PointPos.Coincidence((PointOfPlane1X0Y) strg.TempObjects[0], new PointOfPlane1X0Y(pt, frameCenter))) return;
                     _source = new LineOfPlane1X0Y((PointOfPlane1X0Y)strg.TempObjects[0], new PointOfPlane1X0Y(pt, frameCenter),
-                        frameCenter, new Rectangle(0, can.PicBox.Height / 2, can.PicBox.Width / 2, can.PicBox.Height / 2));
+                        frameCenter, can.PlaneX0Y);
                     strg.AddToCollection(_source);
                     _source = null;
                     strg.TempObjects.Clear();
-                    can.ReDraw(strg);
+                    can.Update(strg);
                     strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
                 }
             }
@@ -86,11 +86,11 @@ namespace GraphicsModule.CreateObjects
                 {
                     if (Analyze.PointPos.Coincidence((PointOfPlane2X0Z) strg.TempObjects[0], new PointOfPlane2X0Z(pt, frameCenter))) return;
                     _source = new LineOfPlane2X0Z((PointOfPlane2X0Z)strg.TempObjects[0], new PointOfPlane2X0Z(pt, frameCenter),
-                        frameCenter, new Rectangle(0, 0, can.PicBox.Width / 2, can.PicBox.Height / 2));
+                        frameCenter, can.PlaneX0Z);
                     strg.AddToCollection(_source);
                     _source = null;
                     strg.TempObjects.Clear();
-                    can.ReDraw(strg);
+                    can.Update(strg);
                     strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
                 }
             }
@@ -116,11 +116,11 @@ namespace GraphicsModule.CreateObjects
                 {
                     if (Analyze.PointPos.Coincidence((PointOfPlane3Y0Z) strg.TempObjects[0], new PointOfPlane3Y0Z(pt, frameCenter))) return;
                     _source = new LineOfPlane3Y0Z((PointOfPlane3Y0Z)strg.TempObjects[0], new PointOfPlane3Y0Z(pt, frameCenter),
-                        frameCenter, new Rectangle(can.PicBox.Width / 2, 0, can.PicBox.Width / 2, can.PicBox.Height / 2));
+                        frameCenter, can.PlaneY0Z);
                     strg.AddToCollection(_source);
                     _source = null;
                     strg.TempObjects.Clear();
-                    can.ReDraw(strg);
+                    can.Update(strg);
                     strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
                 }
             }
@@ -158,7 +158,7 @@ namespace GraphicsModule.CreateObjects
                     strg.TempObjects.Add(ptOfPlane);
                     _tempLineOfPlane = CreateLineOfPlane(strg.TempObjects, setting, frameCenter, can);
                     strg.TempObjects.Clear();
-                    can.ReDraw(strg);
+                    can.Update(strg);
                     _tempLineOfPlane.Draw(setting, frameCenter, can.Graphics);
                 }
                 else if(IsOnLinkLine(_tempLineOfPlane, ptOfPlane))
@@ -168,7 +168,7 @@ namespace GraphicsModule.CreateObjects
                     strg.TempObjects.Clear();
                     _tempLineOfPlane = null;
                     strg.Objects.Add(_source);
-                    can.ReDraw(strg);
+                    can.Update(strg);
                     strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
                 }
             }
@@ -280,7 +280,6 @@ namespace GraphicsModule.CreateObjects
             }
             return false;
         }
-
         #region IsOnLinkLine
         protected bool IsOnLinkLine12(LineOfPlane1X0Y lnproj, PointOfPlane2X0Z ptproj)
         {
@@ -319,7 +318,7 @@ namespace GraphicsModule.CreateObjects
                 if (ReferenceEquals(strg.SelectedObjects[0].GetType(), strg.SelectedObjects[1].GetType()))
                 {
                     strg.SelectedObjects.Remove(strg.SelectedObjects[0]);
-                    can.ReDraw(strg);
+                    can.Update(strg);
                     return;
                 }
                 if ((_source = Line3D.Create(strg.SelectedObjects)) != null)
@@ -328,7 +327,7 @@ namespace GraphicsModule.CreateObjects
                     strg.Objects.Remove(strg.SelectedObjects[0]);
                     strg.Objects.Remove(strg.SelectedObjects[1]);
                     strg.SelectedObjects.Clear();
-                    can.ReDraw(strg);
+                    can.Update(strg);
                     strg.AddToCollection(_source);
                     _source = null;
                     strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
@@ -336,12 +335,12 @@ namespace GraphicsModule.CreateObjects
                 else
                 {
                     strg.SelectedObjects.RemoveAt(strg.SelectedObjects.Count - 1);
-                    can.ReDraw(strg);
+                    can.Update(strg);
                 }
             }
             else
             {
-                can.ReDraw(strg);
+                can.Update(strg);
             }
         }
     }

@@ -50,6 +50,10 @@ namespace GraphicsModule.Settings
         public int RadiusPoints { get; set; }
         public int RadiusLines { get; set; }
         public LinkLineS LinkLineSettings { get; set; }
+        [XmlIgnore]
+        public Font TextFont { get; set; }
+        [XmlIgnore]
+        public Brush TextBrush { get; set; }
         public DrawS()
         {
             RadiusPoints = 2;
@@ -59,9 +63,11 @@ namespace GraphicsModule.Settings
             PenLineOfPlane1X0Y = new Pen(Brushes.LightGreen, RadiusLines);
             PenLineOfPlane2X0Z = new Pen(Brushes.Red, RadiusLines);
             PenLineOfPlane3Y0Z = new Pen(Brushes.Blue, RadiusLines);
+            TextFont = new Font("Times New Roman", 14, FontStyle.Regular);
+            TextBrush = new SolidBrush(Color.Black);
             LinkLineSettings = new LinkLineS();
         }
-        public DrawS(Pen pnPoints, Pen pnLine2D, Pen pnLn1, Pen pnLn2, Pen pnLn3, int rPoints, int rLines)
+        public DrawS(Pen pnPoints, Pen pnLine2D, Pen pnLn1, Pen pnLn2, Pen pnLn3, int rPoints, int rLines, Font fText, Brush tBrush)
         {
             RadiusPoints = rPoints;
             RadiusLines = rLines;
@@ -71,6 +77,8 @@ namespace GraphicsModule.Settings
             PenLineOfPlane2X0Z = pnLn2;
             PenLineOfPlane3Y0Z = pnLn3;
             LinkLineSettings = new LinkLineS(pnLine2D);
+            TextFont = fText;
+            TextBrush = tBrush;
         }
     }
 }

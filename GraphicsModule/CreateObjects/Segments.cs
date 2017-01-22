@@ -2,11 +2,11 @@
 using System.Drawing;
 using GraphicsModule.Geometry;
 using GraphicsModule.Geometry.Analyze;
-using GraphicsModule.Geometry.Objects;
+using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Geometry.Objects.Lines;
 using GraphicsModule.Geometry.Objects.Points;
 using GraphicsModule.Geometry.Objects.Segments;
-using GraphicsModule.Operations;
+using GraphicsModule.Interfaces;
 using GraphicsModule.Settings;
 
 namespace GraphicsModule.CreateObjects
@@ -32,7 +32,7 @@ namespace GraphicsModule.CreateObjects
                 strg.AddToCollection(_source);
                 _source = null;
                 strg.TempObjects.Clear();
-                can.ReDraw(strg);
+                can.Update(strg);
                 strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
             }
         }
@@ -61,7 +61,7 @@ namespace GraphicsModule.CreateObjects
                     strg.AddToCollection(_source);
                     _source = null;
                     strg.TempObjects.Clear();
-                    can.ReDraw(strg);
+                    can.Update(strg);
                     strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
                 }
             }
@@ -90,7 +90,7 @@ namespace GraphicsModule.CreateObjects
                     strg.AddToCollection(_source);
                     _source = null;
                     strg.TempObjects.Clear();
-                    can.ReDraw(strg);
+                    can.Update(strg);
                     strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
                 }
             }
@@ -119,7 +119,7 @@ namespace GraphicsModule.CreateObjects
                     strg.AddToCollection(_source);
                     _source = null;
                     strg.TempObjects.Clear();
-                    can.ReDraw(strg);
+                    can.Update(strg);
                     strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
                 }
             }
@@ -157,7 +157,7 @@ namespace GraphicsModule.CreateObjects
                     strg.TempObjects.Add(ptOfPlane);
                     _tempLineOfPlane = CreateSegmentOfPlane(strg.TempObjects, setting, frameCenter, can);
                     strg.TempObjects.Clear();
-                    can.ReDraw(strg);
+                    can.Update(strg);
                     _tempLineOfPlane.Draw(setting, frameCenter, can.Graphics);
                 }
                 else if (IsOnLinkLine(_tempLineOfPlane, ptOfPlane))
@@ -167,7 +167,7 @@ namespace GraphicsModule.CreateObjects
                     strg.TempObjects.Clear();
                     _tempLineOfPlane = null;
                     strg.Objects.Add(_source);
-                    can.ReDraw(strg);
+                    can.Update(strg);
                     strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
                 }
             }
@@ -179,36 +179,33 @@ namespace GraphicsModule.CreateObjects
                 _source = new Segment3D((SegmentOfPlane1X0Y)ln1, (SegmentOfPlane2X0Z)ln2);
                 return true;
             }
-            else if (ln1.GetType().Name == "SegmentOfPlane1X0Y" && ln2.GetType().Name == "SegmentOfPlane3Y0Z")
+            if (ln1.GetType().Name == "SegmentOfPlane1X0Y" && ln2.GetType().Name == "SegmentOfPlane3Y0Z")
             {
                 _source = new Segment3D((SegmentOfPlane1X0Y)ln1, (SegmentOfPlane3Y0Z)ln2);
-                 return true;
+                return true;
             }
-            else if (ln1.GetType().Name == "SegmentOfPlane2X0Z" && ln2.GetType().Name == "SegmentOfPlane1X0Y")
+            if (ln1.GetType().Name == "SegmentOfPlane2X0Z" && ln2.GetType().Name == "SegmentOfPlane1X0Y")
             {
                 _source = new Segment3D((SegmentOfPlane1X0Y)ln2, (SegmentOfPlane2X0Z)ln1);
                 return true;
             }
-            else if (ln1.GetType().Name == "SegmentOfPlane2X0Z" && ln2.GetType().Name == "SegmentOfPlane3Y0Z")
+            if (ln1.GetType().Name == "SegmentOfPlane2X0Z" && ln2.GetType().Name == "SegmentOfPlane3Y0Z")
             {
                 _source = new Segment3D((SegmentOfPlane2X0Z)ln1, (SegmentOfPlane3Y0Z)ln2);
                 return true;
 
             }
-            else if (ln1.GetType().Name == "SegmentOfPlane3Y0Z" && ln2.GetType().Name == "SegmentOfPlane1X0Y")
+            if (ln1.GetType().Name == "SegmentOfPlane3Y0Z" && ln2.GetType().Name == "SegmentOfPlane1X0Y")
             {
                 _source = new Segment3D((SegmentOfPlane1X0Y)ln2, (SegmentOfPlane3Y0Z)ln1);
                 return true;
             }
-            else if (ln1.GetType().Name == "SegmentOfPlane3Y0Z" && ln2.GetType().Name == "SegmentOfPlane2X0Z")
+            if (ln1.GetType().Name == "SegmentOfPlane3Y0Z" && ln2.GetType().Name == "SegmentOfPlane2X0Z")
             {
                 _source = new Segment3D((SegmentOfPlane2X0Z)ln2, (SegmentOfPlane3Y0Z)ln1);
                 return true;
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
         protected IObject CreateSegmentOfPlane(Collection<IObject> obj, DrawS st, Point frameCenter, Canvas can)
         {
@@ -216,14 +213,11 @@ namespace GraphicsModule.CreateObjects
             {
                 return new SegmentOfPlane1X0Y((PointOfPlane1X0Y)obj[0], (PointOfPlane1X0Y)obj[1]);
             }
-            else if (obj[0].GetType().Name == "PointOfPlane2X0Z")
+            if (obj[0].GetType().Name == "PointOfPlane2X0Z")
             {
                 return new SegmentOfPlane2X0Z((PointOfPlane2X0Z)obj[0], (PointOfPlane2X0Z)obj[1]);
             }
-            else
-            {
-                return new SegmentOfPlane3Y0Z((PointOfPlane3Y0Z)obj[0], (PointOfPlane3Y0Z)obj[1]);
-            }
+            return new SegmentOfPlane3Y0Z((PointOfPlane3Y0Z)obj[0], (PointOfPlane3Y0Z)obj[1]);
         }
         protected bool IsInOnePlane(IObject lnproj, IObject ptproj)
         {
@@ -231,18 +225,11 @@ namespace GraphicsModule.CreateObjects
             {
                 return true;
             }
-            else if (lnproj.GetType().Name == "SegmentOfPlane2X0Z" && ptproj.GetType().Name == "PointOfPlane2X0Z")
+            if (lnproj.GetType().Name == "SegmentOfPlane2X0Z" && ptproj.GetType().Name == "PointOfPlane2X0Z")
             {
                 return true;
             }
-            else if (lnproj.GetType().Name == "SegmentOfPlane3Y0Z" && ptproj.GetType().Name == "PointOfPlane3Y0Z")
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return lnproj.GetType().Name == "SegmentOfPlane3Y0Z" && ptproj.GetType().Name == "PointOfPlane3Y0Z";
         }
         protected bool IsOnLinkLine(IObject lnproj, IObject ptproj)
         {
@@ -250,28 +237,27 @@ namespace GraphicsModule.CreateObjects
             {
                 return IsOnLinkLine12((SegmentOfPlane1X0Y)lnproj, (PointOfPlane2X0Z)ptproj);
             }
-            else if (lnproj.GetType().Name == "SegmentOfPlane1X0Y" && ptproj.GetType().Name == "PointOfPlane3Y0Z")
+            if (lnproj.GetType().Name == "SegmentOfPlane1X0Y" && ptproj.GetType().Name == "PointOfPlane3Y0Z")
             {
                 return IsOnLinkLine13((SegmentOfPlane1X0Y)lnproj, (PointOfPlane3Y0Z)ptproj);
             }
-            else if (lnproj.GetType().Name == "SegmentOfPlane2X0Z" && ptproj.GetType().Name == "PointOfPlane1X0Y")
+            if (lnproj.GetType().Name == "SegmentOfPlane2X0Z" && ptproj.GetType().Name == "PointOfPlane1X0Y")
             {
                 return IsOnLinkLine21((SegmentOfPlane2X0Z)lnproj, (PointOfPlane1X0Y)ptproj);
             }
-            else if (lnproj.GetType().Name == "SegmentOfPlane2X0Z" && ptproj.GetType().Name == "PointOfPlane3Y0Z")
+            if (lnproj.GetType().Name == "SegmentOfPlane2X0Z" && ptproj.GetType().Name == "PointOfPlane3Y0Z")
             {
                 return IsOnLinkLine23((SegmentOfPlane2X0Z)lnproj, (PointOfPlane3Y0Z)ptproj);
             }
-            else if (lnproj.GetType().Name == "SegmentOfPlane3Y0Z" && ptproj.GetType().Name == "PointOfPlane1X0Y")
+            if (lnproj.GetType().Name == "SegmentOfPlane3Y0Z" && ptproj.GetType().Name == "PointOfPlane1X0Y")
             {
                 return IsOnLinkLine31((SegmentOfPlane3Y0Z)lnproj, (PointOfPlane1X0Y)ptproj);
             }
-            else if (lnproj.GetType().Name == "SegmentOfPlane3Y0Z" && ptproj.GetType().Name == "PointOfPlane2X0Z")
+            if (lnproj.GetType().Name == "SegmentOfPlane3Y0Z" && ptproj.GetType().Name == "PointOfPlane2X0Z")
             {
                 return IsOnLinkLine32((SegmentOfPlane3Y0Z)lnproj, (PointOfPlane2X0Z)ptproj);
             }
-            else
-                return false;
+            return false;
         }
 
         #region IsOnLinkLine
@@ -312,7 +298,7 @@ namespace GraphicsModule.CreateObjects
                 if (ReferenceEquals(strg.SelectedObjects[0].GetType(), strg.SelectedObjects[1].GetType()))
                 {
                     strg.SelectedObjects.Remove(strg.SelectedObjects[0]);
-                    can.ReDraw(strg);
+                    can.Update(strg);
                     return;
                 }
                 if ((_source = Segment3D.Create(strg.SelectedObjects)) != null)
@@ -320,7 +306,7 @@ namespace GraphicsModule.CreateObjects
                     strg.Objects.Remove(strg.SelectedObjects[0]);
                     strg.Objects.Remove(strg.SelectedObjects[1]);
                     strg.SelectedObjects.Clear();
-                    can.ReDraw(strg);
+                    can.Update(strg);
                     strg.AddToCollection(_source);
                     _source = null;
                     strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
@@ -328,12 +314,12 @@ namespace GraphicsModule.CreateObjects
                 else
                 {
                     strg.SelectedObjects.RemoveAt(strg.SelectedObjects.Count - 1);
-                    can.ReDraw(strg);
+                    can.Update(strg);
                 }
             }
             else
             {
-                can.ReDraw(strg);
+                can.Update(strg);
             }
         }
     }

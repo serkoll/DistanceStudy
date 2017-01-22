@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace GraphicsModule.Operations
+namespace GraphicsModule.Interfaces
 {
     /// <summary>
     /// Интерфейс, определяющий операции над графическими объектами

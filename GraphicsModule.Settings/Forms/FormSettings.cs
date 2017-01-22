@@ -23,7 +23,7 @@ namespace GraphicsModule.Settings.Forms
 
         private void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            switch (e.Node.Text)
+            switch (e.Node.Text) 
             {
                 case "Общие":
                     labelTitle.Text = @"Общие настройки";
@@ -78,9 +78,9 @@ namespace GraphicsModule.Settings.Forms
                     break;
             }
         }
-
         private void buttonOK_Click(object sender, System.EventArgs e)
         {
+            ValueS.BackgroundColor = _stBackground.BackgroundColor;
             ValueS.Serialize(fName);
             Close();
         }

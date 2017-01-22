@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 using System.Drawing.Imaging;
-using GraphicsModule.Geometry.Background;
+using GraphicsModule.Geometry.CoordinateSystem;
 
 namespace GraphicsModule
 {
@@ -21,64 +21,41 @@ namespace GraphicsModule
             PicBox = picBox;
             St = st;
             Mainbmp = new Bitmap(picBox.ClientSize.Width, picBox.ClientSize.Height, PixelFormat.Format24bppRgb);
+            var centerPoint = new Point(picBox.ClientSize.Width / 2, picBox.ClientSize.Height / 2);
             Mainbmp.MakeTransparent();
             Graphics = Graphics.FromImage(Mainbmp);
-            Grid = new Grid(St.GridS, Graphics);
-            Axis = new Axis(Graphics);
-
+            Grid = new Grid(St.GridS, centerPoint, Graphics);
+            Axis = new Axis(centerPoint, Graphics);
             Grid.DrawGrid(st.GridS, Graphics);
             Axis.DrawAxis(st.AxisS, Graphics);
-
-            PlaneX0Y = new RectangleF(0, Grid.CenterPoint.Y, Grid.CenterPoint.X, Grid.CenterPoint.Y);
-            PlaneX0Z = new RectangleF(0, 0, Grid.CenterPoint.X, Grid.CenterPoint.Y);
-            PlaneY0Z = new RectangleF(Grid.CenterPoint.X, 0, Grid.CenterPoint.X, Grid.CenterPoint.Y);
+            CalculatePlanes(Axis.Center);
             picBox.Image = (Image)Mainbmp.Clone();
             picBox.Refresh();
-        }
-        
-        public void Update()
+        }  
+        public void Refresh()
         {
             PicBox.Image = (Image)Mainbmp.Clone();
             PicBox.Refresh();
         }
-        public void Update(PictureBox pb)
-        {
-            pb.Image = (Image)Mainbmp.Clone();
-            pb.Refresh();
-        }
-        public void ReDraw(Settings.Settings st, Storage strg, PictureBox pb)
-        {
-            Mainbmp = new Bitmap(pb.ClientSize.Width, pb.ClientSize.Height, PixelFormat.Format24bppRgb);
-            Mainbmp.MakeTransparent();
-            Graphics = Graphics.FromImage(Mainbmp);
-            Grid = new Grid(St.GridS, Graphics);
-            Axis = new Axis(Graphics);
-
-            Grid.DrawGrid(st.GridS, Graphics);
-            Axis.DrawAxis(st.AxisS, Graphics);
-
-            strg.DrawObjects(st, Grid.CenterPoint, Graphics);
-
-            pb.Image = (Image)Mainbmp.Clone();
-            pb.Refresh();
-        }
-        public void ReDraw(Storage strg)
+        public void Update(Storage strg)
         {
             Mainbmp = new Bitmap(PicBox.ClientSize.Width, PicBox.ClientSize.Height, PixelFormat.Format24bppRgb);
             Mainbmp.MakeTransparent();
             Graphics = Graphics.FromImage(Mainbmp);
-            Grid = new Grid(St.GridS, Graphics);
-            Axis = new Axis(Graphics);
-
+            Grid.CalculateKnotsPoints(Graphics);
             Grid.DrawGrid(St.GridS, Graphics);
+            Axis.CalculateFinitePoints(Graphics);
             Axis.DrawAxis(St.AxisS, Graphics);
-
             strg.DrawObjects(St, Grid.CenterPoint, Graphics);
-
-            //PicBox.BackColor = St.
-
+            CalculatePlanes(Axis.Center);
             PicBox.Image = (Image)Mainbmp.Clone();
             PicBox.Refresh();
+        }
+        private void CalculatePlanes(Point centerPoint)
+        {
+            PlaneX0Y = new RectangleF(0, centerPoint.Y, centerPoint.X, centerPoint.Y);
+            PlaneX0Z = new RectangleF(0, 0, centerPoint.X, centerPoint.Y);
+            PlaneY0Z = new RectangleF(centerPoint.X, 0, centerPoint.X, centerPoint.Y);
         }
     }
 }

@@ -3,7 +3,8 @@ using System.Collections.ObjectModel;
 using System.Runtime.InteropServices;
 using GraphicsModule.Geometry.Objects;
 using GraphicsModule.Geometry.Objects.Points;
-using GraphicsModule.Geometry.Background;
+using GraphicsModule.Geometry.CoordinateSystem;
+using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Geometry.Objects.Segments;
 
 namespace GraphicsModule.SolidworksInteraction
@@ -35,8 +36,6 @@ namespace GraphicsModule.SolidworksInteraction
             _swModel = _swApp.IActiveDoc2;
             _swModel.SketchManager.Insert3DSketch(true);
             _swModel.SetAddToDB(false);
-            //_swModel.SetDisplayWhenAdded(false);
-            //_swModel.Visible = false;
         }
         public void ImportCollectionToActiveDoc(Collection<IObject> objects, Settings.DrawS ds)
         {

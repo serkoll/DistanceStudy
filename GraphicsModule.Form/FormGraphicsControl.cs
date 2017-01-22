@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Geometry.Objects;
 
 namespace GraphicsModule.Form

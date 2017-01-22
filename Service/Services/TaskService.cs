@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 using DbRepository.Classes.Keys;
+using GraphicsModule.Geometry.Interfaces;
 
 namespace Service.Services
 {
