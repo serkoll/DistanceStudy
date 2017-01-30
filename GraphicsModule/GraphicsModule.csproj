@@ -51,6 +51,12 @@
     <Compile Include="Controls\GraphicsControl.Designer.cs">
       <DependentUpon>GraphicsControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Menu\PlaneMenuSelector.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Menu\PlaneMenuSelector.Designer.cs">
+      <DependentUpon>PlaneMenuSelector.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Menu\LineMenuSelector.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -89,6 +95,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Controls\GraphicsControl.resx">
       <DependentUpon>GraphicsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Menu\PlaneMenuSelector.resx">
+      <DependentUpon>PlaneMenuSelector.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Menu\LineMenuSelector.resx">
       <DependentUpon>LineMenuSelector.cs</DependentUpon>
