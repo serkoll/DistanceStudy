@@ -9,7 +9,7 @@ namespace GraphicsModule
     public class NamesGenerator : INamesGenerator
     {
         public byte Position { get; set; }
-        private DrawS _textSettings;
+        private readonly DrawS _textSettings;
         private int _counter;
         private int _quality;
         public NamesGenerator(bool type, byte startPosition, Settings.Settings textSettings)

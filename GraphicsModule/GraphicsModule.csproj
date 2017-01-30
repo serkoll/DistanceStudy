@@ -43,7 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Canvas.cs" />
+    <Compile Include="Canvas\Canvas.cs" />
     <Compile Include="Controls\GraphicsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

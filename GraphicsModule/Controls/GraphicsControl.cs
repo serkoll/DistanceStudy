@@ -78,9 +78,9 @@ namespace GraphicsModule.Controls
             }
             MainPictureBox.BackColor = _settings.BackgroundColor;
             NmGenerator = new NamesGenerator(true, 0, _settings);
-            _ptMenuSelector = new Menu.PointMenuSelector(MainPictureBox, buttonPointsMenu); //Создаем меню вариантов для точек
-            _lnMenuSelector = new Menu.LineMenuSelector(MainPictureBox, buttonLinesMenu); //Создаем меню вариантов для линий
-            _sgMenuSelector = new Menu.SegmentMenuSelector(MainPictureBox, buttonSegmentMenu); //Создаем меню вариантов для отрезков
+            _ptMenuSelector = new Menu.PointMenuSelector(MainPictureBox, buttonPointsMenu, statusStripObjectMenu); //Создаем меню вариантов для точек
+            _lnMenuSelector = new Menu.LineMenuSelector(MainPictureBox, buttonLinesMenu, statusStripObjectMenu); //Создаем меню вариантов для линий
+            _sgMenuSelector = new Menu.SegmentMenuSelector(MainPictureBox, buttonSegmentMenu, statusStripObjectMenu); //Создаем меню вариантов для отрезков
             Controls.Add(_ptMenuSelector); //Добавляем к контролам компонента
             Controls.Add(_lnMenuSelector); //Добавляем к контролам компонента
             Controls.Add(_sgMenuSelector); //Добавляем к контролам компонента
@@ -287,6 +287,7 @@ namespace GraphicsModule.Controls
                 Operations = null;
                 SetObject = null;
                 MainPictureBox.Cursor = System.Windows.Forms.Cursors.Default;
+                statusStripObjectMenu.Visible = false;
             }
         }
         /// <summary>

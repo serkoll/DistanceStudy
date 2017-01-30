@@ -8,16 +8,19 @@ namespace GraphicsModule.Controls.Menu
     {
         private PictureBox _mainPictureBox;
         private ToolStripButton _mainStripButton;
-        public LineMenuSelector(PictureBox mainPictureBox, ToolStripButton mainStripButton)
+        private StatusStrip _menuStrip;
+        public LineMenuSelector(PictureBox mainPictureBox, ToolStripButton mainStripButton, StatusStrip menuStrip)
         {
             InitializeComponent();
             _mainPictureBox = mainPictureBox;
             _mainStripButton = mainStripButton;
+            _menuStrip = menuStrip;
         }
         private void mainStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             Visible = false;
             GraphicsControl.Operations = null;
+            _menuStrip.Visible = true;
         }
         private void buttonLine2D_Click(object sender, EventArgs e)
         {

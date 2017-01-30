@@ -44,7 +44,7 @@ namespace GraphicsModule.Controls
             this.labelStatusLinkLine = new System.Windows.Forms.ToolStripStatusLabel();
             this.labelCursorToGridFixation = new System.Windows.Forms.ToolStripStatusLabel();
             this.labelExternalEntitiy = new System.Windows.Forms.ToolStripStatusLabel();
-            this.statusStrip2 = new System.Windows.Forms.StatusStrip();
+            this.statusStripObjectMenu = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel_Help = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.левыйВерхнийToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -82,7 +82,7 @@ namespace GraphicsModule.Controls
             this.MainPictureBox = new System.Windows.Forms.PictureBox();
             this.baseTableLayoutPanel.SuspendLayout();
             this.workspaceOperationsStatusStrip1.SuspendLayout();
-            this.statusStrip2.SuspendLayout();
+            this.statusStripObjectMenu.SuspendLayout();
             this.graphicsToolBarStrip.SuspendLayout();
             this.basicToolBarStrip.SuspendLayout();
             this.MainMenu.SuspendLayout();
@@ -102,7 +102,7 @@ namespace GraphicsModule.Controls
             this.baseTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.baseTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.baseTableLayoutPanel.Controls.Add(this.workspaceOperationsStatusStrip1, 0, 4);
-            this.baseTableLayoutPanel.Controls.Add(this.statusStrip2, 1, 3);
+            this.baseTableLayoutPanel.Controls.Add(this.statusStripObjectMenu, 1, 3);
             this.baseTableLayoutPanel.Controls.Add(this.graphicsToolBarStrip, 0, 2);
             this.baseTableLayoutPanel.Controls.Add(this.basicToolBarStrip, 0, 1);
             this.baseTableLayoutPanel.Controls.Add(this.MainMenu, 0, 0);
@@ -220,20 +220,21 @@ namespace GraphicsModule.Controls
             this.labelExternalEntitiy.Size = new System.Drawing.Size(104, 20);
             this.labelExternalEntitiy.Text = "Внешний объект";
             // 
-            // statusStrip2
+            // statusStripObjectMenu
             // 
-            this.statusStrip2.BackColor = System.Drawing.SystemColors.Control;
-            this.baseTableLayoutPanel.SetColumnSpan(this.statusStrip2, 2);
-            this.statusStrip2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.statusStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusStripObjectMenu.BackColor = System.Drawing.SystemColors.Control;
+            this.baseTableLayoutPanel.SetColumnSpan(this.statusStripObjectMenu, 2);
+            this.statusStripObjectMenu.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.statusStripObjectMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel_Help,
             this.toolStripDropDownButton1});
-            this.statusStrip2.Location = new System.Drawing.Point(36, 541);
-            this.statusStrip2.Name = "statusStrip2";
-            this.statusStrip2.Size = new System.Drawing.Size(1203, 27);
-            this.statusStrip2.SizingGrip = false;
-            this.statusStrip2.TabIndex = 10;
-            this.statusStrip2.Text = "statusStrip2";
+            this.statusStripObjectMenu.Location = new System.Drawing.Point(36, 541);
+            this.statusStripObjectMenu.Name = "statusStripObjectMenu";
+            this.statusStripObjectMenu.Size = new System.Drawing.Size(1203, 27);
+            this.statusStripObjectMenu.SizingGrip = false;
+            this.statusStripObjectMenu.TabIndex = 10;
+            this.statusStripObjectMenu.Text = "statusStrip2";
+            this.statusStripObjectMenu.Visible = false;
             // 
             // toolStripStatusLabel_Help
             // 
@@ -572,8 +573,8 @@ namespace GraphicsModule.Controls
             this.baseTableLayoutPanel.PerformLayout();
             this.workspaceOperationsStatusStrip1.ResumeLayout(false);
             this.workspaceOperationsStatusStrip1.PerformLayout();
-            this.statusStrip2.ResumeLayout(false);
-            this.statusStrip2.PerformLayout();
+            this.statusStripObjectMenu.ResumeLayout(false);
+            this.statusStripObjectMenu.PerformLayout();
             this.graphicsToolBarStrip.ResumeLayout(false);
             this.graphicsToolBarStrip.PerformLayout();
             this.basicToolBarStrip.ResumeLayout(false);
@@ -623,7 +624,7 @@ namespace GraphicsModule.Controls
         private System.Windows.Forms.ToolStripStatusLabel labelStatusLinkLine;
         private System.Windows.Forms.ToolStripStatusLabel labelCursorToGridFixation;
         private System.Windows.Forms.ToolStripStatusLabel labelExternalEntitiy;
-        private System.Windows.Forms.StatusStrip statusStrip2;
+        private System.Windows.Forms.StatusStrip statusStripObjectMenu;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel_Help;
         public System.Windows.Forms.PictureBox MainPictureBox;
         private ToolStripButton buttonPointsMenu;

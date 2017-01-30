@@ -8,11 +8,13 @@ namespace GraphicsModule.Controls.Menu
     {
         private PictureBox _mainPictureBox;
         private ToolStripButton _mainStripButton;
-        public PointMenuSelector(PictureBox mainPictureBox, ToolStripButton mainButton)
+        private StatusStrip _menuStrip;
+        public PointMenuSelector(PictureBox mainPictureBox, ToolStripButton mainButton, StatusStrip menuStrip)
         {
             InitializeComponent();
             _mainStripButton = mainButton;
             _mainPictureBox = mainPictureBox;
+            _menuStrip = menuStrip;
         }
         private void buttonPoint2D_Click(object sender, EventArgs e)
         {
@@ -42,6 +44,7 @@ namespace GraphicsModule.Controls.Menu
         {
             Visible = false;
             GraphicsControl.Operations = null;
+            _menuStrip.Visible = true;
         }
         private void buttonPoint3D_Click(object sender, EventArgs e)
         {
