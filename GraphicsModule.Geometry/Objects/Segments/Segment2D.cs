@@ -18,6 +18,7 @@ namespace GraphicsModule.Geometry.Objects.Segments
         public Point2D Point0 { get; set; }
         //Вторая (расчетная или заданная) точка прямой
         public Point2D Point1 { get; set; }
+        public Name Name { get; set; }
         //====================================================================================================
         //================== Свойства задания и извлечения параметров 2D линии ==================================
         /// <summary>Получает или задает коэффициент kx канонического уравнения прямой</summary>
@@ -79,16 +80,26 @@ namespace GraphicsModule.Geometry.Objects.Segments
             kx = pt2.X - pt1.X;
             ky = pt2.Y - pt1.Y;
         }
-        public void Draw(DrawS st, System.Drawing.Point framecenter, Graphics g)
+        public void Draw(DrawS st, Point framecenter, Graphics g)
         {
-            g.DrawPie(st.PenPoints, (float)Point0.X - st.RadiusPoints, (float)Point0.Y - st.RadiusPoints, st.RadiusPoints * 2, st.RadiusPoints * 2, 0, 360);
-            g.DrawPie(st.PenPoints, (float)Point1.X - st.RadiusPoints, (float)Point1.Y - st.RadiusPoints, st.RadiusPoints * 2, st.RadiusPoints * 2, 0, 360);
+            Point0.Draw(st, framecenter, g);
+            Point1.Draw(st, framecenter, g);
             g.DrawLine(st.PenLine2D, new PointF((float)Point0.X, (float)Point0.Y), 
                                      new PointF((float)Point1.X, (float)Point1.Y));
         }
-        public bool IsSelected(System.Drawing.Point mscoords, float ptR, System.Drawing.Point frameCenter, double distance)
+        public bool IsSelected(Point mscoords, float ptR, Point frameCenter, double distance)
         {
             return Analyze.Analyze.SegmentPos.IncidenceOfPoint(mscoords, this, 35 * distance);
+        }
+        public Name GetName()
+        {
+            return Name;
+        }
+        public void SetName(Name name)
+        {
+            Name = new Name(name);
+            Point0.Name = Name;
+            Point1.Name = Name;
         }
     }
 }

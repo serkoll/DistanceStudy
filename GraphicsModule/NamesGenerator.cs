@@ -19,19 +19,35 @@ namespace GraphicsModule
             Position = startPosition;
             _textSettings = textSettings.DrawS;
         }
-        public Name Generate(IObject obj)
+        //public Name Generate(IObject obj)
+        //{
+        //    var name = "";
+        //    for (int i = 0; i < _quality; i++)
+        //    {
+        //        name += Convert.ToChar(_counter).ToString();
+        //    }
+        //    var type = obj.GetType().GetInterfaces();
+        //    if (type.Length > 2)
+        //    {
+        //        if (type[2] == typeof(IObjectOfPlane1X0Y)) name += "'";
+        //        else if (type[2] == typeof(IObjectOfPlane2X0Z)) name += "''";
+        //        else name += "'''";
+        //    }
+        //    var delta = GetDeltaFromPosition();
+        //    if (_counter < 90) _counter++;
+        //    else
+        //    {
+        //        _counter = 65;
+        //        _quality++;
+        //    }
+        //    return new Name(name, delta[0], delta[1]);
+        //}
+        public Name Generate()
         {
             var name = "";
             for (int i = 0; i < _quality; i++)
             {
                 name += Convert.ToChar(_counter).ToString();
-            }
-            var type = obj.GetType().GetInterfaces();
-            if (type.Length > 2)
-            {
-                if (type[2] == typeof(IObjectOfPlane1X0Y)) name += "'";
-                else if (type[2] == typeof(IObjectOfPlane2X0Z)) name += "''";
-                else name += "'''";
             }
             var delta = GetDeltaFromPosition();
             if (_counter < 90) _counter++;

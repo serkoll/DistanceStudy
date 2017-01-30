@@ -16,7 +16,7 @@ namespace GraphicsModule.CreateObjects
         public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
         {
             _source = new Point2D(pt);
-            _source.Name = GraphicsControl.NmGenerator.Generate(_source);
+            _source.SetName(GraphicsControl.NmGenerator.Generate());
             strg.AddToCollection(_source);
             strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
         }
@@ -31,7 +31,7 @@ namespace GraphicsModule.CreateObjects
         {
             if (!PointOfPlane1X0Y.Creatable(pt, frameCenter)) return;
             _source = new PointOfPlane1X0Y(pt, frameCenter);
-            _source.Name = GraphicsControl.NmGenerator.Generate(_source);
+            _source.SetName(GraphicsControl.NmGenerator.Generate());
             strg.AddToCollection(_source);
             strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
         }
@@ -46,7 +46,7 @@ namespace GraphicsModule.CreateObjects
         {
             if (!PointOfPlane2X0Z.Creatable(pt, frameCenter)) return;
             _source = new PointOfPlane2X0Z(pt, frameCenter);
-            _source.Name = GraphicsControl.NmGenerator.Generate(_source);
+            _source.SetName(GraphicsControl.NmGenerator.Generate());
             strg.AddToCollection(_source);
             strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
         }
@@ -61,7 +61,7 @@ namespace GraphicsModule.CreateObjects
         {
             if (!PointOfPlane3Y0Z.Creatable(pt, frameCenter)) return;
             _source = new PointOfPlane3Y0Z(pt, frameCenter);
-            _source.Name = GraphicsControl.NmGenerator.Generate(_source);
+            _source.SetName(GraphicsControl.NmGenerator.Generate());
             strg.AddToCollection(_source);
             strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
         }
@@ -77,6 +77,7 @@ namespace GraphicsModule.CreateObjects
             var ptOfPlane = TypeOf.PointOfPlane(pt, frameCenter);
             if (strg.TempObjects.Count == 0)
             {
+                ptOfPlane.SetName(GraphicsControl.NmGenerator.Generate());
                 strg.TempObjects.Add(ptOfPlane);
                 strg.DrawLastAddedToTempObjects(setting, frameCenter, can.Graphics);
             }
@@ -84,6 +85,7 @@ namespace GraphicsModule.CreateObjects
             {
                 if (ReferenceEquals(strg.TempObjects[0].GetType(), ptOfPlane.GetType()))
                 {
+                    ptOfPlane.SetName(strg.TempObjects[0].GetName());
                     strg.TempObjects.Clear();
                     can.Update(strg);
                     strg.TempObjects.Add(ptOfPlane);
@@ -93,9 +95,9 @@ namespace GraphicsModule.CreateObjects
                 strg.TempObjects.Add(ptOfPlane);
                 if ((_source = Point3D.Create(strg.TempObjects)) != null)
                 {
+                    _source.SetName(strg.TempObjects[0].GetName());
                     strg.TempObjects.Clear();
                     can.Update(strg);
-                    _source.InitializeName(GraphicsControl.NmGenerator.Generate(_source));
                     strg.AddToCollection(_source);
                     _source = null;
                     strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
@@ -128,7 +130,7 @@ namespace GraphicsModule.CreateObjects
                 {
                     strg.Objects.Remove(strg.SelectedObjects[0]);
                     strg.Objects.Remove(strg.SelectedObjects[1]);
-                    _source.InitializeName(GraphicsControl.NmGenerator.Generate(_source));
+                    _source.SetName(GraphicsControl.NmGenerator.Generate());
                     strg.SelectedObjects.Clear();
                     can.Update(strg);
                     strg.AddToCollection(_source);

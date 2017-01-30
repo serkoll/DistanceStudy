@@ -13,13 +13,12 @@ namespace GraphicsModule.Geometry.Objects.Lines
     public class Line2D : IObject
     {
         //Прямая на плоскости
-
         //Переменная для работы с расчетом прямых
-
         //Базовая точка прямой
         public Point2D Point0 { get; set; }
         //Вторая (расчетная или заданная) точка прямой
         public Point2D Point1 { get; set; }
+        public Name Name { get; set; }
         //====================================================================================================
         //================== Свойства задания и извлечения параметров 2D линии ==================================
         /// <summary>Получает или задает коэффициент kx канонического уравнения прямой</summary>
@@ -55,6 +54,7 @@ namespace GraphicsModule.Geometry.Objects.Lines
             Point1 = new Point2D(1, 0);
             kx = 1;
             ky = 0;
+            Name = new Name();
         }
         /// <summary>
         /// Инициализирует новый экземпляр 2D прямой с помощью задания двух точек
@@ -72,6 +72,9 @@ namespace GraphicsModule.Geometry.Objects.Lines
             Point1 = pt2;
             kx = pt2.X - pt1.X;
             ky = pt2.Y - pt1.Y;
+            Name = new Name();
+            pt1.Name = Name;
+            pt2.Name = Name;
         }
         public Line2D(Point2D pt1, Point2D pt2, PictureBox pb)
         {
@@ -83,7 +86,6 @@ namespace GraphicsModule.Geometry.Objects.Lines
             ky = pt2.Y - pt1.Y;
             CalculatePointsForDraw(pb);
         }
-
         //====================================================================================================
         //================== Методы ввода-вывода (расчета) параметров линии по заданным условиям ==================
 
@@ -125,8 +127,10 @@ namespace GraphicsModule.Geometry.Objects.Lines
         }
         public void Draw(DrawS st, Point framecenter, Graphics g)
         {
-            g.DrawPie(st.PenPoints, (float)Point0.X - st.RadiusPoints, (float)Point0.Y - st.RadiusPoints, st.RadiusPoints * 2, st.RadiusPoints * 2, 0, 360);
-            g.DrawPie(st.PenPoints, (float)Point1.X - st.RadiusPoints, (float)Point1.Y - st.RadiusPoints, st.RadiusPoints * 2, st.RadiusPoints * 2, 0, 360);
+            Point0.Draw(st, framecenter, g);
+            Point1.Draw(st, framecenter, g);
+            //g.DrawPie(st.PenPoints, (float)Point0.X - st.RadiusPoints, (float)Point0.Y - st.RadiusPoints, st.RadiusPoints * 2, st.RadiusPoints * 2, 0, 360);
+            //g.DrawPie(st.PenPoints, (float)Point1.X - st.RadiusPoints, (float)Point1.Y - st.RadiusPoints, st.RadiusPoints * 2, st.RadiusPoints * 2, 0, 360);
             g.DrawLine(st.PenLine2D, pts[0], pts[1]);
         }
         private void CalculatePointsForDraw(PictureBox pb)
@@ -165,6 +169,18 @@ namespace GraphicsModule.Geometry.Objects.Lines
         public bool IsSelected(Point mscoords, float ptR, Point frameCenter, double distance)
         {
             return Analyze.Analyze.LinesPos.IncidenceOfPoint(mscoords, this, 35 * distance);
+        }
+
+        public Name GetName()
+        {
+            return Name;
+        }
+
+        public void SetName(Name name)
+        {
+            Name = new Name(name);
+            Point0.SetName(Name);
+            Point1.SetName(Name);
         }
     }
 }

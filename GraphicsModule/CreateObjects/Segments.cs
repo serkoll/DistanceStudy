@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Drawing;
+using GraphicsModule.Controls;
 using GraphicsModule.Geometry;
 using GraphicsModule.Geometry.Analyze;
 using GraphicsModule.Geometry.Interfaces;
@@ -16,19 +17,21 @@ namespace GraphicsModule.CreateObjects
     /// </summary>
     public class CreateSegment2D : ICreate
     {
-        private Line2D _source;
+        private Segment2D _source;
         public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
         {
             var ptOfPlane = new Point2D(pt);
             if (strg.TempObjects.Count == 0)
             {
+                ptOfPlane.SetName(GraphicsControl.NmGenerator.Generate());
                 strg.TempObjects.Add(ptOfPlane);
                 strg.DrawLastAddedToTempObjects(setting, frameCenter, can.Graphics);
             }
             else
             {
                 if (Analyze.PointPos.Coincidence((Point2D) strg.TempObjects[0], new Point2D(pt))) return;
-                _source = new Line2D((Point2D)strg.TempObjects[0], new Point2D(pt), can.PicBox);
+                _source = new Segment2D((Point2D)strg.TempObjects[0], new Point2D(pt), can.PicBox);
+                _source.SetName(strg.TempObjects[0].GetName());
                 strg.AddToCollection(_source);
                 _source = null;
                 strg.TempObjects.Clear();
@@ -50,6 +53,7 @@ namespace GraphicsModule.CreateObjects
                 var ptOfPlane = new PointOfPlane1X0Y(pt, frameCenter);
                 if (strg.TempObjects.Count == 0)
                 {
+                    ptOfPlane.SetName(GraphicsControl.NmGenerator.Generate());
                     strg.TempObjects.Add(ptOfPlane);
                     strg.DrawLastAddedToTempObjects(setting, frameCenter, can.Graphics);
                 }
@@ -58,6 +62,7 @@ namespace GraphicsModule.CreateObjects
                     if (Analyze.PointPos.Coincidence((PointOfPlane1X0Y) strg.TempObjects[0],
                         new PointOfPlane1X0Y(pt, frameCenter))) return;
                     _source = new SegmentOfPlane1X0Y((PointOfPlane1X0Y)strg.TempObjects[0], new PointOfPlane1X0Y(pt, frameCenter));
+                    _source.SetName(strg.TempObjects[0].GetName());
                     strg.AddToCollection(_source);
                     _source = null;
                     strg.TempObjects.Clear();
@@ -80,6 +85,7 @@ namespace GraphicsModule.CreateObjects
                 var ptOfPlane = new PointOfPlane2X0Z(pt, frameCenter);
                 if (strg.TempObjects.Count == 0)
                 {
+                    ptOfPlane.SetName(GraphicsControl.NmGenerator.Generate());
                     strg.TempObjects.Add(ptOfPlane);
                     strg.DrawLastAddedToTempObjects(setting, frameCenter, can.Graphics);
                 }
@@ -87,6 +93,7 @@ namespace GraphicsModule.CreateObjects
                 {
                     if (Analyze.PointPos.Coincidence((PointOfPlane2X0Z) strg.TempObjects[0], new PointOfPlane2X0Z(pt, frameCenter))) return;
                     _source = new SegmentOfPlane2X0Z((PointOfPlane2X0Z)strg.TempObjects[0], new PointOfPlane2X0Z(pt, frameCenter));
+                    _source.SetName(strg.TempObjects[0].GetName());
                     strg.AddToCollection(_source);
                     _source = null;
                     strg.TempObjects.Clear();
@@ -109,6 +116,7 @@ namespace GraphicsModule.CreateObjects
                 var ptOfPlane = new PointOfPlane3Y0Z(pt, frameCenter);
                 if (strg.TempObjects.Count == 0)
                 {
+                    ptOfPlane.SetName(GraphicsControl.NmGenerator.Generate());
                     strg.TempObjects.Add(ptOfPlane);
                     strg.DrawLastAddedToTempObjects(setting, frameCenter, can.Graphics);
                 }
@@ -116,6 +124,7 @@ namespace GraphicsModule.CreateObjects
                 {
                     if (Analyze.PointPos.Coincidence((PointOfPlane3Y0Z) strg.TempObjects[0], new PointOfPlane3Y0Z(pt, frameCenter))) return;
                     _source = new SegmentOfPlane3Y0Z((PointOfPlane3Y0Z)strg.TempObjects[0], new PointOfPlane3Y0Z(pt, frameCenter));
+                    _source.SetName(strg.TempObjects[0].GetName());
                     strg.AddToCollection(_source);
                     _source = null;
                     strg.TempObjects.Clear();
@@ -139,6 +148,7 @@ namespace GraphicsModule.CreateObjects
             {
                 if (_tempLineOfPlane == null)
                 {
+                    ptOfPlane.SetName(GraphicsControl.NmGenerator.Generate());
                     strg.TempObjects.Add(ptOfPlane);
                     strg.DrawLastAddedToTempObjects(setting, frameCenter, can.Graphics);
                 }
@@ -156,6 +166,7 @@ namespace GraphicsModule.CreateObjects
                 {
                     strg.TempObjects.Add(ptOfPlane);
                     _tempLineOfPlane = CreateSegmentOfPlane(strg.TempObjects, setting, frameCenter, can);
+                    _tempLineOfPlane.SetName(strg.TempObjects[0].GetName());
                     strg.TempObjects.Clear();
                     can.Update(strg);
                     _tempLineOfPlane.Draw(setting, frameCenter, can.Graphics);
@@ -164,6 +175,7 @@ namespace GraphicsModule.CreateObjects
                 {
                     strg.TempObjects.Add(ptOfPlane);
                     if (!IsSegment3DCreatable(_tempLineOfPlane, CreateSegmentOfPlane(strg.TempObjects, setting, frameCenter, can), setting, frameCenter, can)) return;
+                    _source.SetName(_tempLineOfPlane.GetName());
                     strg.TempObjects.Clear();
                     _tempLineOfPlane = null;
                     strg.Objects.Add(_source);

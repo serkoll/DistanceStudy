@@ -17,8 +17,8 @@ namespace GraphicsModule.Geometry.Objects.Points
         public PointOfPlane1X0Y(double x, double y) { X = x; Y = y; }
         public PointOfPlane1X0Y(Point pt, Point center)
         {
-                X = -(pt.X - center.X);
-                Y = pt.Y - center.Y;
+            X = -(pt.X - center.X);
+            Y = pt.Y - center.Y;
         }
         /// <summary>Инициализирует новый экземпляр двумерной проекции точки</summary>
         /// <remarks></remarks>
@@ -57,11 +57,13 @@ namespace GraphicsModule.Geometry.Objects.Points
             {
                 DrawLinkLine(st.LinkLineSettings.PenLinkLineX0YtoX, st.LinkLineSettings.PenLinkLineX0YtoY, true, true, true, true, true, frameCenter, g);
             }
-            DrawName(st, st.RadiusPoints, frameCenter, g);
+            if (Name != null)
+                DrawName(st, st.RadiusPoints, frameCenter, g);
         }
         public void DrawPointsOnly(DrawS st, Point frameCenter, Graphics g)
         {
             Draw(st.PenPoints, st.RadiusPoints, frameCenter, g);
+            DrawName(st, st.RadiusPoints, frameCenter, g);
         }
         public void DrawLinkLine(Pen penLinkLineToX, Pen penLinkLinetoY, bool linkPointToX, bool linkPointToY, bool linkXToBorderPi2, bool linkYToBorderPi3, bool linkCurveY1ToY3, Point frameCenter, Graphics graphics)
         {
@@ -80,7 +82,7 @@ namespace GraphicsModule.Geometry.Objects.Points
                 graphics.DrawLine(penLinkLineToX, Convert.ToInt32(frameCenter.X - X), Convert.ToInt32(frameCenter.Y), Convert.ToInt32(frameCenter.X - X), -Convert.ToInt32(2 * frameCenter.Y + 20));
             }
             if (linkPointToY)//Контроль включения линии связи от проекции точки до оси Y
-            { 
+            {
                 //Горизонтальная (от Pi1 к Pi3) - Часть 3: отрезок от заданной точки до вертикальной оси Y (оси Y плоскости проекций Pi1)
                 graphics.DrawLine(penLinkLinetoY, Convert.ToInt32(frameCenter.X - X), Convert.ToInt32(frameCenter.Y + Y), Convert.ToInt32(frameCenter.X), Convert.ToInt32(frameCenter.Y + Y));
             }
@@ -98,6 +100,16 @@ namespace GraphicsModule.Geometry.Objects.Points
         public bool IsSelected(Point mscoords, float ptR, Point frameCenter, double distance)
         {
             return Calculate.Distance(mscoords, ptR, frameCenter, this) < distance;
+        }
+        public Name GetName()
+        {
+            var name = new Name(Name.Value.Remove(Name.Value.IndexOf("'", StringComparison.Ordinal)), Name.Dx, Name.Dy);
+            return name;
+        }
+        public void SetName(Name name)
+        {
+            Name = new Name(name);
+            Name.Value += "'";
         }
     }
 }

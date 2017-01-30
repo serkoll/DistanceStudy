@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Settings;
 
@@ -7,12 +8,12 @@ namespace GraphicsModule.Geometry.Objects.Points
     /// <summary>
     /// 2D точка
     /// </summary>
-    public class Point2D: IObject
+    public class Point2D : IObject
     {
         /// <summary>
         /// Получает или задает координату X точки
         /// </summary>
-        public double X { get; set; } 
+        public double X { get; set; }
         /// <summary>
         /// Получает или задает координату Y точки
         /// </summary>
@@ -90,7 +91,8 @@ namespace GraphicsModule.Geometry.Objects.Points
         public void Draw(DrawS st, Point framecenter, Graphics g)
         {
             g.DrawPie(st.PenPoints, (float)X - st.RadiusPoints, (float)Y - st.RadiusPoints, st.RadiusPoints * 2, st.RadiusPoints * 2, 0, 360);
-            g.DrawString(Name.Value, st.TextFont, st.TextBrush, (float)X + Name.Dx, (float)Y + Name.Dy);
+            if (Name != null)
+                g.DrawString(Name.Value, st.TextFont, st.TextBrush, (float)X + Name.Dx, (float)Y + Name.Dy);
         }
         /// <summary>
         /// Проверяет на выбор курсором
@@ -103,6 +105,14 @@ namespace GraphicsModule.Geometry.Objects.Points
         public bool IsSelected(Point mscoords, float ptR, Point frameCenter, double distance)
         {
             return Calculate.Distance(mscoords, this) < distance;
+        }
+        public Name GetName()
+        {
+            return Name;
+        }
+        public void SetName(Name name)
+        {
+            Name = new Name(name);
         }
     }
 }

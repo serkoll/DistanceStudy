@@ -59,11 +59,13 @@ namespace GraphicsModule.Geometry.Objects.Points
             {
                 DrawLinkLine(st.LinkLineSettings.PenLinkLineX0ZtoZ, st.LinkLineSettings.PenLinkLineY0ZtoY, true, true, true, true, true, frameCenter, g);
             }
-            DrawName(st, st.RadiusPoints, frameCenter, g);
+            if (Name != null)
+                DrawName(st, st.RadiusPoints, frameCenter, g);
         }
         public void DrawPointsOnly(DrawS st, Point frameCenter, Graphics g)
         {
             Draw(st.PenPoints, st.RadiusPoints, frameCenter, g);
+            DrawName(st, st.RadiusPoints, frameCenter, g);
         }
         public void DrawLinkLine(Pen penLinkLineY0ZtoZ, Pen penLinkLineY0ZtoY, bool linkPointToY, bool linkPointToZ, bool linkYToBorderPi1, bool linkZToBorderPi2, bool linkCurveY3ToY1, Point frameCenter, Graphics graphics)
         {
@@ -98,6 +100,16 @@ namespace GraphicsModule.Geometry.Objects.Points
         public bool IsSelected(Point mscoords, float ptR, Point frameCenter, double distance)
         {
             return Calculate.Distance(mscoords, ptR, frameCenter, this) < distance;
+        }
+        public Name GetName()
+        {
+            var name = new Name(Name.Value.Remove(Name.Value.IndexOf("'", StringComparison.Ordinal)), Name.Dx, Name.Dy);
+            return name;
+        }
+        public void SetName(Name name)
+        {
+            Name = new Name(name);
+            Name.Value += "'''";
         }
     }
 }

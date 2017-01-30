@@ -366,9 +366,12 @@ namespace GraphicsModule.Controls
         }
 
         private void GraphicsControl_Resize(object sender, EventArgs e)
-        { 
-            //if(_storage != null)
-            //_canvas.Update(_storage);
+        {
+            if (_storage != null)
+            {
+                _canvas.CalculateBackground();
+                _canvas.Update(_storage);
+            }
         }
         private void левыйВерхнийToolStripMenuItem_Click(object sender, EventArgs e)
         {

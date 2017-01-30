@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Drawing;
 using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Settings;
@@ -125,14 +126,6 @@ namespace GraphicsModule.Geometry.Objects.Points
             PointOfPlane2X0Z = new PointOfPlane2X0Z(X, Z);
             PointOfPlane3Y0Z = new PointOfPlane3Y0Z(Y, Z);
         }
-
-        public void InitializeName(Name name)
-        {
-            Name = new Name(name);
-            PointOfPlane1X0Y.Name = new Name(name);
-            PointOfPlane2X0Z.Name = new Name(name);
-            PointOfPlane3Y0Z.Name = new Name(name);
-        }
         /// <summary>Передвигает ранее заданную 3D точку
         /// (изменяет коодинаты на указанные величины по осям в 3D)
         /// </summary>
@@ -206,6 +199,22 @@ namespace GraphicsModule.Geometry.Objects.Points
         {
             var dst = Calculate.Distance(mscoords, ptR, frameCenter, this);
             return dst[0] < distance || dst[1] < distance || dst[2] < distance;
+        }
+
+        public Name GetName()
+        {
+            var name = new Name(Name.Value.Remove(Name.Value.IndexOf("'", StringComparison.Ordinal)), Name.Dx, Name.Dy);
+            return name;
+        }
+        public void SetName(Name name)
+        {
+            Name = new Name(name);
+            PointOfPlane1X0Y.Name = new Name(Name);
+            PointOfPlane1X0Y.Name.Value += "'";
+            PointOfPlane2X0Z.Name = new Name(Name);
+            PointOfPlane2X0Z.Name.Value += "''";
+            PointOfPlane3Y0Z.Name = new Name(Name);
+            PointOfPlane3Y0Z.Name.Value += "'''";
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Geometry.Objects.Points;
@@ -12,6 +13,7 @@ namespace GraphicsModule.Geometry.Objects.Lines
     { 
         public PointOfPlane2X0Z Point0 { get; set; }
         public PointOfPlane2X0Z Point1 { get; set; }
+        public Name Name { get; set; }
         public List<PointF> pts { get; set; }
         private LineDrawCalc _calc;
         public double kx { get; set; }
@@ -43,6 +45,7 @@ namespace GraphicsModule.Geometry.Objects.Lines
             kz = pt1.Z - pt0.Z;
             _calc = new LineDrawCalc(frameCenter, rc);
             pts = _calc.CalculatePointsForDraw(this);
+            Name = new Name();
         }
         public LineOfPlane2X0Z(Line3D line)
         {
@@ -76,6 +79,18 @@ namespace GraphicsModule.Geometry.Objects.Lines
         {
             var ln = DeterminePosition.ForLineProjection(this, frameCenter);
             return Analyze.Analyze.LinesPos.IncidenceOfPoint(mscoords, ln, 35 * distance);
+        }
+        public Name GetName()
+        {
+            var name = new Name(Name.Value.Remove(Name.Value.IndexOf("'", StringComparison.Ordinal)), Name.Dx, Name.Dy);
+            return name;
+        }
+        public void SetName(Name name)
+        {
+            Name = new Name(name);
+            Name.Value += "''";
+            Point0.Name = Name;
+            Point1.Name = Name;
         }
     }
 }

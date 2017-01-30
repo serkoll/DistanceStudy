@@ -5,6 +5,6 @@ namespace GraphicsModule.Interfaces
 {
     public interface INamesGenerator
     {
-        Name Generate(IObject obj);
+        Name Generate();
     }
 }

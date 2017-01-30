@@ -18,15 +18,20 @@ namespace GraphicsModule.Canvas
         {
             PicBox = picBox;
             Setting = setting;
-            CenterSystemPoint = new Point(picBox.ClientSize.Width / 2, picBox.ClientSize.Height / 2);
-            Bckground = new Background(CenterSystemPoint, Setting, picBox);
+            CalculateBackground();
             Mainbmp = new Bitmap(Bckground.BackBitmap);
             Mainbmp.MakeTransparent();
             Graphics = Graphics.FromImage(Mainbmp);
             CalculatePlanes(Bckground.Axis.Center);
             picBox.Image = (Image)Mainbmp.Clone();
             picBox.Refresh();
-        }  
+        }
+
+        public void CalculateBackground()
+        {
+            CenterSystemPoint = new Point(PicBox.ClientSize.Width / 2, PicBox.ClientSize.Height / 2);
+            Bckground = new Background(CenterSystemPoint, Setting, PicBox);
+        }
         public void Refresh()
         {
             PicBox.Image = (Image)Mainbmp.Clone();

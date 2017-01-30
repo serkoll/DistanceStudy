@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Drawing;
 using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Geometry.Objects.Points;
@@ -12,6 +13,7 @@ namespace GraphicsModule.Geometry.Objects.Lines
     {
         public Point3D Point0 { get; set; }
         public Point3D Point1 { get; set; }
+        public Name Name { get; set; }
         public LineOfPlane1X0Y LineOfPlane1X0Y { get; set; }
         public LineOfPlane2X0Z LineOfPlane2X0Z { get; set; }
         public LineOfPlane3Y0Z LineOfPlane3Y0Z { get; set; }
@@ -281,6 +283,20 @@ namespace GraphicsModule.Geometry.Objects.Lines
                                     new Point2D(LineOfPlane3Y0Z.pts[1].X - 10, LineOfPlane3Y0Z.pts[1].Y));
                 LineOfPlane2X0Z.pts[1] = Calculate.IntersectionPoint(ln, LineOfPlane2X0Z, frameCenter);
             }
+        }
+        public Name GetName()
+        {
+            var name = new Name(Name.Value.Remove(Name.Value.IndexOf("'", StringComparison.Ordinal)), Name.Dx, Name.Dy);
+            return name;
+        }
+        public void SetName(Name name)
+        {
+            Name = new Name(name);
+            Point0.SetName(Name);
+            Point1.SetName(Name);
+            LineOfPlane1X0Y.SetName(Name);
+            LineOfPlane2X0Z.SetName(Name);
+            LineOfPlane3Y0Z.SetName(Name);
         }
     }
 }
