@@ -13,7 +13,7 @@ namespace GraphicsModule.CreateObjects
     public class CreatePoint2D : ICreate
     {
         private Point2D _source;
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
+        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
         {
             _source = new Point2D(pt);
             _source.Name = GraphicsControl.NmGenerator.Generate(_source);
@@ -27,7 +27,7 @@ namespace GraphicsModule.CreateObjects
     public class CreatePointOfPlane1X0Y : ICreate
     {
         private PointOfPlane1X0Y _source;
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
+        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
         {
             if (!PointOfPlane1X0Y.Creatable(pt, frameCenter)) return;
             _source = new PointOfPlane1X0Y(pt, frameCenter);
@@ -42,7 +42,7 @@ namespace GraphicsModule.CreateObjects
     public class CreatePointOfPlane2X0Z : ICreate
     {
         private PointOfPlane2X0Z _source;
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
+        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
         {
             if (!PointOfPlane2X0Z.Creatable(pt, frameCenter)) return;
             _source = new PointOfPlane2X0Z(pt, frameCenter);
@@ -57,7 +57,7 @@ namespace GraphicsModule.CreateObjects
     public class CreatePointOfPlane3Y0Z : ICreate
     {
         private PointOfPlane3Y0Z _source;
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
+        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
         {
             if (!PointOfPlane3Y0Z.Creatable(pt, frameCenter)) return;
             _source = new PointOfPlane3Y0Z(pt, frameCenter);
@@ -72,7 +72,7 @@ namespace GraphicsModule.CreateObjects
     public class CreatePoint3D : ICreate
     {
         private Point3D _source;
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
+        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
         {
             var ptOfPlane = TypeOf.PointOfPlane(pt, frameCenter);
             if (strg.TempObjects.Count == 0)
@@ -113,7 +113,7 @@ namespace GraphicsModule.CreateObjects
     public class GeneratePoint3D : ICreate
     {
         private Point3D _source;
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
+        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
         {
             new SelectPointOfPlane().Execute(pt, strg, can);
             if (strg.SelectedObjects.Count > 1)

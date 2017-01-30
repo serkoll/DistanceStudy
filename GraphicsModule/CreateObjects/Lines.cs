@@ -16,7 +16,7 @@ namespace GraphicsModule.CreateObjects
     public class CreateLine2D : ICreate
     {
         private Line2D _source;
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas can, DrawS settings, Storage strg)
+        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas.Canvas can, DrawS settings, Storage strg)
         {
             var ptOfPlane = new Point2D(pt);
             if (strg.TempObjects.Count == 0)
@@ -42,7 +42,7 @@ namespace GraphicsModule.CreateObjects
     public class CreateLineOfPlane1X0Y : ICreate
     {
         private LineOfPlane1X0Y _source;
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
+        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
         {
             if (PointOfPlane1X0Y.Creatable(pt, frameCenter))
             {
@@ -72,7 +72,7 @@ namespace GraphicsModule.CreateObjects
     public class CreateLineOfPlane2X0Z : ICreate
     {
         private LineOfPlane2X0Z _source;
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
+        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
         {
             if (PointOfPlane2X0Z.Creatable(pt, frameCenter))
             {
@@ -102,7 +102,7 @@ namespace GraphicsModule.CreateObjects
     public class CreateLineOfPlane3Y0Z : ICreate
     {
         private LineOfPlane3Y0Z _source;
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
+        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
         {
             if (PointOfPlane3Y0Z.Creatable(pt, frameCenter))
             {
@@ -133,7 +133,7 @@ namespace GraphicsModule.CreateObjects
     {
         private IObject _tempLineOfPlane;
         private Line3D _source;
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
+        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
         {
             var ptOfPlane = TypeOf.PointOfPlane(pt, frameCenter);
             if (strg.TempObjects.Count == 0)
@@ -173,7 +173,7 @@ namespace GraphicsModule.CreateObjects
                 }
             }
         }
-        protected bool IsLine3DCreatable(IObject ln1, IObject ln2, DrawS st, Point frameCenter, Canvas can)
+        protected bool IsLine3DCreatable(IObject ln1, IObject ln2, DrawS st, Point frameCenter, Canvas.Canvas can)
         {
             if (ln1 == null) return false;
             if(ln1.GetType() == typeof(LineOfPlane1X0Y) && ln2.GetType() == typeof(LineOfPlane2X0Z))
@@ -215,7 +215,7 @@ namespace GraphicsModule.CreateObjects
             }
             return false;
         }
-        protected IObject CreateLineOfPlane(Collection<IObject> obj, DrawS st, Point frameCenter, Canvas can)
+        protected IObject CreateLineOfPlane(Collection<IObject> obj, DrawS st, Point frameCenter, Canvas.Canvas can)
         {
             if (obj[0].GetType() == typeof(PointOfPlane1X0Y))
             {
@@ -310,7 +310,7 @@ namespace GraphicsModule.CreateObjects
     public class GenerateLine3D: ICreate
     {
         private Line3D _source;
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
+        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
         {
             new SelectLineOfPlane().Execute(pt, strg, can);
             if (strg.SelectedObjects.Count > 1)

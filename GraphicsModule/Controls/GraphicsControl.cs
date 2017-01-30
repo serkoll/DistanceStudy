@@ -30,7 +30,7 @@ namespace GraphicsModule.Controls
         /// <summary>
         /// Полотно отрисовки
         /// </summary>
-        private Canvas _canvas;
+        private Canvas.Canvas _canvas;
         /// <summary>
         /// Хранилище графических объектов
         /// </summary>
@@ -145,7 +145,7 @@ namespace GraphicsModule.Controls
             var mousecoords = MainPictureBox.PointToClient(MousePosition);  //Получаем координаты курсора мыши
             if (SetObject != null) //Контроль существования объекта
             {
-                SetObject.AddToStorageAndDraw(mousecoords, _canvas.Grid.CenterPoint, _canvas, _settings.DrawS, _storage); //Отрисовываем объект и добавляем его в коллекцию объектов
+                SetObject.AddToStorageAndDraw(mousecoords, _canvas.CenterSystemPoint, _canvas, _settings.DrawS, _storage); //Отрисовываем объект и добавляем его в коллекцию объектов
                 _canvas.Refresh(); //Перерисовывам полотно
             }
             if (Operations != null) //Наличие операции над объектами
@@ -162,8 +162,8 @@ namespace GraphicsModule.Controls
         private void MainPictureBox_MouseMove(object sender, MouseEventArgs e)
         {
             _crMove.CursorPointToGridMove(_canvas); // Привязка к сетке
-            labelValueX.Text = (MainPictureBox.PointToClient(Cursor.Position).X - _canvas.Axis.Center.X).ToString();
-            labelValueY.Text = (MainPictureBox.PointToClient(Cursor.Position).Y - _canvas.Axis.Center.Y).ToString();
+            labelValueX.Text = (MainPictureBox.PointToClient(Cursor.Position).X - _canvas.CenterSystemPoint.X).ToString();
+            labelValueY.Text = (MainPictureBox.PointToClient(Cursor.Position).Y - _canvas.CenterSystemPoint.Y).ToString();
         }
         /// <summary>
         /// Вызов контекстного меню точек
@@ -199,13 +199,13 @@ namespace GraphicsModule.Controls
             if (labelStatusGrid.BorderStyle == Border3DStyle.RaisedInner)
             {
                 labelStatusGrid.BorderStyle = Border3DStyle.SunkenOuter;
-                _canvas.St.GridS.IsDraw = true;
+                _canvas.Setting.GridS.IsDraw = true;
                 _canvas.Update(_storage);
             }
             else
             {
                 labelStatusGrid.BorderStyle = Border3DStyle.RaisedInner;
-                _canvas.St.GridS.IsDraw = false;
+                _canvas.Setting.GridS.IsDraw = false;
                 _canvas.Update(_storage);
             }
         }
@@ -219,13 +219,13 @@ namespace GraphicsModule.Controls
             if (labelSatusAxis.BorderStyle == Border3DStyle.RaisedInner)
             {
                 labelSatusAxis.BorderStyle = Border3DStyle.SunkenOuter;
-                _canvas.St.AxisS.IsDraw = true;
+                _canvas.Setting.AxisS.IsDraw = true;
                 _canvas.Update(_storage);
             }
             else
             {
                 labelSatusAxis.BorderStyle = Border3DStyle.RaisedInner;
-                _canvas.St.AxisS.IsDraw = false;
+                _canvas.Setting.AxisS.IsDraw = false;
                 _canvas.Update(_storage);
             }
         }
@@ -300,13 +300,13 @@ namespace GraphicsModule.Controls
             if (labelStatusLinkLine.BorderStyle == Border3DStyle.RaisedInner)
             {
                 labelStatusLinkLine.BorderStyle = Border3DStyle.SunkenOuter;
-                _canvas.St.DrawS.LinkLineSettings.IsDraw = true;
+                _canvas.Setting.DrawS.LinkLineSettings.IsDraw = true;
                 _canvas.Update(_storage);
             }
             else
             {
                 labelStatusLinkLine.BorderStyle = Border3DStyle.RaisedInner;
-                _canvas.St.DrawS.LinkLineSettings.IsDraw = false;
+                _canvas.Setting.DrawS.LinkLineSettings.IsDraw = false;
                 _canvas.Update(_storage);
             }
         }
@@ -346,7 +346,7 @@ namespace GraphicsModule.Controls
         }
         private void GraphicsControl_Load(object sender, EventArgs e)
         {
-            _canvas = new Canvas(_settings, MainPictureBox); // Инициализируем полотно отрисовки
+            _canvas = new Canvas.Canvas(_settings, MainPictureBox); // Инициализируем полотно отрисовки
             if(_storage == null) _storage = new Storage(); // инициализируем хранилище графических объектов
         }
         private void solidWorksToolStripMenuItem_Click(object sender, EventArgs e)
@@ -355,9 +355,9 @@ namespace GraphicsModule.Controls
             if (sldWorksObject.Connect())
             {
                 sldWorksObject.SetActiveDocument();
-                sldWorksObject.ImportGrid(_canvas.Grid);
-                sldWorksObject.ImportAxis(_canvas.Axis);
-                sldWorksObject.ImportCollectionToActiveDoc(_storage.Objects, _canvas.St.DrawS);
+                sldWorksObject.ImportGrid(_canvas.Bckground.Grid);
+                sldWorksObject.ImportAxis(_canvas.Bckground.Axis);
+                sldWorksObject.ImportCollectionToActiveDoc(_storage.Objects, _canvas.Setting.DrawS);
             }
             else
             {
