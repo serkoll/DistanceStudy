@@ -28,6 +28,10 @@ namespace GraphicsModule.Controls
         /// </summary>
         private readonly Menu.SegmentMenuSelector _sgMenuSelector;
         /// <summary>
+        /// Меню создания плоскостей
+        /// </summary>
+        private readonly Menu.PlaneMenuSelector _plMenuSelector;
+        /// <summary>
         /// Полотно отрисовки
         /// </summary>
         private Canvas.Canvas _canvas;
@@ -81,9 +85,11 @@ namespace GraphicsModule.Controls
             _ptMenuSelector = new Menu.PointMenuSelector(MainPictureBox, buttonPointsMenu, statusStripObjectMenu); //Создаем меню вариантов для точек
             _lnMenuSelector = new Menu.LineMenuSelector(MainPictureBox, buttonLinesMenu, statusStripObjectMenu); //Создаем меню вариантов для линий
             _sgMenuSelector = new Menu.SegmentMenuSelector(MainPictureBox, buttonSegmentMenu, statusStripObjectMenu); //Создаем меню вариантов для отрезков
+            _plMenuSelector = new Menu.PlaneMenuSelector(MainPictureBox, buttonPlanesMenu, statusStripObjectMenu);
             Controls.Add(_ptMenuSelector); //Добавляем к контролам компонента
             Controls.Add(_lnMenuSelector); //Добавляем к контролам компонента
             Controls.Add(_sgMenuSelector); //Добавляем к контролам компонента
+            Controls.Add(_plMenuSelector);
         }
         /// <summary>
         /// Импорт графических объектов
@@ -115,6 +121,7 @@ namespace GraphicsModule.Controls
             _ptMenuSelector.Visible = false;
             _lnMenuSelector.Visible = false;
             _sgMenuSelector.Visible = false;
+            _plMenuSelector.Visible = false;
         }
         /// <summary>
         /// Включение/выключение привязки к сетке
@@ -389,6 +396,14 @@ namespace GraphicsModule.Controls
         private void правыйНижнийToolStripMenuItem_Click(object sender, EventArgs e)
         {
             NmGenerator.Position = 3;
+        }
+
+        private void buttonPlaneMenu_Click(object sender, EventArgs e)
+        {
+            HideMenus();
+            _plMenuSelector.Location = new Point(graphicsToolBarStrip.Size.Width, graphicsToolBarStrip.Location.Y + buttonPointsMenu.Size.Height + buttonLinesMenu.Size.Height + buttonPlanesMenu.Size.Height);
+            _plMenuSelector.Visible = true;
+            _plMenuSelector.BringToFront();
         }
     }
 }

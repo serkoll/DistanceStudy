@@ -55,6 +55,7 @@ namespace GraphicsModule.Controls
             this.buttonPointsMenu = new System.Windows.Forms.ToolStripButton();
             this.buttonLinesMenu = new System.Windows.Forms.ToolStripButton();
             this.buttonSegmentMenu = new System.Windows.Forms.ToolStripButton();
+            this.buttonPlanesMenu = new System.Windows.Forms.ToolStripButton();
             this.basicToolBarStrip = new System.Windows.Forms.ToolStrip();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.buttonCopy = new System.Windows.Forms.ToolStripButton();
@@ -293,7 +294,8 @@ namespace GraphicsModule.Controls
             this.graphicsToolBarStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.buttonPointsMenu,
             this.buttonLinesMenu,
-            this.buttonSegmentMenu});
+            this.buttonSegmentMenu,
+            this.buttonPlanesMenu});
             this.graphicsToolBarStrip.Location = new System.Drawing.Point(0, 55);
             this.graphicsToolBarStrip.Name = "graphicsToolBarStrip";
             this.baseTableLayoutPanel.SetRowSpan(this.graphicsToolBarStrip, 2);
@@ -330,6 +332,17 @@ namespace GraphicsModule.Controls
             this.buttonSegmentMenu.Size = new System.Drawing.Size(34, 36);
             this.buttonSegmentMenu.Text = "Отрезок";
             this.buttonSegmentMenu.Click += new System.EventHandler(this.buttonSegmentMenu_Click);
+            // 
+            // buttonPlanesMenu
+            // 
+            this.buttonPlanesMenu.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonPlanesMenu.Image = ((System.Drawing.Image)(resources.GetObject("buttonPlanesMenu.Image")));
+            this.buttonPlanesMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonPlanesMenu.Name = "buttonPlanesMenu";
+            this.buttonPlanesMenu.Size = new System.Drawing.Size(34, 36);
+            this.buttonPlanesMenu.Text = "toolStripButton1";
+            this.buttonPlanesMenu.ToolTipText = "Плоскость";
+            this.buttonPlanesMenu.Click += new System.EventHandler(this.buttonPlaneMenu_Click);
             // 
             // basicToolBarStrip
             // 
@@ -636,6 +649,7 @@ namespace GraphicsModule.Controls
         private ToolStripMenuItem правыйВерхнийToolStripMenuItem;
         private ToolStripMenuItem левыйНижнийToolStripMenuItem;
         private ToolStripMenuItem правыйНижнийToolStripMenuItem;
+        private ToolStripButton buttonPlanesMenu;
     }
 
 
