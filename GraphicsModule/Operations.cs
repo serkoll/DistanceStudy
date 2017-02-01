@@ -123,7 +123,6 @@ namespace GraphicsModule
                     return;
                 }
             }
-
         }
     }
 }

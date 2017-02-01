@@ -4,7 +4,7 @@ using GraphicsModule.Geometry.Objects.Lines;
 using GraphicsModule.Geometry.Objects.Points;
 using Microsoft.VisualBasic;
 
-namespace GraphicsModule.Geometry.Planes
+namespace GraphicsModule.Geometry.Objects.Planes
 {
     public class PlaneSpace
     {
