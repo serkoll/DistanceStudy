@@ -12,13 +12,17 @@ namespace GraphicsModule.CreateObjects
     /// </summary>
     public class CreatePoint2D : ICreate
     {
-        private Point2D _source;
         public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
         {
-            _source = new Point2D(pt);
-            _source.SetName(GraphicsControl.NmGenerator.Generate());
-            strg.AddToCollection(_source);
+            strg.AddToCollection(Create(pt, frameCenter, can, setting, strg));
             strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
+        }
+
+        public Point2D Create(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
+        {
+            var source = new Point2D(pt);
+            source.SetName(GraphicsControl.NmGenerator.Generate());
+            return source;
         }
     }
     /// <summary>
@@ -26,14 +30,20 @@ namespace GraphicsModule.CreateObjects
     /// </summary>
     public class CreatePointOfPlane1X0Y : ICreate
     {
-        private PointOfPlane1X0Y _source;
         public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
         {
-            if (!PointOfPlane1X0Y.Creatable(pt, frameCenter)) return;
-            _source = new PointOfPlane1X0Y(pt, frameCenter);
-            _source.SetName(GraphicsControl.NmGenerator.Generate());
-            strg.AddToCollection(_source);
+            var source = Create(pt, frameCenter, can, setting, strg);
+            if (source == null) return;
+            strg.AddToCollection(source);
             strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
+        }
+
+        public PointOfPlane1X0Y Create(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
+        {
+            if (!PointOfPlane1X0Y.Creatable(pt, frameCenter)) return null;
+            var source = new PointOfPlane1X0Y(pt, frameCenter);
+            source.SetName(GraphicsControl.NmGenerator.Generate());
+            return source;
         }
     }
     /// <summary>

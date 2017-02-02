@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Linq;
 using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Geometry.Objects.Lines;
 using GraphicsModule.Geometry.Objects.Points;
@@ -15,22 +16,18 @@ namespace GraphicsModule.Geometry.Objects.Planes
         {
             Objects = new IObject[3];
         }
-
         public Plane2D(Point2D[] pts)
         {
             Objects = new IObject[pts.Length];
             Array.Copy(pts, Objects, pts.Length);
         }
-
         public Plane2D(Point2D pt1, Point2D pt2, Point2D pt3)
         {
             Objects = new IObject[] { pt1, pt2, pt3 };
         }
         public Plane2D(Line2D ln1, Point2D pt1)
         {
-            Objects = new IObject[2];
-            Objects[0] = ln1;
-            Objects[1] = pt1;
+            Objects = new IObject[] {ln1, pt1};
         }
         public Plane2D(Line2D ln1, Line2D ln2)
         {
@@ -45,11 +42,7 @@ namespace GraphicsModule.Geometry.Objects.Planes
         }
         public bool IsSelected(Point mousecoords, float ptR, Point frameCenter, double distance)
         {
-            foreach (var obj in Objects)
-            {
-                if (obj.IsSelected(mousecoords, ptR, frameCenter, distance)) return true;
-            }
-            return false;
+            return Objects.Any(obj => obj.IsSelected(mousecoords, ptR, frameCenter, distance));
         }
         public Name GetName()
         {
