@@ -75,6 +75,7 @@
     <Compile Include="Controls\Menu\SegmentMenuSelector.Designer.cs">
       <DependentUpon>SegmentMenuSelector.cs</DependentUpon>
     </Compile>
+    <Compile Include="CreateObjects\Planes.cs" />
     <Compile Include="Interfaces\ICreate.cs" />
     <Compile Include="CreateObjects\Lines.cs" />
     <Compile Include="CreateObjects\Points.cs" />

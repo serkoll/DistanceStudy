@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Drawing;
+using System.Security.Cryptography.X509Certificates;
 using GraphicsModule.Controls;
 using GraphicsModule.Geometry;
 using GraphicsModule.Geometry.Analyze;
@@ -16,8 +17,16 @@ namespace GraphicsModule.CreateObjects
     /// </summary>
     public class CreateLine2D : ICreate
     {
-        private Line2D _source;
         public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas.Canvas can, DrawS settings, Storage strg)
+        {
+            var obj = Create(pt, frameCenter, can, settings, strg);
+            if (obj == null) return;
+            strg.AddToCollection(obj);
+            can.Update(strg);
+            strg.DrawLastAddedToObjects(settings, frameCenter, can.Graphics);
+        }
+
+        public Line2D Create(Point pt, Point frameCenter, Canvas.Canvas can, DrawS settings, Storage strg)
         {
             var ptOfPlane = new Point2D(pt);
             if (strg.TempObjects.Count == 0)
@@ -28,15 +37,13 @@ namespace GraphicsModule.CreateObjects
             }
             else
             {
-                if (Analyze.PointPos.Coincidence((Point2D)strg.TempObjects[0], new Point2D(pt))) return;
-                _source = new Line2D((Point2D) strg.TempObjects[0], new Point2D(pt), can.PicBox);
-                _source.SetName(strg.TempObjects[0].GetName());
-                strg.AddToCollection(_source);
-                _source = null;
+                if (Analyze.PointPos.Coincidence((Point2D)strg.TempObjects[0], new Point2D(pt))) return null;
+                var source = new Line2D((Point2D)strg.TempObjects[0], new Point2D(pt), can.PicBox);
+                source.SetName(strg.TempObjects[0].GetName());
                 strg.TempObjects.Clear();
-                can.Update(strg);
-                strg.DrawLastAddedToObjects(settings, frameCenter, can.Graphics);
+                return source;
             }
+            return null;
         }
     }
     /// <summary>
@@ -45,6 +52,7 @@ namespace GraphicsModule.CreateObjects
     public class CreateLineOfPlane1X0Y : ICreate
     {
         private LineOfPlane1X0Y _source;
+
         public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
         {
             if (PointOfPlane1X0Y.Creatable(pt, frameCenter))
@@ -58,8 +66,10 @@ namespace GraphicsModule.CreateObjects
                 }
                 else
                 {
-                    if (Analyze.PointPos.Coincidence((PointOfPlane1X0Y)strg.TempObjects[0], new PointOfPlane1X0Y(pt, frameCenter))) return;
-                    _source = new LineOfPlane1X0Y((PointOfPlane1X0Y)strg.TempObjects[0], new PointOfPlane1X0Y(pt, frameCenter),
+                    if (Analyze.PointPos.Coincidence((PointOfPlane1X0Y)strg.TempObjects[0],
+                        new PointOfPlane1X0Y(pt, frameCenter))) return;
+                    _source = new LineOfPlane1X0Y((PointOfPlane1X0Y)strg.TempObjects[0],
+                        new PointOfPlane1X0Y(pt, frameCenter),
                         frameCenter, can.PlaneX0Y);
                     _source.SetName(strg.TempObjects[0].GetName());
                     strg.AddToCollection(_source);
@@ -71,12 +81,14 @@ namespace GraphicsModule.CreateObjects
             }
         }
     }
+
     /// <summary>
     /// Создание проекции линии на плоскость X0Z
     /// </summary>
     public class CreateLineOfPlane2X0Z : ICreate
     {
         private LineOfPlane2X0Z _source;
+
         public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
         {
             if (PointOfPlane2X0Z.Creatable(pt, frameCenter))
@@ -90,8 +102,10 @@ namespace GraphicsModule.CreateObjects
                 }
                 else
                 {
-                    if (Analyze.PointPos.Coincidence((PointOfPlane2X0Z)strg.TempObjects[0], new PointOfPlane2X0Z(pt, frameCenter))) return;
-                    _source = new LineOfPlane2X0Z((PointOfPlane2X0Z)strg.TempObjects[0], new PointOfPlane2X0Z(pt, frameCenter),
+                    if (Analyze.PointPos.Coincidence((PointOfPlane2X0Z)strg.TempObjects[0],
+                        new PointOfPlane2X0Z(pt, frameCenter))) return;
+                    _source = new LineOfPlane2X0Z((PointOfPlane2X0Z)strg.TempObjects[0],
+                        new PointOfPlane2X0Z(pt, frameCenter),
                         frameCenter, can.PlaneX0Z);
                     _source.SetName(strg.TempObjects[0].GetName());
                     strg.AddToCollection(_source);
@@ -103,12 +117,14 @@ namespace GraphicsModule.CreateObjects
             }
         }
     }
+
     /// <summary>
     /// Создание проекции линии на плоскость Y0Z
     /// </summary>
     public class CreateLineOfPlane3Y0Z : ICreate
     {
         private LineOfPlane3Y0Z _source;
+
         public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
         {
             if (PointOfPlane3Y0Z.Creatable(pt, frameCenter))
@@ -122,8 +138,10 @@ namespace GraphicsModule.CreateObjects
                 }
                 else
                 {
-                    if (Analyze.PointPos.Coincidence((PointOfPlane3Y0Z)strg.TempObjects[0], new PointOfPlane3Y0Z(pt, frameCenter))) return;
-                    _source = new LineOfPlane3Y0Z((PointOfPlane3Y0Z)strg.TempObjects[0], new PointOfPlane3Y0Z(pt, frameCenter),
+                    if (Analyze.PointPos.Coincidence((PointOfPlane3Y0Z)strg.TempObjects[0],
+                        new PointOfPlane3Y0Z(pt, frameCenter))) return;
+                    _source = new LineOfPlane3Y0Z((PointOfPlane3Y0Z)strg.TempObjects[0],
+                        new PointOfPlane3Y0Z(pt, frameCenter),
                         frameCenter, can.PlaneY0Z);
                     _source.SetName(strg.TempObjects[0].GetName());
                     strg.AddToCollection(_source);
@@ -135,6 +153,7 @@ namespace GraphicsModule.CreateObjects
             }
         }
     }
+
     /// <summary>
     /// Создание 3D линии
     /// </summary>
@@ -142,6 +161,7 @@ namespace GraphicsModule.CreateObjects
     {
         private IObject _tempLineOfPlane;
         private Line3D _source;
+
         public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
         {
             var ptOfPlane = TypeOf.PointOfPlane(pt, frameCenter);
@@ -163,7 +183,8 @@ namespace GraphicsModule.CreateObjects
             }
             else
             {
-                if (ReferenceEquals(strg.TempObjects[0].GetType(), ptOfPlane.GetType()) && (_tempLineOfPlane == null))
+                if (ReferenceEquals(strg.TempObjects[0].GetType(), ptOfPlane.GetType()) &&
+                    (_tempLineOfPlane == null))
                 {
                     strg.TempObjects.Add(ptOfPlane);
                     _tempLineOfPlane = CreateLineOfPlane(strg.TempObjects, setting, frameCenter, can);
@@ -175,7 +196,10 @@ namespace GraphicsModule.CreateObjects
                 else if (IsOnLinkLine(_tempLineOfPlane, ptOfPlane))
                 {
                     strg.TempObjects.Add(ptOfPlane);
-                    if (!IsLine3DCreatable(_tempLineOfPlane, CreateLineOfPlane(strg.TempObjects, setting, frameCenter, can), setting, frameCenter, can)) return;
+                    if (
+                        !IsLine3DCreatable(_tempLineOfPlane,
+                            CreateLineOfPlane(strg.TempObjects, setting, frameCenter, can), setting, frameCenter,
+                            can)) return;
                     _source.SetName(_tempLineOfPlane.GetName());
                     strg.TempObjects.Clear();
                     _tempLineOfPlane = null;
@@ -185,6 +209,7 @@ namespace GraphicsModule.CreateObjects
                 }
             }
         }
+
         protected bool IsLine3DCreatable(IObject ln1, IObject ln2, DrawS st, Point frameCenter, Canvas.Canvas can)
         {
             if (ln1 == null) return false;
@@ -227,6 +252,7 @@ namespace GraphicsModule.CreateObjects
             }
             return false;
         }
+
         protected IObject CreateLineOfPlane(Collection<IObject> obj, DrawS st, Point frameCenter, Canvas.Canvas can)
         {
             if (obj[0].GetType() == typeof(PointOfPlane1X0Y))
@@ -248,6 +274,7 @@ namespace GraphicsModule.CreateObjects
                 return source;
             }
         }
+
         protected bool IsInOnePlane(IObject lnproj, IObject ptproj)
         {
             if (lnproj.GetType() == typeof(LineOfPlane1X0Y) && ptproj.GetType() == typeof(PointOfPlane1X0Y))
@@ -264,6 +291,7 @@ namespace GraphicsModule.CreateObjects
             }
             return false;
         }
+
         protected bool IsOnLinkLine(IObject lnproj, IObject ptproj)
         {
             if (lnproj.GetType() == typeof(LineOfPlane1X0Y) && ptproj.GetType() == typeof(PointOfPlane2X0Z))
@@ -292,36 +320,46 @@ namespace GraphicsModule.CreateObjects
             }
             return false;
         }
+
         #region IsOnLinkLine
+
         protected bool IsOnLinkLine12(LineOfPlane1X0Y lnproj, PointOfPlane2X0Z ptproj)
         {
             return lnproj.Point0.X == ptproj.X || lnproj.Point1.X == ptproj.X;
         }
+
         protected bool IsOnLinkLine13(LineOfPlane1X0Y lnproj, PointOfPlane3Y0Z ptproj)
         {
             return lnproj.Point0.Y == ptproj.Y || lnproj.Point1.Y == ptproj.Y;
         }
+
         protected bool IsOnLinkLine21(LineOfPlane2X0Z lnproj, PointOfPlane1X0Y ptproj)
         {
             return lnproj.Point0.X == ptproj.X || lnproj.Point1.X == ptproj.X;
         }
+
         protected bool IsOnLinkLine23(LineOfPlane2X0Z lnproj, PointOfPlane3Y0Z ptproj)
         {
             return lnproj.Point0.Z == ptproj.Z || lnproj.Point1.Z == ptproj.Z;
         }
+
         protected bool IsOnLinkLine31(LineOfPlane3Y0Z lnproj, PointOfPlane1X0Y ptproj)
         {
             return lnproj.Point0.Y == ptproj.Y || lnproj.Point1.Y == ptproj.Y;
         }
+
         protected bool IsOnLinkLine32(LineOfPlane3Y0Z lnproj, PointOfPlane2X0Z ptproj)
         {
             return lnproj.Point0.Z == ptproj.Z || lnproj.Point1.Z == ptproj.Z;
         }
+
         #endregion
     }
+
     public class GenerateLine3D : ICreate
     {
         private Line3D _source;
+
         public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
         {
             new SelectLineOfPlane().Execute(pt, strg, can);

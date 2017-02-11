@@ -21,6 +21,7 @@ namespace GraphicsModule.Controls.Menu
             Visible = false;
             GraphicsControl.Operations = null;
             _menuStrip.Visible = true;
+            _menuStrip.Items[2].Visible = false;
         }
         private void buttonLine2D_Click(object sender, EventArgs e)
         {

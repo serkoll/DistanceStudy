@@ -15,23 +15,28 @@ namespace GraphicsModule.Geometry.Objects.Planes
         public Plane2D()
         {
             Objects = new IObject[3];
+            _name = new Name();
         }
         public Plane2D(Point2D[] pts)
         {
             Objects = new IObject[pts.Length];
             Array.Copy(pts, Objects, pts.Length);
+            _name = new Name();
         }
         public Plane2D(Point2D pt1, Point2D pt2, Point2D pt3)
         {
             Objects = new IObject[] { pt1, pt2, pt3 };
+            _name = new Name();
         }
         public Plane2D(Line2D ln1, Point2D pt1)
         {
             Objects = new IObject[] {ln1, pt1};
+            _name = new Name();
         }
         public Plane2D(Line2D ln1, Line2D ln2)
         {
             Objects = new IObject[] { ln1, ln2 };
+            _name = new Name();
         }
         public void Draw(DrawS st, Point frameCenter, Graphics graphics)
         {
@@ -50,7 +55,13 @@ namespace GraphicsModule.Geometry.Objects.Planes
         }
         public void SetName(Name name)
         {
-            _name = new Name(_name);
+            _name = new Name(name);
+            foreach (var t in Objects)
+            {
+                var n = t.GetName();
+                n.Value += _name.Value;
+                t.SetName(n);
+            }
         }
     }
 }

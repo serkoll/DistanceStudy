@@ -46,11 +46,16 @@ namespace GraphicsModule.Controls
             this.labelExternalEntitiy = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStripObjectMenu = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel_Help = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
-            this.левыйВерхнийToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.правыйВерхнийToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.левыйНижнийToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.правыйНижнийToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonNameMenu = new System.Windows.Forms.ToolStripDropDownButton();
+            this.buttonNameMenuTopLeft = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonNameMenuTopRight = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonNameMenuBottomLeft = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonNameMenuBottomRight = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonPlaneTypeMenu = new System.Windows.Forms.ToolStripDropDownButton();
+            this.buttonPlaneType3Points = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonPlaneTypeLinePoint = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonPlaneTypeParrLine = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonPlaneTypeCrossedLine = new System.Windows.Forms.ToolStripMenuItem();
             this.graphicsToolBarStrip = new System.Windows.Forms.ToolStrip();
             this.buttonPointsMenu = new System.Windows.Forms.ToolStripButton();
             this.buttonLinesMenu = new System.Windows.Forms.ToolStripButton();
@@ -228,7 +233,8 @@ namespace GraphicsModule.Controls
             this.statusStripObjectMenu.Dock = System.Windows.Forms.DockStyle.Fill;
             this.statusStripObjectMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel_Help,
-            this.toolStripDropDownButton1});
+            this.buttonNameMenu,
+            this.buttonPlaneTypeMenu});
             this.statusStripObjectMenu.Location = new System.Drawing.Point(36, 541);
             this.statusStripObjectMenu.Name = "statusStripObjectMenu";
             this.statusStripObjectMenu.Size = new System.Drawing.Size(1203, 27);
@@ -243,47 +249,92 @@ namespace GraphicsModule.Controls
             this.toolStripStatusLabel_Help.Size = new System.Drawing.Size(64, 22);
             this.toolStripStatusLabel_Help.Text = "Подсказка";
             // 
-            // toolStripDropDownButton1
+            // buttonNameMenu
             // 
-            this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.левыйВерхнийToolStripMenuItem,
-            this.правыйВерхнийToolStripMenuItem,
-            this.левыйНижнийToolStripMenuItem,
-            this.правыйНижнийToolStripMenuItem});
-            this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
-            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
-            this.toolStripDropDownButton1.Size = new System.Drawing.Size(29, 25);
-            this.toolStripDropDownButton1.Text = "toolStripDropDownButton1";
+            this.buttonNameMenu.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.buttonNameMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.buttonNameMenuTopLeft,
+            this.buttonNameMenuTopRight,
+            this.buttonNameMenuBottomLeft,
+            this.buttonNameMenuBottomRight});
+            this.buttonNameMenu.Image = ((System.Drawing.Image)(resources.GetObject("buttonNameMenu.Image")));
+            this.buttonNameMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonNameMenu.Name = "buttonNameMenu";
+            this.buttonNameMenu.Size = new System.Drawing.Size(104, 25);
+            this.buttonNameMenu.Text = "Левый верхний";
+            this.buttonNameMenu.ToolTipText = "buttonNamePosition";
             // 
-            // левыйВерхнийToolStripMenuItem
+            // buttonNameMenuTopLeft
             // 
-            this.левыйВерхнийToolStripMenuItem.Name = "левыйВерхнийToolStripMenuItem";
-            this.левыйВерхнийToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
-            this.левыйВерхнийToolStripMenuItem.Text = "Левый верхний";
-            this.левыйВерхнийToolStripMenuItem.Click += new System.EventHandler(this.левыйВерхнийToolStripMenuItem_Click);
+            this.buttonNameMenuTopLeft.Name = "buttonNameMenuTopLeft";
+            this.buttonNameMenuTopLeft.Size = new System.Drawing.Size(166, 22);
+            this.buttonNameMenuTopLeft.Text = "Левый верхний";
+            this.buttonNameMenuTopLeft.Click += new System.EventHandler(this.buttonNameMenuTopLeftMenuItem_Click);
             // 
-            // правыйВерхнийToolStripMenuItem
+            // buttonNameMenuTopRight
             // 
-            this.правыйВерхнийToolStripMenuItem.Name = "правыйВерхнийToolStripMenuItem";
-            this.правыйВерхнийToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
-            this.правыйВерхнийToolStripMenuItem.Text = "Правый верхний";
-            this.правыйВерхнийToolStripMenuItem.Click += new System.EventHandler(this.правыйВерхнийToolStripMenuItem_Click);
+            this.buttonNameMenuTopRight.Name = "buttonNameMenuTopRight";
+            this.buttonNameMenuTopRight.Size = new System.Drawing.Size(166, 22);
+            this.buttonNameMenuTopRight.Text = "Правый верхний";
+            this.buttonNameMenuTopRight.Click += new System.EventHandler(this.buttonNameMenuTopRightMenuItem_Click);
             // 
-            // левыйНижнийToolStripMenuItem
+            // buttonNameMenuBottomLeft
             // 
-            this.левыйНижнийToolStripMenuItem.Name = "левыйНижнийToolStripMenuItem";
-            this.левыйНижнийToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
-            this.левыйНижнийToolStripMenuItem.Text = "Левый нижний";
-            this.левыйНижнийToolStripMenuItem.Click += new System.EventHandler(this.левыйНижнийToolStripMenuItem_Click);
+            this.buttonNameMenuBottomLeft.Name = "buttonNameMenuBottomLeft";
+            this.buttonNameMenuBottomLeft.Size = new System.Drawing.Size(166, 22);
+            this.buttonNameMenuBottomLeft.Text = "Левый нижний";
+            this.buttonNameMenuBottomLeft.Click += new System.EventHandler(this.buttonNameMenuBottomLeftMenuItem_Click);
             // 
-            // правыйНижнийToolStripMenuItem
+            // buttonNameMenuBottomRight
             // 
-            this.правыйНижнийToolStripMenuItem.Name = "правыйНижнийToolStripMenuItem";
-            this.правыйНижнийToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
-            this.правыйНижнийToolStripMenuItem.Text = "Правый нижний";
-            this.правыйНижнийToolStripMenuItem.Click += new System.EventHandler(this.правыйНижнийToolStripMenuItem_Click);
+            this.buttonNameMenuBottomRight.Name = "buttonNameMenuBottomRight";
+            this.buttonNameMenuBottomRight.Size = new System.Drawing.Size(166, 22);
+            this.buttonNameMenuBottomRight.Text = "Правый нижний";
+            this.buttonNameMenuBottomRight.Click += new System.EventHandler(this.buttonNameMenuBottomRightMenuItem_Click);
+            // 
+            // buttonPlaneTypeMenu
+            // 
+            this.buttonPlaneTypeMenu.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.buttonPlaneTypeMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.buttonPlaneType3Points,
+            this.buttonPlaneTypeLinePoint,
+            this.buttonPlaneTypeParrLine,
+            this.buttonPlaneTypeCrossedLine});
+            this.buttonPlaneTypeMenu.Image = ((System.Drawing.Image)(resources.GetObject("buttonPlaneTypeMenu.Image")));
+            this.buttonPlaneTypeMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonPlaneTypeMenu.Name = "buttonPlaneTypeMenu";
+            this.buttonPlaneTypeMenu.Size = new System.Drawing.Size(76, 25);
+            this.buttonPlaneTypeMenu.Text = "Три точки";
+            this.buttonPlaneTypeMenu.ToolTipText = "buttonPlaneType";
+            this.buttonPlaneTypeMenu.Visible = false;
+            // 
+            // buttonPlaneType3Points
+            // 
+            this.buttonPlaneType3Points.Name = "buttonPlaneType3Points";
+            this.buttonPlaneType3Points.Size = new System.Drawing.Size(219, 22);
+            this.buttonPlaneType3Points.Text = "Три точки";
+            this.buttonPlaneType3Points.Click += new System.EventHandler(this.buttonPlaneType3Points_Click);
+            // 
+            // buttonPlaneTypeLinePoint
+            // 
+            this.buttonPlaneTypeLinePoint.Name = "buttonPlaneTypeLinePoint";
+            this.buttonPlaneTypeLinePoint.Size = new System.Drawing.Size(219, 22);
+            this.buttonPlaneTypeLinePoint.Text = "Прямая и точка";
+            this.buttonPlaneTypeLinePoint.Click += new System.EventHandler(this.buttonPlaneTypeLinePoint_Click);
+            // 
+            // buttonPlaneTypeParrLine
+            // 
+            this.buttonPlaneTypeParrLine.Name = "buttonPlaneTypeParrLine";
+            this.buttonPlaneTypeParrLine.Size = new System.Drawing.Size(219, 22);
+            this.buttonPlaneTypeParrLine.Text = "Параллельные прямые";
+            this.buttonPlaneTypeParrLine.Click += new System.EventHandler(this.buttonPlaneTypeParrLine_Click);
+            // 
+            // buttonPlaneTypeCrossedLine
+            // 
+            this.buttonPlaneTypeCrossedLine.Name = "buttonPlaneTypeCrossedLine";
+            this.buttonPlaneTypeCrossedLine.Size = new System.Drawing.Size(219, 22);
+            this.buttonPlaneTypeCrossedLine.Text = "Пересекающиеся прямые";
+            this.buttonPlaneTypeCrossedLine.Click += new System.EventHandler(this.buttonPlaneTypeCrossedLine_Click);
             // 
             // graphicsToolBarStrip
             // 
@@ -644,12 +695,17 @@ namespace GraphicsModule.Controls
         private ToolStripButton buttonSegmentMenu;
         private ToolStripMenuItem импортToolStripMenuItem;
         private ToolStripMenuItem solidWorksToolStripMenuItem;
-        private ToolStripDropDownButton toolStripDropDownButton1;
-        private ToolStripMenuItem левыйВерхнийToolStripMenuItem;
-        private ToolStripMenuItem правыйВерхнийToolStripMenuItem;
-        private ToolStripMenuItem левыйНижнийToolStripMenuItem;
-        private ToolStripMenuItem правыйНижнийToolStripMenuItem;
+        private ToolStripDropDownButton buttonNameMenu;
+        private ToolStripMenuItem buttonNameMenuTopLeft;
+        private ToolStripMenuItem buttonNameMenuTopRight;
+        private ToolStripMenuItem buttonNameMenuBottomLeft;
+        private ToolStripMenuItem buttonNameMenuBottomRight;
         private ToolStripButton buttonPlanesMenu;
+        private ToolStripDropDownButton buttonPlaneTypeMenu;
+        private ToolStripMenuItem buttonPlaneType3Points;
+        private ToolStripMenuItem buttonPlaneTypeLinePoint;
+        private ToolStripMenuItem buttonPlaneTypeParrLine;
+        private ToolStripMenuItem buttonPlaneTypeCrossedLine;
     }
 
 

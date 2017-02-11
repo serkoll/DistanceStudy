@@ -21,11 +21,12 @@ namespace GraphicsModule.Controls.Menu
             Visible = false;
             GraphicsControl.Operations = null;
             _menuStrip.Visible = true;
+            _menuStrip.Items[2].Visible = true;
         }
         private void buttonPlane2D_Click(object sender, EventArgs e)
         {
             _mainPictureBox.Cursor = System.Windows.Forms.Cursors.Cross;
-            GraphicsControl.SetObject = new CreateLine2D();
+            GraphicsControl.SetObject = new CreatePlane2D();
             _mainStripButton.Image = buttonPlane2D.Image;
         }
         private void buttonPlaneOfPlane1X0Y_Click(object sender, EventArgs e)

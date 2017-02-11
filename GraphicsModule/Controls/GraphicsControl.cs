@@ -371,7 +371,6 @@ namespace GraphicsModule.Controls
                 MessageBox.Show(@"Не удалось подключиться к SolidWorks");
             }
         }
-
         private void GraphicsControl_Resize(object sender, EventArgs e)
         {
             if (_storage != null)
@@ -380,30 +379,49 @@ namespace GraphicsModule.Controls
                 _canvas.Update(_storage);
             }
         }
-        private void левыйВерхнийToolStripMenuItem_Click(object sender, EventArgs e)
+        private void buttonNameMenuTopLeftMenuItem_Click(object sender, EventArgs e)
         {
             NmGenerator.Position = 0;
+            buttonNameMenu.Text = buttonNameMenuTopLeft.Text;
         }
-        private void правыйВерхнийToolStripMenuItem_Click(object sender, EventArgs e)
+        private void buttonNameMenuTopRightMenuItem_Click(object sender, EventArgs e)
         {
             NmGenerator.Position = 1;
+            buttonNameMenu.Text = buttonNameMenuTopRight.Text;
         }
-
-        private void левыйНижнийToolStripMenuItem_Click(object sender, EventArgs e)
+        private void buttonNameMenuBottomLeftMenuItem_Click(object sender, EventArgs e)
         {
             NmGenerator.Position = 2;
+            buttonNameMenu.Text = buttonNameMenuBottomLeft.Text;
         }
-        private void правыйНижнийToolStripMenuItem_Click(object sender, EventArgs e)
+        private void buttonNameMenuBottomRightMenuItem_Click(object sender, EventArgs e)
         {
             NmGenerator.Position = 3;
+            buttonNameMenu.Text = buttonNameMenuBottomRight.Text;
         }
-
         private void buttonPlaneMenu_Click(object sender, EventArgs e)
         {
             HideMenus();
             _plMenuSelector.Location = new Point(graphicsToolBarStrip.Size.Width, graphicsToolBarStrip.Location.Y + buttonPointsMenu.Size.Height + buttonLinesMenu.Size.Height + buttonPlanesMenu.Size.Height);
             _plMenuSelector.Visible = true;
             _plMenuSelector.BringToFront();
+        }
+        private void buttonPlaneType3Points_Click(object sender, EventArgs e)
+        {
+            
+            buttonPlanesMenu.Text = buttonPlaneType3Points.Text;
+        }
+        private void buttonPlaneTypeLinePoint_Click(object sender, EventArgs e)
+        {
+            buttonPlanesMenu.Text = buttonPlaneTypeLinePoint.Text;
+        }
+        private void buttonPlaneTypeParrLine_Click(object sender, EventArgs e)
+        {
+            buttonPlanesMenu.Text = buttonPlaneTypeParrLine.Text;
+        }
+        private void buttonPlaneTypeCrossedLine_Click(object sender, EventArgs e)
+        {
+            buttonPlanesMenu.Text = buttonPlaneTypeCrossedLine.Text;
         }
     }
 }
