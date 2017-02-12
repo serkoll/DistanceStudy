@@ -7,6 +7,7 @@ using System.IO;
 using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Interfaces;
 using GraphicsModule.Settings.Forms;
+using Microsoft.VisualBasic.Devices;
 
 namespace GraphicsModule.Controls
 {
@@ -82,10 +83,10 @@ namespace GraphicsModule.Controls
             }
             MainPictureBox.BackColor = _settings.BackgroundColor;
             NmGenerator = new NamesGenerator(true, 0, _settings);
-            _ptMenuSelector = new Menu.PointMenuSelector(MainPictureBox, buttonPointsMenu, statusStripObjectMenu); //Создаем меню вариантов для точек
-            _lnMenuSelector = new Menu.LineMenuSelector(MainPictureBox, buttonLinesMenu, statusStripObjectMenu); //Создаем меню вариантов для линий
-            _sgMenuSelector = new Menu.SegmentMenuSelector(MainPictureBox, buttonSegmentMenu, statusStripObjectMenu); //Создаем меню вариантов для отрезков
-            _plMenuSelector = new Menu.PlaneMenuSelector(MainPictureBox, buttonPlanesMenu, statusStripObjectMenu);
+            _ptMenuSelector = new Menu.PointMenuSelector(MainPictureBox, buttonPointsMenu, PropertyBuildMenu); //Создаем меню вариантов для точек
+            _lnMenuSelector = new Menu.LineMenuSelector(MainPictureBox, buttonLinesMenu, PropertyBuildMenu); //Создаем меню вариантов для линий
+            _sgMenuSelector = new Menu.SegmentMenuSelector(MainPictureBox, buttonSegmentMenu, PropertyBuildMenu); //Создаем меню вариантов для отрезков
+            _plMenuSelector = new Menu.PlaneMenuSelector(MainPictureBox, buttonPlanesMenu, PropertyBuildMenu);
             Controls.Add(_ptMenuSelector); //Добавляем к контролам компонента
             Controls.Add(_lnMenuSelector); //Добавляем к контролам компонента
             Controls.Add(_sgMenuSelector); //Добавляем к контролам компонента
@@ -97,7 +98,7 @@ namespace GraphicsModule.Controls
         /// <param name="coll"></param>
         public void ImportObjects(Collection<IObject> coll)
         {
-            if(_storage == null) _storage = new Storage();
+            if (_storage == null) _storage = new Storage();
             _storage.Objects = coll;
             _canvas.Update(_storage);
         }
@@ -116,12 +117,17 @@ namespace GraphicsModule.Controls
         /// <summary>
         /// Скрывает выпадающее меню для графических примитивов
         /// </summary>
-        private void HideMenus()
+        private void HideSelectorMenus()
         {
+            Focus();
             _ptMenuSelector.Visible = false;
             _lnMenuSelector.Visible = false;
             _sgMenuSelector.Visible = false;
             _plMenuSelector.Visible = false;
+        }
+        private void HidePropertyBuidMenu()
+        {
+            PropertyBuildMenu.Visible = false;
         }
         /// <summary>
         /// Включение/выключение привязки к сетке
@@ -148,7 +154,7 @@ namespace GraphicsModule.Controls
         /// <param name="e"></param>
         private void MainPictureBox_MouseDown(object sender, EventArgs e)
         {
-            HideMenus(); // скрываем открытые меню
+            HideSelectorMenus(); // скрываем открытые меню
             var mousecoords = MainPictureBox.PointToClient(MousePosition);  //Получаем координаты курсора мыши
             if (SetObject != null) //Контроль существования объекта
             {
@@ -179,7 +185,7 @@ namespace GraphicsModule.Controls
         /// <param name="e"></param>
         private void buttonPointsMenu_Click(object sender, EventArgs e)
         {
-            HideMenus();
+            HideSelectorMenus();
             _ptMenuSelector.Location = new Point(graphicsToolBarStrip.Size.Width, graphicsToolBarStrip.Location.Y);
             _ptMenuSelector.Visible = true;
             _ptMenuSelector.BringToFront();
@@ -191,7 +197,7 @@ namespace GraphicsModule.Controls
         /// <param name="e"></param>
         private void lnPointsMenu_Click(object sender, EventArgs e)
         {
-            HideMenus();
+            HideSelectorMenus();
             _lnMenuSelector.Location = new Point(graphicsToolBarStrip.Size.Width, graphicsToolBarStrip.Location.Y + buttonPointsMenu.Size.Height);
             _lnMenuSelector.Visible = true;
             _lnMenuSelector.BringToFront();
@@ -283,21 +289,6 @@ namespace GraphicsModule.Controls
             MainPictureBox.Cursor = System.Windows.Forms.Cursors.Default;
         }
         /// <summary>
-        /// Обработчик события нажатия некоторых кнопок ( Кнопка "ESC") 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void MainForm_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Escape)
-            {
-                Operations = null;
-                SetObject = null;
-                MainPictureBox.Cursor = System.Windows.Forms.Cursors.Default;
-                statusStripObjectMenu.Visible = false;
-            }
-        }
-        /// <summary>
         /// Отрисовка линий связи
         /// </summary>
         /// <param name="sender"></param>
@@ -346,7 +337,7 @@ namespace GraphicsModule.Controls
         }
         private void buttonSegmentMenu_Click(object sender, EventArgs e)
         {
-            HideMenus();
+            HideSelectorMenus();
             _sgMenuSelector.Location = new Point(graphicsToolBarStrip.Size.Width, graphicsToolBarStrip.Location.Y + buttonPointsMenu.Size.Height + buttonLinesMenu.Size.Height);
             _sgMenuSelector.Visible = true;
             _sgMenuSelector.BringToFront();
@@ -354,7 +345,7 @@ namespace GraphicsModule.Controls
         private void GraphicsControl_Load(object sender, EventArgs e)
         {
             _canvas = new Canvas.Canvas(_settings, MainPictureBox); // Инициализируем полотно отрисовки
-            if(_storage == null) _storage = new Storage(); // инициализируем хранилище графических объектов
+            if (_storage == null) _storage = new Storage(); // инициализируем хранилище графических объектов
         }
         private void solidWorksToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -401,14 +392,14 @@ namespace GraphicsModule.Controls
         }
         private void buttonPlaneMenu_Click(object sender, EventArgs e)
         {
-            HideMenus();
+            HideSelectorMenus();
             _plMenuSelector.Location = new Point(graphicsToolBarStrip.Size.Width, graphicsToolBarStrip.Location.Y + buttonPointsMenu.Size.Height + buttonLinesMenu.Size.Height + buttonPlanesMenu.Size.Height);
             _plMenuSelector.Visible = true;
             _plMenuSelector.BringToFront();
         }
         private void buttonPlaneType3Points_Click(object sender, EventArgs e)
         {
-            
+
             buttonPlanesMenu.Text = buttonPlaneType3Points.Text;
         }
         private void buttonPlaneTypeLinePoint_Click(object sender, EventArgs e)
@@ -422,6 +413,25 @@ namespace GraphicsModule.Controls
         private void buttonPlaneTypeCrossedLine_Click(object sender, EventArgs e)
         {
             buttonPlanesMenu.Text = buttonPlaneTypeCrossedLine.Text;
+        }
+
+        private void GraphicsControl_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Escape:
+                    {
+                        _storage.TempObjects.Clear();
+                        SetObject = null;
+                        Operations = null;
+                        _storage.SelectedObjects.Clear();
+                        _canvas.Update(_storage);
+                        HideSelectorMenus();
+                        HidePropertyBuidMenu();
+                        MainPictureBox.Cursor = System.Windows.Forms.Cursors.Default;
+                        break;
+                    }
+            }
         }
     }
 }

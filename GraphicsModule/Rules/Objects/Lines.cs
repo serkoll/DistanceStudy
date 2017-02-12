@@ -1,6 +1,5 @@
 ﻿using System.Collections.ObjectModel;
 using System.Drawing;
-using System.Security.Cryptography.X509Certificates;
 using GraphicsModule.Controls;
 using GraphicsModule.Geometry;
 using GraphicsModule.Geometry.Analyze;
@@ -10,7 +9,7 @@ using GraphicsModule.Geometry.Objects.Points;
 using GraphicsModule.Interfaces;
 using GraphicsModule.Settings;
 
-namespace GraphicsModule.CreateObjects
+namespace GraphicsModule.Rules.Objects
 {
     /// <summary>
     /// Создание 2Д линии

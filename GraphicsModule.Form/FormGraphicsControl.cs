@@ -9,6 +9,7 @@ namespace GraphicsModule.Form
         public FormGraphicsControl()
         {
             InitializeComponent();
+            KeyPreview = true;
         }
         public Collection<IObject> Export()
         {
@@ -22,6 +23,11 @@ namespace GraphicsModule.Form
         public Collection<IObject> ExportSelected()
         {
             return graphicsControl1.ExportSelected();
+        }
+
+        private void FormGraphicsControl_Load(object sender, System.EventArgs e)
+        {
+            graphicsControl1.Focus();
         }
     }
 }

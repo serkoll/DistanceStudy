@@ -30,12 +30,13 @@ namespace GraphicsModule.Form
         /// </summary>
         private void InitializeComponent()
         {
-            this.graphicsControl1 = new GraphicsControl();
+            this.graphicsControl1 = new GraphicsModule.Controls.GraphicsControl();
             this.SuspendLayout();
             // 
             // graphicsControl1
             // 
             this.graphicsControl1.AutoSize = true;
+            this.graphicsControl1.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             this.graphicsControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.graphicsControl1.Location = new System.Drawing.Point(0, 0);
             this.graphicsControl1.Name = "graphicsControl1";
@@ -48,8 +49,10 @@ namespace GraphicsModule.Form
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1182, 613);
             this.Controls.Add(this.graphicsControl1);
+            this.KeyPreview = true;
             this.Name = "FormGraphicsControl";
             this.Text = "FormGraphicsControl";
+            this.Load += new System.EventHandler(this.FormGraphicsControl_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -5,7 +5,7 @@ using GraphicsModule.Geometry.Objects.Points;
 using GraphicsModule.Interfaces;
 using GraphicsModule.Settings;
 
-namespace GraphicsModule.CreateObjects
+namespace GraphicsModule.Rules.Objects
 {
     /// <summary>
     /// Создание 2Д точки

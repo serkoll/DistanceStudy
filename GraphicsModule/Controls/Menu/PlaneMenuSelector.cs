@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using GraphicsModule.CreateObjects;
+using GraphicsModule.Rules.Objects;
 
 namespace GraphicsModule.Controls.Menu
 {

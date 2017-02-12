@@ -4,13 +4,12 @@ using GraphicsModule.Controls;
 using GraphicsModule.Geometry;
 using GraphicsModule.Geometry.Analyze;
 using GraphicsModule.Geometry.Interfaces;
-using GraphicsModule.Geometry.Objects.Lines;
 using GraphicsModule.Geometry.Objects.Points;
 using GraphicsModule.Geometry.Objects.Segments;
 using GraphicsModule.Interfaces;
 using GraphicsModule.Settings;
 
-namespace GraphicsModule.CreateObjects
+namespace GraphicsModule.Rules.Objects
 {
     /// <summary>
     /// Создание 2Д линии
