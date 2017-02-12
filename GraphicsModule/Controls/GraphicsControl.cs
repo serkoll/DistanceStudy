@@ -7,7 +7,6 @@ using System.IO;
 using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Interfaces;
 using GraphicsModule.Settings.Forms;
-using Microsoft.VisualBasic.Devices;
 
 namespace GraphicsModule.Controls
 {
