@@ -1,67 +1,71 @@
 ﻿using System;
 using System.Drawing;
+using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Settings;
 
 namespace GraphicsModule.Geometry.Objects.Points
 {
     /// <summary>Класс для расчета параметров проекции 3D точки на X0Y плоскость проекций</summary>
     /// <remarks>Copyright © Polozkov V. Yury, 2015</remarks>
-    public class PointOfPlane1X0Y : IObject, IPointOfPlane
+    public class PointOfPlane1X0Y : IObject, IPointOfPlane, IObjectOfPlane1X0Y
     {
-        //====================================================================================================
-        //================== Методы ввода-вывода (расчета) параметров двумерной проекции точки по заданным условиям ==================
-
         /// <summary>Инициализация нового экземпляра двумерной проекции точки</summary>
         /// <remarks>Исходные координаты точки: X=0; Y=0</remarks>
-        public PointOfPlane1X0Y() { X = 0; Y = 0; }//Конструктор, устанавливающий исходные значения координат 2D точки
-
+        public PointOfPlane1X0Y() { X = 0; Y = 0; }
         /// <summary>Инициализирует новый экземпляр двумерной проекции точки с указанными координатами</summary>
         /// <remarks></remarks>
-        public PointOfPlane1X0Y(double x, double y) { X = x; Y = y; }//Конструктор, устанавливающий пользовательские значения координат 2D точки
-        public PointOfPlane1X0Y(System.Drawing.Point pt, System.Drawing.Point center)
+        public PointOfPlane1X0Y(double x, double y) { X = x; Y = y; }
+        public PointOfPlane1X0Y(Point pt, Point center)
         {
-                X = -(pt.X - center.X);
-                Y = pt.Y - center.Y;
+            X = -(pt.X - center.X);
+            Y = pt.Y - center.Y;
         }
         /// <summary>Инициализирует новый экземпляр двумерной проекции точки</summary>
         /// <remarks></remarks>
-        public PointOfPlane1X0Y(PointOfPlane1X0Y pt) { X = pt.X; Y = pt.Y; }//Конструктор, устанавливающий пользовательские значения координат 2D точки
-        public static bool Creatable(System.Drawing.Point pt, System.Drawing.Point frameCenter)
+        public PointOfPlane1X0Y(PointOfPlane1X0Y pt) { X = pt.X; Y = pt.Y; }
+        public static bool Creatable(Point pt, Point frameCenter)
         {
-            var temp = new System.Drawing.Point(pt.X - frameCenter.X, pt.Y - frameCenter.Y);
+            var temp = new Point(pt.X - frameCenter.X, pt.Y - frameCenter.Y);
             return temp.X <= 0 && temp.Y >= 0;
         }
         /// <summary>Получает или задает координату X двумерной проекции точки</summary>
         /// <remarks></remarks>
-        public double X { get; set; }// Свойство координаты X
-
+        public double X { get; set; }
         /// <summary>Получает или задает координату Y двумерной проекции точки</summary>
         /// <remarks></remarks>
-        public double Y { get; set; }// Свойство координаты Y
+        public double Y { get; set; }
+        public Name Name { get; set; }
         /// <summary>Передвигает ранее заданную двумерную проекцию точку
         /// (изменяет коодинаты на указанные величины по осям в 2D)</summary>
         /// <remarks>PointOfPlan1_X0Y.X += dx; PointOfPlan1_X0Y.Y += dy</remarks>
-        public void PointMove(double dx, double dy) { X += dx; Y += dy; }//Конструктор перемещения на указанные величины по осям
-
-        //-------------------- Задание  значений координат точки путем конвертирования текста и контроль соответсвия значению "Nothing" -----------------------
-        public void Draw(Pen pen, float poitRaduis, System.Drawing.Point frameCenter, Graphics graphics)
+        public void PointMove(double dx, double dy) { X += dx; Y += dy; }
+        public void Draw(Pen pen, float poitRaduis, Point frameCenter, Graphics graphics)
         {
             var ptForDraw = DeterminePosition.ForPointProjection(this, poitRaduis, frameCenter);
             graphics.DrawPie(pen, ptForDraw.X, ptForDraw.Y, poitRaduis * 2, poitRaduis * 2, 0, 360);
         }
-        public void Draw(DrawS st, System.Drawing.Point frameCenter, Graphics g)
+
+        public void DrawName(DrawS st, float poitRaduis, Point frameCenter, Graphics graphics)
+        {
+            var ptForDraw = DeterminePosition.ForPointProjection(this, poitRaduis, frameCenter);
+            graphics.DrawString(Name.Value, st.TextFont, st.TextBrush, ptForDraw.X + Name.Dx, ptForDraw.Y + Name.Dy);
+        }
+        public void Draw(DrawS st, Point frameCenter, Graphics g)
         {
             Draw(st.PenPoints, st.RadiusPoints, frameCenter, g);
             if (st.LinkLineSettings.IsDraw)
             {
-                DrawLinkLine(st.LinkLineSettings.LinkLineX0YToX, st.LinkLineSettings.LinkLineX0YToY, true, true, true, true, true, frameCenter, g);
+                DrawLinkLine(st.LinkLineSettings.PenLinkLineX0YtoX, st.LinkLineSettings.PenLinkLineX0YtoY, true, true, true, true, true, frameCenter, g);
             }
+            if (Name != null)
+                DrawName(st, st.RadiusPoints, frameCenter, g);
         }
-        public void DrawPointsOnly(DrawS st, System.Drawing.Point frameCenter, Graphics g)
+        public void DrawPointsOnly(DrawS st, Point frameCenter, Graphics g)
         {
             Draw(st.PenPoints, st.RadiusPoints, frameCenter, g);
+            DrawName(st, st.RadiusPoints, frameCenter, g);
         }
-        public void DrawLinkLine(Pen penLinkLineToX, Pen penLinkLinetoY, bool linkPointToX, bool linkPointToY, bool linkXToBorderPi2, bool linkYToBorderPi3, bool linkCurveY1ToY3, System.Drawing.Point frameCenter, Graphics graphics)
+        public void DrawLinkLine(Pen penLinkLineToX, Pen penLinkLinetoY, bool linkPointToX, bool linkPointToY, bool linkXToBorderPi2, bool linkYToBorderPi3, bool linkCurveY1ToY3, Point frameCenter, Graphics graphics)
         {
             //Отрисовка линий связи Горизонтальной проекции
             //Контроль нулевого значения координаты X Горизонтальной проекции точки
@@ -78,7 +82,7 @@ namespace GraphicsModule.Geometry.Objects.Points
                 graphics.DrawLine(penLinkLineToX, Convert.ToInt32(frameCenter.X - X), Convert.ToInt32(frameCenter.Y), Convert.ToInt32(frameCenter.X - X), -Convert.ToInt32(2 * frameCenter.Y + 20));
             }
             if (linkPointToY)//Контроль включения линии связи от проекции точки до оси Y
-            { 
+            {
                 //Горизонтальная (от Pi1 к Pi3) - Часть 3: отрезок от заданной точки до вертикальной оси Y (оси Y плоскости проекций Pi1)
                 graphics.DrawLine(penLinkLinetoY, Convert.ToInt32(frameCenter.X - X), Convert.ToInt32(frameCenter.Y + Y), Convert.ToInt32(frameCenter.X), Convert.ToInt32(frameCenter.Y + Y));
             }
@@ -93,9 +97,19 @@ namespace GraphicsModule.Geometry.Objects.Points
                 graphics.DrawLine(penLinkLinetoY, Convert.ToInt32(frameCenter.X + Y), frameCenter.Y, Convert.ToInt32(frameCenter.X + Y), 0);
             }
         }
-        public bool IsSelected(System.Drawing.Point mscoords, float ptR, System.Drawing.Point frameCenter, double distance)
+        public bool IsSelected(Point mscoords, float ptR, Point frameCenter, double distance)
         {
             return Calculate.Distance(mscoords, ptR, frameCenter, this) < distance;
+        }
+        public Name GetName()
+        {
+            var name = new Name(Name.Value.Remove(Name.Value.IndexOf("'", StringComparison.Ordinal)), Name.Dx, Name.Dy);
+            return name;
+        }
+        public void SetName(Name name)
+        {
+            Name = new Name(name);
+            Name.Value += "'";
         }
     }
 }

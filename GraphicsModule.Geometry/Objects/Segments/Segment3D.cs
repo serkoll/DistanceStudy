@@ -1,5 +1,7 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Drawing;
+using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Geometry.Objects.Points;
 using GraphicsModule.Settings;
 
@@ -11,6 +13,7 @@ namespace GraphicsModule.Geometry.Objects.Segments
     {
         public Point3D Point0 { get; set; }
         public Point3D Point1 { get; set; }
+        public Name Name { get; set; }
         public SegmentOfPlane1X0Y SegmentOfPlane1X0Y { get; set; }
         public SegmentOfPlane2X0Z SegmentOfPlane2X0Z { get; set; }
         public SegmentOfPlane3Y0Z SegmentOfPlane3Y0Z { get; set; }
@@ -189,8 +192,8 @@ namespace GraphicsModule.Geometry.Objects.Segments
             SegmentOfPlane3Y0Z.DrawSegmentOnly(st, frameCenter, g);
             if (st.LinkLineSettings.IsDraw)
             {
-                DrawLinkLine(st.LinkLineSettings.LinkLineX0YToX, st.LinkLineSettings.LinkLineX0YToY, st.LinkLineSettings.LinkLineX0ZToX, st.LinkLineSettings.LinkLineX0ZToZ,
-                             st.LinkLineSettings.LinkLineY0ZToZ, st.LinkLineSettings.LinkLineY0ZToY, frameCenter, ref g);
+                DrawLinkLine(st.LinkLineSettings.PenLinkLineX0YtoX, st.LinkLineSettings.PenLinkLineX0YtoY, st.LinkLineSettings.PenLinkLineX0ZtoX, st.LinkLineSettings.PenLinkLineX0ZtoZ,
+                             st.LinkLineSettings.PenLinkLineY0ZtoZ, st.LinkLineSettings.PenLinkLineY0ZtoY, frameCenter, ref g);
             }
 
         }
@@ -206,6 +209,20 @@ namespace GraphicsModule.Geometry.Objects.Segments
             return SegmentOfPlane1X0Y.IsSelected(mscoords, ptR, frameCenter, distance) ||
                    SegmentOfPlane2X0Z.IsSelected(mscoords, ptR, frameCenter, distance) ||
                    SegmentOfPlane3Y0Z.IsSelected(mscoords, ptR, frameCenter, distance);
+        }
+        public Name GetName()
+        {
+            return Name;
+        }
+        public void SetName(Name name)
+        {
+            Name = new Name(name);
+            Name.Value = Name.Value.Remove(Name.Value.IndexOf("'", StringComparison.Ordinal));
+            Point0.Name = Name;
+            Point1.Name = Name;
+            SegmentOfPlane1X0Y.Name = Name;
+            SegmentOfPlane2X0Z.Name = Name;
+            SegmentOfPlane3Y0Z.Name = Name;
         }
     }
 }

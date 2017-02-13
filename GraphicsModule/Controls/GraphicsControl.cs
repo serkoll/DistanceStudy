@@ -2,10 +2,11 @@
 using System.Drawing;
 using System.Windows.Forms;
 using System.Collections.ObjectModel;
-using GraphicsModule.CreateObjects;
 using GraphicsModule.Cursors;
-using GraphicsModule.Operations;
-using GraphicsModule.Geometry.Objects;
+using System.IO;
+using GraphicsModule.Geometry.Interfaces;
+using GraphicsModule.Interfaces;
+using GraphicsModule.Settings.Forms;
 
 namespace GraphicsModule.Controls
 {
@@ -27,9 +28,13 @@ namespace GraphicsModule.Controls
         /// </summary>
         private readonly Menu.SegmentMenuSelector _sgMenuSelector;
         /// <summary>
+        /// Меню создания плоскостей
+        /// </summary>
+        private readonly Menu.PlaneMenuSelector _plMenuSelector;
+        /// <summary>
         /// Полотно отрисовки
         /// </summary>
-        private Canvas _canvas;
+        private Canvas.Canvas _canvas;
         /// <summary>
         /// Хранилище графических объектов
         /// </summary>
@@ -37,7 +42,7 @@ namespace GraphicsModule.Controls
         /// <summary>
         /// Класс настроек
         /// </summary>
-        private Settings.Settings _settings;
+        private readonly Settings.Settings _settings;
         /// <summary>
         /// Текущее инициализированное правило создания объека
         /// </summary>
@@ -47,21 +52,44 @@ namespace GraphicsModule.Controls
         /// </summary>
         public static IOperation Operations;
         /// <summary>
+        /// Генератор имен объектов
+        /// </summary>
+        public static NamesGenerator NmGenerator;
+        /// <summary>
         /// Класс привязки курсора к сетке
         /// </summary>
-        private CursorOnGridMove crMove = new CursorOnGridMove();
+        private readonly CursorOnGridMove _crMove = new CursorOnGridMove();
+        /// <summary>
+        /// Путь к настройкам редактора
+        /// </summary>
+        private const string SettingsFileName = "config.cfg";
         /// <summary>
         /// Инициализация контрола
         /// </summary>
         public GraphicsControl()
         {
             InitializeComponent();
-            _ptMenuSelector = new Menu.PointMenuSelector(MainPictureBox); //Создаем меню вариантов для точек
-            _lnMenuSelector = new Menu.LineMenuSelector(MainPictureBox); //Создаем меню вариантов для линий
-            _sgMenuSelector = new Menu.SegmentMenuSelector(MainPictureBox);
+            if (File.Exists(SettingsFileName))
+            {
+                _settings = new Settings.Settings().Deserialize(SettingsFileName); //Получаем экземпляр настроек
+                FormSettings.ValueS = _settings;
+            }
+            else
+            {
+                _settings = new Settings.Settings();
+                _settings.Serialize(SettingsFileName);
+                FormSettings.ValueS = _settings;
+            }
+            MainPictureBox.BackColor = _settings.BackgroundColor;
+            NmGenerator = new NamesGenerator(true, 0, _settings);
+            _ptMenuSelector = new Menu.PointMenuSelector(MainPictureBox, buttonPointsMenu, PropertyBuildMenu); //Создаем меню вариантов для точек
+            _lnMenuSelector = new Menu.LineMenuSelector(MainPictureBox, buttonLinesMenu, PropertyBuildMenu); //Создаем меню вариантов для линий
+            _sgMenuSelector = new Menu.SegmentMenuSelector(MainPictureBox, buttonSegmentMenu, PropertyBuildMenu); //Создаем меню вариантов для отрезков
+            _plMenuSelector = new Menu.PlaneMenuSelector(MainPictureBox, buttonPlanesMenu, PropertyBuildMenu);
             Controls.Add(_ptMenuSelector); //Добавляем к контролам компонента
             Controls.Add(_lnMenuSelector); //Добавляем к контролам компонента
-            Controls.Add(_sgMenuSelector);
+            Controls.Add(_sgMenuSelector); //Добавляем к контролам компонента
+            Controls.Add(_plMenuSelector);
         }
         /// <summary>
         /// Импорт графических объектов
@@ -69,9 +97,9 @@ namespace GraphicsModule.Controls
         /// <param name="coll"></param>
         public void ImportObjects(Collection<IObject> coll)
         {
-            if(_storage == null) _storage = new Storage();
+            if (_storage == null) _storage = new Storage();
             _storage.Objects = coll;
-            _canvas.ReDraw(_storage);
+            _canvas.Update(_storage);
         }
         /// <summary>
         /// Экспорт графических объектов
@@ -81,7 +109,6 @@ namespace GraphicsModule.Controls
         {
             return _storage.Objects;
         }
-
         public Collection<IObject> ExportSelected()
         {
             return _storage.SelectedObjects;
@@ -89,11 +116,17 @@ namespace GraphicsModule.Controls
         /// <summary>
         /// Скрывает выпадающее меню для графических примитивов
         /// </summary>
-        private void HideMenus()
+        private void HideSelectorMenus()
         {
+            Focus();
             _ptMenuSelector.Visible = false;
             _lnMenuSelector.Visible = false;
             _sgMenuSelector.Visible = false;
+            _plMenuSelector.Visible = false;
+        }
+        private void HidePropertyBuidMenu()
+        {
+            PropertyBuildMenu.Visible = false;
         }
         /// <summary>
         /// Включение/выключение привязки к сетке
@@ -106,7 +139,6 @@ namespace GraphicsModule.Controls
             {
                 labelCursorToGridFixation.BorderStyle = Border3DStyle.SunkenOuter;
                 CursorOnGridMove.ToGridFixation = true;
-
             }
             else
             {
@@ -121,17 +153,17 @@ namespace GraphicsModule.Controls
         /// <param name="e"></param>
         private void MainPictureBox_MouseDown(object sender, EventArgs e)
         {
-            HideMenus(); // скрываем открытые меню
+            HideSelectorMenus(); // скрываем открытые меню
             var mousecoords = MainPictureBox.PointToClient(MousePosition);  //Получаем координаты курсора мыши
             if (SetObject != null) //Контроль существования объекта
             {
-                SetObject.AddToStorageAndDraw(mousecoords, _canvas.Grid.CenterPoint, _canvas, _settings.DrawS, _storage); //Отрисовываем объект и добавляем его в коллекцию объектов
-                _canvas.Update(); //Перерисовывам полотно
+                SetObject.AddToStorageAndDraw(mousecoords, _canvas.CenterSystemPoint, _canvas, _settings.DrawS, _storage); //Отрисовываем объект и добавляем его в коллекцию объектов
+                _canvas.Refresh(); //Перерисовывам полотно
             }
             if (Operations != null) //Наличие операции над объектами
             {
                 Operations.Execute(mousecoords, _storage, _canvas); // Выполненяем операцию
-                _canvas.Update(); //Перерисовываем полотно
+                _canvas.Refresh(); //Перерисовываем полотно
             }
         }
         /// <summary>
@@ -141,10 +173,9 @@ namespace GraphicsModule.Controls
         /// <param name="e"></param>
         private void MainPictureBox_MouseMove(object sender, MouseEventArgs e)
         {
-            crMove.CursorPointToGridMove(_canvas); // Привязка к сетке
-            // Отображение координат текущего положения курсора
-            labelValueX.Text = (MainPictureBox.PointToClient(Cursor.Position).X - _canvas.Grid.CenterPoint.X).ToString();
-            labelValueY.Text = (MainPictureBox.PointToClient(Cursor.Position).Y - _canvas.Grid.CenterPoint.X).ToString();
+            _crMove.CursorPointToGridMove(_canvas); // Привязка к сетке
+            labelValueX.Text = (MainPictureBox.PointToClient(Cursor.Position).X - _canvas.CenterSystemPoint.X).ToString();
+            labelValueY.Text = (MainPictureBox.PointToClient(Cursor.Position).Y - _canvas.CenterSystemPoint.Y).ToString();
         }
         /// <summary>
         /// Вызов контекстного меню точек
@@ -153,6 +184,7 @@ namespace GraphicsModule.Controls
         /// <param name="e"></param>
         private void buttonPointsMenu_Click(object sender, EventArgs e)
         {
+            HideSelectorMenus();
             _ptMenuSelector.Location = new Point(graphicsToolBarStrip.Size.Width, graphicsToolBarStrip.Location.Y);
             _ptMenuSelector.Visible = true;
             _ptMenuSelector.BringToFront();
@@ -164,6 +196,7 @@ namespace GraphicsModule.Controls
         /// <param name="e"></param>
         private void lnPointsMenu_Click(object sender, EventArgs e)
         {
+            HideSelectorMenus();
             _lnMenuSelector.Location = new Point(graphicsToolBarStrip.Size.Width, graphicsToolBarStrip.Location.Y + buttonPointsMenu.Size.Height);
             _lnMenuSelector.Visible = true;
             _lnMenuSelector.BringToFront();
@@ -178,14 +211,14 @@ namespace GraphicsModule.Controls
             if (labelStatusGrid.BorderStyle == Border3DStyle.RaisedInner)
             {
                 labelStatusGrid.BorderStyle = Border3DStyle.SunkenOuter;
-                _canvas.St.GridS.IsDraw = true;
-                _canvas.ReDraw(_settings, _storage, MainPictureBox);
+                _canvas.Setting.GridS.IsDraw = true;
+                _canvas.Update(_storage);
             }
             else
             {
                 labelStatusGrid.BorderStyle = Border3DStyle.RaisedInner;
-                _canvas.St.GridS.IsDraw = false;
-                _canvas.ReDraw(_settings, _storage, MainPictureBox);
+                _canvas.Setting.GridS.IsDraw = false;
+                _canvas.Update(_storage);
             }
         }
         /// <summary>
@@ -198,14 +231,14 @@ namespace GraphicsModule.Controls
             if (labelSatusAxis.BorderStyle == Border3DStyle.RaisedInner)
             {
                 labelSatusAxis.BorderStyle = Border3DStyle.SunkenOuter;
-                _canvas.St.AxisS.IsDraw = true;
-                _canvas.ReDraw(_settings, _storage, MainPictureBox);
+                _canvas.Setting.AxisS.IsDraw = true;
+                _canvas.Update(_storage);
             }
             else
             {
                 labelSatusAxis.BorderStyle = Border3DStyle.RaisedInner;
-                _canvas.St.AxisS.IsDraw = false;
-                _canvas.ReDraw(_settings, _storage, MainPictureBox);
+                _canvas.Setting.AxisS.IsDraw = false;
+                _canvas.Update(_storage);
             }
         }
         /// <summary>
@@ -238,7 +271,7 @@ namespace GraphicsModule.Controls
         private void buttonClearAll_Click(object sender, EventArgs e)
         {
             _storage.ClearAllCollections();
-            _canvas.ReDraw(_settings, _storage, MainPictureBox);
+            _canvas.Update(_storage);
             SetObject = null;
             MainPictureBox.Cursor = System.Windows.Forms.Cursors.Default;
         }
@@ -255,20 +288,6 @@ namespace GraphicsModule.Controls
             MainPictureBox.Cursor = System.Windows.Forms.Cursors.Default;
         }
         /// <summary>
-        /// Обработчик события нажатия некоторых кнопок ( Кнопка "ESC") 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void MainForm_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Escape)
-            {
-                Operations = null;
-                SetObject = null;
-                MainPictureBox.Cursor = System.Windows.Forms.Cursors.Default;
-            }
-        }
-        /// <summary>
         /// Отрисовка линий связи
         /// </summary>
         /// <param name="sender"></param>
@@ -278,14 +297,14 @@ namespace GraphicsModule.Controls
             if (labelStatusLinkLine.BorderStyle == Border3DStyle.RaisedInner)
             {
                 labelStatusLinkLine.BorderStyle = Border3DStyle.SunkenOuter;
-                _settings.DrawS.LinkLineSettings.IsDraw = true;
-                _canvas.ReDraw(_settings, _storage, MainPictureBox);
+                _canvas.Setting.DrawS.LinkLineSettings.IsDraw = true;
+                _canvas.Update(_storage);
             }
             else
             {
                 labelStatusLinkLine.BorderStyle = Border3DStyle.RaisedInner;
-                _settings.DrawS.LinkLineSettings.IsDraw = false;
-                _canvas.ReDraw(_settings, _storage, MainPictureBox);
+                _canvas.Setting.DrawS.LinkLineSettings.IsDraw = false;
+                _canvas.Update(_storage);
             }
         }
         /// <summary>
@@ -295,8 +314,10 @@ namespace GraphicsModule.Controls
         /// <param name="e"></param>
         private void buttonSettings_Click(object sender, EventArgs e)
         {
-            var f = new Settings.Forms.SettingsForm();
+            var f = new FormSettings();
             f.ShowDialog();
+            _canvas.Update(_storage);
+            MainPictureBox.BackColor = _settings.BackgroundColor;
         }
         /// <summary>
         /// Копирование объектов
@@ -315,16 +336,101 @@ namespace GraphicsModule.Controls
         }
         private void buttonSegmentMenu_Click(object sender, EventArgs e)
         {
+            HideSelectorMenus();
             _sgMenuSelector.Location = new Point(graphicsToolBarStrip.Size.Width, graphicsToolBarStrip.Location.Y + buttonPointsMenu.Size.Height + buttonLinesMenu.Size.Height);
             _sgMenuSelector.Visible = true;
             _sgMenuSelector.BringToFront();
         }
-
         private void GraphicsControl_Load(object sender, EventArgs e)
         {
-            _settings = new Settings.Settings(); //Получаем экземпляр настроек
-            _canvas = new Canvas(_settings, MainPictureBox); // Инициализируем полотно отрисовки
-            if(_storage == null) _storage = new Storage(); // инициализируем хранилище графических объектов
+            _canvas = new Canvas.Canvas(_settings, MainPictureBox); // Инициализируем полотно отрисовки
+            if (_storage == null) _storage = new Storage(); // инициализируем хранилище графических объектов
+        }
+        private void solidWorksToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var sldWorksObject = new SolidworksInteraction.SldWorksInteraction();
+            if (sldWorksObject.Connect())
+            {
+                sldWorksObject.SetActiveDocument();
+                sldWorksObject.ImportGrid(_canvas.Bckground.Grid);
+                sldWorksObject.ImportAxis(_canvas.Bckground.Axis);
+                sldWorksObject.ImportCollectionToActiveDoc(_storage.Objects, _canvas.Setting.DrawS);
+            }
+            else
+            {
+                MessageBox.Show(@"Не удалось подключиться к SolidWorks");
+            }
+        }
+        private void GraphicsControl_Resize(object sender, EventArgs e)
+        {
+            if (_storage != null)
+            {
+                _canvas.CalculateBackground();
+                _canvas.Update(_storage);
+            }
+        }
+        private void buttonNameMenuTopLeftMenuItem_Click(object sender, EventArgs e)
+        {
+            NmGenerator.Position = 0;
+            buttonNameMenu.Text = buttonNameMenuTopLeft.Text;
+        }
+        private void buttonNameMenuTopRightMenuItem_Click(object sender, EventArgs e)
+        {
+            NmGenerator.Position = 1;
+            buttonNameMenu.Text = buttonNameMenuTopRight.Text;
+        }
+        private void buttonNameMenuBottomLeftMenuItem_Click(object sender, EventArgs e)
+        {
+            NmGenerator.Position = 2;
+            buttonNameMenu.Text = buttonNameMenuBottomLeft.Text;
+        }
+        private void buttonNameMenuBottomRightMenuItem_Click(object sender, EventArgs e)
+        {
+            NmGenerator.Position = 3;
+            buttonNameMenu.Text = buttonNameMenuBottomRight.Text;
+        }
+        private void buttonPlaneMenu_Click(object sender, EventArgs e)
+        {
+            HideSelectorMenus();
+            _plMenuSelector.Location = new Point(graphicsToolBarStrip.Size.Width, graphicsToolBarStrip.Location.Y + buttonPointsMenu.Size.Height + buttonLinesMenu.Size.Height + buttonPlanesMenu.Size.Height);
+            _plMenuSelector.Visible = true;
+            _plMenuSelector.BringToFront();
+        }
+        private void buttonPlaneType3Points_Click(object sender, EventArgs e)
+        {
+
+            buttonPlanesMenu.Text = buttonPlaneType3Points.Text;
+        }
+        private void buttonPlaneTypeLinePoint_Click(object sender, EventArgs e)
+        {
+            buttonPlanesMenu.Text = buttonPlaneTypeLinePoint.Text;
+        }
+        private void buttonPlaneTypeParrLine_Click(object sender, EventArgs e)
+        {
+            buttonPlanesMenu.Text = buttonPlaneTypeParrLine.Text;
+        }
+        private void buttonPlaneTypeCrossedLine_Click(object sender, EventArgs e)
+        {
+            buttonPlanesMenu.Text = buttonPlaneTypeCrossedLine.Text;
+        }
+
+        private void GraphicsControl_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Escape:
+                    {
+                        _storage.TempObjects.Clear();
+                        SetObject = null;
+                        Operations = null;
+                        _storage.SelectedObjects.Clear();
+                        _canvas.Update(_storage);
+                        HideSelectorMenus();
+                        HidePropertyBuidMenu();
+                        MainPictureBox.Cursor = System.Windows.Forms.Cursors.Default;
+                        break;
+                    }
+            }
         }
     }
 }

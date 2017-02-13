@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 
@@ -6,49 +7,50 @@ namespace GraphicsModule.Geometry.Objects.Lines
 {
     public class LineDrawCalc
     {
-        public System.Drawing.Point FrameCenter { get; set; }
-        public RectangleF rc { get; set; }
-        public LineDrawCalc(System.Drawing.Point frameCenter, RectangleF rc)
+        public double Tolerance { get; set; } = 0.0001;
+        public Point FrameCenter { get; set; }
+        public RectangleF Rc { get; set; }
+        public LineDrawCalc(Point frameCenter, RectangleF rc)
         {
-            this.rc = rc;
+            Rc = rc;
             FrameCenter = frameCenter;
         }
         public List<PointF> CalculatePointsForDraw(LineOfPlane1X0Y ln1)
         {
             var pts = new List<PointF>();
-
+            
             var ln = DeterminePosition.ForLineProjection(ln1, FrameCenter);
 
-            if (ln.kx == 0)
+            if (Math.Abs(ln.kx) < Tolerance)
             {
-                pts.Add(new PointF((float)ln.Point0.X, rc.Top));
-                pts.Add(new PointF((float)ln.Point0.X, rc.Bottom));
+                pts.Add(new PointF((float)ln.Point0.X, Rc.Top));
+                pts.Add(new PointF((float)ln.Point0.X, Rc.Bottom));
                 pts = pts.OrderBy(point => point.X).ToList();
                 return pts;
             }
-            if (ln.ky == 0)
+            if (Math.Abs(ln.ky) < Tolerance)
             {
-                pts.Add(new PointF(rc.Left, (float)ln.Point0.Y));
-                pts.Add(new PointF(rc.Right, (float)ln.Point0.Y));
+                pts.Add(new PointF(Rc.Left, (float)ln.Point0.Y));
+                pts.Add(new PointF(Rc.Right, (float)ln.Point0.Y));
                 pts = pts.OrderBy(point => point.X).ToList();
                 return pts;
             }
             //y=0
-            var cvalue = (float)((rc.Top - ln.Point0.Y) * ln.kx / ln.ky + ln.Point0.X);
-            if (cvalue > rc.Left && cvalue < rc.Right) pts.Add(new PointF(cvalue, rc.Top));
+            var cvalue = (Rc.Top - ln.Point0.Y) * ln.kx / ln.ky + ln.Point0.X;
+            if (cvalue > Rc.Left && cvalue < Rc.Right) pts.Add(new PointF((float)cvalue, Rc.Top));
             //y=max
-            cvalue = (float)((rc.Bottom - ln.Point0.Y) * ln.kx / ln.ky + ln.Point0.X);
-            if (cvalue > rc.Left && cvalue < rc.Right) pts.Add(new PointF(cvalue, rc.Bottom));
+            cvalue = (Rc.Bottom - ln.Point0.Y) * ln.kx / ln.ky + ln.Point0.X;
+            if (cvalue > Rc.Left && cvalue < Rc.Right) pts.Add(new PointF((float)cvalue, Rc.Bottom));
             pts = pts.OrderBy(point => point.X).ToList();
             if (!CheckListState(pts)) return pts;
             //x = 0
-            cvalue = (float)((rc.Left - ln.Point0.X) * ln.ky / ln.kx + ln.Point0.Y);
-            if (cvalue > rc.Top && cvalue < rc.Bottom) pts.Add(new PointF(rc.Left, cvalue));
+            cvalue = (Rc.Left - ln.Point0.X) * ln.ky / ln.kx + ln.Point0.Y;
+            if (cvalue > Rc.Top && cvalue < Rc.Bottom) pts.Add(new PointF(Rc.Left, (float)cvalue));
             pts = pts.OrderBy(point => point.X).ToList();
             if (!CheckListState(pts)) return pts;
             //x = max
-            cvalue = (float)((rc.Right - ln.Point0.X) * ln.ky / ln.kx + ln.Point0.Y);
-            pts.Add(new PointF(rc.Right, cvalue));
+            cvalue = (Rc.Right - ln.Point0.X) * ln.ky / ln.kx + ln.Point0.Y;
+            pts.Add(new PointF(Rc.Right, (float)cvalue));
             pts = pts.OrderBy(point => point.X).ToList();
             return pts;
         }
@@ -58,36 +60,36 @@ namespace GraphicsModule.Geometry.Objects.Lines
 
             var ln = DeterminePosition.ForLineProjection(ln2, FrameCenter);
 
-            if (ln.kx == 0)
+            if (Math.Abs(ln.kx) < Tolerance)
             {
-                pts.Add(new PointF((float)ln.Point0.X, rc.Top));
-                pts.Add(new PointF((float)ln.Point0.X, rc.Bottom));
+                pts.Add(new PointF((float)ln.Point0.X, Rc.Top));
+                pts.Add(new PointF((float)ln.Point0.X, Rc.Bottom));
                 pts = pts.OrderBy(point => point.X).ToList();
                 return pts;
             }
-            if (ln.ky == 0)
+            if (Math.Abs(ln.ky) < Tolerance)
             {
-                pts.Add(new PointF(rc.Left, (float)ln.Point0.Y));
-                pts.Add(new PointF(rc.Right, (float)ln.Point0.Y));
+                pts.Add(new PointF(Rc.Left, (float)ln.Point0.Y));
+                pts.Add(new PointF(Rc.Right, (float)ln.Point0.Y));
                 pts = pts.OrderBy(point => point.X).ToList();
                 return pts;
             }
             //y=0
-            var cvalue = (float)((rc.Top - ln.Point0.Y) * ln.kx / ln.ky + ln.Point0.X);
-            if (cvalue > rc.Left && cvalue < rc.Right) pts.Add(new PointF(cvalue, rc.Top));
+            var cvalue = (float)((Rc.Top - ln.Point0.Y) * ln.kx / ln.ky + ln.Point0.X);
+            if (cvalue > Rc.Left && cvalue < Rc.Right) pts.Add(new PointF(cvalue, Rc.Top));
             //y=max
-            cvalue = (float)((rc.Bottom - ln.Point0.Y) * ln.kx / ln.ky + ln.Point0.X);
-            if (cvalue > rc.Left && cvalue < rc.Right) pts.Add(new PointF(cvalue, rc.Bottom));
+            cvalue = (float)((Rc.Bottom - ln.Point0.Y) * ln.kx / ln.ky + ln.Point0.X);
+            if (cvalue > Rc.Left && cvalue < Rc.Right) pts.Add(new PointF(cvalue, Rc.Bottom));
             pts = pts.OrderBy(point => point.X).ToList();
             if (!CheckListState(pts)) return pts;
                 //x = 0
-                cvalue = (float)((rc.Left - ln.Point0.X) * ln.ky / ln.kx + ln.Point0.Y);
-                if (cvalue > rc.Top && cvalue < rc.Bottom) pts.Add(new PointF(rc.Left, cvalue));
+                cvalue = (float)((Rc.Left - ln.Point0.X) * ln.ky / ln.kx + ln.Point0.Y);
+                if (cvalue > Rc.Top && cvalue < Rc.Bottom) pts.Add(new PointF(Rc.Left, cvalue));
                 pts = pts.OrderBy(point => point.X).ToList();
                 if (!CheckListState(pts)) return pts;
                     //x = max
-                    cvalue = (float)((rc.Right - ln.Point0.X) * ln.ky / ln.kx + ln.Point0.Y);
-                    pts.Add(new PointF(rc.Right, cvalue));
+                    cvalue = (float)((Rc.Right - ln.Point0.X) * ln.ky / ln.kx + ln.Point0.Y);
+                    pts.Add(new PointF(Rc.Right, cvalue));
                     pts = pts.OrderBy(point => point.X).ToList();
                     return pts;
         }
@@ -97,36 +99,36 @@ namespace GraphicsModule.Geometry.Objects.Lines
 
             var ln = DeterminePosition.ForLineProjection(ln3, FrameCenter);
 
-            if (ln.kx == 0)
+            if (Math.Abs(ln.kx) < Tolerance)
             {
-                pts.Add(new PointF((float)ln.Point0.X, rc.Top));
-                pts.Add(new PointF((float)ln.Point0.X, rc.Bottom));
+                pts.Add(new PointF((float)ln.Point0.X, Rc.Top));
+                pts.Add(new PointF((float)ln.Point0.X, Rc.Bottom));
                 pts = pts.OrderBy(point => point.X).ToList();
                 return pts;
             }
-            if (ln.ky == 0)
+            if (Math.Abs(ln.ky) < Tolerance)
             {
-                pts.Add(new PointF(rc.Left, (float)ln.Point0.Y));
-                pts.Add(new PointF(rc.Right, (float)ln.Point0.Y));
+                pts.Add(new PointF(Rc.Left, (float)ln.Point0.Y));
+                pts.Add(new PointF(Rc.Right, (float)ln.Point0.Y));
                 pts = pts.OrderBy(point => point.X).ToList();
                 return pts;
             }
             //y=0
-            var cvalue = (float)((rc.Top - ln.Point0.Y) * ln.kx / ln.ky + ln.Point0.X);
-            if (cvalue > rc.Left && cvalue < rc.Right) pts.Add(new PointF(cvalue, rc.Top));
+            var cvalue = (float)((Rc.Top - ln.Point0.Y) * ln.kx / ln.ky + ln.Point0.X);
+            if (cvalue > Rc.Left && cvalue < Rc.Right) pts.Add(new PointF(cvalue, Rc.Top));
             //y=max
-            cvalue = (float)((rc.Bottom - ln.Point0.Y) * ln.kx / ln.ky + ln.Point0.X);
-            if (cvalue > rc.Left && cvalue < rc.Right) pts.Add(new PointF(cvalue, rc.Bottom));
+            cvalue = (float)((Rc.Bottom - ln.Point0.Y) * ln.kx / ln.ky + ln.Point0.X);
+            if (cvalue > Rc.Left && cvalue < Rc.Right) pts.Add(new PointF(cvalue, Rc.Bottom));
             pts = pts.OrderBy(point => point.X).ToList();
             if (!CheckListState(pts)) return pts;
                 //x = 0
-                cvalue = (float)((rc.Left - ln.Point0.X) * ln.ky / ln.kx + ln.Point0.Y);
-                if (cvalue > rc.Top && cvalue < rc.Bottom) pts.Add(new PointF(rc.Left, cvalue));
+                cvalue = (float)((Rc.Left - ln.Point0.X) * ln.ky / ln.kx + ln.Point0.Y);
+                if (cvalue > Rc.Top && cvalue < Rc.Bottom) pts.Add(new PointF(Rc.Left, cvalue));
                 pts = pts.OrderBy(point => point.X).ToList();
                 if (!CheckListState(pts)) return pts;
                     //x = max
-                    cvalue = (float)((rc.Right - ln.Point0.X) * ln.ky / ln.kx + ln.Point0.Y);
-                    pts.Add(new PointF(rc.Right, cvalue));
+                    cvalue = (float)((Rc.Right - ln.Point0.X) * ln.ky / ln.kx + ln.Point0.Y);
+                    pts.Add(new PointF(Rc.Right, cvalue));
                     pts = pts.OrderBy(point => point.X).ToList();
                     return pts;
         }

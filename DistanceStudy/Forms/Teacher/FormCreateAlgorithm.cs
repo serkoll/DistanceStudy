@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows.Forms;
 using DistanceStudy.Classes;
 using GraphicsModule.Form;
+using Point3DCntrl;
 using Service.HandlerUI;
 
 namespace DistanceStudy.Forms.Teacher
@@ -24,6 +25,7 @@ namespace DistanceStudy.Forms.Teacher
         {
             _taskWorker?.AddAlgothm(checkedListBoxProectionsControls);
             _taskWorker?.SetTaskStatusToReady();
+            TempInversionMethod.IsInversed = checkBoxIsInversed.Checked;
             Dispose();
         }
 
@@ -51,6 +53,7 @@ namespace DistanceStudy.Forms.Teacher
                 ChangeVisibleControlsComboLabelBtn(buttonAcceptRefMethod, labelEnterInputParam, comboBoxInputParam,
                     checkedListBoxProectionsControls, radioButtonGraphic, radioButtonMethod, true, true, true, false,
                     true, true);
+                checkBoxIsInversed.Checked = false;
             }
             else
             {

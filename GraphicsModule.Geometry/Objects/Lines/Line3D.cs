@@ -1,5 +1,7 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Drawing;
+using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Geometry.Objects.Points;
 using GraphicsModule.Settings;
 
@@ -11,6 +13,7 @@ namespace GraphicsModule.Geometry.Objects.Lines
     {
         public Point3D Point0 { get; set; }
         public Point3D Point1 { get; set; }
+        public Name Name { get; set; }
         public LineOfPlane1X0Y LineOfPlane1X0Y { get; set; }
         public LineOfPlane2X0Z LineOfPlane2X0Z { get; set; }
         public LineOfPlane3Y0Z LineOfPlane3Y0Z { get; set; }
@@ -182,38 +185,38 @@ namespace GraphicsModule.Geometry.Objects.Lines
                 LineOfPlane3Y0Z = linePi3;
             }
         }
-        public void Draw(DrawS st, System.Drawing.Point frameCenter, Graphics g)
+        public void Draw(DrawS st, Point frameCenter, Graphics g)
         {
             LineOfPlane1X0Y.DrawLineOnly(st, frameCenter, g);
             LineOfPlane2X0Z.DrawLineOnly(st, frameCenter, g);
             LineOfPlane3Y0Z.DrawLineOnly(st, frameCenter, g);
             if (st.LinkLineSettings.IsDraw)
             {
-                DrawLinkLine(st.LinkLineSettings.LinkLineX0YToX, st.LinkLineSettings.LinkLineX0YToY, st.LinkLineSettings.LinkLineX0ZToX, st.LinkLineSettings.LinkLineX0ZToZ,
-                             st.LinkLineSettings.LinkLineY0ZToZ, st.LinkLineSettings.LinkLineY0ZToY, frameCenter, ref g);
+                DrawLinkLine(st.LinkLineSettings.PenLinkLineX0YtoX, st.LinkLineSettings.PenLinkLineX0YtoY, st.LinkLineSettings.PenLinkLineX0ZtoX, st.LinkLineSettings.PenLinkLineX0ZtoZ,
+                             st.LinkLineSettings.PenLinkLineY0ZtoZ, st.LinkLineSettings.PenLinkLineY0ZtoY, frameCenter, ref g);
             }
 
         }
-        public void DrawLinkLine(Pen penLinkLineX0YToX, Pen penLinkLineX0YToY, Pen penLinkLineX0ZToX, Pen penLinkLineX0ZToZ, Pen penLinkLineY0ZToZ, Pen penLinkLineY0ZToY, System.Drawing.Point frameCenter, ref Graphics graphics)
+        public void DrawLinkLine(Pen penLinkLineX0YToX, Pen penLinkLineX0YToY, Pen penLinkLineX0ZToX, Pen penLinkLineX0ZToZ, Pen penLinkLineY0ZToZ, Pen penLinkLineY0ZToY, Point frameCenter, ref Graphics graphics)
         {
             Point0.DrawLinkLine(penLinkLineX0YToX, penLinkLineX0YToY, penLinkLineX0ZToX, penLinkLineX0ZToZ,
                          penLinkLineY0ZToZ, penLinkLineY0ZToY, frameCenter, ref graphics);
             Point1.DrawLinkLine(penLinkLineX0YToX, penLinkLineX0YToY, penLinkLineX0ZToX, penLinkLineX0ZToZ,
                           penLinkLineY0ZToZ, penLinkLineY0ZToY, frameCenter, ref graphics);
         }
-        public bool IsSelected(System.Drawing.Point mscoords, float ptR, System.Drawing.Point frameCenter, double distance)
+        public bool IsSelected(Point mscoords, float ptR, Point frameCenter, double distance)
         {
             return LineOfPlane1X0Y.IsSelected(mscoords, ptR, frameCenter, distance) ||
                    LineOfPlane2X0Z.IsSelected(mscoords, ptR, frameCenter, distance) ||
                    LineOfPlane3Y0Z.IsSelected(mscoords, ptR, frameCenter, distance);
         }
-        private void CalculatePointsForDraw(System.Drawing.Point frameCenter, RectangleF rc1, RectangleF rc2, RectangleF rc3)
+        private void CalculatePointsForDraw(Point frameCenter, RectangleF rc1, RectangleF rc2, RectangleF rc3)
         {
             LineOfPlane1X0Y.CalculatePointsForDraw(frameCenter, rc1);
             LineOfPlane2X0Z.CalculatePointsForDraw(frameCenter, rc2);
             LineOfPlane3Y0Z.CalculatePointsForDraw(frameCenter, rc3);
         }
-        public void SpecifyBoundaryPoints(System.Drawing.Point frameCenter, RectangleF rc1, RectangleF rc2, RectangleF rc3)
+        public void SpecifyBoundaryPoints(Point frameCenter, RectangleF rc1, RectangleF rc2, RectangleF rc3)
         {
             CalculatePointsForDraw(frameCenter, rc1, rc2, rc3);
             CutLineX0YtoX0Z(frameCenter, rc1);
@@ -221,7 +224,7 @@ namespace GraphicsModule.Geometry.Objects.Lines
             CutLineX0ZtoY0Z(frameCenter, rc1);
             CutLineY0ZtoX0Z(frameCenter, rc1);
         }
-        private void CutLineX0YtoX0Z(System.Drawing.Point frameCenter, RectangleF rc)
+        private void CutLineX0YtoX0Z(Point frameCenter, RectangleF rc)
         {
             if((LineOfPlane1X0Y.pts[0].X > LineOfPlane2X0Z.pts[0].X) && (LineOfPlane1X0Y.pts[0].Y == rc.Top))
             {
@@ -236,7 +239,7 @@ namespace GraphicsModule.Geometry.Objects.Lines
                 LineOfPlane2X0Z.pts[1] = Calculate.IntersectionPoint(ln, LineOfPlane2X0Z, frameCenter);
             }
         }
-        private void CutLineX0ZtoX0Y(System.Drawing.Point frameCenter, RectangleF rc)
+        private void CutLineX0ZtoX0Y(Point frameCenter, RectangleF rc)
         {
             if ((LineOfPlane2X0Z.pts[0].X > LineOfPlane1X0Y.pts[0].X) && (LineOfPlane2X0Z.pts[0].Y == rc.Top))
             {
@@ -251,7 +254,7 @@ namespace GraphicsModule.Geometry.Objects.Lines
                 LineOfPlane1X0Y.pts[1] = Calculate.IntersectionPoint(ln, LineOfPlane1X0Y, frameCenter);
             }
         }
-        private void CutLineX0ZtoY0Z(System.Drawing.Point frameCenter, RectangleF rc)
+        private void CutLineX0ZtoY0Z(Point frameCenter, RectangleF rc)
         {
             if ((LineOfPlane2X0Z.pts[0].Y < LineOfPlane3Y0Z.pts[0].Y) && (LineOfPlane2X0Z.pts[0].X == rc.Right))
             {
@@ -266,7 +269,7 @@ namespace GraphicsModule.Geometry.Objects.Lines
                 LineOfPlane3Y0Z.pts[1] = Calculate.IntersectionPoint(ln, LineOfPlane3Y0Z, frameCenter);
             }
         }
-        private void CutLineY0ZtoX0Z(System.Drawing.Point frameCenter, RectangleF rc)
+        private void CutLineY0ZtoX0Z(Point frameCenter, RectangleF rc)
         {
             if ((LineOfPlane3Y0Z.pts[0].Y > LineOfPlane2X0Z.pts[0].Y) && (LineOfPlane3Y0Z.pts[0].X == rc.Right))
             {
@@ -280,6 +283,20 @@ namespace GraphicsModule.Geometry.Objects.Lines
                                     new Point2D(LineOfPlane3Y0Z.pts[1].X - 10, LineOfPlane3Y0Z.pts[1].Y));
                 LineOfPlane2X0Z.pts[1] = Calculate.IntersectionPoint(ln, LineOfPlane2X0Z, frameCenter);
             }
+        }
+        public Name GetName()
+        {
+            var name = new Name(Name.Value.Remove(Name.Value.IndexOf("'", StringComparison.Ordinal)), Name.Dx, Name.Dy);
+            return name;
+        }
+        public void SetName(Name name)
+        {
+            Name = new Name(name);
+            Point0.SetName(Name);
+            Point1.SetName(Name);
+            LineOfPlane1X0Y.SetName(Name);
+            LineOfPlane2X0Z.SetName(Name);
+            LineOfPlane3Y0Z.SetName(Name);
         }
     }
 }

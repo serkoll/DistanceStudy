@@ -31,11 +31,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SegmentMenuSelector));
             this.mainStrip = new System.Windows.Forms.ToolStrip();
             this.buttonSegment2D = new System.Windows.Forms.ToolStripButton();
-            this.buttonSegmentOfPlaneX0Y = new System.Windows.Forms.ToolStripButton();
+            this.buttonSegmentOfPlane1X0Y = new System.Windows.Forms.ToolStripButton();
             this.buttonSegmentOfPlane2X0Z = new System.Windows.Forms.ToolStripButton();
             this.buttonSegmentOfPlane3Y0Z = new System.Windows.Forms.ToolStripButton();
             this.buttonSegment3D = new System.Windows.Forms.ToolStripButton();
-            this.GenerateSegment3D = new System.Windows.Forms.ToolStripButton();
+            this.buttonGenerateSegment3D = new System.Windows.Forms.ToolStripButton();
             this.mainStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -44,11 +44,11 @@
             this.mainStrip.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mainStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.buttonSegment2D,
-            this.buttonSegmentOfPlaneX0Y,
+            this.buttonSegmentOfPlane1X0Y,
             this.buttonSegmentOfPlane2X0Z,
             this.buttonSegmentOfPlane3Y0Z,
             this.buttonSegment3D,
-            this.GenerateSegment3D});
+            this.buttonGenerateSegment3D});
             this.mainStrip.Location = new System.Drawing.Point(0, 0);
             this.mainStrip.Name = "mainStrip";
             this.mainStrip.Size = new System.Drawing.Size(157, 38);
@@ -66,15 +66,15 @@
             this.buttonSegment2D.Text = "Отрезок";
             this.buttonSegment2D.Click += new System.EventHandler(this.buttonSegment2D_Click);
             // 
-            // buttonSegmentOfPlaneX0Y
+            // buttonSegmentOfPlane1X0Y
             // 
-            this.buttonSegmentOfPlaneX0Y.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.buttonSegmentOfPlaneX0Y.Image = global::GraphicsModule.Properties.Resources.SegmentX0Y;
-            this.buttonSegmentOfPlaneX0Y.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.buttonSegmentOfPlaneX0Y.Name = "buttonSegmentOfPlaneX0Y";
-            this.buttonSegmentOfPlaneX0Y.Size = new System.Drawing.Size(23, 35);
-            this.buttonSegmentOfPlaneX0Y.Text = "Проекция отрезка на плоскость X0Y";
-            this.buttonSegmentOfPlaneX0Y.Click += new System.EventHandler(this.buttonSegmentOfPlaneX0Y_Click);
+            this.buttonSegmentOfPlane1X0Y.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonSegmentOfPlane1X0Y.Image = global::GraphicsModule.Properties.Resources.SegmentX0Y;
+            this.buttonSegmentOfPlane1X0Y.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonSegmentOfPlane1X0Y.Name = "buttonSegmentOfPlane1X0Y";
+            this.buttonSegmentOfPlane1X0Y.Size = new System.Drawing.Size(23, 35);
+            this.buttonSegmentOfPlane1X0Y.Text = "Проекция отрезка на плоскость X0Y";
+            this.buttonSegmentOfPlane1X0Y.Click += new System.EventHandler(this.buttonSegmentOfPlane1X0Y_Click);
             // 
             // buttonSegmentOfPlane2X0Z
             // 
@@ -106,15 +106,15 @@
             this.buttonSegment3D.Text = "3D отрезок";
             this.buttonSegment3D.Click += new System.EventHandler(this.buttonSegment3D_Click);
             // 
-            // GenerateSegment3D
+            // buttonGenerateSegment3D
             // 
-            this.GenerateSegment3D.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.GenerateSegment3D.Image = ((System.Drawing.Image)(resources.GetObject("GenerateSegment3D.Image")));
-            this.GenerateSegment3D.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.GenerateSegment3D.Name = "GenerateSegment3D";
-            this.GenerateSegment3D.Size = new System.Drawing.Size(23, 20);
-            this.GenerateSegment3D.Text = "Генерация 3D отрезка";
-            this.GenerateSegment3D.Click += new System.EventHandler(this.GenerateSegment3D_Click);
+            this.buttonGenerateSegment3D.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonGenerateSegment3D.Image = ((System.Drawing.Image)(resources.GetObject("buttonGenerateSegment3D.Image")));
+            this.buttonGenerateSegment3D.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonGenerateSegment3D.Name = "buttonGenerateSegment3D";
+            this.buttonGenerateSegment3D.Size = new System.Drawing.Size(23, 20);
+            this.buttonGenerateSegment3D.Text = "Генерация 3D отрезка";
+            this.buttonGenerateSegment3D.Click += new System.EventHandler(this.GenerateSegment3D_Click);
             // 
             // SegmentMenuSelector
             // 
@@ -134,10 +134,10 @@
 
         private System.Windows.Forms.ToolStrip mainStrip;
         private System.Windows.Forms.ToolStripButton buttonSegment2D;
-        private System.Windows.Forms.ToolStripButton buttonSegmentOfPlaneX0Y;
+        private System.Windows.Forms.ToolStripButton buttonSegmentOfPlane1X0Y;
         private System.Windows.Forms.ToolStripButton buttonSegmentOfPlane2X0Z;
         private System.Windows.Forms.ToolStripButton buttonSegmentOfPlane3Y0Z;
         private System.Windows.Forms.ToolStripButton buttonSegment3D;
-        private System.Windows.Forms.ToolStripButton GenerateSegment3D;
+        private System.Windows.Forms.ToolStripButton buttonGenerateSegment3D;
     }
 }

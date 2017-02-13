@@ -8,6 +8,7 @@ using Formatter;
 using GraphicsModule.Geometry.Objects;
 using System.Collections.ObjectModel;
 using DbRepository.Classes.Keys;
+using GraphicsModule.Geometry.Interfaces;
 
 namespace Service.HandlerUI
 {

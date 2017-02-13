@@ -1,4 +1,6 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
+using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Geometry.Objects.Points;
 using GraphicsModule.Settings;
 
@@ -10,6 +12,7 @@ namespace GraphicsModule.Geometry.Objects.Segments
     {
         public PointOfPlane1X0Y Point0 { get; set; }
         public PointOfPlane1X0Y Point1 { get; set; }
+        public Name Name { get; set; }
         public double kx { get; set; }
         public double ky { get; set; }
         public SegmentOfPlane1X0Y()
@@ -66,6 +69,16 @@ namespace GraphicsModule.Geometry.Objects.Segments
             var sg = DeterminePosition.ForSegmentProjection(this, frameCenter);
             return Analyze.Analyze.SegmentPos.IncidenceOfPoint(mscoords, sg, 35 * distance);
         }
-
+        public Name GetName()
+        {
+            var name = new Name(Name.Value.Remove(Name.Value.IndexOf("'", StringComparison.Ordinal)), Name.Dx, Name.Dy);
+            return name;
+        }
+        public void SetName(Name name)
+        {
+            Name = new Name(name);
+            Point0.SetName(Name);
+            Point1.SetName(Name);
+        }
     }
 }

@@ -43,14 +43,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Background\Axis.cs" />
-    <Compile Include="Background\Grid.cs" />
-    <Compile Include="Canvas.cs" />
+    <Compile Include="Canvas\Background.cs" />
+    <Compile Include="Canvas\Canvas.cs" />
     <Compile Include="Controls\GraphicsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\GraphicsControl.Designer.cs">
       <DependentUpon>GraphicsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Menu\PlaneMenuSelector.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Menu\PlaneMenuSelector.Designer.cs">
+      <DependentUpon>PlaneMenuSelector.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Menu\LineMenuSelector.cs">
       <SubType>UserControl</SubType>
@@ -70,13 +75,17 @@
     <Compile Include="Controls\Menu\SegmentMenuSelector.Designer.cs">
       <DependentUpon>SegmentMenuSelector.cs</DependentUpon>
     </Compile>
-    <Compile Include="CreateObjects\ICreate.cs" />
-    <Compile Include="CreateObjects\Lines.cs" />
-    <Compile Include="CreateObjects\Points.cs" />
-    <Compile Include="CreateObjects\Segments.cs" />
+    <Compile Include="Rules\Buttons\ESCRules.cs" />
+    <Compile Include="Rules\Objects\Planes.cs" />
+    <Compile Include="Interfaces\ICreate.cs" />
+    <Compile Include="Rules\Objects\Lines.cs" />
+    <Compile Include="Rules\Objects\Points.cs" />
+    <Compile Include="Rules\Objects\Segments.cs" />
     <Compile Include="Cursors\CursorMove.cs" />
-    <Compile Include="Operations\IOperation.cs" />
-    <Compile Include="Operations\Operations.cs" />
+    <Compile Include="Interfaces\INamesGenerator.cs" />
+    <Compile Include="Interfaces\IOperation.cs" />
+    <Compile Include="NamesGenerator.cs" />
+    <Compile Include="Operations.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -88,6 +97,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Controls\GraphicsControl.resx">
       <DependentUpon>GraphicsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Menu\PlaneMenuSelector.resx">
+      <DependentUpon>PlaneMenuSelector.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Menu\LineMenuSelector.resx">
       <DependentUpon>LineMenuSelector.cs</DependentUpon>
@@ -128,6 +140,10 @@
     <ProjectReference Include="..\GraphicsModule.Settings\GraphicsModule.Settings.csproj">
       <Project>{fa7a373a-2140-4f47-b5dd-e4819bf1093e}</Project>
       <Name>GraphicsModule.Settings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GraphicsModule.SolidworksInteraction\GraphicsModule.SolidworksInteraction.csproj">
+      <Project>{fb1ff034-ecea-4dd1-911f-3c4f384c3723}</Project>
+      <Name>GraphicsModule.SolidworksInteraction</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
