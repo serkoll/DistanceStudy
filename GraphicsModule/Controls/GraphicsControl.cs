@@ -398,20 +398,27 @@ namespace GraphicsModule.Controls
         }
         private void buttonPlaneType3Points_Click(object sender, EventArgs e)
         {
-
-            buttonPlanesMenu.Text = buttonPlaneType3Points.Text;
+            var o = (ICreatePlanes)SetObject;
+            o.SetBuildType(0);
+            buttonPlaneTypeMenu.Text = buttonPlaneType3Points.Text;
         }
         private void buttonPlaneTypeLinePoint_Click(object sender, EventArgs e)
         {
-            buttonPlanesMenu.Text = buttonPlaneTypeLinePoint.Text;
+            var o = (ICreatePlanes)SetObject;
+            o.SetBuildType(1);
+            buttonPlaneTypeMenu.Text = buttonPlaneTypeLinePoint.Text;
         }
         private void buttonPlaneTypeParrLine_Click(object sender, EventArgs e)
         {
-            buttonPlanesMenu.Text = buttonPlaneTypeParrLine.Text;
+            var o = (ICreatePlanes)SetObject;
+            o.SetBuildType(2);
+            buttonPlaneTypeMenu.Text = buttonPlaneTypeParrLine.Text;
         }
         private void buttonPlaneTypeCrossedLine_Click(object sender, EventArgs e)
         {
-            buttonPlanesMenu.Text = buttonPlaneTypeCrossedLine.Text;
+            var o = (ICreatePlanes)SetObject;
+            o.SetBuildType(3);
+            buttonPlaneTypeMenu.Text = buttonPlaneTypeCrossedLine.Text;
         }
 
         private void GraphicsControl_KeyDown(object sender, KeyEventArgs e)

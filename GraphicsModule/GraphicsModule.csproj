@@ -75,12 +75,13 @@
     <Compile Include="Controls\Menu\SegmentMenuSelector.Designer.cs">
       <DependentUpon>SegmentMenuSelector.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\ICreatePlanes.cs" />
     <Compile Include="Rules\Buttons\ESCRules.cs" />
-    <Compile Include="Rules\Objects\Planes.cs" />
+    <Compile Include="Rules\Objects\Planes\Planes.cs" />
     <Compile Include="Interfaces\ICreate.cs" />
-    <Compile Include="Rules\Objects\Lines.cs" />
-    <Compile Include="Rules\Objects\Points.cs" />
-    <Compile Include="Rules\Objects\Segments.cs" />
+    <Compile Include="Rules\Objects\Lines\Lines.cs" />
+    <Compile Include="Rules\Objects\Points\Points.cs" />
+    <Compile Include="Rules\Objects\Segments\Segments.cs" />
     <Compile Include="Cursors\CursorMove.cs" />
     <Compile Include="Interfaces\INamesGenerator.cs" />
     <Compile Include="Interfaces\IOperation.cs" />

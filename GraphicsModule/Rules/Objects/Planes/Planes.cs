@@ -10,13 +10,13 @@ using GraphicsModule.Settings;
 
 namespace GraphicsModule.Rules.Objects
 {
-    public class CreatePlane2D : ICreate
+    public class CreatePlane2D : ICreate, ICreatePlanes
     {
-        public byte CreationType { get; set; } = 0;
+        private byte _creationType = 0;
         private Collection<IObject> _planeObjects = new Collection<IObject>();
         public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
         {
-            switch (CreationType)
+            switch (_creationType)
             {
                 case 0:
                     {
@@ -65,6 +65,13 @@ namespace GraphicsModule.Rules.Objects
         public Plane2D CreateByLinePoint(Line2D ln, Point2D pt)
         {
             return new Plane2D(ln, pt);
+        }
+        public void SetBuildType(byte type)
+        {
+            if (type < 5)
+                _creationType = type;
+            else
+                _creationType = 0;
         }
     }
 }
