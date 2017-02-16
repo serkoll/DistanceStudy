@@ -77,7 +77,7 @@
     </Compile>
     <Compile Include="Interfaces\ICreatePlanes.cs" />
     <Compile Include="Rules\Buttons\ESCRules.cs" />
-    <Compile Include="Rules\Objects\Planes\Planes.cs" />
+    <Compile Include="Rules\Objects\Planes\CreatePlane2D.cs" />
     <Compile Include="Interfaces\ICreate.cs" />
     <Compile Include="Rules\Objects\Lines\Lines.cs" />
     <Compile Include="Rules\Objects\Points\Points.cs" />

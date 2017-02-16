@@ -121,11 +121,14 @@ namespace GraphicsModule.Geometry.Analyze
         /// <returns></returns>
         public bool Parallelism(Line2D ln1, Line2D ln2)
         {
-            return false;
+            if (Math.Abs(ln1.kx - ln2.kx) < 0.001 || Math.Abs(ln1.ky - ln2.ky) < 0.001)
+                return true;
+            else
+                return false;
         }
         public bool Parallelism(Line3D ln1, Line3D ln2, double solveerror)
         {
-            return false;
+            return true;
         }
         #endregion
 
