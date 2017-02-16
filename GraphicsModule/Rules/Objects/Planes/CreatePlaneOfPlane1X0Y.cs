@@ -9,9 +9,9 @@ using GraphicsModule.Interfaces;
 using GraphicsModule.Settings;
 using GraphicsModule.Geometry.Analyze;
 
-namespace GraphicsModule.Rules.Objects
+namespace GraphicsModule.Rules.Objects.Planes
 {
-    public class CreatePlane2D : ICreate, ICreatePlanes
+    public class CreatePlaneOfPlane1X0Y : ICreate, ICreatePlanes
     {
         private byte _creationType = 0;
         private Collection<IObject> _planeObjects = new Collection<IObject>();
@@ -43,7 +43,7 @@ namespace GraphicsModule.Rules.Objects
         }
         private void CreateBy3Point(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
         {
-            var tmpobj = new CreatePoint2D().Create(pt, frameCenter, can, setting, strg);
+            var tmpobj = new CreatePointOfPlane1X0Y().Create(pt, frameCenter, can, setting, strg);
             tmpobj.Draw(setting, frameCenter, can.Graphics);
             _planeObjects.Add(tmpobj);
             if (_planeObjects.Count == 3)
@@ -136,26 +136,26 @@ namespace GraphicsModule.Rules.Objects
                 }
             }
         }
-        public Plane2D CreateBy3Point(Collection<IObject> obj)
+        public PlaneOfPlane1X0Y CreateBy3Point(Collection<IObject> obj)
         {
             if (obj.Count != 3) return null;
-            return new Plane2D((Point2D)obj[0], (Point2D)obj[1], (Point2D)obj[2]);
+            return new PlaneOfPlane1X0Y((PointOfPlane1X0Y)obj[0], (PointOfPlane1X0Y)obj[1], (PointOfPlane1X0Y)obj[2]);
         }
-        public Plane2D CreateByLinePoint(Line2D ln, Point2D pt)
+        public PlaneOfPlane1X0Y CreateByLinePoint(LineOfPlane1X0Y ln, PointOfPlane1X0Y pt)
         {
-            return new Plane2D(ln, pt);
+            return new PlaneOfPlane1X0Y(ln, pt);
         }
-        public Plane2D CreateByParallelLines(Line2D ln1, Line2D ln2)
+        public PlaneOfPlane1X0Y CreateByParallelLines(LineOfPlane1X0Y ln1, LineOfPlane1X0Y ln2)
         {
             if (Analyze.LinesPos.Parallelism(ln1, ln2))
-                return new Plane2D(ln1, ln2);
+                return new PlaneOfPlane1X0Y(ln1, ln2);
             else
                 return null;
         }
-        public Plane2D CreateByIntersectedLines(Line2D ln1, Line2D ln2)
+        public PlaneOfPlane1X0Y CreateByIntersectedLines(LineOfPlane1X0Y ln1, LineOfPlane1X0Y ln2)
         {
             if (Analyze.LinesPos.Intersection(ln1, ln2))
-                return new Plane2D(ln1, ln2);
+                return new PlaneOfPlane1X0Y(ln1, ln2);
             else
                 return null;
         }
@@ -167,4 +167,3 @@ namespace GraphicsModule.Rules.Objects
                 _creationType = 0;
         }
     }
-}

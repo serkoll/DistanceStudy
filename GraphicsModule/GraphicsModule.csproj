@@ -80,6 +80,7 @@
     <Compile Include="Rules\Objects\Planes\CreatePlane2D.cs" />
     <Compile Include="Interfaces\ICreate.cs" />
     <Compile Include="Rules\Objects\Lines\Lines.cs" />
+    <Compile Include="Rules\Objects\Planes\CreatePlaneOfPlane1X0Y.cs" />
     <Compile Include="Rules\Objects\Points\Points.cs" />
     <Compile Include="Rules\Objects\Segments\Segments.cs" />
     <Compile Include="Cursors\CursorMove.cs" />

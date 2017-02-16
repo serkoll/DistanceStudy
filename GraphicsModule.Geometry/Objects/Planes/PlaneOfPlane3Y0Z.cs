@@ -8,7 +8,7 @@ using GraphicsModule.Settings;
 
 namespace GraphicsModule.Geometry.Objects.Planes
 {
-    public class PlaneOfPlane3Y0Z
+    public class PlaneOfPlane3Y0Z : IObject
     {
         public IObject[] Objects;
         private Name _name;

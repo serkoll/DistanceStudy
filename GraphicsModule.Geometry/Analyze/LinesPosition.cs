@@ -41,7 +41,6 @@ namespace GraphicsModule.Geometry.Analyze
                    (Math.Abs((pt.Y - ln.Point0.Y) * ln.kz - (pt.Z - ln.Point0.Z) * ln.ky) < solveerror);
         }
         #endregion
-
         #region Incidence Of Plane
         public bool IncidenceOfOnePlane(Line3D ln1, Line3D ln2)
         {
@@ -88,7 +87,6 @@ namespace GraphicsModule.Geometry.Analyze
             return (Math.Abs(s) < solveerror) && (Math.Abs(g) < solveerror);
         }
         #endregion
-
         #region Coincidence of Lines
         public bool Coincidence(Line2D ln1, Line2D ln2)
         {
@@ -111,14 +109,7 @@ namespace GraphicsModule.Geometry.Analyze
             return Coincidence(Cnv.ToLine2D(ln1), Cnv.ToLine2D(ln2));
         }
         #endregion
-
         #region Parallelism of Lines
-        /// <summary>
-        /// Не работает
-        /// </summary>
-        /// <param name="ln1"></param>
-        /// <param name="ln2"></param>
-        /// <returns></returns>
         public bool Parallelism(Line2D ln1, Line2D ln2)
         {
             if (Math.Abs(ln1.kx - ln2.kx) < 0.001 || Math.Abs(ln1.ky - ln2.ky) < 0.001)
@@ -128,10 +119,19 @@ namespace GraphicsModule.Geometry.Analyze
         }
         public bool Parallelism(Line3D ln1, Line3D ln2, double solveerror)
         {
-            return true;
+            if (Math.Abs(ln1.kx - ln2.kx) < solveerror || Math.Abs(ln1.ky - ln2.ky) < solveerror)
+                return true;
+            else
+                return false;
+        }
+        public bool Parallelism(LineOfPlane1X0Y ln1, LineOfPlane1X0Y ln2)
+        {
+            if (Math.Abs(ln1.kx - ln2.kx) < 0.001 || Math.Abs(ln1.ky - ln2.ky) < 0.001)
+                return true;
+            else
+                return false;
         }
         #endregion
-
         #region Intersection of Lines
         public bool Intersection(Line2D ln1, Line2D ln2)
         {
@@ -143,6 +143,20 @@ namespace GraphicsModule.Geometry.Analyze
         public bool Intersection(Line2D ln1, LineOfPlane1X0Y ln, Point frameCenter)
         {
             var ln2 = DeterminePosition.ForLineProjection(ln, frameCenter);
+            var y = (ln2.Point0.Y * ln2.kx * ln1.ky - ln1.Point0.Y * ln2.ky * ln1.kx + ln2.ky * ln1.ky * (ln1.Point0.X - ln2.Point0.X)) /
+                    (ln2.kx * ln1.ky - ln1.kx * ln2.ky);
+            if (y < 0)
+            {
+                return false;
+            }
+            var x = (ln1.Point0.X * ln2.kx * ln1.ky - ln2.Point0.X * ln1.kx * ln2.ky + ln2.kx * ln1.kx * (ln2.Point0.Y - ln1.Point0.Y)) /
+                    (ln1.ky * ln2.kx - ln1.kx * ln2.ky);
+            return !(x < 0);
+        }
+        public bool Intersection(LineOfPlane1X0Y lnOfPlane1, LineOfPlane1X0Y lnOfPlane2, Point frameCenter)
+        {
+            var ln1 = DeterminePosition.ForLineProjection(lnOfPlane1, frameCenter);
+            var ln2 = DeterminePosition.ForLineProjection(lnOfPlane2, frameCenter);
             var y = (ln2.Point0.Y * ln2.kx * ln1.ky - ln1.Point0.Y * ln2.ky * ln1.kx + ln2.ky * ln1.ky * (ln1.Point0.X - ln2.Point0.X)) /
                     (ln2.kx * ln1.ky - ln1.kx * ln2.ky);
             if (y < 0)
@@ -180,7 +194,6 @@ namespace GraphicsModule.Geometry.Analyze
             return !(x < 0);
         }
         #endregion
-
         #region Perpendicularity
 
         public bool PerpendicularityOfPlane(Line3D ln, PlaneSpace pl)
@@ -196,14 +209,12 @@ namespace GraphicsModule.Geometry.Analyze
                    (Math.Abs(pl.B * ln.kz - pl.C * ln.ky) >= solveerror);
         }
         #endregion
-
         #region Crossing
         public bool Crossing(Line3D ln1, Line3D ln2)
         {
             return !IncidenceOfOnePlane(ln1, ln2);
         }
         #endregion
-
         #region Direction of Line
         /// <summary>
         /// Направление не реализовано
