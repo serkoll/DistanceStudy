@@ -8,6 +8,7 @@ using GraphicsModule.Geometry.Objects.Points;
 using GraphicsModule.Interfaces;
 using GraphicsModule.Settings;
 using GraphicsModule.Geometry.Analyze;
+using GraphicsModule.Rules.Objects.Points;
 
 namespace GraphicsModule.Rules.Objects.Planes
 {
@@ -69,7 +70,7 @@ namespace GraphicsModule.Rules.Objects.Planes
             }
             else
             {
-                var tmpobj = new CreateLineOfPlane3Y0Z().Create(pt, frameCenter, can, setting, strg);
+                var tmpobj = new CreatePointOfPlane3Y0Z().Create(pt, frameCenter, can, setting, strg);
                 var source = CreateByLinePoint((LineOfPlane3Y0Z)_planeObjects[0], tmpobj);
                 var nameparams = _planeObjects[0].GetName();
                 source.SetName(new Name(@"p", nameparams.Dx, nameparams.Dy));

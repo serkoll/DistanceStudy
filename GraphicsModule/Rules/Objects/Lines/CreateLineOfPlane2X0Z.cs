@@ -38,7 +38,7 @@ namespace GraphicsModule.Rules.Objects
                         new PointOfPlane2X0Z(pt, frameCenter))) return null;
                     var _source = new LineOfPlane2X0Z((PointOfPlane2X0Z)strg.TempObjects[0],
                         new PointOfPlane2X0Z(pt, frameCenter),
-                        frameCenter, can.PlaneX0Y);
+                        frameCenter, can.PlaneX0Z);
                     _source.SetName(strg.TempObjects[0].GetName());
                     strg.TempObjects.Clear();
                     return _source;

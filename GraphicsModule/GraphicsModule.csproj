@@ -94,7 +94,12 @@
     <Compile Include="Rules\Objects\Points\CreatePointOfPlane2X0Z.cs" />
     <Compile Include="Rules\Objects\Points\CreatePointOfPlane3Y0Z.cs" />
     <Compile Include="Rules\Objects\Points\GeneratePoint3D.cs" />
-    <Compile Include="Rules\Objects\Segments\Segments.cs" />
+    <Compile Include="Rules\Objects\Segments\CreateSegment2D.cs" />
+    <Compile Include="Rules\Objects\Segments\CreateSegment3D.cs" />
+    <Compile Include="Rules\Objects\Segments\CreateSegmentOfPlane1X0Y.cs" />
+    <Compile Include="Rules\Objects\Segments\CreateSegmentOfPlane2X0Z.cs" />
+    <Compile Include="Rules\Objects\Segments\CreateSegmentOfPlane3Y0Z.cs" />
+    <Compile Include="Rules\Objects\Segments\GenerateSegment3D.cs" />
     <Compile Include="Cursors\CursorMove.cs" />
     <Compile Include="Interfaces\INamesGenerator.cs" />
     <Compile Include="Interfaces\IOperation.cs" />

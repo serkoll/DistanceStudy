@@ -8,6 +8,7 @@ using GraphicsModule.Geometry.Objects.Points;
 using GraphicsModule.Interfaces;
 using GraphicsModule.Settings;
 using GraphicsModule.Geometry.Analyze;
+using GraphicsModule.Rules.Objects.Points;
 
 namespace GraphicsModule.Rules.Objects
 {

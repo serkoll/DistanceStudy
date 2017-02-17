@@ -70,7 +70,7 @@ namespace GraphicsModule.Rules.Objects.Planes
             }
             else
             {
-                var tmpobj = new CreateLineOfPlane2X0Z().Create(pt, frameCenter, can, setting, strg);
+                var tmpobj = new CreatePointOfPlane2X0Z().Create(pt, frameCenter, can, setting, strg);
                 var source = CreateByLinePoint((LineOfPlane2X0Z)_planeObjects[0], tmpobj);
                 var nameparams = _planeObjects[0].GetName();
                 source.SetName(new Name(@"p", nameparams.Dx, nameparams.Dy));
