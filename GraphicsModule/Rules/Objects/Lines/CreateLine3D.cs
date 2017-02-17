@@ -1,161 +1,16 @@
-﻿using System.Collections.ObjectModel;
-using System.Drawing;
+﻿using System.Drawing;
 using GraphicsModule.Controls;
-using GraphicsModule.Geometry;
 using GraphicsModule.Geometry.Analyze;
-using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Geometry.Objects.Lines;
 using GraphicsModule.Geometry.Objects.Points;
 using GraphicsModule.Interfaces;
 using GraphicsModule.Settings;
+using GraphicsModule.Geometry.Interfaces;
+using System.Collections.ObjectModel;
+using GraphicsModule.Geometry;
 
-namespace GraphicsModule.Rules.Objects
+namespace GraphicsModule.Rules.Objects.Lines
 {
-    /// <summary>
-    /// Создание 2Д линии
-    /// </summary>
-    public class CreateLine2D : ICreate
-    {
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas.Canvas can, DrawS settings, Storage strg)
-        {
-            var obj = Create(pt, frameCenter, can, settings, strg);
-            if (obj == null) return;
-            strg.AddToCollection(obj);
-            can.Update(strg);
-        }
-        public Line2D Create(Point pt, Point frameCenter, Canvas.Canvas can, DrawS settings, Storage strg)
-        {
-            var ptOfPlane = new Point2D(pt);
-            if (strg.TempObjects.Count == 0)
-            {
-                ptOfPlane.SetName(GraphicsControl.NmGenerator.Generate());
-                strg.TempObjects.Add(ptOfPlane);
-                strg.DrawLastAddedToTempObjects(settings, frameCenter, can.Graphics);
-            }
-            else
-            {
-                if (Analyze.PointPos.Coincidence((Point2D)strg.TempObjects[0], new Point2D(pt))) return null;
-                var source = new Line2D((Point2D)strg.TempObjects[0], new Point2D(pt), can.PicBox);
-                source.SetName(strg.TempObjects[0].GetName());
-                strg.TempObjects.Clear();
-                return source;
-            }
-            return null;
-        }
-    }
-    /// <summary>
-    /// Создание проекции линии на плоскость X0Y
-    /// </summary>
-    public class CreateLineOfPlane1X0Y : ICreate
-    {
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas.Canvas can, DrawS settings, Storage strg)
-        {
-            var obj = Create(pt, frameCenter, can, settings, strg);
-            if (obj == null) return;
-            strg.AddToCollection(obj);
-            can.Update(strg);
-        }
-        public LineOfPlane1X0Y Create(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
-        {
-            if (PointOfPlane1X0Y.Creatable(pt, frameCenter))
-            {
-                var ptOfPlane = new PointOfPlane1X0Y(pt, frameCenter);
-                if (strg.TempObjects.Count == 0)
-                {
-                    ptOfPlane.SetName(GraphicsControl.NmGenerator.Generate());
-                    strg.TempObjects.Add(ptOfPlane);
-                    strg.DrawLastAddedToTempObjects(setting, frameCenter, can.Graphics);
-                    return null;
-                }
-                else
-                {
-                    if (Analyze.PointPos.Coincidence((PointOfPlane1X0Y)strg.TempObjects[0],
-                        new PointOfPlane1X0Y(pt, frameCenter))) return null;
-                    var _source = new LineOfPlane1X0Y((PointOfPlane1X0Y)strg.TempObjects[0],
-                        new PointOfPlane1X0Y(pt, frameCenter),
-                        frameCenter, can.PlaneX0Y);
-                    _source.SetName(strg.TempObjects[0].GetName());
-                    strg.TempObjects.Clear();
-                    return _source;
-                }
-            }
-            else
-                return null;
-        }
-    }
-
-    /// <summary>
-    /// Создание проекции линии на плоскость X0Z
-    /// </summary>
-    public class CreateLineOfPlane2X0Z : ICreate
-    {
-        private LineOfPlane2X0Z _source;
-
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
-        {
-            if (PointOfPlane2X0Z.Creatable(pt, frameCenter))
-            {
-                var ptOfPlane = new PointOfPlane2X0Z(pt, frameCenter);
-                if (strg.TempObjects.Count == 0)
-                {
-                    ptOfPlane.SetName(GraphicsControl.NmGenerator.Generate());
-                    strg.TempObjects.Add(ptOfPlane);
-                    strg.DrawLastAddedToTempObjects(setting, frameCenter, can.Graphics);
-                }
-                else
-                {
-                    if (Analyze.PointPos.Coincidence((PointOfPlane2X0Z)strg.TempObjects[0],
-                        new PointOfPlane2X0Z(pt, frameCenter))) return;
-                    _source = new LineOfPlane2X0Z((PointOfPlane2X0Z)strg.TempObjects[0],
-                        new PointOfPlane2X0Z(pt, frameCenter),
-                        frameCenter, can.PlaneX0Z);
-                    _source.SetName(strg.TempObjects[0].GetName());
-                    strg.AddToCollection(_source);
-                    _source = null;
-                    strg.TempObjects.Clear();
-                    can.Update(strg);
-                    strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
-                }
-            }
-        }
-    }
-
-    /// <summary>
-    /// Создание проекции линии на плоскость Y0Z
-    /// </summary>
-    public class CreateLineOfPlane3Y0Z : ICreate
-    {
-        private LineOfPlane3Y0Z _source;
-
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
-        {
-            if (PointOfPlane3Y0Z.Creatable(pt, frameCenter))
-            {
-                var ptOfPlane = new PointOfPlane3Y0Z(pt, frameCenter);
-                if (strg.TempObjects.Count == 0)
-                {
-                    ptOfPlane.SetName(GraphicsControl.NmGenerator.Generate());
-                    strg.TempObjects.Add(ptOfPlane);
-                    strg.DrawLastAddedToTempObjects(setting, frameCenter, can.Graphics);
-                }
-                else
-                {
-                    if (Analyze.PointPos.Coincidence((PointOfPlane3Y0Z)strg.TempObjects[0],
-                        new PointOfPlane3Y0Z(pt, frameCenter))) return;
-                    _source = new LineOfPlane3Y0Z((PointOfPlane3Y0Z)strg.TempObjects[0],
-                        new PointOfPlane3Y0Z(pt, frameCenter),
-                        frameCenter, can.PlaneY0Z);
-                    _source.SetName(strg.TempObjects[0].GetName());
-                    strg.AddToCollection(_source);
-                    _source = null;
-                    strg.TempObjects.Clear();
-                    can.Update(strg);
-                    strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
-                }
-            }
-        }
-    }
-
     /// <summary>
     /// Создание 3D линии
     /// </summary>
@@ -356,44 +211,5 @@ namespace GraphicsModule.Rules.Objects
         }
 
         #endregion
-    }
-
-    public class GenerateLine3D : ICreate
-    {
-        private Line3D _source;
-
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
-        {
-            new SelectLineOfPlane().Execute(pt, strg, can);
-            if (strg.SelectedObjects.Count > 1)
-            {
-                if (ReferenceEquals(strg.SelectedObjects[0].GetType(), strg.SelectedObjects[1].GetType()))
-                {
-                    strg.SelectedObjects.Remove(strg.SelectedObjects[0]);
-                    can.Update(strg);
-                    return;
-                }
-                if ((_source = Line3D.Create(strg.SelectedObjects)) != null)
-                {
-                    _source.SpecifyBoundaryPoints(frameCenter, can.PlaneX0Y, can.PlaneX0Z, can.PlaneY0Z);
-                    strg.Objects.Remove(strg.SelectedObjects[0]);
-                    strg.Objects.Remove(strg.SelectedObjects[1]);
-                    strg.SelectedObjects.Clear();
-                    can.Update(strg);
-                    strg.AddToCollection(_source);
-                    _source = null;
-                    strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
-                }
-                else
-                {
-                    strg.SelectedObjects.RemoveAt(strg.SelectedObjects.Count - 1);
-                    can.Update(strg);
-                }
-            }
-            else
-            {
-                can.Update(strg);
-            }
-        }
     }
 }

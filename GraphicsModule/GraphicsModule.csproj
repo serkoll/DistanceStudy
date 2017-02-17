@@ -77,9 +77,14 @@
     </Compile>
     <Compile Include="Interfaces\ICreatePlanes.cs" />
     <Compile Include="Rules\Buttons\ESCRules.cs" />
+    <Compile Include="Rules\Objects\Lines\CreateLine2D.cs" />
+    <Compile Include="Rules\Objects\Lines\CreateLine3D.cs" />
+    <Compile Include="Rules\Objects\Lines\CreateLineOfPlane1X0Y.cs" />
+    <Compile Include="Rules\Objects\Lines\CreateLineOfPlane2X0Z.cs" />
+    <Compile Include="Rules\Objects\Lines\CreateLineOfPlane3Y0Z.cs" />
     <Compile Include="Rules\Objects\Planes\CreatePlane2D.cs" />
     <Compile Include="Interfaces\ICreate.cs" />
-    <Compile Include="Rules\Objects\Lines\Lines.cs" />
+    <Compile Include="Rules\Objects\Lines\GenerateLine3D.cs" />
     <Compile Include="Rules\Objects\Planes\CreatePlaneOfPlane1X0Y.cs" />
     <Compile Include="Rules\Objects\Planes\CreatePlaneOfPlane2X0Z.cs" />
     <Compile Include="Rules\Objects\Planes\CreatePlaneOfPlane3Y0Z.cs" />
