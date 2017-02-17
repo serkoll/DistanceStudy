@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using GraphicsModule.Rules.Objects;
+using GraphicsModule.Rules.Objects.Planes;
 
 namespace GraphicsModule.Controls.Menu
 {
@@ -32,7 +33,7 @@ namespace GraphicsModule.Controls.Menu
         private void buttonPlaneOfPlane1X0Y_Click(object sender, EventArgs e)
         {
             _mainPictureBox.Cursor = System.Windows.Forms.Cursors.Cross;
-            GraphicsControl.SetObject = new CreateLineOfPlane1X0Y();
+            GraphicsControl.SetObject = new CreatePlaneOfPlane1X0Y();
             _mainStripButton.Image = buttonPlaneOfPlane1X0Y.Image;
         }
         private void buttonPlaneOfPlane2X0Z_Click(object sender, EventArgs e)

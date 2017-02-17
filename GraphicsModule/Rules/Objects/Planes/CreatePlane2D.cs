@@ -49,10 +49,11 @@ namespace GraphicsModule.Rules.Objects
             if (_planeObjects.Count == 3)
             {
                 var source = CreateBy3Point(_planeObjects);
-                source.SetName(new Name(@"p", 0, 0));
+                var nameparams = _planeObjects[0].GetName();
+                source.SetName(new Name(@"p", nameparams.Dx, nameparams.Dy));
                 _planeObjects.Clear();
                 strg.AddToCollection(source);
-                strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
+                can.Update(strg);
             }
         }
         private void CreateByLinePoint(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
@@ -70,10 +71,11 @@ namespace GraphicsModule.Rules.Objects
             {
                 var tmpobj = new CreatePoint2D().Create(pt, frameCenter, can, setting, strg);
                 var source = CreateByLinePoint((Line2D)_planeObjects[0], tmpobj);
-                source.SetName(new Name(@"p", 0, 0));
+                var nameparams = _planeObjects[0].GetName();
+                source.SetName(new Name(@"p", nameparams.Dx, nameparams.Dy));
                 _planeObjects.Clear();
                 strg.AddToCollection(source);
-                strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
+                can.Update(strg);
             }
         }
         private void CreateByParallelLines(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
@@ -92,10 +94,11 @@ namespace GraphicsModule.Rules.Objects
                 var source = CreateByParallelLines((Line2D)_planeObjects[0], (Line2D)_planeObjects[1]);
                 if (source != null)
                 {
-                    source.SetName(new Name(@"p", 0, 0));
+                    var nameparams = _planeObjects[0].GetName();
+                    source.SetName(new Name(@"p", nameparams.Dx, nameparams.Dy));
                     _planeObjects.Clear();
                     strg.AddToCollection(source);
-                    strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
+                    can.Update(strg);
                 }
                 else
                 {
@@ -122,10 +125,11 @@ namespace GraphicsModule.Rules.Objects
                 var source = CreateByIntersectedLines((Line2D)_planeObjects[0], (Line2D)_planeObjects[1]);
                 if (source != null)
                 {
-                    source.SetName(new Name(@"p", 0, 0));
+                    var nameparams = _planeObjects[0].GetName();
+                    source.SetName(new Name(@"p", nameparams.Dx, nameparams.Dy));
                     _planeObjects.Clear();
                     strg.AddToCollection(source);
-                    strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
+                    can.Update(strg);
                 }
                 else
                 {

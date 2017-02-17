@@ -50,7 +50,14 @@ namespace GraphicsModule.Geometry.Objects.Planes
         }
         public void SetName(Name name)
         {
-            _name = new Name(_name);
+            _name = new Name(name);
+            foreach (var t in Objects)
+            {
+                var n = t.GetName();
+                n.Value.Remove(n.Value.Length - 1);
+                n.Value += _name.Value;
+                t.SetName(n);
+            }
         }
     }
 }

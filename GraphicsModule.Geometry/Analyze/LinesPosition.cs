@@ -131,6 +131,20 @@ namespace GraphicsModule.Geometry.Analyze
             else
                 return false;
         }
+        public bool Parallelism(LineOfPlane2X0Z ln1, LineOfPlane2X0Z ln2)
+        {
+            if (Math.Abs(ln1.kx - ln2.kx) < 0.001 || Math.Abs(ln1.kz - ln2.kz) < 0.001)
+                return true;
+            else
+                return false;
+        }
+        public bool Parallelism(LineOfPlane3Y0Z ln1, LineOfPlane3Y0Z ln2)
+        {
+            if (Math.Abs(ln1.kz - ln2.kz) < 0.001 || Math.Abs(ln1.ky - ln2.ky) < 0.001)
+                return true;
+            else
+                return false;
+        }
         #endregion
         #region Intersection of Lines
         public bool Intersection(Line2D ln1, Line2D ln2)
@@ -143,20 +157,6 @@ namespace GraphicsModule.Geometry.Analyze
         public bool Intersection(Line2D ln1, LineOfPlane1X0Y ln, Point frameCenter)
         {
             var ln2 = DeterminePosition.ForLineProjection(ln, frameCenter);
-            var y = (ln2.Point0.Y * ln2.kx * ln1.ky - ln1.Point0.Y * ln2.ky * ln1.kx + ln2.ky * ln1.ky * (ln1.Point0.X - ln2.Point0.X)) /
-                    (ln2.kx * ln1.ky - ln1.kx * ln2.ky);
-            if (y < 0)
-            {
-                return false;
-            }
-            var x = (ln1.Point0.X * ln2.kx * ln1.ky - ln2.Point0.X * ln1.kx * ln2.ky + ln2.kx * ln1.kx * (ln2.Point0.Y - ln1.Point0.Y)) /
-                    (ln1.ky * ln2.kx - ln1.kx * ln2.ky);
-            return !(x < 0);
-        }
-        public bool Intersection(LineOfPlane1X0Y lnOfPlane1, LineOfPlane1X0Y lnOfPlane2, Point frameCenter)
-        {
-            var ln1 = DeterminePosition.ForLineProjection(lnOfPlane1, frameCenter);
-            var ln2 = DeterminePosition.ForLineProjection(lnOfPlane2, frameCenter);
             var y = (ln2.Point0.Y * ln2.kx * ln1.ky - ln1.Point0.Y * ln2.ky * ln1.kx + ln2.ky * ln1.ky * (ln1.Point0.X - ln2.Point0.X)) /
                     (ln2.kx * ln1.ky - ln1.kx * ln2.ky);
             if (y < 0)
@@ -185,6 +185,48 @@ namespace GraphicsModule.Geometry.Analyze
             var ln2 = DeterminePosition.ForLineProjection(ln, frameCenter);
             var y = (ln2.Point0.Y * ln2.kx * ln1.ky - ln1.Point0.Y * ln2.ky * ln1.kx + ln2.ky * ln1.ky * (ln1.Point0.X - ln2.Point0.X)) /
                      (ln2.kx * ln1.ky - ln1.kx * ln2.ky);
+            if (y < 0)
+            {
+                return false;
+            }
+            var x = (ln1.Point0.X * ln2.kx * ln1.ky - ln2.Point0.X * ln1.kx * ln2.ky + ln2.kx * ln1.kx * (ln2.Point0.Y - ln1.Point0.Y)) /
+                    (ln1.ky * ln2.kx - ln1.kx * ln2.ky);
+            return !(x < 0);
+        }
+        public bool Intersection(LineOfPlane1X0Y lnOfPlane1, LineOfPlane1X0Y lnOfPlane2, Point frameCenter)
+        {
+            var ln1 = DeterminePosition.ForLineProjection(lnOfPlane1, frameCenter);
+            var ln2 = DeterminePosition.ForLineProjection(lnOfPlane2, frameCenter);
+            var y = (ln2.Point0.Y * ln2.kx * ln1.ky - ln1.Point0.Y * ln2.ky * ln1.kx + ln2.ky * ln1.ky * (ln1.Point0.X - ln2.Point0.X)) /
+                    (ln2.kx * ln1.ky - ln1.kx * ln2.ky);
+            if (y < 0)
+            {
+                return false;
+            }
+            var x = (ln1.Point0.X * ln2.kx * ln1.ky - ln2.Point0.X * ln1.kx * ln2.ky + ln2.kx * ln1.kx * (ln2.Point0.Y - ln1.Point0.Y)) /
+                    (ln1.ky * ln2.kx - ln1.kx * ln2.ky);
+            return !(x < 0);
+        }
+        public bool Intersection(LineOfPlane2X0Z lnOfPlane1, LineOfPlane2X0Z lnOfPlane2, Point frameCenter)
+        {
+            var ln1 = DeterminePosition.ForLineProjection(lnOfPlane1, frameCenter);
+            var ln2 = DeterminePosition.ForLineProjection(lnOfPlane2, frameCenter);
+            var y = (ln2.Point0.Y * ln2.kx * ln1.ky - ln1.Point0.Y * ln2.ky * ln1.kx + ln2.ky * ln1.ky * (ln1.Point0.X - ln2.Point0.X)) /
+                    (ln2.kx * ln1.ky - ln1.kx * ln2.ky);
+            if (y < 0)
+            {
+                return false;
+            }
+            var x = (ln1.Point0.X * ln2.kx * ln1.ky - ln2.Point0.X * ln1.kx * ln2.ky + ln2.kx * ln1.kx * (ln2.Point0.Y - ln1.Point0.Y)) /
+                    (ln1.ky * ln2.kx - ln1.kx * ln2.ky);
+            return !(x < 0);
+        }
+        public bool Intersection(LineOfPlane3Y0Z lnOfPlane1, LineOfPlane3Y0Z lnOfPlane2, Point frameCenter)
+        {
+            var ln1 = DeterminePosition.ForLineProjection(lnOfPlane1, frameCenter);
+            var ln2 = DeterminePosition.ForLineProjection(lnOfPlane2, frameCenter);
+            var y = (ln2.Point0.Y * ln2.kx * ln1.ky - ln1.Point0.Y * ln2.ky * ln1.kx + ln2.ky * ln1.ky * (ln1.Point0.X - ln2.Point0.X)) /
+                    (ln2.kx * ln1.ky - ln1.kx * ln2.ky);
             if (y < 0)
             {
                 return false;

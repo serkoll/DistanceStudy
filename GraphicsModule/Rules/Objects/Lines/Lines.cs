@@ -22,9 +22,7 @@ namespace GraphicsModule.Rules.Objects
             if (obj == null) return;
             strg.AddToCollection(obj);
             can.Update(strg);
-            strg.DrawLastAddedToObjects(settings, frameCenter, can.Graphics);
         }
-
         public Line2D Create(Point pt, Point frameCenter, Canvas.Canvas can, DrawS settings, Storage strg)
         {
             var ptOfPlane = new Point2D(pt);
@@ -50,9 +48,14 @@ namespace GraphicsModule.Rules.Objects
     /// </summary>
     public class CreateLineOfPlane1X0Y : ICreate
     {
-        private LineOfPlane1X0Y _source;
-
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
+        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas.Canvas can, DrawS settings, Storage strg)
+        {
+            var obj = Create(pt, frameCenter, can, settings, strg);
+            if (obj == null) return;
+            strg.AddToCollection(obj);
+            can.Update(strg);
+        }
+        public LineOfPlane1X0Y Create(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
         {
             if (PointOfPlane1X0Y.Creatable(pt, frameCenter))
             {
@@ -62,22 +65,22 @@ namespace GraphicsModule.Rules.Objects
                     ptOfPlane.SetName(GraphicsControl.NmGenerator.Generate());
                     strg.TempObjects.Add(ptOfPlane);
                     strg.DrawLastAddedToTempObjects(setting, frameCenter, can.Graphics);
+                    return null;
                 }
                 else
                 {
                     if (Analyze.PointPos.Coincidence((PointOfPlane1X0Y)strg.TempObjects[0],
-                        new PointOfPlane1X0Y(pt, frameCenter))) return;
-                    _source = new LineOfPlane1X0Y((PointOfPlane1X0Y)strg.TempObjects[0],
+                        new PointOfPlane1X0Y(pt, frameCenter))) return null;
+                    var _source = new LineOfPlane1X0Y((PointOfPlane1X0Y)strg.TempObjects[0],
                         new PointOfPlane1X0Y(pt, frameCenter),
                         frameCenter, can.PlaneX0Y);
                     _source.SetName(strg.TempObjects[0].GetName());
-                    strg.AddToCollection(_source);
-                    _source = null;
                     strg.TempObjects.Clear();
-                    can.Update(strg);
-                    strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
+                    return _source;
                 }
             }
+            else
+                return null;
         }
     }
 

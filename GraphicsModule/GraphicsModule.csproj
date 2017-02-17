@@ -81,7 +81,14 @@
     <Compile Include="Interfaces\ICreate.cs" />
     <Compile Include="Rules\Objects\Lines\Lines.cs" />
     <Compile Include="Rules\Objects\Planes\CreatePlaneOfPlane1X0Y.cs" />
-    <Compile Include="Rules\Objects\Points\Points.cs" />
+    <Compile Include="Rules\Objects\Planes\CreatePlaneOfPlane2X0Z.cs" />
+    <Compile Include="Rules\Objects\Planes\CreatePlaneOfPlane3Y0Z.cs" />
+    <Compile Include="Rules\Objects\Points\CreatePoint2D.cs" />
+    <Compile Include="Rules\Objects\Points\CreatePoint3D.cs" />
+    <Compile Include="Rules\Objects\Points\CreatePointOfPlane1X0Y.cs" />
+    <Compile Include="Rules\Objects\Points\CreatePointOfPlane2X0Z.cs" />
+    <Compile Include="Rules\Objects\Points\CreatePointOfPlane3Y0Z.cs" />
+    <Compile Include="Rules\Objects\Points\GeneratePoint3D.cs" />
     <Compile Include="Rules\Objects\Segments\Segments.cs" />
     <Compile Include="Cursors\CursorMove.cs" />
     <Compile Include="Interfaces\INamesGenerator.cs" />
