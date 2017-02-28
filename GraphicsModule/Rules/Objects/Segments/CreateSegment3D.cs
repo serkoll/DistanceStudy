@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Drawing;
 using GraphicsModule.Controls;
 using GraphicsModule.Geometry;
@@ -152,27 +153,33 @@ namespace GraphicsModule.Rules.Objects.Segments
         #region IsOnLinkLine
         protected bool IsOnLinkLine12(SegmentOfPlane1X0Y lnproj, PointOfPlane2X0Z ptproj)
         {
-            return lnproj.Point0.X == ptproj.X || lnproj.Point1.X == ptproj.X;
+            const double tolerance = 0.001;
+            return Math.Abs(lnproj.Point0.X - ptproj.X) < tolerance || Math.Abs(lnproj.Point1.X - ptproj.X) < tolerance;
         }
         protected bool IsOnLinkLine13(SegmentOfPlane1X0Y lnproj, PointOfPlane3Y0Z ptproj)
         {
-            return lnproj.Point0.Y == ptproj.Y || lnproj.Point1.Y == ptproj.Y;
+            const double tolerance = 0.001;
+            return Math.Abs(lnproj.Point0.Y - ptproj.Y) < tolerance || Math.Abs(lnproj.Point1.Y - ptproj.Y) < tolerance;
         }
         protected bool IsOnLinkLine21(SegmentOfPlane2X0Z lnproj, PointOfPlane1X0Y ptproj)
         {
-            return lnproj.Point0.X == ptproj.X || lnproj.Point1.X == ptproj.X;
+            const double tolerance = 0.001;
+            return Math.Abs(lnproj.Point0.X - ptproj.X) < tolerance || Math.Abs(lnproj.Point1.X - ptproj.X) < tolerance;
         }
         protected bool IsOnLinkLine23(SegmentOfPlane2X0Z lnproj, PointOfPlane3Y0Z ptproj)
         {
-            return lnproj.Point0.Z == ptproj.Z || lnproj.Point1.Z == ptproj.Z;
+            const double tolerance = 0.001;
+            return Math.Abs(lnproj.Point0.Z - ptproj.Z) < tolerance || Math.Abs(lnproj.Point1.Z - ptproj.Z) < tolerance;
         }
         protected bool IsOnLinkLine31(SegmentOfPlane3Y0Z lnproj, PointOfPlane1X0Y ptproj)
         {
-            return lnproj.Point0.Y == ptproj.Y || lnproj.Point1.Y == ptproj.Y;
+            const double tolerance = 0.001;
+            return Math.Abs(lnproj.Point0.Y - ptproj.Y) < tolerance || Math.Abs(lnproj.Point1.Y - ptproj.Y) < tolerance;
         }
         protected bool IsOnLinkLine32(SegmentOfPlane3Y0Z lnproj, PointOfPlane2X0Z ptproj)
         {
-            return lnproj.Point0.Z == ptproj.Z || lnproj.Point1.Z == ptproj.Z;
+            const double tolerance = 0.001;
+            return Math.Abs(lnproj.Point0.Z - ptproj.Z) < tolerance || Math.Abs(lnproj.Point1.Z - ptproj.Z) < tolerance;
         }
         #endregion
     }
