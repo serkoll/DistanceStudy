@@ -9,32 +9,33 @@ using GraphicsModule.Settings;
 
 namespace GraphicsModule.Rules.Objects.Segments
 {
-    /// <summary>
-    /// Создание 2Д линии
-    /// </summary>
     public class CreateSegment2D : ICreate
     {
-        private Segment2D _source;
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
+        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas.Canvas can, DrawS settings, Storage strg)
+        {
+            var obj = Create(pt, frameCenter, can, settings, strg);
+            if (obj == null) return;
+            strg.AddToCollection(obj);
+            can.Update(strg);
+        }
+        public Segment2D Create(Point pt, Point frameCenter, Canvas.Canvas can, DrawS settings, Storage strg)
         {
             var ptOfPlane = new Point2D(pt);
             if (strg.TempObjects.Count == 0)
             {
                 ptOfPlane.SetName(GraphicsControl.NmGenerator.Generate());
                 strg.TempObjects.Add(ptOfPlane);
-                strg.DrawLastAddedToTempObjects(setting, frameCenter, can.Graphics);
+                strg.DrawLastAddedToTempObjects(settings, frameCenter, can.Graphics);
             }
             else
             {
-                if (Analyze.PointPos.Coincidence((Point2D)strg.TempObjects[0], new Point2D(pt))) return;
-                _source = new Segment2D((Point2D)strg.TempObjects[0], new Point2D(pt), can.PicBox);
-                _source.SetName(strg.TempObjects[0].GetName());
-                strg.AddToCollection(_source);
-                _source = null;
+                if (Analyze.PointPos.Coincidence((Point2D)strg.TempObjects[0], new Point2D(pt))) return null;
+                var source = new Segment2D((Point2D)strg.TempObjects[0], new Point2D(pt), can.PicBox);
+                source.SetName(strg.TempObjects[0].GetName());
                 strg.TempObjects.Clear();
-                can.Update(strg);
-                strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
+                return source;
             }
+            return null;
         }
     }
 }

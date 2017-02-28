@@ -22,30 +22,23 @@ namespace GraphicsModule.Rules.Objects.Lines
         }
         public LineOfPlane1X0Y Create(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
         {
-            if (PointOfPlane1X0Y.Creatable(pt, frameCenter))
+            if (!PointOfPlane1X0Y.Creatable(pt, frameCenter)) return null;
+            var ptOfPlane = new PointOfPlane1X0Y(pt, frameCenter);
+            if (strg.TempObjects.Count == 0)
             {
-                var ptOfPlane = new PointOfPlane1X0Y(pt, frameCenter);
-                if (strg.TempObjects.Count == 0)
-                {
-                    ptOfPlane.SetName(GraphicsControl.NmGenerator.Generate());
-                    strg.TempObjects.Add(ptOfPlane);
-                    strg.DrawLastAddedToTempObjects(setting, frameCenter, can.Graphics);
-                    return null;
-                }
-                else
-                {
-                    if (Analyze.PointPos.Coincidence((PointOfPlane1X0Y)strg.TempObjects[0],
-                        new PointOfPlane1X0Y(pt, frameCenter))) return null;
-                    var _source = new LineOfPlane1X0Y((PointOfPlane1X0Y)strg.TempObjects[0],
-                        new PointOfPlane1X0Y(pt, frameCenter),
-                        frameCenter, can.PlaneX0Y);
-                    _source.SetName(strg.TempObjects[0].GetName());
-                    strg.TempObjects.Clear();
-                    return _source;
-                }
-            }
-            else
+                ptOfPlane.SetName(GraphicsControl.NmGenerator.Generate());
+                strg.TempObjects.Add(ptOfPlane);
+                strg.DrawLastAddedToTempObjects(setting, frameCenter, can.Graphics);
                 return null;
+            }
+            if (Analyze.PointPos.Coincidence((PointOfPlane1X0Y)strg.TempObjects[0],
+                new PointOfPlane1X0Y(pt, frameCenter))) return null;
+            var source = new LineOfPlane1X0Y((PointOfPlane1X0Y)strg.TempObjects[0],
+                new PointOfPlane1X0Y(pt, frameCenter),
+                frameCenter, can.PlaneX0Y);
+            source.SetName(strg.TempObjects[0].GetName());
+            strg.TempObjects.Clear();
+            return source;
         }
     }
 }
