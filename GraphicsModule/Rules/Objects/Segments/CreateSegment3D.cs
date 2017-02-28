@@ -63,33 +63,33 @@ namespace GraphicsModule.Rules.Objects.Segments
         }
         protected bool IsSegment3DCreatable(IObject ln1, IObject ln2, DrawS st, Point frameCenter, Canvas.Canvas can)
         {
-            if (ln1.GetType().Name == "SegmentOfPlane1X0Y" && ln2.GetType().Name == "SegmentOfPlane2X0Z")
+            if (ln1.GetType() == typeof(SegmentOfPlane1X0Y) && ln2.GetType() == typeof(SegmentOfPlane2X0Z))
             {
                 _source = new Segment3D((SegmentOfPlane1X0Y)ln1, (SegmentOfPlane2X0Z)ln2);
                 return true;
             }
-            if (ln1.GetType().Name == "SegmentOfPlane1X0Y" && ln2.GetType().Name == "SegmentOfPlane3Y0Z")
+            if (ln1.GetType() == typeof(SegmentOfPlane1X0Y) && ln2.GetType() == typeof(SegmentOfPlane3Y0Z))
             {
                 _source = new Segment3D((SegmentOfPlane1X0Y)ln1, (SegmentOfPlane3Y0Z)ln2);
                 return true;
             }
-            if (ln1.GetType().Name == "SegmentOfPlane2X0Z" && ln2.GetType().Name == "SegmentOfPlane1X0Y")
+            if (ln1.GetType() == typeof(SegmentOfPlane2X0Z) && ln2.GetType() == typeof(SegmentOfPlane1X0Y))
             {
                 _source = new Segment3D((SegmentOfPlane1X0Y)ln2, (SegmentOfPlane2X0Z)ln1);
                 return true;
             }
-            if (ln1.GetType().Name == "SegmentOfPlane2X0Z" && ln2.GetType().Name == "SegmentOfPlane3Y0Z")
+            if (ln1.GetType() == typeof(SegmentOfPlane2X0Z) && ln2.GetType() == typeof(SegmentOfPlane3Y0Z))
             {
                 _source = new Segment3D((SegmentOfPlane2X0Z)ln1, (SegmentOfPlane3Y0Z)ln2);
                 return true;
 
             }
-            if (ln1.GetType().Name == "SegmentOfPlane3Y0Z" && ln2.GetType().Name == "SegmentOfPlane1X0Y")
+            if (ln1.GetType() == typeof(SegmentOfPlane3Y0Z) && ln2.GetType() == typeof(SegmentOfPlane1X0Y))
             {
                 _source = new Segment3D((SegmentOfPlane1X0Y)ln2, (SegmentOfPlane3Y0Z)ln1);
                 return true;
             }
-            if (ln1.GetType().Name == "SegmentOfPlane3Y0Z" && ln2.GetType().Name == "SegmentOfPlane2X0Z")
+            if (ln1.GetType() == typeof(SegmentOfPlane3Y0Z) && ln2.GetType() == typeof(SegmentOfPlane2X0Z))
             {
                 _source = new Segment3D((SegmentOfPlane2X0Z)ln2, (SegmentOfPlane3Y0Z)ln1);
                 return true;
@@ -98,11 +98,11 @@ namespace GraphicsModule.Rules.Objects.Segments
         }
         protected IObject CreateSegmentOfPlane(Collection<IObject> obj, DrawS st, Point frameCenter, Canvas.Canvas can)
         {
-            if (obj[0].GetType().Name == "PointOfPlane1X0Y")
+            if (obj[0].GetType() == typeof(PointOfPlane1X0Y))
             {
                 return new SegmentOfPlane1X0Y((PointOfPlane1X0Y)obj[0], (PointOfPlane1X0Y)obj[1]);
             }
-            if (obj[0].GetType().Name == "PointOfPlane2X0Z")
+            if (obj[0].GetType() == typeof(PointOfPlane2X0Z))
             {
                 return new SegmentOfPlane2X0Z((PointOfPlane2X0Z)obj[0], (PointOfPlane2X0Z)obj[1]);
             }
@@ -110,39 +110,39 @@ namespace GraphicsModule.Rules.Objects.Segments
         }
         protected bool IsInOnePlane(IObject lnproj, IObject ptproj)
         {
-            if (lnproj.GetType().Name == "SegmentOfPlane1X0Y" && ptproj.GetType().Name == "PointOfPlane1X0Y")
+            if (lnproj.GetType() == typeof(SegmentOfPlane1X0Y) && ptproj.GetType() == typeof(PointOfPlane1X0Y))
             {
                 return true;
             }
-            if (lnproj.GetType().Name == "SegmentOfPlane2X0Z" && ptproj.GetType().Name == "PointOfPlane2X0Z")
+            if (lnproj.GetType() == typeof(SegmentOfPlane2X0Z) && ptproj.GetType() == typeof(PointOfPlane2X0Z))
             {
                 return true;
             }
-            return lnproj.GetType().Name == "SegmentOfPlane3Y0Z" && ptproj.GetType().Name == "PointOfPlane3Y0Z";
+            return lnproj.GetType() == typeof(SegmentOfPlane3Y0Z) && ptproj.GetType() == typeof(PointOfPlane3Y0Z);
         }
         protected bool IsOnLinkLine(IObject lnproj, IObject ptproj)
         {
-            if (lnproj.GetType().Name == "SegmentOfPlane1X0Y" && ptproj.GetType().Name == "PointOfPlane2X0Z")
+            if (lnproj.GetType() == typeof(SegmentOfPlane1X0Y) && ptproj.GetType() == typeof(PointOfPlane2X0Z))
             {
                 return IsOnLinkLine12((SegmentOfPlane1X0Y)lnproj, (PointOfPlane2X0Z)ptproj);
             }
-            if (lnproj.GetType().Name == "SegmentOfPlane1X0Y" && ptproj.GetType().Name == "PointOfPlane3Y0Z")
+            if (lnproj.GetType() == typeof(SegmentOfPlane1X0Y) && ptproj.GetType() == typeof(PointOfPlane3Y0Z))
             {
                 return IsOnLinkLine13((SegmentOfPlane1X0Y)lnproj, (PointOfPlane3Y0Z)ptproj);
             }
-            if (lnproj.GetType().Name == "SegmentOfPlane2X0Z" && ptproj.GetType().Name == "PointOfPlane1X0Y")
+            if (lnproj.GetType() == typeof(SegmentOfPlane2X0Z) && ptproj.GetType() == typeof(PointOfPlane1X0Y))
             {
                 return IsOnLinkLine21((SegmentOfPlane2X0Z)lnproj, (PointOfPlane1X0Y)ptproj);
             }
-            if (lnproj.GetType().Name == "SegmentOfPlane2X0Z" && ptproj.GetType().Name == "PointOfPlane3Y0Z")
+            if (lnproj.GetType() == typeof(SegmentOfPlane2X0Z) && ptproj.GetType() == typeof(PointOfPlane3Y0Z))
             {
-                return IsOnLinkLine23((SegmentOfPlane2X0Z)lnproj, (PointOfPlane3Y0Z)ptproj);
+                return IsOnLinkLine23((SegmentOfPlane2X0Z) lnproj, (PointOfPlane3Y0Z) ptproj);
             }
-            if (lnproj.GetType().Name == "SegmentOfPlane3Y0Z" && ptproj.GetType().Name == "PointOfPlane1X0Y")
+            if (lnproj.GetType() == typeof(SegmentOfPlane3Y0Z) && ptproj.GetType() == typeof(PointOfPlane1X0Y))
             {
                 return IsOnLinkLine31((SegmentOfPlane3Y0Z)lnproj, (PointOfPlane1X0Y)ptproj);
             }
-            if (lnproj.GetType().Name == "SegmentOfPlane3Y0Z" && ptproj.GetType().Name == "PointOfPlane2X0Z")
+            if (lnproj.GetType() == typeof(SegmentOfPlane3Y0Z) && ptproj.GetType() == typeof(PointOfPlane2X0Z))
             {
                 return IsOnLinkLine32((SegmentOfPlane3Y0Z)lnproj, (PointOfPlane2X0Z)ptproj);
             }
