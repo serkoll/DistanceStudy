@@ -397,6 +397,7 @@ namespace GraphicsModule.Controls
             _plMenuSelector.Visible = true;
             _plMenuSelector.BringToFront();
         }
+        #region Buttons Planes Create
         private void buttonPlaneType3Points_Click(object sender, EventArgs e)
         {
             var o = (ICreatePlanes)SetObject;
@@ -413,7 +414,7 @@ namespace GraphicsModule.Controls
         {
             var o = (ICreatePlanes)SetObject;
             o.SetBuildType(PlaneBuildType.ParallelLines);
-            buttonPlaneTypeMenu.Text = buttonPlaneTypeParrLine.Text;
+            buttonPlaneTypeMenu.Text = buttonPlaneTypeParallelLine.Text;
         }
         private void buttonPlaneTypeCrossedLine_Click(object sender, EventArgs e)
         {
@@ -421,7 +422,27 @@ namespace GraphicsModule.Controls
             o.SetBuildType(PlaneBuildType.CrossedLines);
             buttonPlaneTypeMenu.Text = buttonPlaneTypeCrossedLine.Text;
         }
+        private void buttonPlaneTypeSegmentPoint_Click(object sender, EventArgs e)
+        {
+            var o = (ICreatePlanes)SetObject;
+            o.SetBuildType(PlaneBuildType.PointAndSegment);
+            buttonPlaneTypeMenu.Text = buttonPlaneTypeSegmentPoint.Text;
+        }
 
+        private void buttonPlaneTypeParallelSegment_Click(object sender, EventArgs e)
+        {
+            var o = (ICreatePlanes)SetObject;
+            o.SetBuildType(PlaneBuildType.ParallelSegments);
+            buttonPlaneTypeMenu.Text = buttonPlaneTypeParallelSegment.Text;
+        }
+
+        private void buttonPlaneTypeCrossedSegment_Click(object sender, EventArgs e)
+        {
+            var o = (ICreatePlanes)SetObject;
+            o.SetBuildType(PlaneBuildType.CrossedSegments);
+            buttonPlaneTypeMenu.Text = buttonPlaneTypeCrossedSegment.Text;
+        }
+        #endregion
         private void GraphicsControl_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)

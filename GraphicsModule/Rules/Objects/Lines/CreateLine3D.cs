@@ -215,7 +215,6 @@ namespace GraphicsModule.Rules.Objects.Lines
             const double tolerance = 0.001;
             return Math.Abs(lnproj.Point0.Z - ptproj.Z) < tolerance || Math.Abs(lnproj.Point1.Z - ptproj.Z) < tolerance;
         }
-
         #endregion
     }
 }

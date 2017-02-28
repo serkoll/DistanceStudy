@@ -54,8 +54,11 @@ namespace GraphicsModule.Controls
             this.buttonPlaneTypeMenu = new System.Windows.Forms.ToolStripDropDownButton();
             this.buttonPlaneType3Points = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonPlaneTypeLinePoint = new System.Windows.Forms.ToolStripMenuItem();
-            this.buttonPlaneTypeParrLine = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonPlaneTypeParallelLine = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonPlaneTypeCrossedLine = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonPlaneTypeSegmentPoint = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonPlaneTypeParallelSegment = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonPlaneTypeCrossedSegment = new System.Windows.Forms.ToolStripMenuItem();
             this.graphicsToolBarStrip = new System.Windows.Forms.ToolStrip();
             this.buttonPointsMenu = new System.Windows.Forms.ToolStripButton();
             this.buttonLinesMenu = new System.Windows.Forms.ToolStripButton();
@@ -298,8 +301,11 @@ namespace GraphicsModule.Controls
             this.buttonPlaneTypeMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.buttonPlaneType3Points,
             this.buttonPlaneTypeLinePoint,
-            this.buttonPlaneTypeParrLine,
-            this.buttonPlaneTypeCrossedLine});
+            this.buttonPlaneTypeParallelLine,
+            this.buttonPlaneTypeCrossedLine,
+            this.buttonPlaneTypeSegmentPoint,
+            this.buttonPlaneTypeParallelSegment,
+            this.buttonPlaneTypeCrossedSegment});
             this.buttonPlaneTypeMenu.Image = ((System.Drawing.Image)(resources.GetObject("buttonPlaneTypeMenu.Image")));
             this.buttonPlaneTypeMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonPlaneTypeMenu.Name = "buttonPlaneTypeMenu";
@@ -322,12 +328,12 @@ namespace GraphicsModule.Controls
             this.buttonPlaneTypeLinePoint.Text = "Прямая и точка";
             this.buttonPlaneTypeLinePoint.Click += new System.EventHandler(this.buttonPlaneTypeLinePoint_Click);
             // 
-            // buttonPlaneTypeParrLine
+            // buttonPlaneTypeParallelLine
             // 
-            this.buttonPlaneTypeParrLine.Name = "buttonPlaneTypeParrLine";
-            this.buttonPlaneTypeParrLine.Size = new System.Drawing.Size(219, 22);
-            this.buttonPlaneTypeParrLine.Text = "Параллельные прямые";
-            this.buttonPlaneTypeParrLine.Click += new System.EventHandler(this.buttonPlaneTypeParrLine_Click);
+            this.buttonPlaneTypeParallelLine.Name = "buttonPlaneTypeParallelLine";
+            this.buttonPlaneTypeParallelLine.Size = new System.Drawing.Size(219, 22);
+            this.buttonPlaneTypeParallelLine.Text = "Параллельные прямые";
+            this.buttonPlaneTypeParallelLine.Click += new System.EventHandler(this.buttonPlaneTypeParrLine_Click);
             // 
             // buttonPlaneTypeCrossedLine
             // 
@@ -335,6 +341,27 @@ namespace GraphicsModule.Controls
             this.buttonPlaneTypeCrossedLine.Size = new System.Drawing.Size(219, 22);
             this.buttonPlaneTypeCrossedLine.Text = "Пересекающиеся прямые";
             this.buttonPlaneTypeCrossedLine.Click += new System.EventHandler(this.buttonPlaneTypeCrossedLine_Click);
+            // 
+            // buttonPlaneTypeSegmentPoint
+            // 
+            this.buttonPlaneTypeSegmentPoint.Name = "buttonPlaneTypeSegmentPoint";
+            this.buttonPlaneTypeSegmentPoint.Size = new System.Drawing.Size(219, 22);
+            this.buttonPlaneTypeSegmentPoint.Text = "Отрезок и точка";
+            this.buttonPlaneTypeSegmentPoint.Click += new System.EventHandler(this.buttonPlaneTypeSegmentPoint_Click);
+            // 
+            // buttonPlaneTypeParallelSegment
+            // 
+            this.buttonPlaneTypeParallelSegment.Name = "buttonPlaneTypeParallelSegment";
+            this.buttonPlaneTypeParallelSegment.Size = new System.Drawing.Size(219, 22);
+            this.buttonPlaneTypeParallelSegment.Text = "Параллельные отрезки";
+            this.buttonPlaneTypeParallelSegment.Click += new System.EventHandler(this.buttonPlaneTypeParallelSegment_Click);
+            // 
+            // buttonPlaneTypeCrossedSegment
+            // 
+            this.buttonPlaneTypeCrossedSegment.Name = "buttonPlaneTypeCrossedSegment";
+            this.buttonPlaneTypeCrossedSegment.Size = new System.Drawing.Size(219, 22);
+            this.buttonPlaneTypeCrossedSegment.Text = "Пересекающиеся отрезки";
+            this.buttonPlaneTypeCrossedSegment.Click += new System.EventHandler(this.buttonPlaneTypeCrossedSegment_Click);
             // 
             // graphicsToolBarStrip
             // 
@@ -705,7 +732,10 @@ namespace GraphicsModule.Controls
         private ToolStripDropDownButton buttonPlaneTypeMenu;
         private ToolStripMenuItem buttonPlaneType3Points;
         private ToolStripMenuItem buttonPlaneTypeLinePoint;
-        private ToolStripMenuItem buttonPlaneTypeParrLine;
+        private ToolStripMenuItem buttonPlaneTypeParallelLine;
         private ToolStripMenuItem buttonPlaneTypeCrossedLine;
+        private ToolStripMenuItem buttonPlaneTypeSegmentPoint;
+        private ToolStripMenuItem buttonPlaneTypeParallelSegment;
+        private ToolStripMenuItem buttonPlaneTypeCrossedSegment;
     }
 }

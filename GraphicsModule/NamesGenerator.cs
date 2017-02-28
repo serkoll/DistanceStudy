@@ -1,6 +1,5 @@
 ﻿using System;
 using GraphicsModule.Geometry;
-using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Interfaces;
 using GraphicsModule.Settings;
 
