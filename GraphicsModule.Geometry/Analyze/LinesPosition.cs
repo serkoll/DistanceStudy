@@ -112,38 +112,23 @@ namespace GraphicsModule.Geometry.Analyze
         #region Parallelism of Lines
         public bool Parallelism(Line2D ln1, Line2D ln2)
         {
-            if (Math.Abs(ln1.kx - ln2.kx) < 0.001 || Math.Abs(ln1.ky - ln2.ky) < 0.001)
-                return true;
-            else
-                return false;
+            return Math.Abs(ln1.kx - ln2.kx) < 0.001 || Math.Abs(ln1.ky - ln2.ky) < 0.001;
         }
         public bool Parallelism(Line3D ln1, Line3D ln2, double solveerror)
         {
-            if (Math.Abs(ln1.kx - ln2.kx) < solveerror || Math.Abs(ln1.ky - ln2.ky) < solveerror)
-                return true;
-            else
-                return false;
+            return Math.Abs(ln1.kx - ln2.kx) < solveerror || Math.Abs(ln1.ky - ln2.ky) < solveerror;
         }
         public bool Parallelism(LineOfPlane1X0Y ln1, LineOfPlane1X0Y ln2)
         {
-            if (Math.Abs(ln1.kx - ln2.kx) < 0.001 || Math.Abs(ln1.ky - ln2.ky) < 0.001)
-                return true;
-            else
-                return false;
+            return Math.Abs(ln1.kx - ln2.kx) < 0.001 || Math.Abs(ln1.ky - ln2.ky) < 0.001;
         }
         public bool Parallelism(LineOfPlane2X0Z ln1, LineOfPlane2X0Z ln2)
         {
-            if (Math.Abs(ln1.kx - ln2.kx) < 0.001 || Math.Abs(ln1.kz - ln2.kz) < 0.001)
-                return true;
-            else
-                return false;
+            return Math.Abs(ln1.kx - ln2.kx) < 0.001 || Math.Abs(ln1.kz - ln2.kz) < 0.001;
         }
         public bool Parallelism(LineOfPlane3Y0Z ln1, LineOfPlane3Y0Z ln2)
         {
-            if (Math.Abs(ln1.kz - ln2.kz) < 0.001 || Math.Abs(ln1.ky - ln2.ky) < 0.001)
-                return true;
-            else
-                return false;
+            return Math.Abs(ln1.kz - ln2.kz) < 0.001 || Math.Abs(ln1.ky - ln2.ky) < 0.001;
         }
         #endregion
         #region Intersection of Lines

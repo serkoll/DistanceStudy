@@ -112,13 +112,25 @@ namespace GraphicsModule.Geometry.Analyze
         #endregion
 
         #region Parallelism of Lines
-        public bool Parallelism(Segment2D ln1, Segment2D ln2)
+        public bool Parallelism(Segment2D sg1, Segment2D sg2)
         {
-            return false;
+            return Math.Abs(sg1.kx - sg2.kx) < 0.001 || Math.Abs(sg1.ky - sg2.ky) < 0.001;
         }
-        public bool Parallelism(Segment3D ln1, Segment3D ln2, double solveerror)
+        public bool Parallelism(Segment3D sg1, Segment3D sg2, double solveerror)
         {
-            return false;
+            return Math.Abs(sg1.kx - sg2.kx) < solveerror || Math.Abs(sg1.ky - sg2.ky) < solveerror;
+        }
+        public bool Parallelism(SegmentOfPlane1X0Y sg1, SegmentOfPlane1X0Y sg2)
+        {
+            return Math.Abs(sg1.kx - sg2.kx) < 0.001 || Math.Abs(sg1.ky - sg2.ky) < 0.001;
+        }
+        public bool Parallelism(SegmentOfPlane2X0Z sg1, SegmentOfPlane2X0Z sg2)
+        {
+            return Math.Abs(sg1.kx - sg2.kx) < 0.001 || Math.Abs(sg1.kz - sg2.kz) < 0.001;
+        }
+        public bool Parallelism(SegmentOfPlane3Y0Z sg1, SegmentOfPlane3Y0Z sg2)
+        {
+            return Math.Abs(sg1.kz - sg2.kz) < 0.001 || Math.Abs(sg1.ky - sg2.ky) < 0.001;
         }
         #endregion
 

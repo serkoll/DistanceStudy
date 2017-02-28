@@ -4,6 +4,7 @@ using System.Linq;
 using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Geometry.Objects.Lines;
 using GraphicsModule.Geometry.Objects.Points;
+using GraphicsModule.Geometry.Objects.Segments;
 using GraphicsModule.Settings;
 
 namespace GraphicsModule.Geometry.Objects.Planes
@@ -36,6 +37,16 @@ namespace GraphicsModule.Geometry.Objects.Planes
         public Plane2D(Line2D ln1, Line2D ln2)
         {
             Objects = new IObject[] { ln1, ln2 };
+            _name = new Name();
+        }
+        public Plane2D(Segment2D sg1, Point2D pt1)
+        {
+            Objects = new IObject[] { sg1, pt1 };
+            _name = new Name();
+        }
+        public Plane2D(Segment2D sg1, Segment2D sg2)
+        {
+            Objects = new IObject[] { sg1, sg2 };
             _name = new Name();
         }
         public void Draw(DrawS st, Point frameCenter, Graphics graphics)
