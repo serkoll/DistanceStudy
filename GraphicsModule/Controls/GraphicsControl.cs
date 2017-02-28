@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Collections.ObjectModel;
 using GraphicsModule.Cursors;
 using System.IO;
+using GraphicsModule.Enums;
 using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Interfaces;
 using GraphicsModule.Settings.Forms;
@@ -392,32 +393,32 @@ namespace GraphicsModule.Controls
         private void buttonPlaneMenu_Click(object sender, EventArgs e)
         {
             HideSelectorMenus();
-            _plMenuSelector.Location = new Point(graphicsToolBarStrip.Size.Width, graphicsToolBarStrip.Location.Y + buttonPointsMenu.Size.Height + buttonLinesMenu.Size.Height + buttonPlanesMenu.Size.Height);
+            _plMenuSelector.Location = new Point(graphicsToolBarStrip.Size.Width, graphicsToolBarStrip.Location.Y + buttonPointsMenu.Height * (graphicsToolBarStrip.Items.Count - 1));
             _plMenuSelector.Visible = true;
             _plMenuSelector.BringToFront();
         }
         private void buttonPlaneType3Points_Click(object sender, EventArgs e)
         {
             var o = (ICreatePlanes)SetObject;
-            o.SetBuildType(0);
+            o.SetBuildType(PlaneBuildType.ThreePoints);
             buttonPlaneTypeMenu.Text = buttonPlaneType3Points.Text;
         }
         private void buttonPlaneTypeLinePoint_Click(object sender, EventArgs e)
         {
             var o = (ICreatePlanes)SetObject;
-            o.SetBuildType(1);
+            o.SetBuildType(PlaneBuildType.PointAndLine);
             buttonPlaneTypeMenu.Text = buttonPlaneTypeLinePoint.Text;
         }
         private void buttonPlaneTypeParrLine_Click(object sender, EventArgs e)
         {
             var o = (ICreatePlanes)SetObject;
-            o.SetBuildType(2);
+            o.SetBuildType(PlaneBuildType.ParallelLines);
             buttonPlaneTypeMenu.Text = buttonPlaneTypeParrLine.Text;
         }
         private void buttonPlaneTypeCrossedLine_Click(object sender, EventArgs e)
         {
             var o = (ICreatePlanes)SetObject;
-            o.SetBuildType(3);
+            o.SetBuildType(PlaneBuildType.CrossedLines);
             buttonPlaneTypeMenu.Text = buttonPlaneTypeCrossedLine.Text;
         }
 

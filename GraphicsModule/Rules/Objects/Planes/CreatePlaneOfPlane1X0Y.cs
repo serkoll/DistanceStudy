@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Drawing;
+using GraphicsModule.Enums;
 using GraphicsModule.Geometry;
 using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Geometry.Objects.Lines;
@@ -8,6 +9,7 @@ using GraphicsModule.Geometry.Objects.Points;
 using GraphicsModule.Interfaces;
 using GraphicsModule.Settings;
 using GraphicsModule.Geometry.Analyze;
+using GraphicsModule.Rules.Objects.Lines;
 using GraphicsModule.Rules.Objects.Points;
 
 namespace GraphicsModule.Rules.Objects.Planes
@@ -152,24 +154,15 @@ namespace GraphicsModule.Rules.Objects.Planes
         }
         public PlaneOfPlane1X0Y CreateByParallelLines(LineOfPlane1X0Y ln1, LineOfPlane1X0Y ln2)
         {
-            if (Analyze.LinesPos.Parallelism(ln1, ln2))
-                return new PlaneOfPlane1X0Y(ln1, ln2);
-            else
-                return null;
+            return Analyze.LinesPos.Parallelism(ln1, ln2) ? new PlaneOfPlane1X0Y(ln1, ln2) : null;
         }
         public PlaneOfPlane1X0Y CreateByIntersectedLines(LineOfPlane1X0Y ln1, LineOfPlane1X0Y ln2, Point frameCenter)
         {
-            if (Analyze.LinesPos.Intersection(ln1, ln2, frameCenter))
-                return new PlaneOfPlane1X0Y(ln1, ln2);
-            else
-                return null;
+            return Analyze.LinesPos.Intersection(ln1, ln2, frameCenter) ? new PlaneOfPlane1X0Y(ln1, ln2) : null;
         }
-        public void SetBuildType(byte type)
+        public void SetBuildType(PlaneBuildType type)
         {
-            if (type < 5)
-                _creationType = type;
-            else
-                _creationType = 0;
+            _creationType = (byte)type;
         }
     }
 }

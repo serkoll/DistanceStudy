@@ -6,7 +6,6 @@ using GraphicsModule.Settings;
 
 namespace GraphicsModule.Rules.Objects.Points
 {
-
     /// <summary>
     /// Создание проекции точки на плоскость X0Y
     /// </summary>
@@ -19,7 +18,6 @@ namespace GraphicsModule.Rules.Objects.Points
             strg.AddToCollection(source);
             strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
         }
-
         public PointOfPlane1X0Y Create(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
         {
             if (!PointOfPlane1X0Y.Creatable(pt, frameCenter)) return null;

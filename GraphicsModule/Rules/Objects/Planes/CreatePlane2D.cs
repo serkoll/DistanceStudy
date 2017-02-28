@@ -1,20 +1,23 @@
 ﻿using System.Collections.ObjectModel;
 using System.Drawing;
+using GraphicsModule.Enums;
 using GraphicsModule.Geometry;
+using GraphicsModule.Geometry.Analyze;
 using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Geometry.Objects.Lines;
 using GraphicsModule.Geometry.Objects.Planes;
 using GraphicsModule.Geometry.Objects.Points;
 using GraphicsModule.Interfaces;
-using GraphicsModule.Settings;
-using GraphicsModule.Geometry.Analyze;
+using GraphicsModule.Rules.Objects.Lines;
 using GraphicsModule.Rules.Objects.Points;
+using GraphicsModule.Settings;
 
-namespace GraphicsModule.Rules.Objects
+
+namespace GraphicsModule.Rules.Objects.Planes
 {
     public class CreatePlane2D : ICreate, ICreatePlanes
     {
-        private byte _creationType = 0;
+        private byte _creationType;
         private Collection<IObject> _planeObjects = new Collection<IObject>();
         public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
         {
@@ -152,24 +155,15 @@ namespace GraphicsModule.Rules.Objects
         }
         public Plane2D CreateByParallelLines(Line2D ln1, Line2D ln2)
         {
-            if (Analyze.LinesPos.Parallelism(ln1, ln2))
-                return new Plane2D(ln1, ln2);
-            else
-                return null;
+            return Analyze.LinesPos.Parallelism(ln1, ln2) ? new Plane2D(ln1, ln2) : null;
         }
         public Plane2D CreateByIntersectedLines(Line2D ln1, Line2D ln2)
         {
-            if (Analyze.LinesPos.Intersection(ln1, ln2))
-                return new Plane2D(ln1, ln2);
-            else
-                return null;
+            return Analyze.LinesPos.Intersection(ln1, ln2) ? new Plane2D(ln1, ln2) : null;
         }
-        public void SetBuildType(byte type)
+        public void SetBuildType(PlaneBuildType type)
         {
-            if (type < 5)
-                _creationType = type;
-            else
-                _creationType = 0;
+            _creationType = (byte)type;
         }
     }
 }

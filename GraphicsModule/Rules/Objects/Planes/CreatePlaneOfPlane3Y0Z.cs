@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Drawing;
+using GraphicsModule.Enums;
 using GraphicsModule.Geometry;
 using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Geometry.Objects.Lines;
@@ -8,6 +9,7 @@ using GraphicsModule.Geometry.Objects.Points;
 using GraphicsModule.Interfaces;
 using GraphicsModule.Settings;
 using GraphicsModule.Geometry.Analyze;
+using GraphicsModule.Rules.Objects.Lines;
 using GraphicsModule.Rules.Objects.Points;
 
 namespace GraphicsModule.Rules.Objects.Planes
@@ -143,8 +145,7 @@ namespace GraphicsModule.Rules.Objects.Planes
         }
         public PlaneOfPlane3Y0Z CreateBy3Point(Collection<IObject> obj)
         {
-            if (obj.Count != 3) return null;
-            return new PlaneOfPlane3Y0Z((PointOfPlane3Y0Z)obj[0], (PointOfPlane3Y0Z)obj[1], (PointOfPlane3Y0Z)obj[2]);
+            return obj.Count != 3 ? null : new PlaneOfPlane3Y0Z((PointOfPlane3Y0Z)obj[0], (PointOfPlane3Y0Z)obj[1], (PointOfPlane3Y0Z)obj[2]);
         }
         public PlaneOfPlane3Y0Z CreateByLinePoint(LineOfPlane3Y0Z ln, PointOfPlane3Y0Z pt)
         {
@@ -152,24 +153,15 @@ namespace GraphicsModule.Rules.Objects.Planes
         }
         public PlaneOfPlane3Y0Z CreateByParallelLines(LineOfPlane3Y0Z ln1, LineOfPlane3Y0Z ln2)
         {
-            if (Analyze.LinesPos.Parallelism(ln1, ln2))
-                return new PlaneOfPlane3Y0Z(ln1, ln2);
-            else
-                return null;
+            return Analyze.LinesPos.Parallelism(ln1, ln2) ? new PlaneOfPlane3Y0Z(ln1, ln2) : null;
         }
         public PlaneOfPlane3Y0Z CreateByIntersectedLines(LineOfPlane3Y0Z ln1, LineOfPlane3Y0Z ln2, Point frameCenter)
         {
-            if (Analyze.LinesPos.Intersection(ln1, ln2, frameCenter))
-                return new PlaneOfPlane3Y0Z(ln1, ln2);
-            else
-                return null;
+            return Analyze.LinesPos.Intersection(ln1, ln2, frameCenter) ? new PlaneOfPlane3Y0Z(ln1, ln2) : null;
         }
-        public void SetBuildType(byte type)
+        public void SetBuildType(PlaneBuildType type)
         {
-            if (type < 5)
-                _creationType = type;
-            else
-                _creationType = 0;
+            _creationType = (byte)type;
         }
     }
 }

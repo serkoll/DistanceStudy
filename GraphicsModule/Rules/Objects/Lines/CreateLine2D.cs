@@ -6,7 +6,7 @@ using GraphicsModule.Geometry.Objects.Points;
 using GraphicsModule.Interfaces;
 using GraphicsModule.Settings;
 
-namespace GraphicsModule.Rules.Objects
+namespace GraphicsModule.Rules.Objects.Lines
 {
     /// <summary>
     /// Создание 2Д линии

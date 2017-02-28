@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GraphicsModule.Enums;
 
 namespace GraphicsModule.Interfaces
 {
     public interface ICreatePlanes
     {
-        void SetBuildType(byte type);
+        void SetBuildType(PlaneBuildType type);
     }
 
 }
