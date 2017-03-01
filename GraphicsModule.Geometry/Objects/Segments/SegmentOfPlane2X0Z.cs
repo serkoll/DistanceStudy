@@ -73,8 +73,9 @@ namespace GraphicsModule.Geometry.Objects.Segments
         public void SetName(Name name)
         {
             Name = new Name(name);
-            Point0.SetName(Name);
-            Point1.SetName(Name);
+            Name.Value += "''";
+            Point0.Name = Name;
+            Point1.Name = Name;
         }
     }
 }

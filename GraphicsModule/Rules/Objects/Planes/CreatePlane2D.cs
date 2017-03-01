@@ -19,49 +19,49 @@ namespace GraphicsModule.Rules.Objects.Planes
 {
     public class CreatePlane2D : ICreate, ICreatePlanes
     {
-        private byte _creationType;
+        private PlaneBuildType _creationType;
         private Collection<IObject> _planeObjects = new Collection<IObject>();
         public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
         {
             switch (_creationType)
             {
-                case 0:
-                    CreateBy3Point(pt, frameCenter, can, setting, strg);
+                case PlaneBuildType.ThreePoints:
+                    CreateByThreePoint(pt, frameCenter, can, setting, strg);
                     break;
-                case 1:
-                    CreateByLinePoint(pt, frameCenter, can, setting, strg);
+                case PlaneBuildType.LineAndPoint:
+                    CreateByLineAndPoint(pt, frameCenter, can, setting, strg);
                     break;
-                case 2:
+                case PlaneBuildType.ParallelLines:
                     CreateByParallelLines(pt, frameCenter, can, setting, strg);
                     break;
-                case 3:
-                    CreateByIntersectedLines(pt, frameCenter, can, setting, strg);
+                case PlaneBuildType.CrossedLines:
+                    CreateByCrossedLines(pt, frameCenter, can, setting, strg);
                     break;
-                case 4:
-                    CreateBySegmentPoint(pt, frameCenter, can, setting, strg);
+                case PlaneBuildType.SegmentAndPoint:
+                    CreateByPointAndSegment(pt, frameCenter, can, setting, strg);
                     break;
-                case 5:
+                case PlaneBuildType.ParallelSegments:
                     CreateByParallelSegments(pt, frameCenter, can, setting, strg);
                     break;
-                case 6:
-                    CreateByIntersectedSegments(pt, frameCenter, can, setting, strg);
+                case PlaneBuildType.CrossedSegments:
+                    CreateByCrossedSegments(pt, frameCenter, can, setting, strg);
                     break;
             }
         }
-        private void CreateBy3Point(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
+        private void CreateByThreePoint(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
         {
             var tmpobj = new CreatePoint2D().Create(pt, frameCenter, can, setting, strg);
             tmpobj.Draw(setting, frameCenter, can.Graphics);
             _planeObjects.Add(tmpobj);
             if (_planeObjects.Count != 3) return;
-            var source = CreateBy3Point(_planeObjects);
+            var source = CreateByThreePoint(_planeObjects);
             var nameparams = _planeObjects[0].GetName();
             source.SetName(new Name(@"p", nameparams.Dx, nameparams.Dy));
             _planeObjects.Clear();
             strg.AddToCollection(source);
             can.Update(strg);
         }
-        private void CreateByLinePoint(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
+        private void CreateByLineAndPoint(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
         {
             if (_planeObjects.Count == 0)
             {
@@ -73,7 +73,7 @@ namespace GraphicsModule.Rules.Objects.Planes
             else
             {
                 var tmpobj = new CreatePoint2D().Create(pt, frameCenter, can, setting, strg);
-                var source = CreateByLinePoint((Line2D)_planeObjects[0], tmpobj);
+                var source = CreateByLineAndPoint((Line2D)_planeObjects[0], tmpobj);
                 var nameparams = _planeObjects[0].GetName();
                 source.SetName(new Name(@"p", nameparams.Dx, nameparams.Dy));
                 _planeObjects.Clear();
@@ -81,7 +81,7 @@ namespace GraphicsModule.Rules.Objects.Planes
                 can.Update(strg);
             }
         }
-        private void CreateBySegmentPoint(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
+        private void CreateByPointAndSegment(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
         {
             if (_planeObjects.Count == 0)
             {
@@ -93,7 +93,7 @@ namespace GraphicsModule.Rules.Objects.Planes
             else
             {
                 var tmpobj = new CreatePoint2D().Create(pt, frameCenter, can, setting, strg);
-                var source = CreateBySegmentPoint((Segment2D)_planeObjects[0], tmpobj);
+                var source = CreateByPointAndSegment((Segment2D)_planeObjects[0], tmpobj);
                 var nameparams = _planeObjects[0].GetName();
                 source.SetName(new Name(@"p", nameparams.Dx, nameparams.Dy));
                 _planeObjects.Clear();
@@ -161,7 +161,7 @@ namespace GraphicsModule.Rules.Objects.Planes
                 can.Update(strg);
             }
         }
-        private void CreateByIntersectedLines(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
+        private void CreateByCrossedLines(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
         {
             if (_planeObjects.Count < 2)
             {
@@ -173,7 +173,7 @@ namespace GraphicsModule.Rules.Objects.Planes
                 }
             }
             if (_planeObjects.Count != 2) return;
-            var source = CreateByIntersectedLines((Line2D)_planeObjects[0], (Line2D)_planeObjects[1]);
+            var source = CreateByCrossedLines((Line2D)_planeObjects[0], (Line2D)_planeObjects[1]);
             if (source == null)
             {
                 _planeObjects.RemoveAt(1);
@@ -193,7 +193,7 @@ namespace GraphicsModule.Rules.Objects.Planes
                 can.Update(strg);
             }
         }
-        private void CreateByIntersectedSegments(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
+        private void CreateByCrossedSegments(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
         {
             if (_planeObjects.Count < 2)
             {
@@ -205,7 +205,7 @@ namespace GraphicsModule.Rules.Objects.Planes
                 }
             }
             if (_planeObjects.Count != 2) return;
-            var source = CreateByIntersectedSegments((Segment2D)_planeObjects[0], (Segment2D)_planeObjects[1]);
+            var source = CreateByCrossedSegments((Segment2D)_planeObjects[0], (Segment2D)_planeObjects[1]);
             if (source == null)
             {
                 _planeObjects.RemoveAt(1);
@@ -225,15 +225,15 @@ namespace GraphicsModule.Rules.Objects.Planes
                 can.Update(strg);
             }
         }
-        public Plane2D CreateBy3Point(Collection<IObject> obj)
+        public Plane2D CreateByThreePoint(Collection<IObject> obj)
         {
             return obj.Count != 3 ? null : new Plane2D((Point2D)obj[0], (Point2D)obj[1], (Point2D)obj[2]);
         }
-        public Plane2D CreateByLinePoint(Line2D ln, Point2D pt)
+        public Plane2D CreateByLineAndPoint(Line2D ln, Point2D pt)
         {
             return new Plane2D(ln, pt);
         }
-        public Plane2D CreateBySegmentPoint(Segment2D sg, Point2D pt)
+        public Plane2D CreateByPointAndSegment(Segment2D sg, Point2D pt)
         {
             return new Plane2D(sg, pt);
         }
@@ -245,17 +245,17 @@ namespace GraphicsModule.Rules.Objects.Planes
         {
             return Analyze.SegmentPos.Parallelism(sg1, sg2) ? new Plane2D(sg1, sg2) : null;
         }
-        public Plane2D CreateByIntersectedLines(Line2D ln1, Line2D ln2)
+        public Plane2D CreateByCrossedLines(Line2D ln1, Line2D ln2)
         {
             return Analyze.LinesPos.Intersection(ln1, ln2) ? new Plane2D(ln1, ln2) : null;
         }
-        public Plane2D CreateByIntersectedSegments(Segment2D sg1, Segment2D sg2)
+        public Plane2D CreateByCrossedSegments(Segment2D sg1, Segment2D sg2)
         {
             return Analyze.SegmentPos.Intersection(sg1, sg2) ? new Plane2D(sg1, sg2) : null;
         }
         public void SetBuildType(PlaneBuildType type)
         {
-            _creationType = (byte)type;
+            _creationType = type;
         }
     }
 }

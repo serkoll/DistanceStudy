@@ -3,10 +3,10 @@
     public enum PlaneBuildType
     {
         ThreePoints = 0,
-        PointAndLine = 1,
+        LineAndPoint = 1,
         ParallelLines = 2,
         CrossedLines = 3,
-        PointAndSegment = 4,
+        SegmentAndPoint = 4,
         ParallelSegments = 5,
         CrossedSegments = 6
     }

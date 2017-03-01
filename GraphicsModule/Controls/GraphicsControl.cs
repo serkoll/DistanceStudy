@@ -407,7 +407,7 @@ namespace GraphicsModule.Controls
         private void buttonPlaneTypeLinePoint_Click(object sender, EventArgs e)
         {
             var o = (ICreatePlanes)SetObject;
-            o.SetBuildType(PlaneBuildType.PointAndLine);
+            o.SetBuildType(PlaneBuildType.LineAndPoint);
             buttonPlaneTypeMenu.Text = buttonPlaneTypeLinePoint.Text;
         }
         private void buttonPlaneTypeParrLine_Click(object sender, EventArgs e)
@@ -425,7 +425,7 @@ namespace GraphicsModule.Controls
         private void buttonPlaneTypeSegmentPoint_Click(object sender, EventArgs e)
         {
             var o = (ICreatePlanes)SetObject;
-            o.SetBuildType(PlaneBuildType.PointAndSegment);
+            o.SetBuildType(PlaneBuildType.SegmentAndPoint);
             buttonPlaneTypeMenu.Text = buttonPlaneTypeSegmentPoint.Text;
         }
 
