@@ -11,6 +11,7 @@ using GraphicsModule.Geometry.Objects.Segments;
 using GraphicsModule.Interfaces;
 using GraphicsModule.Rules.Objects.Lines;
 using GraphicsModule.Rules.Objects.Points;
+using GraphicsModule.Rules.Objects.Segments;
 using GraphicsModule.Settings;
 
 
@@ -35,6 +36,15 @@ namespace GraphicsModule.Rules.Objects.Planes
                     break;
                 case 3:
                     CreateByIntersectedLines(pt, frameCenter, can, setting, strg);
+                    break;
+                case 4:
+                    CreateBySegmentPoint(pt, frameCenter, can, setting, strg);
+                    break;
+                case 5:
+                    CreateByParallelSegments(pt, frameCenter, can, setting, strg);
+                    break;
+                case 6:
+                    CreateByIntersectedSegments(pt, frameCenter, can, setting, strg);
                     break;
             }
         }
@@ -75,7 +85,7 @@ namespace GraphicsModule.Rules.Objects.Planes
         {
             if (_planeObjects.Count == 0)
             {
-                var tmpobj = new CreateLine2D().Create(pt, frameCenter, can, setting, strg);
+                var tmpobj = new CreateSegment2D().Create(pt, frameCenter, can, setting, strg);
                 if (tmpobj == null) return;
                 tmpobj.Draw(setting, frameCenter, can.Graphics);
                 _planeObjects.Add(tmpobj);
@@ -83,7 +93,7 @@ namespace GraphicsModule.Rules.Objects.Planes
             else
             {
                 var tmpobj = new CreatePoint2D().Create(pt, frameCenter, can, setting, strg);
-                var source = CreateByLinePoint((Line2D)_planeObjects[0], tmpobj);
+                var source = CreateBySegmentPoint((Segment2D)_planeObjects[0], tmpobj);
                 var nameparams = _planeObjects[0].GetName();
                 source.SetName(new Name(@"p", nameparams.Dx, nameparams.Dy));
                 _planeObjects.Clear();
@@ -109,6 +119,36 @@ namespace GraphicsModule.Rules.Objects.Planes
                 foreach (var o in _planeObjects)
                 {
                     var ln = (Line2D)o;
+                    ln.Draw(setting, frameCenter, can.Graphics);
+                }
+            }
+            else
+            {
+                var nameparams = _planeObjects[0].GetName();
+                source.SetName(new Name(@"p", nameparams.Dx, nameparams.Dy));
+                _planeObjects.Clear();
+                strg.AddToCollection(source);
+                can.Update(strg);
+            }
+        }
+        private void CreateByParallelSegments(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
+        {
+            if (_planeObjects.Count < 2)
+            {
+                var tmpobj = new CreateSegment2D().Create(pt, frameCenter, can, setting, strg);
+                if (tmpobj == null) return;
+                tmpobj.Draw(setting, frameCenter, can.Graphics);
+                _planeObjects.Add(tmpobj);
+            }
+            if (_planeObjects.Count != 2) return;
+            var source = CreateByParallelSegments((Segment2D)_planeObjects[0], (Segment2D)_planeObjects[1]);
+            if (source == null)
+            {
+                _planeObjects.RemoveAt(1);
+                can.Update(strg);
+                foreach (var o in _planeObjects)
+                {
+                    var ln = (Segment2D)o;
                     ln.Draw(setting, frameCenter, can.Graphics);
                 }
             }
@@ -153,6 +193,38 @@ namespace GraphicsModule.Rules.Objects.Planes
                 can.Update(strg);
             }
         }
+        private void CreateByIntersectedSegments(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
+        {
+            if (_planeObjects.Count < 2)
+            {
+                var tmpobj = new CreateSegment2D().Create(pt, frameCenter, can, setting, strg);
+                if (tmpobj != null)
+                {
+                    tmpobj.Draw(setting, frameCenter, can.Graphics);
+                    _planeObjects.Add(tmpobj);
+                }
+            }
+            if (_planeObjects.Count != 2) return;
+            var source = CreateByIntersectedSegments((Segment2D)_planeObjects[0], (Segment2D)_planeObjects[1]);
+            if (source == null)
+            {
+                _planeObjects.RemoveAt(1);
+                can.Update(strg);
+                foreach (var o in _planeObjects)
+                {
+                    var ln = (Segment2D)o;
+                    ln.Draw(setting, frameCenter, can.Graphics);
+                }
+            }
+            else
+            {
+                var nameparams = _planeObjects[0].GetName();
+                source.SetName(new Name(@"p", nameparams.Dx, nameparams.Dy));
+                _planeObjects.Clear();
+                strg.AddToCollection(source);
+                can.Update(strg);
+            }
+        }
         public Plane2D CreateBy3Point(Collection<IObject> obj)
         {
             return obj.Count != 3 ? null : new Plane2D((Point2D)obj[0], (Point2D)obj[1], (Point2D)obj[2]);
@@ -177,7 +249,7 @@ namespace GraphicsModule.Rules.Objects.Planes
         {
             return Analyze.LinesPos.Intersection(ln1, ln2) ? new Plane2D(ln1, ln2) : null;
         }
-        public Plane2D CreateByIntersectedLines(Segment2D sg1, Segment2D sg2)
+        public Plane2D CreateByIntersectedSegments(Segment2D sg1, Segment2D sg2)
         {
             return Analyze.SegmentPos.Intersection(sg1, sg2) ? new Plane2D(sg1, sg2) : null;
         }
