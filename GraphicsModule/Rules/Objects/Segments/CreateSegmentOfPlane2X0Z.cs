@@ -1,9 +1,6 @@
-﻿using System.Collections.ObjectModel;
-using System.Drawing;
+﻿using System.Drawing;
 using GraphicsModule.Controls;
-using GraphicsModule.Geometry;
 using GraphicsModule.Geometry.Analyze;
-using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Geometry.Objects.Points;
 using GraphicsModule.Geometry.Objects.Segments;
 using GraphicsModule.Interfaces;

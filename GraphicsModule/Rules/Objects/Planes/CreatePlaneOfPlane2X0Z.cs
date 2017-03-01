@@ -16,7 +16,7 @@ namespace GraphicsModule.Rules.Objects.Planes
 {
     public class CreatePlaneOfPlane2X0Z : ICreate, ICreatePlanes
     {
-        private byte _creationType = 0;
+        private byte _creationType;
         private Collection<IObject> _planeObjects = new Collection<IObject>();
         public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
         {
@@ -107,8 +107,11 @@ namespace GraphicsModule.Rules.Objects.Planes
                 {
                     _planeObjects.RemoveAt(1);
                     can.Update(strg);
-                    foreach (LineOfPlane2X0Z ln in _planeObjects)
+                    foreach (var o in _planeObjects)
+                    {
+                        var ln = (LineOfPlane2X0Z) o;
                         ln.Draw(setting, frameCenter, can.Graphics);
+                    }
                 }
             }
         }
@@ -138,15 +141,17 @@ namespace GraphicsModule.Rules.Objects.Planes
                 {
                     _planeObjects.RemoveAt(1);
                     can.Update(strg);
-                    foreach (LineOfPlane2X0Z ln in _planeObjects)
+                    foreach (var o in _planeObjects)
+                    {
+                        var ln = (LineOfPlane2X0Z) o;
                         ln.Draw(setting, frameCenter, can.Graphics);
+                    }
                 }
             }
         }
         public PlaneOfPlane2X0Z CreateBy3Point(Collection<IObject> obj)
         {
-            if (obj.Count != 3) return null;
-            return new PlaneOfPlane2X0Z((PointOfPlane2X0Z)obj[0], (PointOfPlane2X0Z)obj[1], (PointOfPlane2X0Z)obj[2]);
+            return obj.Count != 3 ? null : new PlaneOfPlane2X0Z((PointOfPlane2X0Z)obj[0], (PointOfPlane2X0Z)obj[1], (PointOfPlane2X0Z)obj[2]);
         }
         public PlaneOfPlane2X0Z CreateByLinePoint(LineOfPlane2X0Z ln, PointOfPlane2X0Z pt)
         {

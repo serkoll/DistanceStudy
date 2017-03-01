@@ -41,7 +41,6 @@ namespace GraphicsModule.Geometry.Analyze
                    (Math.Abs((pt.Y - ln.Point0.Y) * ln.kz - (pt.Z - ln.Point0.Z) * ln.ky) < solveerror);
         }
         #endregion
-
         #region Incidence Of Plane
         public bool IncidenceOfOnePlane(Segment3D ln1, Segment3D ln2)
         {
@@ -87,7 +86,6 @@ namespace GraphicsModule.Geometry.Analyze
             return (Math.Abs(s) < solveerror) && (Math.Abs(g) < solveerror);
         }
         #endregion
-
         #region Coincidence of Lines
         public bool Coincidence(Segment2D ln1, Segment2D ln2)
         {
@@ -110,7 +108,6 @@ namespace GraphicsModule.Geometry.Analyze
             return Coincidence(Cnv.ToSegment2D(ln1), Cnv.ToSegment2D(ln2));
         }
         #endregion
-
         #region Parallelism of Lines
         public bool Parallelism(Segment2D sg1, Segment2D sg2)
         {
@@ -133,7 +130,6 @@ namespace GraphicsModule.Geometry.Analyze
             return Math.Abs(sg1.kz - sg2.kz) < 0.001 || Math.Abs(sg1.ky - sg2.ky) < 0.001;
         }
         #endregion
-
         #region Intersection of Lines
         public bool Intersection(Segment2D ln1, Segment2D ln2)
         {
@@ -182,7 +178,6 @@ namespace GraphicsModule.Geometry.Analyze
             return !(x < 0);
         }
         #endregion
-
         #region Perpendicularity
 
         public bool PerpendicularityOfPlane(Segment3D ln, PlaneSpace pl)
@@ -198,14 +193,12 @@ namespace GraphicsModule.Geometry.Analyze
                    (Math.Abs(pl.B * ln.kz - pl.C * ln.ky) >= solveerror);
         }
         #endregion
-
         #region Crossing
         public bool Crossing(Segment3D ln1, Segment3D ln2)
         {
             return !IncidenceOfOnePlane(ln1, ln2);
         }
         #endregion
-
         #region Direction of Line
         /// <summary>
         /// Направление не реализовано

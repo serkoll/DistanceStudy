@@ -16,7 +16,7 @@ namespace GraphicsModule.Rules.Objects.Planes
 {
     public class CreatePlaneOfPlane3Y0Z : ICreate, ICreatePlanes
     {
-        private byte _creationType = 0;
+        private byte _creationType;
         private Collection<IObject> _planeObjects = new Collection<IObject>();
         public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
         {
@@ -107,8 +107,11 @@ namespace GraphicsModule.Rules.Objects.Planes
                 {
                     _planeObjects.RemoveAt(1);
                     can.Update(strg);
-                    foreach (LineOfPlane3Y0Z ln in _planeObjects)
+                    foreach (var o in _planeObjects)
+                    {
+                        var ln = (LineOfPlane3Y0Z) o;
                         ln.Draw(setting, frameCenter, can.Graphics);
+                    }
                 }
             }
         }
@@ -138,8 +141,11 @@ namespace GraphicsModule.Rules.Objects.Planes
                 {
                     _planeObjects.RemoveAt(1);
                     can.Update(strg);
-                    foreach (LineOfPlane3Y0Z ln in _planeObjects)
+                    foreach (var o in _planeObjects)
+                    {
+                        var ln = (LineOfPlane3Y0Z) o;
                         ln.Draw(setting, frameCenter, can.Graphics);
+                    }
                 }
             }
         }

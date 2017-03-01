@@ -3,7 +3,7 @@ using GraphicsModule.Geometry.Objects.Segments;
 using GraphicsModule.Interfaces;
 using GraphicsModule.Settings;
 
-namespace GraphicsModule.Rules.Objects
+namespace GraphicsModule.Rules.Objects.Segments
 {
     public class GenerateSegment3D : ICreate
     {

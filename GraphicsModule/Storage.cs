@@ -85,19 +85,19 @@ namespace GraphicsModule
         /// <param name="g">Целевой Graphics</param>
         public void DrawObjects(Settings.Settings st, Point frameCenter, Graphics g)
         {
-            foreach(IObject ob in Objects)
+            foreach(var ob in Objects)
             {
                 ob.Draw(st.DrawS, frameCenter, g);
             }
-            foreach (IObject ob in TempObjects)
+            foreach (var ob in TempObjects)
             {
                 ob.Draw(st.DrawS, frameCenter, g);
             }
-            foreach (IObject ob in SelectedObjects)
+            foreach (var ob in SelectedObjects)
             {
                 ob.Draw(st.SelectedDrawS, frameCenter, g);
             }
-            foreach (IObject ob in DeletedObjects)
+            foreach (var ob in DeletedObjects)
             {
                 ob.Draw(st.SelectedDrawS, frameCenter, g);
             }

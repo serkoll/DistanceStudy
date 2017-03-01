@@ -24,8 +24,8 @@ namespace GraphicsModule.Geometry.EquationsSysEvalution
         //размерность задачи
         private int size;
 
-        internal SluGaussSolve(double[,] a_matrix, double[] b_vector)
-            : this(a_matrix, b_vector, 0.0001)
+        internal SluGaussSolve(double[,] aMatrix, double[] b_vector)
+            : this(aMatrix, b_vector, 0.0001)
         {
         }
 
