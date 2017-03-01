@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using GraphicsModule.Geometry.Objects.Planes;
 using GraphicsModule.Geometry.Objects.Points;
 using GraphicsModule.Geometry.Objects.Segments;
 
@@ -39,51 +38,6 @@ namespace GraphicsModule.Geometry.Analyze
             return (Math.Abs((pt.X - ln.Point0.X) * ln.ky - (pt.Y - ln.Point0.Y) * ln.kx) < solveerror) &&
                    (Math.Abs((pt.X - ln.Point0.X) * ln.kz - (pt.Z - ln.Point0.Z) * ln.kx) < solveerror) &&
                    (Math.Abs((pt.Y - ln.Point0.Y) * ln.kz - (pt.Z - ln.Point0.Z) * ln.ky) < solveerror);
-        }
-        #endregion
-        #region Incidence Of Plane
-        public bool IncidenceOfOnePlane(Segment3D ln1, Segment3D ln2)
-        {
-            var mrx = new MatrixEvalution.MatrixEvalution();
-            var dx = ln2.Point0.X - ln1.Point0.X;
-            var dy = ln2.Point0.Y - ln1.Point0.Y;
-            var dz = ln2.Point0.Z - ln1.Point0.Z;
-            double[,] detlines = { { dx, dy, dz },
-                                                { ln1.kx, ln1.ky, ln1.kz},
-                                                { ln2.kx, ln2.ky, ln2.kz}};
-            var dt = mrx.detMrx3x3(detlines);
-            return Math.Abs(dt) <= 0.001;
-        }
-
-        public bool IncidenceOfOnePlane(Segment3D ln1, Segment3D ln2, double solveerror)
-        {
-            var mrx = new MatrixEvalution.MatrixEvalution();
-            var dx = ln2.Point0.X - ln1.Point0.X;
-            var dy = ln2.Point0.Y - ln1.Point0.Y;
-            var dz = ln2.Point0.Z - ln1.Point0.Z;
-            double[,] detlines = { { dx, dy, dz },
-                                                { ln1.kx, ln1.ky, ln1.kz},
-                                                { ln2.kx, ln2.ky, ln2.kz}};
-            var dt = mrx.detMrx3x3(detlines);
-            return Math.Abs(dt) <= solveerror;
-        }
-        public bool IncidenceOfFramePlane(Segment3D ln)
-        {
-            return (Math.Abs(ln.Point0.X) < 0.001) && (Math.Abs(ln.kx) < 0.001) ||
-                   (Math.Abs(ln.Point0.Y) < 0.001) && (Math.Abs(ln.ky) < 0.001) ||
-                   (Math.Abs(ln.Point0.Z) < 0.001) && (Math.Abs(ln.kz) < 0.001);
-        }
-        public bool IncidenceOfPlane(Segment3D ln, PlaneSpace pl)
-        {
-            var s = pl.A * ln.kx + pl.B * ln.ky + pl.C * ln.kz;
-            var g = pl.A * ln.Point0.X + pl.B * ln.Point0.Y + pl.C * ln.Point0.Z + pl.D;
-            return (Math.Abs(s) < 0.001) && (Math.Abs(g) < 0.001);
-        }
-        public bool IncidenceOfPlane(Segment3D ln, PlaneSpace pl, double solveerror)
-        {
-            var s = pl.A * ln.kx + pl.B * ln.ky + pl.C * ln.kz;
-            var g = pl.A * ln.Point0.X + pl.B * ln.Point0.Y + pl.C * ln.Point0.Z + pl.D;
-            return (Math.Abs(s) < solveerror) && (Math.Abs(g) < solveerror);
         }
         #endregion
         #region Coincidence of Lines
@@ -176,27 +130,6 @@ namespace GraphicsModule.Geometry.Analyze
             var x = (ln1.Point0.X * ln2.kx * ln1.ky - ln2.Point0.X * ln1.kx * ln2.ky + ln2.kx * ln1.kx * (ln2.Point0.Y - ln1.Point0.Y)) /
                     (ln1.ky * ln2.kx - ln1.kx * ln2.ky);
             return !(x < 0);
-        }
-        #endregion
-        #region Perpendicularity
-
-        public bool PerpendicularityOfPlane(Segment3D ln, PlaneSpace pl)
-        {
-            return (Math.Abs(pl.A * ln.ky - pl.B * ln.kx) >= 0.001) &&
-                   (Math.Abs(pl.A * ln.kz - pl.C * ln.kx) >= 0.001) &&
-                   (Math.Abs(pl.B * ln.kz - pl.C * ln.ky) >= 0.001);
-        }
-        public bool PerpendicularityOfPlane(Segment3D ln, PlaneSpace pl, double solveerror)
-        {
-            return (Math.Abs(pl.A * ln.ky - pl.B * ln.kx) >= solveerror) &&
-                   (Math.Abs(pl.A * ln.kz - pl.C * ln.kx) >= solveerror) &&
-                   (Math.Abs(pl.B * ln.kz - pl.C * ln.ky) >= solveerror);
-        }
-        #endregion
-        #region Crossing
-        public bool Crossing(Segment3D ln1, Segment3D ln2)
-        {
-            return !IncidenceOfOnePlane(ln1, ln2);
         }
         #endregion
         #region Direction of Line
