@@ -9,70 +9,64 @@ namespace GraphicsModule.Geometry.EquationsSysEvalution
     /// <remarks></remarks>
     internal class SluGaussSolve : EqSysCalculation
     {
-        private double[,] initial_a_matrix;
+        private double[,] _initialAMatrix;
         //матрица A
-        private double[,] a_matrix;
+        private double[,] _aMatrix;
         //вектор неизвестных x
-        private double[] x_vector;
-        private double[] initial_b_vector;
+        private double[] _xVector;
+        private double[] _initialBVector;
         //вектор b
-        private double[] b_vector;
+        private double[] _bVector;
         //вектор невязки U
-        private double[] u_vector;
+        private double[] _uVector;
         //порядок точности для сравнения вещественных чисел 
-        private double eps;
+        private double _eps;
         //размерность задачи
-        private int size;
+        private int _size;
 
-        internal SluGaussSolve(double[,] aMatrix, double[] b_vector)
-            : this(aMatrix, b_vector, 0.0001)
+        internal SluGaussSolve(double[,] aMatrix, double[] bVector)
+            : this(aMatrix, bVector, 0.0001)
         {
         }
 
-        internal SluGaussSolve(double[,] a_matrix, double[] b_vector, double eps)
+        internal SluGaussSolve(double[,] aMatrix, double[] bVector, double eps)
         {
-            if (a_matrix == null | b_vector == null)
+            if (aMatrix == null | bVector == null)
             {
                 throw new ArgumentNullException("Один из параметров не задан.");
             }
-            int b_length = b_vector.Length;
-            int a_length = a_matrix.Length;
-            if ((!(a_length == b_length * b_length)))
+            var bLength = bVector.Length;
+            var aLength = aMatrix.Length;
+            if (aLength != bLength * bLength)
             {
                 throw new ArgumentException("Количество строк и столбцов в матрице A должно совпадать с количеством элементров в векторе B.");
             }
-            initial_a_matrix = a_matrix;
+            _initialAMatrix = aMatrix;
             //запоминаем исходную матрицу
-            this.a_matrix = (double[,])a_matrix.Clone();
+            _aMatrix = (double[,])aMatrix.Clone();
             //с её копией будем производить вычисления
-            initial_b_vector = b_vector;
+            _initialBVector = bVector;
             //запоминаем исходный вектор
-            this.b_vector = (double[])b_vector.Clone();
+            _bVector = (double[])bVector.Clone();
             //с его копией будем производить вычисления
-            x_vector = new double[b_length + 1];
-            u_vector = new double[b_length + 1];
-            size = b_length;
+            _xVector = new double[bLength + 1];
+            _uVector = new double[bLength + 1];
+            _size = bLength;
             //
-            this.eps = eps;
+            _eps = eps;
             //
             GaussSolve();
         }
 
-        internal double[] XVector
-        {
-            get { return x_vector; }
-        }
+        internal double[] XVector => _xVector;
 
-        internal double[] UVector
-        {
-            get { return u_vector; }
-        }
+        internal double[] UVector => _uVector;
 
         //Инициализация массива индексов столбцов
         private int[] InitIndex()
         {
-            int[] index = new int[size + 1];
-            for (int i = 0; i <= size - 1; i++)
+            var index = new int[_size + 1];
+            for (int i = 0; i <= _size - 1; i++)
             {
                 index[i] = i;
             }
@@ -82,36 +76,28 @@ namespace GraphicsModule.Geometry.EquationsSysEvalution
         //Поиск главного элемента в матрице
         private double FindR(int row, int[] index)
         {
-            int max_index = row;
-            double max = a_matrix[row, index[max_index]];
-            double max_abs = Math.Abs(max);
-            int cur_index = 0;
-            for (cur_index = row + 1; cur_index <= size - 1; cur_index++)
+            var maxIndex = row;
+            var max = _aMatrix[row, index[maxIndex]];
+            var maxAbs = Math.Abs(max);
+            for (var curIndex = row + 1; curIndex <= _size - 1; curIndex++)
             {
-                double cur = a_matrix[row, index[cur_index]];
-                double cur_abs = Math.Abs(cur);
-                if (cur_abs > max_abs)
-                {
-                    max_index = cur_index;
-                    max = cur;
-                    max_abs = cur_abs;
-                }
+                var cur = _aMatrix[row, index[curIndex]];
+                var curAbs = Math.Abs(cur);
+                if (!(curAbs > maxAbs)) continue;
+                maxIndex = curIndex;
+                max = cur;
+                maxAbs = curAbs;
             }
-            if (max_abs < eps)
+            if (maxAbs < _eps)
             {
-                if (Math.Abs(b_vector[row]) > eps)
-                {
-                    Interaction.MsgBox("Система уравнений несовместна.");
-                }
-                else
-                {
-                    Interaction.MsgBox("Система уравнений имеет множество решений.");
-                }
+                Interaction.MsgBox(Math.Abs(_bVector[row]) > _eps
+                    ? "Система уравнений несовместна."
+                    : "Система уравнений имеет множество решений.");
             }
             // меняем местами индексы столбцов
-            int temp = index[row];
-            index[row] = index[max_index];
-            index[max_index] = temp;
+            var temp = index[row];
+            index[row] = index[maxIndex];
+            index[maxIndex] = temp;
             return max;
         }
 
@@ -128,28 +114,28 @@ namespace GraphicsModule.Geometry.EquationsSysEvalution
         private void GaussForwardStroke(int[] index)
         {
             //перемещаемся по каждой строке сверху вниз
-            for (int i = 0; i <= size - 1; i++)
+            for (int i = 0; i <= _size - 1; i++)
             {
                 // 1) выбор главного элемента
                 double r = FindR(i, index);
                 // 2) преобразование текущей строки матрицы A
-                for (int j = 0; j <= size - 1; j++)
+                for (int j = 0; j <= _size - 1; j++)
                 {
-                    a_matrix[i, j] /= r;
+                    _aMatrix[i, j] /= r;
                 }
                 // 3) преобразование i-го элемента вектора b
-                b_vector[i] /= r;
+                _bVector[i] /= r;
 
                 // 4) Вычитание текущей строки из всех нижерасположенных строк
-                for (int k = i + 1; k <= size - 1; k++)
+                for (int k = i + 1; k <= _size - 1; k++)
                 {
-                    double p = a_matrix[k, index[i]];
-                    for (int j = i; j <= size - 1; j++)
+                    double p = _aMatrix[k, index[i]];
+                    for (int j = i; j <= _size - 1; j++)
                     {
-                        a_matrix[k, index[j]] -= a_matrix[i, index[j]] * p;
+                        _aMatrix[k, index[j]] -= _aMatrix[i, index[j]] * p;
                     }
-                    b_vector[k] -= b_vector[i] * p;
-                    a_matrix[k, index[i]] = 0.0;
+                    _bVector[k] -= _bVector[i] * p;
+                    _aMatrix[k, index[i]] = 0.0;
                 }
             }
         }
@@ -158,17 +144,17 @@ namespace GraphicsModule.Geometry.EquationsSysEvalution
         private void GaussBackwardStroke(int[] index)
         {
             //перемещаемся по каждой строке снизу вверх
-            for (int i = size - 1; i >= 0; i += -1)
+            for (int i = _size - 1; i >= 0; i += -1)
             {
                 // 1) задаётся начальное значение элемента x
-                double x_i = b_vector[i];
+                double xI = _bVector[i];
 
                 // 2) корректировка этого значения
-                for (int j = i + 1; j <= size - 1; j++)
+                for (int j = i + 1; j <= _size - 1; j++)
                 {
-                    x_i -= x_vector[index[j]] * a_matrix[i, index[j]];
+                    xI -= _xVector[index[j]] * _aMatrix[i, index[j]];
                 }
-                x_vector[index[i]] = x_i;
+                _xVector[index[i]] = xI;
             }
         }
 
@@ -177,18 +163,17 @@ namespace GraphicsModule.Geometry.EquationsSysEvalution
         // x - решение уравнения, полученное методом Гаусса
         private void GaussDiscrepancy()
         {
-            int i = 0;
-            for (i = 0; i <= size - 1; i++)
+            for (int i = 0; i <= _size - 1; i++)
             {
-                double actual_b_i = 0.0;
+                double actualBI = 0.0;
                 // результат перемножения i-строки 
                 // исходной матрицы на вектор x
-                for (int j = 0; j <= size - 1; j++)
+                for (int j = 0; j <= _size - 1; j++)
                 {
-                    actual_b_i += initial_a_matrix[i, j] * x_vector[j];
+                    actualBI += _initialAMatrix[i, j] * _xVector[j];
                 }
                 // i-й элемент вектора невязки
-                u_vector[i] = initial_b_vector[i] - actual_b_i;
+                _uVector[i] = _initialBVector[i] - actualBI;
             }
         }
     }
