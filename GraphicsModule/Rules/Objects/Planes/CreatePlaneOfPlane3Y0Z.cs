@@ -12,6 +12,7 @@ using GraphicsModule.Geometry.Analyze;
 using GraphicsModule.Geometry.Objects.Segments;
 using GraphicsModule.Rules.Objects.Lines;
 using GraphicsModule.Rules.Objects.Points;
+using GraphicsModule.Rules.Objects.Segments;
 
 namespace GraphicsModule.Rules.Objects.Planes
 {
@@ -25,12 +26,12 @@ namespace GraphicsModule.Rules.Objects.Planes
             {
                 case PlaneBuildType.ThreePoints:
                     {
-                        CreateBy3Point(pt, frameCenter, can, setting, strg);
+                        CreateByThreePoint(pt, frameCenter, can, setting, strg);
                         break;
                     }
                 case PlaneBuildType.LineAndPoint:
                     {
-                        CreateByLinePoint(pt, frameCenter, can, setting, strg);
+                        CreateByLineAndPoint(pt, frameCenter, can, setting, strg);
                         break;
                     }
                 case PlaneBuildType.ParallelLines:
@@ -40,25 +41,40 @@ namespace GraphicsModule.Rules.Objects.Planes
                     }
                 case PlaneBuildType.CrossedLines:
                     {
-                        CreateByIntersectedLines(pt, frameCenter, can, setting, strg);
+                        CreateByCrossedLines(pt, frameCenter, can, setting, strg);
+                        break;
+                    }
+                case PlaneBuildType.SegmentAndPoint:
+                    {
+                        CreateBySegmentAndPoint(pt, frameCenter, can, setting, strg);
+                        break;
+                    }
+                case PlaneBuildType.ParallelSegments:
+                    {
+                        CreateByParallelSegments(pt, frameCenter, can, setting, strg);
+                        break;
+                    }
+                case PlaneBuildType.CrossedSegments:
+                    {
+                        CreateByCrossedSegments(pt, frameCenter, can, setting, strg);
                         break;
                     }
             }
         }
-        private void CreateBy3Point(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
+        private void CreateByThreePoint(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
         {
             var tmpobj = new CreatePointOfPlane3Y0Z().Create(pt, frameCenter, can, setting, strg);
             tmpobj.Draw(setting, frameCenter, can.Graphics);
             _planeObjects.Add(tmpobj);
             if (_planeObjects.Count != 3) return;
-            var source = CreateBy3Point(_planeObjects);
+            var source = CreateByThreePoint(_planeObjects);
             var nameparams = _planeObjects[0].GetName();
             source.SetName(new Name(@"p", nameparams.Dx, nameparams.Dy));
             _planeObjects.Clear();
             strg.AddToCollection(source);
             can.Update(strg);
         }
-        private void CreateByLinePoint(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
+        private void CreateByLineAndPoint(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
         {
             if (_planeObjects.Count == 0)
             {
@@ -70,7 +86,7 @@ namespace GraphicsModule.Rules.Objects.Planes
             else
             {
                 var tmpobj = new CreatePointOfPlane3Y0Z().Create(pt, frameCenter, can, setting, strg);
-                var source = CreateByLinePoint((LineOfPlane3Y0Z)_planeObjects[0], tmpobj);
+                var source = CreateByLineAndPoint((LineOfPlane3Y0Z)_planeObjects[0], tmpobj);
                 var nameparams = _planeObjects[0].GetName();
                 source.SetName(new Name(@"p", nameparams.Dx, nameparams.Dy));
                 _planeObjects.Clear();
@@ -110,7 +126,7 @@ namespace GraphicsModule.Rules.Objects.Planes
                 }
             }
         }
-        private void CreateByIntersectedLines(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
+        private void CreateByCrossedLines(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
         {
             if (_planeObjects.Count < 2)
             {
@@ -122,7 +138,7 @@ namespace GraphicsModule.Rules.Objects.Planes
                 }
             }
             if (_planeObjects.Count != 2) return;
-            var source = CreateByIntersectedLines((LineOfPlane3Y0Z)_planeObjects[0], (LineOfPlane3Y0Z)_planeObjects[1], frameCenter);
+            var source = CreateByCrossedLines((LineOfPlane3Y0Z)_planeObjects[0], (LineOfPlane3Y0Z)_planeObjects[1], frameCenter);
             if (source != null)
             {
                 var nameparams = _planeObjects[0].GetName();
@@ -142,11 +158,95 @@ namespace GraphicsModule.Rules.Objects.Planes
                 }
             }
         }
-        public PlaneOfPlane3Y0Z CreateBy3Point(Collection<IObject> obj)
+        private void CreateBySegmentAndPoint(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
+        {
+            if (_planeObjects.Count == 0)
+            {
+                var tmpobj = new CreateSegmentOfPlane3Y0Z().Create(pt, frameCenter, can, setting, strg);
+                if (tmpobj == null) return;
+                tmpobj.Draw(setting, frameCenter, can.Graphics);
+                _planeObjects.Add(tmpobj);
+            }
+            else
+            {
+                var tmpobj = new CreatePointOfPlane3Y0Z().Create(pt, frameCenter, can, setting, strg);
+                var source = CreateBySegmentAndPoint((SegmentOfPlane3Y0Z)_planeObjects[0], tmpobj);
+                var nameparams = _planeObjects[0].GetName();
+                source.SetName(new Name(@"p", nameparams.Dx, nameparams.Dy));
+                _planeObjects.Clear();
+                strg.AddToCollection(source);
+                can.Update(strg);
+            }
+        }
+        private void CreateByParallelSegments(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
+        {
+            if (_planeObjects.Count < 2)
+            {
+                var tmpobj = new CreateSegmentOfPlane3Y0Z().Create(pt, frameCenter, can, setting, strg);
+                if (tmpobj != null)
+                {
+                    tmpobj.Draw(setting, frameCenter, can.Graphics);
+                    _planeObjects.Add(tmpobj);
+                }
+            }
+            if (_planeObjects.Count != 2) return;
+            var source = CreateByParallelSegments((SegmentOfPlane3Y0Z)_planeObjects[0], (SegmentOfPlane3Y0Z)_planeObjects[1]);
+            if (source != null)
+            {
+                var nameparams = _planeObjects[0].GetName();
+                source.SetName(new Name(@"p", nameparams.Dx, nameparams.Dy));
+                _planeObjects.Clear();
+                strg.AddToCollection(source);
+                can.Update(strg);
+            }
+            else
+            {
+                _planeObjects.RemoveAt(1);
+                can.Update(strg);
+                foreach (var o in _planeObjects)
+                {
+                    var ln = (SegmentOfPlane3Y0Z)o;
+                    ln.Draw(setting, frameCenter, can.Graphics);
+                }
+            }
+        }
+        private void CreateByCrossedSegments(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
+        {
+            if (_planeObjects.Count < 2)
+            {
+                var tmpobj = new CreateSegmentOfPlane3Y0Z().Create(pt, frameCenter, can, setting, strg);
+                if (tmpobj != null)
+                {
+                    tmpobj.Draw(setting, frameCenter, can.Graphics);
+                    _planeObjects.Add(tmpobj);
+                }
+            }
+            if (_planeObjects.Count != 2) return;
+            var source = CreateByCrossedSegments((SegmentOfPlane3Y0Z)_planeObjects[0], (SegmentOfPlane3Y0Z)_planeObjects[1], frameCenter);
+            if (source != null)
+            {
+                var nameparams = _planeObjects[0].GetName();
+                source.SetName(new Name(@"p", nameparams.Dx, nameparams.Dy));
+                _planeObjects.Clear();
+                strg.AddToCollection(source);
+                can.Update(strg);
+            }
+            else
+            {
+                _planeObjects.RemoveAt(1);
+                can.Update(strg);
+                foreach (var o in _planeObjects)
+                {
+                    var ln = (SegmentOfPlane3Y0Z)o;
+                    ln.Draw(setting, frameCenter, can.Graphics);
+                }
+            }
+        }
+        public PlaneOfPlane3Y0Z CreateByThreePoint(Collection<IObject> obj)
         {
             return obj.Count != 3 ? null : new PlaneOfPlane3Y0Z((PointOfPlane3Y0Z)obj[0], (PointOfPlane3Y0Z)obj[1], (PointOfPlane3Y0Z)obj[2]);
         }
-        public PlaneOfPlane3Y0Z CreateByLinePoint(LineOfPlane3Y0Z ln, PointOfPlane3Y0Z pt)
+        public PlaneOfPlane3Y0Z CreateByLineAndPoint(LineOfPlane3Y0Z ln, PointOfPlane3Y0Z pt)
         {
             return new PlaneOfPlane3Y0Z(ln, pt);
         }
@@ -154,11 +254,11 @@ namespace GraphicsModule.Rules.Objects.Planes
         {
             return Analyze.LinesPos.Parallelism(ln1, ln2) ? new PlaneOfPlane3Y0Z(ln1, ln2) : null;
         }
-        public PlaneOfPlane3Y0Z CreateByIntersectedLines(LineOfPlane3Y0Z ln1, LineOfPlane3Y0Z ln2, Point frameCenter)
+        public PlaneOfPlane3Y0Z CreateByCrossedLines(LineOfPlane3Y0Z ln1, LineOfPlane3Y0Z ln2, Point frameCenter)
         {
             return Analyze.LinesPos.Intersection(ln1, ln2, frameCenter) ? new PlaneOfPlane3Y0Z(ln1, ln2) : null;
         }
-        public PlaneOfPlane3Y0Z CreateBySegmentPoint(SegmentOfPlane3Y0Z sg, PointOfPlane3Y0Z pt)
+        public PlaneOfPlane3Y0Z CreateBySegmentAndPoint(SegmentOfPlane3Y0Z sg, PointOfPlane3Y0Z pt)
         {
             return new PlaneOfPlane3Y0Z(sg, pt);
         }
@@ -166,7 +266,7 @@ namespace GraphicsModule.Rules.Objects.Planes
         {
             return Analyze.LinesPos.Parallelism(sg1, sg2) ? new PlaneOfPlane3Y0Z(sg1, sg2) : null;
         }
-        public PlaneOfPlane3Y0Z CreateByIntersectedSegments(SegmentOfPlane3Y0Z sg1, SegmentOfPlane3Y0Z sg2, Point frameCenter)
+        public PlaneOfPlane3Y0Z CreateByCrossedSegments(SegmentOfPlane3Y0Z sg1, SegmentOfPlane3Y0Z sg2, Point frameCenter)
         {
             return Analyze.LinesPos.Intersection(sg1, sg2, frameCenter) ? new PlaneOfPlane3Y0Z(sg1, sg2) : null;
         }
