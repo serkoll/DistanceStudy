@@ -30,7 +30,7 @@ namespace GraphicsModule.Rules.Objects.Segments
             else
             {
                 if (Analyze.PointPos.Coincidence((Point2D)strg.TempObjects[0], new Point2D(pt))) return null;
-                var source = new Segment2D((Point2D)strg.TempObjects[0], new Point2D(pt), can.PicBox);
+                var source = new Segment2D((Point2D)strg.TempObjects[0], new Point2D(pt));
                 source.SetName(strg.TempObjects[0].GetName());
                 strg.TempObjects.Clear();
                 return source;

@@ -13,8 +13,8 @@ namespace GraphicsModule.Geometry.Objects.Segments
         public PointOfPlane2X0Z Point0 { get; set; }
         public PointOfPlane2X0Z Point1 { get; set; }
         public Name Name { get; set; }
-        public double kx { get; set; }
-        public double kz { get; set; }
+        public double Kx { get; set; }
+        public double Kz { get; set; }
         public SegmentOfPlane2X0Z()
         {
             Point0 = new PointOfPlane2X0Z();
@@ -31,8 +31,8 @@ namespace GraphicsModule.Geometry.Objects.Segments
         {
             Point0 = pt0;
             Point1 = pt1;
-            kx = pt1.X - pt0.X;
-            kz = pt1.Z - pt0.Z;
+            Kx = pt1.X - pt0.X;
+            Kz = pt1.Z - pt0.Z;
         }
         public SegmentOfPlane2X0Z(Segment3D line)
         {
@@ -41,7 +41,7 @@ namespace GraphicsModule.Geometry.Objects.Segments
             Point1.X = line.Point1.X;
             Point1.Z = line.Point1.Z;
         }
-        public void Draw(DrawS st, System.Drawing.Point framecenter, Graphics g)
+        public void Draw(DrawS st, Point framecenter, Graphics g)
         {
             Point0.Draw(st, framecenter, g);
             Point1.Draw(st, framecenter, g);
@@ -50,7 +50,7 @@ namespace GraphicsModule.Geometry.Objects.Segments
             g.DrawLine(st.PenLineOfPlane2X0Z, new PointF(pt0.X + st.RadiusPoints, pt0.Y + st.RadiusPoints),
                                               new PointF(pt1.X + st.RadiusPoints, pt1.Y + st.RadiusPoints));
         } 
-        public void DrawSegmentOnly(DrawS st, System.Drawing.Point framecenter, Graphics g)
+        public void DrawSegmentOnly(DrawS st, Point framecenter, Graphics g)
         {
             Point0.DrawPointsOnly(st, framecenter, g);
             Point1.DrawPointsOnly(st, framecenter, g);
@@ -60,15 +60,14 @@ namespace GraphicsModule.Geometry.Objects.Segments
                                               new PointF(pt1.X + st.RadiusPoints, pt1.Y + st.RadiusPoints));
 
         }
-        public bool IsSelected(System.Drawing.Point mscoords, float ptR, System.Drawing.Point frameCenter, double distance)
+        public bool IsSelected(Point mscoords, float ptR, Point frameCenter, double distance)
         {
             var sg = DeterminePosition.ForSegmentProjection(this, frameCenter);
             return Analyze.Analyze.SegmentPos.IncidenceOfPoint(mscoords, sg, 35 * distance);
         }
         public Name GetName()
         {
-            var name = new Name(Name.Value.Remove(Name.Value.IndexOf("'", StringComparison.Ordinal)), Name.Dx, Name.Dy);
-            return name;
+            return Name;
         }
         public void SetName(Name name)
         {

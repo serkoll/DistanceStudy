@@ -30,16 +30,16 @@ namespace GraphicsModule.Geometry.Analyze
 
         public bool IncidenceOfPoint(Point3D pt, Line3D ln)
         {
-            return (Math.Abs((pt.X - ln.Point0.X) * ln.ky - (pt.Y - ln.Point0.Y) * ln.kx) < 0.001) &&
-                   (Math.Abs((pt.X - ln.Point0.X) * ln.kz - (pt.Z - ln.Point0.Z) * ln.kx) < 0.001) &&
-                   (Math.Abs((pt.Y - ln.Point0.Y) * ln.kz - (pt.Z - ln.Point0.Z) * ln.ky) < 0.001);
+            return (Math.Abs((pt.X - ln.Point0.X) * ln.Ky - (pt.Y - ln.Point0.Y) * ln.Kx) < 0.001) &&
+                   (Math.Abs((pt.X - ln.Point0.X) * ln.Kz - (pt.Z - ln.Point0.Z) * ln.Kx) < 0.001) &&
+                   (Math.Abs((pt.Y - ln.Point0.Y) * ln.Kz - (pt.Z - ln.Point0.Z) * ln.Ky) < 0.001);
         }
 
         public bool IncidenceOfPoint(Point3D pt, Line3D ln, double solveerror)
         {
-            return (Math.Abs((pt.X - ln.Point0.X) * ln.ky - (pt.Y - ln.Point0.Y) * ln.kx) < solveerror) &&
-                   (Math.Abs((pt.X - ln.Point0.X) * ln.kz - (pt.Z - ln.Point0.Z) * ln.kx) < solveerror) &&
-                   (Math.Abs((pt.Y - ln.Point0.Y) * ln.kz - (pt.Z - ln.Point0.Z) * ln.ky) < solveerror);
+            return (Math.Abs((pt.X - ln.Point0.X) * ln.Ky - (pt.Y - ln.Point0.Y) * ln.Kx) < solveerror) &&
+                   (Math.Abs((pt.X - ln.Point0.X) * ln.Kz - (pt.Z - ln.Point0.Z) * ln.Kx) < solveerror) &&
+                   (Math.Abs((pt.Y - ln.Point0.Y) * ln.Kz - (pt.Z - ln.Point0.Z) * ln.Ky) < solveerror);
         }
         #endregion
         #region Coincidence of Lines
@@ -75,11 +75,11 @@ namespace GraphicsModule.Geometry.Analyze
         }
         public bool Parallelism(Line3D ln1, Line3D ln2)
         {
-            return Math.Abs(ln1.kx - ln2.kx) < 0.001 || Math.Abs(ln1.ky - ln2.ky) < 0.001 || Math.Abs(ln1.kz - ln2.kz) < 0.001;
+            return Math.Abs(ln1.Kx - ln2.Kx) < 0.001 || Math.Abs(ln1.Ky - ln2.Ky) < 0.001 || Math.Abs(ln1.Kz - ln2.Kz) < 0.001;
         }
         public bool Parallelism(Line3D ln1, Line3D ln2, double solveerror)
         {
-            return Math.Abs(ln1.kx - ln2.kx) < solveerror || Math.Abs(ln1.ky - ln2.ky) < solveerror || Math.Abs(ln1.kz - ln2.kz) < solveerror;
+            return Math.Abs(ln1.Kx - ln2.Kx) < solveerror || Math.Abs(ln1.Ky - ln2.Ky) < solveerror || Math.Abs(ln1.Kz - ln2.Kz) < solveerror;
         }
         public bool Parallelism(Line3D ln1, LineOfPlane1X0Y ln2)
         {
@@ -120,15 +120,15 @@ namespace GraphicsModule.Geometry.Analyze
         }
         public bool Parallelism(SegmentOfPlane1X0Y sg1, SegmentOfPlane1X0Y sg2)
         {
-            return Math.Abs(sg1.kx - sg2.kx) < 0.001 || Math.Abs(sg1.ky - sg2.ky) < 0.001;
+            return Math.Abs(sg1.Kx - sg2.Kx) < 0.001 || Math.Abs(sg1.Ky - sg2.Ky) < 0.001;
         }
         public bool Parallelism(SegmentOfPlane2X0Z sg1, SegmentOfPlane2X0Z sg2)
         {
-            return Math.Abs(sg1.kx - sg2.kx) < 0.001 || Math.Abs(sg1.kz - sg2.kz) < 0.001;
+            return Math.Abs(sg1.Kx - sg2.Kx) < 0.001 || Math.Abs(sg1.Kz - sg2.Kz) < 0.001;
         }
         public bool Parallelism(SegmentOfPlane3Y0Z sg1, SegmentOfPlane3Y0Z sg2)
         {
-            return Math.Abs(sg1.kz - sg2.kz) < 0.001 || Math.Abs(sg1.ky - sg2.ky) < 0.001;
+            return Math.Abs(sg1.Kz - sg2.Kz) < 0.001 || Math.Abs(sg1.Ky - sg2.Ky) < 0.001;
         }
         #endregion
         #region Crossing of lines
@@ -224,42 +224,42 @@ namespace GraphicsModule.Geometry.Analyze
         {
             var ln1 = DeterminePosition.ForSegmentProjection(lnOfPlane1, frameCenter);
             var ln2 = DeterminePosition.ForSegmentProjection(lnOfPlane2, frameCenter);
-            var y = (ln2.Point0.Y * ln2.kx * ln1.ky - ln1.Point0.Y * ln2.ky * ln1.kx + ln2.ky * ln1.ky * (ln1.Point0.X - ln2.Point0.X)) /
-                    (ln2.kx * ln1.ky - ln1.kx * ln2.ky);
+            var y = (ln2.Point0.Y * ln2.Kx * ln1.Ky - ln1.Point0.Y * ln2.Ky * ln1.Kx + ln2.Ky * ln1.Ky * (ln1.Point0.X - ln2.Point0.X)) /
+                    (ln2.Kx * ln1.Ky - ln1.Kx * ln2.Ky);
             if (y < 0)
             {
                 return false;
             }
-            var x = (ln1.Point0.X * ln2.kx * ln1.ky - ln2.Point0.X * ln1.kx * ln2.ky + ln2.kx * ln1.kx * (ln2.Point0.Y - ln1.Point0.Y)) /
-                    (ln1.ky * ln2.kx - ln1.kx * ln2.ky);
+            var x = (ln1.Point0.X * ln2.Kx * ln1.Ky - ln2.Point0.X * ln1.Kx * ln2.Ky + ln2.Kx * ln1.Kx * (ln2.Point0.Y - ln1.Point0.Y)) /
+                    (ln1.Ky * ln2.Kx - ln1.Kx * ln2.Ky);
             return !(x < 0);
         }
         public bool Crossing(SegmentOfPlane2X0Z lnOfPlane1, SegmentOfPlane2X0Z lnOfPlane2, Point frameCenter)
         {
             var ln1 = DeterminePosition.ForSegmentProjection(lnOfPlane1, frameCenter);
             var ln2 = DeterminePosition.ForSegmentProjection(lnOfPlane2, frameCenter);
-            var y = (ln2.Point0.Y * ln2.kx * ln1.ky - ln1.Point0.Y * ln2.ky * ln1.kx + ln2.ky * ln1.ky * (ln1.Point0.X - ln2.Point0.X)) /
-                    (ln2.kx * ln1.ky - ln1.kx * ln2.ky);
+            var y = (ln2.Point0.Y * ln2.Kx * ln1.Ky - ln1.Point0.Y * ln2.Ky * ln1.Kx + ln2.Ky * ln1.Ky * (ln1.Point0.X - ln2.Point0.X)) /
+                    (ln2.Kx * ln1.Ky - ln1.Kx * ln2.Ky);
             if (y < 0)
             {
                 return false;
             }
-            var x = (ln1.Point0.X * ln2.kx * ln1.ky - ln2.Point0.X * ln1.kx * ln2.ky + ln2.kx * ln1.kx * (ln2.Point0.Y - ln1.Point0.Y)) /
-                    (ln1.ky * ln2.kx - ln1.kx * ln2.ky);
+            var x = (ln1.Point0.X * ln2.Kx * ln1.Ky - ln2.Point0.X * ln1.Kx * ln2.Ky + ln2.Kx * ln1.Kx * (ln2.Point0.Y - ln1.Point0.Y)) /
+                    (ln1.Ky * ln2.Kx - ln1.Kx * ln2.Ky);
             return !(x < 0);
         }
         public bool Crossing(SegmentOfPlane3Y0Z lnOfPlane1, SegmentOfPlane3Y0Z lnOfPlane2, Point frameCenter)
         {
             var ln1 = DeterminePosition.ForSegmentProjection(lnOfPlane1, frameCenter);
             var ln2 = DeterminePosition.ForSegmentProjection(lnOfPlane2, frameCenter);
-            var y = (ln2.Point0.Y * ln2.kx * ln1.ky - ln1.Point0.Y * ln2.ky * ln1.kx + ln2.ky * ln1.ky * (ln1.Point0.X - ln2.Point0.X)) /
-                    (ln2.kx * ln1.ky - ln1.kx * ln2.ky);
+            var y = (ln2.Point0.Y * ln2.Kx * ln1.Ky - ln1.Point0.Y * ln2.Ky * ln1.Kx + ln2.Ky * ln1.Ky * (ln1.Point0.X - ln2.Point0.X)) /
+                    (ln2.Kx * ln1.Ky - ln1.Kx * ln2.Ky);
             if (y < 0)
             {
                 return false;
             }
-            var x = (ln1.Point0.X * ln2.kx * ln1.ky - ln2.Point0.X * ln1.kx * ln2.ky + ln2.kx * ln1.kx * (ln2.Point0.Y - ln1.Point0.Y)) /
-                    (ln1.ky * ln2.kx - ln1.kx * ln2.ky);
+            var x = (ln1.Point0.X * ln2.Kx * ln1.Ky - ln2.Point0.X * ln1.Kx * ln2.Ky + ln2.Kx * ln1.Kx * (ln2.Point0.Y - ln1.Point0.Y)) /
+                    (ln1.Ky * ln2.Kx - ln1.Kx * ln2.Ky);
             return !(x < 0);
         }
         #endregion

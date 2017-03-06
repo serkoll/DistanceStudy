@@ -13,26 +13,14 @@ namespace GraphicsModule.Geometry.Objects.Segments
         public PointOfPlane3Y0Z Point0 { get; set; }
         public PointOfPlane3Y0Z Point1 { get; set; }
         public Name Name { get; set; }
-        public double ky { get; set; }
-        public double kz { get; set; }
-        public SegmentOfPlane3Y0Z()
-        {
-            Point0 = new PointOfPlane3Y0Z();
-            Point1 = new PointOfPlane3Y0Z();
-        }
-        public SegmentOfPlane3Y0Z(Point3D pt0, Point3D pt1)
-        {
-            Point0.Y = pt0.Y;
-            Point0.Z = pt0.Z;
-            Point1.Y = pt1.Y;
-            Point1.Z = pt1.Z;
-        }
+        public double Ky { get; set; }
+        public double Kz { get; set; }
         public SegmentOfPlane3Y0Z(PointOfPlane3Y0Z pt0, PointOfPlane3Y0Z pt1)
         {
             Point0 = pt0;
             Point1 = pt1;
-            ky = pt1.Y - pt0.Y;
-            kz = pt1.Z - pt0.Z;
+            Ky = pt1.Y - pt0.Y;
+            Kz = pt1.Z - pt0.Z;
 
         }
         public SegmentOfPlane3Y0Z(Segment3D line)
@@ -42,7 +30,7 @@ namespace GraphicsModule.Geometry.Objects.Segments
             Point1.Y = line.Point1.Y;
             Point1.Z = line.Point1.Z;
         }
-        public void Draw(DrawS st, System.Drawing.Point framecenter, Graphics g)
+        public void Draw(DrawS st, Point framecenter, Graphics g)
         {
             Point0.Draw(st, framecenter, g);
             Point1.Draw(st, framecenter, g);
@@ -51,7 +39,7 @@ namespace GraphicsModule.Geometry.Objects.Segments
             g.DrawLine(st.PenLineOfPlane3Y0Z, new PointF(pt0.X + st.RadiusPoints, pt0.Y + st.RadiusPoints),
                                               new PointF(pt1.X + st.RadiusPoints, pt1.Y + st.RadiusPoints));
         }
-        public void DrawSegmentOnly(DrawS st, System.Drawing.Point framecenter, Graphics g)
+        public void DrawSegmentOnly(DrawS st, Point framecenter, Graphics g)
         {
             Point0.DrawPointsOnly(st, framecenter, g);
             Point1.DrawPointsOnly(st, framecenter, g);
@@ -60,15 +48,14 @@ namespace GraphicsModule.Geometry.Objects.Segments
             g.DrawLine(st.PenLineOfPlane3Y0Z, new PointF(pt0.X + st.RadiusPoints, pt0.Y + st.RadiusPoints),
                                               new PointF(pt1.X + st.RadiusPoints, pt1.Y + st.RadiusPoints));
         }
-        public bool IsSelected(System.Drawing.Point mscoords, float ptR, System.Drawing.Point frameCenter, double distance)
+        public bool IsSelected(Point mscoords, float ptR, Point frameCenter, double distance)
         {
             var sg = DeterminePosition.ForSegmentProjection(this, frameCenter);
             return Analyze.Analyze.SegmentPos.IncidenceOfPoint(mscoords, sg, 35 * distance);
         }
         public Name GetName()
         {
-            var name = new Name(Name.Value.Remove(Name.Value.IndexOf("'", StringComparison.Ordinal)), Name.Dx, Name.Dy);
-            return name;
+            return Name;
         }
         public void SetName(Name name)
         {
