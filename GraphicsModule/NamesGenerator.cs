@@ -1,4 +1,5 @@
 ﻿using System;
+using GraphicsModule.Enums;
 using GraphicsModule.Geometry;
 using GraphicsModule.Interfaces;
 using GraphicsModule.Settings;
@@ -7,11 +8,11 @@ namespace GraphicsModule
 {
     public class NamesGenerator : INamesGenerator
     {
-        public byte Position { get; set; }
+        public NamePosition Position { get; set; }
         private readonly DrawS _textSettings;
         private int _counter;
         private int _quality;
-        public NamesGenerator(bool type, byte startPosition, Settings.Settings textSettings)
+        public NamesGenerator(bool type, NamePosition startPosition, Settings.Settings textSettings)
         {
             _counter = type ? 65 : 49;
             _quality = 1;
@@ -39,30 +40,32 @@ namespace GraphicsModule
             var delta = new float[2];
             switch (Position)
             {
-                case 0:
+                case NamePosition.TopLeft:
                     {
                         delta[0] = -(_textSettings.TextFont.Size * _quality + 5);
                         delta[1] = -(_textSettings.TextFont.Height + 5);
                         break;
                     }
-                case 1:
+                case NamePosition.TopRight:
                     {
                         delta[0] = 5;
                         delta[1] = -(_textSettings.TextFont.Height + 5);
                         break;
                     }
-                case 2:
+                case NamePosition.BottomLeft:
                     {
                         delta[0] = -(_textSettings.TextFont.Size * _quality + 5);
                         delta[1] = 5;
                         break;
                     }
-                case 3:
+                case NamePosition.BottomRight:
                     {
                         delta[0] = 5;
                         delta[1] = 5;
                         break;
                     }
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
             return delta;
         }

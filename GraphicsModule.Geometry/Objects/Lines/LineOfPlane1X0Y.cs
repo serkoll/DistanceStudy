@@ -32,7 +32,7 @@ namespace GraphicsModule.Geometry.Objects.Lines
             Kx = pt1.X - pt0.X;
             Ky = pt1.Y - pt0.Y;
             _calc = new LineDrawCalc(frameCenter, rc);
-            _calc.CalculatePointsForDraw(this);
+            DrawPoints = _calc.CalculatePointsForDraw(this);
             Name = new Name();
         }
         public LineOfPlane1X0Y(Line3D line)

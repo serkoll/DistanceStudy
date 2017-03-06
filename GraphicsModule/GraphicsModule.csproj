@@ -75,6 +75,7 @@
     <Compile Include="Controls\Menu\SegmentMenuSelector.Designer.cs">
       <DependentUpon>SegmentMenuSelector.cs</DependentUpon>
     </Compile>
+    <Compile Include="Enums\NamePosition.cs" />
     <Compile Include="Enums\PlaneBuildType.cs" />
     <Compile Include="Interfaces\ICreatePlanes.cs" />
     <Compile Include="Rules\Buttons\ESCRules.cs" />

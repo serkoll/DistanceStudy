@@ -92,6 +92,11 @@ namespace GraphicsModule.Controls
             Controls.Add(_sgMenuSelector); //Добавляем к контролам компонента
             Controls.Add(_plMenuSelector);
         }
+        private void GraphicsControl_Load(object sender, EventArgs e)
+        {
+            _canvas = new Canvas.Canvas(_settings, MainPictureBox); // Инициализируем полотно отрисовки
+            if (_storage == null) _storage = new Storage(); // инициализируем хранилище графических объектов
+        }
         /// <summary>
         /// Импорт графических объектов
         /// </summary>
@@ -186,6 +191,8 @@ namespace GraphicsModule.Controls
         private void buttonPointsMenu_Click(object sender, EventArgs e)
         {
             HideSelectorMenus();
+            _storage.ClearTempCollections();
+            _canvas.Update(_storage);
             _ptMenuSelector.Location = new Point(graphicsToolBarStrip.Size.Width, graphicsToolBarStrip.Location.Y);
             _ptMenuSelector.Visible = true;
             _ptMenuSelector.BringToFront();
@@ -198,9 +205,20 @@ namespace GraphicsModule.Controls
         private void lnPointsMenu_Click(object sender, EventArgs e)
         {
             HideSelectorMenus();
+            _storage.ClearTempCollections();
+            _canvas.Update(_storage);
             _lnMenuSelector.Location = new Point(graphicsToolBarStrip.Size.Width, graphicsToolBarStrip.Location.Y + buttonPointsMenu.Size.Height);
             _lnMenuSelector.Visible = true;
             _lnMenuSelector.BringToFront();
+        }
+        private void buttonSegmentMenu_Click(object sender, EventArgs e)
+        {
+            HideSelectorMenus();
+            _storage.ClearTempCollections();
+            _canvas.Update(_storage);
+            _sgMenuSelector.Location = new Point(graphicsToolBarStrip.Size.Width, graphicsToolBarStrip.Location.Y + buttonPointsMenu.Size.Height + buttonLinesMenu.Size.Height);
+            _sgMenuSelector.Visible = true;
+            _sgMenuSelector.BringToFront();
         }
         /// <summary>
         /// Включить/выключить сетку
@@ -335,18 +353,6 @@ namespace GraphicsModule.Controls
         {
 
         }
-        private void buttonSegmentMenu_Click(object sender, EventArgs e)
-        {
-            HideSelectorMenus();
-            _sgMenuSelector.Location = new Point(graphicsToolBarStrip.Size.Width, graphicsToolBarStrip.Location.Y + buttonPointsMenu.Size.Height + buttonLinesMenu.Size.Height);
-            _sgMenuSelector.Visible = true;
-            _sgMenuSelector.BringToFront();
-        }
-        private void GraphicsControl_Load(object sender, EventArgs e)
-        {
-            _canvas = new Canvas.Canvas(_settings, MainPictureBox); // Инициализируем полотно отрисовки
-            if (_storage == null) _storage = new Storage(); // инициализируем хранилище графических объектов
-        }
         private void solidWorksToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var sldWorksObject = new SolidworksInteraction.SldWorksInteraction();
@@ -370,26 +376,28 @@ namespace GraphicsModule.Controls
                 _canvas.Update(_storage);
             }
         }
+        #region Names position
         private void buttonNameMenuTopLeftMenuItem_Click(object sender, EventArgs e)
         {
-            NmGenerator.Position = 0;
+            NmGenerator.Position = NamePosition.TopLeft;
             buttonNameMenu.Text = buttonNameMenuTopLeft.Text;
         }
         private void buttonNameMenuTopRightMenuItem_Click(object sender, EventArgs e)
         {
-            NmGenerator.Position = 1;
+            NmGenerator.Position = NamePosition.TopRight;
             buttonNameMenu.Text = buttonNameMenuTopRight.Text;
         }
         private void buttonNameMenuBottomLeftMenuItem_Click(object sender, EventArgs e)
         {
-            NmGenerator.Position = 2;
+            NmGenerator.Position = NamePosition.BottomLeft;
             buttonNameMenu.Text = buttonNameMenuBottomLeft.Text;
         }
         private void buttonNameMenuBottomRightMenuItem_Click(object sender, EventArgs e)
         {
-            NmGenerator.Position = 3;
+            NmGenerator.Position = NamePosition.BottomRight;
             buttonNameMenu.Text = buttonNameMenuBottomRight.Text;
         }
+        #endregion
         private void buttonPlaneMenu_Click(object sender, EventArgs e)
         {
             HideSelectorMenus();

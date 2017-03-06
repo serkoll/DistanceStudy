@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Drawing;
+using System.Linq;
 using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Settings;
 
@@ -112,7 +113,7 @@ namespace GraphicsModule
         /// <param name="g"></param>
         public void DrawLastAddedToObjects(DrawS st, Point frameCenter, Graphics g)
         {
-            Objects[Objects.Count - 1].Draw(st, frameCenter, g);
+            Objects.Last().Draw(st, frameCenter, g);
         }
         /// <summary>
         /// Отрисовывает последний добавленный объект в коллекцию временных объектов
@@ -122,7 +123,14 @@ namespace GraphicsModule
         /// <param name="g"></param>
         public void DrawLastAddedToTempObjects(DrawS st, Point frameCenter, Graphics g)
         {
-            TempObjects[TempObjects.Count - 1].Draw(st, frameCenter, g);
+            TempObjects.Last().Draw(st, frameCenter, g);
+        }
+
+        public void ClearTempCollections()
+        {
+            TempObjects.Clear();
+            TempLinesOfPlane.Clear();
+            TempPointsOfPlane.Clear();
         }
     }
 }
