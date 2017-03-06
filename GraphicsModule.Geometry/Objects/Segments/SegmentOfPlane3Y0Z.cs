@@ -8,7 +8,7 @@ namespace GraphicsModule.Geometry.Objects.Segments
 {
     /// <summary>Класс для расчета параметров проекции 3D линии на Y0Z плоскость проекций</summary>
     /// <remarks>Copyright © Polozkov V. Yury, 2015</remarks>
-    public class SegmentOfPlane3Y0Z : IObject, ISegmentOfPlane
+    public class SegmentOfPlane3Y0Z : ISegmentOfPlane
     {
         public PointOfPlane3Y0Z Point0 { get; set; }
         public PointOfPlane3Y0Z Point1 { get; set; }

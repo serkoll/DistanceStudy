@@ -8,7 +8,7 @@ namespace GraphicsModule.Geometry.Objects.Segments
 {
     /// <summary>Класс для расчета параметров проекции 3D линии на X0Z плоскость проекций</summary>
     /// <remarks>Copyright © Polozkov V. Yury, 2015</remarks>
-    public class SegmentOfPlane2X0Z : IObject, ISegmentOfPlane
+    public class SegmentOfPlane2X0Z : ISegmentOfPlane
     { 
         public PointOfPlane2X0Z Point0 { get; set; }
         public PointOfPlane2X0Z Point1 { get; set; }

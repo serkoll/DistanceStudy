@@ -28,16 +28,16 @@ namespace GraphicsModule.Geometry.Analyze
 
         public bool IncidenceOfPoint(Point3D pt, Segment3D ln)
         {
-            return (Math.Abs((pt.X - ln.Point0.X) * ln.ky - (pt.Y - ln.Point0.Y) * ln.kx) < 0.001) &&
-                   (Math.Abs((pt.X - ln.Point0.X) * ln.kz - (pt.Z - ln.Point0.Z) * ln.kx) < 0.001) &&
-                   (Math.Abs((pt.Y - ln.Point0.Y) * ln.kz - (pt.Z - ln.Point0.Z) * ln.ky) < 0.001);
+            return (Math.Abs((pt.X - ln.Point0.X) * ln.Ky - (pt.Y - ln.Point0.Y) * ln.Kx) < 0.001) &&
+                   (Math.Abs((pt.X - ln.Point0.X) * ln.Kz - (pt.Z - ln.Point0.Z) * ln.Kx) < 0.001) &&
+                   (Math.Abs((pt.Y - ln.Point0.Y) * ln.Kz - (pt.Z - ln.Point0.Z) * ln.Ky) < 0.001);
         }
 
         public bool IncidenceOfPoint(Point3D pt, Segment3D ln, double solveerror)
         {
-            return (Math.Abs((pt.X - ln.Point0.X) * ln.ky - (pt.Y - ln.Point0.Y) * ln.kx) < solveerror) &&
-                   (Math.Abs((pt.X - ln.Point0.X) * ln.kz - (pt.Z - ln.Point0.Z) * ln.kx) < solveerror) &&
-                   (Math.Abs((pt.Y - ln.Point0.Y) * ln.kz - (pt.Z - ln.Point0.Z) * ln.ky) < solveerror);
+            return (Math.Abs((pt.X - ln.Point0.X) * ln.Ky - (pt.Y - ln.Point0.Y) * ln.Kx) < solveerror) &&
+                   (Math.Abs((pt.X - ln.Point0.X) * ln.Kz - (pt.Z - ln.Point0.Z) * ln.Kx) < solveerror) &&
+                   (Math.Abs((pt.Y - ln.Point0.Y) * ln.Kz - (pt.Z - ln.Point0.Z) * ln.Ky) < solveerror);
         }
         #endregion
         #region Coincidence of Lines
@@ -69,7 +69,7 @@ namespace GraphicsModule.Geometry.Analyze
         }
         public bool Parallelism(Segment3D sg1, Segment3D sg2, double solveerror)
         {
-            return Math.Abs(sg1.kx - sg2.kx) < solveerror || Math.Abs(sg1.ky - sg2.ky) < solveerror;
+            return Math.Abs(sg1.Kx - sg2.Kx) < solveerror || Math.Abs(sg1.Ky - sg2.Ky) < solveerror;
         }
         public bool Parallelism(SegmentOfPlane1X0Y sg1, SegmentOfPlane1X0Y sg2)
         {

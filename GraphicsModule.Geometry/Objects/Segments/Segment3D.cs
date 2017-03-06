@@ -17,39 +17,9 @@ namespace GraphicsModule.Geometry.Objects.Segments
         public SegmentOfPlane1X0Y SegmentOfPlane1X0Y { get; set; }
         public SegmentOfPlane2X0Z SegmentOfPlane2X0Z { get; set; }
         public SegmentOfPlane3Y0Z SegmentOfPlane3Y0Z { get; set; }
-        public double kx { get; set; }
-        public double ky { get; set; }
-        public double kz { get; set; }
-
-        //====================================================================================================
-        //================== Свойства задания и извлечения параметров 3D линии ==================================
-
-        /// <summary>
-        /// Получает 3D точки, инцидентной инцидентной ранее заданной 3D прямой по параметру t
-        /// </summary>
-        /// <param name="t">Параметр, определяющий удаление новой точки от базовой точки прямой</param>
-        /// <value></value>
-        /// <returns></returns>
-        /// <remarks>Расчетные формулы координат новой точки: X = Point_0.X + kx * t; Y = Point_0.Y + ky * t; Z = Point_0.Z + kz * t.</remarks>
-        public Point3D GetPoint(double t)
-        {
-            //Свойство, возвращающее координаты 3D точки на 3D прямой по параметру t 
-            return (new Point3D(Point0.X + kx * t, Point0.Y + ky * t, Point0.Z + kz * t));
-        }
-        /// <summary>Инициализация нового экземпляра 2D прямой</summary>
-        /// <remarks>Исходные координаты базовой точки прямой равны нулю.
-        /// Исходные коэффициенты канонического уравнения прямой: kx=1; ky=0; kz=0.
-        /// </remarks>
-        public Segment3D()
-        {
-            Point0 = new Point3D(0, 0, 0);
-            kx = 1;
-            ky = 0;
-            kz = 0;
-            Point1.X = kx + Point0.X;
-            Point1.Y = ky + Point0.Y;
-            Point1.Z = kz + Point0.Z;
-        }
+        public double Kx { get; set; }
+        public double Ky { get; set; }
+        public double Kz { get; set; }
         public static Segment3D Create(Collection<IObject> lst)
         {
             if (lst[0].GetType() == typeof(SegmentOfPlane1X0Y))
@@ -68,10 +38,6 @@ namespace GraphicsModule.Geometry.Objects.Segments
                 new Segment3D((SegmentOfPlane1X0Y)lst[1], (SegmentOfPlane3Y0Z)lst[0]) : 
                 new Segment3D((SegmentOfPlane2X0Z)lst[1], (SegmentOfPlane3Y0Z)lst[0]);
         }
-        /// <summary> Задает 3D точку, заданную двумя (горизонтальной и фронтальной) проекциями</summary>
-        /// <remarks> При неправильном заднии проекций возвращает "Nothing" </remarks>
-        /// <param name="pointPi1"> Горизонтальная проекция 3D точки</param>
-        /// <param name="pointPi2"> Фронтальная проекция 3D точки</param>
         public Segment3D(SegmentOfPlane1X0Y linePi1, SegmentOfPlane2X0Z linePi2)
         {
             Point0 = new Point3D();
@@ -107,10 +73,6 @@ namespace GraphicsModule.Geometry.Objects.Segments
                 SegmentOfPlane3Y0Z = new SegmentOfPlane3Y0Z(new PointOfPlane3Y0Z(linePi1.Point1.Y, linePi2.Point0.Z), new PointOfPlane3Y0Z(linePi1.Point0.Y, linePi2.Point1.Z));
             }
         }
-        /// <summary> Задает 3D точку, заданную двумя (горизонтальной и профильной) проекциями</summary>
-        /// <remarks> При неправильном заднии проекций возвращает "Nothing" </remarks>
-        /// <param name="pointPi1"> Горизонтальная проекция 3D точки</param>
-        /// <param name="linePi3"> Профильная проекция 3D точки</param>
         public Segment3D(SegmentOfPlane1X0Y linePi1, SegmentOfPlane3Y0Z linePi3)
         {
             Point0 = new Point3D();
@@ -146,10 +108,6 @@ namespace GraphicsModule.Geometry.Objects.Segments
                 SegmentOfPlane3Y0Z = linePi3;
             }
         }
-        /// <summary> Задает 3D точку, заданную двумя (фронтальной и профильной) проекциями</summary>
-        /// <remarks> При неправильном заднии проекций возвращает "Nothing" </remarks>
-        /// <param name="pointPi2"> Фронтальня проекция 3D точки</param>
-        /// <param name="pointPi3"> Профильная проекция 3D точки</param>
         public Segment3D(SegmentOfPlane2X0Z linePi2, SegmentOfPlane3Y0Z linePi3)
         {
             Point0 = new Point3D();
@@ -185,7 +143,7 @@ namespace GraphicsModule.Geometry.Objects.Segments
                 SegmentOfPlane3Y0Z = linePi3;
             }
         }
-        public void Draw(DrawS st, System.Drawing.Point frameCenter, Graphics g)
+        public void Draw(DrawS st, Point frameCenter, Graphics g)
         {
             SegmentOfPlane1X0Y.DrawSegmentOnly(st, frameCenter, g);
             SegmentOfPlane2X0Z.DrawSegmentOnly(st, frameCenter, g);
@@ -197,14 +155,14 @@ namespace GraphicsModule.Geometry.Objects.Segments
             }
 
         }
-        public void DrawLinkLine(Pen penLinkLineX0YToX, Pen penLinkLineX0YToY, Pen penLinkLineX0ZToX, Pen penLinkLineX0ZToZ, Pen penLinkLineY0ZToZ, Pen penLinkLineY0ZToY, System.Drawing.Point frameCenter, ref Graphics graphics)
+        public void DrawLinkLine(Pen penLinkLineX0YtoX, Pen penLinkLineX0YtoY, Pen penLinkLineX0ZtoX, Pen penLinkLineX0ZtoZ, Pen penLinkLineY0ZtoZ, Pen penLinkLineY0ZtoY, Point frameCenter, ref Graphics graphics)
         {
-            Point0.DrawLinkLine(penLinkLineX0YToX, penLinkLineX0YToY, penLinkLineX0ZToX, penLinkLineX0ZToZ,
-                         penLinkLineY0ZToZ, penLinkLineY0ZToY, frameCenter, ref graphics);
-            Point1.DrawLinkLine(penLinkLineX0YToX, penLinkLineX0YToY, penLinkLineX0ZToX, penLinkLineX0ZToZ,
-                          penLinkLineY0ZToZ, penLinkLineY0ZToY, frameCenter, ref graphics);
+            Point0.DrawLinkLine(penLinkLineX0YtoX, penLinkLineX0YtoY, penLinkLineX0ZtoX, penLinkLineX0ZtoZ,
+                         penLinkLineY0ZtoZ, penLinkLineY0ZtoY, frameCenter, ref graphics);
+            Point1.DrawLinkLine(penLinkLineX0YtoX, penLinkLineX0YtoY, penLinkLineX0ZtoX, penLinkLineX0ZtoZ,
+                          penLinkLineY0ZtoZ, penLinkLineY0ZtoY, frameCenter, ref graphics);
         }
-        public bool IsSelected(System.Drawing.Point mscoords, float ptR, System.Drawing.Point frameCenter, double distance)
+        public bool IsSelected(Point mscoords, float ptR, Point frameCenter, double distance)
         {
             return SegmentOfPlane1X0Y.IsSelected(mscoords, ptR, frameCenter, distance) ||
                    SegmentOfPlane2X0Z.IsSelected(mscoords, ptR, frameCenter, distance) ||
