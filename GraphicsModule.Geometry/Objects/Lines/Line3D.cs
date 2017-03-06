@@ -225,62 +225,62 @@ namespace GraphicsModule.Geometry.Objects.Lines
         }
         private void CutLineX0YtoX0Z(Point frameCenter, RectangleF rc)
         {
-            if((LineOfPlane1X0Y.pts[0].X > LineOfPlane2X0Z.pts[0].X) && (LineOfPlane1X0Y.pts[0].Y == rc.Top))
+            if((LineOfPlane1X0Y.DrawPoints[0].X > LineOfPlane2X0Z.DrawPoints[0].X) && (LineOfPlane1X0Y.DrawPoints[0].Y == rc.Top))
             {
-                var ln = new Line2D(new Point2D(LineOfPlane1X0Y.pts[0].X, LineOfPlane1X0Y.pts[0].Y),
-                                    new Point2D(LineOfPlane1X0Y.pts[0].X, LineOfPlane1X0Y.pts[0].Y - 10));
-                LineOfPlane2X0Z.pts[0] = Calculate.CrossingPoint(ln, LineOfPlane2X0Z, frameCenter);
+                var ln = new Line2D(new Point2D(LineOfPlane1X0Y.DrawPoints[0].X, LineOfPlane1X0Y.DrawPoints[0].Y),
+                                    new Point2D(LineOfPlane1X0Y.DrawPoints[0].X, LineOfPlane1X0Y.DrawPoints[0].Y - 10));
+                LineOfPlane2X0Z.DrawPoints[0] = Calculate.CrossingPoint(ln, LineOfPlane2X0Z, frameCenter);
             }
-            if(LineOfPlane1X0Y.pts[1].X < LineOfPlane2X0Z.pts[1].X && (LineOfPlane1X0Y.pts[1].Y == rc.Top))
+            if(LineOfPlane1X0Y.DrawPoints[1].X < LineOfPlane2X0Z.DrawPoints[1].X && (LineOfPlane1X0Y.DrawPoints[1].Y == rc.Top))
             {
-                var ln = new Line2D(new Point2D(LineOfPlane1X0Y.pts[1].X, LineOfPlane1X0Y.pts[1].Y),
-                                    new Point2D(LineOfPlane1X0Y.pts[1].X, LineOfPlane1X0Y.pts[1].Y - 10));
-                LineOfPlane2X0Z.pts[1] = Calculate.CrossingPoint(ln, LineOfPlane2X0Z, frameCenter);
+                var ln = new Line2D(new Point2D(LineOfPlane1X0Y.DrawPoints[1].X, LineOfPlane1X0Y.DrawPoints[1].Y),
+                                    new Point2D(LineOfPlane1X0Y.DrawPoints[1].X, LineOfPlane1X0Y.DrawPoints[1].Y - 10));
+                LineOfPlane2X0Z.DrawPoints[1] = Calculate.CrossingPoint(ln, LineOfPlane2X0Z, frameCenter);
             }
         }
         private void CutLineX0ZtoX0Y(Point frameCenter, RectangleF rc)
         {
-            if ((LineOfPlane2X0Z.pts[0].X > LineOfPlane1X0Y.pts[0].X) && (LineOfPlane2X0Z.pts[0].Y == rc.Top))
+            if ((LineOfPlane2X0Z.DrawPoints[0].X > LineOfPlane1X0Y.DrawPoints[0].X) && (LineOfPlane2X0Z.DrawPoints[0].Y == rc.Top))
             {
-                var ln = new Line2D(new Point2D(LineOfPlane2X0Z.pts[0].X, LineOfPlane2X0Z.pts[0].Y),
-                                    new Point2D(LineOfPlane2X0Z.pts[0].X, LineOfPlane2X0Z.pts[0].Y - 10));
-                LineOfPlane1X0Y.pts[0] = Calculate.CrossingPoint(ln, LineOfPlane1X0Y, frameCenter);
+                var ln = new Line2D(new Point2D(LineOfPlane2X0Z.DrawPoints[0].X, LineOfPlane2X0Z.DrawPoints[0].Y),
+                                    new Point2D(LineOfPlane2X0Z.DrawPoints[0].X, LineOfPlane2X0Z.DrawPoints[0].Y - 10));
+                LineOfPlane1X0Y.DrawPoints[0] = Calculate.CrossingPoint(ln, LineOfPlane1X0Y, frameCenter);
             }
-            if ((LineOfPlane2X0Z.pts[1].X < LineOfPlane1X0Y.pts[1].X) && (LineOfPlane2X0Z.pts[1].Y == rc.Top))
+            if ((LineOfPlane2X0Z.DrawPoints[1].X < LineOfPlane1X0Y.DrawPoints[1].X) && (LineOfPlane2X0Z.DrawPoints[1].Y == rc.Top))
             {
-                var ln = new Line2D(new Point2D(LineOfPlane2X0Z.pts[1].X, LineOfPlane2X0Z.pts[1].Y),
-                                    new Point2D(LineOfPlane2X0Z.pts[1].X, LineOfPlane2X0Z.pts[1].Y - 10));
-                LineOfPlane1X0Y.pts[1] = Calculate.CrossingPoint(ln, LineOfPlane1X0Y, frameCenter);
+                var ln = new Line2D(new Point2D(LineOfPlane2X0Z.DrawPoints[1].X, LineOfPlane2X0Z.DrawPoints[1].Y),
+                                    new Point2D(LineOfPlane2X0Z.DrawPoints[1].X, LineOfPlane2X0Z.DrawPoints[1].Y - 10));
+                LineOfPlane1X0Y.DrawPoints[1] = Calculate.CrossingPoint(ln, LineOfPlane1X0Y, frameCenter);
             }
         }
         private void CutLineX0ZtoY0Z(Point frameCenter, RectangleF rc)
         {
-            if ((LineOfPlane2X0Z.pts[0].Y < LineOfPlane3Y0Z.pts[0].Y) && (LineOfPlane2X0Z.pts[0].X == rc.Right))
+            if ((LineOfPlane2X0Z.DrawPoints[0].Y < LineOfPlane3Y0Z.DrawPoints[0].Y) && (LineOfPlane2X0Z.DrawPoints[0].X == rc.Right))
             {
-                var ln = new Line2D(new Point2D(LineOfPlane2X0Z.pts[0].X, LineOfPlane2X0Z.pts[0].Y),
-                                    new Point2D(LineOfPlane2X0Z.pts[0].X - 10, LineOfPlane2X0Z.pts[0].Y));
-                LineOfPlane3Y0Z.pts[0] = Calculate.CrossingPoint(ln, LineOfPlane3Y0Z, frameCenter);
+                var ln = new Line2D(new Point2D(LineOfPlane2X0Z.DrawPoints[0].X, LineOfPlane2X0Z.DrawPoints[0].Y),
+                                    new Point2D(LineOfPlane2X0Z.DrawPoints[0].X - 10, LineOfPlane2X0Z.DrawPoints[0].Y));
+                LineOfPlane3Y0Z.DrawPoints[0] = Calculate.CrossingPoint(ln, LineOfPlane3Y0Z, frameCenter);
             }
-            if((LineOfPlane2X0Z.pts[1].Y > LineOfPlane3Y0Z.pts[1].Y) && (LineOfPlane2X0Z.pts[1].X == rc.Right))
+            if((LineOfPlane2X0Z.DrawPoints[1].Y > LineOfPlane3Y0Z.DrawPoints[1].Y) && (LineOfPlane2X0Z.DrawPoints[1].X == rc.Right))
             {
-                var ln = new Line2D(new Point2D(LineOfPlane2X0Z.pts[1].X, LineOfPlane2X0Z.pts[1].Y),
-                                    new Point2D(LineOfPlane2X0Z.pts[1].X - 10, LineOfPlane2X0Z.pts[1].Y));
-                LineOfPlane3Y0Z.pts[1] = Calculate.CrossingPoint(ln, LineOfPlane3Y0Z, frameCenter);
+                var ln = new Line2D(new Point2D(LineOfPlane2X0Z.DrawPoints[1].X, LineOfPlane2X0Z.DrawPoints[1].Y),
+                                    new Point2D(LineOfPlane2X0Z.DrawPoints[1].X - 10, LineOfPlane2X0Z.DrawPoints[1].Y));
+                LineOfPlane3Y0Z.DrawPoints[1] = Calculate.CrossingPoint(ln, LineOfPlane3Y0Z, frameCenter);
             }
         }
         private void CutLineY0ZtoX0Z(Point frameCenter, RectangleF rc)
         {
-            if ((LineOfPlane3Y0Z.pts[0].Y > LineOfPlane2X0Z.pts[0].Y) && (LineOfPlane3Y0Z.pts[0].X == rc.Right))
+            if ((LineOfPlane3Y0Z.DrawPoints[0].Y > LineOfPlane2X0Z.DrawPoints[0].Y) && (LineOfPlane3Y0Z.DrawPoints[0].X == rc.Right))
             {
-                var ln = new Line2D(new Point2D(LineOfPlane3Y0Z.pts[0].X, LineOfPlane3Y0Z.pts[0].Y),
-                                    new Point2D(LineOfPlane3Y0Z.pts[0].X - 10, LineOfPlane3Y0Z.pts[0].Y));
-                LineOfPlane2X0Z.pts[0] = Calculate.CrossingPoint(ln, LineOfPlane2X0Z, frameCenter);
+                var ln = new Line2D(new Point2D(LineOfPlane3Y0Z.DrawPoints[0].X, LineOfPlane3Y0Z.DrawPoints[0].Y),
+                                    new Point2D(LineOfPlane3Y0Z.DrawPoints[0].X - 10, LineOfPlane3Y0Z.DrawPoints[0].Y));
+                LineOfPlane2X0Z.DrawPoints[0] = Calculate.CrossingPoint(ln, LineOfPlane2X0Z, frameCenter);
             }
-            if ((LineOfPlane3Y0Z.pts[1].Y > LineOfPlane2X0Z.pts[1].Y) && (LineOfPlane3Y0Z.pts[1].X == rc.Right))
+            if ((LineOfPlane3Y0Z.DrawPoints[1].Y > LineOfPlane2X0Z.DrawPoints[1].Y) && (LineOfPlane3Y0Z.DrawPoints[1].X == rc.Right))
             {
-                var ln = new Line2D(new Point2D(LineOfPlane3Y0Z.pts[1].X, LineOfPlane3Y0Z.pts[1].Y),
-                                    new Point2D(LineOfPlane3Y0Z.pts[1].X - 10, LineOfPlane3Y0Z.pts[1].Y));
-                LineOfPlane2X0Z.pts[1] = Calculate.CrossingPoint(ln, LineOfPlane2X0Z, frameCenter);
+                var ln = new Line2D(new Point2D(LineOfPlane3Y0Z.DrawPoints[1].X, LineOfPlane3Y0Z.DrawPoints[1].Y),
+                                    new Point2D(LineOfPlane3Y0Z.DrawPoints[1].X - 10, LineOfPlane3Y0Z.DrawPoints[1].Y));
+                LineOfPlane2X0Z.DrawPoints[1] = Calculate.CrossingPoint(ln, LineOfPlane2X0Z, frameCenter);
             }
         }
         public Name GetName()

@@ -9,43 +9,31 @@ namespace GraphicsModule.Geometry.Objects.Lines
 {
     /// <summary>Класс для расчета параметров проекции 3D линии на Y0Z плоскость проекций</summary>
     /// <remarks>Copyright © Polozkov V. Yury, 2015</remarks>
-    public class LineOfPlane3Y0Z : IObject, ILineOfPlane
+    public class LineOfPlane3Y0Z : ILineOfPlane
     {
         public PointOfPlane3Y0Z Point0 { get; set; }
         public PointOfPlane3Y0Z Point1 { get; set; }
         public Name Name { get; set; }
-        public List<PointF> pts { get; set; }
+        public List<PointF> DrawPoints { get; set; }
         private LineDrawCalc _calc;
-        public double ky { get; set; }
-        public double kz { get; set; }
-        public LineOfPlane3Y0Z()
-        {
-            Point0 = new PointOfPlane3Y0Z();
-            Point1 = new PointOfPlane3Y0Z();
-        }
-        public LineOfPlane3Y0Z(Point3D pt0, Point3D pt1)
-        {
-            Point0.Y = pt0.Y;
-            Point0.Z = pt0.Z;
-            Point1.Y = pt1.Y;
-            Point1.Z = pt1.Z;
-        }
+        public double Ky { get; set; }
+        public double Kz { get; set; }
         public LineOfPlane3Y0Z(PointOfPlane3Y0Z pt0, PointOfPlane3Y0Z pt1)
         {
             Point0 = pt0;
             Point1 = pt1;
-            ky = pt1.Y - pt0.Y;
-            kz = pt1.Z - pt0.Z;
+            Ky = pt1.Y - pt0.Y;
+            Kz = pt1.Z - pt0.Z;
 
         }
         public LineOfPlane3Y0Z(PointOfPlane3Y0Z pt0, PointOfPlane3Y0Z pt1, Point frameCenter, RectangleF rc)
         {
             Point0 = pt0;
             Point1 = pt1;
-            ky = pt1.Y - pt0.Y;
-            kz = pt1.Z - pt0.Z;
+            Ky = pt1.Y - pt0.Y;
+            Kz = pt1.Z - pt0.Z;
             _calc = new LineDrawCalc(frameCenter, rc);
-            pts = _calc.CalculatePointsForDraw(this);
+            DrawPoints = _calc.CalculatePointsForDraw(this);
             Name = new Name();
         }
         
@@ -60,22 +48,18 @@ namespace GraphicsModule.Geometry.Objects.Lines
         {
             Point0.Draw(st, framecenter, g);
             Point1.Draw(st, framecenter, g);
-            g.DrawLine(st.PenLineOfPlane3Y0Z, pts[0], pts[1]);
+            g.DrawLine(st.PenLineOfPlane3Y0Z, DrawPoints[0], DrawPoints[1]);
         }
         public void DrawLineOnly(DrawS st, Point framecenter, Graphics g)
         {
             Point0.DrawPointsOnly(st, framecenter, g);
             Point1.DrawPointsOnly(st, framecenter, g);
-            g.DrawLine(st.PenLineOfPlane3Y0Z, pts[0], pts[1]);
-        }
-        public void CalculatePointsForDraw()
-        {
-            pts = _calc.CalculatePointsForDraw(this);
+            g.DrawLine(st.PenLineOfPlane3Y0Z, DrawPoints[0], DrawPoints[1]);
         }
         public void CalculatePointsForDraw(Point frameCenter, RectangleF rc)
         {
             _calc = new LineDrawCalc(frameCenter, rc);
-            pts = _calc.CalculatePointsForDraw(this);
+            DrawPoints = _calc.CalculatePointsForDraw(this);
         }
         public bool IsSelected(Point mscoords, float ptR, Point frameCenter, double distance)
         {

@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Linq;
 using GraphicsModule.Controls;
 using GraphicsModule.Geometry.Analyze;
 using GraphicsModule.Geometry.Objects.Lines;
@@ -31,9 +32,9 @@ namespace GraphicsModule.Rules.Objects.Lines
             }
             else
             {
-                if (Analyze.PointPos.Coincidence((Point2D)strg.TempObjects[0], new Point2D(pt))) return null;
-                var source = new Line2D((Point2D)strg.TempObjects[0], new Point2D(pt), can.PicBox);
-                source.SetName(strg.TempObjects[0].GetName());
+                if (Analyze.PointPos.Coincidence((Point2D)strg.TempObjects.First(), new Point2D(pt))) return null;
+                var source = new Line2D((Point2D)strg.TempObjects.First(), new Point2D(pt), can.PicBox);
+                source.SetName(strg.TempObjects.First().GetName());
                 strg.TempObjects.Clear();
                 return source;
             }

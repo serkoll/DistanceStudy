@@ -95,7 +95,7 @@ namespace GraphicsModule.Geometry.Analyze
         }
         public bool Parallelism(Line3D ln1, LineOfPlane1X0Y ln2, double solveerror)
         {
-            return Math.Abs(ln1.LineOfPlane1X0Y.kx - ln2.kx) < solveerror || Math.Abs(ln1.LineOfPlane1X0Y.ky - ln2.ky) < solveerror;
+            return Math.Abs(ln1.LineOfPlane1X0Y.Kx - ln2.Kx) < solveerror || Math.Abs(ln1.LineOfPlane1X0Y.Ky - ln2.Ky) < solveerror;
         }
         public bool Parallelism(Line3D ln1, ILineOfPlane ln)
         {
@@ -108,15 +108,15 @@ namespace GraphicsModule.Geometry.Analyze
         }
         public bool Parallelism(LineOfPlane1X0Y ln1, LineOfPlane1X0Y ln2)
         {
-            return Math.Abs(ln1.kx - ln2.kx) < 0.001 || Math.Abs(ln1.ky - ln2.ky) < 0.001;
+            return Math.Abs(ln1.Kx - ln2.Kx) < 0.001 || Math.Abs(ln1.Ky - ln2.Ky) < 0.001;
         }
         public bool Parallelism(LineOfPlane2X0Z ln1, LineOfPlane2X0Z ln2)
         {
-            return Math.Abs(ln1.kx - ln2.kx) < 0.001 || Math.Abs(ln1.kz - ln2.kz) < 0.001;
+            return Math.Abs(ln1.Kx - ln2.Kx) < 0.001 || Math.Abs(ln1.Kz - ln2.Kz) < 0.001;
         }
         public bool Parallelism(LineOfPlane3Y0Z ln1, LineOfPlane3Y0Z ln2)
         {
-            return Math.Abs(ln1.kz - ln2.kz) < 0.001 || Math.Abs(ln1.ky - ln2.ky) < 0.001;
+            return Math.Abs(ln1.Kz - ln2.Kz) < 0.001 || Math.Abs(ln1.Ky - ln2.Ky) < 0.001;
         }
         public bool Parallelism(SegmentOfPlane1X0Y sg1, SegmentOfPlane1X0Y sg2)
         {

@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Linq;
 using GraphicsModule.Controls;
 using GraphicsModule.Geometry.Analyze;
 using GraphicsModule.Geometry.Objects.Lines;
@@ -31,12 +32,12 @@ namespace GraphicsModule.Rules.Objects.Lines
                 strg.DrawLastAddedToTempObjects(setting, frameCenter, can.Graphics);
                 return null;
             }
-            if (Analyze.PointPos.Coincidence((PointOfPlane1X0Y)strg.TempObjects[0],
+            if (Analyze.PointPos.Coincidence((PointOfPlane1X0Y)strg.TempObjects.First(),
                 new PointOfPlane1X0Y(pt, frameCenter))) return null;
-            var source = new LineOfPlane1X0Y((PointOfPlane1X0Y)strg.TempObjects[0],
+            var source = new LineOfPlane1X0Y((PointOfPlane1X0Y)strg.TempObjects.First(),
                 new PointOfPlane1X0Y(pt, frameCenter),
                 frameCenter, can.PlaneX0Y);
-            source.SetName(strg.TempObjects[0].GetName());
+            source.SetName(strg.TempObjects.First().GetName());
             strg.TempObjects.Clear();
             return source;
         }
