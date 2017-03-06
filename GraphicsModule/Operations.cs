@@ -11,7 +11,7 @@ namespace GraphicsModule
     {
         public void Execute(Point mousecoords, Storage strg, Canvas.Canvas can)
         {
-            foreach (IObject obj in strg.Objects)
+            foreach (var obj in strg.Objects)
             {
                 if (obj.IsSelected(mousecoords, can.Setting.SelectedDrawS.RadiusPoints, can.CenterSystemPoint, 5))
                 {
@@ -29,7 +29,7 @@ namespace GraphicsModule
     {
         public void Execute(Point mousecoords, Storage strg, Canvas.Canvas can)
         {
-            foreach (IObject obj in strg.Objects)
+            foreach (var obj in strg.Objects)
             {
                 var type = obj.GetType().GetInterfaces();
                 if(type.Length < 2) continue;

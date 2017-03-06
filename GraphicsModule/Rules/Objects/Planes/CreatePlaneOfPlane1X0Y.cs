@@ -256,7 +256,7 @@ namespace GraphicsModule.Rules.Objects.Planes
         }
         public PlaneOfPlane1X0Y CreateByCrossedLines(LineOfPlane1X0Y ln1, LineOfPlane1X0Y ln2, Point frameCenter)
         {
-            return Analyze.LinesPos.Intersection(ln1, ln2, frameCenter) ? new PlaneOfPlane1X0Y(ln1, ln2) : null;
+            return Analyze.LinesPos.Crossing(ln1, ln2, frameCenter) ? new PlaneOfPlane1X0Y(ln1, ln2) : null;
         }
         public PlaneOfPlane1X0Y CreateByPointAndSegment(SegmentOfPlane1X0Y sg, PointOfPlane1X0Y pt)
         {
@@ -268,7 +268,7 @@ namespace GraphicsModule.Rules.Objects.Planes
         }
         public PlaneOfPlane1X0Y CreateByCrossedSegments(SegmentOfPlane1X0Y sg1, SegmentOfPlane1X0Y sg2, Point frameCenter)
         {
-            return Analyze.LinesPos.Intersection(sg1, sg2, frameCenter) ? new PlaneOfPlane1X0Y(sg1, sg2) : null;
+            return Analyze.LinesPos.Crossing(sg1, sg2, frameCenter) ? new PlaneOfPlane1X0Y(sg1, sg2) : null;
         }
         public void SetBuildType(PlaneBuildType type)
         {

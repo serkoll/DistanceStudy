@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using GraphicsModule.Controls;
 using GraphicsModule.Geometry.Objects.Points;
 using GraphicsModule.Interfaces;
@@ -12,8 +13,14 @@ namespace GraphicsModule.Rules.Objects.Points
     /// </summary>
     public class CreatePoint3D : ICreate
     {
-        private Point3D _source;
         public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
+        {
+            var source = Create(pt, frameCenter, can, setting, strg);
+            if (source == null) return;
+            strg.AddToCollection(source);
+            strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
+        }
+        public Point3D Create(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
         {
             var ptOfPlane = TypeOf.PointOfPlane(pt, frameCenter);
             if (strg.TempObjects.Count == 0)
@@ -21,33 +28,20 @@ namespace GraphicsModule.Rules.Objects.Points
                 ptOfPlane.SetName(GraphicsControl.NmGenerator.Generate());
                 strg.TempObjects.Add(ptOfPlane);
                 strg.DrawLastAddedToTempObjects(setting, frameCenter, can.Graphics);
+                return null;
             }
-            else
+            if (ReferenceEquals(strg.TempObjects[0].GetType(), ptOfPlane.GetType())) return null;
+            strg.TempObjects.Add(ptOfPlane);
+            var source = Point3D.Create(strg.TempObjects);
+            if (source != null)
             {
-                if (ReferenceEquals(strg.TempObjects[0].GetType(), ptOfPlane.GetType()))
-                {
-                    ptOfPlane.SetName(strg.TempObjects[0].GetName());
-                    strg.TempObjects.Clear();
-                    can.Update(strg);
-                    strg.TempObjects.Add(ptOfPlane);
-                    strg.DrawLastAddedToTempObjects(setting, frameCenter, can.Graphics);
-                    return;
-                }
-                strg.TempObjects.Add(ptOfPlane);
-                if ((_source = Point3D.Create(strg.TempObjects)) != null)
-                {
-                    _source.SetName(strg.TempObjects[0].GetName());
-                    strg.TempObjects.Clear();
-                    can.Update(strg);
-                    strg.AddToCollection(_source);
-                    _source = null;
-                    strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
-                }
-                else
-                {
-                    strg.TempObjects.RemoveAt(strg.TempObjects.Count - 1);
-                }
+                source.SetName(strg.TempObjects[0].GetName());
+                strg.TempObjects.Clear();
+                can.Update(strg);
+                return source;
             }
+            strg.TempObjects.RemoveAt(strg.TempObjects.Count - 1);
+            return null;
         }
     }
 }

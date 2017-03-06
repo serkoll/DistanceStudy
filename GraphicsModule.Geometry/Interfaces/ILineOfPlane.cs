@@ -3,7 +3,7 @@ using GraphicsModule.Settings;
 
 namespace GraphicsModule.Geometry.Interfaces
 {
-    internal interface ILineOfPlane
+    public interface ILineOfPlane : IObject
     {
         void DrawLineOnly(DrawS st, Point framecenter, Graphics g);
     }

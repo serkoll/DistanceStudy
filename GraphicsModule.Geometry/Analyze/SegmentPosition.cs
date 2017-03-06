@@ -84,15 +84,15 @@ namespace GraphicsModule.Geometry.Analyze
             return Math.Abs(sg1.kz - sg2.kz) < 0.001 || Math.Abs(sg1.ky - sg2.ky) < 0.001;
         }
         #endregion
-        #region Intersection of Lines
-        public bool Intersection(Segment2D ln1, Segment2D ln2)
+        #region Crossing of Lines
+        public bool Crossing(Segment2D ln1, Segment2D ln2)
         {
             var y = (ln2.Point0.Y * ln2.kx * ln1.ky - ln1.Point0.Y * ln2.ky * ln1.kx + ln2.ky * ln1.ky * (ln1.Point0.X - ln2.Point0.X)) /
                     (ln2.kx * ln1.ky - ln1.kx * ln2.ky);
             var x = ln1.kx * (y - ln1.Point0.Y) / ln1.ky + ln1.Point0.X;
             return !(y < 0) && !(x < 0);
         }
-        public bool Intersection(Segment2D ln1, SegmentOfPlane1X0Y ln, Point frameCenter)
+        public bool Crossing(Segment2D ln1, SegmentOfPlane1X0Y ln, Point frameCenter)
         {
             var ln2 = DeterminePosition.ForSegmentProjection(ln, frameCenter);
             var y = (ln2.Point0.Y * ln2.kx * ln1.ky - ln1.Point0.Y * ln2.ky * ln1.kx + ln2.ky * ln1.ky * (ln1.Point0.X - ln2.Point0.X)) /
@@ -105,7 +105,7 @@ namespace GraphicsModule.Geometry.Analyze
                     (ln1.ky * ln2.kx - ln1.kx * ln2.ky);
             return !(x < 0);
         }
-        public bool Intersection(Segment2D ln1, SegmentOfPlane2X0Z ln, Point frameCenter)
+        public bool Crossing(Segment2D ln1, SegmentOfPlane2X0Z ln, Point frameCenter)
         {
             var ln2 = DeterminePosition.ForSegmentProjection(ln, frameCenter);
             var y = (ln2.Point0.Y * ln2.kx * ln1.ky - ln1.Point0.Y * ln2.ky * ln1.kx + ln2.ky * ln1.ky * (ln1.Point0.X - ln2.Point0.X)) /
@@ -118,7 +118,7 @@ namespace GraphicsModule.Geometry.Analyze
                     (ln1.ky * ln2.kx - ln1.kx * ln2.ky);
             return !(x < 0);
         }
-        public bool Intersection(Segment2D ln1, SegmentOfPlane3Y0Z ln, Point frameCenter)
+        public bool Crossing(Segment2D ln1, SegmentOfPlane3Y0Z ln, Point frameCenter)
         {
             var ln2 = DeterminePosition.ForSegmentProjection(ln, frameCenter);
             var y = (ln2.Point0.Y * ln2.kx * ln1.ky - ln1.Point0.Y * ln2.ky * ln1.kx + ln2.ky * ln1.ky * (ln1.Point0.X - ln2.Point0.X)) /
@@ -144,7 +144,7 @@ namespace GraphicsModule.Geometry.Analyze
             return true;
         }
         #endregion
-        #region Point Of Intersection 
+        #region Point Of Crossing 
 
         #endregion
     }

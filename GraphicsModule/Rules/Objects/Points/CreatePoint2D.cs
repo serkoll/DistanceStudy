@@ -16,7 +16,6 @@ namespace GraphicsModule.Rules.Objects.Points
             strg.AddToCollection(Create(pt, frameCenter, can, setting, strg));
             strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
         }
-
         public Point2D Create(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
         {
             var source = new Point2D(pt);

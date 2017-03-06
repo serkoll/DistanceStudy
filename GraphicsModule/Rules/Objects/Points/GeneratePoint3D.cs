@@ -23,7 +23,7 @@ namespace GraphicsModule.Rules.Objects.Points
                     can.Update(strg);
                     return;
                 }
-                if ((_source = Point3D.Create(strg.SelectedObjects)) != null)
+                if ((_source = Point3D.Create(strg.SelectedObjects )) != null)
                 {
                     strg.Objects.Remove(strg.SelectedObjects[0]);
                     strg.Objects.Remove(strg.SelectedObjects[1]);

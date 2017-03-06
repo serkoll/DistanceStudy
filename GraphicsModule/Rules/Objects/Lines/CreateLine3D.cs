@@ -7,6 +7,7 @@ using GraphicsModule.Interfaces;
 using GraphicsModule.Settings;
 using GraphicsModule.Geometry.Interfaces;
 using System.Collections.ObjectModel;
+using System.Linq;
 using GraphicsModule.Geometry;
 
 namespace GraphicsModule.Rules.Objects.Lines
@@ -16,55 +17,50 @@ namespace GraphicsModule.Rules.Objects.Lines
     /// </summary>
     public class CreateLine3D : ICreate
     {
-        private IObject _tempLineOfPlane;
+        public ILineOfPlane TempLineOfPlane;
         private Line3D _source;
-
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
+        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas.Canvas can, DrawS settings, Storage strg)
+        {
+            var obj = Create(pt, frameCenter, can, settings, strg);
+            if (obj == null) return;
+            strg.AddToCollection(obj);
+            can.Update(strg);
+        }
+        public Line3D Create(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
         {
             var ptOfPlane = TypeOf.PointOfPlane(pt, frameCenter);
             if (strg.TempObjects.Count == 0)
             {
-                if (_tempLineOfPlane == null)
+                if (TempLineOfPlane == null)
                 {
                     ptOfPlane.SetName(GraphicsControl.NmGenerator.Generate());
                     strg.TempObjects.Add(ptOfPlane);
                     strg.DrawLastAddedToTempObjects(setting, frameCenter, can.Graphics);
+                    return null;
                 }
-                else
-                {
-                    if (IsInOnePlane(_tempLineOfPlane, ptOfPlane)) return;
-                    if (!IsOnLinkLine(_tempLineOfPlane, ptOfPlane)) return;
-                    strg.TempObjects.Add(ptOfPlane);
-                    strg.DrawLastAddedToTempObjects(setting, frameCenter, can.Graphics);
-                }
+                if (IsInOnePlane(TempLineOfPlane, ptOfPlane)) return null;
+                if (!IsOnLinkLine(TempLineOfPlane, ptOfPlane)) return null;
+                strg.TempObjects.Add(ptOfPlane);
+                strg.DrawLastAddedToTempObjects(setting, frameCenter, can.Graphics);
+                return null;
             }
-            else
+            if (ReferenceEquals(strg.TempObjects.First().GetType(), ptOfPlane.GetType()) && (TempLineOfPlane == null))
             {
-                if (ReferenceEquals(strg.TempObjects[0].GetType(), ptOfPlane.GetType()) &&
-                    (_tempLineOfPlane == null))
-                {
-                    strg.TempObjects.Add(ptOfPlane);
-                    _tempLineOfPlane = CreateLineOfPlane(strg.TempObjects, setting, frameCenter, can);
-                    _tempLineOfPlane.SetName(strg.TempObjects[0].GetName());
-                    strg.TempObjects.Clear();
-                    can.Update(strg);
-                    _tempLineOfPlane.Draw(setting, frameCenter, can.Graphics);
-                }
-                else if (IsOnLinkLine(_tempLineOfPlane, ptOfPlane))
-                {
-                    strg.TempObjects.Add(ptOfPlane);
-                    if (
-                        !IsLine3DCreatable(_tempLineOfPlane,
-                            CreateLineOfPlane(strg.TempObjects, setting, frameCenter, can), setting, frameCenter,
-                            can)) return;
-                    _source.SetName(_tempLineOfPlane.GetName());
-                    strg.TempObjects.Clear();
-                    _tempLineOfPlane = null;
-                    strg.Objects.Add(_source);
-                    can.Update(strg);
-                    strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
-                }
+                strg.TempObjects.Add(ptOfPlane);
+                TempLineOfPlane = CreateLineOfPlane(strg.TempObjects, setting, frameCenter, can);
+                TempLineOfPlane.SetName(strg.TempObjects.First().GetName());
+                strg.TempObjects.Clear();
+                can.Update(strg);
+                TempLineOfPlane.Draw(setting, frameCenter, can.Graphics);
+                return null;
             }
+            if (!IsOnLinkLine(TempLineOfPlane, ptOfPlane)) return null;
+            strg.TempObjects.Add(ptOfPlane);
+            if (!IsLine3DCreatable(TempLineOfPlane, CreateLineOfPlane(strg.TempObjects, setting, frameCenter, can), setting, frameCenter, can)) return null;
+            _source.SetName(TempLineOfPlane.GetName());
+            strg.TempObjects.Clear();
+            TempLineOfPlane = null;
+            return _source;
         }
 
         protected bool IsLine3DCreatable(IObject ln1, IObject ln2, DrawS st, Point frameCenter, Canvas.Canvas can)
@@ -110,7 +106,7 @@ namespace GraphicsModule.Rules.Objects.Lines
             return false;
         }
 
-        protected IObject CreateLineOfPlane(Collection<IObject> obj, DrawS st, Point frameCenter, Canvas.Canvas can)
+        protected ILineOfPlane CreateLineOfPlane(Collection<IObject> obj, DrawS st, Point frameCenter, Canvas.Canvas can)
         {
             if (obj[0].GetType() == typeof(PointOfPlane1X0Y))
             {

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Drawing;
 using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Geometry.Objects.Points;
@@ -230,13 +229,13 @@ namespace GraphicsModule.Geometry.Objects.Lines
             {
                 var ln = new Line2D(new Point2D(LineOfPlane1X0Y.pts[0].X, LineOfPlane1X0Y.pts[0].Y),
                                     new Point2D(LineOfPlane1X0Y.pts[0].X, LineOfPlane1X0Y.pts[0].Y - 10));
-                LineOfPlane2X0Z.pts[0] = Calculate.IntersectionPoint(ln, LineOfPlane2X0Z, frameCenter);
+                LineOfPlane2X0Z.pts[0] = Calculate.CrossingPoint(ln, LineOfPlane2X0Z, frameCenter);
             }
             if(LineOfPlane1X0Y.pts[1].X < LineOfPlane2X0Z.pts[1].X && (LineOfPlane1X0Y.pts[1].Y == rc.Top))
             {
                 var ln = new Line2D(new Point2D(LineOfPlane1X0Y.pts[1].X, LineOfPlane1X0Y.pts[1].Y),
                                     new Point2D(LineOfPlane1X0Y.pts[1].X, LineOfPlane1X0Y.pts[1].Y - 10));
-                LineOfPlane2X0Z.pts[1] = Calculate.IntersectionPoint(ln, LineOfPlane2X0Z, frameCenter);
+                LineOfPlane2X0Z.pts[1] = Calculate.CrossingPoint(ln, LineOfPlane2X0Z, frameCenter);
             }
         }
         private void CutLineX0ZtoX0Y(Point frameCenter, RectangleF rc)
@@ -245,13 +244,13 @@ namespace GraphicsModule.Geometry.Objects.Lines
             {
                 var ln = new Line2D(new Point2D(LineOfPlane2X0Z.pts[0].X, LineOfPlane2X0Z.pts[0].Y),
                                     new Point2D(LineOfPlane2X0Z.pts[0].X, LineOfPlane2X0Z.pts[0].Y - 10));
-                LineOfPlane1X0Y.pts[0] = Calculate.IntersectionPoint(ln, LineOfPlane1X0Y, frameCenter);
+                LineOfPlane1X0Y.pts[0] = Calculate.CrossingPoint(ln, LineOfPlane1X0Y, frameCenter);
             }
             if ((LineOfPlane2X0Z.pts[1].X < LineOfPlane1X0Y.pts[1].X) && (LineOfPlane2X0Z.pts[1].Y == rc.Top))
             {
                 var ln = new Line2D(new Point2D(LineOfPlane2X0Z.pts[1].X, LineOfPlane2X0Z.pts[1].Y),
                                     new Point2D(LineOfPlane2X0Z.pts[1].X, LineOfPlane2X0Z.pts[1].Y - 10));
-                LineOfPlane1X0Y.pts[1] = Calculate.IntersectionPoint(ln, LineOfPlane1X0Y, frameCenter);
+                LineOfPlane1X0Y.pts[1] = Calculate.CrossingPoint(ln, LineOfPlane1X0Y, frameCenter);
             }
         }
         private void CutLineX0ZtoY0Z(Point frameCenter, RectangleF rc)
@@ -260,13 +259,13 @@ namespace GraphicsModule.Geometry.Objects.Lines
             {
                 var ln = new Line2D(new Point2D(LineOfPlane2X0Z.pts[0].X, LineOfPlane2X0Z.pts[0].Y),
                                     new Point2D(LineOfPlane2X0Z.pts[0].X - 10, LineOfPlane2X0Z.pts[0].Y));
-                LineOfPlane3Y0Z.pts[0] = Calculate.IntersectionPoint(ln, LineOfPlane3Y0Z, frameCenter);
+                LineOfPlane3Y0Z.pts[0] = Calculate.CrossingPoint(ln, LineOfPlane3Y0Z, frameCenter);
             }
             if((LineOfPlane2X0Z.pts[1].Y > LineOfPlane3Y0Z.pts[1].Y) && (LineOfPlane2X0Z.pts[1].X == rc.Right))
             {
                 var ln = new Line2D(new Point2D(LineOfPlane2X0Z.pts[1].X, LineOfPlane2X0Z.pts[1].Y),
                                     new Point2D(LineOfPlane2X0Z.pts[1].X - 10, LineOfPlane2X0Z.pts[1].Y));
-                LineOfPlane3Y0Z.pts[1] = Calculate.IntersectionPoint(ln, LineOfPlane3Y0Z, frameCenter);
+                LineOfPlane3Y0Z.pts[1] = Calculate.CrossingPoint(ln, LineOfPlane3Y0Z, frameCenter);
             }
         }
         private void CutLineY0ZtoX0Z(Point frameCenter, RectangleF rc)
@@ -275,19 +274,18 @@ namespace GraphicsModule.Geometry.Objects.Lines
             {
                 var ln = new Line2D(new Point2D(LineOfPlane3Y0Z.pts[0].X, LineOfPlane3Y0Z.pts[0].Y),
                                     new Point2D(LineOfPlane3Y0Z.pts[0].X - 10, LineOfPlane3Y0Z.pts[0].Y));
-                LineOfPlane2X0Z.pts[0] = Calculate.IntersectionPoint(ln, LineOfPlane2X0Z, frameCenter);
+                LineOfPlane2X0Z.pts[0] = Calculate.CrossingPoint(ln, LineOfPlane2X0Z, frameCenter);
             }
             if ((LineOfPlane3Y0Z.pts[1].Y > LineOfPlane2X0Z.pts[1].Y) && (LineOfPlane3Y0Z.pts[1].X == rc.Right))
             {
                 var ln = new Line2D(new Point2D(LineOfPlane3Y0Z.pts[1].X, LineOfPlane3Y0Z.pts[1].Y),
                                     new Point2D(LineOfPlane3Y0Z.pts[1].X - 10, LineOfPlane3Y0Z.pts[1].Y));
-                LineOfPlane2X0Z.pts[1] = Calculate.IntersectionPoint(ln, LineOfPlane2X0Z, frameCenter);
+                LineOfPlane2X0Z.pts[1] = Calculate.CrossingPoint(ln, LineOfPlane2X0Z, frameCenter);
             }
         }
         public Name GetName()
         {
-            var name = new Name(Name.Value.Remove(Name.Value.IndexOf("'", StringComparison.Ordinal)), Name.Dx, Name.Dy);
-            return name;
+            return Name;
         }
         public void SetName(Name name)
         {

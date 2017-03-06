@@ -20,9 +20,6 @@ namespace GraphicsModule.Geometry.Objects.Points
             X = -(pt.X - center.X);
             Y = pt.Y - center.Y;
         }
-        /// <summary>Инициализирует новый экземпляр двумерной проекции точки</summary>
-        /// <remarks></remarks>
-        public PointOfPlane1X0Y(PointOfPlane1X0Y pt) { X = pt.X; Y = pt.Y; }
         public static bool Creatable(Point pt, Point frameCenter)
         {
             var temp = new Point(pt.X - frameCenter.X, pt.Y - frameCenter.Y);
@@ -70,7 +67,8 @@ namespace GraphicsModule.Geometry.Objects.Points
             //Отрисовка линий связи Горизонтальной проекции
             //Контроль нулевого значения координаты X Горизонтальной проекции точки
             //Проекция точки инцидентна оси X, следовательно отрисовка линий связи не требуется (обрабатывается ошибка существования нулевой ширины и высоты прямоугольника, в который вписывается дуга окружности)
-            if (Y == 0) return;
+            const double tolerance = 0.0001;
+            if (Math.Abs(Y) < tolerance) return;
             if (linkPointToX) //Контроль включения линии связи от проекции точки до оси X
             {
                 //Горизонтальная (от Pi1 к Pi3) - Часть 1: отрезок от заданной точки до оси X

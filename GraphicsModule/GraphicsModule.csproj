@@ -86,6 +86,7 @@
     <Compile Include="Rules\Objects\Planes\CreatePlane2D.cs" />
     <Compile Include="Interfaces\ICreate.cs" />
     <Compile Include="Rules\Objects\Lines\GenerateLine3D.cs" />
+    <Compile Include="Rules\Objects\Planes\CreatePlane3D.cs" />
     <Compile Include="Rules\Objects\Planes\CreatePlaneOfPlane1X0Y.cs" />
     <Compile Include="Rules\Objects\Planes\CreatePlaneOfPlane2X0Z.cs" />
     <Compile Include="Rules\Objects\Planes\CreatePlaneOfPlane3Y0Z.cs" />

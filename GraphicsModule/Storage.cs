@@ -34,6 +34,8 @@ namespace GraphicsModule
         /// Коллекция временных объектов
         /// </summary>
         public Collection<IObject> TempObjects { get; set; }
+        public Collection<IObject> TempPointsOfPlane { get; set; }
+        public Collection<IObject> TempLinesOfPlane { get; set; }
         public Storage()
         {
             Objects = new Collection<IObject>();

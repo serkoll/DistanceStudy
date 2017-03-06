@@ -61,6 +61,7 @@
     <Compile Include="Objects\Lines\LineDrawCalc.cs" />
     <Compile Include="Interfaces\ISegmentOfPlane.cs" />
     <Compile Include="Objects\Planes\Plane2D.cs" />
+    <Compile Include="Objects\Planes\Plane3D.cs" />
     <Compile Include="Objects\Planes\PlaneOfPlane1X0Y.cs" />
     <Compile Include="Objects\Planes\PlaneOfPlane2X0Z.cs" />
     <Compile Include="Objects\Planes\PlaneOfPlane3Y0Z.cs" />

@@ -247,11 +247,11 @@ namespace GraphicsModule.Rules.Objects.Planes
         }
         public Plane2D CreateByCrossedLines(Line2D ln1, Line2D ln2)
         {
-            return Analyze.LinesPos.Intersection(ln1, ln2) ? new Plane2D(ln1, ln2) : null;
+            return Analyze.LinesPos.Crossing(ln1, ln2) ? new Plane2D(ln1, ln2) : null;
         }
         public Plane2D CreateByCrossedSegments(Segment2D sg1, Segment2D sg2)
         {
-            return Analyze.SegmentPos.Intersection(sg1, sg2) ? new Plane2D(sg1, sg2) : null;
+            return Analyze.SegmentPos.Crossing(sg1, sg2) ? new Plane2D(sg1, sg2) : null;
         }
         public void SetBuildType(PlaneBuildType type)
         {

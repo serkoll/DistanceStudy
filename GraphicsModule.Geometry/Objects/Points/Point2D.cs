@@ -1,5 +1,4 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Settings;
 
@@ -22,14 +21,6 @@ namespace GraphicsModule.Geometry.Objects.Points
         /// Имя точки
         /// </summary>
         public Name Name { get; set; }
-        /// <summary>
-        /// Инициализирует новый экземпляр 2D точки
-        /// </summary>
-        public Point2D()
-        {
-            X = 0;
-            Y = 0;
-        }
         /// <summary>Инициализирует новый экземпляр 2D точки с указанными координатами</summary>
         /// <remarks></remarks>
         public Point2D(double x, double y)
@@ -39,42 +30,12 @@ namespace GraphicsModule.Geometry.Objects.Points
             Name = new Name();
         }
         /// <summary>
-        /// Инициализирует новый экземпляр 2D точки с указанными координатами и именем
-        /// </summary>
-        /// <param name="x">Координата X</param>
-        /// <param name="y">Координата Y</param>
-        /// <param name="name">Имя точки</param>
-        public Point2D(double x, double y, Name name)
-        {
-            X = x;
-            Y = y;
-            Name = new Name(name);
-        }
-        /// <summary>
-        /// Копирует  экземпляр 2D точки
-        /// </summary>
-        /// <param name="pt">2D точка</param>
-        public Point2D(Point2D pt)
-        {
-            X = pt.X; Y = pt.Y;
-        }
-        /// <summary>
         /// Создает экземпляр 2D точки
         /// </summary>
         /// <param name="pt">Точка</param>
         public Point2D(Point pt)
         {
             X = pt.X; Y = pt.Y;
-        }
-        /// <summary>
-        /// Создает экземпляр 2D точки и задает имя
-        /// </summary>
-        /// <param name="pt"></param>
-        /// <param name="name"></param>
-        public Point2D(Point pt, Name name)
-        {
-            X = pt.X; Y = pt.Y;
-            Name = new Name(name);
         }
         /// <summary>
         /// Передвигает ранее заданную 2D точку (изменяет коодинаты на указанные величины по осям в 2D)

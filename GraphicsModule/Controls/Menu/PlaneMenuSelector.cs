@@ -52,7 +52,7 @@ namespace GraphicsModule.Controls.Menu
         private void buttonPlane3D_Click(object sender, EventArgs e)
         {
             _mainPictureBox.Cursor = System.Windows.Forms.Cursors.Cross;
-            GraphicsControl.SetObject = new CreateLine3D();
+            GraphicsControl.SetObject = new CreatePlane3D();
             _mainStripButton.Image = buttonPlane3D.Image;
         }
         private void buttonGeneratePlane3D_Click(object sender, EventArgs e)
