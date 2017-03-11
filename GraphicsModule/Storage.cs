@@ -45,6 +45,8 @@ namespace GraphicsModule
             PastedObjects = new Collection<IObject>();
             DeletedObjects = new Collection<IObject>();
             TempObjects = new Collection<IObject>();
+            TempPointsOfPlane = new Collection<IObject>();
+            TempLinesOfPlane = new Collection<IObject>();
         }
 
         public Storage(Collection<IObject> objects)
@@ -55,6 +57,8 @@ namespace GraphicsModule
             PastedObjects = new Collection<IObject>();
             DeletedObjects = new Collection<IObject>();
             TempObjects = new Collection<IObject>();
+            TempPointsOfPlane = new Collection<IObject>();
+            TempLinesOfPlane = new Collection<IObject>();
         }
         /// <summary>
         /// Очищает все коллекции
