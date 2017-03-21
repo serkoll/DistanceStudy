@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows.Forms;
 using GraphicsModule.Settings.Forms;
 
-namespace GraphicsModule.Settings.Controls
+namespace GraphicsModule.Settings.Controls.General
 {
     public partial class SettingsAxis : UserControl
     {
@@ -11,14 +11,14 @@ namespace GraphicsModule.Settings.Controls
         public SettingsAxis()
         {
             InitializeComponent();
-            AxisS = FormSettings.ValueS.AxisS;
+            AxisS = GraphicsControlSettingsForm.ValueS.AxisS;
             CheckBoxFlagDrawAxisX.Checked = AxisS.FlagDrawX;
             CheckBoxFlagDrawAxisY.Checked = AxisS.FlagDrawY;
             CheckBoxFlagDrawAxisZ.Checked = AxisS.FlagDrawZ;
             NumericUpDownAxisWidth.Value = AxisS.Width;
-            colorBoxX.BackColor = FormSettings.ValueS.AxisS.ColorX;
-            colorBoxY.BackColor = FormSettings.ValueS.AxisS.ColorY;
-            colorBoxZ.BackColor = FormSettings.ValueS.AxisS.ColorZ;
+            colorBoxX.BackColor = GraphicsControlSettingsForm.ValueS.AxisS.ColorX;
+            colorBoxY.BackColor = GraphicsControlSettingsForm.ValueS.AxisS.ColorY;
+            colorBoxZ.BackColor = GraphicsControlSettingsForm.ValueS.AxisS.ColorZ;
         }
 
         private void colorBoxX_Click(object sender, EventArgs e)

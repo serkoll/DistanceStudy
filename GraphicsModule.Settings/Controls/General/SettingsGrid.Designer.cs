@@ -1,4 +1,4 @@
-﻿namespace GraphicsModule.Settings.Controls
+﻿namespace GraphicsModule.Settings.Controls.General
 {
     partial class SettingsGrid
     {

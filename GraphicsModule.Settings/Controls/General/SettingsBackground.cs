@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using GraphicsModule.Settings.Forms;
 
-namespace GraphicsModule.Settings.Controls
+namespace GraphicsModule.Settings.Controls.General
 {
     public partial class SettingsBackground : UserControl
     {
@@ -12,7 +12,7 @@ namespace GraphicsModule.Settings.Controls
         {
 
             InitializeComponent();
-            BackgroundColor = FormSettings.ValueS.BackgroundColor;
+            BackgroundColor = GraphicsControlSettingsForm.ValueS.BackgroundColor;
             pictureBox1.BackColor = BackgroundColor;
         }
 

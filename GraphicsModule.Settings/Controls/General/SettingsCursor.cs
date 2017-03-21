@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using GraphicsModule.Settings.Cursors;
 
-namespace GraphicsModule.Settings.Controls
+namespace GraphicsModule.Settings.Controls.General
 {
     public partial class SettingsCursor : UserControl
     {

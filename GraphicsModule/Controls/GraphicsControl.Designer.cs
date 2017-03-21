@@ -89,6 +89,7 @@ namespace GraphicsModule.Controls
             this.импортToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.solidWorksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainPictureBox = new System.Windows.Forms.PictureBox();
+            this.доступностьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.baseTableLayoutPanel.SuspendLayout();
             this.WorkspaceOperations.SuspendLayout();
             this.ObjectsPropertyMenu.SuspendLayout();
@@ -569,7 +570,8 @@ namespace GraphicsModule.Controls
             this.buttonSettings,
             this.окнаToolStripMenuItem,
             this.справкаToolStripMenuItem,
-            this.импортToolStripMenuItem});
+            this.импортToolStripMenuItem,
+            this.доступностьToolStripMenuItem});
             this.MainMenu.Location = new System.Drawing.Point(0, 0);
             this.MainMenu.Name = "MainMenu";
             this.MainMenu.Size = new System.Drawing.Size(1239, 25);
@@ -646,6 +648,12 @@ namespace GraphicsModule.Controls
             this.MainPictureBox.TabStop = false;
             this.MainPictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainPictureBox_MouseDown);
             this.MainPictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MainPictureBox_MouseMove);
+            // 
+            // доступностьToolStripMenuItem
+            // 
+            this.доступностьToolStripMenuItem.Name = "доступностьToolStripMenuItem";
+            this.доступностьToolStripMenuItem.Size = new System.Drawing.Size(89, 21);
+            this.доступностьToolStripMenuItem.Text = "Доступность";
             // 
             // GraphicsControl
             // 
@@ -736,5 +744,6 @@ namespace GraphicsModule.Controls
         private ToolStripMenuItem buttonPlaneTypeSegmentPoint;
         private ToolStripMenuItem buttonPlaneTypeParallelSegment;
         private ToolStripMenuItem buttonPlaneTypeCrossedSegment;
+        private ToolStripMenuItem доступностьToolStripMenuItem;
     }
 }

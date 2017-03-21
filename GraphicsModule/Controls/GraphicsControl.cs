@@ -77,13 +77,13 @@ namespace GraphicsModule.Controls
             if (File.Exists(SettingsFileName))
             {
                 _settings = new Settings.Settings().Deserialize(SettingsFileName); //Получаем экземпляр настроек
-                FormSettings.ValueS = _settings;
+                GraphicsControlSettingsForm.ValueS = _settings;
             }
             else
             {
                 _settings = new Settings.Settings();
                 _settings.Serialize(SettingsFileName);
-                FormSettings.ValueS = _settings;
+                GraphicsControlSettingsForm.ValueS = _settings;
             }
             MainPictureBox.BackColor = _settings.BackgroundColor;
             NmGenerator = new NamesGenerator(true, 0, _settings);
@@ -384,7 +384,7 @@ namespace GraphicsModule.Controls
         /// <param name="e"></param>
         private void buttonSettings_Click(object sender, EventArgs e)
         {
-            var f = new FormSettings();
+            var f = new GraphicsControlSettingsForm();
             f.ShowDialog();
             _canvas.Update(_storage);
             MainPictureBox.BackColor = _settings.BackgroundColor;

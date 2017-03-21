@@ -1,10 +1,11 @@
 ﻿using System.IO;
 using System.Windows.Forms;
 using GraphicsModule.Settings.Controls;
+using GraphicsModule.Settings.Controls.General;
 
 namespace GraphicsModule.Settings.Forms
 {
-    public partial class FormSettings : Form
+    public partial class GraphicsControlSettingsForm : Form
     {
         private readonly SettingsAxis _stAxis = new SettingsAxis();
         private readonly SettingsGrid _stGrid = new SettingsGrid();
@@ -16,7 +17,7 @@ namespace GraphicsModule.Settings.Forms
         private readonly SettingsSegment _stSegment = new SettingsSegment();
         private readonly string fName = "config.cfg";
         public static Settings ValueS;
-        public FormSettings()
+        public GraphicsControlSettingsForm()
         {
             InitializeComponent();
         }

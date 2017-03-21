@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows.Forms;
 using GraphicsModule.Settings.Forms;
 
-namespace GraphicsModule.Settings.Controls
+namespace GraphicsModule.Settings.Controls.General
 {
     public partial class SettingsGrid : UserControl
     {
@@ -11,7 +11,7 @@ namespace GraphicsModule.Settings.Controls
         public SettingsGrid()
         {
             InitializeComponent();
-            GridS = FormSettings.ValueS.GridS;
+            GridS = GraphicsControlSettingsForm.ValueS.GridS;
             CheckBoxFlagDrawGrid.Checked = GridS.IsDraw;
             NumericUpDownPointsSize.Value = GridS.PointsSize;
             colorEdge.BackColor = GridS.PointsColor;

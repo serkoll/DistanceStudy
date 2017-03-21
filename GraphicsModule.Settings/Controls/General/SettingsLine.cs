@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace GraphicsModule.Settings.Controls
+namespace GraphicsModule.Settings.Controls.General
 {
     public partial class SettingsLine : UserControl
     {
