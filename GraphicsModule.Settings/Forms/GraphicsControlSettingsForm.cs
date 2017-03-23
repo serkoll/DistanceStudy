@@ -1,6 +1,4 @@
-﻿using System.IO;
-using System.Windows.Forms;
-using GraphicsModule.Settings.Controls;
+﻿using System.Windows.Forms;
 using GraphicsModule.Settings.Controls.General;
 
 namespace GraphicsModule.Settings.Forms
@@ -15,7 +13,7 @@ namespace GraphicsModule.Settings.Forms
         private readonly SettingsLink _stLink = new SettingsLink();
         private readonly SettingsPoint _stPoint = new SettingsPoint();
         private readonly SettingsSegment _stSegment = new SettingsSegment();
-        private readonly string fName = "config.cfg";
+        private const string FileName = "config.cfg";
         public static Settings ValueS;
         public GraphicsControlSettingsForm()
         {
@@ -82,7 +80,7 @@ namespace GraphicsModule.Settings.Forms
         private void buttonOK_Click(object sender, System.EventArgs e)
         {
             ValueS.BackgroundColor = _stBackground.BackgroundColor;
-            ValueS.Serialize(fName);
+            ValueS.Serialize(FileName);
             Close();
         }
         private void buttonCancel_Click(object sender, System.EventArgs e)

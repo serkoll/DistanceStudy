@@ -88,8 +88,8 @@ namespace GraphicsModule.Controls
             this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.импортToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.solidWorksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.MainPictureBox = new System.Windows.Forms.PictureBox();
             this.доступностьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MainPictureBox = new System.Windows.Forms.PictureBox();
             this.baseTableLayoutPanel.SuspendLayout();
             this.WorkspaceOperations.SuspendLayout();
             this.ObjectsPropertyMenu.SuspendLayout();
@@ -636,6 +636,13 @@ namespace GraphicsModule.Controls
             this.solidWorksToolStripMenuItem.Text = "SolidWorks";
             this.solidWorksToolStripMenuItem.Click += new System.EventHandler(this.solidWorksToolStripMenuItem_Click);
             // 
+            // доступностьToolStripMenuItem
+            // 
+            this.доступностьToolStripMenuItem.Name = "доступностьToolStripMenuItem";
+            this.доступностьToolStripMenuItem.Size = new System.Drawing.Size(89, 21);
+            this.доступностьToolStripMenuItem.Text = "Доступность";
+            this.доступностьToolStripMenuItem.Click += new System.EventHandler(this.доступностьToolStripMenuItem_Click);
+            // 
             // MainPictureBox
             // 
             this.MainPictureBox.BackColor = System.Drawing.Color.Azure;
@@ -648,12 +655,6 @@ namespace GraphicsModule.Controls
             this.MainPictureBox.TabStop = false;
             this.MainPictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainPictureBox_MouseDown);
             this.MainPictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MainPictureBox_MouseMove);
-            // 
-            // доступностьToolStripMenuItem
-            // 
-            this.доступностьToolStripMenuItem.Name = "доступностьToolStripMenuItem";
-            this.доступностьToolStripMenuItem.Size = new System.Drawing.Size(89, 21);
-            this.доступностьToolStripMenuItem.Text = "Доступность";
             // 
             // GraphicsControl
             // 

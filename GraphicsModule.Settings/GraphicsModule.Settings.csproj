@@ -41,6 +41,36 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\Tasks\PlanesAccess.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Tasks\PlanesAccess.Designer.cs">
+      <DependentUpon>PlanesAccess.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Tasks\SegmentsAccess.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Tasks\SegmentsAccess.Designer.cs">
+      <DependentUpon>SegmentsAccess.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Tasks\LinesAccess.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Tasks\LinesAccess.Designer.cs">
+      <DependentUpon>LinesAccess.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Tasks\GeneralAccess.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Tasks\GeneralAccess.Designer.cs">
+      <DependentUpon>GeneralAccess.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Tasks\PointsAccess.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Tasks\PointsAccess.Designer.cs">
+      <DependentUpon>PointsAccess.cs</DependentUpon>
+    </Compile>
     <Compile Include="Cursors\AddOnPoint.cs" />
     <Compile Include="Cursors\Circle.cs" />
     <Compile Include="Cursors\Cross.cs" />
@@ -118,6 +148,21 @@
     <Compile Include="Settings.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Controls\Tasks\PlanesAccess.resx">
+      <DependentUpon>PlanesAccess.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Tasks\SegmentsAccess.resx">
+      <DependentUpon>SegmentsAccess.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Tasks\LinesAccess.resx">
+      <DependentUpon>LinesAccess.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Tasks\GeneralAccess.resx">
+      <DependentUpon>GeneralAccess.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Tasks\PointsAccess.resx">
+      <DependentUpon>PointsAccess.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\GraphicsControlSettingsForm.resx">
       <DependentUpon>GraphicsControlSettingsForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -149,9 +194,7 @@
       <DependentUpon>TaskSettingsForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controls\Tasks\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

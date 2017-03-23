@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Collections.ObjectModel;
 using GraphicsModule.Cursors;
 using System.IO;
+using System.Linq;
 using GraphicsModule.Enums;
 using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Interfaces;
@@ -473,8 +474,14 @@ namespace GraphicsModule.Controls
             o.SetBuildType(PlaneBuildType.CrossedSegments);
             buttonPlaneTypeMenu.Text = buttonPlaneTypeCrossedSegment.Text;
         }
-        #endregion     
         #endregion
+
+        #endregion
+
+        private void доступностьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

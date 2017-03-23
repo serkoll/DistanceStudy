@@ -39,8 +39,9 @@
             treeNode4,
             treeNode5});
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.treeView1 = new System.Windows.Forms.TreeView();
-            this.label1 = new System.Windows.Forms.Label();
+            this.MainTreeView = new System.Windows.Forms.TreeView();
+            this.titleLabel = new System.Windows.Forms.Label();
+            this.groupBoxControls = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -49,8 +50,9 @@
             this.tableLayoutPanel.ColumnCount = 2;
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80F));
-            this.tableLayoutPanel.Controls.Add(this.treeView1, 0, 0);
-            this.tableLayoutPanel.Controls.Add(this.label1, 1, 0);
+            this.tableLayoutPanel.Controls.Add(this.MainTreeView, 0, 0);
+            this.tableLayoutPanel.Controls.Add(this.titleLabel, 1, 0);
+            this.tableLayoutPanel.Controls.Add(this.groupBoxControls, 1, 1);
             this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel.Name = "tableLayoutPanel";
@@ -61,12 +63,12 @@
             this.tableLayoutPanel.Size = new System.Drawing.Size(731, 324);
             this.tableLayoutPanel.TabIndex = 0;
             // 
-            // treeView1
+            // MainTreeView
             // 
-            this.treeView1.BackColor = System.Drawing.SystemColors.Control;
-            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeView1.Location = new System.Drawing.Point(3, 3);
-            this.treeView1.Name = "treeView1";
+            this.MainTreeView.BackColor = System.Drawing.SystemColors.Control;
+            this.MainTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MainTreeView.Location = new System.Drawing.Point(3, 3);
+            this.MainTreeView.Name = "MainTreeView";
             treeNode1.Name = "NodeGeneral";
             treeNode1.Text = "Общие";
             treeNode2.Name = "NodePoint";
@@ -79,24 +81,34 @@
             treeNode5.Text = "Плоскость";
             treeNode6.Name = "NodePrimitive";
             treeNode6.Text = "Примитивы";
-            this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            this.MainTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode1,
             treeNode6});
-            this.tableLayoutPanel.SetRowSpan(this.treeView1, 2);
-            this.treeView1.Size = new System.Drawing.Size(140, 318);
-            this.treeView1.TabIndex = 0;
+            this.tableLayoutPanel.SetRowSpan(this.MainTreeView, 2);
+            this.MainTreeView.Size = new System.Drawing.Size(140, 318);
+            this.MainTreeView.TabIndex = 0;
+            this.MainTreeView.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.mainTreeView_NodeMouseClick);
             // 
-            // label1
+            // titleLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(149, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(579, 31);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Настройки";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.titleLabel.AutoSize = true;
+            this.titleLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.titleLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.titleLabel.Location = new System.Drawing.Point(149, 0);
+            this.titleLabel.Name = "titleLabel";
+            this.titleLabel.Size = new System.Drawing.Size(579, 31);
+            this.titleLabel.TabIndex = 1;
+            this.titleLabel.Text = "Настройки";
+            this.titleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // groupBoxControls
+            // 
+            this.groupBoxControls.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBoxControls.Location = new System.Drawing.Point(149, 34);
+            this.groupBoxControls.Name = "groupBoxControls";
+            this.groupBoxControls.Size = new System.Drawing.Size(579, 287);
+            this.groupBoxControls.TabIndex = 2;
+            this.groupBoxControls.TabStop = false;
             // 
             // TaskSettingsForm
             // 
@@ -120,7 +132,8 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
-        private System.Windows.Forms.TreeView treeView1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TreeView MainTreeView;
+        private System.Windows.Forms.GroupBox groupBoxControls;
+        private System.Windows.Forms.Label titleLabel;
     }
 }
