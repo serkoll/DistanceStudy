@@ -20,23 +20,23 @@ namespace GraphicsModule.Rules.Objects.Planes
         private PlaneCreateType _creationType;
         private Collection<IObject> _planeObjects = new Collection<IObject>();
         private CreateLine3D _createLine = new CreateLine3D();
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
+        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas can, DrawS settings, Storage strg)
         {
             switch (_creationType)
             {
                 case PlaneCreateType.ThreePoints:
                     {
-                        CreateByThreePoint(pt, frameCenter, can, setting, strg);
+                        CreateByThreePoint(pt, frameCenter, can, settings, strg);
                         break;
                     }
                 case PlaneCreateType.LineAndPoint:
                     {
-                        CreateByLineAndPoint(pt, frameCenter, can, setting, strg);
+                        CreateByLineAndPoint(pt, frameCenter, can, settings, strg);
                         break;
                     }
                 case PlaneCreateType.ParallelLines:
                     {
-                        CreateByParallelLines(pt, frameCenter, can, setting, strg);
+                        CreateByParallelLines(pt, frameCenter, can, settings, strg);
                         break;
                     }
                 case PlaneCreateType.CrossedLines:

@@ -12,7 +12,7 @@ namespace GraphicsModule.Rules.Objects.Points
     public class GeneratePoint3D : ICreate
     {
         private Point3D _source;
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
+        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas can, DrawS settings, Storage strg)
         {
             new SelectPointOfPlane().Execute(pt, strg, can);
             if (strg.SelectedObjects.Count > 1)
@@ -32,7 +32,7 @@ namespace GraphicsModule.Rules.Objects.Points
                     can.Update(strg);
                     strg.AddToCollection(_source);
                     _source = null;
-                    strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
+                    strg.DrawLastAddedToObjects(settings, frameCenter, can.Graphics);
                 }
                 else
                 {

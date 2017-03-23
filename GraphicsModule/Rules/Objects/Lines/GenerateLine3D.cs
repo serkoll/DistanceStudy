@@ -9,7 +9,7 @@ namespace GraphicsModule.Rules.Objects.Lines
     {
         private Line3D _source;
 
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
+        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas can, DrawS settings, Storage strg)
         {
             new SelectLineOfPlane().Execute(pt, strg, can);
             if (strg.SelectedObjects.Count > 1)
@@ -29,7 +29,7 @@ namespace GraphicsModule.Rules.Objects.Lines
                     can.Update(strg);
                     strg.AddToCollection(_source);
                     _source = null;
-                    strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
+                    strg.DrawLastAddedToObjects(settings, frameCenter, can.Graphics);
                 }
                 else
                 {

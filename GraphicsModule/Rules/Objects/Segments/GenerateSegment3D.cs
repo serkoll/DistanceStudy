@@ -8,7 +8,7 @@ namespace GraphicsModule.Rules.Objects.Segments
     public class GenerateSegment3D : ICreate
     {
         private Segment3D _source;
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
+        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas can, DrawS settings, Storage strg)
         {
             new SelectSegmentOfPlane().Execute(pt, strg, can);
             if (strg.SelectedObjects.Count > 1)
@@ -27,7 +27,7 @@ namespace GraphicsModule.Rules.Objects.Segments
                     can.Update(strg);
                     strg.AddToCollection(_source);
                     _source = null;
-                    strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
+                    strg.DrawLastAddedToObjects(settings, frameCenter, can.Graphics);
                 }
                 else
                 {

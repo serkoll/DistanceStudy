@@ -19,7 +19,7 @@ namespace GraphicsModule.Rules.Objects.Segments
     {
         private IObject _tempLineOfPlane;
         private Segment3D _source;
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
+        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas can, DrawS settings, Storage strg)
         {
             var ptOfPlane = TypeOf.PointOfPlane(pt, frameCenter);
             if (strg.TempObjects.Count == 0)
@@ -28,14 +28,14 @@ namespace GraphicsModule.Rules.Objects.Segments
                 {
                     ptOfPlane.SetName(GraphicsControl.NmGenerator.Generate());
                     strg.TempObjects.Add(ptOfPlane);
-                    strg.DrawLastAddedToTempObjects(setting, frameCenter, can.Graphics);
+                    strg.DrawLastAddedToTempObjects(settings, frameCenter, can.Graphics);
                 }
                 else
                 {
                     if (IsInOnePlane(_tempLineOfPlane, ptOfPlane)) return;
                     if (!IsOnLinkLine(_tempLineOfPlane, ptOfPlane)) return;
                     strg.TempObjects.Add(ptOfPlane);
-                    strg.DrawLastAddedToTempObjects(setting, frameCenter, can.Graphics);
+                    strg.DrawLastAddedToTempObjects(settings, frameCenter, can.Graphics);
                 }
             }
             else
@@ -43,22 +43,22 @@ namespace GraphicsModule.Rules.Objects.Segments
                 if (ReferenceEquals(strg.TempObjects[0].GetType(), ptOfPlane.GetType()) && (_tempLineOfPlane == null))
                 {
                     strg.TempObjects.Add(ptOfPlane);
-                    _tempLineOfPlane = CreateSegmentOfPlane(strg.TempObjects, setting, frameCenter, can);
+                    _tempLineOfPlane = CreateSegmentOfPlane(strg.TempObjects, settings, frameCenter, can);
                     _tempLineOfPlane.SetName(strg.TempObjects[0].GetName());
                     strg.TempObjects.Clear();
                     can.Update(strg);
-                    _tempLineOfPlane.Draw(setting, frameCenter, can.Graphics);
+                    _tempLineOfPlane.Draw(settings, frameCenter, can.Graphics);
                 }
                 else if (IsOnLinkLine(_tempLineOfPlane, ptOfPlane))
                 {
                     strg.TempObjects.Add(ptOfPlane);
-                    if (!IsSegment3DCreatable(_tempLineOfPlane, CreateSegmentOfPlane(strg.TempObjects, setting, frameCenter, can), setting, frameCenter, can)) return;
+                    if (!IsSegment3DCreatable(_tempLineOfPlane, CreateSegmentOfPlane(strg.TempObjects, settings, frameCenter, can), settings, frameCenter, can)) return;
                     _source.SetName(_tempLineOfPlane.GetName());
                     strg.TempObjects.Clear();
                     _tempLineOfPlane = null;
                     strg.Objects.Add(_source);
                     can.Update(strg);
-                    strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
+                    strg.DrawLastAddedToObjects(settings, frameCenter, can.Graphics);
                 }
             }
         }

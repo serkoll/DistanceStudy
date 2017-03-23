@@ -2,7 +2,7 @@
 {
     public enum Point3DCreateType
     {
-        By2PointsOfPlane = 0,
-        By3PointsOfPlane = 1
+        By2PointsOfPlane = 2,
+        By3PointsOfPlane = 3
     }
 }

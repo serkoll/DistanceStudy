@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Linq;
 using GraphicsModule.Configuration;
@@ -77,7 +76,7 @@ namespace GraphicsModule.Geometry.Objects.Points
             Z = pt2.Z;
             InitializePointsOfPlane();
         }
-        public static bool IsCreatable(IList<IPointOfPlane> points, byte projectionsCount = 2)
+        public static Point3D Create(IList<IPointOfPlane> points, byte projectionsCount = 2)
         {
             if (projectionsCount < 2 && projectionsCount > 3) throw new ArgumentOutOfRangeException();
             if (points.Count != projectionsCount) throw new ArgumentOutOfRangeException();
@@ -86,14 +85,13 @@ namespace GraphicsModule.Geometry.Objects.Points
             var pt3 = points.First(x => x is PointOfPlane3Y0Z) as PointOfPlane3Y0Z;
             if (pt1 != null)
                 return (pt2 != null)
-                    ? Point3D.IsCreatable(pt1, pt2)
-                    : Point3D.IsCreatable(pt1, pt3);
+                    ? Point3D.IsCreatable(pt1, pt2) ? new Point3D(pt1, pt2) : null
+                    : Point3D.IsCreatable(pt1, pt3) ? new Point3D(pt1, pt3) : null;
             else if (pt2 != null && pt3 != null)
-                return Point3D.IsCreatable(pt2, pt3);
+                return Point3D.IsCreatable(pt2, pt3) ? new Point3D(pt2, pt3) : null; 
             else
                 throw new ArgumentException();
         }
-
         public static bool IsCreatable(PointOfPlane1X0Y pt1, PointOfPlane2X0Z pt2)
         {
             return Math.Abs(pt1.X - pt2.X) < 0.0001;

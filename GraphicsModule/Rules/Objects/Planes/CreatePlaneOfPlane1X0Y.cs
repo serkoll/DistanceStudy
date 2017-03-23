@@ -20,43 +20,43 @@ namespace GraphicsModule.Rules.Objects.Planes
     {
         private PlaneCreateType _creationType;
         private Collection<IObject> _planeObjects = new Collection<IObject>();
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
+        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas can, DrawS settings, Storage strg)
         {
             switch (_creationType)
             {
                 case PlaneCreateType.ThreePoints:
                     {
-                        CreateByThreePoint(pt, frameCenter, can, setting, strg);
+                        CreateByThreePoint(pt, frameCenter, can, settings, strg);
                         break;
                     }
                 case PlaneCreateType.LineAndPoint:
                     {
-                        CreateByLineAndPoint(pt, frameCenter, can, setting, strg);
+                        CreateByLineAndPoint(pt, frameCenter, can, settings, strg);
                         break;
                     }
                 case PlaneCreateType.ParallelLines:
                     {
-                        CreateByParallelLines(pt, frameCenter, can, setting, strg);
+                        CreateByParallelLines(pt, frameCenter, can, settings, strg);
                         break;
                     }
                 case PlaneCreateType.CrossedLines:
                     {
-                        CreateByCrossedLines(pt, frameCenter, can, setting, strg);
+                        CreateByCrossedLines(pt, frameCenter, can, settings, strg);
                         break;
                     }
                 case PlaneCreateType.SegmentAndPoint:
                     {
-                        CreateByPointAndSegment(pt, frameCenter, can, setting, strg);
+                        CreateByPointAndSegment(pt, frameCenter, can, settings, strg);
                         break;
                     }
                 case PlaneCreateType.ParallelSegments:
                     {
-                        CreateByParallelSegments(pt, frameCenter, can, setting, strg);
+                        CreateByParallelSegments(pt, frameCenter, can, settings, strg);
                         break;
                     }
                 case PlaneCreateType.CrossedSegments:
                     {
-                        CreateByCrossedSegments(pt, frameCenter, can, setting, strg);
+                        CreateByCrossedSegments(pt, frameCenter, can, settings, strg);
                         break;
                     }
             }
