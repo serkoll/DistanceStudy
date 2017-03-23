@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DbRepository.Context
+namespace DbRepository.Classes.Keys
 {
     public partial class Task_MethodRef : IEquatable<Task_MethodRef>
     {

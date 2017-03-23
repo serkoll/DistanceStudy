@@ -5,10 +5,11 @@ using System.Collections.ObjectModel;
 using GraphicsModule.Cursors;
 using System.IO;
 using System.Linq;
+using GraphicsModule.Configuration;
+using GraphicsModule.Configuration.Forms;
 using GraphicsModule.Enums;
 using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Interfaces;
-using GraphicsModule.Settings.Forms;
 
 namespace GraphicsModule.Controls
 {
@@ -37,7 +38,7 @@ namespace GraphicsModule.Controls
         /// <summary>
         /// Полотно отрисовки
         /// </summary>
-        private Canvas.Canvas _canvas;
+        private Canvas _canvas;
         /// <summary>
         /// Хранилище графических объектов
         /// </summary>
@@ -45,7 +46,7 @@ namespace GraphicsModule.Controls
         /// <summary>
         /// Класс настроек
         /// </summary>
-        private readonly Settings.Settings _settings;
+        private readonly Settings _settings;
         /// <summary>
         /// Текущее инициализированное правило создания объека
         /// </summary>
@@ -77,12 +78,12 @@ namespace GraphicsModule.Controls
             InitializeComponent();
             if (File.Exists(SettingsFileName))
             {
-                _settings = new Settings.Settings().Deserialize(SettingsFileName); //Получаем экземпляр настроек
+                _settings = new Settings().Deserialize(SettingsFileName); //Получаем экземпляр настроек
                 GraphicsControlSettingsForm.ValueS = _settings;
             }
             else
             {
-                _settings = new Settings.Settings();
+                _settings = new Settings();
                 _settings.Serialize(SettingsFileName);
                 GraphicsControlSettingsForm.ValueS = _settings;
             }
@@ -99,7 +100,7 @@ namespace GraphicsModule.Controls
         }
         private void GraphicsControl_Load(object sender, EventArgs e)
         {
-            _canvas = new Canvas.Canvas(_settings, MainPictureBox); // Инициализируем полотно отрисовки
+            _canvas = new Canvas(_settings, MainPictureBox); // Инициализируем полотно отрисовки
             if (_storage == null) _storage = new Storage(); // инициализируем хранилище графических объектов
         }
         private void GraphicsControl_Resize(object sender, EventArgs e)
@@ -433,45 +434,45 @@ namespace GraphicsModule.Controls
         private void buttonPlaneType3Points_Click(object sender, EventArgs e)
         {
             var o = (ICreatePlanes)SetObject;
-            o.SetBuildType(PlaneBuildType.ThreePoints);
+            o.SetBuildType(PlaneCreateType.ThreePoints);
             buttonPlaneTypeMenu.Text = buttonPlaneType3Points.Text;
         }
         private void buttonPlaneTypeLinePoint_Click(object sender, EventArgs e)
         {
             var o = (ICreatePlanes)SetObject;
-            o.SetBuildType(PlaneBuildType.LineAndPoint);
+            o.SetBuildType(PlaneCreateType.LineAndPoint);
             buttonPlaneTypeMenu.Text = buttonPlaneTypeLinePoint.Text;
         }
         private void buttonPlaneTypeParrLine_Click(object sender, EventArgs e)
         {
             var o = (ICreatePlanes)SetObject;
-            o.SetBuildType(PlaneBuildType.ParallelLines);
+            o.SetBuildType(PlaneCreateType.ParallelLines);
             buttonPlaneTypeMenu.Text = buttonPlaneTypeParallelLine.Text;
         }
         private void buttonPlaneTypeCrossedLine_Click(object sender, EventArgs e)
         {
             var o = (ICreatePlanes)SetObject;
-            o.SetBuildType(PlaneBuildType.CrossedLines);
+            o.SetBuildType(PlaneCreateType.CrossedLines);
             buttonPlaneTypeMenu.Text = buttonPlaneTypeCrossedLine.Text;
         }
         private void buttonPlaneTypeSegmentPoint_Click(object sender, EventArgs e)
         {
             var o = (ICreatePlanes)SetObject;
-            o.SetBuildType(PlaneBuildType.SegmentAndPoint);
+            o.SetBuildType(PlaneCreateType.SegmentAndPoint);
             buttonPlaneTypeMenu.Text = buttonPlaneTypeSegmentPoint.Text;
         }
 
         private void buttonPlaneTypeParallelSegment_Click(object sender, EventArgs e)
         {
             var o = (ICreatePlanes)SetObject;
-            o.SetBuildType(PlaneBuildType.ParallelSegments);
+            o.SetBuildType(PlaneCreateType.ParallelSegments);
             buttonPlaneTypeMenu.Text = buttonPlaneTypeParallelSegment.Text;
         }
 
         private void buttonPlaneTypeCrossedSegment_Click(object sender, EventArgs e)
         {
             var o = (ICreatePlanes)SetObject;
-            o.SetBuildType(PlaneBuildType.CrossedSegments);
+            o.SetBuildType(PlaneCreateType.CrossedSegments);
             buttonPlaneTypeMenu.Text = buttonPlaneTypeCrossedSegment.Text;
         }
         #endregion

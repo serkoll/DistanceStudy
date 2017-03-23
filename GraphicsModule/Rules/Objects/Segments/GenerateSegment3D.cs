@@ -1,14 +1,14 @@
 ﻿using System.Drawing;
+using GraphicsModule.Configuration;
 using GraphicsModule.Geometry.Objects.Segments;
 using GraphicsModule.Interfaces;
-using GraphicsModule.Settings;
 
 namespace GraphicsModule.Rules.Objects.Segments
 {
     public class GenerateSegment3D : ICreate
     {
         private Segment3D _source;
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
+        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
         {
             new SelectSegmentOfPlane().Execute(pt, strg, can);
             if (strg.SelectedObjects.Count > 1)

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace GraphicsModule.Settings.Controls.General
+namespace GraphicsModule.Configuration.Controls.General
 {
     public partial class SettingsSegment : UserControl
     {

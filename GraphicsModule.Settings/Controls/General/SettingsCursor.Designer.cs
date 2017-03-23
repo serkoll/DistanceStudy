@@ -1,4 +1,4 @@
-﻿namespace GraphicsModule.Settings.Controls.General
+﻿namespace GraphicsModule.Configuration.Controls.General
 {
     partial class SettingsCursor
     {

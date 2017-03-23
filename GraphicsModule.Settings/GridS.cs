@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Xml.Serialization;
 
-namespace GraphicsModule.Settings
+namespace GraphicsModule.Configuration
 {
     [Serializable]
     public class GridS

@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Drawing;
+using GraphicsModule.Configuration;
 using GraphicsModule.Controls;
 using GraphicsModule.Geometry;
 using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Geometry.Objects.Points;
 using GraphicsModule.Geometry.Objects.Segments;
 using GraphicsModule.Interfaces;
-using GraphicsModule.Settings;
 
 
 namespace GraphicsModule.Rules.Objects.Segments
@@ -19,7 +19,7 @@ namespace GraphicsModule.Rules.Objects.Segments
     {
         private IObject _tempLineOfPlane;
         private Segment3D _source;
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
+        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
         {
             var ptOfPlane = TypeOf.PointOfPlane(pt, frameCenter);
             if (strg.TempObjects.Count == 0)
@@ -62,7 +62,7 @@ namespace GraphicsModule.Rules.Objects.Segments
                 }
             }
         }
-        protected bool IsSegment3DCreatable(IObject ln1, IObject ln2, DrawS st, Point frameCenter, Canvas.Canvas can)
+        protected bool IsSegment3DCreatable(IObject ln1, IObject ln2, DrawS st, Point frameCenter, Canvas can)
         {
             if (ln1.GetType() == typeof(SegmentOfPlane1X0Y) && ln2.GetType() == typeof(SegmentOfPlane2X0Z))
             {
@@ -97,7 +97,7 @@ namespace GraphicsModule.Rules.Objects.Segments
             }
             return false;
         }
-        protected IObject CreateSegmentOfPlane(Collection<IObject> obj, DrawS st, Point frameCenter, Canvas.Canvas can)
+        protected IObject CreateSegmentOfPlane(Collection<IObject> obj, DrawS st, Point frameCenter, Canvas can)
         {
             if (obj[0].GetType() == typeof(PointOfPlane1X0Y))
             {

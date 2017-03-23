@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
+using GraphicsModule.Configuration;
 using GraphicsModule.Geometry.Interfaces;
-using GraphicsModule.Settings;
 
 namespace GraphicsModule.Geometry.Objects.Points
 {

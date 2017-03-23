@@ -61,9 +61,9 @@
       <Project>{9445d9ed-e7b5-451b-bf93-2265ba1e186a}</Project>
       <Name>GraphicsModule.Geometry</Name>
     </ProjectReference>
-    <ProjectReference Include="..\GraphicsModule.Settings\GraphicsModule.Settings.csproj">
+    <ProjectReference Include="..\GraphicsModule.Settings\GraphicsModule.Configuration.csproj">
       <Project>{fa7a373a-2140-4f47-b5dd-e4819bf1093e}</Project>
-      <Name>GraphicsModule.Settings</Name>
+      <Name>GraphicsModule.Configuration</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

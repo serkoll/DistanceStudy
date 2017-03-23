@@ -1,12 +1,13 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
+using GraphicsModule.Configuration;
 
-namespace GraphicsModule.Canvas
+namespace GraphicsModule
 {
     public class Canvas
     {
         public PictureBox PicBox { get; set; }
-        public Settings.Settings Setting { get; set; }
+        public Settings Setting { get; set; }
         public Bitmap Mainbmp { get; set; }
         public Background Bckground { get; set; }
         public Graphics Graphics { get; set; }
@@ -14,7 +15,7 @@ namespace GraphicsModule.Canvas
         public RectangleF PlaneX0Z { get; set; }
         public RectangleF PlaneY0Z { get; set; }
         public Point CenterSystemPoint { get; set; }
-        public Canvas(Settings.Settings setting, PictureBox picBox)
+        public Canvas(Settings setting, PictureBox picBox)
         {
             PicBox = picBox;
             Setting = setting;

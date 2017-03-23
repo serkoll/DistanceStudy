@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using GraphicsModule.Configuration;
 using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Geometry.Objects.Points;
-using GraphicsModule.Settings;
 
 namespace GraphicsModule.Geometry.Objects.Lines
 {

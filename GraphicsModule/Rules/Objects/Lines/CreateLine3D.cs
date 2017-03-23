@@ -4,10 +4,10 @@ using GraphicsModule.Controls;
 using GraphicsModule.Geometry.Objects.Lines;
 using GraphicsModule.Geometry.Objects.Points;
 using GraphicsModule.Interfaces;
-using GraphicsModule.Settings;
 using GraphicsModule.Geometry.Interfaces;
 using System.Collections.ObjectModel;
 using System.Linq;
+using GraphicsModule.Configuration;
 using GraphicsModule.Geometry;
 
 namespace GraphicsModule.Rules.Objects.Lines
@@ -19,14 +19,14 @@ namespace GraphicsModule.Rules.Objects.Lines
     {
         public ILineOfPlane TempLineOfPlane;
         private Line3D _source;
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas.Canvas can, DrawS settings, Storage strg)
+        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas can, DrawS settings, Storage strg)
         {
             var obj = Create(pt, frameCenter, can, settings, strg);
             if (obj == null) return;
             strg.AddToCollection(obj);
             can.Update(strg);
         }
-        public Line3D Create(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
+        public Line3D Create(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
         {
             var ptOfPlane = TypeOf.PointOfPlane(pt, frameCenter);
             if (strg.TempObjects.Count == 0)
@@ -63,7 +63,7 @@ namespace GraphicsModule.Rules.Objects.Lines
             return _source;
         }
 
-        protected bool IsLine3DCreatable(IObject ln1, IObject ln2, DrawS st, Point frameCenter, Canvas.Canvas can)
+        protected bool IsLine3DCreatable(IObject ln1, IObject ln2, DrawS st, Point frameCenter, Canvas can)
         {
             if (ln1 == null) return false;
             if (ln1.GetType() == typeof(LineOfPlane1X0Y) && ln2.GetType() == typeof(LineOfPlane2X0Z))
@@ -106,7 +106,7 @@ namespace GraphicsModule.Rules.Objects.Lines
             return false;
         }
 
-        protected ILineOfPlane CreateLineOfPlane(Collection<IObject> obj, DrawS st, Point frameCenter, Canvas.Canvas can)
+        protected ILineOfPlane CreateLineOfPlane(Collection<IObject> obj, DrawS st, Point frameCenter, Canvas can)
         {
             if (obj[0].GetType() == typeof(PointOfPlane1X0Y))
             {

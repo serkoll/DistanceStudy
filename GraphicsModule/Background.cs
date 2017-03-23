@@ -1,9 +1,10 @@
 ﻿using System.Drawing;
 using System.Drawing.Imaging;
 using System.Windows.Forms;
+using GraphicsModule.Configuration;
 using GraphicsModule.Geometry.CoordinateSystem;
 
-namespace GraphicsModule.Canvas
+namespace GraphicsModule
 {
     public class Background
     {
@@ -17,7 +18,7 @@ namespace GraphicsModule.Canvas
             BackBitmap = new Bitmap(pb.ClientSize.Width, pb.ClientSize.Height, PixelFormat.Format24bppRgb);
             BackBitmap.MakeTransparent();
         }
-        public Background(Point centerPoint, Settings.Settings settings, Control pb)
+        public Background(Point centerPoint, Settings settings, Control pb)
         {
             BackBitmap = new Bitmap(pb.ClientSize.Width, pb.ClientSize.Height, PixelFormat.Format24bppRgb);
             BackBitmap.MakeTransparent();
@@ -26,7 +27,7 @@ namespace GraphicsModule.Canvas
             Grid = new Grid(settings.GridS, centerPoint, graphics);
             DrawBackground(settings);
         }
-        public void DrawBackground(Settings.Settings settings)
+        public void DrawBackground(Settings settings)
         {
             var graphics = Graphics.FromImage(BackBitmap);
             Grid.DrawGrid(settings.GridS, graphics);

@@ -4,7 +4,7 @@ namespace GraphicsModule.Interfaces
 {
     public interface ICreatePlanes
     {
-        void SetBuildType(PlaneBuildType type);
+        void SetBuildType(PlaneCreateType type);
     }
 
 }

@@ -1,4 +1,4 @@
-﻿namespace GraphicsModule.Settings.Controls.Tasks
+﻿namespace GraphicsModule.Configuration.Controls.Tasks
 {
     partial class LinesAccess
     {

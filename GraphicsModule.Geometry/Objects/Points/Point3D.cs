@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Linq;
+using GraphicsModule.Configuration;
 using GraphicsModule.Geometry.Interfaces;
-using GraphicsModule.Settings;
 
 namespace GraphicsModule.Geometry.Objects.Points
 {
@@ -78,43 +77,36 @@ namespace GraphicsModule.Geometry.Objects.Points
             Z = pt2.Z;
             InitializePointsOfPlane();
         }
-        public static Point3D Create(Collection<IObject> points)
+        public static bool IsCreatable(IList<IPointOfPlane> points, byte projectionsCount = 2)
         {
-            if (points.Count != 2) return null;
-            if (points.First().GetType() == typeof(PointOfPlane1X0Y))
-            {
-                return points[1].GetType() == typeof(PointOfPlane2X0Z) ?
-                    CreateByPointOfPlane1And2((PointOfPlane1X0Y)points[0], (PointOfPlane2X0Z)points[1]) :
-                    CreateByPointOfPlane1And3((PointOfPlane1X0Y)points[0], (PointOfPlane3Y0Z)points[1]);
-            }
-            if (points.First().GetType() == typeof(PointOfPlane2X0Z))
-            {
-                return points[1].GetType() == typeof(PointOfPlane1X0Y) ?
-                    CreateByPointOfPlane1And2((PointOfPlane1X0Y)points[1], (PointOfPlane2X0Z)points[0]) :
-                    CreateByPointOfPlane2And3((PointOfPlane2X0Z)points[0], (PointOfPlane3Y0Z)points[1]);
-            }
-            return points.First().GetType() == typeof(PointOfPlane3Y0Z) ?
-                CreateByPointOfPlane1And3((PointOfPlane1X0Y)points[1], (PointOfPlane3Y0Z)points[0]) :
-                CreateByPointOfPlane2And3((PointOfPlane2X0Z)points[1], (PointOfPlane3Y0Z)points[0]);
+            if (projectionsCount < 2 && projectionsCount > 3) throw new ArgumentOutOfRangeException();
+            if (points.Count != projectionsCount) throw new ArgumentOutOfRangeException();
+            var pt1 = points.First(x => x is PointOfPlane1X0Y) as PointOfPlane1X0Y;
+            var pt2 = points.First(x => x is PointOfPlane2X0Z) as PointOfPlane2X0Z;
+            var pt3 = points.First(x => x is PointOfPlane3Y0Z) as PointOfPlane3Y0Z;
+            if (pt1 != null)
+                return (pt2 != null)
+                    ? Point3D.IsCreatable(pt1, pt2)
+                    : Point3D.IsCreatable(pt1, pt3);
+            else if (pt2 != null && pt3 != null)
+                return Point3D.IsCreatable(pt2, pt3);
+            else
+                throw new ArgumentException();
         }
 
-        public static bool IsCreatable(IList<IPointOfPlane> points)
+        public static bool IsCreatable(PointOfPlane1X0Y pt1, PointOfPlane2X0Z pt2)
         {
-            if (points.Count != 2) return false;
+            return Math.Abs(pt1.X - pt2.X) < 0.0001;
+        }
 
-            return false;
-        }
-        private static Point3D CreateByPointOfPlane1And2(PointOfPlane1X0Y pt1, PointOfPlane2X0Z pt2)
+        public static bool IsCreatable(PointOfPlane1X0Y pt1, PointOfPlane3Y0Z pt3)
         {
-            return Math.Abs(pt1.X - pt2.X) < 0.0001 ? new Point3D(pt1, pt2) : null;
+            return Math.Abs(pt1.Y - pt3.Y) < 0.0001;
         }
-        private static Point3D CreateByPointOfPlane1And3(PointOfPlane1X0Y pt1, PointOfPlane3Y0Z pt3)
+
+        public static bool IsCreatable(PointOfPlane2X0Z pt2, PointOfPlane3Y0Z pt3)
         {
-            return Math.Abs(pt1.Y - pt3.Y) < 0.0001 ? new Point3D(pt1, pt3) : null;
-        }
-        private static Point3D CreateByPointOfPlane2And3(PointOfPlane2X0Z pt2, PointOfPlane3Y0Z pt3)
-        {
-            return Math.Abs(pt2.Z - pt3.Z) < 0.0001 ? new Point3D(pt2, pt3) : null;
+            return Math.Abs(pt2.Z - pt3.Z) < 0.0001;
         }
         public void InitializePointsOfPlane()
         {

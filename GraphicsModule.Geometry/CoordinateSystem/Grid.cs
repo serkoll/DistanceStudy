@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Drawing;
-using GraphicsModule.Settings;
+using GraphicsModule.Configuration;
 
 namespace GraphicsModule.Geometry.CoordinateSystem
 {

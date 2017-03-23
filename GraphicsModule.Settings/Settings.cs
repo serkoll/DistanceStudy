@@ -3,7 +3,7 @@ using System.Drawing;
 using System.IO;
 using System.Xml.Serialization;
 
-namespace GraphicsModule.Settings
+namespace GraphicsModule.Configuration
 {
     [Serializable]
     public class Settings

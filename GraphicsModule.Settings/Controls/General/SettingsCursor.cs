@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using GraphicsModule.Settings.Cursors;
+using GraphicsModule.Configuration.Cursors;
 
-namespace GraphicsModule.Settings.Controls.General
+namespace GraphicsModule.Configuration.Controls.General
 {
     public partial class SettingsCursor : UserControl
     {

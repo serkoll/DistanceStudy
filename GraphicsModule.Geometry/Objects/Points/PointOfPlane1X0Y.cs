@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
+using GraphicsModule.Configuration;
 using GraphicsModule.Geometry.Interfaces;
-using GraphicsModule.Settings;
 
 namespace GraphicsModule.Geometry.Objects.Points
 {
@@ -20,10 +20,9 @@ namespace GraphicsModule.Geometry.Objects.Points
             X = -(pt.X - center.X);
             Y = pt.Y - center.Y;
         }
-        public static bool Creatable(Point pt, Point frameCenter)
+        public static bool IsCreatable(Point pt, Point frameCenter)
         {
-            var temp = new Point(pt.X - frameCenter.X, pt.Y - frameCenter.Y);
-            return temp.X <= 0 && temp.Y >= 0;
+            return (pt.X - frameCenter.X) <= 0 && (pt.Y - frameCenter.Y) >= 0;
         }
         /// <summary>Получает или задает координату X двумерной проекции точки</summary>
         /// <remarks></remarks>

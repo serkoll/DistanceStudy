@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Forms;
-using GraphicsModule.Settings.Forms;
+using GraphicsModule.Configuration.Forms;
 
-namespace GraphicsModule.Settings.Controls.Tasks
+namespace GraphicsModule.Configuration.Controls.Tasks
 {
     public partial class SegmentsAccess : UserControl
     {

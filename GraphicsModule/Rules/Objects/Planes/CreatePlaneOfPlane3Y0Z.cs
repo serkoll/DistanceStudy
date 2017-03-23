@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Drawing;
+using GraphicsModule.Configuration;
 using GraphicsModule.Enums;
 using GraphicsModule.Geometry;
 using GraphicsModule.Geometry.Interfaces;
@@ -7,7 +8,6 @@ using GraphicsModule.Geometry.Objects.Lines;
 using GraphicsModule.Geometry.Objects.Planes;
 using GraphicsModule.Geometry.Objects.Points;
 using GraphicsModule.Interfaces;
-using GraphicsModule.Settings;
 using GraphicsModule.Geometry.Analyze;
 using GraphicsModule.Geometry.Objects.Segments;
 using GraphicsModule.Rules.Objects.Lines;
@@ -18,50 +18,50 @@ namespace GraphicsModule.Rules.Objects.Planes
 {
     public class CreatePlaneOfPlane3Y0Z : ICreate, ICreatePlanes
     {
-        private PlaneBuildType _creationType;
+        private PlaneCreateType _creationType;
         private Collection<IObject> _planeObjects = new Collection<IObject>();
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
+        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
         {
             switch (_creationType)
             {
-                case PlaneBuildType.ThreePoints:
+                case PlaneCreateType.ThreePoints:
                     {
                         CreateByThreePoint(pt, frameCenter, can, setting, strg);
                         break;
                     }
-                case PlaneBuildType.LineAndPoint:
+                case PlaneCreateType.LineAndPoint:
                     {
                         CreateByLineAndPoint(pt, frameCenter, can, setting, strg);
                         break;
                     }
-                case PlaneBuildType.ParallelLines:
+                case PlaneCreateType.ParallelLines:
                     {
                         CreateByParallelLines(pt, frameCenter, can, setting, strg);
                         break;
                     }
-                case PlaneBuildType.CrossedLines:
+                case PlaneCreateType.CrossedLines:
                     {
                         CreateByCrossedLines(pt, frameCenter, can, setting, strg);
                         break;
                     }
-                case PlaneBuildType.SegmentAndPoint:
+                case PlaneCreateType.SegmentAndPoint:
                     {
                         CreateBySegmentAndPoint(pt, frameCenter, can, setting, strg);
                         break;
                     }
-                case PlaneBuildType.ParallelSegments:
+                case PlaneCreateType.ParallelSegments:
                     {
                         CreateByParallelSegments(pt, frameCenter, can, setting, strg);
                         break;
                     }
-                case PlaneBuildType.CrossedSegments:
+                case PlaneCreateType.CrossedSegments:
                     {
                         CreateByCrossedSegments(pt, frameCenter, can, setting, strg);
                         break;
                     }
             }
         }
-        private void CreateByThreePoint(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
+        private void CreateByThreePoint(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
         {
             var tmpobj = new CreatePointOfPlane3Y0Z().Create(pt, frameCenter, can, setting, strg);
             tmpobj.Draw(setting, frameCenter, can.Graphics);
@@ -74,7 +74,7 @@ namespace GraphicsModule.Rules.Objects.Planes
             strg.AddToCollection(source);
             can.Update(strg);
         }
-        private void CreateByLineAndPoint(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
+        private void CreateByLineAndPoint(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
         {
             if (_planeObjects.Count == 0)
             {
@@ -94,7 +94,7 @@ namespace GraphicsModule.Rules.Objects.Planes
                 can.Update(strg);
             }
         }
-        private void CreateByParallelLines(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
+        private void CreateByParallelLines(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
         {
             if (_planeObjects.Count < 2)
             {
@@ -126,7 +126,7 @@ namespace GraphicsModule.Rules.Objects.Planes
                 }
             }
         }
-        private void CreateByCrossedLines(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
+        private void CreateByCrossedLines(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
         {
             if (_planeObjects.Count < 2)
             {
@@ -158,7 +158,7 @@ namespace GraphicsModule.Rules.Objects.Planes
                 }
             }
         }
-        private void CreateBySegmentAndPoint(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
+        private void CreateBySegmentAndPoint(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
         {
             if (_planeObjects.Count == 0)
             {
@@ -178,7 +178,7 @@ namespace GraphicsModule.Rules.Objects.Planes
                 can.Update(strg);
             }
         }
-        private void CreateByParallelSegments(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
+        private void CreateByParallelSegments(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
         {
             if (_planeObjects.Count < 2)
             {
@@ -210,7 +210,7 @@ namespace GraphicsModule.Rules.Objects.Planes
                 }
             }
         }
-        private void CreateByCrossedSegments(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
+        private void CreateByCrossedSegments(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
         {
             if (_planeObjects.Count < 2)
             {
@@ -270,7 +270,7 @@ namespace GraphicsModule.Rules.Objects.Planes
         {
             return Analyze.LinesPos.Crossing(sg1, sg2, frameCenter) ? new PlaneOfPlane3Y0Z(sg1, sg2) : null;
         }
-        public void SetBuildType(PlaneBuildType type)
+        public void SetBuildType(PlaneCreateType type)
         {
             _creationType = type;
         }

@@ -1,8 +1,10 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Linq;
+using GraphicsModule.Configuration;
 using GraphicsModule.Geometry.Interfaces;
-using GraphicsModule.Settings;
 
 namespace GraphicsModule
 {
@@ -35,7 +37,7 @@ namespace GraphicsModule
         /// Коллекция временных объектов
         /// </summary>
         public Collection<IObject> TempObjects { get; set; }
-        public Collection<IObject> TempPointsOfPlane { get; set; }
+        public IList<IPointOfPlane> TempPointsOfPlane { get;}
         public Collection<IObject> TempLinesOfPlane { get; set; }
         public Storage()
         {
@@ -45,7 +47,6 @@ namespace GraphicsModule
             PastedObjects = new Collection<IObject>();
             DeletedObjects = new Collection<IObject>();
             TempObjects = new Collection<IObject>();
-            TempPointsOfPlane = new Collection<IObject>();
             TempLinesOfPlane = new Collection<IObject>();
         }
 
@@ -57,7 +58,6 @@ namespace GraphicsModule
             PastedObjects = new Collection<IObject>();
             DeletedObjects = new Collection<IObject>();
             TempObjects = new Collection<IObject>();
-            TempPointsOfPlane = new Collection<IObject>();
             TempLinesOfPlane = new Collection<IObject>();
         }
         /// <summary>
@@ -90,7 +90,7 @@ namespace GraphicsModule
         /// <param name="st">Настройки</param>
         /// <param name="frameCenter">Центр системы координат</param>
         /// <param name="g">Целевой Graphics</param>
-        public void DrawObjects(Settings.Settings st, Point frameCenter, Graphics g)
+        public void DrawObjects(Settings st, Point frameCenter, Graphics g)
         {
             foreach(var ob in Objects)
             {

@@ -1,8 +1,8 @@
 ﻿using System.Drawing;
+using GraphicsModule.Configuration;
 using GraphicsModule.Controls;
 using GraphicsModule.Geometry.Objects.Points;
 using GraphicsModule.Interfaces;
-using GraphicsModule.Settings;
 
 namespace GraphicsModule.Rules.Objects.Points
 {
@@ -11,16 +11,16 @@ namespace GraphicsModule.Rules.Objects.Points
     /// </summary>
     public class CreatePointOfPlane3Y0Z : ICreate
     {
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
+        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
         {
             var source = Create(pt, frameCenter, can, setting, strg);
             if (source == null) return;
             strg.AddToCollection(source);
             strg.DrawLastAddedToObjects(setting, frameCenter, can.Graphics);
         }
-        public PointOfPlane3Y0Z Create(Point pt, Point frameCenter, Canvas.Canvas can, DrawS setting, Storage strg)
+        public PointOfPlane3Y0Z Create(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
         {
-            if (!PointOfPlane3Y0Z.Creatable(pt, frameCenter)) return null;
+            if (!PointOfPlane3Y0Z.IsCreatable(pt, frameCenter)) return null;
             var source = new PointOfPlane3Y0Z(pt, frameCenter);
             source.SetName(GraphicsControl.NmGenerator.Generate());
             return source;

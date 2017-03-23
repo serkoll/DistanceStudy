@@ -7,6 +7,6 @@ namespace GraphicsModule.Interfaces
     /// </summary>
     public interface IOperation
     {
-        void Execute(Point mousecoords, Storage strg, Canvas.Canvas can);
+        void Execute(Point mousecoords, Storage strg, Canvas can);
     }
 }

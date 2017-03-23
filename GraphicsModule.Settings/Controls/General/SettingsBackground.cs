@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using GraphicsModule.Settings.Forms;
+using GraphicsModule.Configuration.Forms;
 
-namespace GraphicsModule.Settings.Controls.General
+namespace GraphicsModule.Configuration.Controls.General
 {
     public partial class SettingsBackground : UserControl
     {

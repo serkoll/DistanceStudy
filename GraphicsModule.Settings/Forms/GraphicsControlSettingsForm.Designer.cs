@@ -1,4 +1,4 @@
-﻿namespace GraphicsModule.Settings.Forms
+﻿namespace GraphicsModule.Configuration.Forms
 {
     partial class GraphicsControlSettingsForm
     {

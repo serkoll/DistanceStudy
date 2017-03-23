@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace GraphicsModule.Settings.Cursors
+namespace GraphicsModule.Configuration.Cursors
 {
     class Square:Cursor
     {

@@ -1,7 +1,7 @@
 ﻿using System.Windows.Forms;
-using GraphicsModule.Settings.Controls.General;
+using GraphicsModule.Configuration.Controls.General;
 
-namespace GraphicsModule.Settings.Forms
+namespace GraphicsModule.Configuration.Forms
 {
     public partial class GraphicsControlSettingsForm : Form
     {

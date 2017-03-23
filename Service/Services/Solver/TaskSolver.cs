@@ -10,6 +10,7 @@ using Formatter;
 using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Geometry.Objects;
 using Point3DCntrl;
+using Task_MethodRef = DbRepository.Classes.Keys.Task_MethodRef;
 
 namespace Service.Services.Solver
 {

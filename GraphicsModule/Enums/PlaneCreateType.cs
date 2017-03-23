@@ -1,6 +1,6 @@
 ﻿namespace GraphicsModule.Enums
 {
-    public enum PlaneBuildType
+    public enum PlaneCreateType
     {
         ThreePoints = 0,
         LineAndPoint = 1,

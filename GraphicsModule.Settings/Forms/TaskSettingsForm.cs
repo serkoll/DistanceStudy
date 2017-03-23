@@ -1,7 +1,7 @@
 ﻿using System.Windows.Forms;
-using GraphicsModule.Settings.Controls.Tasks;
+using GraphicsModule.Configuration.Controls.Tasks;
 
-namespace GraphicsModule.Settings.Forms
+namespace GraphicsModule.Configuration.Forms
 {
     public partial class TaskSettingsForm : Form
     {

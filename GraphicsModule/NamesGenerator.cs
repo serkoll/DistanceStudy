@@ -1,8 +1,8 @@
 ﻿using System;
+using GraphicsModule.Configuration;
 using GraphicsModule.Enums;
 using GraphicsModule.Geometry;
 using GraphicsModule.Interfaces;
-using GraphicsModule.Settings;
 
 namespace GraphicsModule
 {
@@ -12,7 +12,7 @@ namespace GraphicsModule
         private readonly DrawS _textSettings;
         private int _counter;
         private int _quality;
-        public NamesGenerator(bool type, NamePosition startPosition, Settings.Settings textSettings)
+        public NamesGenerator(bool type, NamePosition startPosition, Settings textSettings)
         {
             _counter = type ? 65 : 49;
             _quality = 1;
