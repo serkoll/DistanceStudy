@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Linq;
@@ -68,6 +70,14 @@ namespace GraphicsModule.Geometry.Objects.Points
             Z = pt2.Z;
             InitializePointsOfPlane();
         }
+
+        public Point3D(PointOfPlane1X0Y pt1, PointOfPlane2X0Z pt2, PointOfPlane3Y0Z pt3)
+        {
+            X = pt1.X;
+            Y = pt3.Y;
+            Z = pt2.Z;
+            InitializePointsOfPlane();
+        }
         public static Point3D Create(Collection<IObject> points)
         {
             if (points.Count != 2) return null;
@@ -86,6 +96,13 @@ namespace GraphicsModule.Geometry.Objects.Points
             return points.First().GetType() == typeof(PointOfPlane3Y0Z) ?
                 CreateByPointOfPlane1And3((PointOfPlane1X0Y)points[1], (PointOfPlane3Y0Z)points[0]) :
                 CreateByPointOfPlane2And3((PointOfPlane2X0Z)points[1], (PointOfPlane3Y0Z)points[0]);
+        }
+
+        public static bool IsCreatable(IList<IPointOfPlane> points)
+        {
+            if (points.Count != 2) return false;
+
+            return false;
         }
         private static Point3D CreateByPointOfPlane1And2(PointOfPlane1X0Y pt1, PointOfPlane2X0Z pt2)
         {

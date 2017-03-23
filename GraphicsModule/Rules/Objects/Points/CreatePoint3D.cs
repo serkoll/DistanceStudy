@@ -1,5 +1,5 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
+using System.Linq;
 using GraphicsModule.Controls;
 using GraphicsModule.Geometry.Objects.Points;
 using GraphicsModule.Interfaces;
@@ -30,7 +30,7 @@ namespace GraphicsModule.Rules.Objects.Points
                 strg.DrawLastAddedToTempObjects(setting, frameCenter, can.Graphics);
                 return null;
             }
-            if (ReferenceEquals(strg.TempObjects[0].GetType(), ptOfPlane.GetType())) return null;
+            if (ReferenceEquals(strg.TempObjects.First().GetType(), ptOfPlane.GetType())) return null;
             strg.TempObjects.Add(ptOfPlane);
             var source = Point3D.Create(strg.TempObjects);
             if (source != null)
