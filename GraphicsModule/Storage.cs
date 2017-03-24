@@ -134,7 +134,6 @@ namespace GraphicsModule
         {
             TempObjects.Clear();
             TempLinesOfPlane.Clear();
-            TempPointsOfPlane.Clear();
         }
     }
 }

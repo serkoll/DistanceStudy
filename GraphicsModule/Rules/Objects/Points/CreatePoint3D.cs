@@ -15,13 +15,14 @@ namespace GraphicsModule.Rules.Objects.Points
     /// </summary>
     public class CreatePoint3D : ICreate
     {
-        public Point3DCreateType BuidType = Point3DCreateType.By2PointsOfPlane;
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas can, DrawS settings, Storage strg)
+        public Point3DCreateType BuildType = Point3DCreateType.By2PointsOfPlane;
+        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas canvas, DrawS settings, Storage storage)
         {
-            var source = Create(pt, frameCenter, can, settings, strg);
+            var source = Create(pt, frameCenter, canvas, settings, storage);
             if (source == null) return;
-            strg.AddToCollection(source);
-            strg.DrawLastAddedToObjects(settings, frameCenter, can.Graphics);
+            storage.AddToCollection(source);
+            storage.TempObjects.Clear();
+            canvas.Update(storage);
         }
         public Point3D Create(Point pt, Point frameCenter, Canvas can, DrawS settings, Storage storage)
         {
@@ -29,17 +30,16 @@ namespace GraphicsModule.Rules.Objects.Points
             if (storage.TempObjects.Count == 0)
             {
                 ptOfPlane.SetName(GraphicsControl.NmGenerator.Generate());
-                storage.TempPointsOfPlane.Add((IPointOfPlane)ptOfPlane);
-                //storage.TempObjects.Add(ptOfPlane);
+                storage.TempObjects.Add(ptOfPlane);
                 ptOfPlane.Draw(settings, frameCenter, can.Graphics);
                 return null;
             }
             if (ReferenceEquals(storage.TempObjects.First().GetType(), ptOfPlane.GetType())) return null;
-            storage.TempPointsOfPlane.Add((IPointOfPlane)ptOfPlane);
-            if (BuidType == Point3DCreateType.By3PointsOfPlane && storage.TempPointsOfPlane.Count != 3)
+            storage.TempObjects.Add(ptOfPlane);
+            if (BuildType == Point3DCreateType.By3PointsOfPlane && storage.TempObjects.Count != 3)
             {
-                if(Point3D.Create(storage.TempPointsOfPlane, byte.Parse(BuidType.ToString())) == null)
-                    storage.TempPointsOfPlane.RemoveAt(storage.TempPointsOfPlane.Count - 1);
+                if(Point3D.Create(storage.TempObjects, byte.Parse(BuildType.ToString())) == null)
+                    storage.TempObjects.RemoveAt(storage.TempObjects.Count - 1);
                 else
                     ptOfPlane.Draw(settings, frameCenter, can.Graphics);
                 return null;
@@ -48,17 +48,15 @@ namespace GraphicsModule.Rules.Objects.Points
         }
         private Point3D Create(Canvas canvas, Storage storage)
         {
-            var source = Point3D.Create(storage.TempPointsOfPlane, byte.Parse(BuidType.ToString()));
+            var source = Point3D.Create(storage.TempObjects, (byte)BuildType);
             if (source == null)
             {
-                storage.TempPointsOfPlane.RemoveAt(storage.TempPointsOfPlane.Count - 1);
+                storage.TempObjects.RemoveAt(storage.TempObjects.Count - 1);
                 canvas.Update(storage);
                 return null;
             }
-            source.SetName(((IObject)storage.TempPointsOfPlane.First()).GetName());
-            storage.TempObjects.Clear();
-            canvas.Update(storage);
-            return null;
+            source.SetName(((IObject)storage.TempObjects.First()).GetName());
+            return source;
         }
     }
 }

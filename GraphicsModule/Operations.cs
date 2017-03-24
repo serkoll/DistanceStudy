@@ -27,6 +27,7 @@ namespace GraphicsModule
     /// </summary>
     class SelectPointOfPlane : IOperation
     {
+        //TODO: исправить вызов
         public void Execute(Point mousecoords, Storage strg, Canvas can)
         {
             foreach (var obj in strg.Objects)

@@ -43,6 +43,7 @@ namespace GraphicsModule.Geometry.Objects.Points
         /// <param name="dx">Смещение по dx</param>
         /// <param name="dy">Спещение по dy</param>
         public void PointMove(double dx, double dy) { X += dx; Y += dy; }
+
         /// <summary>
         /// Отрисовывает 2D точку
         /// </summary>

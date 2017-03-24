@@ -7,7 +7,7 @@ namespace GraphicsModule.Geometry.Objects.Points
 {
     /// <summary>Класс для расчета параметров проекции 3D точки на X0Y плоскость проекций</summary>
     /// <remarks>Copyright © Polozkov V. Yury, 2015</remarks>
-    public class PointOfPlane1X0Y : IObject, IPointOfPlane, IObjectOfPlane1X0Y
+    public class PointOfPlane1X0Y : IPointOfPlane, IObjectOfPlane1X0Y
     {
         /// <summary>Инициализация нового экземпляра двумерной проекции точки</summary>
         /// <remarks>Исходные координаты точки: X=0; Y=0</remarks>

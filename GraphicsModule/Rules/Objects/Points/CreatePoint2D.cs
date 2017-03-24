@@ -11,10 +11,10 @@ namespace GraphicsModule.Rules.Objects.Points
     /// </summary>
     public class CreatePoint2D : ICreate
     {
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas can, DrawS settings, Storage strg)
+        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas canvas, DrawS settings, Storage storage)
         {
-            strg.AddToCollection(Create(pt, frameCenter, can, settings, strg));
-            strg.DrawLastAddedToObjects(settings, frameCenter, can.Graphics);
+            storage.AddToCollection(Create(pt, frameCenter, canvas, settings, storage));
+            storage.DrawLastAddedToObjects(settings, frameCenter, canvas.Graphics);
         }
         public Point2D Create(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
         {

@@ -2,7 +2,7 @@
 
 namespace GraphicsModule.Geometry.Interfaces
 {
-    public interface IPointOfPlane
+    public interface IPointOfPlane : IObject
     {
         void Draw(Pen pen, float poitRaduis, Point frameCenter, Graphics graphics);
     }

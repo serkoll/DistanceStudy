@@ -19,12 +19,12 @@ namespace GraphicsModule.Rules.Objects.Lines
     {
         public ILineOfPlane TempLineOfPlane;
         private Line3D _source;
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas can, DrawS settings, Storage strg)
+        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas canvas, DrawS settings, Storage storage)
         {
-            var obj = Create(pt, frameCenter, can, settings, strg);
+            var obj = Create(pt, frameCenter, canvas, settings, storage);
             if (obj == null) return;
-            strg.AddToCollection(obj);
-            can.Update(strg);
+            storage.AddToCollection(obj);
+            canvas.Update(storage);
         }
         public Line3D Create(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
         {

@@ -7,7 +7,7 @@ namespace GraphicsModule.Geometry.Objects.Points
 {
     /// <summary>Класс для расчета параметров проекции 3D точки на Y0Z плоскость проекций</summary>
     /// <remarks>Copyright © Polozkov V. Yury, 2013</remarks>
-    public class PointOfPlane3Y0Z : IObject, IPointOfPlane, IObjectOfPlane3Y0Z
+    public class PointOfPlane3Y0Z : IPointOfPlane, IObjectOfPlane3Y0Z
     {
         /// <summary>Инициализация нового экземпляра двумерной проекции точки</summary>
         /// <remarks>Исходные координаты точки: Y=0; Z=0</remarks>

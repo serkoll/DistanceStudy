@@ -1,6 +1,9 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
+using System.Linq;
 using GraphicsModule.Configuration;
 using GraphicsModule.Controls;
+using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Geometry.Objects.Points;
 using GraphicsModule.Interfaces;
 
@@ -12,37 +15,37 @@ namespace GraphicsModule.Rules.Objects.Points
     public class GeneratePoint3D : ICreate
     {
         private Point3D _source;
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas can, DrawS settings, Storage strg)
+        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas canvas, DrawS settings, Storage storage)
         {
-            new SelectPointOfPlane().Execute(pt, strg, can);
-            if (strg.SelectedObjects.Count > 1)
+            new SelectPointOfPlane().Execute(pt, storage, canvas);
+            if (storage.SelectedObjects.Count > 1)
             {
-                if (ReferenceEquals(strg.SelectedObjects[0].GetType(), strg.SelectedObjects[1].GetType()))
+                if (ReferenceEquals(storage.SelectedObjects[0].GetType(), storage.SelectedObjects[1].GetType()))
                 {
-                    strg.SelectedObjects.Remove(strg.SelectedObjects[0]);
-                    can.Update(strg);
+                    storage.SelectedObjects.Remove(storage.SelectedObjects[0]);
+                    canvas.Update(storage);
                     return;
                 }
-                if ((_source = Point3D.Create(strg.SelectedObjects )) != null)
+                if ((_source = Point3D.Create(storage.SelectedObjects)) != null)
                 {
-                    strg.Objects.Remove(strg.SelectedObjects[0]);
-                    strg.Objects.Remove(strg.SelectedObjects[1]);
+                    storage.Objects.Remove(storage.SelectedObjects[0]);
+                    storage.Objects.Remove(storage.SelectedObjects[1]);
                     _source.SetName(GraphicsControl.NmGenerator.Generate());
-                    strg.SelectedObjects.Clear();
-                    can.Update(strg);
-                    strg.AddToCollection(_source);
+                    storage.SelectedObjects.Clear();
+                    canvas.Update(storage);
+                    storage.AddToCollection(_source);
                     _source = null;
-                    strg.DrawLastAddedToObjects(settings, frameCenter, can.Graphics);
+                    storage.DrawLastAddedToObjects(settings, frameCenter, canvas.Graphics);
                 }
                 else
                 {
-                    strg.SelectedObjects.RemoveAt(strg.SelectedObjects.Count - 1);
-                    can.Update(strg);
+                    storage.SelectedObjects.RemoveAt(storage.SelectedObjects.Count - 1);
+                    canvas.Update(storage);
                 }
             }
             else
             {
-                can.Update(strg);
+                canvas.Update(storage);
             }
         }
     }

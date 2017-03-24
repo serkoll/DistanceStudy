@@ -11,12 +11,12 @@ namespace GraphicsModule.Rules.Objects.Points
     /// </summary>
     public class CreatePointOfPlane3Y0Z : ICreate
     {
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas can, DrawS settings, Storage strg)
+        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas canvas, DrawS settings, Storage storage)
         {
-            var source = Create(pt, frameCenter, can, settings, strg);
+            var source = Create(pt, frameCenter, canvas, settings, storage);
             if (source == null) return;
-            strg.AddToCollection(source);
-            strg.DrawLastAddedToObjects(settings, frameCenter, can.Graphics);
+            storage.AddToCollection(source);
+            storage.DrawLastAddedToObjects(settings, frameCenter, canvas.Graphics);
         }
         public PointOfPlane3Y0Z Create(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
         {

@@ -14,12 +14,12 @@ namespace GraphicsModule.Rules.Objects.Lines
     /// </summary>
     public class CreateLine2D : ICreate
     {
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas can, DrawS settings, Storage strg)
+        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas canvas, DrawS settings, Storage storage)
         {
-            var obj = Create(pt, frameCenter, can, settings, strg);
+            var obj = Create(pt, frameCenter, canvas, settings, storage);
             if (obj == null) return;
-            strg.AddToCollection(obj);
-            can.Update(strg);
+            storage.AddToCollection(obj);
+            canvas.Update(storage);
         }
         public Line2D Create(Point pt, Point frameCenter, Canvas can, DrawS settings, Storage strg)
         {
