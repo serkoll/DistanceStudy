@@ -164,13 +164,13 @@ namespace GraphicsModule.Controls
             if (labelStatusLinkLine.BorderStyle == Border3DStyle.RaisedInner)
             {
                 labelStatusLinkLine.BorderStyle = Border3DStyle.SunkenOuter;
-                _canvas.Setting.DrawS.LinkLineSettings.IsDraw = true;
+                _canvas.Settings.DrawS.LinkLineSettings.IsDraw = true;
                 _canvas.Update(_storage);
             }
             else
             {
                 labelStatusLinkLine.BorderStyle = Border3DStyle.RaisedInner;
-                _canvas.Setting.DrawS.LinkLineSettings.IsDraw = false;
+                _canvas.Settings.DrawS.LinkLineSettings.IsDraw = false;
                 _canvas.Update(_storage);
             }
         }
@@ -197,13 +197,13 @@ namespace GraphicsModule.Controls
             if (labelStatusGrid.BorderStyle == Border3DStyle.RaisedInner)
             {
                 labelStatusGrid.BorderStyle = Border3DStyle.SunkenOuter;
-                _canvas.Setting.GridS.IsDraw = true;
+                _canvas.Settings.GridS.IsDraw = true;
                 _canvas.Update(_storage);
             }
             else
             {
                 labelStatusGrid.BorderStyle = Border3DStyle.RaisedInner;
-                _canvas.Setting.GridS.IsDraw = false;
+                _canvas.Settings.GridS.IsDraw = false;
                 _canvas.Update(_storage);
             }
         }
@@ -217,13 +217,13 @@ namespace GraphicsModule.Controls
             if (labelSatusAxis.BorderStyle == Border3DStyle.RaisedInner)
             {
                 labelSatusAxis.BorderStyle = Border3DStyle.SunkenOuter;
-                _canvas.Setting.AxisS.IsDraw = true;
+                _canvas.Settings.AxisS.IsDraw = true;
                 _canvas.Update(_storage);
             }
             else
             {
                 labelSatusAxis.BorderStyle = Border3DStyle.RaisedInner;
-                _canvas.Setting.AxisS.IsDraw = false;
+                _canvas.Settings.AxisS.IsDraw = false;
                 _canvas.Update(_storage);
             }
         }
@@ -397,9 +397,9 @@ namespace GraphicsModule.Controls
             if (sldWorksObject.Connect())
             {
                 sldWorksObject.SetActiveDocument();
-                sldWorksObject.ImportGrid(_canvas.Bckground.Grid);
-                sldWorksObject.ImportAxis(_canvas.Bckground.Axis);
-                sldWorksObject.ImportCollectionToActiveDoc(_storage.Objects, _canvas.Setting.DrawS);
+                sldWorksObject.ImportGrid(_canvas.Background.Grid);
+                sldWorksObject.ImportAxis(_canvas.Background.Axis);
+                sldWorksObject.ImportCollectionToActiveDoc(_storage.Objects, _canvas.Settings.DrawS);
             }
             else
             {
