@@ -41,6 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Access\Structures\LinesAccess.cs" />
+    <Compile Include="Access\Structures\SegmentsAccess.cs" />
+    <Compile Include="Access\Structures\PlanesAccess.cs" />
+    <Compile Include="Access\Structures\PointsAccess.cs" />
     <Compile Include="Controls\Tasks\PlanesAccessControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -116,6 +120,7 @@
       <DependentUpon>TaskSettingsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="PenSerialize.cs" />
+    <Compile Include="Access\PrimitivesAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controls\General\AxisSettingsControl.cs">
       <SubType>UserControl</SubType>

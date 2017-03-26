@@ -9,7 +9,6 @@ namespace GraphicsModule.Configuration.Controls.General
         {
             InitializeComponent();
         }
-
         private void colorSegment1stPlaneBox_Click(object sender, EventArgs e)
         {
             if (colorDialog1.ShowDialog() == DialogResult.OK)
@@ -17,7 +16,6 @@ namespace GraphicsModule.Configuration.Controls.General
                 colorSegment1stPlaneBox.BackColor = colorDialog1.Color;
             }
         }
-
         private void colorSegment2ndPlaneBox_Click(object sender, EventArgs e)
         {
             colorSegment2ndPlaneBox.BackColor = colorDialog2.Color;
