@@ -8,7 +8,6 @@ using DbRepository.Classes.Repository;
 using DbRepository.Context;
 using Formatter;
 using GraphicsModule.Geometry.Objects.Points;
-using Task_MethodRef = DbRepository.Classes.Keys.Task_MethodRef;
 
 namespace Point3DCntrl
 {
