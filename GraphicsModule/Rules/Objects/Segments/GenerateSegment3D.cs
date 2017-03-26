@@ -8,7 +8,7 @@ namespace GraphicsModule.Rules.Objects.Segments
     public class GenerateSegment3D : ICreate
     {
         private Segment3D _source;
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas canvas, DrawS settings, Storage storage)
+        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas canvas, DrawSettings settings, Storage storage)
         {
             new SelectSegmentOfPlane().Execute(pt, storage, canvas);
             if (storage.SelectedObjects.Count > 1)

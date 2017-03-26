@@ -11,14 +11,14 @@ namespace GraphicsModule.Rules.Objects.Segments
 {
     public class CreateSegmentOfPlane3Y0Z : ICreate
     {
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas canvas, DrawS settings, Storage storage)
+        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas canvas, DrawSettings settings, Storage storage)
         {
             var obj = Create(pt, frameCenter, canvas, settings, storage);
             if (obj == null) return;
             storage.AddToCollection(obj);
             canvas.Update(storage);
         }
-        public SegmentOfPlane3Y0Z Create(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
+        public SegmentOfPlane3Y0Z Create(Point pt, Point frameCenter, Canvas can, DrawSettings setting, Storage strg)
         {
             if (!PointOfPlane3Y0Z.IsCreatable(pt, frameCenter)) return null;
             var ptOfPlane = new PointOfPlane3Y0Z(pt, frameCenter);

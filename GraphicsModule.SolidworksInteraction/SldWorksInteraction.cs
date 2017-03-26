@@ -38,7 +38,7 @@ namespace GraphicsModule.SolidworksInteraction
             _swModel.SketchManager.Insert3DSketch(true);
             _swModel.SetAddToDB(false);
         }
-        public void ImportCollectionToActiveDoc(Collection<IObject> objects, DrawS ds)
+        public void ImportCollectionToActiveDoc(Collection<IObject> objects, DrawSettings ds)
         {
             if (objects.Count == 0) return;
             foreach (IObject obj in objects)

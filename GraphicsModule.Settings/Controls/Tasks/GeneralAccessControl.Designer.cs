@@ -1,6 +1,6 @@
 ﻿namespace GraphicsModule.Configuration.Controls.Tasks
 {
-    partial class GeneralAccess
+    partial class GeneralAccessControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -165,7 +165,7 @@
             this.LinkLineLabel.TabIndex = 30;
             this.LinkLineLabel.Text = "Линии связи";
             // 
-            // GeneralAccess
+            // GeneralAccessControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -181,7 +181,7 @@
             this.Controls.Add(this.AxisOYLabel);
             this.Controls.Add(this.AxisOZLabel);
             this.Controls.Add(this.AxisOXLabel);
-            this.Name = "GeneralAccess";
+            this.Name = "GeneralAccessControl";
             this.Size = new System.Drawing.Size(555, 258);
             this.ResumeLayout(false);
             this.PerformLayout();

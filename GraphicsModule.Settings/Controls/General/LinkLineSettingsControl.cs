@@ -3,9 +3,9 @@ using System.Windows.Forms;
 
 namespace GraphicsModule.Configuration.Controls.General
 {
-    public partial class SettingsLink : UserControl
+    public partial class LinkLineSettingsControl : UserControl
     {
-        public SettingsLink()
+        public LinkLineSettingsControl()
         {
             InitializeComponent();
         }

@@ -1,6 +1,6 @@
 ﻿namespace GraphicsModule.Configuration.Controls.General
 {
-    partial class SettingsGrid
+    partial class GridSettingsControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -185,7 +185,7 @@
             this.colorEdge.TabStop = false;
             this.colorEdge.Click += new System.EventHandler(this.colorEdge_Click);
             // 
-            // SettingsGrid
+            // GridSettingsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -201,7 +201,7 @@
             this.Controls.Add(this.Label12);
             this.Controls.Add(this.CheckBoxFlagDrawGrid);
             this.Controls.Add(this.Label13);
-            this.Name = "SettingsGrid";
+            this.Name = "GridSettingsControl";
             this.Size = new System.Drawing.Size(555, 258);
             ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownPointsSize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.colorEdge)).EndInit();

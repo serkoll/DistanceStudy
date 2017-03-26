@@ -19,14 +19,14 @@ namespace GraphicsModule.Rules.Objects.Lines
     {
         public ILineOfPlane TempLineOfPlane;
         private Line3D _source;
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas canvas, DrawS settings, Storage storage)
+        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas canvas, DrawSettings settings, Storage storage)
         {
             var obj = Create(pt, frameCenter, canvas, settings, storage);
             if (obj == null) return;
             storage.AddToCollection(obj);
             canvas.Update(storage);
         }
-        public Line3D Create(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
+        public Line3D Create(Point pt, Point frameCenter, Canvas can, DrawSettings setting, Storage strg)
         {
             var ptOfPlane = TypeOf.PointOfPlane(pt, frameCenter);
             if (strg.TempObjects.Count == 0)
@@ -63,7 +63,7 @@ namespace GraphicsModule.Rules.Objects.Lines
             return _source;
         }
 
-        protected bool IsLine3DCreatable(IObject ln1, IObject ln2, DrawS st, Point frameCenter, Canvas can)
+        protected bool IsLine3DCreatable(IObject ln1, IObject ln2, DrawSettings st, Point frameCenter, Canvas can)
         {
             if (ln1 == null) return false;
             if (ln1.GetType() == typeof(LineOfPlane1X0Y) && ln2.GetType() == typeof(LineOfPlane2X0Z))
@@ -106,7 +106,7 @@ namespace GraphicsModule.Rules.Objects.Lines
             return false;
         }
 
-        protected ILineOfPlane CreateLineOfPlane(Collection<IObject> obj, DrawS st, Point frameCenter, Canvas can)
+        protected ILineOfPlane CreateLineOfPlane(Collection<IObject> obj, DrawSettings st, Point frameCenter, Canvas can)
         {
             if (obj[0].GetType() == typeof(PointOfPlane1X0Y))
             {

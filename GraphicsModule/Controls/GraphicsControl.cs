@@ -164,13 +164,13 @@ namespace GraphicsModule.Controls
             if (labelStatusLinkLine.BorderStyle == Border3DStyle.RaisedInner)
             {
                 labelStatusLinkLine.BorderStyle = Border3DStyle.SunkenOuter;
-                _canvas.Settings.DrawS.LinkLineSettings.IsDraw = true;
+                _canvas.Settings.DrawSettings.LinkLinesSettings.IsDraw = true;
                 _canvas.Update(_storage);
             }
             else
             {
                 labelStatusLinkLine.BorderStyle = Border3DStyle.RaisedInner;
-                _canvas.Settings.DrawS.LinkLineSettings.IsDraw = false;
+                _canvas.Settings.DrawSettings.LinkLinesSettings.IsDraw = false;
                 _canvas.Update(_storage);
             }
         }
@@ -197,13 +197,13 @@ namespace GraphicsModule.Controls
             if (labelStatusGrid.BorderStyle == Border3DStyle.RaisedInner)
             {
                 labelStatusGrid.BorderStyle = Border3DStyle.SunkenOuter;
-                _canvas.Settings.GridS.IsDraw = true;
+                _canvas.Settings.GridSettings.IsDraw = true;
                 _canvas.Update(_storage);
             }
             else
             {
                 labelStatusGrid.BorderStyle = Border3DStyle.RaisedInner;
-                _canvas.Settings.GridS.IsDraw = false;
+                _canvas.Settings.GridSettings.IsDraw = false;
                 _canvas.Update(_storage);
             }
         }
@@ -217,13 +217,13 @@ namespace GraphicsModule.Controls
             if (labelSatusAxis.BorderStyle == Border3DStyle.RaisedInner)
             {
                 labelSatusAxis.BorderStyle = Border3DStyle.SunkenOuter;
-                _canvas.Settings.AxisS.IsDraw = true;
+                _canvas.Settings.AxisSettings.IsDraw = true;
                 _canvas.Update(_storage);
             }
             else
             {
                 labelSatusAxis.BorderStyle = Border3DStyle.RaisedInner;
-                _canvas.Settings.AxisS.IsDraw = false;
+                _canvas.Settings.AxisSettings.IsDraw = false;
                 _canvas.Update(_storage);
             }
         }
@@ -236,7 +236,7 @@ namespace GraphicsModule.Controls
             var mousecoords = MainPictureBox.PointToClient(MousePosition);  //Получаем координаты курсора мыши
             if (SetObject != null) //Контроль существования объекта
             {
-                SetObject.AddToStorageAndDraw(mousecoords, _canvas.CenterSystemPoint, _canvas, _settings.DrawS, _storage); //Отрисовываем объект и добавляем его в коллекцию объектов
+                SetObject.AddToStorageAndDraw(mousecoords, _canvas.CenterSystemPoint, _canvas, _settings.DrawSettings, _storage); //Отрисовываем объект и добавляем его в коллекцию объектов
                 _canvas.Refresh(); //Перерисовывам полотно
             }
             if (Operations != null) //Наличие операции над объектами
@@ -399,7 +399,7 @@ namespace GraphicsModule.Controls
                 sldWorksObject.SetActiveDocument();
                 sldWorksObject.ImportGrid(_canvas.Background.Grid);
                 sldWorksObject.ImportAxis(_canvas.Background.Axis);
-                sldWorksObject.ImportCollectionToActiveDoc(_storage.Objects, _canvas.Settings.DrawS);
+                sldWorksObject.ImportCollectionToActiveDoc(_storage.Objects, _canvas.Settings.DrawSettings);
             }
             else
             {

@@ -5,14 +5,14 @@ namespace GraphicsModule.Configuration.Forms
 {
     public partial class GraphicsControlSettingsForm : Form
     {
-        private readonly SettingsAxis _stAxis = new SettingsAxis();
-        private readonly SettingsGrid _stGrid = new SettingsGrid();
-        private readonly SettingsLine _stLine = new SettingsLine();
-        private readonly SettingsBackground _stBackground = new SettingsBackground();
-        private readonly SettingsCursor _stCursor = new SettingsCursor();
-        private readonly SettingsLink _stLink = new SettingsLink();
-        private readonly SettingsPoint _stPoint = new SettingsPoint();
-        private readonly SettingsSegment _stSegment = new SettingsSegment();
+        private readonly AxisSettingsControl _stAxis = new AxisSettingsControl();
+        private readonly GridSettingsControl _stGrid = new GridSettingsControl();
+        private readonly LinesSettingsControl _stLine = new LinesSettingsControl();
+        private readonly BackgroundSettingsControl _stBackground = new BackgroundSettingsControl();
+        private readonly CursorSettingsControl _stCursor = new CursorSettingsControl();
+        private readonly LinkLineSettingsControl _stLink = new LinkLineSettingsControl();
+        private readonly PointsSettingsControl _stPoint = new PointsSettingsControl();
+        private readonly SegmentsSettingsControl _stSegment = new SegmentsSettingsControl();
         private const string FileName = "config.cfg";
         public static Settings ValueS;
         public GraphicsControlSettingsForm()

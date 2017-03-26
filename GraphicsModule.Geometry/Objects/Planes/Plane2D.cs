@@ -49,7 +49,7 @@ namespace GraphicsModule.Geometry.Objects.Planes
             Objects = new IObject[] { sg1, sg2 };
             _name = new Name();
         }
-        public void Draw(DrawS st, Point frameCenter, Graphics graphics)
+        public void Draw(DrawSettings st, Point frameCenter, Graphics graphics)
         {
             foreach (var obj in Objects)
             {

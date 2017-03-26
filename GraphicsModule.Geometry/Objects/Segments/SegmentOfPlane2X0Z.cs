@@ -41,7 +41,7 @@ namespace GraphicsModule.Geometry.Objects.Segments
             Point1.X = line.Point1.X;
             Point1.Z = line.Point1.Z;
         }
-        public void Draw(DrawS st, Point framecenter, Graphics g)
+        public void Draw(DrawSettings st, Point framecenter, Graphics g)
         {
             Point0.Draw(st, framecenter, g);
             Point1.Draw(st, framecenter, g);
@@ -50,7 +50,7 @@ namespace GraphicsModule.Geometry.Objects.Segments
             g.DrawLine(st.PenLineOfPlane2X0Z, new PointF(pt0.X + st.RadiusPoints, pt0.Y + st.RadiusPoints),
                                               new PointF(pt1.X + st.RadiusPoints, pt1.Y + st.RadiusPoints));
         } 
-        public void DrawSegmentOnly(DrawS st, Point framecenter, Graphics g)
+        public void DrawSegmentOnly(DrawSettings st, Point framecenter, Graphics g)
         {
             Point0.DrawPointsOnly(st, framecenter, g);
             Point1.DrawPointsOnly(st, framecenter, g);

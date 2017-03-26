@@ -2,9 +2,9 @@
 
 namespace GraphicsModule.Configuration.Controls.General
 {
-    public partial class SettingsLine : UserControl
+    public partial class LinesSettingsControl : UserControl
     {
-        public SettingsLine()
+        public LinesSettingsControl()
         {
             InitializeComponent();
         }

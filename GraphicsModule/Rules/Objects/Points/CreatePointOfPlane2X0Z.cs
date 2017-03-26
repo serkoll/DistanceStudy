@@ -11,14 +11,14 @@ namespace GraphicsModule.Rules.Objects.Points
     /// </summary>
     public class CreatePointOfPlane2X0Z : ICreate
     {
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas canvas, DrawS settings, Storage storage)
+        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas canvas, DrawSettings settings, Storage storage)
         {
             var source = Create(pt, frameCenter, canvas, settings, storage);
             if (source == null) return;
             storage.AddToCollection(source);
             storage.DrawLastAddedToObjects(settings, frameCenter, canvas.Graphics);
         }
-        public PointOfPlane2X0Z Create(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
+        public PointOfPlane2X0Z Create(Point pt, Point frameCenter, Canvas can, DrawSettings setting, Storage strg)
         {
             if (!PointOfPlane2X0Z.IsCreatable(pt, frameCenter)) return null;
             var source = new PointOfPlane2X0Z(pt, frameCenter);

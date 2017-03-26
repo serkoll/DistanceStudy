@@ -35,7 +35,7 @@ namespace GraphicsModule.Geometry.Objects.Segments
             Kx = pt2.X - pt1.X;
             Ky = pt2.Y - pt1.Y;
         }
-        public void Draw(DrawS st, Point framecenter, Graphics g)
+        public void Draw(DrawSettings st, Point framecenter, Graphics g)
         {
             Point0.Draw(st, framecenter, g);
             Point1.Draw(st, framecenter, g);

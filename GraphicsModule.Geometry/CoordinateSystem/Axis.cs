@@ -37,7 +37,7 @@ namespace GraphicsModule.Geometry.CoordinateSystem
             FinitePoints[2] = new Point(Center.X, 0);
             FinitePoints[3] = new Point(Center.X, (int)graphics.VisibleClipBounds.Size.Height);
         }
-        public void DrawAxis(AxisS settings, Graphics g)
+        public void DrawAxis(AxisSettings settings, Graphics g)
         {
             if(!settings.IsDraw) return;
             if (settings.FlagDrawX)
@@ -59,19 +59,19 @@ namespace GraphicsModule.Geometry.CoordinateSystem
             var pens = new Pen(axisColor, axisWidth);
             g.DrawLine(pens, beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y);
         }
-        private void DrawAxisX(AxisS sett, Graphics g)
+        private void DrawAxisX(AxisSettings sett, Graphics g)
         {
             DrawAxis(FinitePoints[0], Center, sett.ColorX, sett.Width, g);
         }
-        private void DrawAxisYHor(AxisS sett, Graphics g)
+        private void DrawAxisYHor(AxisSettings sett, Graphics g)
         {
             DrawAxis(FinitePoints[1], Center, sett.ColorY, sett.Width, g);
         }
-        private void DrawAxisYVert(AxisS sett, Graphics g)
+        private void DrawAxisYVert(AxisSettings sett, Graphics g)
         {
             DrawAxis(FinitePoints[3], Center, sett.ColorY, sett.Width, g);
         }
-        private void DrawAxisZ(AxisS sett, Graphics g)
+        private void DrawAxisZ(AxisSettings sett, Graphics g)
         {
             DrawAxis(FinitePoints[2], Center, sett.ColorZ, sett.Width, g);
         }

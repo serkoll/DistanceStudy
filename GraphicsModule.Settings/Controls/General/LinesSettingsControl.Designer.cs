@@ -1,6 +1,6 @@
 ﻿namespace GraphicsModule.Configuration.Controls.General
 {
-    partial class SettingsLine
+    partial class LinesSettingsControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -371,7 +371,7 @@
             this.label10.TabIndex = 19;
             this.label10.Text = "Цвет";
             // 
-            // SettingsLine
+            // LinesSettingsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -381,7 +381,7 @@
             this.Controls.Add(this.colorLabel);
             this.Controls.Add(this.lineWidth);
             this.Controls.Add(this.lineWidthUpDown);
-            this.Name = "SettingsLine";
+            this.Name = "LinesSettingsControl";
             this.Size = new System.Drawing.Size(451, 288);
             ((System.ComponentModel.ISupportInitialize)(this.lineWidthUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lineColorBox)).EndInit();

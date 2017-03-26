@@ -3,9 +3,9 @@ using System.Windows.Forms;
 
 namespace GraphicsModule.Configuration.Controls.General
 {
-    public partial class SettingsSegment : UserControl
+    public partial class SegmentsSettingsControl : UserControl
     {
-        public SettingsSegment()
+        public SegmentsSettingsControl()
         {
             InitializeComponent();
         }

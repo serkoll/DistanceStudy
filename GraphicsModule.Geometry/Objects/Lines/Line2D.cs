@@ -125,7 +125,7 @@ namespace GraphicsModule.Geometry.Objects.Lines
             return line.ky / line.kx;
 
         }
-        public void Draw(DrawS st, Point framecenter, Graphics g)
+        public void Draw(DrawSettings st, Point framecenter, Graphics g)
         {
             Point0.Draw(st, framecenter, g);
             Point1.Draw(st, framecenter, g);

@@ -27,7 +27,7 @@ namespace GraphicsModule.Geometry.CoordinateSystem
         /// Центральная точка сетки
         /// </summary>
         public Point CenterPoint { get; set; }
-        public Grid(GridS sett, Graphics g)
+        public Grid(GridSettings sett, Graphics g)
         {
             StepOnWidth = sett.StepOfWidth;
             StepOnHeight = sett.StepOfHeight;
@@ -36,7 +36,7 @@ namespace GraphicsModule.Geometry.CoordinateSystem
             CenterPoint = new Point(Width/2, Height/2);
             CalculateKnotsPoints();
         }
-        public Grid(GridS settings, Point centerPoint, Graphics graphics)
+        public Grid(GridSettings settings, Point centerPoint, Graphics graphics)
         {
             StepOnWidth = settings.StepOfWidth;
             StepOnHeight = settings.StepOfHeight;
@@ -169,7 +169,7 @@ namespace GraphicsModule.Geometry.CoordinateSystem
         //        }
         //    }
         //}
-        public void DrawGrid(GridS sett, Graphics g)
+        public void DrawGrid(GridSettings sett, Graphics g)
         {
             if (sett.IsDraw)
             {

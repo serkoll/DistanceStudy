@@ -1,6 +1,6 @@
-﻿namespace GraphicsModule.Configuration.Controls.General
+﻿namespace GraphicsModule.Configuration.Controls.Tasks
 {
-    partial class SettingsAxis
+    partial class SegmentsAccessControl
     {
         /// <summary> 
         /// Required designer variable.

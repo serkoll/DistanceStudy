@@ -20,7 +20,7 @@ namespace GraphicsModule.Rules.Objects.Planes
     {
         private PlaneCreateType _creationType;
         private Collection<IObject> _planeObjects = new Collection<IObject>();
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas canvas, DrawS settings, Storage storage)
+        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas canvas, DrawSettings settings, Storage storage)
         {
             switch (_creationType)
             {
@@ -61,7 +61,7 @@ namespace GraphicsModule.Rules.Objects.Planes
                     }
             }
         }
-        private void CreateByThreePoints(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
+        private void CreateByThreePoints(Point pt, Point frameCenter, Canvas can, DrawSettings setting, Storage strg)
         {
             var tmpobj = new CreatePointOfPlane2X0Z().Create(pt, frameCenter, can, setting, strg);
             tmpobj.Draw(setting, frameCenter, can.Graphics);
@@ -74,7 +74,7 @@ namespace GraphicsModule.Rules.Objects.Planes
             strg.AddToCollection(source);
             can.Update(strg);
         }
-        private void CreateByLineAndPoint(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
+        private void CreateByLineAndPoint(Point pt, Point frameCenter, Canvas can, DrawSettings setting, Storage strg)
         {
             if (_planeObjects.Count == 0)
             {
@@ -94,7 +94,7 @@ namespace GraphicsModule.Rules.Objects.Planes
                 can.Update(strg);
             }
         }
-        private void CreateByParallelLines(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
+        private void CreateByParallelLines(Point pt, Point frameCenter, Canvas can, DrawSettings setting, Storage strg)
         {
             if (_planeObjects.Count < 2)
             {
@@ -126,7 +126,7 @@ namespace GraphicsModule.Rules.Objects.Planes
                 }
             }
         }
-        private void CreateByCrossedLines(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
+        private void CreateByCrossedLines(Point pt, Point frameCenter, Canvas can, DrawSettings setting, Storage strg)
         {
             if (_planeObjects.Count < 2)
             {
@@ -158,7 +158,7 @@ namespace GraphicsModule.Rules.Objects.Planes
                 }
             }
         }
-        private void CreateBySegmentAndPoint(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
+        private void CreateBySegmentAndPoint(Point pt, Point frameCenter, Canvas can, DrawSettings setting, Storage strg)
         {
             if (_planeObjects.Count == 0)
             {
@@ -178,7 +178,7 @@ namespace GraphicsModule.Rules.Objects.Planes
                 can.Update(strg);
             }
         }
-        private void CreateByParallelSegments(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
+        private void CreateByParallelSegments(Point pt, Point frameCenter, Canvas can, DrawSettings setting, Storage strg)
         {
             if (_planeObjects.Count < 2)
             {
@@ -210,7 +210,7 @@ namespace GraphicsModule.Rules.Objects.Planes
                 }
             }
         }
-        private void CreateByCrossedSegments(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
+        private void CreateByCrossedSegments(Point pt, Point frameCenter, Canvas can, DrawSettings setting, Storage strg)
         {
             if (_planeObjects.Count < 2)
             {

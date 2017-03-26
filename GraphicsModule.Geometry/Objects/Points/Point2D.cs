@@ -50,7 +50,7 @@ namespace GraphicsModule.Geometry.Objects.Points
         /// <param name="st">Параметры отрисовки графических объектов</param>
         /// <param name="framecenter">Центр системы координат</param>
         /// <param name="g">Целевой Graphics</param>
-        public void Draw(DrawS st, Point framecenter, Graphics g)
+        public void Draw(DrawSettings st, Point framecenter, Graphics g)
         {
             g.DrawPie(st.PenPoints, (float)X - st.RadiusPoints, (float)Y - st.RadiusPoints, st.RadiusPoints * 2, st.RadiusPoints * 2, 0, 360);
             if (Name != null)

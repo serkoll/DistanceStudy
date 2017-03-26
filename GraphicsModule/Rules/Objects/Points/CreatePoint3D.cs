@@ -15,7 +15,7 @@ namespace GraphicsModule.Rules.Objects.Points
     public class CreatePoint3D : ICreate
     {
         public Point3DCreateType BuildType = Point3DCreateType.By2PointsOfPlane;
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas canvas, DrawS settings, Storage storage)
+        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas canvas, DrawSettings settings, Storage storage)
         {
             var source = Create(pt, frameCenter, canvas, settings, storage);
             if (source == null) return;
@@ -23,7 +23,7 @@ namespace GraphicsModule.Rules.Objects.Points
             storage.TempObjects.Clear();
             canvas.Update(storage);
         }
-        public Point3D Create(Point pt, Point frameCenter, Canvas canvas, DrawS settings, Storage storage)
+        public Point3D Create(Point pt, Point frameCenter, Canvas canvas, DrawSettings settings, Storage storage)
         {
             var ptOfPlane = TypeOf.PointOfPlane(pt, frameCenter);
             if (storage.TempObjects.Count == 0)

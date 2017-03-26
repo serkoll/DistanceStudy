@@ -142,15 +142,15 @@ namespace GraphicsModule.Geometry.Objects.Lines
                 LineOfPlane3Y0Z = linePi3;
             }
         }
-        public void Draw(DrawS st, Point frameCenter, Graphics g)
+        public void Draw(DrawSettings st, Point frameCenter, Graphics g)
         {
             LineOfPlane1X0Y.DrawLineOnly(st, frameCenter, g);
             LineOfPlane2X0Z.DrawLineOnly(st, frameCenter, g);
             LineOfPlane3Y0Z.DrawLineOnly(st, frameCenter, g);
-            if (st.LinkLineSettings.IsDraw)
+            if (st.LinkLinesSettings.IsDraw)
             {
-                DrawLinkLine(st.LinkLineSettings.PenLinkLineX0YtoX, st.LinkLineSettings.PenLinkLineX0YtoY, st.LinkLineSettings.PenLinkLineX0ZtoX, st.LinkLineSettings.PenLinkLineX0ZtoZ,
-                             st.LinkLineSettings.PenLinkLineY0ZtoZ, st.LinkLineSettings.PenLinkLineY0ZtoY, frameCenter, ref g);
+                DrawLinkLine(st.LinkLinesSettings.PenLinkLineX0YtoX, st.LinkLinesSettings.PenLinkLineX0YtoY, st.LinkLinesSettings.PenLinkLineX0ZtoX, st.LinkLinesSettings.PenLinkLineX0ZtoZ,
+                             st.LinkLinesSettings.PenLinkLineY0ZtoZ, st.LinkLinesSettings.PenLinkLineY0ZtoY, frameCenter, ref g);
             }
 
         }

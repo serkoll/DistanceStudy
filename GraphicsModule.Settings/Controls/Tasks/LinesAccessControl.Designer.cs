@@ -1,6 +1,6 @@
 ﻿namespace GraphicsModule.Configuration.Controls.Tasks
 {
-    partial class LinesAccess
+    partial class LinesAccessControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -190,12 +190,12 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Доступно для построения";
             // 
-            // LinesAccess
+            // LinesAccessControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.groupBox1);
-            this.Name = "LinesAccess";
+            this.Name = "LinesAccessControl";
             this.Size = new System.Drawing.Size(555, 258);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

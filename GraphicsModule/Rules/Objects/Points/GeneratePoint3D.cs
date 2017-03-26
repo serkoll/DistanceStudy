@@ -15,7 +15,7 @@ namespace GraphicsModule.Rules.Objects.Points
     public class GeneratePoint3D : ICreate
     {
         private Point3D _source;
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas canvas, DrawS settings, Storage storage)
+        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas canvas, DrawSettings settings, Storage storage)
         {
             new SelectPointOfPlane().Execute(pt, storage, canvas);
             if (storage.SelectedObjects.Count > 1)

@@ -24,14 +24,14 @@ namespace GraphicsModule
             BackBitmap.MakeTransparent();
             var graphics = Graphics.FromImage(BackBitmap);
             Axis = new Axis(centerPoint, graphics);
-            Grid = new Grid(settings.GridS, centerPoint, graphics);
+            Grid = new Grid(settings.GridSettings, centerPoint, graphics);
             DrawBackground(settings);
         }
         public void DrawBackground(Settings settings)
         {
             var graphics = Graphics.FromImage(BackBitmap);
-            Grid.DrawGrid(settings.GridS, graphics);
-            Axis.DrawAxis(settings.AxisS, graphics);
+            Grid.DrawGrid(settings.GridSettings, graphics);
+            Axis.DrawAxis(settings.AxisSettings, graphics);
             graphics.Dispose();
         }
     }

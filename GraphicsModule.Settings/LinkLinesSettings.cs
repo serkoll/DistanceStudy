@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 namespace GraphicsModule.Configuration
 {
     [Serializable]
-    public class LinkLineS
+    public class LinkLinesSettings
     {
         public bool IsDraw { get; set; }
         [XmlIgnore]
@@ -67,7 +67,7 @@ namespace GraphicsModule.Configuration
         public bool LinkZToBorderPi3 { get; set; }
         public bool LinkCurveY3ToY1 { get; set; }
         public bool LinkCurveY1ToY3 { get; set; }
-        public LinkLineS()
+        public LinkLinesSettings()
         {
             IsDraw = true;
             PenLinkLineX0YtoX = new Pen(Color.LightGreen, 0.3F);
@@ -85,7 +85,7 @@ namespace GraphicsModule.Configuration
             LinkCurveY3ToY1 = true;
             LinkCurveY1ToY3 = true;
         }
-        public LinkLineS(Pen selectedPen)
+        public LinkLinesSettings(Pen selectedPen)
         {
             IsDraw = true;
             PenLinkLineX0YtoX = selectedPen;

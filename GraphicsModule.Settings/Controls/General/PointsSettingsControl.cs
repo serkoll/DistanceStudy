@@ -3,9 +3,9 @@ using System.Windows.Forms;
 
 namespace GraphicsModule.Configuration.Controls.General
 {
-    public partial class SettingsPoint : UserControl
+    public partial class PointsSettingsControl : UserControl
     {
-        public SettingsPoint()
+        public PointsSettingsControl()
         {
             InitializeComponent();
         }

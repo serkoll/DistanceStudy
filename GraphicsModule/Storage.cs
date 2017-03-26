@@ -94,19 +94,19 @@ namespace GraphicsModule
         {
             foreach(var ob in Objects)
             {
-                ob.Draw(st.DrawS, frameCenter, g);
+                ob.Draw(st.DrawSettings, frameCenter, g);
             }
             foreach (var ob in TempObjects)
             {
-                ob.Draw(st.DrawS, frameCenter, g);
+                ob.Draw(st.DrawSettings, frameCenter, g);
             }
             foreach (var ob in SelectedObjects)
             {
-                ob.Draw(st.SelectedDrawS, frameCenter, g);
+                ob.Draw(st.SelectedDrawSettings, frameCenter, g);
             }
             foreach (var ob in DeletedObjects)
             {
-                ob.Draw(st.SelectedDrawS, frameCenter, g);
+                ob.Draw(st.SelectedDrawSettings, frameCenter, g);
             }
         }
         /// <summary>
@@ -115,7 +115,7 @@ namespace GraphicsModule
         /// <param name="st"></param>
         /// <param name="frameCenter"></param>
         /// <param name="g"></param>
-        public void DrawLastAddedToObjects(DrawS st, Point frameCenter, Graphics g)
+        public void DrawLastAddedToObjects(DrawSettings st, Point frameCenter, Graphics g)
         {
             Objects.Last().Draw(st, frameCenter, g);
         }
@@ -125,7 +125,7 @@ namespace GraphicsModule
         /// <param name="st"></param>
         /// <param name="frameCenter"></param>
         /// <param name="g"></param>
-        public void DrawLastAddedToTempObjects(DrawS st, Point frameCenter, Graphics g)
+        public void DrawLastAddedToTempObjects(DrawSettings st, Point frameCenter, Graphics g)
         {
             TempObjects.Last().Draw(st, frameCenter, g);
         }

@@ -41,22 +41,22 @@ namespace GraphicsModule.Geometry.Objects.Points
             graphics.DrawPie(pen, ptForDraw.X, ptForDraw.Y, poitRaduis * 2, poitRaduis * 2, 0, 360);
         }
 
-        public void DrawName(DrawS st, float poitRaduis, Point frameCenter, Graphics graphics)
+        public void DrawName(DrawSettings st, float poitRaduis, Point frameCenter, Graphics graphics)
         {
             var ptForDraw = DeterminePosition.ForPointProjection(this, poitRaduis, frameCenter);
             graphics.DrawString(Name.Value, st.TextFont, st.TextBrush, ptForDraw.X + Name.Dx, ptForDraw.Y + Name.Dy);
         }
-        public void Draw(DrawS st, Point frameCenter, Graphics g)
+        public void Draw(DrawSettings st, Point frameCenter, Graphics g)
         {
             Draw(st.PenPoints, st.RadiusPoints, frameCenter, g);
-            if (st.LinkLineSettings.IsDraw)
+            if (st.LinkLinesSettings.IsDraw)
             {
-                DrawLinkLine(st.LinkLineSettings.PenLinkLineX0YtoX, st.LinkLineSettings.PenLinkLineX0YtoY, true, true, true, true, true, frameCenter, g);
+                DrawLinkLine(st.LinkLinesSettings.PenLinkLineX0YtoX, st.LinkLinesSettings.PenLinkLineX0YtoY, true, true, true, true, true, frameCenter, g);
             }
             if (Name != null)
                 DrawName(st, st.RadiusPoints, frameCenter, g);
         }
-        public void DrawPointsOnly(DrawS st, Point frameCenter, Graphics g)
+        public void DrawPointsOnly(DrawSettings st, Point frameCenter, Graphics g)
         {
             Draw(st.PenPoints, st.RadiusPoints, frameCenter, g);
             DrawName(st, st.RadiusPoints, frameCenter, g);

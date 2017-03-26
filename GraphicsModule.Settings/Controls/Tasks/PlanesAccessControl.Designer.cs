@@ -1,6 +1,6 @@
 ﻿namespace GraphicsModule.Configuration.Controls.Tasks
 {
-    partial class SegmentsAccess
+    partial class PlanesAccessControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -288,7 +288,7 @@
             this.axis3NameBox.TabIndex = 36;
             this.axis3NameBox.SelectedIndexChanged += new System.EventHandler(this.axis3NameBox_SelectedIndexChanged);
             // 
-            // SettingsAxis
+            // AxisSettingsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

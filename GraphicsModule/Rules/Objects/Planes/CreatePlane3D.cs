@@ -20,7 +20,7 @@ namespace GraphicsModule.Rules.Objects.Planes
         private PlaneCreateType _creationType;
         private Collection<IObject> _planeObjects = new Collection<IObject>();
         private CreateLine3D _createLine = new CreateLine3D();
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas canvas, DrawS settings, Storage storage)
+        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas canvas, DrawSettings settings, Storage storage)
         {
             switch (_creationType)
             {
@@ -61,7 +61,7 @@ namespace GraphicsModule.Rules.Objects.Planes
                     }
             }
         }
-        private void PlaneObjectsDraw(DrawS settings, Point frameCenter, Canvas can)
+        private void PlaneObjectsDraw(DrawSettings settings, Point frameCenter, Canvas can)
         {
             if (_planeObjects.Count == 0) return;
             foreach (var o in _planeObjects)
@@ -69,7 +69,7 @@ namespace GraphicsModule.Rules.Objects.Planes
                 o.Draw(settings, frameCenter, can.Graphics);
             }
         }
-        private void CreateByThreePoint(Point pt, Point frameCenter, Canvas can, DrawS settings, Storage strg)
+        private void CreateByThreePoint(Point pt, Point frameCenter, Canvas can, DrawSettings settings, Storage strg)
         {
             var tmpobj = new CreatePoint3D().Create(pt, frameCenter, can, settings, strg);
             if (tmpobj == null) return;
@@ -83,7 +83,7 @@ namespace GraphicsModule.Rules.Objects.Planes
             strg.AddToCollection(source);
             can.Update(strg);
         }
-        private void CreateByLineAndPoint(Point pt, Point frameCenter, Canvas can, DrawS settings, Storage strg)
+        private void CreateByLineAndPoint(Point pt, Point frameCenter, Canvas can, DrawSettings settings, Storage strg)
         {
             if (_planeObjects.Count == 0)
             {
@@ -109,7 +109,7 @@ namespace GraphicsModule.Rules.Objects.Planes
                 can.Update(strg);
             }
         }
-        private void CreateByParallelLines(Point pt, Point frameCenter, Canvas can, DrawS settings, Storage strg)
+        private void CreateByParallelLines(Point pt, Point frameCenter, Canvas can, DrawSettings settings, Storage strg)
         {
             if (_planeObjects.Count < 2)
             {

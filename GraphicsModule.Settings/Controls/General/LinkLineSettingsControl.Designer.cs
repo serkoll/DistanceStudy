@@ -1,6 +1,6 @@
 ﻿namespace GraphicsModule.Configuration.Controls.General
 {
-    partial class SettingsLink
+    partial class LinkLineSettingsControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -155,7 +155,7 @@
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
-            // SettingsLink
+            // LinkLineSettingsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -168,7 +168,7 @@
             this.Controls.Add(this.linkToAxis3OnOff);
             this.Controls.Add(this.linkToAxis2OnOff);
             this.Controls.Add(this.linkToAxis1OnOff);
-            this.Name = "SettingsLink";
+            this.Name = "LinkLineSettingsControl";
             this.Size = new System.Drawing.Size(451, 288);
             ((System.ComponentModel.ISupportInitialize)(this.link1ColorBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.linkWidth)).EndInit();

@@ -1,6 +1,6 @@
 ﻿namespace GraphicsModule.Configuration.Controls.General
 {
-    partial class SettingsSegment
+    partial class SegmentsSettingsControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -369,7 +369,7 @@
             this.label10.TabIndex = 19;
             this.label10.Text = "Цвет";
             // 
-            // SettingsSegment
+            // SegmentsSettingsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -379,7 +379,7 @@
             this.Controls.Add(this.colorLabel);
             this.Controls.Add(this.lineWidth);
             this.Controls.Add(this.segmentWidth);
-            this.Name = "SettingsSegment";
+            this.Name = "SegmentsSettingsControl";
             this.Size = new System.Drawing.Size(451, 288);
             ((System.ComponentModel.ISupportInitialize)(this.segmentColorBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.segmentWidth)).EndInit();

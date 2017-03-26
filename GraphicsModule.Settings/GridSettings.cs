@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 namespace GraphicsModule.Configuration
 {
     [Serializable]
-    public class GridS
+    public class GridSettings
     {
         public int StepOfWidth { get; set; }
         public int StepOfHeight { get; set; }
@@ -19,7 +19,7 @@ namespace GraphicsModule.Configuration
             set { PointsColor = ColorTranslator.FromHtml(value); }
         }
         public bool IsDraw { get; set; }
-        public GridS()
+        public GridSettings()
         {
             StepOfWidth = 10;
             StepOfHeight = 10;

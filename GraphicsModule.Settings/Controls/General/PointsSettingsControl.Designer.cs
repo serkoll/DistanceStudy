@@ -1,6 +1,6 @@
 ﻿namespace GraphicsModule.Configuration.Controls.General
 {
-    partial class SettingsPoint
+    partial class PointsSettingsControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -353,7 +353,7 @@
             this.label11.TabIndex = 13;
             this.label11.Text = "Цвет";
             // 
-            // SettingsPoint
+            // PointsSettingsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -362,7 +362,7 @@
             this.Controls.Add(this.pointIconsList);
             this.Controls.Add(this.pointColorBox);
             this.Controls.Add(this.label6);
-            this.Name = "SettingsPoint";
+            this.Name = "PointsSettingsControl";
             this.Size = new System.Drawing.Size(451, 288);
             ((System.ComponentModel.ISupportInitialize)(this.pointColorBox)).EndInit();
             this.tabControl1.ResumeLayout(false);

@@ -41,35 +41,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\Tasks\PlanesAccess.cs">
+    <Compile Include="Controls\Tasks\PlanesAccessControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Tasks\PlanesAccess.Designer.cs">
-      <DependentUpon>PlanesAccess.cs</DependentUpon>
+    <Compile Include="Controls\Tasks\PlanesAccessControl.Designer.cs">
+      <DependentUpon>PlanesAccessControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Tasks\SegmentsAccess.cs">
+    <Compile Include="Controls\Tasks\SegmentsAccessControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Tasks\SegmentsAccess.Designer.cs">
-      <DependentUpon>SegmentsAccess.cs</DependentUpon>
+    <Compile Include="Controls\Tasks\SegmentsAccessControl.Designer.cs">
+      <DependentUpon>SegmentsAccessControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Tasks\LinesAccess.cs">
+    <Compile Include="Controls\Tasks\LinesAccessControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Tasks\LinesAccess.Designer.cs">
-      <DependentUpon>LinesAccess.cs</DependentUpon>
+    <Compile Include="Controls\Tasks\LinesAccessControl.Designer.cs">
+      <DependentUpon>LinesAccessControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Tasks\GeneralAccess.cs">
+    <Compile Include="Controls\Tasks\GeneralAccessControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Tasks\GeneralAccess.Designer.cs">
-      <DependentUpon>GeneralAccess.cs</DependentUpon>
+    <Compile Include="Controls\Tasks\GeneralAccessControl.Designer.cs">
+      <DependentUpon>GeneralAccessControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Tasks\PointsAccess.cs">
+    <Compile Include="Controls\Tasks\PointsAccessControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Tasks\PointsAccess.Designer.cs">
-      <DependentUpon>PointsAccess.cs</DependentUpon>
+    <Compile Include="Controls\Tasks\PointsAccessControl.Designer.cs">
+      <DependentUpon>PointsAccessControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Cursors\AddOnPoint.cs" />
     <Compile Include="Cursors\Circle.cs" />
@@ -85,29 +85,29 @@
     <Compile Include="Forms\GraphicsControlSettingsForm.Designer.cs">
       <DependentUpon>GraphicsControlSettingsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\General\SettingsBackground.cs">
+    <Compile Include="Controls\General\BackgroundSettingsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\General\SettingsBackground.Designer.cs">
-      <DependentUpon>SettingsBackground.cs</DependentUpon>
+    <Compile Include="Controls\General\BackgroundSettingsControl.Designer.cs">
+      <DependentUpon>BackgroundSettingsControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\General\SettingsPoint.cs">
+    <Compile Include="Controls\General\PointsSettingsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\General\SettingsPoint.Designer.cs">
-      <DependentUpon>SettingsPoint.cs</DependentUpon>
+    <Compile Include="Controls\General\PointsSettingsControl.Designer.cs">
+      <DependentUpon>PointsSettingsControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\General\SettingsCursor.cs">
+    <Compile Include="Controls\General\CursorSettingsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\General\SettingsCursor.Designer.cs">
-      <DependentUpon>SettingsCursor.cs</DependentUpon>
+    <Compile Include="Controls\General\CursorSettingsControl.Designer.cs">
+      <DependentUpon>CursorSettingsControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\General\SettingsGrid.cs">
+    <Compile Include="Controls\General\GridSettingsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\General\SettingsGrid.Designer.cs">
-      <DependentUpon>SettingsGrid.cs</DependentUpon>
+    <Compile Include="Controls\General\GridSettingsControl.Designer.cs">
+      <DependentUpon>GridSettingsControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\TaskSettingsForm.cs">
       <SubType>Form</SubType>
@@ -117,78 +117,78 @@
     </Compile>
     <Compile Include="PenSerialize.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Controls\General\SettingsAxis.cs">
+    <Compile Include="Controls\General\AxisSettingsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\General\SettingsAxis.Designer.cs">
-      <DependentUpon>SettingsAxis.cs</DependentUpon>
+    <Compile Include="Controls\General\AxisSettingsControl.Designer.cs">
+      <DependentUpon>AxisSettingsControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\General\SettingsLine.cs">
+    <Compile Include="Controls\General\LinesSettingsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\General\SettingsLine.Designer.cs">
-      <DependentUpon>SettingsLine.cs</DependentUpon>
+    <Compile Include="Controls\General\LinesSettingsControl.Designer.cs">
+      <DependentUpon>LinesSettingsControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\General\SettingsLink.cs">
+    <Compile Include="Controls\General\LinkLineSettingsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\General\SettingsLink.Designer.cs">
-      <DependentUpon>SettingsLink.cs</DependentUpon>
+    <Compile Include="Controls\General\LinkLineSettingsControl.Designer.cs">
+      <DependentUpon>LinkLineSettingsControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\General\SettingsSegment.cs">
+    <Compile Include="Controls\General\SegmentsSettingsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\General\SettingsSegment.Designer.cs">
-      <DependentUpon>SettingsSegment.cs</DependentUpon>
+    <Compile Include="Controls\General\SegmentsSettingsControl.Designer.cs">
+      <DependentUpon>SegmentsSettingsControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="DrawS.cs" />
-    <Compile Include="LinkLineS.cs" />
-    <Compile Include="AxisS.cs" />
-    <Compile Include="GridS.cs" />
+    <Compile Include="DrawSettings.cs" />
+    <Compile Include="LinkLinesSettings.cs" />
+    <Compile Include="AxisSettings.cs" />
+    <Compile Include="GridSettings.cs" />
     <Compile Include="Settings.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Controls\Tasks\PlanesAccess.resx">
-      <DependentUpon>PlanesAccess.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Tasks\PlanesAccessControl.resx">
+      <DependentUpon>PlanesAccessControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Tasks\SegmentsAccess.resx">
-      <DependentUpon>SegmentsAccess.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Tasks\SegmentsAccessControl.resx">
+      <DependentUpon>SegmentsAccessControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Tasks\LinesAccess.resx">
-      <DependentUpon>LinesAccess.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Tasks\LinesAccessControl.resx">
+      <DependentUpon>LinesAccessControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Tasks\GeneralAccess.resx">
-      <DependentUpon>GeneralAccess.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Tasks\GeneralAccessControl.resx">
+      <DependentUpon>GeneralAccessControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Tasks\PointsAccess.resx">
-      <DependentUpon>PointsAccess.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Tasks\PointsAccessControl.resx">
+      <DependentUpon>PointsAccessControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\GraphicsControlSettingsForm.resx">
       <DependentUpon>GraphicsControlSettingsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\General\SettingsBackground.resx">
-      <DependentUpon>SettingsBackground.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\General\BackgroundSettingsControl.resx">
+      <DependentUpon>BackgroundSettingsControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\General\SettingsPoint.resx">
-      <DependentUpon>SettingsPoint.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\General\PointsSettingsControl.resx">
+      <DependentUpon>PointsSettingsControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\General\SettingsCursor.resx">
-      <DependentUpon>SettingsCursor.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\General\CursorSettingsControl.resx">
+      <DependentUpon>CursorSettingsControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\General\SettingsGrid.resx">
-      <DependentUpon>SettingsGrid.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\General\GridSettingsControl.resx">
+      <DependentUpon>GridSettingsControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\General\SettingsAxis.resx">
-      <DependentUpon>SettingsAxis.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\General\AxisSettingsControl.resx">
+      <DependentUpon>AxisSettingsControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\General\SettingsLine.resx">
-      <DependentUpon>SettingsLine.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\General\LinesSettingsControl.resx">
+      <DependentUpon>LinesSettingsControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\General\SettingsLink.resx">
-      <DependentUpon>SettingsLink.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\General\LinkLineSettingsControl.resx">
+      <DependentUpon>LinkLineSettingsControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\General\SettingsSegment.resx">
-      <DependentUpon>SettingsSegment.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\General\SegmentsSettingsControl.resx">
+      <DependentUpon>SegmentsSettingsControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\TaskSettingsForm.resx">
       <DependentUpon>TaskSettingsForm.cs</DependentUpon>

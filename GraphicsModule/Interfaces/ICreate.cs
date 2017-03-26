@@ -16,6 +16,6 @@ namespace GraphicsModule.Interfaces
         /// <param name="canvas">Полотно отрисовки</param>
         /// <param name="settings">Настройки</param>
         /// <param name="storage">Хранилище данных</param>
-        void AddToStorageAndDraw(Point pt, Point frameCenter,Canvas canvas, DrawS settings, Storage storage);
+        void AddToStorageAndDraw(Point pt, Point frameCenter,Canvas canvas, DrawSettings settings, Storage storage);
     }
 }

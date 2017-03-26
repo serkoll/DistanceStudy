@@ -5,10 +5,10 @@ using GraphicsModule.Configuration.Forms;
 
 namespace GraphicsModule.Configuration.Controls.General
 {
-    public partial class SettingsBackground : UserControl
+    public partial class BackgroundSettingsControl : UserControl
     {
         public Color BackgroundColor { get; set; }
-        public SettingsBackground()
+        public BackgroundSettingsControl()
         {
 
             InitializeComponent();

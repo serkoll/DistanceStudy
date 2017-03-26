@@ -6,7 +6,7 @@ using GraphicsModule.Configuration.Cursors;
 
 namespace GraphicsModule.Configuration.Controls.General
 {
-    public partial class SettingsCursor : UserControl
+    public partial class CursorSettingsControl : UserControl
     {
         private readonly List<Button> _buttons;
         internal readonly List<ColorDialog> ColorDialogs;
@@ -14,7 +14,7 @@ namespace GraphicsModule.Configuration.Controls.General
         public List<PictureBox> CursorBoxes;
         public List<PictureBox> ColorBase; 
 
-        public SettingsCursor()
+        public CursorSettingsControl()
         {
             InitializeComponent();
             ColorBase = new List<PictureBox>

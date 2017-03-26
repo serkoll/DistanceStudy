@@ -1,6 +1,6 @@
-﻿namespace GraphicsModule.Configuration.Controls.Tasks
+﻿namespace GraphicsModule.Configuration.Controls.General
 {
-    partial class PlanesAccess
+    partial class AxisSettingsControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -288,7 +288,7 @@
             this.axis3NameBox.TabIndex = 36;
             this.axis3NameBox.SelectedIndexChanged += new System.EventHandler(this.axis3NameBox_SelectedIndexChanged);
             // 
-            // SettingsAxis
+            // AxisSettingsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -307,7 +307,7 @@
             this.Controls.Add(this.Label14);
             this.Controls.Add(this.Label15);
             this.Controls.Add(this.Label13);
-            this.Name = "SettingsAxis";
+            this.Name = "AxisSettingsControl";
             this.Size = new System.Drawing.Size(555, 258);
             ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownAxisWidth)).EndInit();
             this.GroupBox1_AxisColor.ResumeLayout(false);

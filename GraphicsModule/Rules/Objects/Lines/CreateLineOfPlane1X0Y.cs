@@ -14,14 +14,14 @@ namespace GraphicsModule.Rules.Objects.Lines
     /// </summary>
     public class CreateLineOfPlane1X0Y : ICreate
     {
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas canvas, DrawS settings, Storage storage)
+        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas canvas, DrawSettings settings, Storage storage)
         {
             var obj = Create(pt, frameCenter, canvas, settings, storage);
             if (obj == null) return;
             storage.AddToCollection(obj);
             canvas.Update(storage);
         }
-        public LineOfPlane1X0Y Create(Point pt, Point frameCenter, Canvas can, DrawS setting, Storage strg)
+        public LineOfPlane1X0Y Create(Point pt, Point frameCenter, Canvas can, DrawSettings setting, Storage strg)
         {
             if (!PointOfPlane1X0Y.IsCreatable(pt, frameCenter)) return null;
             var ptOfPlane = new PointOfPlane1X0Y(pt, frameCenter);

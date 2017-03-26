@@ -3,22 +3,22 @@ using System.Globalization;
 using System.Windows.Forms;
 using GraphicsModule.Configuration.Forms;
 
-namespace GraphicsModule.Configuration.Controls.General
+namespace GraphicsModule.Configuration.Controls.Tasks
 {
-    public partial class SettingsAxis : UserControl
+    public partial class SegmentsAccessControl : UserControl
     {
-        public AxisS AxisS { get; set; }
-        public SettingsAxis()
+        public AxisSettings AxisSettings { get; set; }
+        public SegmentsAccessControl()
         {
             InitializeComponent();
-            AxisS = GraphicsControlSettingsForm.ValueS.AxisS;
-            CheckBoxFlagDrawAxisX.Checked = AxisS.FlagDrawX;
-            CheckBoxFlagDrawAxisY.Checked = AxisS.FlagDrawY;
-            CheckBoxFlagDrawAxisZ.Checked = AxisS.FlagDrawZ;
-            NumericUpDownAxisWidth.Value = AxisS.Width;
-            colorBoxX.BackColor = GraphicsControlSettingsForm.ValueS.AxisS.ColorX;
-            colorBoxY.BackColor = GraphicsControlSettingsForm.ValueS.AxisS.ColorY;
-            colorBoxZ.BackColor = GraphicsControlSettingsForm.ValueS.AxisS.ColorZ;
+            AxisSettings = GraphicsControlSettingsForm.ValueS.AxisSettings;
+            CheckBoxFlagDrawAxisX.Checked = AxisSettings.FlagDrawX;
+            CheckBoxFlagDrawAxisY.Checked = AxisSettings.FlagDrawY;
+            CheckBoxFlagDrawAxisZ.Checked = AxisSettings.FlagDrawZ;
+            NumericUpDownAxisWidth.Value = AxisSettings.Width;
+            colorBoxX.BackColor = GraphicsControlSettingsForm.ValueS.AxisSettings.ColorX;
+            colorBoxY.BackColor = GraphicsControlSettingsForm.ValueS.AxisSettings.ColorY;
+            colorBoxZ.BackColor = GraphicsControlSettingsForm.ValueS.AxisSettings.ColorZ;
         }
 
         private void colorBoxX_Click(object sender, EventArgs e)
@@ -26,7 +26,7 @@ namespace GraphicsModule.Configuration.Controls.General
             if (colorDialogX.ShowDialog() == DialogResult.OK)
             {
                 colorBoxX.BackColor = colorDialogX.Color;
-                AxisS.ColorX = colorDialogX.Color;
+                AxisSettings.ColorX = colorDialogX.Color;
             }
         }
 
@@ -35,7 +35,7 @@ namespace GraphicsModule.Configuration.Controls.General
             if (colorDialogY.ShowDialog() == DialogResult.OK)
             {
                 colorBoxY.BackColor = colorDialogY.Color;
-                AxisS.ColorY = colorDialogY.Color;
+                AxisSettings.ColorY = colorDialogY.Color;
             }
         }
 
@@ -44,7 +44,7 @@ namespace GraphicsModule.Configuration.Controls.General
             if (colorDialogZ.ShowDialog() == DialogResult.OK)
             {
                 colorBoxZ.BackColor = colorDialogZ.Color;
-                AxisS.ColorZ = colorDialogZ.Color;
+                AxisSettings.ColorZ = colorDialogZ.Color;
             }
         }
 
@@ -77,22 +77,22 @@ namespace GraphicsModule.Configuration.Controls.General
 
         private void CheckBoxFlagDrawAxisX_CheckedChanged(object sender, EventArgs e)
         {
-            AxisS.FlagDrawX = CheckBoxFlagDrawAxisX.Checked;
+            AxisSettings.FlagDrawX = CheckBoxFlagDrawAxisX.Checked;
         }
 
         private void CheckBoxFlagDrawAxisY_CheckedChanged(object sender, EventArgs e)
         {
-            AxisS.FlagDrawY = CheckBoxFlagDrawAxisY.Checked;
+            AxisSettings.FlagDrawY = CheckBoxFlagDrawAxisY.Checked;
         }
 
         private void CheckBoxFlagDrawAxisZ_CheckedChanged(object sender, EventArgs e)
         {
-            AxisS.FlagDrawZ = CheckBoxFlagDrawAxisZ.Checked;
+            AxisSettings.FlagDrawZ = CheckBoxFlagDrawAxisZ.Checked;
         }
 
         private void NumericUpDownAxisWidth_ValueChanged(object sender, EventArgs e)
         {
-            AxisS.Width = Convert.ToInt32(NumericUpDownAxisWidth.Value.ToString(CultureInfo.InvariantCulture));
+            AxisSettings.Width = Convert.ToInt32(NumericUpDownAxisWidth.Value.ToString(CultureInfo.InvariantCulture));
         }
     }
 }

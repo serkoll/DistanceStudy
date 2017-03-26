@@ -44,13 +44,13 @@ namespace GraphicsModule.Geometry.Objects.Lines
             Point1.Y = line.Point1.Y;
             Point1.Z = line.Point1.Z;
         }
-        public void Draw(DrawS st, Point framecenter, Graphics g)
+        public void Draw(DrawSettings st, Point framecenter, Graphics g)
         {
             Point0.Draw(st, framecenter, g);
             Point1.Draw(st, framecenter, g);
             g.DrawLine(st.PenLineOfPlane3Y0Z, DrawPoints[0], DrawPoints[1]);
         }
-        public void DrawLineOnly(DrawS st, Point framecenter, Graphics g)
+        public void DrawLineOnly(DrawSettings st, Point framecenter, Graphics g)
         {
             Point0.DrawPointsOnly(st, framecenter, g);
             Point1.DrawPointsOnly(st, framecenter, g);

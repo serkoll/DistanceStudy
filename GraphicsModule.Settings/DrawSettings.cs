@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 namespace GraphicsModule.Configuration
 {
     [Serializable]
-    public class DrawS
+    public class DrawSettings
     {
         [XmlIgnore]
         public Pen PenPoints { get; set; }
@@ -49,12 +49,12 @@ namespace GraphicsModule.Configuration
         }
         public int RadiusPoints { get; set; }
         public int RadiusLines { get; set; }
-        public LinkLineS LinkLineSettings { get; set; }
+        public LinkLinesSettings LinkLinesSettings { get; set; }
         [XmlIgnore]
         public Font TextFont { get; set; }
         [XmlIgnore]
         public Brush TextBrush { get; set; }
-        public DrawS()
+        public DrawSettings()
         {
             RadiusPoints = 2;
             RadiusLines = 1;
@@ -65,9 +65,9 @@ namespace GraphicsModule.Configuration
             PenLineOfPlane3Y0Z = new Pen(Brushes.Blue, RadiusLines);
             TextFont = new Font("Times New Roman", 14, FontStyle.Regular);
             TextBrush = new SolidBrush(Color.Black);
-            LinkLineSettings = new LinkLineS();
+            LinkLinesSettings = new LinkLinesSettings();
         }
-        public DrawS(Pen pnPoints, Pen pnLine2D, Pen pnLn1, Pen pnLn2, Pen pnLn3, int rPoints, int rLines, Font fText, Brush tBrush)
+        public DrawSettings(Pen pnPoints, Pen pnLine2D, Pen pnLn1, Pen pnLn2, Pen pnLn3, int rPoints, int rLines, Font fText, Brush tBrush)
         {
             RadiusPoints = rPoints;
             RadiusLines = rLines;
@@ -76,7 +76,7 @@ namespace GraphicsModule.Configuration
             PenLineOfPlane1X0Y = pnLn1;
             PenLineOfPlane2X0Z = pnLn2;
             PenLineOfPlane3Y0Z = pnLn3;
-            LinkLineSettings = new LinkLineS(pnLine2D);
+            LinkLinesSettings = new LinkLinesSettings(pnLine2D);
             TextFont = fText;
             TextBrush = tBrush;
         }

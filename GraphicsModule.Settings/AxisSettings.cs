@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 namespace GraphicsModule.Configuration
 {
     [Serializable]
-    public class AxisS
+    public class AxisSettings
     { 
         public int Width { get; set; }
         [XmlIgnore]
@@ -36,7 +36,7 @@ namespace GraphicsModule.Configuration
         public bool FlagDrawY { get; set; }
         public bool FlagDrawZ { get; set; }
         public bool IsDraw { get; set; }
-        public AxisS()
+        public AxisSettings()
         {
             Width = 1;
             ColorX = Color.Black;

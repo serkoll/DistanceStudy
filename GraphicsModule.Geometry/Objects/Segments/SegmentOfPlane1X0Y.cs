@@ -29,7 +29,7 @@ namespace GraphicsModule.Geometry.Objects.Segments
             Point1.X = line.Point1.X;
             Point1.Y = line.Point1.Y;
         }
-        public void Draw(DrawS st, Point framecenter, Graphics g)
+        public void Draw(DrawSettings st, Point framecenter, Graphics g)
         {
             
             Point0.Draw(st, framecenter, g);
@@ -40,7 +40,7 @@ namespace GraphicsModule.Geometry.Objects.Segments
                                              new PointF(pt1.X + st.RadiusPoints, pt1.Y + st.RadiusPoints));
 
         }
-        public void DrawSegmentOnly(DrawS st, Point framecenter, Graphics g)
+        public void DrawSegmentOnly(DrawSettings st, Point framecenter, Graphics g)
         {
             Point0.DrawPointsOnly(st, framecenter, g);
             Point1.DrawPointsOnly(st, framecenter, g);

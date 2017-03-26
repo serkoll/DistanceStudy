@@ -9,7 +9,7 @@ namespace GraphicsModule
     public class NamesGenerator : INamesGenerator
     {
         public NamePosition Position { get; set; }
-        private readonly DrawS _textSettings;
+        private readonly DrawSettings _textSettings;
         private int _counter;
         private int _quality;
         public NamesGenerator(bool type, NamePosition startPosition, Settings textSettings)
@@ -17,7 +17,7 @@ namespace GraphicsModule
             _counter = type ? 65 : 49;
             _quality = 1;
             Position = startPosition;
-            _textSettings = textSettings.DrawS;
+            _textSettings = textSettings.DrawSettings;
         }
         public Name Generate()
         {
