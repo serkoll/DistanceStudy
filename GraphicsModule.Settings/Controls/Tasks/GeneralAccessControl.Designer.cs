@@ -36,7 +36,7 @@
             this.AxisOXLabel = new System.Windows.Forms.Label();
             this.AccessGridCheckBox = new System.Windows.Forms.CheckBox();
             this.AccessBindToGridCheckBox = new System.Windows.Forms.CheckBox();
-            this.AccessLinkLineCheckBox = new System.Windows.Forms.CheckBox();
+            this.AccessLinkLinesCheckBox = new System.Windows.Forms.CheckBox();
             this.GridLabel = new System.Windows.Forms.Label();
             this.BindToGridLabel = new System.Windows.Forms.Label();
             this.LinkLineLabel = new System.Windows.Forms.Label();
@@ -52,7 +52,7 @@
             this.AccessAxisYCheckBox.Size = new System.Drawing.Size(15, 14);
             this.AccessAxisYCheckBox.TabIndex = 19;
             this.AccessAxisYCheckBox.UseVisualStyleBackColor = true;
-            this.AccessAxisYCheckBox.CheckedChanged += new System.EventHandler(this.CheckBoxFlagDrawAxisY_CheckedChanged);
+            this.AccessAxisYCheckBox.CheckedChanged += new System.EventHandler(this.AccessAxisYCheckBox_CheckedChanged);
             // 
             // AccessAxisZCheckBox
             // 
@@ -64,7 +64,7 @@
             this.AccessAxisZCheckBox.Size = new System.Drawing.Size(15, 14);
             this.AccessAxisZCheckBox.TabIndex = 20;
             this.AccessAxisZCheckBox.UseVisualStyleBackColor = true;
-            this.AccessAxisZCheckBox.CheckedChanged += new System.EventHandler(this.CheckBoxFlagDrawAxisZ_CheckedChanged);
+            this.AccessAxisZCheckBox.CheckedChanged += new System.EventHandler(this.AccessAxisZCheckBox_CheckedChanged);
             // 
             // AccessAxisXCheckBox
             // 
@@ -76,7 +76,7 @@
             this.AccessAxisXCheckBox.Size = new System.Drawing.Size(15, 14);
             this.AccessAxisXCheckBox.TabIndex = 21;
             this.AccessAxisXCheckBox.UseVisualStyleBackColor = true;
-            this.AccessAxisXCheckBox.CheckedChanged += new System.EventHandler(this.CheckBoxFlagDrawAxisX_CheckedChanged);
+            this.AccessAxisXCheckBox.CheckedChanged += new System.EventHandler(this.AccessAxisXCheckBox_CheckedChanged);
             // 
             // AxisOYLabel
             // 
@@ -115,6 +115,7 @@
             this.AccessGridCheckBox.Size = new System.Drawing.Size(15, 14);
             this.AccessGridCheckBox.TabIndex = 25;
             this.AccessGridCheckBox.UseVisualStyleBackColor = true;
+            this.AccessGridCheckBox.CheckedChanged += new System.EventHandler(this.AccessGridCheckBox_CheckedChanged);
             // 
             // AccessBindToGridCheckBox
             // 
@@ -126,17 +127,19 @@
             this.AccessBindToGridCheckBox.Size = new System.Drawing.Size(15, 14);
             this.AccessBindToGridCheckBox.TabIndex = 26;
             this.AccessBindToGridCheckBox.UseVisualStyleBackColor = true;
+            this.AccessBindToGridCheckBox.CheckedChanged += new System.EventHandler(this.AccessBindToGridCheckBox_CheckedChanged);
             // 
-            // AccessLinkLineCheckBox
+            // AccessLinkLinesCheckBox
             // 
-            this.AccessLinkLineCheckBox.AutoSize = true;
-            this.AccessLinkLineCheckBox.Checked = true;
-            this.AccessLinkLineCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.AccessLinkLineCheckBox.Location = new System.Drawing.Point(147, 87);
-            this.AccessLinkLineCheckBox.Name = "AccessLinkLineCheckBox";
-            this.AccessLinkLineCheckBox.Size = new System.Drawing.Size(15, 14);
-            this.AccessLinkLineCheckBox.TabIndex = 27;
-            this.AccessLinkLineCheckBox.UseVisualStyleBackColor = true;
+            this.AccessLinkLinesCheckBox.AutoSize = true;
+            this.AccessLinkLinesCheckBox.Checked = true;
+            this.AccessLinkLinesCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.AccessLinkLinesCheckBox.Location = new System.Drawing.Point(147, 87);
+            this.AccessLinkLinesCheckBox.Name = "AccessLinkLinesCheckBox";
+            this.AccessLinkLinesCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.AccessLinkLinesCheckBox.TabIndex = 27;
+            this.AccessLinkLinesCheckBox.UseVisualStyleBackColor = true;
+            this.AccessLinkLinesCheckBox.CheckedChanged += new System.EventHandler(this.AccessLinkLineCheckBox_CheckedChanged);
             // 
             // GridLabel
             // 
@@ -171,7 +174,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.AccessGridCheckBox);
             this.Controls.Add(this.AccessBindToGridCheckBox);
-            this.Controls.Add(this.AccessLinkLineCheckBox);
+            this.Controls.Add(this.AccessLinkLinesCheckBox);
             this.Controls.Add(this.GridLabel);
             this.Controls.Add(this.BindToGridLabel);
             this.Controls.Add(this.LinkLineLabel);
@@ -197,7 +200,7 @@
         internal System.Windows.Forms.Label AxisOZLabel;
         internal System.Windows.Forms.Label AxisOXLabel;
         public System.Windows.Forms.CheckBox AccessGridCheckBox;
-        public System.Windows.Forms.CheckBox AccessLinkLineCheckBox;
+        public System.Windows.Forms.CheckBox AccessLinkLinesCheckBox;
         internal System.Windows.Forms.Label GridLabel;
         internal System.Windows.Forms.Label BindToGridLabel;
         internal System.Windows.Forms.Label LinkLineLabel;

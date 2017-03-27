@@ -1,14 +1,17 @@
-﻿namespace GraphicsModule.Configuration.Access.Structures
+﻿using System;
+
+namespace GraphicsModule.Configuration.Access.Structures
 {
-    public struct PlanesAccess
+    [Serializable]
+    public class PlanesAccess
     {
-        public bool IsPlanesEnabled;
-        public bool IsPlane2DEnabled;
-        public bool IsPlane3DEnabled;
-        public bool IsPlaneOfPlane1X0YEnabled;
-        public bool IsPlaneOfPlane2X0ZEnabled;
-        public bool IsPlaneOfPlane3Y0ZEnabled;
-        public bool IsGeneratePlane3DEnabled;
+        public bool IsPlanesEnabled { get; set; }
+        public bool IsPlane2DEnabled { get; set; }
+        public bool IsPlane3DEnabled { get; set; }
+        public bool IsPlaneOfPlane1X0YEnabled { get; set; }
+        public bool IsPlaneOfPlane2X0ZEnabled { get; set; }
+        public bool IsPlaneOfPlane3Y0ZEnabled { get; set; }
+        public bool IsGeneratePlane3DEnabled { get; set; }
         public PlanesAccess(bool planesEnabled, bool plane2DEnabled, bool plane3DEnabled, bool planeOfPlane1X0YEnabled,
             bool planeOfPlane2X0ZEnabled, bool planeOfPlane3Y0ZEnabled, bool generatePlane3DEnabled)
         {

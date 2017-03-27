@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using GraphicsModule.Configuration.Access.Structures;
 using GraphicsModule.Rules.Objects;
 using GraphicsModule.Rules.Objects.Planes;
 using GraphicsModule.Rules.Objects.Lines;
@@ -11,12 +12,17 @@ namespace GraphicsModule.Controls.Menu
         private PictureBox _mainPictureBox;
         private ToolStripButton _mainStripButton;
         private StatusStrip _menuStrip;
-        public PlaneMenuSelector(PictureBox mainPictureBox, ToolStripButton mainStripButton, StatusStrip menuStrip)
+        public PlaneMenuSelector(PictureBox mainPictureBox, ToolStripButton mainStripButton, StatusStrip menuStrip, PlanesAccess planesAccess)
         {
             InitializeComponent();
             _mainPictureBox = mainPictureBox;
             _mainStripButton = mainStripButton;
             _menuStrip = menuStrip;
+            buttonPlane2D.Enabled = planesAccess.IsPlane2DEnabled;
+            buttonPlane3D.Enabled = planesAccess.IsPlane3DEnabled;
+            buttonPlaneOfPlane1X0Y.Enabled = planesAccess.IsPlaneOfPlane1X0YEnabled;
+            buttonPlaneOfPlane2X0Z.Enabled = planesAccess.IsPlaneOfPlane2X0ZEnabled;
+            buttonPlaneOfPlane3Y0Z.Enabled = planesAccess.IsPlaneOfPlane3Y0ZEnabled;
         }
         private void mainStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {

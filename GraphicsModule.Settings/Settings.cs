@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.IO;
 using System.Xml.Serialization;
+using GraphicsModule.Configuration.Access;
 
 namespace GraphicsModule.Configuration
 {
@@ -16,7 +17,7 @@ namespace GraphicsModule.Configuration
             get { return ColorTranslator.ToHtml(BackgroundColor); }
             set { BackgroundColor = ColorTranslator.FromHtml(value); }
         }
-
+        public PrimitivesAccess PrimitivesAcces { get; set; }
         public GridSettings GridSettings { get; set; }
         public AxisSettings AxisSettings { get; set; }
         public DrawSettings DrawSettings { get; set; }
@@ -27,6 +28,7 @@ namespace GraphicsModule.Configuration
             GridSettings = new GridSettings();
             AxisSettings = new AxisSettings();
             DrawSettings = new DrawSettings();
+            PrimitivesAcces = new PrimitivesAccess();
             SelectedDrawSettings = new DrawSettings(new Pen(Brushes.Orange, 4), new Pen(Brushes.Orange, 1), new Pen(Brushes.Orange, 1), new Pen(Brushes.Orange, 1), new Pen(Brushes.Orange, 1), 2, 1, new Font("Times New Roman", 6, FontStyle.Bold), new SolidBrush(Color.Black));
         }
         public Settings(AxisSettings axisSettings, GridSettings gridSettings, DrawSettings drawSettings, DrawSettings selectedDrawSettings)
@@ -36,6 +38,7 @@ namespace GraphicsModule.Configuration
             AxisSettings = axisSettings;
             DrawSettings = drawSettings;
             SelectedDrawSettings = selectedDrawSettings;
+            PrimitivesAcces = new PrimitivesAccess();
         }
         public void Serialize(string fileName)
         {

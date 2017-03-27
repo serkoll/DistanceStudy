@@ -33,9 +33,6 @@
             this.AccesPoint3DLabel = new System.Windows.Forms.Label();
             this.AccesPointOfPlane1X0YLabel = new System.Windows.Forms.Label();
             this.AccesPoint2DLabel = new System.Windows.Forms.Label();
-            this.colorDialogX = new System.Windows.Forms.ColorDialog();
-            this.colorDialogY = new System.Windows.Forms.ColorDialog();
-            this.colorDialogZ = new System.Windows.Forms.ColorDialog();
             this.AccesPointOfPlane2X0ZLabel = new System.Windows.Forms.Label();
             this.AccesPointOfPlane3X0YLabel = new System.Windows.Forms.Label();
             this.AccesGeneratePoint3DLabel = new System.Windows.Forms.Label();
@@ -44,6 +41,8 @@
             this.AccessPointOfPlane1X0YCheckBox = new System.Windows.Forms.CheckBox();
             this.AccessGeneratePoint3DCheckBox = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.AccessLinesCheckBox = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,7 +56,7 @@
             this.AccessPoint3DCheckBox.Size = new System.Drawing.Size(15, 14);
             this.AccessPoint3DCheckBox.TabIndex = 19;
             this.AccessPoint3DCheckBox.UseVisualStyleBackColor = true;
-            this.AccessPoint3DCheckBox.CheckedChanged += new System.EventHandler(this.CheckBoxFlagDrawAxisY_CheckedChanged);
+            this.AccessPoint3DCheckBox.CheckedChanged += new System.EventHandler(this.AccessPoint3DCheckBox_CheckedChanged);
             // 
             // AccessPoint2DCheckBox
             // 
@@ -69,7 +68,7 @@
             this.AccessPoint2DCheckBox.Size = new System.Drawing.Size(15, 14);
             this.AccessPoint2DCheckBox.TabIndex = 21;
             this.AccessPoint2DCheckBox.UseVisualStyleBackColor = true;
-            this.AccessPoint2DCheckBox.CheckedChanged += new System.EventHandler(this.CheckBoxFlagDrawAxisX_CheckedChanged);
+            this.AccessPoint2DCheckBox.CheckedChanged += new System.EventHandler(this.AccessPoint2DCheckBox_CheckedChanged);
             // 
             // AccesPoint3DLabel
             // 
@@ -135,6 +134,7 @@
             this.AccessPointOfPlane2X0ZCheckBox.Size = new System.Drawing.Size(15, 14);
             this.AccessPointOfPlane2X0ZCheckBox.TabIndex = 28;
             this.AccessPointOfPlane2X0ZCheckBox.UseVisualStyleBackColor = true;
+            this.AccessPointOfPlane2X0ZCheckBox.CheckedChanged += new System.EventHandler(this.AccessPointOfPlane2X0ZCheckBox_CheckedChanged);
             // 
             // AccessPointOfPlane3Y0ZCheckBox
             // 
@@ -146,6 +146,7 @@
             this.AccessPointOfPlane3Y0ZCheckBox.Size = new System.Drawing.Size(15, 14);
             this.AccessPointOfPlane3Y0ZCheckBox.TabIndex = 29;
             this.AccessPointOfPlane3Y0ZCheckBox.UseVisualStyleBackColor = true;
+            this.AccessPointOfPlane3Y0ZCheckBox.CheckedChanged += new System.EventHandler(this.AccessPointOfPlane3Y0ZCheckBox_CheckedChanged);
             // 
             // AccessPointOfPlane1X0YCheckBox
             // 
@@ -157,6 +158,7 @@
             this.AccessPointOfPlane1X0YCheckBox.Size = new System.Drawing.Size(15, 14);
             this.AccessPointOfPlane1X0YCheckBox.TabIndex = 30;
             this.AccessPointOfPlane1X0YCheckBox.UseVisualStyleBackColor = true;
+            this.AccessPointOfPlane1X0YCheckBox.CheckedChanged += new System.EventHandler(this.AccessPointOfPlane1X0YCheckBox_CheckedChanged);
             // 
             // AccessGeneratePoint3DCheckBox
             // 
@@ -168,6 +170,7 @@
             this.AccessGeneratePoint3DCheckBox.Size = new System.Drawing.Size(15, 14);
             this.AccessGeneratePoint3DCheckBox.TabIndex = 31;
             this.AccessGeneratePoint3DCheckBox.UseVisualStyleBackColor = true;
+            this.AccessGeneratePoint3DCheckBox.CheckedChanged += new System.EventHandler(this.AccessGeneratePoint3DCheckBox_CheckedChanged);
             // 
             // groupBox1
             // 
@@ -183,23 +186,47 @@
             this.groupBox1.Controls.Add(this.AccesGeneratePoint3DLabel);
             this.groupBox1.Controls.Add(this.AccesPointOfPlane2X0ZLabel);
             this.groupBox1.Controls.Add(this.AccesPointOfPlane3X0YLabel);
-            this.groupBox1.Location = new System.Drawing.Point(3, 3);
+            this.groupBox1.Location = new System.Drawing.Point(142, 44);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(281, 187);
             this.groupBox1.TabIndex = 32;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Доступно для построения";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(148, 17);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(56, 13);
+            this.label1.TabIndex = 34;
+            this.label1.Text = "Включить";
+            // 
+            // AccessLinesCheckBox
+            // 
+            this.AccessLinesCheckBox.AutoSize = true;
+            this.AccessLinesCheckBox.Checked = true;
+            this.AccessLinesCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.AccessLinesCheckBox.Location = new System.Drawing.Point(338, 17);
+            this.AccessLinesCheckBox.Name = "AccessLinesCheckBox";
+            this.AccessLinesCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.AccessLinesCheckBox.TabIndex = 33;
+            this.AccessLinesCheckBox.UseVisualStyleBackColor = true;
+            this.AccessLinesCheckBox.CheckedChanged += new System.EventHandler(this.AccessLinesCheckBox_CheckedChanged);
+            // 
             // LinesAccessControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.AccessLinesCheckBox);
             this.Controls.Add(this.groupBox1);
             this.Name = "LinesAccessControl";
             this.Size = new System.Drawing.Size(555, 258);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -210,9 +237,6 @@
         internal System.Windows.Forms.Label AccesPoint3DLabel;
         internal System.Windows.Forms.Label AccesPointOfPlane1X0YLabel;
         internal System.Windows.Forms.Label AccesPoint2DLabel;
-        public System.Windows.Forms.ColorDialog colorDialogX;
-        public System.Windows.Forms.ColorDialog colorDialogY;
-        public System.Windows.Forms.ColorDialog colorDialogZ;
         internal System.Windows.Forms.Label AccesPointOfPlane2X0ZLabel;
         internal System.Windows.Forms.Label AccesPointOfPlane3X0YLabel;
         internal System.Windows.Forms.Label AccesGeneratePoint3DLabel;
@@ -221,5 +245,7 @@
         public System.Windows.Forms.CheckBox AccessPointOfPlane1X0YCheckBox;
         public System.Windows.Forms.CheckBox AccessGeneratePoint3DCheckBox;
         private System.Windows.Forms.GroupBox groupBox1;
+        internal System.Windows.Forms.Label label1;
+        public System.Windows.Forms.CheckBox AccessLinesCheckBox;
     }
 }

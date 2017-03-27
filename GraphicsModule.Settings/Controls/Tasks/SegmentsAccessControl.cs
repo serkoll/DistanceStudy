@@ -1,98 +1,54 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Forms;
+using GraphicsModule.Configuration.Access.Structures;
 using GraphicsModule.Configuration.Forms;
 
 namespace GraphicsModule.Configuration.Controls.Tasks
 {
     public partial class SegmentsAccessControl : UserControl
     {
-        public AxisSettings AxisSettings { get; set; }
+        public SegmentsAccess SegmentsAccess { get; set; }
+
         public SegmentsAccessControl()
         {
             InitializeComponent();
-            AxisSettings = GraphicsControlSettingsForm.ValueS.AxisSettings;
-            CheckBoxFlagDrawAxisX.Checked = AxisSettings.FlagDrawX;
-            CheckBoxFlagDrawAxisY.Checked = AxisSettings.FlagDrawY;
-            CheckBoxFlagDrawAxisZ.Checked = AxisSettings.FlagDrawZ;
-            NumericUpDownAxisWidth.Value = AxisSettings.Width;
-            colorBoxX.BackColor = GraphicsControlSettingsForm.ValueS.AxisSettings.ColorX;
-            colorBoxY.BackColor = GraphicsControlSettingsForm.ValueS.AxisSettings.ColorY;
-            colorBoxZ.BackColor = GraphicsControlSettingsForm.ValueS.AxisSettings.ColorZ;
+            SegmentsAccess = GraphicsControlSettingsForm.ValueS.PrimitivesAcces.Segments;
+            accessSegmentsCheckBox.Checked = SegmentsAccess.IsSegmentsEnabled;
+            AccessSegment2DCheckBox.Checked = SegmentsAccess.IsSegment2DEnabled;
+            AccessSegment3DCheckBox.Checked = SegmentsAccess.IsSegment3DEnabled;
+            AccessSegmentOfPlane1X0YCheckBox.Checked = SegmentsAccess.IsSegmentOfPlane1X0YEnabled;
+            AccessSegmentOfPlane2X0ZCheckBox.Checked = SegmentsAccess.IsSegmentOfPlane2X0ZEnabled;
+            AccessSegmentOfPlane3Y0ZCheckBox.Checked = SegmentsAccess.IsSegmentOfPlane3Y0ZEnabled;
+            AccessGenerateSegment3DCheckBox.Checked = SegmentsAccess.IsGenerateSegment3DEnabled;
         }
-
-        private void colorBoxX_Click(object sender, EventArgs e)
+        private void AccessSegment2DCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (colorDialogX.ShowDialog() == DialogResult.OK)
-            {
-                colorBoxX.BackColor = colorDialogX.Color;
-                AxisSettings.ColorX = colorDialogX.Color;
-            }
+            SegmentsAccess.IsSegment2DEnabled = AccessSegment2DCheckBox.Checked;
         }
-
-        private void colorBoxY_Click(object sender, EventArgs e)
+        private void AccessSegmentOfPlane3Y0ZCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (colorDialogY.ShowDialog() == DialogResult.OK)
-            {
-                colorBoxY.BackColor = colorDialogY.Color;
-                AxisSettings.ColorY = colorDialogY.Color;
-            }
+            SegmentsAccess.IsSegmentOfPlane3Y0ZEnabled = AccessSegmentOfPlane3Y0ZCheckBox.Checked;
         }
-
-        private void colorBoxZ_Click(object sender, EventArgs e)
+        private void AccessSegmentOfPlane2X0ZCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (colorDialogZ.ShowDialog() == DialogResult.OK)
-            {
-                colorBoxZ.BackColor = colorDialogZ.Color;
-                AxisSettings.ColorZ = colorDialogZ.Color;
-            }
+            SegmentsAccess.IsSegmentOfPlane2X0ZEnabled = AccessSegmentOfPlane2X0ZCheckBox.Checked;
         }
-
-        private void axis1NameBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void AccessSegmentOfPlane1X0YCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (axis1NameBox.SelectedIndex == axis1NameBox.Items.IndexOf(axis1NameBox.SelectedItem))
-            {
-                axis2NameBox.SelectedIndex = axis1NameBox.SelectedIndex;
-                axis3NameBox.SelectedIndex = axis1NameBox.SelectedIndex;
-            }
+            SegmentsAccess.IsSegmentOfPlane1X0YEnabled = AccessSegmentOfPlane1X0YCheckBox.Checked;
         }
-
-        private void axis2NameBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void AccessSegment3DCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (axis2NameBox.SelectedIndex == axis2NameBox.Items.IndexOf(axis2NameBox.SelectedItem))
-            {
-                axis1NameBox.SelectedIndex = axis2NameBox.SelectedIndex;
-                axis3NameBox.SelectedIndex = axis2NameBox.SelectedIndex;
-            }
+            SegmentsAccess.IsSegment3DEnabled = AccessSegment3DCheckBox.Checked;
         }
-
-        private void axis3NameBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void accessSegmentsCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (axis3NameBox.SelectedIndex == axis3NameBox.Items.IndexOf(axis3NameBox.SelectedItem))
-            {
-                axis1NameBox.SelectedIndex = axis3NameBox.SelectedIndex;
-                axis2NameBox.SelectedIndex = axis3NameBox.SelectedIndex;
-            }
+            SegmentsAccess.IsSegmentsEnabled = accessSegmentsCheckBox.Checked;
         }
-
-        private void CheckBoxFlagDrawAxisX_CheckedChanged(object sender, EventArgs e)
+        private void AccessGenerateSegment3DCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            AxisSettings.FlagDrawX = CheckBoxFlagDrawAxisX.Checked;
-        }
-
-        private void CheckBoxFlagDrawAxisY_CheckedChanged(object sender, EventArgs e)
-        {
-            AxisSettings.FlagDrawY = CheckBoxFlagDrawAxisY.Checked;
-        }
-
-        private void CheckBoxFlagDrawAxisZ_CheckedChanged(object sender, EventArgs e)
-        {
-            AxisSettings.FlagDrawZ = CheckBoxFlagDrawAxisZ.Checked;
-        }
-
-        private void NumericUpDownAxisWidth_ValueChanged(object sender, EventArgs e)
-        {
-            AxisSettings.Width = Convert.ToInt32(NumericUpDownAxisWidth.Value.ToString(CultureInfo.InvariantCulture));
+            SegmentsAccess.IsGenerateSegment3DEnabled = AccessGenerateSegment3DCheckBox.Checked;
         }
     }
 }
