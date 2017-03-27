@@ -5,7 +5,7 @@ using System.Drawing.Drawing2D;
 
 namespace GraphicsModule.Configuration.Cursors
 {
-    class Star:Cursor
+    public class Star:Cursor
     {
         readonly List<Point> _starPoints = new List<Point>();
 

@@ -12,6 +12,15 @@ namespace GraphicsModule.Configuration.Access.Structures
         public bool IsSegmentOfPlane2X0ZEnabled { get; set; }
         public bool IsSegmentOfPlane3Y0ZEnabled { get; set; }
         public bool IsGenerateSegment3DEnabled { get; set; }
+        public SegmentsAccess()
+        {
+            IsSegmentsEnabled =
+                IsSegment2DEnabled =
+                    IsSegment3DEnabled =
+                        IsSegmentOfPlane1X0YEnabled =
+                            IsSegmentOfPlane2X0ZEnabled =
+                                IsSegmentOfPlane3Y0ZEnabled = IsGenerateSegment3DEnabled = true;
+        }
         public SegmentsAccess(bool segmentsEnabled, bool segment2DEnabled, bool segment3DEnabled, bool segmentOfPlane1X0YEnabled,
             bool segmentOfPlane2X0ZEnabled, bool segmentOfPlane3Y0ZEnabled, bool generateSegment3DEnabled)
         {

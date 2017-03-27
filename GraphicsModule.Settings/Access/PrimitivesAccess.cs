@@ -6,12 +6,12 @@ namespace GraphicsModule.Configuration.Access
     [Serializable]
     public class PrimitivesAccess
     {
-        public GeneralSettings General { get; set; }
+        public GeneralAccess General { get; set; }
         public PointsAccess Points { get; }
         public LinesAccess Lines { get; }
         public SegmentsAccess Segments { get; }
         public PlanesAccess Planes { get; }
-        public PrimitivesAccess(GeneralSettings general, PointsAccess points, LinesAccess lines, SegmentsAccess segments, PlanesAccess planes)
+        public PrimitivesAccess(GeneralAccess general, PointsAccess points, LinesAccess lines, SegmentsAccess segments, PlanesAccess planes)
         {
             General = general;
             Points = points;
@@ -21,7 +21,7 @@ namespace GraphicsModule.Configuration.Access
         }
         public PrimitivesAccess()
         {
-            General = new GeneralSettings(true, true, true, true, true, true);
+            General = new GeneralAccess(true, true, true, true, true, true);
             Points = new PointsAccess(true, true, true, true, true, true, true);
             Lines = new LinesAccess(true, true, true, true, true, true, true);
             Segments = new SegmentsAccess(true, true, true, true, true, true, true);

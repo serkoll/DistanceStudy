@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using GraphicsModule.Controls;
 using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Geometry.Objects;
 
@@ -28,6 +29,7 @@ namespace GraphicsModule.Form
         private void FormGraphicsControl_Load(object sender, System.EventArgs e)
         {
             graphicsControl1.Focus();
+            GraphicsControl.StaticName = graphicsControl1.Name;
         }
     }
 }

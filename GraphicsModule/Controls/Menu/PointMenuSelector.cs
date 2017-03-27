@@ -22,6 +22,17 @@ namespace GraphicsModule.Controls.Menu
             buttonPointOfPlane1.Enabled = pointsAccess.IsPointOfPlane1X0YEnabled;
             buttonPointOfPlane2.Enabled = pointsAccess.IsPointOfPlane2X0ZEnabled;
             buttonPointOfPlane3.Enabled = pointsAccess.IsPointOfPlane3Y0ZEnabled;
+            buttonPoint3DGenerate.Enabled = pointsAccess.IsGeneratePoint3DEnabled;
+        }
+
+        public void SetAccess(PointsAccess pointsAccess)
+        {
+            buttonPoint2D.Enabled = pointsAccess.IsPoint2DEnabled;
+            buttonPoint3D.Enabled = pointsAccess.IsPoint3DEnabled;
+            buttonPointOfPlane1.Enabled = pointsAccess.IsPointOfPlane1X0YEnabled;
+            buttonPointOfPlane2.Enabled = pointsAccess.IsPointOfPlane2X0ZEnabled;
+            buttonPointOfPlane3.Enabled = pointsAccess.IsPointOfPlane3Y0ZEnabled;
+            buttonPoint3DGenerate.Enabled = pointsAccess.IsGeneratePoint3DEnabled;
         }
         private void buttonPoint2D_Click(object sender, EventArgs e)
         {

@@ -24,6 +24,16 @@ namespace GraphicsModule.Controls.Menu
             buttonPlaneOfPlane2X0Z.Enabled = planesAccess.IsPlaneOfPlane2X0ZEnabled;
             buttonPlaneOfPlane3Y0Z.Enabled = planesAccess.IsPlaneOfPlane3Y0ZEnabled;
         }
+
+        public void SetAccess(PlanesAccess planesAccess)
+        {
+            buttonPlane2D.Enabled = planesAccess.IsPlane2DEnabled;
+            buttonPlane3D.Enabled = planesAccess.IsPlane3DEnabled;
+            buttonPlaneOfPlane1X0Y.Enabled = planesAccess.IsPlaneOfPlane1X0YEnabled;
+            buttonPlaneOfPlane2X0Z.Enabled = planesAccess.IsPlaneOfPlane2X0ZEnabled;
+            buttonPlaneOfPlane3Y0Z.Enabled = planesAccess.IsPlaneOfPlane3Y0ZEnabled;
+            buttonGeneratePlane3D.Enabled = planesAccess.IsGeneratePlane3DEnabled;
+        }
         private void mainStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             Visible = false;

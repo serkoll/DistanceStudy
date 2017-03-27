@@ -22,6 +22,17 @@ namespace GraphicsModule.Controls.Menu
             buttonSegmentOfPlane1X0Y.Enabled = segmentsAccess.IsSegmentOfPlane1X0YEnabled;
             buttonSegmentOfPlane2X0Z.Enabled = segmentsAccess.IsSegmentOfPlane2X0ZEnabled;
             buttonSegmentOfPlane3Y0Z.Enabled = segmentsAccess.IsSegmentOfPlane3Y0ZEnabled;
+            buttonGenerateSegment3D.Enabled = segmentsAccess.IsGenerateSegment3DEnabled;
+        }
+
+        public void SetAccess(SegmentsAccess segmentsAccess)
+        {
+            buttonSegment2D.Enabled = segmentsAccess.IsSegment2DEnabled;
+            buttonSegment3D.Enabled = segmentsAccess.IsSegment3DEnabled;
+            buttonSegmentOfPlane1X0Y.Enabled = segmentsAccess.IsSegmentOfPlane1X0YEnabled;
+            buttonSegmentOfPlane2X0Z.Enabled = segmentsAccess.IsSegmentOfPlane2X0ZEnabled;
+            buttonSegmentOfPlane3Y0Z.Enabled = segmentsAccess.IsSegmentOfPlane3Y0ZEnabled;
+            buttonGenerateSegment3D.Enabled = segmentsAccess.IsGenerateSegment3DEnabled;
         }
         private void mainStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {

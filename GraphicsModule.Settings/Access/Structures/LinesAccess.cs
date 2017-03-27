@@ -12,6 +12,11 @@ namespace GraphicsModule.Configuration.Access.Structures
         public bool IsLineOfPlane2X0ZEnabled { get; set; }
         public bool IsLineOfPlane3Y0ZEnabled { get; set; }
         public bool IsGenerateLine3DEnabled { get; set; }
+
+        public LinesAccess()
+        {
+            IsLinesEnabled = IsLine2DEnabled = IsLine3DEnabled = IsLineOfPlane1X0YEnabled = IsLineOfPlane2X0ZEnabled = IsLineOfPlane3Y0ZEnabled = IsGenerateLine3DEnabled = true;
+        }
         public LinesAccess(bool linesEnabled, bool line2DEnabled, bool line3DEnabled, bool lineOfPlane1X0YEnabled,
             bool lineOfPlane2X0ZEnabled, bool lineOfPlane3Y0ZEnabled, bool generateLine3DEnabled)
         {

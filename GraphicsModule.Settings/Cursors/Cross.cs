@@ -5,7 +5,7 @@ using System.Drawing.Drawing2D;
 
 namespace GraphicsModule.Configuration.Cursors
 {
-    class Cross:Cursor
+    public class Cross:Cursor
     {
         readonly List<Point> _crossPoints=new List<Point>();
 

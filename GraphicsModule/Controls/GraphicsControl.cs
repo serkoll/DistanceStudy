@@ -6,8 +6,8 @@ using GraphicsModule.Cursors;
 using System.IO;
 using System.Linq;
 using GraphicsModule.Configuration;
-using GraphicsModule.Configuration.Forms;
 using GraphicsModule.Enums;
+using GraphicsModule.Forms;
 using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Interfaces;
 
@@ -18,7 +18,8 @@ namespace GraphicsModule.Controls
     /// </summary>
     public partial class GraphicsControl : UserControl
     {
-        #region Properties
+        #region
+        public static string StaticName;
         /// <summary>
         /// Меню создания точек
         /// </summary>
@@ -46,7 +47,7 @@ namespace GraphicsModule.Controls
         /// <summary>
         /// Класс настроек
         /// </summary>
-        private Settings _settings;
+        private Configuration.Settings _settings;
         /// <summary>
         /// Текущее инициализированное правило создания объека
         /// </summary>
@@ -85,30 +86,49 @@ namespace GraphicsModule.Controls
             if (File.Exists(SettingsFileName))
             {
                 _settings = new Settings().Deserialize(SettingsFileName); //Получаем экземпляр настроек
-                GraphicsControlSettingsForm.ValueS = _settings;
+                GraphicsControlSettingsForm.CurrentSettings = _settings;
             }
             else
             {
                 _settings = new Settings();
                 _settings.Serialize(SettingsFileName);
-                GraphicsControlSettingsForm.ValueS = _settings;
+                GraphicsControlSettingsForm.CurrentSettings = _settings;
             }
             MainPictureBox.BackColor = _settings.BackgroundColor;
         }
         public void InitializeMenu()
+        {  
+            _ptMenuSelector = new Menu.PointMenuSelector(MainPictureBox, buttonPointsMenu, ObjectsPropertyMenu, _settings.PrimitivesAcces.Points);
+            _lnMenuSelector = new Menu.LineMenuSelector(MainPictureBox, buttonLinesMenu, ObjectsPropertyMenu, _settings.PrimitivesAcces.Lines); 
+            _sgMenuSelector = new Menu.SegmentMenuSelector(MainPictureBox, buttonSegmentMenu, ObjectsPropertyMenu, _settings.PrimitivesAcces.Segments); 
+            _plMenuSelector = new Menu.PlaneMenuSelector(MainPictureBox, buttonPlanesMenu, ObjectsPropertyMenu, _settings.PrimitivesAcces.Planes);
+            AddMenus();
+            SetPrimitivesButtonsEnabled();
+        }
+        private void AddMenus()
+        {
+            Controls.Add(_ptMenuSelector);
+            Controls.Add(_lnMenuSelector); 
+            Controls.Add(_sgMenuSelector); 
+            Controls.Add(_plMenuSelector);
+        }
+        private void SetPrimitivesButtonsEnabled()
         {
             buttonPointsMenu.Enabled = _settings.PrimitivesAcces.Points.IsPointsEnabled;
             buttonLinesMenu.Enabled = _settings.PrimitivesAcces.Lines.IsLinesEnabled;
             buttonSegmentMenu.Enabled = _settings.PrimitivesAcces.Segments.IsSegmentsEnabled;
             buttonPlanesMenu.Enabled = _settings.PrimitivesAcces.Planes.IsPlanesEnabled;
-            _ptMenuSelector = new Menu.PointMenuSelector(MainPictureBox, buttonPointsMenu, ObjectsPropertyMenu, _settings.PrimitivesAcces.Points); //Создаем меню вариантов для точек
-            _lnMenuSelector = new Menu.LineMenuSelector(MainPictureBox, buttonLinesMenu, ObjectsPropertyMenu, _settings.PrimitivesAcces.Lines); //Создаем меню вариантов для линий
-            _sgMenuSelector = new Menu.SegmentMenuSelector(MainPictureBox, buttonSegmentMenu, ObjectsPropertyMenu, _settings.PrimitivesAcces.Segments); //Создаем меню вариантов для отрезков
-            _plMenuSelector = new Menu.PlaneMenuSelector(MainPictureBox, buttonPlanesMenu, ObjectsPropertyMenu, _settings.PrimitivesAcces.Planes);
-            Controls.Add(_ptMenuSelector); //Добавляем к контролам компонента
-            Controls.Add(_lnMenuSelector); //Добавляем к контролам компонента
-            Controls.Add(_sgMenuSelector); //Добавляем к контролам компонента
-            Controls.Add(_plMenuSelector);
+        }
+        public void SetAccess()
+        {
+            buttonPointsMenu.Enabled = _settings.PrimitivesAcces.Points.IsPointsEnabled;
+            buttonLinesMenu.Enabled = _settings.PrimitivesAcces.Lines.IsLinesEnabled;
+            buttonSegmentMenu.Enabled = _settings.PrimitivesAcces.Segments.IsSegmentsEnabled;
+            buttonPlanesMenu.Enabled = _settings.PrimitivesAcces.Planes.IsPlanesEnabled;
+            _ptMenuSelector.SetAccess(_settings.PrimitivesAcces.Points);
+            _lnMenuSelector.SetAccess(_settings.PrimitivesAcces.Lines);
+            _plMenuSelector.SetAccess(_settings.PrimitivesAcces.Planes);
+            _sgMenuSelector.SetAccess(_settings.PrimitivesAcces.Segments);
         }
         private void GraphicsControl_Load(object sender, EventArgs e)
         {
@@ -493,7 +513,9 @@ namespace GraphicsModule.Controls
 
         private void доступностьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            var f = new TaskSettingsForm {Owner = Form.ActiveForm};
+            f.ShowDialog();
+            _canvas.Update(_storage);
         }
     }
 }
