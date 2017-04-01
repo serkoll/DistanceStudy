@@ -23,7 +23,7 @@ namespace GraphicsModule.Rules.Objects.Segments
             var ptOfPlane = new Point2D(pt);
             if (strg.TempObjects.Count == 0)
             {
-                ptOfPlane.SetName(GraphicsControl.NmGenerator.Generate());
+                ptOfPlane.SetName(GraphicsControl.NamesGenerator.Generate());
                 strg.TempObjects.Add(ptOfPlane);
                 strg.DrawLastAddedToTempObjects(settings, frameCenter, can.Graphics);
             }

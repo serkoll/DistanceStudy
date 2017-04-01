@@ -30,7 +30,7 @@ namespace GraphicsModule.Rules.Objects.Points
                 {
                     storage.Objects.Remove(storage.SelectedObjects[0]);
                     storage.Objects.Remove(storage.SelectedObjects[1]);
-                    _source.SetName(GraphicsControl.NmGenerator.Generate());
+                    _source.SetName(GraphicsControl.NamesGenerator.Generate());
                     storage.SelectedObjects.Clear();
                     canvas.Update(storage);
                     storage.AddToCollection(_source);

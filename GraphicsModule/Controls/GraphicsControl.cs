@@ -18,8 +18,9 @@ namespace GraphicsModule.Controls
     /// </summary>
     public partial class GraphicsControl : UserControl
     {
-        #region
+        #region Properties
         public static string StaticName;
+        #region Menus
         /// <summary>
         /// Меню создания точек
         /// </summary>
@@ -36,6 +37,7 @@ namespace GraphicsModule.Controls
         /// Меню создания плоскостей
         /// </summary>
         private Menu.PlaneMenuSelector _plMenuSelector;
+        #endregion
         /// <summary>
         /// Полотно отрисовки
         /// </summary>
@@ -47,7 +49,7 @@ namespace GraphicsModule.Controls
         /// <summary>
         /// Класс настроек
         /// </summary>
-        private Configuration.Settings _settings;
+        private Settings _settings;
         /// <summary>
         /// Текущее инициализированное правило создания объека
         /// </summary>
@@ -59,7 +61,7 @@ namespace GraphicsModule.Controls
         /// <summary>
         /// Генератор имен объектов
         /// </summary>
-        public static NamesGenerator NmGenerator;
+        public static NamesGenerator NamesGenerator;
         /// <summary>
         /// Класс привязки курсора к сетке
         /// </summary>
@@ -68,8 +70,6 @@ namespace GraphicsModule.Controls
         /// Путь к настройкам редактора
         /// </summary>
         private const string SettingsFileName = "config.cfg";
-
-
         #endregion
         /// <summary>
         /// Инициализация контрола
@@ -79,7 +79,7 @@ namespace GraphicsModule.Controls
             InitializeComponent();
             LoadSettings();
             InitializeMenu();
-            NmGenerator = new NamesGenerator(true, 0, _settings);
+            NamesGenerator = new NamesGenerator(true, 0, _settings);
         }
         public void LoadSettings()
         {
@@ -443,22 +443,22 @@ namespace GraphicsModule.Controls
         #region Names position
         private void buttonNameMenuTopLeftMenuItem_Click(object sender, EventArgs e)
         {
-            NmGenerator.Position = NamePosition.TopLeft;
+            NamesGenerator.Position = NamePosition.TopLeft;
             buttonNameMenu.Text = buttonNameMenuTopLeft.Text;
         }
         private void buttonNameMenuTopRightMenuItem_Click(object sender, EventArgs e)
         {
-            NmGenerator.Position = NamePosition.TopRight;
+            NamesGenerator.Position = NamePosition.TopRight;
             buttonNameMenu.Text = buttonNameMenuTopRight.Text;
         }
         private void buttonNameMenuBottomLeftMenuItem_Click(object sender, EventArgs e)
         {
-            NmGenerator.Position = NamePosition.BottomLeft;
+            NamesGenerator.Position = NamePosition.BottomLeft;
             buttonNameMenu.Text = buttonNameMenuBottomLeft.Text;
         }
         private void buttonNameMenuBottomRightMenuItem_Click(object sender, EventArgs e)
         {
-            NmGenerator.Position = NamePosition.BottomRight;
+            NamesGenerator.Position = NamePosition.BottomRight;
             buttonNameMenu.Text = buttonNameMenuBottomRight.Text;
         }
         #endregion

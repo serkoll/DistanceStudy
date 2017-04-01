@@ -26,7 +26,7 @@ namespace GraphicsModule.Rules.Objects.Segments
             {
                 if (_tempLineOfPlane == null)
                 {
-                    ptOfPlane.SetName(GraphicsControl.NmGenerator.Generate());
+                    ptOfPlane.SetName(GraphicsControl.NamesGenerator.Generate());
                     storage.TempObjects.Add(ptOfPlane);
                     storage.DrawLastAddedToTempObjects(settings, frameCenter, canvas.Graphics);
                 }

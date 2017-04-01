@@ -33,7 +33,7 @@ namespace GraphicsModule.Rules.Objects.Lines
             {
                 if (TempLineOfPlane == null)
                 {
-                    ptOfPlane.SetName(GraphicsControl.NmGenerator.Generate());
+                    ptOfPlane.SetName(GraphicsControl.NamesGenerator.Generate());
                     strg.TempObjects.Add(ptOfPlane);
                     strg.DrawLastAddedToTempObjects(setting, frameCenter, can.Graphics);
                     return null;
