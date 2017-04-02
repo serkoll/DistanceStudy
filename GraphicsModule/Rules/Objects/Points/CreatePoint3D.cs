@@ -23,14 +23,16 @@ namespace GraphicsModule.Rules.Objects.Points
             storage.TempObjects.Clear();
             canvas.Update(storage);
         }
+
         public Point3D Create(Point pt, Point frameCenter, Canvas canvas, DrawSettings settings, Storage storage)
         {
             var ptOfPlane = TypeOf.PointOfPlane(pt, frameCenter);
             if (storage.TempObjects.Count == 0)
             {
-                ptOfPlane.SetName(GraphicsControl.NamesGenerator.Generate());
-                storage.TempObjects.Add(ptOfPlane);
+                //TODO: единый вид отрисовки временных объектов
+                ptOfPlane.Name = GraphicsControl.NamesGenerator.Generate();
                 ptOfPlane.Draw(settings, frameCenter, canvas.Graphics);
+                storage.TempObjects.Add(ptOfPlane);
                 return null;
             }
             if (ReferenceEquals(storage.TempObjects.First().GetType(), ptOfPlane.GetType())) return null;
@@ -50,7 +52,9 @@ namespace GraphicsModule.Rules.Objects.Points
                 canvas.Update(storage);
                 return null;
             }
-            source.SetName(storage.TempObjects.First().GetName());
+            var name = storage.TempObjects.First().GetName();
+            name.Value = name.Value.Replace("'", "");
+            source.Name = name;
             return source;
         }
     }

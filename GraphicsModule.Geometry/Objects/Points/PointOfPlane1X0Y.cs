@@ -9,9 +9,20 @@ namespace GraphicsModule.Geometry.Objects.Points
     /// <remarks>Copyright © Polozkov V. Yury, 2015</remarks>
     public class PointOfPlane1X0Y : IPointOfPlane, IObjectOfPlane1X0Y
     {
-        /// <summary>Инициализация нового экземпляра двумерной проекции точки</summary>
-        /// <remarks>Исходные координаты точки: X=0; Y=0</remarks>
-        public PointOfPlane1X0Y() { X = 0; Y = 0; }
+        public double X { get; set; }
+        /// <summary>Получает или задает координату Y двумерной проекции точки</summary>
+        /// <remarks></remarks>
+        public double Y { get; set; }
+        private Name _name;
+        public Name Name {
+            get { return _name; }
+            set
+            {
+                _name = new Name(value);
+                _name.Value += "'";
+            }
+        }
+        public string Id => $"P{X}{Y}";
         /// <summary>Инициализирует новый экземпляр двумерной проекции точки с указанными координатами</summary>
         /// <remarks></remarks>
         public PointOfPlane1X0Y(double x, double y) { X = x; Y = y; }
@@ -24,13 +35,6 @@ namespace GraphicsModule.Geometry.Objects.Points
         {
             return (pt.X - frameCenter.X) <= 0 && (pt.Y - frameCenter.Y) >= 0;
         }
-        /// <summary>Получает или задает координату X двумерной проекции точки</summary>
-        /// <remarks></remarks>
-        public double X { get; set; }
-        /// <summary>Получает или задает координату Y двумерной проекции точки</summary>
-        /// <remarks></remarks>
-        public double Y { get; set; }
-        public Name Name { get; set; }
         /// <summary>Передвигает ранее заданную двумерную проекцию точку
         /// (изменяет коодинаты на указанные величины по осям в 2D)</summary>
         /// <remarks>PointOfPlan1_X0Y.X += dx; PointOfPlan1_X0Y.Y += dy</remarks>
@@ -40,21 +44,20 @@ namespace GraphicsModule.Geometry.Objects.Points
             var ptForDraw = DeterminePosition.ForPointProjection(this, poitRaduis, frameCenter);
             graphics.DrawPie(pen, ptForDraw.X, ptForDraw.Y, poitRaduis * 2, poitRaduis * 2, 0, 360);
         }
-
-        public void DrawName(DrawSettings st, float poitRaduis, Point frameCenter, Graphics graphics)
+        public void Draw(DrawSettings settings, Point frameCenter, Graphics g)
+        {
+            Draw(settings.PenPoints, settings.RadiusPoints, frameCenter, g);
+            if (settings.LinkLinesSettings.IsDraw)
+            {
+                DrawLinkLine(settings.LinkLinesSettings.PenLinkLineX0YtoX, settings.LinkLinesSettings.PenLinkLineX0YtoY, true, true, true, true, true, frameCenter, g);
+            }
+            if (Name.IsDraw)
+                DrawName(settings, settings.RadiusPoints, frameCenter, g);
+        }
+        public void DrawName(DrawSettings settings, float poitRaduis, Point frameCenter, Graphics graphics)
         {
             var ptForDraw = DeterminePosition.ForPointProjection(this, poitRaduis, frameCenter);
-            graphics.DrawString(Name.Value, st.TextFont, st.TextBrush, ptForDraw.X + Name.Dx, ptForDraw.Y + Name.Dy);
-        }
-        public void Draw(DrawSettings st, Point frameCenter, Graphics g)
-        {
-            Draw(st.PenPoints, st.RadiusPoints, frameCenter, g);
-            if (st.LinkLinesSettings.IsDraw)
-            {
-                DrawLinkLine(st.LinkLinesSettings.PenLinkLineX0YtoX, st.LinkLinesSettings.PenLinkLineX0YtoY, true, true, true, true, true, frameCenter, g);
-            }
-            if (Name != null)
-                DrawName(st, st.RadiusPoints, frameCenter, g);
+            graphics.DrawString(Name.Value, settings.TextFont, settings.TextBrush, ptForDraw.X + Name.Dx, ptForDraw.Y + Name.Dy);
         }
         public void DrawPointsOnly(DrawSettings st, Point frameCenter, Graphics g)
         {
@@ -100,13 +103,12 @@ namespace GraphicsModule.Geometry.Objects.Points
         }
         public Name GetName()
         {
-            var name = new Name(Name.Value.Remove(Name.Value.IndexOf("'", StringComparison.Ordinal)), Name.Dx, Name.Dy);
-            return name;
+            return _name;
         }
+
         public void SetName(Name name)
         {
-            Name = new Name(name);
-            Name.Value += "'";
+            _name = name;
         }
     }
 }

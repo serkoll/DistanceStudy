@@ -22,7 +22,6 @@ namespace GraphicsModule.Geometry.Analyze
         {
             return Math.Abs((pt.X - ln.Point0.X) * ln.ky - (pt.Y - ln.Point0.Y) * ln.kx) < 0.001;
         }
-
         public bool IncidenceOfPoint(Point2D pt, Line2D ln, double solveerror)
         {
             return Math.Abs((pt.X - ln.Point0.X) * ln.ky - (pt.Y - ln.Point0.Y) * ln.kx) < solveerror;

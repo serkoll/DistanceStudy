@@ -239,19 +239,19 @@ namespace GraphicsModule.Rules.Objects.Planes
         }
         public Plane2D CreateByParallelLines(Line2D ln1, Line2D ln2)
         {
-            return Analyze.LinesPos.Parallelism(ln1, ln2) ? new Plane2D(ln1, ln2) : null;
+            return Analyze.LinesPosition.Parallelism(ln1, ln2) ? new Plane2D(ln1, ln2) : null;
         }
         public Plane2D CreateByParallelSegments(Segment2D sg1, Segment2D sg2)
         {
-            return Analyze.SegmentPos.Parallelism(sg1, sg2) ? new Plane2D(sg1, sg2) : null;
+            return Analyze.SegmentsPosition.Parallelism(sg1, sg2) ? new Plane2D(sg1, sg2) : null;
         }
         public Plane2D CreateByCrossedLines(Line2D ln1, Line2D ln2)
         {
-            return Analyze.LinesPos.Crossing(ln1, ln2) ? new Plane2D(ln1, ln2) : null;
+            return Analyze.LinesPosition.Crossing(ln1, ln2) ? new Plane2D(ln1, ln2) : null;
         }
         public Plane2D CreateByCrossedSegments(Segment2D sg1, Segment2D sg2)
         {
-            return Analyze.SegmentPos.Crossing(sg1, sg2) ? new Plane2D(sg1, sg2) : null;
+            return Analyze.SegmentsPosition.Crossing(sg1, sg2) ? new Plane2D(sg1, sg2) : null;
         }
         public void SetBuildType(PlaneCreateType type)
         {

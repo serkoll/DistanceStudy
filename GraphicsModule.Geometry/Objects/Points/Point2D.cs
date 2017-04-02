@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Runtime.InteropServices;
 using GraphicsModule.Configuration;
 using GraphicsModule.Geometry.Interfaces;
 
@@ -13,14 +14,20 @@ namespace GraphicsModule.Geometry.Objects.Points
         /// Получает или задает координату X точки
         /// </summary>
         public double X { get; set; }
+
         /// <summary>
         /// Получает или задает координату Y точки
         /// </summary>
         public double Y { get; set; }
+        private Name _name;
         /// <summary>
         /// Имя точки
         /// </summary>
-        public Name Name { get; set; }
+        public Name Name
+        {
+            get { return _name; }
+            set { _name = new Name(value); }
+        }
         /// <summary>Инициализирует новый экземпляр 2D точки с указанными координатами</summary>
         /// <remarks></remarks>
         public Point2D(double x, double y)
@@ -35,7 +42,7 @@ namespace GraphicsModule.Geometry.Objects.Points
         /// <param name="pt">Точка</param>
         public Point2D(Point pt)
         {
-            X = pt.X; Y = pt.Y;
+            X = pt.X; Y = pt.Y; Name = new Name();
         }
         /// <summary>
         /// Передвигает ранее заданную 2D точку (изменяет коодинаты на указанные величины по осям в 2D)
@@ -47,14 +54,14 @@ namespace GraphicsModule.Geometry.Objects.Points
         /// <summary>
         /// Отрисовывает 2D точку
         /// </summary>
-        /// <param name="st">Параметры отрисовки графических объектов</param>
+        /// <param name="settings">Параметры отрисовки графических объектов</param>
         /// <param name="framecenter">Центр системы координат</param>
         /// <param name="g">Целевой Graphics</param>
-        public void Draw(DrawSettings st, Point framecenter, Graphics g)
+        public void Draw(DrawSettings settings, Point framecenter, Graphics g)
         {
-            g.DrawPie(st.PenPoints, (float)X - st.RadiusPoints, (float)Y - st.RadiusPoints, st.RadiusPoints * 2, st.RadiusPoints * 2, 0, 360);
-            if (Name != null)
-                g.DrawString(Name.Value, st.TextFont, st.TextBrush, (float)X + Name.Dx, (float)Y + Name.Dy);
+            g.DrawPie(settings.PenPoints, (float)X - settings.RadiusPoints, (float)Y - settings.RadiusPoints, settings.RadiusPoints * 2, settings.RadiusPoints * 2, 0, 360);
+            if (Name.IsDraw)
+                g.DrawString(Name.Value, settings.TextFont, settings.TextBrush, (float)X + Name.Dx, (float)Y + Name.Dy);
         }
         /// <summary>
         /// Проверяет на выбор курсором

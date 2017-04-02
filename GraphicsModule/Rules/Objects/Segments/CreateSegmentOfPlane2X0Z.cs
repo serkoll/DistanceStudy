@@ -32,7 +32,7 @@ namespace GraphicsModule.Rules.Objects.Segments
                 strg.DrawLastAddedToTempObjects(setting, frameCenter, can.Graphics);
                 return null;
             }
-            if (Analyze.PointPos.Coincidence((PointOfPlane2X0Z)strg.TempObjects[0],
+            if (Analyze.PointsPosition.Coincidence((PointOfPlane2X0Z)strg.TempObjects[0],
                 new PointOfPlane2X0Z(pt, frameCenter))) return null;
             var source = new SegmentOfPlane2X0Z((PointOfPlane2X0Z) strg.TempObjects[0],
                 new PointOfPlane2X0Z(pt, frameCenter));

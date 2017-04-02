@@ -29,7 +29,7 @@ namespace GraphicsModule.Rules.Objects.Segments
                 strg.DrawLastAddedToTempObjects(setting, frameCenter, can.Graphics);
                 return null;
             }
-            if (Analyze.PointPos.Coincidence((PointOfPlane3Y0Z)strg.TempObjects[0],
+            if (Analyze.PointsPosition.Coincidence((PointOfPlane3Y0Z)strg.TempObjects[0],
                 new PointOfPlane3Y0Z(pt, frameCenter))) return null;
             var source = new SegmentOfPlane3Y0Z((PointOfPlane3Y0Z)strg.TempObjects[0],
                 new PointOfPlane3Y0Z(pt, frameCenter));

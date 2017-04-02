@@ -67,7 +67,7 @@ namespace GraphicsModule.Geometry.Objects.Lines
         public Line2D(Point2D pt1, Point2D pt2)
         {
             //Контроль совпадения заданных точек
-            if (Analyze.Analyze.PointPos.Coincidence(pt1, pt2)) return;
+            if (Analyze.Analyze.PointsPosition.Coincidence(pt1, pt2)) return;
             Point0 = pt1;
             Point1 = pt2;
             kx = pt2.X - pt1.X;
@@ -79,7 +79,7 @@ namespace GraphicsModule.Geometry.Objects.Lines
         public Line2D(Point2D pt1, Point2D pt2, PictureBox pb)
         {
             //Контроль совпадения заданных точек
-            if (Analyze.Analyze.PointPos.Coincidence(pt1, pt2)) return;
+            if (Analyze.Analyze.PointsPosition.Coincidence(pt1, pt2)) return;
             Point0 = pt1;
             Point1 = pt2;
             kx = pt2.X - pt1.X;
@@ -125,13 +125,13 @@ namespace GraphicsModule.Geometry.Objects.Lines
             return line.ky / line.kx;
 
         }
-        public void Draw(DrawSettings st, Point framecenter, Graphics g)
+        public void Draw(DrawSettings settings, Point framecenter, Graphics g)
         {
-            Point0.Draw(st, framecenter, g);
-            Point1.Draw(st, framecenter, g);
-            //g.DrawPie(st.PenPoints, (float)Point0.X - st.RadiusPoints, (float)Point0.Y - st.RadiusPoints, st.RadiusPoints * 2, st.RadiusPoints * 2, 0, 360);
-            //g.DrawPie(st.PenPoints, (float)Point1.X - st.RadiusPoints, (float)Point1.Y - st.RadiusPoints, st.RadiusPoints * 2, st.RadiusPoints * 2, 0, 360);
-            g.DrawLine(st.PenLine2D, pts[0], pts[1]);
+            Point0.Draw(settings, framecenter, g);
+            Point1.Draw(settings, framecenter, g);
+            //g.DrawPie(settings.PenPoints, (float)Point0.X - settings.RadiusPoints, (float)Point0.Y - settings.RadiusPoints, settings.RadiusPoints * 2, settings.RadiusPoints * 2, 0, 360);
+            //g.DrawPie(settings.PenPoints, (float)Point1.X - settings.RadiusPoints, (float)Point1.Y - settings.RadiusPoints, settings.RadiusPoints * 2, settings.RadiusPoints * 2, 0, 360);
+            g.DrawLine(settings.PenLine2D, pts[0], pts[1]);
         }
         private void CalculatePointsForDraw(PictureBox pb)
         {
@@ -168,7 +168,7 @@ namespace GraphicsModule.Geometry.Objects.Lines
         }
         public bool IsSelected(Point mscoords, float ptR, Point frameCenter, double distance)
         {
-            return Analyze.Analyze.LinesPos.IncidenceOfPoint(mscoords, this, 35 * distance);
+            return Analyze.Analyze.LinesPosition.IncidenceOfPoint(mscoords, this, 35 * distance);
         }
 
         public Name GetName()

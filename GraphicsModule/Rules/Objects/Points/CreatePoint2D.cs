@@ -18,9 +18,7 @@ namespace GraphicsModule.Rules.Objects.Points
         }
         public Point2D Create(Point pt, Point frameCenter, Canvas can, DrawSettings setting, Storage strg)
         {
-            var source = new Point2D(pt);
-            source.SetName(GraphicsControl.NamesGenerator.Generate());
-            return source;
+            return new Point2D(pt) { Name = GraphicsControl.NamesGenerator.Generate() };
         }
     }
 }

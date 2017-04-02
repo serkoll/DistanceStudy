@@ -29,22 +29,22 @@ namespace GraphicsModule.Geometry.Objects.Segments
         /// </remarks>
         public Segment2D(Point2D pt1, Point2D pt2)
         {
-            if (Analyze.Analyze.PointPos.Coincidence(pt1, pt2)) return;
+            if (Analyze.Analyze.PointsPosition.Coincidence(pt1, pt2)) return;
             Point0 = pt1;
             Point1 = pt2;
             Kx = pt2.X - pt1.X;
             Ky = pt2.Y - pt1.Y;
         }
-        public void Draw(DrawSettings st, Point framecenter, Graphics g)
+        public void Draw(DrawSettings settings, Point framecenter, Graphics g)
         {
-            Point0.Draw(st, framecenter, g);
-            Point1.Draw(st, framecenter, g);
-            g.DrawLine(st.PenLine2D, new PointF((float)Point0.X, (float)Point0.Y), 
+            Point0.Draw(settings, framecenter, g);
+            Point1.Draw(settings, framecenter, g);
+            g.DrawLine(settings.PenLine2D, new PointF((float)Point0.X, (float)Point0.Y), 
                                      new PointF((float)Point1.X, (float)Point1.Y));
         }
         public bool IsSelected(Point mscoords, float ptR, Point frameCenter, double distance)
         {
-            return Analyze.Analyze.SegmentPos.IncidenceOfPoint(mscoords, this, 35 * distance);
+            return Analyze.Analyze.SegmentsPosition.IncidenceOfPoint(mscoords, this, 35 * distance);
         }
         public Name GetName()
         {

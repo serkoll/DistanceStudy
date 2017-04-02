@@ -9,6 +9,23 @@ namespace GraphicsModule.Geometry.Objects.Points
     /// <remarks>Copyright © Polozkov V. Yury, 2013</remarks>
     public class PointOfPlane3Y0Z : IPointOfPlane, IObjectOfPlane3Y0Z
     {
+        /// <summary>Получает или задает координату Y двумерной проекции точки</summary>
+        /// <remarks></remarks>
+        public double Y { get; set; }
+        /// <summary>Получает или задает координату Z двумерной проекции точки</summary>
+        /// <remarks></remarks>
+        public double Z { get; set; }
+        private Name _name;
+        public Name Name
+        {
+            get { return _name; }
+            set
+            {
+                _name = new Name(value);
+                _name.Value += "'''";
+            }
+        }
+        public string Id => $"P{Y}{Z}";
         /// <summary>Инициализация нового экземпляра двумерной проекции точки</summary>
         /// <remarks>Исходные координаты точки: Y=0; Z=0</remarks>
         public PointOfPlane3Y0Z() { Y = 0; Z = 0; }
@@ -27,13 +44,7 @@ namespace GraphicsModule.Geometry.Objects.Points
         {
             return (pt.X - frameCenter.X) >= 0 && (pt.Y - frameCenter.Y) <= 0;
         }
-        /// <summary>Получает или задает координату Y двумерной проекции точки</summary>
-        /// <remarks></remarks>
-        public double Y { get; set; }
-        /// <summary>Получает или задает координату Z двумерной проекции точки</summary>
-        /// <remarks></remarks>
-        public double Z { get; set; }
-        public Name Name { get; set; }
+        
         /// <summary>Передвигает ранее заданную двумерную проекцию точку
         /// (изменяет коодинаты на указанные величины по осям в 2D)
         /// </summary>
@@ -46,21 +57,22 @@ namespace GraphicsModule.Geometry.Objects.Points
             var ptForDraw = DeterminePosition.ForPointProjection(this, poitRaduis, frameCenter);
             graphics.DrawPie(pen, ptForDraw.X, ptForDraw.Y, poitRaduis * 2, poitRaduis * 2, 0, 360);
         }
+        public void Draw(DrawSettings settings, Point frameCenter, Graphics g)
+        {
+            Draw(settings.PenPoints, settings.RadiusPoints, frameCenter, g);
+            if (settings.LinkLinesSettings.IsDraw)
+            {
+                DrawLinkLine(settings.LinkLinesSettings.PenLinkLineX0ZtoZ, settings.LinkLinesSettings.PenLinkLineY0ZtoY, true, true, true, true, true, frameCenter, g);
+            }
+            if (Name.IsDraw)
+                DrawName(settings, settings.RadiusPoints, frameCenter, g);
+        }
         public void DrawName(DrawSettings st, float poitRaduis, Point frameCenter, Graphics graphics)
         {
             var ptForDraw = DeterminePosition.ForPointProjection(this, poitRaduis, frameCenter);
             graphics.DrawString(Name.Value, st.TextFont, st.TextBrush, ptForDraw.X + Name.Dx, ptForDraw.Y + Name.Dy);
         }
-        public void Draw(DrawSettings st, Point frameCenter, Graphics g)
-        {
-            Draw(st.PenPoints, st.RadiusPoints, frameCenter, g);
-            if (st.LinkLinesSettings.IsDraw)
-            {
-                DrawLinkLine(st.LinkLinesSettings.PenLinkLineX0ZtoZ, st.LinkLinesSettings.PenLinkLineY0ZtoY, true, true, true, true, true, frameCenter, g);
-            }
-            if (Name != null)
-                DrawName(st, st.RadiusPoints, frameCenter, g);
-        }
+        
         public void DrawPointsOnly(DrawSettings st, Point frameCenter, Graphics g)
         {
             Draw(st.PenPoints, st.RadiusPoints, frameCenter, g);
@@ -103,13 +115,12 @@ namespace GraphicsModule.Geometry.Objects.Points
         }
         public Name GetName()
         {
-            var name = new Name(Name.Value.Remove(Name.Value.IndexOf("'", StringComparison.Ordinal)), Name.Dx, Name.Dy);
-            return name;
+            return _name;
         }
+
         public void SetName(Name name)
         {
-            Name = new Name(name);
-            Name.Value += "'''";
+            _name = name;
         }
     }
 }

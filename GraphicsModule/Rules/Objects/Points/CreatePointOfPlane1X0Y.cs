@@ -20,10 +20,9 @@ namespace GraphicsModule.Rules.Objects.Points
         }
         public PointOfPlane1X0Y Create(Point pt, Point frameCenter, Canvas can, DrawSettings setting, Storage strg)
         {
-            if (!PointOfPlane1X0Y.IsCreatable(pt, frameCenter)) return null;
-            var source = new PointOfPlane1X0Y(pt, frameCenter);
-            source.SetName(GraphicsControl.NamesGenerator.Generate());
-            return source;
+            return PointOfPlane1X0Y.IsCreatable(pt, frameCenter)
+                ? new PointOfPlane1X0Y(pt, frameCenter) {Name = GraphicsControl.NamesGenerator.Generate()}
+                : null;
         }
     }
 }

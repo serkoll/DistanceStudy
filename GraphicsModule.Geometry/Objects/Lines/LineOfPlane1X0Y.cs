@@ -42,11 +42,11 @@ namespace GraphicsModule.Geometry.Objects.Lines
             Point1.X = line.Point1.X;
             Point1.Y = line.Point1.Y;
         }
-        public void Draw(DrawSettings st, Point framecenter, Graphics g)
+        public void Draw(DrawSettings settings, Point framecenter, Graphics g)
         {
-            Point0.Draw(st, framecenter, g);
-            Point1.Draw(st, framecenter, g);
-            g.DrawLine(st.PenLineOfPlane1X0Y, DrawPoints[0], DrawPoints[1]);
+            Point0.Draw(settings, framecenter, g);
+            Point1.Draw(settings, framecenter, g);
+            g.DrawLine(settings.PenLineOfPlane1X0Y, DrawPoints[0], DrawPoints[1]);
         }
         public void DrawLineOnly(DrawSettings st, Point framecenter, Graphics g)
         {
@@ -62,7 +62,7 @@ namespace GraphicsModule.Geometry.Objects.Lines
         public bool IsSelected(Point mscoords, float ptR, Point frameCenter, double distance)
         {
             var ln = DeterminePosition.ForLineProjection(this, frameCenter);
-            return Analyze.Analyze.LinesPos.IncidenceOfPoint(mscoords, ln, 35 * distance);
+            return Analyze.Analyze.LinesPosition.IncidenceOfPoint(mscoords, ln, 35 * distance);
         }
         public Name GetName()
         {

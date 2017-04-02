@@ -14,7 +14,18 @@ namespace GraphicsModule.Geometry.Objects.Points
         public double X { get; set; }
         public double Y { get; set; }
         public double Z { get; set; }
-        public Name Name { get; set; }
+        private Name _name;
+        public Name Name
+        {
+            get { return _name; }
+            set
+            {
+                _name = new Name(value);
+                PointOfPlane1X0Y.Name = _name;
+                PointOfPlane2X0Z.Name = _name;
+                PointOfPlane3Y0Z.Name = _name;
+            }
+        }
         public PointOfPlane1X0Y PointOfPlane1X0Y { get; set; }
         /// <summary>Получает или задает координаты проекции 3D точки на плоскость X0Z пространственной системы координат</summary>
         /// <remarks></remarks>
@@ -123,12 +134,12 @@ namespace GraphicsModule.Geometry.Objects.Points
             PointOfPlane2X0Z.Draw(pen, ptR, frameCenter, graphics);
             PointOfPlane3Y0Z.Draw(pen, ptR, frameCenter, graphics);
         }
-        public void Draw(DrawSettings st, Point frameCenter, Graphics g)
+        public void Draw(DrawSettings settings, Point frameCenter, Graphics g)
         {
-            Draw(st.PenPoints, st.RadiusPoints, frameCenter, g);
-            DrawLinkLine(st.LinkLinesSettings.PenLinkLineX0YtoX, st.LinkLinesSettings.PenLinkLineX0YtoY, st.LinkLinesSettings.PenLinkLineX0ZtoX, st.LinkLinesSettings.PenLinkLineX0ZtoZ,
-                         st.LinkLinesSettings.PenLinkLineY0ZtoZ, st.LinkLinesSettings.PenLinkLineY0ZtoY, frameCenter, ref g);
-            DrawName(st, st.RadiusPoints, frameCenter, g);
+            Draw(settings.PenPoints, settings.RadiusPoints, frameCenter, g);
+            DrawLinkLine(settings.LinkLinesSettings.PenLinkLineX0YtoX, settings.LinkLinesSettings.PenLinkLineX0YtoY, settings.LinkLinesSettings.PenLinkLineX0ZtoX, settings.LinkLinesSettings.PenLinkLineX0ZtoZ,
+                         settings.LinkLinesSettings.PenLinkLineY0ZtoZ, settings.LinkLinesSettings.PenLinkLineY0ZtoY, frameCenter, ref g);
+            DrawName(settings, settings.RadiusPoints, frameCenter, g);
         }
         public void DrawName(DrawSettings st, float poitRaduis, Point frameCenter, Graphics graphics)
         {
@@ -190,17 +201,12 @@ namespace GraphicsModule.Geometry.Objects.Points
 
         public Name GetName()
         {
-            return Name;
+            return _name;
         }
+
         public void SetName(Name name)
         {
-            Name = new Name(name);
-            PointOfPlane1X0Y.Name = new Name(Name);
-            PointOfPlane1X0Y.Name.Value += "'";
-            PointOfPlane2X0Z.Name = new Name(Name);
-            PointOfPlane2X0Z.Name.Value += "''";
-            PointOfPlane3Y0Z.Name = new Name(Name);
-            PointOfPlane3Y0Z.Name.Value += "'''";
+            _name = name;
         }
     }
 }

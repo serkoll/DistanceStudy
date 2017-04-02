@@ -17,6 +17,7 @@ namespace GraphicsModule.Rules.Objects.Points
         private Point3D _source;
         public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas canvas, DrawSettings settings, Storage storage)
         {
+            //TODO: проверить логику создания
             new SelectPointOfPlane().Execute(pt, storage, canvas);
             if (storage.SelectedObjects.Count > 1)
             {
@@ -30,7 +31,7 @@ namespace GraphicsModule.Rules.Objects.Points
                 {
                     storage.Objects.Remove(storage.SelectedObjects[0]);
                     storage.Objects.Remove(storage.SelectedObjects[1]);
-                    _source.SetName(GraphicsControl.NamesGenerator.Generate());
+                    _source.Name = GraphicsControl.NamesGenerator.Generate();
                     storage.SelectedObjects.Clear();
                     canvas.Update(storage);
                     storage.AddToCollection(_source);

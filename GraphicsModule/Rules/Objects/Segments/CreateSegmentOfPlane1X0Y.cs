@@ -28,7 +28,7 @@ namespace GraphicsModule.Rules.Objects.Segments
                 strg.DrawLastAddedToTempObjects(setting, frameCenter, can.Graphics);
                 return null;
             }
-            if (Analyze.PointPos.Coincidence((PointOfPlane1X0Y)strg.TempObjects[0],
+            if (Analyze.PointsPosition.Coincidence((PointOfPlane1X0Y)strg.TempObjects[0],
                 new PointOfPlane1X0Y(pt, frameCenter))) return null;
             var source = new SegmentOfPlane1X0Y((PointOfPlane1X0Y)strg.TempObjects[0],
                 new PointOfPlane1X0Y(pt, frameCenter));
