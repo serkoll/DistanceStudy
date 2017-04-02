@@ -62,6 +62,7 @@ namespace GraphicsModule.Forms
                 _linesAccessControl.LinesAccess, 
                 _segmentsAccessControl.SegmentsAccess, 
                 _planesAccessControl.PlanesAccess);
+            //TODO: убрать stаtic name
             var graphicsControl = Owner.Controls.Find(GraphicsControl.StaticName, false).First() as GraphicsControl;
             graphicsControl?.SetAccess();
             Close();

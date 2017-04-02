@@ -4,7 +4,6 @@ using System.Windows.Forms;
 using System.Collections.ObjectModel;
 using GraphicsModule.Cursors;
 using System.IO;
-using System.Linq;
 using GraphicsModule.Configuration;
 using GraphicsModule.Enums;
 using GraphicsModule.Forms;

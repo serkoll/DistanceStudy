@@ -10,7 +10,8 @@ namespace GraphicsModule.Geometry.Objects.Lines
     /// <summary>Класс для расчета параметров проекции 3D линии на X0Z плоскость проекций</summary>
     /// <remarks>Copyright © Polozkov V. Yury, 2015</remarks>
     public class LineOfPlane2X0Z : ILineOfPlane
-    { 
+    {
+        //TODO: логику имен, рефакторинг
         public PointOfPlane2X0Z Point0 { get; set; }
         public PointOfPlane2X0Z Point1 { get; set; }
         public Name Name { get; set; }

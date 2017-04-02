@@ -13,10 +13,10 @@ namespace GraphicsModule.Geometry.Objects.Segments
         //Вторая (расчетная или заданная) точка прямой
         public Point2D Point1 { get; set; }
         public Name Name { get; set; }
-        /// <summary>Получает или задает коэффициент kx канонического уравнения прямой</summary>
+        /// <summary>Получает или задает коэффициент Kx канонического уравнения прямой</summary>
         /// <remarks></remarks>
         public double Kx { get; set; }
-        /// <summary>Получает или задает коэффициент ky канонического уравнения прямой</summary>
+        /// <summary>Получает или задает коэффициент Ky канонического уравнения прямой</summary>
         /// <remarks></remarks>
         public double Ky { get; set; }
         /// <summary>

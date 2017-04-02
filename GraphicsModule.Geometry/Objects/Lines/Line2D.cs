@@ -21,40 +21,22 @@ namespace GraphicsModule.Geometry.Objects.Lines
         public Name Name { get; set; }
         //====================================================================================================
         //================== Свойства задания и извлечения параметров 2D линии ==================================
-        /// <summary>Получает или задает коэффициент kx канонического уравнения прямой</summary>
+        /// <summary>Получает или задает коэффициент Kx канонического уравнения прямой</summary>
         /// <remarks></remarks>
-        public double kx { get; set; }
-        /// <summary>Получает или задает коэффициент ky канонического уравнения прямой</summary>
+        public double Kx { get; set; }
+        /// <summary>Получает или задает коэффициент Ky канонического уравнения прямой</summary>
         /// <remarks></remarks>
-        public double ky { get; set; }
+        public double Ky { get; set; }
         private List<PointF> pts { get; set; }
         /// <summary>
         /// Возвращает значения координат 2D точки, инцидентной ранее заданной 2D прямой по параметру t 
         /// </summary>
         /// <param name="t">Параметр, определяющий удаление новой точки от базовой точки прямой</param>
         /// <value></value>
-        /// <remarks>Расчетные формулы координат новой точки: X = Point_0.X + kx * t; Y = Point_0.Y + ky * t.</remarks>
+        /// <remarks>Расчетные формулы координат новой точки: X = Point_0.X + Kx * t; Y = Point_0.Y + Ky * t.</remarks>
         public Point2D GetPoint1(double t)
         {
-            //Свойство, возвращающее координаты 2D точки на 2D прямой по параметру t 
-            return (new Point2D(Point0.X + kx * t, Point0.Y + ky * t));
-        }
-
-        //====================================================================================================
-        //================== Конструкторы ввода-вывода (расчета) параметров линии по заданным условиям ==================
-
-        /// <summary>Инициализация нового экземпляра 2D прямой</summary>
-        /// <remarks>Исходные координаты базовой точки прямой равны нулю.
-        /// Исходные коэффициенты канонического уравнения прямой: kx=1; ky=0.
-        /// </remarks>
-        public Line2D()
-        {
-            //Конструктор возвращает 2D опорную точку (заданной координатами) 2D прямой линии
-            Point0 = new Point2D(0, 0);
-            Point1 = new Point2D(1, 0);
-            kx = 1;
-            ky = 0;
-            Name = new Name();
+            return (new Point2D(Point0.X + Kx * t, Point0.Y + Ky * t));
         }
         /// <summary>
         /// Инициализирует новый экземпляр 2D прямой с помощью задания двух точек
@@ -70,25 +52,23 @@ namespace GraphicsModule.Geometry.Objects.Lines
             if (Analyze.Analyze.PointsPosition.Coincidence(pt1, pt2)) return;
             Point0 = pt1;
             Point1 = pt2;
-            kx = pt2.X - pt1.X;
-            ky = pt2.Y - pt1.Y;
+            Kx = pt2.X - pt1.X;
+            Ky = pt2.Y - pt1.Y;
             Name = new Name();
             pt1.Name = Name;
             pt2.Name = Name;
         }
+        //TODO: избавиться от этого конструктора
         public Line2D(Point2D pt1, Point2D pt2, PictureBox pb)
         {
             //Контроль совпадения заданных точек
             if (Analyze.Analyze.PointsPosition.Coincidence(pt1, pt2)) return;
             Point0 = pt1;
             Point1 = pt2;
-            kx = pt2.X - pt1.X;
-            ky = pt2.Y - pt1.Y;
+            Kx = pt2.X - pt1.X;
+            Ky = pt2.Y - pt1.Y;
             CalculatePointsForDraw(pb);
         }
-        //====================================================================================================
-        //================== Методы ввода-вывода (расчета) параметров линии по заданным условиям ==================
-
         /// <summary>
         /// Задает перпендикуляр из указанной 2D точки к указанной 2D прямой
         /// </summary>
@@ -97,7 +77,7 @@ namespace GraphicsModule.Geometry.Objects.Lines
         /// <remarks></remarks>
         public Line2D ConstructPerpendicularOfPointToLine(Line2D line, Point2D pt)
         {
-            return new Line2D(pt, new Point2D(-line.kx + pt.X, line.ky + pt.Y));
+            return new Line2D(pt, new Point2D(-line.Kx + pt.X, line.Ky + pt.Y));
         }
 
         /// <summary>
@@ -108,7 +88,7 @@ namespace GraphicsModule.Geometry.Objects.Lines
         /// <remarks></remarks>
         public Line2D ConstructParallelOfPointToLine(Line2D line, Point2D pt)
         {
-            return new Line2D(pt, new Point2D(line.kx + pt.X, line.ky + pt.Y));
+            return new Line2D(pt, new Point2D(line.Kx + pt.X, line.Ky + pt.Y));
         }
 
         //====================================================================================================
@@ -122,44 +102,43 @@ namespace GraphicsModule.Geometry.Objects.Lines
         /// <remarks></remarks>
         public double CalculateSlopeOfLine(Line2D line)
         {
-            return line.ky / line.kx;
+            return line.Ky / line.Kx;
 
         }
         public void Draw(DrawSettings settings, Point framecenter, Graphics g)
         {
             Point0.Draw(settings, framecenter, g);
             Point1.Draw(settings, framecenter, g);
-            //g.DrawPie(settings.PenPoints, (float)Point0.X - settings.RadiusPoints, (float)Point0.Y - settings.RadiusPoints, settings.RadiusPoints * 2, settings.RadiusPoints * 2, 0, 360);
-            //g.DrawPie(settings.PenPoints, (float)Point1.X - settings.RadiusPoints, (float)Point1.Y - settings.RadiusPoints, settings.RadiusPoints * 2, settings.RadiusPoints * 2, 0, 360);
             g.DrawLine(settings.PenLine2D, pts[0], pts[1]);
         }
+        //TODO: исправить логику метода, привести к общему знаменателю
         private void CalculatePointsForDraw(PictureBox pb)
         {
             pts = new List<PointF>();
 
-            if (Math.Abs(kx) < 0.0001)
+            if (Math.Abs(Kx) < 0.0001)
             {
                 pts.Add(new PointF((float)Point0.X, 0));
                 pts.Add(new PointF((float)Point0.X, pb.Height));
             }
-            if (Math.Abs(ky) < 0.0001)
+            if (Math.Abs(Ky) < 0.0001)
             {
                 pts.Add(new PointF(0, (float)Point0.Y));
                 pts.Add(new PointF(pb.Width, (float)Point0.Y));
             }
             //y=0
-            var x = (float)(-Point0.Y * kx / ky + Point0.X);
+            var x = (float)(-Point0.Y * Kx / Ky + Point0.X);
             if (x > 0) pts.Add(new PointF(x, 0));
             //y=max
-            x = (float)((pb.Height - Point0.Y) * kx / ky + Point0.X);
+            x = (float)((pb.Height - Point0.Y) * Kx / Ky + Point0.X);
             if (x < pb.Width) pts.Add(new PointF(x, pb.Height));
             if (!CheckListState(pts)) return;
             //x = 0
-            var y = (float)(-Point0.X * ky / kx + Point0.Y);
+            var y = (float)(-Point0.X * Ky / Kx + Point0.Y);
             if (y > 0) pts.Add(new PointF(0, y));
             if (!CheckListState(pts)) return;
             //x = max
-            y = (int)((pb.Width - Point0.X) * ky / kx + Point0.Y);
+            y = (int)((pb.Width - Point0.X) * Ky / Kx + Point0.Y);
             pts.Add(new PointF(pb.Width, y));
         }
         private bool CheckListState(List<PointF> lst)
@@ -175,7 +154,6 @@ namespace GraphicsModule.Geometry.Objects.Lines
         {
             return Name;
         }
-
         public void SetName(Name name)
         {
             Name = new Name(name);

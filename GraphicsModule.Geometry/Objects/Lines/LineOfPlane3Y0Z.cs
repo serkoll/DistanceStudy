@@ -11,6 +11,7 @@ namespace GraphicsModule.Geometry.Objects.Lines
     /// <remarks>Copyright © Polozkov V. Yury, 2015</remarks>
     public class LineOfPlane3Y0Z : ILineOfPlane
     {
+        //TODO: логику имен, рефакторинг
         public PointOfPlane3Y0Z Point0 { get; set; }
         public PointOfPlane3Y0Z Point1 { get; set; }
         public Name Name { get; set; }

@@ -1,5 +1,6 @@
 ﻿namespace GraphicsModule.Geometry.Analyze
 {
+    //TODO: логика именования
     public static class Analyze
     {
         public static PointsPosition PointsPosition = new PointsPosition();

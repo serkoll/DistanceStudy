@@ -41,36 +41,36 @@ namespace GraphicsModule.Geometry
         #region Crossing
         public static PointF CrossingPoint(Line2D ln1, Line2D ln2)
         {
-            var y = (ln2.Point0.Y * ln2.kx * ln1.ky - ln1.Point0.Y * ln2.ky * ln1.kx + ln2.ky * ln1.ky * (ln1.Point0.X - ln2.Point0.X)) /
-                    (ln2.kx * ln1.ky - ln1.kx * ln2.ky);
-            var x = ln1.kx * (y - ln1.Point0.Y) / ln1.ky + ln1.Point0.X;
+            var y = (ln2.Point0.Y * ln2.Kx * ln1.Ky - ln1.Point0.Y * ln2.Ky * ln1.Kx + ln2.Ky * ln1.Ky * (ln1.Point0.X - ln2.Point0.X)) /
+                    (ln2.Kx * ln1.Ky - ln1.Kx * ln2.Ky);
+            var x = ln1.Kx * (y - ln1.Point0.Y) / ln1.Ky + ln1.Point0.X;
             return new PointF((float)x, (float)y);
         }
         public static PointF CrossingPoint(Line2D ln1, LineOfPlane1X0Y ln, Point frameCenter)
         {
             var ln2 = DeterminePosition.ForLineProjection(ln, frameCenter);
-            var y = (ln2.Point0.Y * ln2.kx * ln1.ky - ln1.Point0.Y * ln2.ky * ln1.kx + ln2.ky * ln1.ky * (ln1.Point0.X - ln2.Point0.X)) /
-                    (ln2.kx * ln1.ky - ln1.kx * ln2.ky);
-            var x = (ln1.Point0.X * ln2.kx * ln1.ky - ln2.Point0.X * ln1.kx * ln2.ky + ln2.kx * ln1.kx * (ln2.Point0.Y - ln1.Point0.Y)) /
-                    (ln1.ky * ln2.kx - ln1.kx * ln2.ky);
+            var y = (ln2.Point0.Y * ln2.Kx * ln1.Ky - ln1.Point0.Y * ln2.Ky * ln1.Kx + ln2.Ky * ln1.Ky * (ln1.Point0.X - ln2.Point0.X)) /
+                    (ln2.Kx * ln1.Ky - ln1.Kx * ln2.Ky);
+            var x = (ln1.Point0.X * ln2.Kx * ln1.Ky - ln2.Point0.X * ln1.Kx * ln2.Ky + ln2.Kx * ln1.Kx * (ln2.Point0.Y - ln1.Point0.Y)) /
+                    (ln1.Ky * ln2.Kx - ln1.Kx * ln2.Ky);
             return new PointF((float)x, (float)y);
         }
         public static PointF CrossingPoint(Line2D ln1, LineOfPlane2X0Z ln, Point frameCenter)
         {
             var ln2 = DeterminePosition.ForLineProjection(ln, frameCenter);
-            var y = (ln2.Point0.Y * ln2.kx * ln1.ky - ln1.Point0.Y * ln2.ky * ln1.kx + ln2.ky * ln1.ky * (ln1.Point0.X - ln2.Point0.X)) /
-                     (ln2.kx * ln1.ky - ln1.kx * ln2.ky);
-            var x = (ln1.Point0.X * ln2.kx * ln1.ky - ln2.Point0.X * ln1.kx * ln2.ky + ln2.kx * ln1.kx * (ln2.Point0.Y - ln1.Point0.Y)) /
-                    (ln1.ky * ln2.kx - ln1.kx * ln2.ky);
+            var y = (ln2.Point0.Y * ln2.Kx * ln1.Ky - ln1.Point0.Y * ln2.Ky * ln1.Kx + ln2.Ky * ln1.Ky * (ln1.Point0.X - ln2.Point0.X)) /
+                     (ln2.Kx * ln1.Ky - ln1.Kx * ln2.Ky);
+            var x = (ln1.Point0.X * ln2.Kx * ln1.Ky - ln2.Point0.X * ln1.Kx * ln2.Ky + ln2.Kx * ln1.Kx * (ln2.Point0.Y - ln1.Point0.Y)) /
+                    (ln1.Ky * ln2.Kx - ln1.Kx * ln2.Ky);
             return new PointF((float)x, (float)y);
         }
         public static PointF CrossingPoint(Line2D ln1, LineOfPlane3Y0Z ln, Point frameCenter)
         {
             var ln2 = DeterminePosition.ForLineProjection(ln, frameCenter);
-            var y = (ln2.Point0.Y * ln2.kx * ln1.ky - ln1.Point0.Y * ln2.ky * ln1.kx + ln2.ky * ln1.ky * (ln1.Point0.X - ln2.Point0.X)) /
-                     (ln2.kx * ln1.ky - ln1.kx * ln2.ky);
-            var x = (ln1.Point0.X * ln2.kx * ln1.ky - ln2.Point0.X * ln1.kx * ln2.ky + ln2.kx * ln1.kx * (ln2.Point0.Y - ln1.Point0.Y)) /
-                    (ln1.ky * ln2.kx - ln1.kx * ln2.ky);
+            var y = (ln2.Point0.Y * ln2.Kx * ln1.Ky - ln1.Point0.Y * ln2.Ky * ln1.Kx + ln2.Ky * ln1.Ky * (ln1.Point0.X - ln2.Point0.X)) /
+                     (ln2.Kx * ln1.Ky - ln1.Kx * ln2.Ky);
+            var x = (ln1.Point0.X * ln2.Kx * ln1.Ky - ln2.Point0.X * ln1.Kx * ln2.Ky + ln2.Kx * ln1.Kx * (ln2.Point0.Y - ln1.Point0.Y)) /
+                    (ln1.Ky * ln2.Kx - ln1.Kx * ln2.Ky);
             return new PointF((float)x, (float)y);
         }
         #endregion

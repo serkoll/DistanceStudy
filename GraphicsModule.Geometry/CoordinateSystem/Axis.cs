@@ -54,6 +54,7 @@ namespace GraphicsModule.Geometry.CoordinateSystem
                 DrawAxisZ(settings, g);
             }
         }
+        //TODO: проверить логику отрисовки осей
         private void DrawAxis(Point beginPoint, Point endPoint, Color axisColor, int axisWidth, Graphics g)
         {
             var pens = new Pen(axisColor, axisWidth);

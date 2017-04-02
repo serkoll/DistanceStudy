@@ -9,6 +9,7 @@ namespace GraphicsModule.Geometry.CoordinateSystem
     /// </summary>
     public class Grid
     {
+        //TODO: продумать логику работы сетки
         /// <summary>
         /// Массив узловых точек сетки
         /// </summary>
