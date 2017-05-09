@@ -6,7 +6,18 @@ namespace GraphicsModule.Configuration
 {
     [Serializable]
     public class AxisSettings
-    { 
+    {
+        public AxisSettings()
+        {
+            Width = 1;
+            ColorX = Color.Black;
+            ColorY = Color.Black;
+            ColorZ = Color.Black;
+            FlagDrawX = true;
+            FlagDrawY = true;
+            FlagDrawZ = true;
+            IsDraw = true;
+        }
         public int Width { get; set; }
         [XmlIgnore]
         public Color ColorX { get; set; }
@@ -36,16 +47,5 @@ namespace GraphicsModule.Configuration
         public bool FlagDrawY { get; set; }
         public bool FlagDrawZ { get; set; }
         public bool IsDraw { get; set; }
-        public AxisSettings()
-        {
-            Width = 1;
-            ColorX = Color.Black;
-            ColorY = Color.Black;
-            ColorZ = Color.Black;
-            FlagDrawX = true;
-            FlagDrawY = true;
-            FlagDrawZ = true;
-            IsDraw = true;
-        }
     }
 }

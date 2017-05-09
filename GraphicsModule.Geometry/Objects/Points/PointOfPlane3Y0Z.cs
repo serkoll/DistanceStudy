@@ -5,42 +5,26 @@ using GraphicsModule.Geometry.Interfaces;
 
 namespace GraphicsModule.Geometry.Objects.Points
 {
-    /// <summary>Класс для расчета параметров проекции 3D точки на Y0Z плоскость проекций</summary>
-    /// <remarks>Copyright © Polozkov V. Yury, 2013</remarks>
     public class PointOfPlane3Y0Z : IPointOfPlane, IObjectOfPlane3Y0Z
     {
-        /// <summary>Инициализация нового экземпляра двумерной проекции точки</summary>
-        /// <remarks>Исходные координаты точки: Y=0; Z=0</remarks>
         public PointOfPlane3Y0Z() { Y = 0; Z = 0; }
-        /// <summary>Инициализирует новый экземпляр двумерной проекции точки с указанными координатами</summary>
-        /// <remarks></remarks>
+
         public PointOfPlane3Y0Z(double y, double z) { Y = y; Z = z; }
+
         public PointOfPlane3Y0Z(Point pt, Point center)
         {
             Y = pt.X - center.X;
             Z = -(pt.Y - center.Y);
         }
-        /// <summary>Инициализирует новый экземпляр двумерной проекции точки</summary>
-        /// <remarks></remarks>
+
         public PointOfPlane3Y0Z(PointOfPlane3Y0Z pt) { Y = pt.Y; Z = pt.Z; }
         public static bool IsCreatable(Point pt, Point frameCenter)
         {
             return (pt.X - frameCenter.X) >= 0 && (pt.Y - frameCenter.Y) <= 0;
         }
-        /// <summary>Получает или задает координату Y двумерной проекции точки</summary>
-        /// <remarks></remarks>
-        public double Y { get; set; }
-        /// <summary>Получает или задает координату Z двумерной проекции точки</summary>
-        /// <remarks></remarks>
-        public double Z { get; set; }
-        public Name Name { get; set; }
-        /// <summary>Передвигает ранее заданную двумерную проекцию точку
-        /// (изменяет коодинаты на указанные величины по осям в 2D)
-        /// </summary>
-        /// <remarks>PointOfPlan3_Y0Z.Y += dy; PointOfPlan3_Y0Z.Z += dz</remarks>
+ 
         public void PointMove(double dy, double dz) { Y += dy; Z += dz; }
-        /// <summary>Конвертирует заданную проекцию точки на плоскость X0Z в GeomObjects.Point2D</summary>
-        /// <remarks>PointOfPlan2_X0Z.X = Point2D.X; PointOfPlan2_X0Z.Z = Point2D.Y</remarks>
+
         public void Draw(Pen pen, float poitRaduis, Point frameCenter, Graphics graphics)
         {
             var ptForDraw = DeterminePosition.ForPointProjection(this, poitRaduis, frameCenter);
@@ -49,7 +33,7 @@ namespace GraphicsModule.Geometry.Objects.Points
         public void DrawName(DrawSettings st, float poitRaduis, Point frameCenter, Graphics graphics)
         {
             var ptForDraw = DeterminePosition.ForPointProjection(this, poitRaduis, frameCenter);
-            graphics.DrawString(Name.Value, st.TextFont, st.TextBrush, ptForDraw.X + Name.Dx, ptForDraw.Y + Name.Dy);
+            graphics.DrawString(Name.Value + "'''", st.TextFont, st.TextBrush, ptForDraw.X + Name.Dx, ptForDraw.Y + Name.Dy);
         }
         public void Draw(DrawSettings st, Point frameCenter, Graphics g)
         {
@@ -97,19 +81,12 @@ namespace GraphicsModule.Geometry.Objects.Points
                 graphics.DrawLine(penLinkLineY0ZtoZ, Convert.ToInt32(frameCenter.X), Convert.ToInt32(frameCenter.Y - Z), 0, Convert.ToInt32(frameCenter.Y - Z));
             }
         }
+        public double Y { get; private set; }
+        public double Z { get; private set; }
+        public Name Name { get; set; }
         public bool IsSelected(Point mscoords, float ptR, Point frameCenter, double distance)
         {
             return Calculate.Distance(mscoords, ptR, frameCenter, this) < distance;
-        }
-        public Name GetName()
-        {
-            var name = new Name(Name.Value.Remove(Name.Value.IndexOf("'", StringComparison.Ordinal)), Name.Dx, Name.Dy);
-            return name;
-        }
-        public void SetName(Name name)
-        {
-            Name = new Name(name);
-            Name.Value += "'''";
         }
     }
 }

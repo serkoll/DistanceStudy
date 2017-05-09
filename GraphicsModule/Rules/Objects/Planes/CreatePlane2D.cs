@@ -55,8 +55,8 @@ namespace GraphicsModule.Rules.Objects.Planes
             _planeObjects.Add(tmpobj);
             if (_planeObjects.Count != 3) return;
             var source = CreateByThreePoint(_planeObjects);
-            var nameparams = _planeObjects[0].GetName();
-            source.SetName(new Name(@"p", nameparams.Dx, nameparams.Dy));
+            var nameparams = _planeObjects[0].Name;
+            source.Name = new Name(@"p", nameparams.Dx, nameparams.Dy);
             _planeObjects.Clear();
             strg.AddToCollection(source);
             can.Update(strg);
@@ -74,8 +74,8 @@ namespace GraphicsModule.Rules.Objects.Planes
             {
                 var tmpobj = new CreatePoint2D().Create(pt, frameCenter, can, setting, strg);
                 var source = CreateByLineAndPoint((Line2D)_planeObjects[0], tmpobj);
-                var nameparams = _planeObjects[0].GetName();
-                source.SetName(new Name(@"p", nameparams.Dx, nameparams.Dy));
+                var nameparams = _planeObjects[0].Name;
+                source.Name =new Name(@"p", nameparams.Dx, nameparams.Dy);
                 _planeObjects.Clear();
                 strg.AddToCollection(source);
                 can.Update(strg);
@@ -94,8 +94,8 @@ namespace GraphicsModule.Rules.Objects.Planes
             {
                 var tmpobj = new CreatePoint2D().Create(pt, frameCenter, can, setting, strg);
                 var source = CreateByPointAndSegment((Segment2D)_planeObjects[0], tmpobj);
-                var nameparams = _planeObjects[0].GetName();
-                source.SetName(new Name(@"p", nameparams.Dx, nameparams.Dy));
+                var nameparams = _planeObjects[0].Name;
+                source.Name =new Name(@"p", nameparams.Dx, nameparams.Dy);
                 _planeObjects.Clear();
                 strg.AddToCollection(source);
                 can.Update(strg);
@@ -124,8 +124,8 @@ namespace GraphicsModule.Rules.Objects.Planes
             }
             else
             {
-                var nameparams = _planeObjects[0].GetName();
-                source.SetName(new Name(@"p", nameparams.Dx, nameparams.Dy));
+                var nameparams = _planeObjects[0].Name;
+                source.Name =new Name(@"p", nameparams.Dx, nameparams.Dy);
                 _planeObjects.Clear();
                 strg.AddToCollection(source);
                 can.Update(strg);
@@ -154,8 +154,8 @@ namespace GraphicsModule.Rules.Objects.Planes
             }
             else
             {
-                var nameparams = _planeObjects[0].GetName();
-                source.SetName(new Name(@"p", nameparams.Dx, nameparams.Dy));
+                var nameparams = _planeObjects[0].Name;
+                source.Name =new Name(@"p", nameparams.Dx, nameparams.Dy);
                 _planeObjects.Clear();
                 strg.AddToCollection(source);
                 can.Update(strg);
@@ -186,8 +186,8 @@ namespace GraphicsModule.Rules.Objects.Planes
             }
             else
             {
-                var nameparams = _planeObjects[0].GetName();
-                source.SetName(new Name(@"p", nameparams.Dx, nameparams.Dy));
+                var nameparams = _planeObjects[0].Name;
+                source.Name =new Name(@"p", nameparams.Dx, nameparams.Dy);
                 _planeObjects.Clear();
                 strg.AddToCollection(source);
                 can.Update(strg);
@@ -218,8 +218,8 @@ namespace GraphicsModule.Rules.Objects.Planes
             }
             else
             {
-                var nameparams = _planeObjects[0].GetName();
-                source.SetName(new Name(@"p", nameparams.Dx, nameparams.Dy));
+                var nameparams = _planeObjects[0].Name;
+                source.Name =new Name(@"p", nameparams.Dx, nameparams.Dy);
                 _planeObjects.Clear();
                 strg.AddToCollection(source);
                 can.Update(strg);

@@ -9,19 +9,6 @@ namespace GraphicsModule.Configuration
     [Serializable]
     public class Settings
     {
-        [XmlIgnore]
-        public Color BackgroundColor { get; set; }
-        [XmlElement("BackgroundColor")]
-        public string ColorXHtml
-        {
-            get { return ColorTranslator.ToHtml(BackgroundColor); }
-            set { BackgroundColor = ColorTranslator.FromHtml(value); }
-        }
-        public PrimitivesAccess PrimitivesAcces { get; set; }
-        public GridSettings GridSettings { get; set; }
-        public AxisSettings AxisSettings { get; set; }
-        public DrawSettings DrawSettings { get; set; }
-        public DrawSettings SelectedDrawSettings { get; set; }
         public Settings()
         {
             BackgroundColor = Color.White;
@@ -47,7 +34,6 @@ namespace GraphicsModule.Configuration
                 FileMode.Create, FileAccess.Write, FileShare.None))
             {
                 xmlFormat.Serialize(fStream, this);
-                fStream.Close();
             }
         }
         public Settings Deserialize(string fileName)
@@ -59,5 +45,18 @@ namespace GraphicsModule.Configuration
                 return (Settings)xmlFormat.Deserialize(fStream);
             }
         }
+        [XmlIgnore]
+        public Color BackgroundColor { get; set; }
+        [XmlElement("BackgroundColor")]
+        public string ColorXHtml
+        {
+            get { return ColorTranslator.ToHtml(BackgroundColor); }
+            set { BackgroundColor = ColorTranslator.FromHtml(value); }
+        }
+        public PrimitivesAccess PrimitivesAcces { get; set; }
+        public GridSettings GridSettings { get; set; }
+        public AxisSettings AxisSettings { get; set; }
+        public DrawSettings DrawSettings { get; set; }
+        public DrawSettings SelectedDrawSettings { get; set; }
     }
 }

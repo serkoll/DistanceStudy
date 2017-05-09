@@ -26,7 +26,7 @@ namespace GraphicsModule.Rules.Objects.Segments
             {
                 if (_tempLineOfPlane == null)
                 {
-                    ptOfPlane.SetName(GraphicsControl.NmGenerator.Generate());
+                    ptOfPlane.Name = GraphicsControl.NmGenerator.Generate();
                     storage.TempObjects.Add(ptOfPlane);
                     storage.DrawLastAddedToTempObjects(settings, frameCenter, canvas.Graphics);
                 }
@@ -40,11 +40,11 @@ namespace GraphicsModule.Rules.Objects.Segments
             }
             else
             {
-                if (ReferenceEquals(storage.TempObjects[0].GetType(), ptOfPlane.GetType()) && (_tempLineOfPlane == null))
+                if (ReferenceEquals(storage.TempObjects[0].GetType(), ptOfPlane.GetType()) && _tempLineOfPlane == null)
                 {
                     storage.TempObjects.Add(ptOfPlane);
                     _tempLineOfPlane = CreateSegmentOfPlane(storage.TempObjects, settings, frameCenter, canvas);
-                    _tempLineOfPlane.SetName(storage.TempObjects[0].GetName());
+                    _tempLineOfPlane.Name = storage.TempObjects[0].Name;
                     storage.TempObjects.Clear();
                     canvas.Update(storage);
                     _tempLineOfPlane.Draw(settings, frameCenter, canvas.Graphics);
@@ -53,7 +53,7 @@ namespace GraphicsModule.Rules.Objects.Segments
                 {
                     storage.TempObjects.Add(ptOfPlane);
                     if (!IsSegment3DCreatable(_tempLineOfPlane, CreateSegmentOfPlane(storage.TempObjects, settings, frameCenter, canvas), settings, frameCenter, canvas)) return;
-                    _source.SetName(_tempLineOfPlane.GetName());
+                    _source.Name = _tempLineOfPlane.Name;
                     storage.TempObjects.Clear();
                     _tempLineOfPlane = null;
                     storage.Objects.Add(_source);

@@ -6,15 +6,6 @@ namespace GraphicsModule
 {
     public class Canvas
     {
-        public PictureBox PicBox { get; set; }
-        public Settings Settings { get; set; }
-        public Bitmap Mainbmp { get; set; }
-        public Background Background { get; set; }
-        public Graphics Graphics { get; set; }
-        public RectangleF PlaneX0Y { get; set; }
-        public RectangleF PlaneX0Z { get; set; }
-        public RectangleF PlaneY0Z { get; set; }
-        public Point CenterSystemPoint { get; set; }
         public Canvas(Settings settings, PictureBox picBox)
         {
             PicBox = picBox;
@@ -54,5 +45,15 @@ namespace GraphicsModule
             PlaneX0Z = new RectangleF(0, 0, centerPoint.X, centerPoint.Y);
             PlaneY0Z = new RectangleF(centerPoint.X, 0, centerPoint.X, centerPoint.Y);
         }
+
+        public PictureBox PicBox { get; set; }
+        public Settings Settings { get; set; }
+        public Bitmap Mainbmp { get; set; }
+        public Background Background { get; set; }
+        public Graphics Graphics { get; set; }
+        public RectangleF PlaneX0Y { get; set; }
+        public RectangleF PlaneX0Z { get; set; }
+        public RectangleF PlaneY0Z { get; set; }
+        public Point CenterSystemPoint { get; set; }
     }
 }

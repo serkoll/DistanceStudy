@@ -8,16 +8,6 @@ namespace GraphicsModule
 {
     public class Background
     {
-        public Bitmap BackBitmap { get; set; }
-        public Axis Axis { get; set; }
-        public Grid Grid { get; set; }
-        public Background(Axis axis, Grid grid, Control pb)
-        {
-            Axis = axis;
-            Grid = grid;
-            BackBitmap = new Bitmap(pb.ClientSize.Width, pb.ClientSize.Height, PixelFormat.Format24bppRgb);
-            BackBitmap.MakeTransparent();
-        }
         public Background(Point centerPoint, Settings settings, Control pb)
         {
             BackBitmap = new Bitmap(pb.ClientSize.Width, pb.ClientSize.Height, PixelFormat.Format24bppRgb);
@@ -34,5 +24,8 @@ namespace GraphicsModule
             Axis.DrawAxis(settings.AxisSettings, graphics);
             graphics.Dispose();
         }
+        public Bitmap BackBitmap { get; set; }
+        public Axis Axis { get; set; }
+        public Grid Grid { get; set; }
     }
 }

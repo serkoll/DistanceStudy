@@ -13,46 +13,9 @@ namespace GraphicsModule
     /// </summary>
     public class Storage
     {
-        /// <summary>
-        /// Коллекция графическиъ объектов
-        /// </summary>
-        public Collection<IObject> Objects { get; set; }
-        /// <summary>
-        /// Коллекция выбранных объектов
-        /// </summary>
-        public Collection<IObject> SelectedObjects { get; set; }
-        /// <summary>
-        /// Коллекция скопированных объектов
-        /// </summary>
-        public Collection<IObject> CopiedObjects { get; set; }
-        /// <summary>
-        /// Коллекция вставленных объектов
-        /// </summary>
-        public Collection<IObject> PastedObjects { get; set; }
-        /// <summary>
-        /// Коллекция объектов, подлежащих удалению
-        /// </summary>
-        public Collection<IObject> DeletedObjects { get; set; }
-        /// <summary>
-        /// Коллекция временных объектов
-        /// </summary>
-        public Collection<IObject> TempObjects { get; set; }
-        public IList<IPointOfPlane> TempPointsOfPlane { get;}
-        public Collection<IObject> TempLinesOfPlane { get; set; }
         public Storage()
         {
             Objects = new Collection<IObject>();
-            SelectedObjects = new Collection<IObject>();
-            CopiedObjects = new Collection<IObject>();
-            PastedObjects = new Collection<IObject>();
-            DeletedObjects = new Collection<IObject>();
-            TempObjects = new Collection<IObject>();
-            TempLinesOfPlane = new Collection<IObject>();
-        }
-
-        public Storage(Collection<IObject> objects)
-        {
-            Objects = new Collection<IObject>(objects);
             SelectedObjects = new Collection<IObject>();
             CopiedObjects = new Collection<IObject>();
             PastedObjects = new Collection<IObject>();
@@ -135,5 +98,13 @@ namespace GraphicsModule
             TempObjects.Clear();
             TempLinesOfPlane.Clear();
         }
+        public Collection<IObject> Objects { get; set; }
+        public Collection<IObject> SelectedObjects { get; set; }
+        public Collection<IObject> CopiedObjects { get; set; }
+        public Collection<IObject> PastedObjects { get; set; }
+        public Collection<IObject> DeletedObjects { get; set; }
+        public Collection<IObject> TempObjects { get; set; }
+        public IList<IPointOfPlane> TempPointsOfPlane { get; }
+        public Collection<IObject> TempLinesOfPlane { get; set; }
     }
 }

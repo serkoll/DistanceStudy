@@ -7,19 +7,10 @@ using GraphicsModule.Geometry.Objects.Points;
 
 namespace GraphicsModule.Geometry.Objects.Segments
 {
-    /// <summary>Класс для задания и расчета параметров 3D прямой</summary>
-    /// <remarks>Copyright © Polozkov V. Yury, 2015</remarks>
+    //TODO: NAMES REFACTOR
     public class Segment3D : IObject
     {
-        public Point3D Point0 { get; set; }
-        public Point3D Point1 { get; set; }
-        public Name Name { get; set; }
-        public SegmentOfPlane1X0Y SegmentOfPlane1X0Y { get; set; }
-        public SegmentOfPlane2X0Z SegmentOfPlane2X0Z { get; set; }
-        public SegmentOfPlane3Y0Z SegmentOfPlane3Y0Z { get; set; }
-        public double Kx { get; set; }
-        public double Ky { get; set; }
-        public double Kz { get; set; }
+        private Name _name;
         public static Segment3D Create(Collection<IObject> lst)
         {
             if (lst[0].GetType() == typeof(SegmentOfPlane1X0Y))
@@ -40,34 +31,20 @@ namespace GraphicsModule.Geometry.Objects.Segments
         }
         public Segment3D(SegmentOfPlane1X0Y linePi1, SegmentOfPlane2X0Z linePi2)
         {
-            Point0 = new Point3D();
-            Point1 = new Point3D();
             if (linePi1.Point0.X == linePi2.Point0.X &&
                 linePi1.Point1.X == linePi2.Point1.X)
             {
-                Point0.X = linePi1.Point0.X;
-                Point0.Y = linePi1.Point0.Y;
-                Point0.Z = linePi2.Point0.Z;
-                Point1.X = linePi1.Point1.X;
-                Point1.Y = linePi1.Point1.Y;
-                Point1.Z = linePi2.Point1.Z;
+                Point0 = new Point3D(linePi1.Point0, linePi2.Point0);
+                Point1 = new Point3D(linePi1.Point1, linePi2.Point1);
                 SegmentOfPlane1X0Y = linePi1;
                 SegmentOfPlane2X0Z = linePi2;
                 SegmentOfPlane3Y0Z = new SegmentOfPlane3Y0Z(new PointOfPlane3Y0Z(linePi1.Point0.Y, linePi2.Point0.Z), new PointOfPlane3Y0Z(linePi1.Point1.Y, linePi2.Point1.Z));
-                Point0.InitializePointsOfPlane();
-                Point1.InitializePointsOfPlane();
             }
             else if (linePi1.Point0.X == linePi2.Point1.X &&
                      linePi1.Point1.X == linePi2.Point0.X)
             {
-                Point0.X = linePi1.Point1.X;
-                Point0.Y = linePi1.Point1.Y;
-                Point0.Z = linePi2.Point0.Z;
-                Point1.X = linePi1.Point0.X;
-                Point1.Y = linePi1.Point0.Y;
-                Point1.Z = linePi2.Point1.Z;
-                Point0.InitializePointsOfPlane();
-                Point1.InitializePointsOfPlane();
+                Point0 = new Point3D(linePi1.Point1.ToPoint2D(), linePi2.Point0.Z);
+                Point1 = new Point3D(linePi1.Point0.ToPoint2D(), linePi2.Point1.Z);
                 SegmentOfPlane1X0Y = linePi1;
                 SegmentOfPlane2X0Z = linePi2;
                 SegmentOfPlane3Y0Z = new SegmentOfPlane3Y0Z(new PointOfPlane3Y0Z(linePi1.Point1.Y, linePi2.Point0.Z), new PointOfPlane3Y0Z(linePi1.Point0.Y, linePi2.Point1.Z));
@@ -75,19 +52,11 @@ namespace GraphicsModule.Geometry.Objects.Segments
         }
         public Segment3D(SegmentOfPlane1X0Y linePi1, SegmentOfPlane3Y0Z linePi3)
         {
-            Point0 = new Point3D();
-            Point1 = new Point3D();
             if (linePi1.Point0.Y == linePi3.Point0.Y &&
                 linePi1.Point1.Y == linePi3.Point1.Y)
             {
-                Point0.X = linePi1.Point0.X;
-                Point0.Y = linePi1.Point0.Y;
-                Point0.Z = linePi3.Point0.Z;
-                Point1.X = linePi1.Point1.X;
-                Point1.Y = linePi1.Point1.Y;
-                Point1.Z = linePi3.Point1.Z;
-                Point0.InitializePointsOfPlane();
-                Point1.InitializePointsOfPlane();
+                Point0 = new Point3D(linePi1.Point0, linePi3.Point0);
+                Point1 = new Point3D(linePi1.Point1, linePi3.Point1);
                 SegmentOfPlane1X0Y = linePi1;
                 SegmentOfPlane2X0Z = new SegmentOfPlane2X0Z(new PointOfPlane2X0Z(linePi1.Point0.X, linePi3.Point0.Z), new PointOfPlane2X0Z(linePi1.Point1.X, linePi3.Point1.Z));
                 SegmentOfPlane3Y0Z = linePi3;
@@ -95,14 +64,8 @@ namespace GraphicsModule.Geometry.Objects.Segments
             else if (linePi1.Point0.Y == linePi3.Point1.Y &&
                      linePi1.Point1.Y == linePi3.Point0.Y)
             {
-                Point0.X = linePi1.Point0.X;
-                Point0.Y = linePi1.Point0.Y;
-                Point0.Z = linePi3.Point1.Z;
-                Point1.X = linePi1.Point1.X;
-                Point1.Y = linePi1.Point1.Y;
-                Point1.Z = linePi3.Point0.Z;
-                Point0.InitializePointsOfPlane();
-                Point1.InitializePointsOfPlane();
+                Point0 = new Point3D(linePi1.Point0.ToPoint2D(), linePi3.Point1.Z);
+                Point1 = new Point3D(linePi1.Point1.ToPoint2D(), linePi3.Point0.Z);
                 SegmentOfPlane1X0Y = linePi1;
                 SegmentOfPlane2X0Z = new SegmentOfPlane2X0Z(new PointOfPlane2X0Z(linePi1.Point0.X, linePi3.Point1.Z), new PointOfPlane2X0Z(linePi1.Point1.X, linePi3.Point0.Z));
                 SegmentOfPlane3Y0Z = linePi3;
@@ -110,17 +73,11 @@ namespace GraphicsModule.Geometry.Objects.Segments
         }
         public Segment3D(SegmentOfPlane2X0Z linePi2, SegmentOfPlane3Y0Z linePi3)
         {
-            Point0 = new Point3D();
-            Point1 = new Point3D();
             if (linePi2.Point0.Z == linePi3.Point0.Z &&
                linePi2.Point1.Z == linePi3.Point1.Z)
             {
-                Point0.X = linePi2.Point0.X;
-                Point0.Y = linePi3.Point0.Y;
-                Point0.Z = linePi2.Point0.Z;
-                Point1.X = linePi2.Point1.X;
-                Point1.Y = linePi3.Point1.Y;
-                Point1.Z = linePi2.Point1.Z;
+                Point0 = new Point3D(linePi2.Point0, linePi3.Point0);
+                Point1 = new Point3D(linePi2.Point1, linePi3.Point1);
                 Point0.InitializePointsOfPlane();
                 Point1.InitializePointsOfPlane();
                 SegmentOfPlane1X0Y = new SegmentOfPlane1X0Y(new PointOfPlane1X0Y(linePi2.Point0.X, linePi3.Point0.Y), new PointOfPlane1X0Y(linePi2.Point1.X, linePi3.Point1.Y));
@@ -130,14 +87,8 @@ namespace GraphicsModule.Geometry.Objects.Segments
             else if (linePi2.Point1.Z == linePi3.Point0.Z &&
                     linePi2.Point0.Z == linePi3.Point1.Z)
             {
-                Point0.X = linePi2.Point0.X;
-                Point0.Y = linePi3.Point1.Y;
-                Point0.Z = linePi2.Point0.Z;
-                Point1.X = linePi2.Point1.X;
-                Point1.Y = linePi3.Point0.Y;
-                Point1.Z = linePi2.Point1.Z;
-                Point0.InitializePointsOfPlane();
-                Point1.InitializePointsOfPlane();
+                Point0 = new Point3D(linePi2.Point0.X, linePi3.Point1.Y, linePi2.Point0.Z);
+                Point1 = new Point3D(linePi2.Point1.X, linePi3.Point0.Y, linePi2.Point1.Z);
                 SegmentOfPlane1X0Y = new SegmentOfPlane1X0Y(new PointOfPlane1X0Y(linePi2.Point0.X, linePi3.Point1.Y), new PointOfPlane1X0Y(linePi2.Point1.X, linePi3.Point0.Y));
                 SegmentOfPlane2X0Z = linePi2;
                 SegmentOfPlane3Y0Z = linePi3;
@@ -168,19 +119,38 @@ namespace GraphicsModule.Geometry.Objects.Segments
                    SegmentOfPlane2X0Z.IsSelected(mscoords, ptR, frameCenter, distance) ||
                    SegmentOfPlane3Y0Z.IsSelected(mscoords, ptR, frameCenter, distance);
         }
-        public Name GetName()
+        public Point3D Point0 { get; private set; }
+
+        public Point3D Point1 { get; private set; }
+
+        public SegmentOfPlane1X0Y SegmentOfPlane1X0Y { get; private set; }
+
+        public SegmentOfPlane2X0Z SegmentOfPlane2X0Z { get; private set; }
+
+        public SegmentOfPlane3Y0Z SegmentOfPlane3Y0Z { get; private set; }
+
+        public double Kx { get; private set; }
+
+        public double Ky { get; private set; }
+
+        public double Kz { get; private set; }
+
+        public Name Name
         {
-            return Name;
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                _name = value;
+                Point0.Name = _name;
+                Point1.Name = _name;
+                SegmentOfPlane1X0Y.Name = _name;
+                SegmentOfPlane2X0Z.Name = _name;
+                SegmentOfPlane3Y0Z.Name = _name;
+            }
         }
-        public void SetName(Name name)
-        {
-            Name = new Name(name);
-            Name.Value = Name.Value.Remove(Name.Value.IndexOf("'", StringComparison.Ordinal));
-            Point0.Name = Name;
-            Point1.Name = Name;
-            SegmentOfPlane1X0Y.Name = Name;
-            SegmentOfPlane2X0Z.Name = Name;
-            SegmentOfPlane3Y0Z.Name = Name;
-        }
+
     }
 }

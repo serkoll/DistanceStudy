@@ -6,7 +6,7 @@ namespace GraphicsModule.Geometry
 {
     public static class TypeOf
     {
-        public static IObject PointOfPlane(Point pt, Point frameCenter)
+        public static IPointOfPlane PointOfPlane(Point pt, Point frameCenter)
         {
             if (PointOfPlane1X0Y.IsCreatable(pt, frameCenter))
             {

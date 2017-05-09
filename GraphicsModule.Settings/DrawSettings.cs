@@ -7,6 +7,32 @@ namespace GraphicsModule.Configuration
     [Serializable]
     public class DrawSettings
     {
+        public DrawSettings()
+        {
+            RadiusPoints = 2;
+            RadiusLines = 1;
+            PenPoints = new Pen(Brushes.Black, RadiusPoints * 2);
+            PenLine2D = new Pen(Brushes.Black, RadiusLines);
+            PenLineOfPlane1X0Y = new Pen(Brushes.LightGreen, RadiusLines);
+            PenLineOfPlane2X0Z = new Pen(Brushes.Red, RadiusLines);
+            PenLineOfPlane3Y0Z = new Pen(Brushes.Blue, RadiusLines);
+            TextFont = new Font("Times New Roman", 14, FontStyle.Regular);
+            TextBrush = new SolidBrush(Color.Black);
+            LinkLinesSettings = new LinkLinesSettings();
+        }
+        public DrawSettings(Pen pnPoints, Pen pnLine2D, Pen pnLn1, Pen pnLn2, Pen pnLn3, int rPoints, int rLines, Font fText, Brush tBrush)
+        {
+            RadiusPoints = rPoints;
+            RadiusLines = rLines;
+            PenPoints = pnPoints;
+            PenLine2D = pnLine2D;
+            PenLineOfPlane1X0Y = pnLn1;
+            PenLineOfPlane2X0Z = pnLn2;
+            PenLineOfPlane3Y0Z = pnLn3;
+            LinkLinesSettings = new LinkLinesSettings(pnLine2D);
+            TextFont = fText;
+            TextBrush = tBrush;
+        }
         [XmlIgnore]
         public Pen PenPoints { get; set; }
         [XmlIgnore]
@@ -54,31 +80,5 @@ namespace GraphicsModule.Configuration
         public Font TextFont { get; set; }
         [XmlIgnore]
         public Brush TextBrush { get; set; }
-        public DrawSettings()
-        {
-            RadiusPoints = 2;
-            RadiusLines = 1;
-            PenPoints = new Pen(Brushes.Black, RadiusPoints * 2);
-            PenLine2D = new Pen(Brushes.Black, RadiusLines);
-            PenLineOfPlane1X0Y = new Pen(Brushes.LightGreen, RadiusLines);
-            PenLineOfPlane2X0Z = new Pen(Brushes.Red, RadiusLines);
-            PenLineOfPlane3Y0Z = new Pen(Brushes.Blue, RadiusLines);
-            TextFont = new Font("Times New Roman", 14, FontStyle.Regular);
-            TextBrush = new SolidBrush(Color.Black);
-            LinkLinesSettings = new LinkLinesSettings();
-        }
-        public DrawSettings(Pen pnPoints, Pen pnLine2D, Pen pnLn1, Pen pnLn2, Pen pnLn3, int rPoints, int rLines, Font fText, Brush tBrush)
-        {
-            RadiusPoints = rPoints;
-            RadiusLines = rLines;
-            PenPoints = pnPoints;
-            PenLine2D = pnLine2D;
-            PenLineOfPlane1X0Y = pnLn1;
-            PenLineOfPlane2X0Z = pnLn2;
-            PenLineOfPlane3Y0Z = pnLn3;
-            LinkLinesSettings = new LinkLinesSettings(pnLine2D);
-            TextFont = fText;
-            TextBrush = tBrush;
-        }
     }
 }

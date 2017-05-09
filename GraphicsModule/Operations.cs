@@ -34,7 +34,7 @@ namespace GraphicsModule
             {
                 var type = obj.GetType().GetInterfaces();
                 if(type.Length < 2) continue;
-                if (obj.IsSelected(mousecoords, can.Settings.SelectedDrawSettings.RadiusPoints, can.CenterSystemPoint, 5) && (type[1] == typeof(IPointOfPlane)))
+                if (obj.IsSelected(mousecoords, can.Settings.SelectedDrawSettings.RadiusPoints, can.CenterSystemPoint, 5) && type[1] == typeof(IPointOfPlane))
                 {
                     strg.SelectedObjects.Add(obj);
                     can.Update(strg);
@@ -53,7 +53,7 @@ namespace GraphicsModule
             foreach (IObject obj in strg.Objects)
             {
                 var type = obj.GetType().GetInterfaces();
-                if (obj.IsSelected(mousecoords, can.Settings.SelectedDrawSettings.RadiusPoints, can.CenterSystemPoint, 5) && (type[1].Name == "ILineOfPlane"))
+                if (obj.IsSelected(mousecoords, can.Settings.SelectedDrawSettings.RadiusPoints, can.CenterSystemPoint, 5) && type[1].Name == "ILineOfPlane")
                 {
                     strg.SelectedObjects.Add(obj);
                     can.Update(strg);
@@ -69,7 +69,7 @@ namespace GraphicsModule
             foreach (IObject obj in strg.Objects)
             {
                 var type = obj.GetType().GetInterfaces();
-                if (obj.IsSelected(mousecoords, can.Settings.SelectedDrawSettings.RadiusPoints, can.CenterSystemPoint, 5) && (type[1].Name == "ISegmentOfPlane"))
+                if (obj.IsSelected(mousecoords, can.Settings.SelectedDrawSettings.RadiusPoints, can.CenterSystemPoint, 5) && type[1].Name == "ISegmentOfPlane")
                 {
                     strg.SelectedObjects.Add(obj);
                     can.Update(strg);

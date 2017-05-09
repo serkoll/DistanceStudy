@@ -12,6 +12,7 @@ namespace GraphicsModule.Geometry.Objects.Planes
     public class Plane3D : IObject
     {
         public IObject[] Objects;
+
         private Name _name;
         public Plane3D()
         {
@@ -60,18 +61,19 @@ namespace GraphicsModule.Geometry.Objects.Planes
         {
             return Objects.Any(obj => obj.IsSelected(mousecoords, ptR, frameCenter, distance));
         }
-        public Name GetName()
+        public Name Name
         {
-            return _name;
-        }
-        public void SetName(Name name)
-        {
-            _name = new Name(name);
-            foreach (var t in Objects)
+            get
             {
-                var n = t.GetName();
-                n.Value += _name.Value;
-                t.SetName(n);
+                return _name;
+            }
+            set
+            {
+                _name = value;
+                foreach (var t in Objects)
+                {
+                    t.Name = _name;
+                }
             }
         }
     }

@@ -10,15 +10,7 @@ namespace GraphicsModule.Geometry.Objects.Lines
     /// <remarks>Copyright © Polozkov V. Yury, 2015</remarks>
     public class Line3D : IObject
     {
-        public Point3D Point0 { get; set; }
-        public Point3D Point1 { get; set; }
-        public Name Name { get; set; }
-        public LineOfPlane1X0Y LineOfPlane1X0Y { get; set; }
-        public LineOfPlane2X0Z LineOfPlane2X0Z { get; set; }
-        public LineOfPlane3Y0Z LineOfPlane3Y0Z { get; set; }
-        public double Kx { get; set; }
-        public double Ky { get; set; }
-        public double Kz { get; set; }
+        private Name _name;
         public static Line3D Create(Collection<IObject> lst)
         {
             if (lst[0].GetType() == typeof(LineOfPlane1X0Y))
@@ -44,29 +36,18 @@ namespace GraphicsModule.Geometry.Objects.Lines
             if (linePi1.Point0.X == linePi2.Point0.X &&
                 linePi1.Point1.X == linePi2.Point1.X)
             {
-                Point0.X = linePi1.Point0.X;
-                Point0.Y = linePi1.Point0.Y;
-                Point0.Z = linePi2.Point0.Z;
-                Point1.X = linePi1.Point1.X;
-                Point1.Y = linePi1.Point1.Y;
-                Point1.Z = linePi2.Point1.Z;
+                Point0 = new Point3D(linePi1.Point0, linePi2.Point0);
+                Point1 = new Point3D(linePi1.Point1, linePi2.Point1);
+                //TODO: в метод нах
                 LineOfPlane1X0Y = linePi1;
                 LineOfPlane2X0Z = linePi2;
                 LineOfPlane3Y0Z = new LineOfPlane3Y0Z(new PointOfPlane3Y0Z(linePi1.Point0.Y, linePi2.Point0.Z), new PointOfPlane3Y0Z(linePi1.Point1.Y, linePi2.Point1.Z));
-                Point0.InitializePointsOfPlane();
-                Point1.InitializePointsOfPlane();
             }
             else if (linePi1.Point0.X == linePi2.Point1.X &&
                      linePi1.Point1.X == linePi2.Point0.X)
             {
-                Point0.X = linePi1.Point1.X;
-                Point0.Y = linePi1.Point1.Y;
-                Point0.Z = linePi2.Point0.Z;
-                Point1.X = linePi1.Point0.X;
-                Point1.Y = linePi1.Point0.Y;
-                Point1.Z = linePi2.Point1.Z;
-                Point0.InitializePointsOfPlane();
-                Point1.InitializePointsOfPlane();
+                Point0 = new Point3D(linePi1.Point1.ToPoint2D(), linePi2.Point0.Z);
+                Point1 = new Point3D(linePi1.Point1.ToPoint2D(), linePi2.Point1.Z);
                 LineOfPlane1X0Y = linePi1;
                 LineOfPlane2X0Z = linePi2;
                 LineOfPlane3Y0Z = new LineOfPlane3Y0Z(new PointOfPlane3Y0Z(linePi1.Point1.Y, linePi2.Point0.Z), new PointOfPlane3Y0Z(linePi1.Point0.Y, linePi2.Point1.Z));
@@ -74,19 +55,11 @@ namespace GraphicsModule.Geometry.Objects.Lines
         }
         public Line3D(LineOfPlane1X0Y linePi1, LineOfPlane3Y0Z linePi3)
         {
-            Point0 = new Point3D();
-            Point1 = new Point3D();
             if (linePi1.Point0.Y == linePi3.Point0.Y &&
                 linePi1.Point1.Y == linePi3.Point1.Y)
             {
-                Point0.X = linePi1.Point0.X;
-                Point0.Y = linePi1.Point0.Y;
-                Point0.Z = linePi3.Point0.Z;
-                Point1.X = linePi1.Point1.X;
-                Point1.Y = linePi1.Point1.Y;
-                Point1.Z = linePi3.Point1.Z;
-                Point0.InitializePointsOfPlane();
-                Point1.InitializePointsOfPlane();
+                Point0 = new Point3D(linePi1.Point0, linePi3.Point0);
+                Point1 = new Point3D(linePi1.Point1, linePi3.Point1);
                 LineOfPlane1X0Y = linePi1;
                 LineOfPlane2X0Z = new LineOfPlane2X0Z(new PointOfPlane2X0Z(linePi1.Point0.X, linePi3.Point0.Z), new PointOfPlane2X0Z(linePi1.Point1.X, linePi3.Point1.Z));
                 LineOfPlane3Y0Z = linePi3;
@@ -94,14 +67,8 @@ namespace GraphicsModule.Geometry.Objects.Lines
             else if (linePi1.Point0.Y == linePi3.Point1.Y &&
                      linePi1.Point1.Y == linePi3.Point0.Y)
             {
-                Point0.X = linePi1.Point0.X;
-                Point0.Y = linePi1.Point0.Y;
-                Point0.Z = linePi3.Point1.Z;
-                Point1.X = linePi1.Point1.X;
-                Point1.Y = linePi1.Point1.Y;
-                Point1.Z = linePi3.Point0.Z;
-                Point0.InitializePointsOfPlane();
-                Point1.InitializePointsOfPlane();
+                Point0 = new Point3D(linePi1.Point0.ToPoint2D(), linePi3.Point1.Z);
+                Point1 = new Point3D(linePi1.Point1.ToPoint2D(), linePi3.Point0.Z);
                 LineOfPlane1X0Y = linePi1;
                 LineOfPlane2X0Z = new LineOfPlane2X0Z(new PointOfPlane2X0Z(linePi1.Point0.X, linePi3.Point1.Z), new PointOfPlane2X0Z(linePi1.Point1.X, linePi3.Point0.Z));
                 LineOfPlane3Y0Z = linePi3;
@@ -109,19 +76,11 @@ namespace GraphicsModule.Geometry.Objects.Lines
         }
         public Line3D(LineOfPlane2X0Z linePi2, LineOfPlane3Y0Z linePi3)
         {
-            Point0 = new Point3D();
-            Point1 = new Point3D();
             if (linePi2.Point0.Z == linePi3.Point0.Z &&
                linePi2.Point1.Z == linePi3.Point1.Z)
             {
-                Point0.X = linePi2.Point0.X;
-                Point0.Y = linePi3.Point0.Y;
-                Point0.Z = linePi2.Point0.Z;
-                Point1.X = linePi2.Point1.X;
-                Point1.Y = linePi3.Point1.Y;
-                Point1.Z = linePi2.Point1.Z;
-                Point0.InitializePointsOfPlane();
-                Point1.InitializePointsOfPlane();
+                Point0 = new Point3D(linePi2.Point0, linePi3.Point0);
+                Point1 = new Point3D(linePi2.Point1, linePi3.Point1);
                 LineOfPlane1X0Y = new LineOfPlane1X0Y(new PointOfPlane1X0Y(linePi2.Point0.X, linePi3.Point0.Y), new PointOfPlane1X0Y(linePi2.Point1.X, linePi3.Point1.Y));
                 LineOfPlane2X0Z = linePi2;
                 LineOfPlane3Y0Z = linePi3;
@@ -129,14 +88,9 @@ namespace GraphicsModule.Geometry.Objects.Lines
             else if (linePi2.Point1.Z == linePi3.Point0.Z &&
                     linePi2.Point0.Z == linePi3.Point1.Z)
             {
-                Point0.X = linePi2.Point0.X;
-                Point0.Y = linePi3.Point1.Y;
-                Point0.Z = linePi2.Point0.Z;
-                Point1.X = linePi2.Point1.X;
-                Point1.Y = linePi3.Point0.Y;
-                Point1.Z = linePi2.Point1.Z;
-                Point0.InitializePointsOfPlane();
-                Point1.InitializePointsOfPlane();
+                //TODO: dermo tut
+                Point0 = new Point3D(linePi2.Point0.X, linePi3.Point1.Y, linePi2.Point0.Z);
+                Point1 = new Point3D(linePi2.Point1.X, linePi3.Point0.Y, linePi2.Point1.Z);
                 LineOfPlane1X0Y = new LineOfPlane1X0Y(new PointOfPlane1X0Y(linePi2.Point0.X, linePi3.Point1.Y), new PointOfPlane1X0Y(linePi2.Point1.X, linePi3.Point0.Y));
                 LineOfPlane2X0Z = linePi2;
                 LineOfPlane3Y0Z = linePi3;
@@ -241,18 +195,37 @@ namespace GraphicsModule.Geometry.Objects.Lines
                 LineOfPlane2X0Z.DrawPoints[1] = Calculate.CrossingPoint(ln, LineOfPlane2X0Z, frameCenter);
             }
         }
-        public Name GetName()
+        public Point3D Point0 { get; }
+
+        public Point3D Point1 { get; }
+
+        public LineOfPlane1X0Y LineOfPlane1X0Y { get; }
+
+        public LineOfPlane2X0Z LineOfPlane2X0Z { get; }
+
+        public LineOfPlane3Y0Z LineOfPlane3Y0Z { get; }
+
+        public double Kx { get; private set; }
+
+        public double Ky { get; private set; }
+
+        public double Kz { get; private set; }
+
+        public Name Name
         {
-            return Name;
-        }
-        public void SetName(Name name)
-        {
-            Name = new Name(name);
-            Point0.SetName(Name);
-            Point1.SetName(Name);
-            LineOfPlane1X0Y.SetName(Name);
-            LineOfPlane2X0Z.SetName(Name);
-            LineOfPlane3Y0Z.SetName(Name);
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                _name = value;
+                Point0.Name = _name;
+                Point1.Name = _name;
+                LineOfPlane1X0Y.Name = _name;
+                LineOfPlane2X0Z.Name = _name;
+                LineOfPlane3Y0Z.Name = _name;          
+            }
         }
     }
 }

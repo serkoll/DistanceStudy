@@ -27,14 +27,14 @@ namespace GraphicsModule.Rules.Objects.Lines
             var ptOfPlane = new PointOfPlane1X0Y(pt, frameCenter);
             if (strg.TempObjects.Count == 0)
             {
-                ptOfPlane.SetName(GraphicsControl.NmGenerator.Generate());
+                ptOfPlane.Name = GraphicsControl.NmGenerator.Generate();
                 strg.TempObjects.Add(ptOfPlane);
                 strg.DrawLastAddedToTempObjects(setting, frameCenter, can.Graphics);
                 return null;
             }
             if (Analyze.PointPos.Coincidence((PointOfPlane1X0Y)strg.TempObjects.First(), new PointOfPlane1X0Y(pt, frameCenter))) return null;
             var source = new LineOfPlane1X0Y((PointOfPlane1X0Y)strg.TempObjects.First(), new PointOfPlane1X0Y(pt, frameCenter), frameCenter, can.PlaneX0Y);
-            source.SetName(strg.TempObjects.First().GetName());
+            source.Name = strg.TempObjects.First().Name;
             strg.TempObjects.Clear();
             return source;
         }

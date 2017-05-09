@@ -7,6 +7,42 @@ namespace GraphicsModule.Configuration
     [Serializable]
     public class LinkLinesSettings
     {
+        public LinkLinesSettings()
+        {
+            IsDraw = true;
+            PenLinkLineX0YtoX = new Pen(Color.LightGreen, 0.3F);
+            PenLinkLineX0YtoY = new Pen(Color.Blue, 0.3F);
+            PenLinkLineX0ZtoX = new Pen(Color.LightGreen, 0.3F);
+            PenLinkLineX0ZtoZ = new Pen(Color.Red, 0.3F);
+            PenLinkLineY0ZtoY = new Pen(Color.Blue, 0.3F);
+            PenLinkLineY0ZtoZ = new Pen(Color.Red, 0.3F);
+            LinkXToBorderPi1 = true;
+            LinkYToBorderPi1 = true;
+            LinkXToBorderPi2 = true;
+            LinkZToBorderPi2 = true;
+            LinkYToBorderPi3 = true;
+            LinkZToBorderPi3 = true;
+            LinkCurveY3ToY1 = true;
+            LinkCurveY1ToY3 = true;
+        }
+        public LinkLinesSettings(Pen selectedPen)
+        {
+            IsDraw = true;
+            PenLinkLineX0YtoX = selectedPen;
+            PenLinkLineX0YtoY = selectedPen;
+            PenLinkLineX0ZtoX = selectedPen;
+            PenLinkLineX0ZtoZ = selectedPen;
+            PenLinkLineY0ZtoY = selectedPen;
+            PenLinkLineY0ZtoZ = selectedPen;
+            LinkXToBorderPi1 = true;
+            LinkYToBorderPi1 = true;
+            LinkXToBorderPi2 = true;
+            LinkZToBorderPi2 = true;
+            LinkYToBorderPi3 = true;
+            LinkZToBorderPi3 = true;
+            LinkCurveY3ToY1 = true;
+            LinkCurveY1ToY3 = true;
+        }
         public bool IsDraw { get; set; }
         [XmlIgnore]
         public Pen PenLinkLineX0YtoX { get; set; }
@@ -67,42 +103,5 @@ namespace GraphicsModule.Configuration
         public bool LinkZToBorderPi3 { get; set; }
         public bool LinkCurveY3ToY1 { get; set; }
         public bool LinkCurveY1ToY3 { get; set; }
-        public LinkLinesSettings()
-        {
-            IsDraw = true;
-            PenLinkLineX0YtoX = new Pen(Color.LightGreen, 0.3F);
-            PenLinkLineX0YtoY = new Pen(Color.Blue, 0.3F);
-            PenLinkLineX0ZtoX = new Pen(Color.LightGreen, 0.3F);
-            PenLinkLineX0ZtoZ = new Pen(Color.Red, 0.3F);
-            PenLinkLineY0ZtoY = new Pen(Color.Blue, 0.3F);
-            PenLinkLineY0ZtoZ = new Pen(Color.Red, 0.3F);
-            LinkXToBorderPi1 = true;
-            LinkYToBorderPi1 = true;
-            LinkXToBorderPi2 = true;
-            LinkZToBorderPi2 = true;
-            LinkYToBorderPi3 = true;
-            LinkZToBorderPi3 = true;
-            LinkCurveY3ToY1 = true;
-            LinkCurveY1ToY3 = true;
-        }
-        public LinkLinesSettings(Pen selectedPen)
-        {
-            IsDraw = true;
-            PenLinkLineX0YtoX = selectedPen;
-            PenLinkLineX0YtoY = selectedPen;
-            PenLinkLineX0ZtoX = selectedPen;
-            PenLinkLineX0ZtoZ = selectedPen;
-            PenLinkLineY0ZtoY = selectedPen;
-            PenLinkLineY0ZtoZ = selectedPen;
-            LinkXToBorderPi1 = true;
-            LinkYToBorderPi1 = true;
-            LinkXToBorderPi2 = true;
-            LinkZToBorderPi2 = true;
-            LinkYToBorderPi3 = true;
-            LinkZToBorderPi3 = true;
-            LinkCurveY3ToY1 = true;
-            LinkCurveY1ToY3 = true;
-        }
     }
-
 }

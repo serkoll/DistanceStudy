@@ -65,6 +65,7 @@
     <Compile Include="Objects\Planes\PlaneOfPlane1X0Y.cs" />
     <Compile Include="Objects\Planes\PlaneOfPlane2X0Z.cs" />
     <Compile Include="Objects\Planes\PlaneOfPlane3Y0Z.cs" />
+    <Compile Include="Objects\Points\PointsExtensions.cs" />
     <Compile Include="Objects\Segments\Segment2D.cs" />
     <Compile Include="Objects\Segments\Segment3D.cs" />
     <Compile Include="Objects\Segments\SegmentOfPlane1X0Y.cs" />
@@ -90,6 +91,9 @@
       <Project>{fa7a373a-2140-4f47-b5dd-e4819bf1093e}</Project>
       <Name>GraphicsModule.Configuration</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

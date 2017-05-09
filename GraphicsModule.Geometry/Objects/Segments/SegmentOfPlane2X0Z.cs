@@ -1,31 +1,18 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using GraphicsModule.Configuration;
 using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Geometry.Objects.Points;
 
 namespace GraphicsModule.Geometry.Objects.Segments
 {
-    /// <summary>Класс для расчета параметров проекции 3D линии на X0Z плоскость проекций</summary>
-    /// <remarks>Copyright © Polozkov V. Yury, 2015</remarks>
     public class SegmentOfPlane2X0Z : ISegmentOfPlane
-    { 
-        public PointOfPlane2X0Z Point0 { get; set; }
-        public PointOfPlane2X0Z Point1 { get; set; }
-        public Name Name { get; set; }
-        public double Kx { get; set; }
-        public double Kz { get; set; }
+    {
+        private Name _name;
+
         public SegmentOfPlane2X0Z()
         {
             Point0 = new PointOfPlane2X0Z();
             Point1 = new PointOfPlane2X0Z();
-        }
-        public SegmentOfPlane2X0Z(Point3D pt0, Point3D pt1)
-        {
-            Point0.X = pt0.X;
-            Point0.Z = pt0.Z;
-            Point1.X = pt1.X;
-            Point1.Z = pt1.Z;
         }
         public SegmentOfPlane2X0Z(PointOfPlane2X0Z pt0, PointOfPlane2X0Z pt1)
         {
@@ -34,12 +21,10 @@ namespace GraphicsModule.Geometry.Objects.Segments
             Kx = pt1.X - pt0.X;
             Kz = pt1.Z - pt0.Z;
         }
-        public SegmentOfPlane2X0Z(Segment3D line)
+        public SegmentOfPlane2X0Z(Segment3D segment)
         {
-            Point0.X = line.Point0.X;
-            Point0.Z = line.Point0.Z;
-            Point1.X = line.Point1.X;
-            Point1.Z = line.Point1.Z;
+            Point0 = new PointOfPlane2X0Z(segment.Point0.X, segment.Point0.Z);
+            Point1 = new PointOfPlane2X0Z(segment.Point1.X, segment.Point1.Z);
         }
         public void Draw(DrawSettings st, Point framecenter, Graphics g)
         {
@@ -65,16 +50,22 @@ namespace GraphicsModule.Geometry.Objects.Segments
             var sg = DeterminePosition.ForSegmentProjection(this, frameCenter);
             return Analyze.Analyze.SegmentPos.IncidenceOfPoint(mscoords, sg, 35 * distance);
         }
-        public Name GetName()
+
+        public PointOfPlane2X0Z Point0 { get; }
+
+        public PointOfPlane2X0Z Point1 { get; }
+
+        public Name Name
         {
-            return Name;
+            get { return _name; }
+            set
+            {
+                _name = value;
+                Point0.Name = _name;
+                Point1.Name = _name;
+            }
         }
-        public void SetName(Name name)
-        {
-            Name = new Name(name);
-            Name.Value += "''";
-            Point0.Name = Name;
-            Point1.Name = Name;
-        }
+        public double Kx { get; set; }
+        public double Kz { get; set; }
     }
 }

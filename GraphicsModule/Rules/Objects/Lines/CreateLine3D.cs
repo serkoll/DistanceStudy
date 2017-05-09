@@ -33,7 +33,7 @@ namespace GraphicsModule.Rules.Objects.Lines
             {
                 if (TempLineOfPlane == null)
                 {
-                    ptOfPlane.SetName(GraphicsControl.NmGenerator.Generate());
+                    ptOfPlane.Name = GraphicsControl.NmGenerator.Generate();
                     strg.TempObjects.Add(ptOfPlane);
                     strg.DrawLastAddedToTempObjects(setting, frameCenter, can.Graphics);
                     return null;
@@ -44,11 +44,11 @@ namespace GraphicsModule.Rules.Objects.Lines
                 strg.DrawLastAddedToTempObjects(setting, frameCenter, can.Graphics);
                 return null;
             }
-            if (ReferenceEquals(strg.TempObjects.First().GetType(), ptOfPlane.GetType()) && (TempLineOfPlane == null))
+            if (ReferenceEquals(strg.TempObjects.First().GetType(), ptOfPlane.GetType()) && TempLineOfPlane == null)
             {
                 strg.TempObjects.Add(ptOfPlane);
                 TempLineOfPlane = CreateLineOfPlane(strg.TempObjects, setting, frameCenter, can);
-                TempLineOfPlane.SetName(strg.TempObjects.First().GetName());
+                TempLineOfPlane.Name = strg.TempObjects.First().Name;
                 strg.TempObjects.Clear();
                 can.Update(strg);
                 TempLineOfPlane.Draw(setting, frameCenter, can.Graphics);
@@ -57,7 +57,7 @@ namespace GraphicsModule.Rules.Objects.Lines
             if (!IsOnLinkLine(TempLineOfPlane, ptOfPlane)) return null;
             strg.TempObjects.Add(ptOfPlane);
             if (!IsLine3DCreatable(TempLineOfPlane, CreateLineOfPlane(strg.TempObjects, setting, frameCenter, can), setting, frameCenter, can)) return null;
-            _source.SetName(TempLineOfPlane.GetName());
+            _source.Name = TempLineOfPlane.Name;
             strg.TempObjects.Clear();
             TempLineOfPlane = null;
             return _source;

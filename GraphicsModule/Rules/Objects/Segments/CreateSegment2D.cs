@@ -23,7 +23,7 @@ namespace GraphicsModule.Rules.Objects.Segments
             var ptOfPlane = new Point2D(pt);
             if (strg.TempObjects.Count == 0)
             {
-                ptOfPlane.SetName(GraphicsControl.NmGenerator.Generate());
+                ptOfPlane.Name =GraphicsControl.NmGenerator.Generate();
                 strg.TempObjects.Add(ptOfPlane);
                 strg.DrawLastAddedToTempObjects(settings, frameCenter, can.Graphics);
             }
@@ -31,7 +31,7 @@ namespace GraphicsModule.Rules.Objects.Segments
             {
                 if (Analyze.PointPos.Coincidence((Point2D)strg.TempObjects[0], new Point2D(pt))) return null;
                 var source = new Segment2D((Point2D)strg.TempObjects[0], new Point2D(pt));
-                source.SetName(strg.TempObjects[0].GetName());
+                source.SetName(strg.TempObjects[0].Name);
                 strg.TempObjects.Clear();
                 return source;
             }

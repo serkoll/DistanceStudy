@@ -24,7 +24,7 @@ namespace GraphicsModule.Rules.Objects.Segments
             var ptOfPlane = new PointOfPlane3Y0Z(pt, frameCenter);
             if (strg.TempObjects.Count == 0)
             {
-                ptOfPlane.SetName(GraphicsControl.NmGenerator.Generate());
+                ptOfPlane.Name = GraphicsControl.NmGenerator.Generate();
                 strg.TempObjects.Add(ptOfPlane);
                 strg.DrawLastAddedToTempObjects(setting, frameCenter, can.Graphics);
                 return null;
@@ -33,7 +33,7 @@ namespace GraphicsModule.Rules.Objects.Segments
                 new PointOfPlane3Y0Z(pt, frameCenter))) return null;
             var source = new SegmentOfPlane3Y0Z((PointOfPlane3Y0Z)strg.TempObjects[0],
                 new PointOfPlane3Y0Z(pt, frameCenter));
-            source.SetName(strg.TempObjects[0].GetName());
+            source.Name = strg.TempObjects[0].Name;
             strg.TempObjects.Clear();
             return source;
         }

@@ -1,20 +1,13 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using GraphicsModule.Configuration;
 using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Geometry.Objects.Points;
 
 namespace GraphicsModule.Geometry.Objects.Segments
 {
-    /// <summary>Класс для расчета параметров проекции 3D линии на X0Y плоскость проекций</summary>
-    /// <remarks>Copyright © Polozkov V. Yury, 2015</remarks>
     public class SegmentOfPlane1X0Y : ISegmentOfPlane
     {
-        public PointOfPlane1X0Y Point0 { get; set; }
-        public PointOfPlane1X0Y Point1 { get; set; }
-        public Name Name { get; set; }
-        public double Kx { get; set; }
-        public double Ky { get; set; }
+        private Name _name;
         public SegmentOfPlane1X0Y(PointOfPlane1X0Y pt0, PointOfPlane1X0Y pt1)
         {
             Point0 = pt0;
@@ -22,12 +15,10 @@ namespace GraphicsModule.Geometry.Objects.Segments
             Kx = pt1.X - pt0.X;
             Ky = pt1.Y - pt0.Y;
         }
-        public SegmentOfPlane1X0Y(Segment3D line)
+        public SegmentOfPlane1X0Y(Segment3D segment)
         {
-            Point0.X = line.Point0.X;
-            Point0.Y = line.Point0.Y;
-            Point1.X = line.Point1.X;
-            Point1.Y = line.Point1.Y;
+            Point0 = new PointOfPlane1X0Y(segment.Point0.X, segment.Point0.Y);
+            Point1 = new PointOfPlane1X0Y(segment.Point1.X, segment.Point1.Y);
         }
         public void Draw(DrawSettings st, Point framecenter, Graphics g)
         {
@@ -55,16 +46,20 @@ namespace GraphicsModule.Geometry.Objects.Segments
             var sg = DeterminePosition.ForSegmentProjection(this, frameCenter);
             return Analyze.Analyze.SegmentPos.IncidenceOfPoint(mscoords, sg, 35 * distance);
         }
-        public Name GetName()
+        public PointOfPlane1X0Y Point0 { get; private set; }
+        public PointOfPlane1X0Y Point1 { get; private set; }
+
+        public Name Name
         {
-            return Name;
+            get { return _name; }
+            set
+            {
+                _name = value;
+                Point0.Name = _name;
+                Point1.Name = _name;
+            }
         }
-        public void SetName(Name name)
-        {
-            Name = new Name(name);
-            Name.Value += "'";
-            Point0.Name = Name;
-            Point1.Name = Name;
-        }
+        public double Kx { get; private set; }
+        public double Ky { get; private set; }
     }
 }

@@ -269,6 +269,7 @@ namespace GraphicsModule.Controls
             if (SetObject != null) //Контроль существования объекта
             {
                 SetObject.AddToStorageAndDraw(mousecoords, _canvas.CenterSystemPoint, _canvas, _settings.DrawSettings, _storage); //Отрисовываем объект и добавляем его в коллекцию объектов
+                //TODO: нужно ли
                 _canvas.Refresh(); //Перерисовывам полотно
             }
             if (Operations != null) //Наличие операции над объектами

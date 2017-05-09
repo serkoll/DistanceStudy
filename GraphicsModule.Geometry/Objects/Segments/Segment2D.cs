@@ -9,24 +9,8 @@ namespace GraphicsModule.Geometry.Objects.Segments
     /// <remarks>Copyright © Polozkov V. Yury, 2015</remarks>
     public class Segment2D : IObject
     {
-        public Point2D Point0 { get; set; }
-        //Вторая (расчетная или заданная) точка прямой
-        public Point2D Point1 { get; set; }
-        public Name Name { get; set; }
-        /// <summary>Получает или задает коэффициент kx канонического уравнения прямой</summary>
-        /// <remarks></remarks>
-        public double Kx { get; set; }
-        /// <summary>Получает или задает коэффициент ky канонического уравнения прямой</summary>
-        /// <remarks></remarks>
-        public double Ky { get; set; }
-        /// <summary>
-        /// Инициализирует новый экземпляр 2D прямой с помощью задания двух точек
-        /// </summary>
-        /// <param name="pt1">Первая (опорная) точка прямой</param>
-        /// <param name="pt2">Вторая точка прямой</param>
-        /// <remarks>Рассчитывает значения постоянных коэффициентов 2D прямой, заданной двумя 2D точками.
-        /// Первая заданная точка записывается в качестве опорной точки прямой.
-        /// </remarks>
+        private Name _name;
+
         public Segment2D(Point2D pt1, Point2D pt2)
         {
             if (Analyze.Analyze.PointPos.Coincidence(pt1, pt2)) return;
@@ -56,5 +40,23 @@ namespace GraphicsModule.Geometry.Objects.Segments
             Point0.Name = Name;
             Point1.Name = Name;
         }
+        public Point2D Point0 { get; }
+
+        public Point2D Point1 { get; }
+
+        public Name Name
+        {
+            get { return _name; }
+            set
+            {
+                _name = value;
+                Point0.Name = value;
+                Point1.Name = value;
+            }
+        }
+
+        public double Kx { get; }
+
+        public double Ky { get; }
     }
 }

@@ -28,7 +28,7 @@ namespace GraphicsModule.Rules.Objects.Points
             var ptOfPlane = TypeOf.PointOfPlane(pt, frameCenter);
             if (storage.TempObjects.Count == 0)
             {
-                ptOfPlane.SetName(GraphicsControl.NmGenerator.Generate());
+                ptOfPlane.Name = GraphicsControl.NmGenerator.Generate();
                 storage.TempObjects.Add(ptOfPlane);
                 ptOfPlane.Draw(settings, frameCenter, canvas.Graphics);
                 return null;
@@ -50,7 +50,7 @@ namespace GraphicsModule.Rules.Objects.Points
                 canvas.Update(storage);
                 return null;
             }
-            source.SetName(storage.TempObjects.First().GetName());
+            source.Name = storage.TempObjects.First().Name;
             return source;
         }
     }

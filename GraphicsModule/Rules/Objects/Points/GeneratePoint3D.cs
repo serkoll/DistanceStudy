@@ -1,9 +1,6 @@
-﻿using System;
-using System.Drawing;
-using System.Linq;
+﻿using System.Drawing;
 using GraphicsModule.Configuration;
 using GraphicsModule.Controls;
-using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Geometry.Objects.Points;
 using GraphicsModule.Interfaces;
 
@@ -30,7 +27,7 @@ namespace GraphicsModule.Rules.Objects.Points
                 {
                     storage.Objects.Remove(storage.SelectedObjects[0]);
                     storage.Objects.Remove(storage.SelectedObjects[1]);
-                    _source.SetName(GraphicsControl.NmGenerator.Generate());
+                    _source.Name = GraphicsControl.NmGenerator.Generate();
                     storage.SelectedObjects.Clear();
                     canvas.Update(storage);
                     storage.AddToCollection(_source);

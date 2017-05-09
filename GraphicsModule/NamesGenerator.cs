@@ -8,7 +8,6 @@ namespace GraphicsModule
 {
     public class NamesGenerator : INamesGenerator
     {
-        public NamePosition Position { get; set; }
         private readonly DrawSettings _textSettings;
         private int _counter;
         private int _quality;
@@ -69,5 +68,7 @@ namespace GraphicsModule
             }
             return delta;
         }
+        public NamePosition Position { get; set; }
+
     }
 }

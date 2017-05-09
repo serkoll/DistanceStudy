@@ -38,6 +38,7 @@ namespace GraphicsModule.Geometry
                                   Distance(mscoords, ptR, frameCenter, pt.PointOfPlane3Y0Z)};
         }
         #endregion
+
         #region Crossing
         public static PointF CrossingPoint(Line2D ln1, Line2D ln2)
         {

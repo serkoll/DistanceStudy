@@ -9,9 +9,6 @@ using GraphicsModule.Interfaces;
 
 namespace GraphicsModule.Rules.Objects.Lines
 {
-    /// <summary>
-    /// Создание 2Д линии
-    /// </summary>
     public class CreateLine2D : ICreate
     {
         public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas canvas, DrawSettings settings, Storage storage)
@@ -26,7 +23,7 @@ namespace GraphicsModule.Rules.Objects.Lines
             var ptOfPlane = new Point2D(pt);
             if (strg.TempObjects.Count == 0)
             {
-                ptOfPlane.SetName(GraphicsControl.NmGenerator.Generate());
+                ptOfPlane.Name = GraphicsControl.NmGenerator.Generate();
                 strg.TempObjects.Add(ptOfPlane);
                 strg.DrawLastAddedToTempObjects(settings, frameCenter, can.Graphics);
             }
@@ -34,7 +31,7 @@ namespace GraphicsModule.Rules.Objects.Lines
             {
                 if (Analyze.PointPos.Coincidence((Point2D)strg.TempObjects.First(), new Point2D(pt))) return null;
                 var source = new Line2D((Point2D)strg.TempObjects.First(), new Point2D(pt), can.PicBox);
-                source.SetName(strg.TempObjects.First().GetName());
+                source.Name = strg.TempObjects.First().Name;
                 strg.TempObjects.Clear();
                 return source;
             }

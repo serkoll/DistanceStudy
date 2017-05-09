@@ -41,11 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Access\Structures\GeneralAccess.cs" />
-    <Compile Include="Access\Structures\LinesAccess.cs" />
-    <Compile Include="Access\Structures\SegmentsAccess.cs" />
-    <Compile Include="Access\Structures\PlanesAccess.cs" />
-    <Compile Include="Access\Structures\PointsAccess.cs" />
+    <Compile Include="Access\GeneralAccess.cs" />
+    <Compile Include="Access\LinesAccess.cs" />
+    <Compile Include="Access\SegmentsAccess.cs" />
+    <Compile Include="Access\PlanesAccess.cs" />
+    <Compile Include="Access\PointsAccess.cs" />
     <Compile Include="Cursors\AddOnPoint.cs" />
     <Compile Include="Cursors\Circle.cs" />
     <Compile Include="Cursors\Cross.cs" />
@@ -63,7 +63,9 @@
     <Compile Include="GridSettings.cs" />
     <Compile Include="Settings.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

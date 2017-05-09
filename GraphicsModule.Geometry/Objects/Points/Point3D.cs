@@ -11,26 +11,12 @@ namespace GraphicsModule.Geometry.Objects.Points
     /// <remarks>Copyright © Polozkov V. Yury, 2015</remarks>
     public class Point3D : IObject
     {
-        public double X { get; set; }
-        public double Y { get; set; }
-        public double Z { get; set; }
-        public Name Name { get; set; }
-        public PointOfPlane1X0Y PointOfPlane1X0Y { get; set; }
-        /// <summary>Получает или задает координаты проекции 3D точки на плоскость X0Z пространственной системы координат</summary>
-        /// <remarks></remarks>
-        public PointOfPlane2X0Z PointOfPlane2X0Z { get; set; }
-        /// <summary>Получает или задает координаты проекции 3D точки на плоскость Y0Z пространственной системы координат</summary>
-        /// <remarks></remarks>
-        public PointOfPlane3Y0Z PointOfPlane3Y0Z { get; set; }
-        /// <summary>Инициализация нового экземпляра 3D точки</summary>
-        /// <remarks>Исходные координаты точки: X=0; Y=0; Z=0</remarks>
+        private Name _name;
         public Point3D()
         {
             Z = 0;
             InitializePointsOfPlane();
         }
-        /// <summary>Инициализирует новый экземпляр 3D точки с указанными координатами</summary>
-        /// <remarks></remarks>
         public Point3D(double x, double y, double z)
         {
             X = x;
@@ -38,8 +24,6 @@ namespace GraphicsModule.Geometry.Objects.Points
             Z = z;
             InitializePointsOfPlane();
         }
-        /// <summary>Преобразует 2D точку в 3D точку путем добавления третьей координаты</summary>
-        /// <remarks></remarks>
         public Point3D(Point2D pt, double z)
         {
             X = pt.X;
@@ -112,17 +96,16 @@ namespace GraphicsModule.Geometry.Objects.Points
             PointOfPlane2X0Z = new PointOfPlane2X0Z(X, Z);
             PointOfPlane3Y0Z = new PointOfPlane3Y0Z(Y, Z);
         }
-        /// <summary>Передвигает ранее заданную 3D точку
-        /// (изменяет коодинаты на указанные величины по осям в 3D)
-        /// </summary>
-        /// <remarks>Point3D.X += dx; Point3D.Y += dy; Point3D.Z += dz</remarks>
-        public void PointMove(double dx, double dy, double dz) { X += dx; Y += dy; Z += dz; }//Конструктор перемещения на указанные величины по осям в 3D 
+
+        public void PointMove(double dx, double dy, double dz) { X += dx; Y += dy; Z += dz; }
+
         public void Draw(Pen pen, float ptR, Point frameCenter, Graphics graphics)
         {
             PointOfPlane1X0Y.Draw(pen, ptR, frameCenter, graphics);
             PointOfPlane2X0Z.Draw(pen, ptR, frameCenter, graphics);
             PointOfPlane3Y0Z.Draw(pen, ptR, frameCenter, graphics);
         }
+
         public void Draw(DrawSettings st, Point frameCenter, Graphics g)
         {
             Draw(st.PenPoints, st.RadiusPoints, frameCenter, g);
@@ -130,12 +113,14 @@ namespace GraphicsModule.Geometry.Objects.Points
                          st.LinkLinesSettings.PenLinkLineY0ZtoZ, st.LinkLinesSettings.PenLinkLineY0ZtoY, frameCenter, ref g);
             DrawName(st, st.RadiusPoints, frameCenter, g);
         }
+
         public void DrawName(DrawSettings st, float poitRaduis, Point frameCenter, Graphics graphics)
         {
             PointOfPlane1X0Y.DrawName(st, poitRaduis, frameCenter, graphics);
             PointOfPlane2X0Z.DrawName(st, poitRaduis, frameCenter, graphics);
             PointOfPlane3Y0Z.DrawName(st, poitRaduis, frameCenter, graphics);
         }
+
         public void DrawLinkLine(Pen penLinkLineToX, Pen penLinkLinetoY, Pen penLinkLineX0ZtoX, Pen penLinkLineX0ZtoZ, Pen penLinkLineY0ZtoZ, Pen penLinkLineY0ZtoY, Point frameCenter, ref Graphics graphics)
         {
             //Отрисовка линий связи
@@ -182,25 +167,38 @@ namespace GraphicsModule.Geometry.Objects.Points
                 PointOfPlane3Y0Z.DrawLinkLine(penLinkLineY0ZtoZ, penLinkLineY0ZtoY, true, true, false, false, false, frameCenter, graphics); //Отрисовка линий связи Профильной проекции с ограничениями (не отображаются связи от осей до границ плоскотсей проекций и дуга (для дуги устраняется повторная отрисовка))
             }
         }
+
+        public double X { get; private set; }
+
+        public double Y { get; private set; }
+
+        public double Z { get; private set; }
+
+        //TODO: test code
+        public Name Name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                PointOfPlane1X0Y.Name = value;
+                PointOfPlane2X0Z.Name = value;
+                PointOfPlane3Y0Z.Name = value;
+                _name = value;
+            }
+        }
+        public PointOfPlane1X0Y PointOfPlane1X0Y { get; private set; }
+
+        public PointOfPlane2X0Z PointOfPlane2X0Z { get; private set; }
+
+        public PointOfPlane3Y0Z PointOfPlane3Y0Z { get; private set; }
+
         public bool IsSelected(Point mscoords, float ptR, Point frameCenter, double distance)
         {
             var dst = Calculate.Distance(mscoords, ptR, frameCenter, this);
             return dst[0] < distance || dst[1] < distance || dst[2] < distance;
-        }
-
-        public Name GetName()
-        {
-            return Name;
-        }
-        public void SetName(Name name)
-        {
-            Name = new Name(name);
-            PointOfPlane1X0Y.Name = new Name(Name);
-            PointOfPlane1X0Y.Name.Value += "'";
-            PointOfPlane2X0Z.Name = new Name(Name);
-            PointOfPlane2X0Z.Name.Value += "''";
-            PointOfPlane3Y0Z.Name = new Name(Name);
-            PointOfPlane3Y0Z.Name.Value += "'''";
         }
     }
 }
