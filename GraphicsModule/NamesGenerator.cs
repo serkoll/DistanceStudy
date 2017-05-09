@@ -1,37 +1,29 @@
 ﻿using System;
+using GraphicsModule.Configuration;
+using GraphicsModule.Enums;
 using GraphicsModule.Geometry;
-using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Interfaces;
-using GraphicsModule.Settings;
 
 namespace GraphicsModule
 {
     public class NamesGenerator : INamesGenerator
     {
-        public byte Position { get; set; }
-        private DrawS _textSettings;
+        private readonly DrawSettings _textSettings;
         private int _counter;
         private int _quality;
-        public NamesGenerator(bool type, byte startPosition, Settings.Settings textSettings)
+        public NamesGenerator(bool type, NamePosition startPosition, Settings textSettings)
         {
             _counter = type ? 65 : 49;
             _quality = 1;
             Position = startPosition;
-            _textSettings = textSettings.DrawS;
+            _textSettings = textSettings.DrawSettings;
         }
-        public Name Generate(IObject obj)
+        public Name Generate()
         {
             var name = "";
             for (int i = 0; i < _quality; i++)
             {
                 name += Convert.ToChar(_counter).ToString();
-            }
-            var type = obj.GetType().GetInterfaces();
-            if (type.Length > 2)
-            {
-                if (type[2] == typeof(IObjectOfPlane1X0Y)) name += "'";
-                else if (type[2] == typeof(IObjectOfPlane2X0Z)) name += "''";
-                else name += "'''";
             }
             var delta = GetDeltaFromPosition();
             if (_counter < 90) _counter++;
@@ -47,32 +39,36 @@ namespace GraphicsModule
             var delta = new float[2];
             switch (Position)
             {
-                case 0:
+                case NamePosition.TopLeft:
                     {
                         delta[0] = -(_textSettings.TextFont.Size * _quality + 5);
                         delta[1] = -(_textSettings.TextFont.Height + 5);
                         break;
                     }
-                case 1:
+                case NamePosition.TopRight:
                     {
                         delta[0] = 5;
                         delta[1] = -(_textSettings.TextFont.Height + 5);
                         break;
                     }
-                case 2:
+                case NamePosition.BottomLeft:
                     {
                         delta[0] = -(_textSettings.TextFont.Size * _quality + 5);
                         delta[1] = 5;
                         break;
                     }
-                case 3:
+                case NamePosition.BottomRight:
                     {
                         delta[0] = 5;
                         delta[1] = 5;
                         break;
                     }
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
             return delta;
         }
+        public NamePosition Position { get; set; }
+
     }
 }

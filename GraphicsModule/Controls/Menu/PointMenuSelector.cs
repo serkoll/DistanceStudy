@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
-using GraphicsModule.CreateObjects;
+using GraphicsModule.Configuration.Access.Structures;
+using GraphicsModule.Rules.Objects;
+using GraphicsModule.Rules.Objects.Points;
 
 namespace GraphicsModule.Controls.Menu
 {
@@ -8,11 +10,29 @@ namespace GraphicsModule.Controls.Menu
     {
         private PictureBox _mainPictureBox;
         private ToolStripButton _mainStripButton;
-        public PointMenuSelector(PictureBox mainPictureBox, ToolStripButton mainButton)
+        private StatusStrip _menuStrip;
+        public PointMenuSelector(PictureBox mainPictureBox, ToolStripButton mainButton, StatusStrip menuStrip, PointsAccess pointsAccess)
         {
             InitializeComponent();
             _mainStripButton = mainButton;
             _mainPictureBox = mainPictureBox;
+            _menuStrip = menuStrip;
+            buttonPoint2D.Enabled = pointsAccess.IsPoint2DEnabled;
+            buttonPoint3D.Enabled = pointsAccess.IsPoint3DEnabled;
+            buttonPointOfPlane1.Enabled = pointsAccess.IsPointOfPlane1X0YEnabled;
+            buttonPointOfPlane2.Enabled = pointsAccess.IsPointOfPlane2X0ZEnabled;
+            buttonPointOfPlane3.Enabled = pointsAccess.IsPointOfPlane3Y0ZEnabled;
+            buttonPoint3DGenerate.Enabled = pointsAccess.IsGeneratePoint3DEnabled;
+        }
+
+        public void SetAccess(PointsAccess pointsAccess)
+        {
+            buttonPoint2D.Enabled = pointsAccess.IsPoint2DEnabled;
+            buttonPoint3D.Enabled = pointsAccess.IsPoint3DEnabled;
+            buttonPointOfPlane1.Enabled = pointsAccess.IsPointOfPlane1X0YEnabled;
+            buttonPointOfPlane2.Enabled = pointsAccess.IsPointOfPlane2X0ZEnabled;
+            buttonPointOfPlane3.Enabled = pointsAccess.IsPointOfPlane3Y0ZEnabled;
+            buttonPoint3DGenerate.Enabled = pointsAccess.IsGeneratePoint3DEnabled;
         }
         private void buttonPoint2D_Click(object sender, EventArgs e)
         {
@@ -42,6 +62,8 @@ namespace GraphicsModule.Controls.Menu
         {
             Visible = false;
             GraphicsControl.Operations = null;
+            _menuStrip.Visible = true;
+            _menuStrip.Items[2].Visible = false;
         }
         private void buttonPoint3D_Click(object sender, EventArgs e)
         {

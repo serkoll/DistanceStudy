@@ -2,11 +2,21 @@
 using System.Drawing;
 using System.Xml.Serialization;
 
-namespace GraphicsModule.Settings
+namespace GraphicsModule.Configuration
 {
     [Serializable]
     public class PenSerialize
     {
+        public PenSerialize()
+        {
+            Color = Color.Black;
+            Width = 1;
+        }
+        public PenSerialize(Pen pen)
+        {
+            Color = pen.Color;
+            Width = pen.Width;
+        }
         [XmlIgnore]
         public Pen Pen { get; set; }
         [XmlIgnore]
@@ -18,16 +28,6 @@ namespace GraphicsModule.Settings
             set { Color = ColorTranslator.FromHtml(value); }
         }
         public float Width { get; set; }
-
-        public PenSerialize()
-        {
-            Color = Color.Black;
-            Width = 1;
-        }
-        public PenSerialize(Pen pen)
-        {
-            Color = pen.Color;
-            Width = pen.Width;
-        }
+        
     }
 }

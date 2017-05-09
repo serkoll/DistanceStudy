@@ -1,10 +1,10 @@
 ﻿using System.Drawing;
-using GraphicsModule.Settings;
+using GraphicsModule.Configuration;
 
 namespace GraphicsModule.Geometry.Interfaces
 {
-    internal interface ILineOfPlane
+    public interface ILineOfPlane : IObject
     {
-        void DrawLineOnly(DrawS st, Point framecenter, Graphics g);
+        void DrawLineOnly(DrawSettings st, Point framecenter, Graphics g);
     }
 }

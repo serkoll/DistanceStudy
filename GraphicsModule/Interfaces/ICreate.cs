@@ -1,5 +1,5 @@
 ﻿using System.Drawing;
-using GraphicsModule.Settings;
+using GraphicsModule.Configuration;
 
 namespace GraphicsModule.Interfaces
 {
@@ -13,9 +13,9 @@ namespace GraphicsModule.Interfaces
         /// </summary>
         /// <param name="pt"></param>
         /// <param name="frameCenter">Центр системы координат</param>
-        /// <param name="can">Полотно отрисовки</param>
-        /// <param name="setting">Настройки</param>
-        /// <param name="strg">Хранилище данных</param>
-        void AddToStorageAndDraw(Point pt, Point frameCenter,Canvas can, DrawS setting, Storage strg);
+        /// <param name="canvas">Полотно отрисовки</param>
+        /// <param name="settings">Настройки</param>
+        /// <param name="storage">Хранилище данных</param>
+        void AddToStorageAndDraw(Point pt, Point frameCenter,Canvas canvas, DrawSettings settings, Storage storage);
     }
 }

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
-namespace GraphicsModule.Settings.Cursors
+namespace GraphicsModule.Configuration.Cursors
 {
-    class Cross:Cursor
+    public class Cross:Cursor
     {
         readonly List<Point> _crossPoints=new List<Point>();
 

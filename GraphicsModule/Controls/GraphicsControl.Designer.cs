@@ -34,7 +34,7 @@ namespace GraphicsModule.Controls
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GraphicsControl));
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.baseTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.workspaceOperationsStatusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.WorkspaceOperations = new System.Windows.Forms.StatusStrip();
             this.labelValueX = new System.Windows.Forms.ToolStripStatusLabel();
             this.labelValueY = new System.Windows.Forms.ToolStripStatusLabel();
             this.labelValueZ = new System.Windows.Forms.ToolStripStatusLabel();
@@ -44,18 +44,27 @@ namespace GraphicsModule.Controls
             this.labelStatusLinkLine = new System.Windows.Forms.ToolStripStatusLabel();
             this.labelCursorToGridFixation = new System.Windows.Forms.ToolStripStatusLabel();
             this.labelExternalEntitiy = new System.Windows.Forms.ToolStripStatusLabel();
-            this.statusStrip2 = new System.Windows.Forms.StatusStrip();
+            this.ObjectsPropertyMenu = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel_Help = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
-            this.левыйВерхнийToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.правыйВерхнийToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.левыйНижнийToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.правыйНижнийToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.graphicsToolBarStrip = new System.Windows.Forms.ToolStrip();
+            this.buttonNameMenu = new System.Windows.Forms.ToolStripDropDownButton();
+            this.buttonNameMenuTopLeft = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonNameMenuTopRight = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonNameMenuBottomLeft = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonNameMenuBottomRight = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonPlaneTypeMenu = new System.Windows.Forms.ToolStripDropDownButton();
+            this.buttonPlaneType3Points = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonPlaneTypeLinePoint = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonPlaneTypeParallelLine = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonPlaneTypeCrossedLine = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonPlaneTypeSegmentPoint = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonPlaneTypeParallelSegment = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonPlaneTypeCrossedSegment = new System.Windows.Forms.ToolStripMenuItem();
+            this.ObjectsBuildMenu = new System.Windows.Forms.ToolStrip();
             this.buttonPointsMenu = new System.Windows.Forms.ToolStripButton();
             this.buttonLinesMenu = new System.Windows.Forms.ToolStripButton();
             this.buttonSegmentMenu = new System.Windows.Forms.ToolStripButton();
-            this.basicToolBarStrip = new System.Windows.Forms.ToolStrip();
+            this.buttonPlanesMenu = new System.Windows.Forms.ToolStripButton();
+            this.BaseOperationsMenu = new System.Windows.Forms.ToolStrip();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.buttonCopy = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
@@ -79,12 +88,13 @@ namespace GraphicsModule.Controls
             this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.импортToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.solidWorksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.доступностьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainPictureBox = new System.Windows.Forms.PictureBox();
             this.baseTableLayoutPanel.SuspendLayout();
-            this.workspaceOperationsStatusStrip1.SuspendLayout();
-            this.statusStrip2.SuspendLayout();
-            this.graphicsToolBarStrip.SuspendLayout();
-            this.basicToolBarStrip.SuspendLayout();
+            this.WorkspaceOperations.SuspendLayout();
+            this.ObjectsPropertyMenu.SuspendLayout();
+            this.ObjectsBuildMenu.SuspendLayout();
+            this.BaseOperationsMenu.SuspendLayout();
             this.MainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainPictureBox)).BeginInit();
             this.SuspendLayout();
@@ -101,10 +111,10 @@ namespace GraphicsModule.Controls
             this.baseTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 36F));
             this.baseTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.baseTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.baseTableLayoutPanel.Controls.Add(this.workspaceOperationsStatusStrip1, 0, 4);
-            this.baseTableLayoutPanel.Controls.Add(this.statusStrip2, 1, 3);
-            this.baseTableLayoutPanel.Controls.Add(this.graphicsToolBarStrip, 0, 2);
-            this.baseTableLayoutPanel.Controls.Add(this.basicToolBarStrip, 0, 1);
+            this.baseTableLayoutPanel.Controls.Add(this.WorkspaceOperations, 0, 4);
+            this.baseTableLayoutPanel.Controls.Add(this.ObjectsPropertyMenu, 1, 3);
+            this.baseTableLayoutPanel.Controls.Add(this.ObjectsBuildMenu, 0, 2);
+            this.baseTableLayoutPanel.Controls.Add(this.BaseOperationsMenu, 0, 1);
             this.baseTableLayoutPanel.Controls.Add(this.MainMenu, 0, 0);
             this.baseTableLayoutPanel.Controls.Add(this.MainPictureBox, 1, 2);
             this.baseTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -119,12 +129,12 @@ namespace GraphicsModule.Controls
             this.baseTableLayoutPanel.Size = new System.Drawing.Size(1239, 593);
             this.baseTableLayoutPanel.TabIndex = 7;
             // 
-            // workspaceOperationsStatusStrip1
+            // WorkspaceOperations
             // 
-            this.workspaceOperationsStatusStrip1.BackColor = System.Drawing.SystemColors.Control;
-            this.baseTableLayoutPanel.SetColumnSpan(this.workspaceOperationsStatusStrip1, 3);
-            this.workspaceOperationsStatusStrip1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.workspaceOperationsStatusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.WorkspaceOperations.BackColor = System.Drawing.SystemColors.Control;
+            this.baseTableLayoutPanel.SetColumnSpan(this.WorkspaceOperations, 3);
+            this.WorkspaceOperations.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.WorkspaceOperations.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.labelValueX,
             this.labelValueY,
             this.labelValueZ,
@@ -134,12 +144,12 @@ namespace GraphicsModule.Controls
             this.labelStatusLinkLine,
             this.labelCursorToGridFixation,
             this.labelExternalEntitiy});
-            this.workspaceOperationsStatusStrip1.Location = new System.Drawing.Point(0, 568);
-            this.workspaceOperationsStatusStrip1.Name = "workspaceOperationsStatusStrip1";
-            this.workspaceOperationsStatusStrip1.Size = new System.Drawing.Size(1239, 25);
-            this.workspaceOperationsStatusStrip1.SizingGrip = false;
-            this.workspaceOperationsStatusStrip1.TabIndex = 11;
-            this.workspaceOperationsStatusStrip1.Text = "statusStrip1";
+            this.WorkspaceOperations.Location = new System.Drawing.Point(0, 568);
+            this.WorkspaceOperations.Name = "WorkspaceOperations";
+            this.WorkspaceOperations.Size = new System.Drawing.Size(1239, 25);
+            this.WorkspaceOperations.SizingGrip = false;
+            this.WorkspaceOperations.TabIndex = 11;
+            this.WorkspaceOperations.Text = "statusStrip1";
             // 
             // labelValueX
             // 
@@ -220,20 +230,22 @@ namespace GraphicsModule.Controls
             this.labelExternalEntitiy.Size = new System.Drawing.Size(104, 20);
             this.labelExternalEntitiy.Text = "Внешний объект";
             // 
-            // statusStrip2
+            // ObjectsPropertyMenu
             // 
-            this.statusStrip2.BackColor = System.Drawing.SystemColors.Control;
-            this.baseTableLayoutPanel.SetColumnSpan(this.statusStrip2, 2);
-            this.statusStrip2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.statusStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ObjectsPropertyMenu.BackColor = System.Drawing.SystemColors.Control;
+            this.baseTableLayoutPanel.SetColumnSpan(this.ObjectsPropertyMenu, 2);
+            this.ObjectsPropertyMenu.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ObjectsPropertyMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel_Help,
-            this.toolStripDropDownButton1});
-            this.statusStrip2.Location = new System.Drawing.Point(36, 541);
-            this.statusStrip2.Name = "statusStrip2";
-            this.statusStrip2.Size = new System.Drawing.Size(1203, 27);
-            this.statusStrip2.SizingGrip = false;
-            this.statusStrip2.TabIndex = 10;
-            this.statusStrip2.Text = "statusStrip2";
+            this.buttonNameMenu,
+            this.buttonPlaneTypeMenu});
+            this.ObjectsPropertyMenu.Location = new System.Drawing.Point(36, 541);
+            this.ObjectsPropertyMenu.Name = "ObjectsPropertyMenu";
+            this.ObjectsPropertyMenu.Size = new System.Drawing.Size(1203, 27);
+            this.ObjectsPropertyMenu.SizingGrip = false;
+            this.ObjectsPropertyMenu.TabIndex = 10;
+            this.ObjectsPropertyMenu.Text = "statusStrip2";
+            this.ObjectsPropertyMenu.Visible = false;
             // 
             // toolStripStatusLabel_Help
             // 
@@ -241,63 +253,133 @@ namespace GraphicsModule.Controls
             this.toolStripStatusLabel_Help.Size = new System.Drawing.Size(64, 22);
             this.toolStripStatusLabel_Help.Text = "Подсказка";
             // 
-            // toolStripDropDownButton1
+            // buttonNameMenu
             // 
-            this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.левыйВерхнийToolStripMenuItem,
-            this.правыйВерхнийToolStripMenuItem,
-            this.левыйНижнийToolStripMenuItem,
-            this.правыйНижнийToolStripMenuItem});
-            this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
-            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
-            this.toolStripDropDownButton1.Size = new System.Drawing.Size(29, 25);
-            this.toolStripDropDownButton1.Text = "toolStripDropDownButton1";
+            this.buttonNameMenu.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.buttonNameMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.buttonNameMenuTopLeft,
+            this.buttonNameMenuTopRight,
+            this.buttonNameMenuBottomLeft,
+            this.buttonNameMenuBottomRight});
+            this.buttonNameMenu.Image = ((System.Drawing.Image)(resources.GetObject("buttonNameMenu.Image")));
+            this.buttonNameMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonNameMenu.Name = "buttonNameMenu";
+            this.buttonNameMenu.Size = new System.Drawing.Size(104, 25);
+            this.buttonNameMenu.Text = "Левый верхний";
+            this.buttonNameMenu.ToolTipText = "buttonNamePosition";
             // 
-            // левыйВерхнийToolStripMenuItem
+            // buttonNameMenuTopLeft
             // 
-            this.левыйВерхнийToolStripMenuItem.Name = "левыйВерхнийToolStripMenuItem";
-            this.левыйВерхнийToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
-            this.левыйВерхнийToolStripMenuItem.Text = "Левый верхний";
-            this.левыйВерхнийToolStripMenuItem.Click += new System.EventHandler(this.левыйВерхнийToolStripMenuItem_Click);
+            this.buttonNameMenuTopLeft.Name = "buttonNameMenuTopLeft";
+            this.buttonNameMenuTopLeft.Size = new System.Drawing.Size(166, 22);
+            this.buttonNameMenuTopLeft.Text = "Левый верхний";
+            this.buttonNameMenuTopLeft.Click += new System.EventHandler(this.buttonNameMenuTopLeftMenuItem_Click);
             // 
-            // правыйВерхнийToolStripMenuItem
+            // buttonNameMenuTopRight
             // 
-            this.правыйВерхнийToolStripMenuItem.Name = "правыйВерхнийToolStripMenuItem";
-            this.правыйВерхнийToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
-            this.правыйВерхнийToolStripMenuItem.Text = "Правый верхний";
-            this.правыйВерхнийToolStripMenuItem.Click += new System.EventHandler(this.правыйВерхнийToolStripMenuItem_Click);
+            this.buttonNameMenuTopRight.Name = "buttonNameMenuTopRight";
+            this.buttonNameMenuTopRight.Size = new System.Drawing.Size(166, 22);
+            this.buttonNameMenuTopRight.Text = "Правый верхний";
+            this.buttonNameMenuTopRight.Click += new System.EventHandler(this.buttonNameMenuTopRightMenuItem_Click);
             // 
-            // левыйНижнийToolStripMenuItem
+            // buttonNameMenuBottomLeft
             // 
-            this.левыйНижнийToolStripMenuItem.Name = "левыйНижнийToolStripMenuItem";
-            this.левыйНижнийToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
-            this.левыйНижнийToolStripMenuItem.Text = "Левый нижний";
-            this.левыйНижнийToolStripMenuItem.Click += new System.EventHandler(this.левыйНижнийToolStripMenuItem_Click);
+            this.buttonNameMenuBottomLeft.Name = "buttonNameMenuBottomLeft";
+            this.buttonNameMenuBottomLeft.Size = new System.Drawing.Size(166, 22);
+            this.buttonNameMenuBottomLeft.Text = "Левый нижний";
+            this.buttonNameMenuBottomLeft.Click += new System.EventHandler(this.buttonNameMenuBottomLeftMenuItem_Click);
             // 
-            // правыйНижнийToolStripMenuItem
+            // buttonNameMenuBottomRight
             // 
-            this.правыйНижнийToolStripMenuItem.Name = "правыйНижнийToolStripMenuItem";
-            this.правыйНижнийToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
-            this.правыйНижнийToolStripMenuItem.Text = "Правый нижний";
-            this.правыйНижнийToolStripMenuItem.Click += new System.EventHandler(this.правыйНижнийToolStripMenuItem_Click);
+            this.buttonNameMenuBottomRight.Name = "buttonNameMenuBottomRight";
+            this.buttonNameMenuBottomRight.Size = new System.Drawing.Size(166, 22);
+            this.buttonNameMenuBottomRight.Text = "Правый нижний";
+            this.buttonNameMenuBottomRight.Click += new System.EventHandler(this.buttonNameMenuBottomRightMenuItem_Click);
             // 
-            // graphicsToolBarStrip
+            // buttonPlaneTypeMenu
             // 
-            this.graphicsToolBarStrip.BackColor = System.Drawing.SystemColors.Control;
-            this.graphicsToolBarStrip.Dock = System.Windows.Forms.DockStyle.Left;
-            this.graphicsToolBarStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.graphicsToolBarStrip.ImageScalingSize = new System.Drawing.Size(32, 32);
-            this.graphicsToolBarStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.buttonPlaneTypeMenu.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.buttonPlaneTypeMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.buttonPlaneType3Points,
+            this.buttonPlaneTypeLinePoint,
+            this.buttonPlaneTypeParallelLine,
+            this.buttonPlaneTypeCrossedLine,
+            this.buttonPlaneTypeSegmentPoint,
+            this.buttonPlaneTypeParallelSegment,
+            this.buttonPlaneTypeCrossedSegment});
+            this.buttonPlaneTypeMenu.Image = ((System.Drawing.Image)(resources.GetObject("buttonPlaneTypeMenu.Image")));
+            this.buttonPlaneTypeMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonPlaneTypeMenu.Name = "buttonPlaneTypeMenu";
+            this.buttonPlaneTypeMenu.Size = new System.Drawing.Size(76, 25);
+            this.buttonPlaneTypeMenu.Text = "Три точки";
+            this.buttonPlaneTypeMenu.ToolTipText = "buttonPlaneType";
+            this.buttonPlaneTypeMenu.Visible = false;
+            // 
+            // buttonPlaneType3Points
+            // 
+            this.buttonPlaneType3Points.Name = "buttonPlaneType3Points";
+            this.buttonPlaneType3Points.Size = new System.Drawing.Size(219, 22);
+            this.buttonPlaneType3Points.Text = "Три точки";
+            this.buttonPlaneType3Points.Click += new System.EventHandler(this.buttonPlaneType3Points_Click);
+            // 
+            // buttonPlaneTypeLinePoint
+            // 
+            this.buttonPlaneTypeLinePoint.Name = "buttonPlaneTypeLinePoint";
+            this.buttonPlaneTypeLinePoint.Size = new System.Drawing.Size(219, 22);
+            this.buttonPlaneTypeLinePoint.Text = "Прямая и точка";
+            this.buttonPlaneTypeLinePoint.Click += new System.EventHandler(this.buttonPlaneTypeLinePoint_Click);
+            // 
+            // buttonPlaneTypeParallelLine
+            // 
+            this.buttonPlaneTypeParallelLine.Name = "buttonPlaneTypeParallelLine";
+            this.buttonPlaneTypeParallelLine.Size = new System.Drawing.Size(219, 22);
+            this.buttonPlaneTypeParallelLine.Text = "Параллельные прямые";
+            this.buttonPlaneTypeParallelLine.Click += new System.EventHandler(this.buttonPlaneTypeParrLine_Click);
+            // 
+            // buttonPlaneTypeCrossedLine
+            // 
+            this.buttonPlaneTypeCrossedLine.Name = "buttonPlaneTypeCrossedLine";
+            this.buttonPlaneTypeCrossedLine.Size = new System.Drawing.Size(219, 22);
+            this.buttonPlaneTypeCrossedLine.Text = "Пересекающиеся прямые";
+            this.buttonPlaneTypeCrossedLine.Click += new System.EventHandler(this.buttonPlaneTypeCrossedLine_Click);
+            // 
+            // buttonPlaneTypeSegmentPoint
+            // 
+            this.buttonPlaneTypeSegmentPoint.Name = "buttonPlaneTypeSegmentPoint";
+            this.buttonPlaneTypeSegmentPoint.Size = new System.Drawing.Size(219, 22);
+            this.buttonPlaneTypeSegmentPoint.Text = "Отрезок и точка";
+            this.buttonPlaneTypeSegmentPoint.Click += new System.EventHandler(this.buttonPlaneTypeSegmentPoint_Click);
+            // 
+            // buttonPlaneTypeParallelSegment
+            // 
+            this.buttonPlaneTypeParallelSegment.Name = "buttonPlaneTypeParallelSegment";
+            this.buttonPlaneTypeParallelSegment.Size = new System.Drawing.Size(219, 22);
+            this.buttonPlaneTypeParallelSegment.Text = "Параллельные отрезки";
+            this.buttonPlaneTypeParallelSegment.Click += new System.EventHandler(this.buttonPlaneTypeParallelSegment_Click);
+            // 
+            // buttonPlaneTypeCrossedSegment
+            // 
+            this.buttonPlaneTypeCrossedSegment.Name = "buttonPlaneTypeCrossedSegment";
+            this.buttonPlaneTypeCrossedSegment.Size = new System.Drawing.Size(219, 22);
+            this.buttonPlaneTypeCrossedSegment.Text = "Пересекающиеся отрезки";
+            this.buttonPlaneTypeCrossedSegment.Click += new System.EventHandler(this.buttonPlaneTypeCrossedSegment_Click);
+            // 
+            // ObjectsBuildMenu
+            // 
+            this.ObjectsBuildMenu.BackColor = System.Drawing.SystemColors.Control;
+            this.ObjectsBuildMenu.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ObjectsBuildMenu.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.ObjectsBuildMenu.ImageScalingSize = new System.Drawing.Size(32, 32);
+            this.ObjectsBuildMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.buttonPointsMenu,
             this.buttonLinesMenu,
-            this.buttonSegmentMenu});
-            this.graphicsToolBarStrip.Location = new System.Drawing.Point(0, 55);
-            this.graphicsToolBarStrip.Name = "graphicsToolBarStrip";
-            this.baseTableLayoutPanel.SetRowSpan(this.graphicsToolBarStrip, 2);
-            this.graphicsToolBarStrip.Size = new System.Drawing.Size(36, 513);
-            this.graphicsToolBarStrip.TabIndex = 4;
+            this.buttonSegmentMenu,
+            this.buttonPlanesMenu});
+            this.ObjectsBuildMenu.Location = new System.Drawing.Point(0, 55);
+            this.ObjectsBuildMenu.Name = "ObjectsBuildMenu";
+            this.baseTableLayoutPanel.SetRowSpan(this.ObjectsBuildMenu, 2);
+            this.ObjectsBuildMenu.Size = new System.Drawing.Size(36, 513);
+            this.ObjectsBuildMenu.TabIndex = 4;
             // 
             // buttonPointsMenu
             // 
@@ -330,14 +412,25 @@ namespace GraphicsModule.Controls
             this.buttonSegmentMenu.Text = "Отрезок";
             this.buttonSegmentMenu.Click += new System.EventHandler(this.buttonSegmentMenu_Click);
             // 
-            // basicToolBarStrip
+            // buttonPlanesMenu
             // 
-            this.basicToolBarStrip.BackColor = System.Drawing.SystemColors.Control;
-            this.basicToolBarStrip.CanOverflow = false;
-            this.baseTableLayoutPanel.SetColumnSpan(this.basicToolBarStrip, 3);
-            this.basicToolBarStrip.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.basicToolBarStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.basicToolBarStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.buttonPlanesMenu.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonPlanesMenu.Image = ((System.Drawing.Image)(resources.GetObject("buttonPlanesMenu.Image")));
+            this.buttonPlanesMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonPlanesMenu.Name = "buttonPlanesMenu";
+            this.buttonPlanesMenu.Size = new System.Drawing.Size(34, 36);
+            this.buttonPlanesMenu.Text = "toolStripButton1";
+            this.buttonPlanesMenu.ToolTipText = "Плоскость";
+            this.buttonPlanesMenu.Click += new System.EventHandler(this.buttonPlaneMenu_Click);
+            // 
+            // BaseOperationsMenu
+            // 
+            this.BaseOperationsMenu.BackColor = System.Drawing.SystemColors.Control;
+            this.BaseOperationsMenu.CanOverflow = false;
+            this.baseTableLayoutPanel.SetColumnSpan(this.BaseOperationsMenu, 3);
+            this.BaseOperationsMenu.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BaseOperationsMenu.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.BaseOperationsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButton5,
             this.buttonCopy,
             this.toolStripButton7,
@@ -351,11 +444,11 @@ namespace GraphicsModule.Controls
             this.toolStripComboBox_ScaleSize,
             this.toolStripButton34,
             this.toolStripSeparator3});
-            this.basicToolBarStrip.Location = new System.Drawing.Point(0, 25);
-            this.basicToolBarStrip.Name = "basicToolBarStrip";
-            this.basicToolBarStrip.Size = new System.Drawing.Size(1239, 30);
-            this.basicToolBarStrip.TabIndex = 2;
-            this.basicToolBarStrip.Text = "toolStrip1";
+            this.BaseOperationsMenu.Location = new System.Drawing.Point(0, 25);
+            this.BaseOperationsMenu.Name = "BaseOperationsMenu";
+            this.BaseOperationsMenu.Size = new System.Drawing.Size(1239, 30);
+            this.BaseOperationsMenu.TabIndex = 2;
+            this.BaseOperationsMenu.Text = "toolStrip1";
             // 
             // toolStripButton5
             // 
@@ -443,7 +536,6 @@ namespace GraphicsModule.Controls
             this.toolStripButton_Scale.Name = "toolStripButton_Scale";
             this.toolStripButton_Scale.Size = new System.Drawing.Size(78, 27);
             this.toolStripButton_Scale.Text = "Приблизить";
-            this.toolStripButton_Scale.Click += new System.EventHandler(this.toolStripButton_Scale_Click);
             // 
             // toolStripComboBox_ScaleSize
             // 
@@ -478,7 +570,8 @@ namespace GraphicsModule.Controls
             this.buttonSettings,
             this.окнаToolStripMenuItem,
             this.справкаToolStripMenuItem,
-            this.импортToolStripMenuItem});
+            this.импортToolStripMenuItem,
+            this.доступностьToolStripMenuItem});
             this.MainMenu.Location = new System.Drawing.Point(0, 0);
             this.MainMenu.Name = "MainMenu";
             this.MainMenu.Size = new System.Drawing.Size(1239, 25);
@@ -543,6 +636,13 @@ namespace GraphicsModule.Controls
             this.solidWorksToolStripMenuItem.Text = "SolidWorks";
             this.solidWorksToolStripMenuItem.Click += new System.EventHandler(this.solidWorksToolStripMenuItem_Click);
             // 
+            // доступностьToolStripMenuItem
+            // 
+            this.доступностьToolStripMenuItem.Name = "доступностьToolStripMenuItem";
+            this.доступностьToolStripMenuItem.Size = new System.Drawing.Size(89, 21);
+            this.доступностьToolStripMenuItem.Text = "Доступность";
+            this.доступностьToolStripMenuItem.Click += new System.EventHandler(this.доступностьToolStripMenuItem_Click);
+            // 
             // MainPictureBox
             // 
             this.MainPictureBox.BackColor = System.Drawing.Color.Azure;
@@ -561,23 +661,24 @@ namespace GraphicsModule.Controls
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.Controls.Add(this.baseTableLayoutPanel);
             this.DoubleBuffered = true;
             this.Name = "GraphicsControl";
             this.Size = new System.Drawing.Size(1239, 593);
             this.Load += new System.EventHandler(this.GraphicsControl_Load);
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyUp);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GraphicsControl_KeyDown);
             this.Resize += new System.EventHandler(this.GraphicsControl_Resize);
             this.baseTableLayoutPanel.ResumeLayout(false);
             this.baseTableLayoutPanel.PerformLayout();
-            this.workspaceOperationsStatusStrip1.ResumeLayout(false);
-            this.workspaceOperationsStatusStrip1.PerformLayout();
-            this.statusStrip2.ResumeLayout(false);
-            this.statusStrip2.PerformLayout();
-            this.graphicsToolBarStrip.ResumeLayout(false);
-            this.graphicsToolBarStrip.PerformLayout();
-            this.basicToolBarStrip.ResumeLayout(false);
-            this.basicToolBarStrip.PerformLayout();
+            this.WorkspaceOperations.ResumeLayout(false);
+            this.WorkspaceOperations.PerformLayout();
+            this.ObjectsPropertyMenu.ResumeLayout(false);
+            this.ObjectsPropertyMenu.PerformLayout();
+            this.ObjectsBuildMenu.ResumeLayout(false);
+            this.ObjectsBuildMenu.PerformLayout();
+            this.BaseOperationsMenu.ResumeLayout(false);
+            this.BaseOperationsMenu.PerformLayout();
             this.MainMenu.ResumeLayout(false);
             this.MainMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainPictureBox)).EndInit();
@@ -596,7 +697,7 @@ namespace GraphicsModule.Controls
         private System.Windows.Forms.ToolStripMenuItem buttonSettings;
         private System.Windows.Forms.ToolStripMenuItem окнаToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem справкаToolStripMenuItem;
-        private System.Windows.Forms.ToolStrip basicToolBarStrip;
+        private System.Windows.Forms.ToolStrip BaseOperationsMenu;
         private System.Windows.Forms.ToolStripButton toolStripButton5;
         private System.Windows.Forms.ToolStripButton buttonCopy;
         private System.Windows.Forms.ToolStripButton toolStripButton7;
@@ -610,9 +711,9 @@ namespace GraphicsModule.Controls
         private System.Windows.Forms.ToolStripComboBox toolStripComboBox_ScaleSize;
         private System.Windows.Forms.ToolStripButton toolStripButton34;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStrip graphicsToolBarStrip;
+        private System.Windows.Forms.ToolStrip ObjectsBuildMenu;
         private System.Windows.Forms.ToolStripButton buttonLinesMenu;
-        private System.Windows.Forms.StatusStrip workspaceOperationsStatusStrip1;
+        private System.Windows.Forms.StatusStrip WorkspaceOperations;
         private System.Windows.Forms.ToolStripStatusLabel labelValueX;
         private System.Windows.Forms.ToolStripStatusLabel labelValueY;
         private System.Windows.Forms.ToolStripStatusLabel labelValueZ;
@@ -623,216 +724,27 @@ namespace GraphicsModule.Controls
         private System.Windows.Forms.ToolStripStatusLabel labelStatusLinkLine;
         private System.Windows.Forms.ToolStripStatusLabel labelCursorToGridFixation;
         private System.Windows.Forms.ToolStripStatusLabel labelExternalEntitiy;
-        private System.Windows.Forms.StatusStrip statusStrip2;
+        private System.Windows.Forms.StatusStrip ObjectsPropertyMenu;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel_Help;
         public System.Windows.Forms.PictureBox MainPictureBox;
         private ToolStripButton buttonPointsMenu;
         private ToolStripButton buttonSegmentMenu;
         private ToolStripMenuItem импортToolStripMenuItem;
         private ToolStripMenuItem solidWorksToolStripMenuItem;
-        private ToolStripDropDownButton toolStripDropDownButton1;
-        private ToolStripMenuItem левыйВерхнийToolStripMenuItem;
-        private ToolStripMenuItem правыйВерхнийToolStripMenuItem;
-        private ToolStripMenuItem левыйНижнийToolStripMenuItem;
-        private ToolStripMenuItem правыйНижнийToolStripMenuItem;
-    }
-
-
-    internal class CustomToolStripRender : System.Windows.Forms.ToolStripRenderer
-    {
-        // The style of the empty cell's text.
-        private static System.Drawing.StringFormat style = new StringFormat();
-
-        // The thickness (width or height) of a 
-        // ToolStripButton control's border.
-        static int borderThickness = 2;
-
-        // The main bitmap that is the source for the 
-        // subimagesthat are assigned to individual 
-        // ToolStripButton controls.
-        private System.Drawing.Bitmap bmp = null;
-
-        // The brush that paints the background of 
-        // the GridStrip control.
-        private Brush backgroundBrush = null;
-
-        // This is the static constructor. It initializes the
-        // StringFormat for drawing the text in the empty cell.
-        static CustomToolStripRender()
-        {
-            style.Alignment = StringAlignment.Center;
-            style.LineAlignment = StringAlignment.Center;
-        }
-
-        // This method initializes the GridStripRenderer by
-        // creating the image that is used as the source for
-        // the individual button images.
-        protected override void Initialize(ToolStrip ts)
-        {
-            base.Initialize(ts);
-
-            //this.InitializeBitmap(ts);
-        }
-
-        // This method initializes an individual ToolStripButton
-        // control. It copies a subimage from the GridStripRenderer's
-        // main image, according to the position and size of 
-        // the ToolStripButton.
-        //protected override void InitializeItem(ToolStripItem item)
-        //{
-        //    base.InitializeItem(item);
-
-        //    GridStrip gs = item.Owner as GridStrip;
-
-        //    // The empty cell does not receive a subimage.
-        //    if ((item is ToolStripButton) &&
-        //        (item != gs.EmptyCell))
-        //    {
-        //        // Copy the subimage from the appropriate 
-        //        // part of the main image.
-        //        Bitmap subImage = bmp.Clone(
-        //            item.Bounds,
-        //            PixelFormat.Undefined);
-
-        //        // Assign the subimage to the ToolStripButton
-        //        // control's Image property.
-        //        item.Image = subImage;
-        //    }
-        //}
-
-        //// This utility method creates the main image that
-        //// is the source for the subimages of the individual 
-        //// ToolStripButton controls.
-        //private void InitializeBitmap(ToolStrip toolStrip)
-        //{
-        //    // Create the main bitmap, into which the image is drawn.
-        //    this.bmp = new Bitmap(
-        //        toolStrip.Size.Width,
-        //        toolStrip.Size.Height);
-
-        //    // Draw a fancy pattern. This could be any image or drawing.
-        //    using (Graphics g = Graphics.FromImage(bmp))
-        //    {
-        //        // Draw smoothed lines.
-        //        g.SmoothingMode = SmoothingMode.AntiAlias;
-
-        //        // Draw the image. In this case, it is 
-        //        // a number of concentric ellipses. 
-        //        for (int i = 0; i < toolStrip.Size.Width; i += 8)
-        //        {
-        //            g.DrawEllipse(Pens.Blue, 0, 0, i, i);
-        //        }
-        //    }
-        //}
-
-        // This method draws a border around the GridStrip control.
-        protected override void OnRenderToolStripBorder(
-            ToolStripRenderEventArgs e)
-        {
-            base.OnRenderToolStripBorder(e);
-
-            ControlPaint.DrawFocusRectangle(
-                e.Graphics,
-                e.AffectedBounds,
-                SystemColors.ControlDarkDark,
-                SystemColors.ControlDarkDark);
-        }
-
-        // This method renders the GridStrip control's background.
-        //protected override void OnRenderToolStripBackground(
-        //    ToolStripRenderEventArgs e)
-        //{
-        //    base.OnRenderToolStripBackground(e);
-
-        //    // This late initialization is a workaround. The gradient
-        //    // depends on the bounds of the GridStrip control. The bounds 
-        //    // are dependent on the layout engine, which hasn't fully
-        //    // performed layout by the time the Initialize method runs.
-        //    if (this.backgroundBrush == null)
-        //    {
-        //        this.backgroundBrush = new LinearGradientBrush(
-        //           e.ToolStrip.ClientRectangle,
-        //           SystemColors.ControlLightLight,
-        //           SystemColors.ControlDark,
-        //           90,
-        //           true);
-        //    }
-
-        //    // Paint the GridStrip control's background.
-        //    e.Graphics.FillRectangle(
-        //        this.backgroundBrush,
-        //        e.AffectedBounds);
-        //}
-
-        //// This method draws a border around the button's image. If the background
-        //// to be rendered belongs to the empty cell, a string is drawn. Otherwise,
-        //// a border is drawn at the edges of the button.
-        //protected override void OnRenderButtonBackground(
-        //    ToolStripItemRenderEventArgs e)
-        //{
-        //    base.OnRenderButtonBackground(e);
-
-        //    // Define some local variables for convenience.
-        //    Graphics g = e.Graphics;
-        //    GridStrip gs = e.ToolStrip as GridStrip;
-        //    ToolStripButton gsb = e.Item as ToolStripButton;
-
-        //    // Calculate the rectangle around which the border is painted.
-        //    Rectangle imageRectangle = new Rectangle(
-        //        borderThickness,
-        //        borderThickness,
-        //        e.Item.Width - 2 * borderThickness,
-        //        e.Item.Height - 2 * borderThickness);
-
-        //    // If rendering the empty cell background, draw an 
-        //    // explanatory string, centered in the ToolStripButton.
-        //    if (gsb == gs.EmptyCell)
-        //    {
-        //        e.Graphics.DrawString(
-        //            "Drag to here",
-        //            gsb.Font,
-        //            SystemBrushes.ControlDarkDark,
-        //            imageRectangle, style);
-        //    }
-        //    else
-        //    {
-        //        // If the button can be a drag source, paint its border red.
-        //        // otherwise, paint its border a dark color.
-        //        Brush b = gs.IsValidDragSource(gsb) ? b =
-        //            Brushes.Red : SystemBrushes.ControlDarkDark;
-
-        //        // Draw the top segment of the border.
-        //        Rectangle borderSegment = new Rectangle(
-        //            0,
-        //            0,
-        //            e.Item.Width,
-        //            imageRectangle.Top);
-        //        g.FillRectangle(b, borderSegment);
-
-        //        // Draw the right segment.
-        //        borderSegment = new Rectangle(
-        //            imageRectangle.Right,
-        //            0,
-        //            e.Item.Bounds.Right - imageRectangle.Right,
-        //            imageRectangle.Bottom);
-        //        g.FillRectangle(b, borderSegment);
-
-        //        // Draw the left segment.
-        //        borderSegment = new Rectangle(
-        //            0,
-        //            0,
-        //            imageRectangle.Left,
-        //            e.Item.Height);
-        //        g.FillRectangle(b, borderSegment);
-
-        //        // Draw the bottom segment.
-        //        borderSegment = new Rectangle(
-        //            0,
-        //            imageRectangle.Bottom,
-        //            e.Item.Width,
-        //            e.Item.Bounds.Bottom - imageRectangle.Bottom);
-        //        g.FillRectangle(b, borderSegment);
-        //    }
-        //}
+        private ToolStripDropDownButton buttonNameMenu;
+        private ToolStripMenuItem buttonNameMenuTopLeft;
+        private ToolStripMenuItem buttonNameMenuTopRight;
+        private ToolStripMenuItem buttonNameMenuBottomLeft;
+        private ToolStripMenuItem buttonNameMenuBottomRight;
+        private ToolStripButton buttonPlanesMenu;
+        private ToolStripDropDownButton buttonPlaneTypeMenu;
+        private ToolStripMenuItem buttonPlaneType3Points;
+        private ToolStripMenuItem buttonPlaneTypeLinePoint;
+        private ToolStripMenuItem buttonPlaneTypeParallelLine;
+        private ToolStripMenuItem buttonPlaneTypeCrossedLine;
+        private ToolStripMenuItem buttonPlaneTypeSegmentPoint;
+        private ToolStripMenuItem buttonPlaneTypeParallelSegment;
+        private ToolStripMenuItem buttonPlaneTypeCrossedSegment;
+        private ToolStripMenuItem доступностьToolStripMenuItem;
     }
 }

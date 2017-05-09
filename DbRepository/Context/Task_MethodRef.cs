@@ -11,7 +11,8 @@ namespace DbRepository.Context
 {
     using System;
     using System.Collections.Generic;
-    
+
+
     public partial class Task_MethodRef
     {
         public int Id { get; set; }

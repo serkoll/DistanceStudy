@@ -65,14 +65,13 @@
     <Compile Include="Objects\Planes\PlaneOfPlane1X0Y.cs" />
     <Compile Include="Objects\Planes\PlaneOfPlane2X0Z.cs" />
     <Compile Include="Objects\Planes\PlaneOfPlane3Y0Z.cs" />
+    <Compile Include="Objects\Points\PointsExtensions.cs" />
     <Compile Include="Objects\Segments\Segment2D.cs" />
     <Compile Include="Objects\Segments\Segment3D.cs" />
     <Compile Include="Objects\Segments\SegmentOfPlane1X0Y.cs" />
     <Compile Include="Objects\Segments\SegmentOfPlane2X0Z.cs" />
     <Compile Include="Objects\Segments\SegmentOfPlane3Y0Z.cs" />
     <Compile Include="TypeOf.cs" />
-    <Compile Include="EquationsSysEvalution\EquationsSysCalc.cs" />
-    <Compile Include="EquationsSysEvalution\SluGaussSolve.cs" />
     <Compile Include="Interfaces\IObject.cs" />
     <Compile Include="Interfaces\IPointOfPlane.cs" />
     <Compile Include="Objects\Lines\Line2D.cs" />
@@ -80,12 +79,6 @@
     <Compile Include="Objects\Lines\LineOfPlane1X0Y.cs" />
     <Compile Include="Objects\Lines\LineOfPlane2X0Z.cs" />
     <Compile Include="Objects\Lines\LineOfPlane3Y0Z.cs" />
-    <Compile Include="MatrixEvalution\ArrayControl.cs" />
-    <Compile Include="MatrixEvalution\ArrayNxM_Double.cs" />
-    <Compile Include="MatrixEvalution\ArrayNxM_Integer.cs" />
-    <Compile Include="MatrixEvalution\ArrayNxM_Operation.cs" />
-    <Compile Include="MatrixEvalution\MatrixCalc.cs" />
-    <Compile Include="Planes\PlaneSpace.cs" />
     <Compile Include="Objects\Points\Point2D.cs" />
     <Compile Include="Objects\Points\Point3D.cs" />
     <Compile Include="Objects\Points\PointOfPlane1X0Y.cs" />
@@ -94,10 +87,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GraphicsModule.Settings\GraphicsModule.Settings.csproj">
+    <ProjectReference Include="..\GraphicsModule.Settings\GraphicsModule.Configuration.csproj">
       <Project>{fa7a373a-2140-4f47-b5dd-e4819bf1093e}</Project>
-      <Name>GraphicsModule.Settings</Name>
+      <Name>GraphicsModule.Configuration</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

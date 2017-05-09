@@ -1,0 +1,297 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="GraphicsModule.Geometry.Analyze.Analyze" Collapsed="true">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAIAAgAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Analyze\Analyze.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GraphicsModule.Geometry.Analyze.LinesPosition" Collapsed="true">
+    <Position X="7.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACIAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAEAAEAAA=</HashCode>
+      <FileName>Analyze\LinesPosition.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GraphicsModule.Geometry.Analyze.PointsPosition" Collapsed="true">
+    <Position X="7.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgERAAAAIACEQAAAACQAAAAiAACAAEAEACAAAA=</HashCode>
+      <FileName>Analyze\PointsPosition.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GraphicsModule.Geometry.Analyze.SegmentPosition" Collapsed="true">
+    <Position X="7.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACIAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAEAAEAAA=</HashCode>
+      <FileName>Analyze\SegmentPosition.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GraphicsModule.Geometry.Calculate" Collapsed="true">
+    <Position X="11" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAA=</HashCode>
+      <FileName>Calculate.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GraphicsModule.Geometry.Cnv" Collapsed="true">
+    <Position X="12.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAACAAAACAAABgAAAAQACgAAAIQAAAAAEAAAA=</HashCode>
+      <FileName>Cnv.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GraphicsModule.Geometry.DeterminePosition" Collapsed="true">
+    <Position X="14.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAMAAAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>DeterminePosition.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GraphicsModule.Geometry.Name" Collapsed="true">
+    <Position X="9.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Name.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GraphicsModule.Geometry.TypeOf" Collapsed="true">
+    <Position X="9.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TypeOf.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GraphicsModule.Geometry.CoordinateSystem.Axis" Collapsed="true">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAQAAAAAAAAAAAAAAAAgAgAAQAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>CoordinateSystem\Axis.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GraphicsModule.Geometry.CoordinateSystem.Grid" Collapsed="true">
+    <Position X="16.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABCAgAAAAAEEAAEAAAAAABAAABQIAAAAAAAA=</HashCode>
+      <FileName>CoordinateSystem\Grid.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GraphicsModule.Geometry.Objects.Lines.Line2D" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAIAAAAAAAkgAAQAAAAQQAAAAEAGAAAAAAQAAABIA=</HashCode>
+      <FileName>Objects\Lines\Line2D.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GraphicsModule.Geometry.Objects.Lines.Line3D" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAACDAkgACAAAADAQAGAAEAEAAAAAAwAACBAA=</HashCode>
+      <FileName>Objects\Lines\Line3D.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GraphicsModule.Geometry.Objects.Lines.LineDrawCalc" Collapsed="true">
+    <Position X="11" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAAABAAAAAAAAAEAAAAAAAAAAAIAIA=</HashCode>
+      <FileName>Objects\Lines\LineDrawCalc.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GraphicsModule.Geometry.Objects.Lines.LineOfPlane1X0Y" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAgAAAAQBAkgAAAAAAAAQAAAAEgAAAAAAAQAAABAA=</HashCode>
+      <FileName>Objects\Lines\LineOfPlane1X0Y.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GraphicsModule.Geometry.Objects.Lines.LineOfPlane2X0Z" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAgAAAAQAAkgAAAAAAAAQAAAAEgAAAAAAAQAACBAA=</HashCode>
+      <FileName>Objects\Lines\LineOfPlane2X0Z.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GraphicsModule.Geometry.Objects.Lines.LineOfPlane3Y0Z" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAQBAkgAAAAAAAAQAAAAEgAAAAAAAQAACBAA=</HashCode>
+      <FileName>Objects\Lines\LineOfPlane3Y0Z.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GraphicsModule.Geometry.Objects.Planes.Plane2D" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAEgAAAAAAAAAAAAAAAAEAAAAAQAAABAA=</HashCode>
+      <FileName>Objects\Planes\Plane2D.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GraphicsModule.Geometry.Objects.Planes.Plane3D" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAEgAAAAAAAAAAAAAAAAEAAAAAQAAABAA=</HashCode>
+      <FileName>Objects\Planes\Plane3D.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GraphicsModule.Geometry.Objects.Planes.PlaneOfPlane1X0Y" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAEgAAAAAAAAAAAAAAAAEAAAAAQAAABAA=</HashCode>
+      <FileName>Objects\Planes\PlaneOfPlane1X0Y.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GraphicsModule.Geometry.Objects.Planes.PlaneOfPlane2X0Z" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAEgAAAAAAAAAAAAAAAAEAAAAAQAAABAA=</HashCode>
+      <FileName>Objects\Planes\PlaneOfPlane2X0Z.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GraphicsModule.Geometry.Objects.Planes.PlaneOfPlane3Y0Z" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAEgAAAAAAAAAAAAAAAAEAAAAAQAAABAA=</HashCode>
+      <FileName>Objects\Planes\PlaneOfPlane3Y0Z.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GraphicsModule.Geometry.Objects.Points.Point2D" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEgAAAAAAAAQAABAAAAAAAAAAQAAAZAA=</HashCode>
+      <FileName>Objects\Points\Point2D.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GraphicsModule.Geometry.Objects.Points.Point3D" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAEACAEgAAABAAAAQABBIAAEACAAAAQAAAZAE=</HashCode>
+      <FileName>Objects\Points\Point3D.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GraphicsModule.Geometry.Objects.Points.PointOfPlane1X0Y" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAEgAAAAAAACQAABIAAAACAAAAQAAAZAA=</HashCode>
+      <FileName>Objects\Points\PointOfPlane1X0Y.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GraphicsModule.Geometry.Objects.Points.PointOfPlane2X0Z" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAEgAAAAAAACQAABIAAAACAAAAQAAARAE=</HashCode>
+      <FileName>Objects\Points\PointOfPlane2X0Z.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GraphicsModule.Geometry.Objects.Points.PointOfPlane3Y0Z" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAEgAAAAAAACQAABIAAAACAAAAQAAAJAE=</HashCode>
+      <FileName>Objects\Points\PointOfPlane3Y0Z.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GraphicsModule.Geometry.Objects.Segments.Segment2D" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAABAkgAAAAAAAAQAAAAAAAAAAAAAQAAABAA=</HashCode>
+      <FileName>Objects\Segments\Segment2D.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GraphicsModule.Geometry.Objects.Segments.Segment3D" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAADAkwAAAAAAAAQAAAAAAEAAAAAAQAACBAA=</HashCode>
+      <FileName>Objects\Segments\Segment3D.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GraphicsModule.Geometry.Objects.Segments.SegmentOfPlane1X0Y" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAABAkgAAAAAAAAQAAAAAAAAAQAAAQAAABAA=</HashCode>
+      <FileName>Objects\Segments\SegmentOfPlane1X0Y.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GraphicsModule.Geometry.Objects.Segments.SegmentOfPlane2X0Z" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAkgAAAAAAAAQAAAAAAAAAQAAAQAACBAA=</HashCode>
+      <FileName>Objects\Segments\SegmentOfPlane2X0Z.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GraphicsModule.Geometry.Objects.Segments.SegmentOfPlane3Y0Z" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAkgAAAAAAAAQAAAAAAAAAQAAAQAACBAA=</HashCode>
+      <FileName>Objects\Segments\SegmentOfPlane3Y0Z.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Interface Name="GraphicsModule.Geometry.Interfaces.ILineOfPlane">
+    <Position X="5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\ILineOfPlane.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="GraphicsModule.Geometry.Interfaces.IObject">
+    <Position X="2.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEgAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IObject.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="GraphicsModule.Geometry.Interfaces.IObjectOfPlane1X0Y" Collapsed="true">
+    <Position X="5.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IObjectOfPlane1X0Y.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="GraphicsModule.Geometry.Interfaces.IObjectOfPlane2X0Z">
+    <Position X="5.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IObjectOfPlane2X0Z.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="GraphicsModule.Geometry.Interfaces.IObjectOfPlane3Y0Z">
+    <Position X="4" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IObjectOfPlane3Y0Z.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="GraphicsModule.Geometry.Interfaces.IPointOfPlane">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IPointOfPlane.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="GraphicsModule.Geometry.Interfaces.ISegmentOfPlane">
+    <Position X="2.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\ISegmentOfPlane.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
