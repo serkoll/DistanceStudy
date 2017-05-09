@@ -147,7 +147,7 @@ namespace Service.HandlerUI
         /// Экспорт графических объектов из формы преподавателя в json
         /// </summary>
         /// <param name="coll">Коллекция объектов</param>
-        public void AddGraphicsObjectsToJsonTaskRelated(Collection<IObject> coll)
+        public void AddGraphicsObjectsToJsonTaskRelated(IList<IObject> coll)
         {
             _taskService.AddGraphicObjectsForTask(_task.TaskId, coll);
         }

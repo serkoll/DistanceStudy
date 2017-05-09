@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using GraphicsModule.Controls;
 using GraphicsModule.Geometry.Objects.Lines;
@@ -106,7 +107,7 @@ namespace GraphicsModule.Rules.Objects.Lines
             return false;
         }
 
-        protected ILineOfPlane CreateLineOfPlane(Collection<IObject> obj, DrawSettings st, Point frameCenter, Canvas can)
+        protected ILineOfPlane CreateLineOfPlane(IList<IObject> obj, DrawSettings st, Point frameCenter, Canvas can)
         {
             if (obj[0].GetType() == typeof(PointOfPlane1X0Y))
             {

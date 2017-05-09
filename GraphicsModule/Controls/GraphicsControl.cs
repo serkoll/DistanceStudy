@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Collections.ObjectModel;
 using GraphicsModule.Cursors;
 using System.IO;
 using GraphicsModule.Configuration;
@@ -76,9 +76,10 @@ namespace GraphicsModule.Controls
         public GraphicsControl()
         {
             InitializeComponent();
-            LoadSettings();
-            InitializeMenu();
-            NamesGenerator = new NamesGenerator(true, 0, _settings);
+            this.LoadSettings();
+            this.InitializeMenu();
+            GraphicsControl.NamesGenerator = new NamesGenerator(true, 0, _settings);
+            _storage = new Storage();
         }
         public void LoadSettings()
         {
@@ -93,7 +94,7 @@ namespace GraphicsModule.Controls
                 _settings.Serialize(SettingsFileName);
                 GraphicsControlSettingsForm.CurrentSettings = _settings;
             }
-            MainPictureBox.BackColor = _settings.BackgroundColor;
+            this.MainPictureBox.BackColor = _settings.BackgroundColor;
         }
         public void InitializeMenu()
         {  
@@ -101,29 +102,30 @@ namespace GraphicsModule.Controls
             _lnMenuSelector = new Menu.LineMenuSelector(MainPictureBox, buttonLinesMenu, ObjectsPropertyMenu, _settings.PrimitivesAcces.Lines); 
             _sgMenuSelector = new Menu.SegmentMenuSelector(MainPictureBox, buttonSegmentMenu, ObjectsPropertyMenu, _settings.PrimitivesAcces.Segments); 
             _plMenuSelector = new Menu.PlaneMenuSelector(MainPictureBox, buttonPlanesMenu, ObjectsPropertyMenu, _settings.PrimitivesAcces.Planes);
-            AddMenus();
-            SetPrimitivesButtonsEnabled();
+            this.AddMenus();
+            this.SetPrimitivesButtonsEnabled();
         }
         private void AddMenus()
         {
-            Controls.Add(_ptMenuSelector);
-            Controls.Add(_lnMenuSelector); 
-            Controls.Add(_sgMenuSelector); 
-            Controls.Add(_plMenuSelector);
+            //TODO: GOVNOCOD
+            this.Controls.Add(_ptMenuSelector);
+            this.Controls.Add(_lnMenuSelector); 
+            this.Controls.Add(_sgMenuSelector); 
+            this.Controls.Add(_plMenuSelector);
         }
         private void SetPrimitivesButtonsEnabled()
         {
-            buttonPointsMenu.Enabled = _settings.PrimitivesAcces.Points.IsPointsEnabled;
-            buttonLinesMenu.Enabled = _settings.PrimitivesAcces.Lines.IsLinesEnabled;
-            buttonSegmentMenu.Enabled = _settings.PrimitivesAcces.Segments.IsSegmentsEnabled;
-            buttonPlanesMenu.Enabled = _settings.PrimitivesAcces.Planes.IsPlanesEnabled;
+            this.buttonPointsMenu.Enabled = _settings.PrimitivesAcces.Points.IsPointsEnabled;
+            this.buttonLinesMenu.Enabled = _settings.PrimitivesAcces.Lines.IsLinesEnabled;
+            this.buttonSegmentMenu.Enabled = _settings.PrimitivesAcces.Segments.IsSegmentsEnabled;
+            this.buttonPlanesMenu.Enabled = _settings.PrimitivesAcces.Planes.IsPlanesEnabled;
         }
         public void SetAccess()
         {
-            buttonPointsMenu.Enabled = _settings.PrimitivesAcces.Points.IsPointsEnabled;
-            buttonLinesMenu.Enabled = _settings.PrimitivesAcces.Lines.IsLinesEnabled;
-            buttonSegmentMenu.Enabled = _settings.PrimitivesAcces.Segments.IsSegmentsEnabled;
-            buttonPlanesMenu.Enabled = _settings.PrimitivesAcces.Planes.IsPlanesEnabled;
+            this.buttonPointsMenu.Enabled = _settings.PrimitivesAcces.Points.IsPointsEnabled;
+            this.buttonLinesMenu.Enabled = _settings.PrimitivesAcces.Lines.IsLinesEnabled;
+            this.buttonSegmentMenu.Enabled = _settings.PrimitivesAcces.Segments.IsSegmentsEnabled;
+            this.buttonPlanesMenu.Enabled = _settings.PrimitivesAcces.Planes.IsPlanesEnabled;
             _ptMenuSelector.SetAccess(_settings.PrimitivesAcces.Points);
             _lnMenuSelector.SetAccess(_settings.PrimitivesAcces.Lines);
             _plMenuSelector.SetAccess(_settings.PrimitivesAcces.Planes);
@@ -132,36 +134,33 @@ namespace GraphicsModule.Controls
         private void GraphicsControl_Load(object sender, EventArgs e)
         {
             _canvas = new Canvas(_settings, MainPictureBox); // Инициализируем полотно отрисовки
-            if (_storage == null) _storage = new Storage(); // инициализируем хранилище графических объектов
+            if (_storage == null) throw new Exception("STROAGE IS NULL"); // инициализируем хранилище графических объектов
         }
         private void GraphicsControl_Resize(object sender, EventArgs e)
         {
-            if (_storage != null)
-            {
-                _canvas.CalculateBackground();
-                _canvas.Update(_storage);
-            }
+            if (_storage == null || _canvas == null) return;
+            _canvas.CalculateBackground();
+            _canvas.Update(_storage);
         }
         #region Other operations
         /// <summary>
         /// Импорт графических объектов
         /// </summary>
         /// <param name="coll"></param>
-        public void ImportObjects(Collection<IObject> coll)
+        public void ImportObjects(IList<IObject> coll)
         {
-            if (_storage == null) _storage = new Storage();
-            _storage.Objects = coll;
+            if (_storage == null) _storage = new Storage(coll);
             _canvas.Update(_storage);
         }
         /// <summary>
         /// Экспорт графических объектов
         /// </summary>
         /// <returns></returns>
-        public Collection<IObject> ExportObjects()
+        public IList<IObject> ExportObjects()
         {
             return _storage.Objects;
         }
-        public Collection<IObject> ExportSelected()
+        public IList<IObject> ExportSelected()
         {
             return _storage.SelectedObjects;
         }

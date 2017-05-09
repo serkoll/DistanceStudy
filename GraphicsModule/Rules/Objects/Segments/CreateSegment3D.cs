@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
 using GraphicsModule.Configuration;
@@ -97,7 +98,7 @@ namespace GraphicsModule.Rules.Objects.Segments
             }
             return false;
         }
-        protected IObject CreateSegmentOfPlane(Collection<IObject> obj, DrawSettings st, Point frameCenter, Canvas can)
+        protected IObject CreateSegmentOfPlane(IList<IObject> obj, DrawSettings st, Point frameCenter, Canvas can)
         {
             if (obj[0].GetType() == typeof(PointOfPlane1X0Y))
             {

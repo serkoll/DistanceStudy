@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using GraphicsModule.Controls;
 using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Geometry.Objects;
@@ -12,16 +13,16 @@ namespace GraphicsModule.Form
             InitializeComponent();
             KeyPreview = true;
         }
-        public Collection<IObject> Export()
+        public IList<IObject> Export()
         {
             return graphicsControl1.ExportObjects();
         }
-        public void Import(Collection<IObject> obj)
+        public void Import(IList<IObject> obj)
         {
             graphicsControl1.ImportObjects(obj);
         }
 
-        public Collection<IObject> ExportSelected()
+        public IList<IObject> ExportSelected()
         {
             return graphicsControl1.ExportSelected();
         }

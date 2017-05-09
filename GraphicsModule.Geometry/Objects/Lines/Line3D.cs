@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Drawing;
 using GraphicsModule.Configuration;
 using GraphicsModule.Geometry.Interfaces;
@@ -11,7 +12,7 @@ namespace GraphicsModule.Geometry.Objects.Lines
     public class Line3D : IObject
     {
         private Name _name;
-        public static Line3D Create(Collection<IObject> lst)
+        public static Line3D Create(IList<IObject> lst)
         {
             if (lst[0].GetType() == typeof(LineOfPlane1X0Y))
             {

@@ -64,6 +64,7 @@ namespace GraphicsModule.Rules.Objects.Planes
         private void CreateByThreePoint(Point pt, Point frameCenter, Canvas can, DrawSettings setting, Storage strg)
         {
             var tmpobj = new CreatePointOfPlane1X0Y().Create(pt, frameCenter, can, setting, strg);
+            if(tmpobj == null) return;
             tmpobj.Draw(setting, frameCenter, can.Graphics);
             _planeObjects.Add(tmpobj);
             if (_planeObjects.Count != 3) return;
@@ -244,6 +245,7 @@ namespace GraphicsModule.Rules.Objects.Planes
         }
         public PlaneOfPlane1X0Y CreateByThreePoint(Collection<IObject> obj)
         {
+            //TODO: govnokod popravit
             return obj.Count != 3 ? null : new PlaneOfPlane1X0Y((PointOfPlane1X0Y)obj[0], (PointOfPlane1X0Y)obj[1], (PointOfPlane1X0Y)obj[2]);
         }
         public PlaneOfPlane1X0Y CreateByLineAndPoint(LineOfPlane1X0Y ln, PointOfPlane1X0Y pt)

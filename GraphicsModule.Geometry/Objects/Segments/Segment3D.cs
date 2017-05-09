@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
 using GraphicsModule.Configuration;
@@ -11,7 +12,7 @@ namespace GraphicsModule.Geometry.Objects.Segments
     public class Segment3D : IObject
     {
         private Name _name;
-        public static Segment3D Create(Collection<IObject> lst)
+        public static Segment3D Create(IList<IObject> lst)
         {
             if (lst[0].GetType() == typeof(SegmentOfPlane1X0Y))
             {

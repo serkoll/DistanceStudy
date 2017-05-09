@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using GraphicsModule.Configuration;
@@ -8,24 +6,28 @@ using GraphicsModule.Geometry.Interfaces;
 
 namespace GraphicsModule
 {
-    /// <summary>
-    /// Обеспечивает доступ и управление отрисованными графическими объектами
-    /// </summary>
     public class Storage
     {
         public Storage()
         {
-            Objects = new Collection<IObject>();
-            SelectedObjects = new Collection<IObject>();
-            CopiedObjects = new Collection<IObject>();
-            PastedObjects = new Collection<IObject>();
-            DeletedObjects = new Collection<IObject>();
-            TempObjects = new Collection<IObject>();
-            TempLinesOfPlane = new Collection<IObject>();
+            Objects = new List<IObject>();
+            SelectedObjects = new List<IObject>();
+            CopiedObjects = new List<IObject>();
+            PastedObjects = new List<IObject>();
+            DeletedObjects = new List<IObject>();
+            TempObjects = new List<IObject>();
+            TempLinesOfPlane = new List<IObject>();
         }
-        /// <summary>
-        /// Очищает все коллекции
-        /// </summary>
+        public Storage(IList<IObject> objects)
+        {
+            Objects = objects;
+            SelectedObjects = new List<IObject>();
+            CopiedObjects = new List<IObject>();
+            PastedObjects = new List<IObject>();
+            DeletedObjects = new List<IObject>();
+            TempObjects = new List<IObject>();
+            TempLinesOfPlane = new List<IObject>();
+        }
         public void ClearAllCollections()
         {
             Objects.Clear();
@@ -35,11 +37,6 @@ namespace GraphicsModule
             DeletedObjects.Clear();
             TempObjects.Clear();
         }
-
-        /// <summary>
-        /// Добавляет объект в коллекцию графическиъ объектов
-        /// </summary>
-        /// <param name="source"></param>
         public void AddToCollection(IObject source)
         {
             if (source != null)
@@ -98,13 +95,13 @@ namespace GraphicsModule
             TempObjects.Clear();
             TempLinesOfPlane.Clear();
         }
-        public Collection<IObject> Objects { get; set; }
-        public Collection<IObject> SelectedObjects { get; set; }
-        public Collection<IObject> CopiedObjects { get; set; }
-        public Collection<IObject> PastedObjects { get; set; }
-        public Collection<IObject> DeletedObjects { get; set; }
-        public Collection<IObject> TempObjects { get; set; }
+        public IList<IObject> Objects { get; }
+        public IList<IObject> SelectedObjects { get; }
+        public IList<IObject> CopiedObjects { get; }
+        public IList<IObject> PastedObjects { get; }
+        public IList<IObject> DeletedObjects { get; }
+        public IList<IObject> TempObjects { get; }
         public IList<IPointOfPlane> TempPointsOfPlane { get; }
-        public Collection<IObject> TempLinesOfPlane { get; set; }
+        public IList<IObject> TempLinesOfPlane { get; }
     }
 }

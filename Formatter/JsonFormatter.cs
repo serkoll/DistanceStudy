@@ -11,7 +11,7 @@ namespace Formatter
 {
     public static class JsonFormatter
     {
-        public static void WriteObjectsToJson(Collection<IObject> coll, string fileName = "GraphicObjects")
+        public static void WriteObjectsToJson(IList<IObject> coll, string fileName = "GraphicObjects")
         {
             var fullPath = GetPathToJsonFile();
             List<GraphicKey> listGraphObjects = new List<GraphicKey>();
