@@ -20,15 +20,15 @@ namespace GraphicsModule.Geometry.Objects.Segments
             Point0 = new PointOfPlane1X0Y(segment.Point0.X, segment.Point0.Y);
             Point1 = new PointOfPlane1X0Y(segment.Point1.X, segment.Point1.Y);
         }
-        public void Draw(DrawSettings st, Point framecenter, Graphics g)
+        public void Draw(DrawSettings settings, Point framecenter, Graphics g)
         {
             
-            Point0.Draw(st, framecenter, g);
-            Point1.Draw(st, framecenter, g);
-            var pt0 = DeterminePosition.ForPointProjection(Point0, st.RadiusPoints, framecenter);
-            var pt1 = DeterminePosition.ForPointProjection(Point1, st.RadiusPoints, framecenter);
-            g.DrawLine(st.PenLineOfPlane1X0Y, new PointF(pt0.X + st.RadiusPoints, pt0.Y + st.RadiusPoints),
-                                             new PointF(pt1.X + st.RadiusPoints, pt1.Y + st.RadiusPoints));
+            Point0.Draw(settings, framecenter, g);
+            Point1.Draw(settings, framecenter, g);
+            var pt0 = DeterminePosition.ForPointProjection(Point0, settings.RadiusPoints, framecenter);
+            var pt1 = DeterminePosition.ForPointProjection(Point1, settings.RadiusPoints, framecenter);
+            g.DrawLine(settings.PenLineOfPlane1X0Y, new PointF(pt0.X + settings.RadiusPoints, pt0.Y + settings.RadiusPoints),
+                                             new PointF(pt1.X + settings.RadiusPoints, pt1.Y + settings.RadiusPoints));
 
         }
         public void DrawSegmentOnly(DrawSettings st, Point framecenter, Graphics g)
@@ -44,7 +44,7 @@ namespace GraphicsModule.Geometry.Objects.Segments
         public bool IsSelected(Point mscoords, float ptR, Point frameCenter, double distance)
         {
             var sg = DeterminePosition.ForSegmentProjection(this, frameCenter);
-            return Analyze.Analyze.SegmentPos.IncidenceOfPoint(mscoords, sg, 35 * distance);
+            return Analyze.Analyze.SegmentsPosition.IncidenceOfPoint(mscoords, sg, 35 * distance);
         }
         public PointOfPlane1X0Y Point0 { get; private set; }
         public PointOfPlane1X0Y Point1 { get; private set; }

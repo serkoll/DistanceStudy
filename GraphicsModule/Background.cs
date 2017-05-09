@@ -6,6 +6,7 @@ using GraphicsModule.Geometry.CoordinateSystem;
 
 namespace GraphicsModule
 {
+    //TODO: логика отрисовки
     public class Background
     {
         public Background(Point centerPoint, Settings settings, Control pb)

@@ -15,6 +15,7 @@ namespace GraphicsModule.Geometry.Objects.Planes
         public IObject[] Objects;
 
         private Name _name;
+        public Name Name { get; set; }
         public Plane2D()
         {
             Objects = new IObject[3];
@@ -51,11 +52,11 @@ namespace GraphicsModule.Geometry.Objects.Planes
             Objects = new IObject[] { sg1, sg2 };
             _name = new Name();
         }
-        public void Draw(DrawSettings st, Point frameCenter, Graphics graphics)
+        public void Draw(DrawSettings settings, Point frameCenter, Graphics graphics)
         {
             foreach (var obj in Objects)
             {
-                obj.Draw(st, frameCenter, graphics);
+                obj.Draw(settings, frameCenter, graphics);
             }
         }
         public bool IsSelected(Point mousecoords, float ptR, Point frameCenter, double distance)

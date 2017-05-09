@@ -117,7 +117,7 @@ namespace GraphicsModule.Rules.Objects.Planes
                 if (_planeObjects.Count != 0)
                 {
                     var line3D = (Line3D)_planeObjects.First();
-                    if(_createLine.TempLineOfPlane != null && Analyze.LinesPos.Parallelism(line3D, _createLine.TempLineOfPlane))
+                    if(_createLine.TempLineOfPlane != null && Analyze.LinesPosition.Parallelism(line3D, _createLine.TempLineOfPlane))
                     {
                         _createLine.TempLineOfPlane = null;
                         can.Update(strg);
@@ -277,11 +277,11 @@ namespace GraphicsModule.Rules.Objects.Planes
         }
         public Plane3D CreateByParallelLines(Line3D ln1, Line3D ln2)
         {
-            return Analyze.LinesPos.Parallelism(ln1, ln2) ? new Plane3D(ln1, ln2) : null;
+            return Analyze.LinesPosition.Parallelism(ln1, ln2) ? new Plane3D(ln1, ln2) : null;
         }
         //public Plane3D CreateByCrossedLines(Line3D ln1, Line3D ln2, Point frameCenter)
         //{
-        //    return Analyze.LinesPos.Crossing(ln1, ln2, frameCenter) ? new Plane3D(ln1, ln2) : null;
+        //    return Analyze.LinesPosition.Crossing(ln1, ln2, frameCenter) ? new Plane3D(ln1, ln2) : null;
         //}
         //public Plane3D CreateByPointAndSegment(Segment3D sg, Point3D pt)
         //{
@@ -289,11 +289,11 @@ namespace GraphicsModule.Rules.Objects.Planes
         //}
         //public Plane3D CreateByParallelSegments(Segment3D sg1, Segment3D sg2)
         //{
-        //    return Analyze.LinesPos.Parallelism(sg1, sg2) ? new Plane3D(sg1, sg2) : null;
+        //    return Analyze.LinesPosition.Parallelism(sg1, sg2) ? new Plane3D(sg1, sg2) : null;
         //}
         //public Plane3D CreateByCrossedSegments(Segment3D sg1, Segment3D sg2, Point frameCenter)
         //{
-        //    return Analyze.LinesPos.Crossing(sg1, sg2, frameCenter) ? new Plane3D(sg1, sg2) : null;
+        //    return Analyze.LinesPosition.Crossing(sg1, sg2, frameCenter) ? new Plane3D(sg1, sg2) : null;
         //}
         public void SetBuildType(PlaneCreateType type)
         {
