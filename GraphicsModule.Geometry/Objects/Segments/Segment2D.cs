@@ -13,7 +13,7 @@ namespace GraphicsModule.Geometry.Objects.Segments
 
         public Segment2D(Point2D pt1, Point2D pt2)
         {
-            if (Analyze.Analyze.PointPos.Coincidence(pt1, pt2)) return;
+            if (Analyze.Analyze.PointsPosition.Coincidence(pt1, pt2)) return;
             Point0 = pt1;
             Point1 = pt2;
             Kx = pt2.X - pt1.X;
@@ -28,7 +28,7 @@ namespace GraphicsModule.Geometry.Objects.Segments
         }
         public bool IsSelected(Point mscoords, float ptR, Point frameCenter, double distance)
         {
-            return Analyze.Analyze.SegmentPos.IncidenceOfPoint(mscoords, this, 35 * distance);
+            return Analyze.Analyze.SegmentsPosition.IncidenceOfPoint(mscoords, this, 35 * distance);
         }
         public Name GetName()
         {

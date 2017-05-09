@@ -23,13 +23,13 @@ namespace GraphicsModule.Rules.Objects.Segments
             var ptOfPlane = new Point2D(pt);
             if (strg.TempObjects.Count == 0)
             {
-                ptOfPlane.Name =GraphicsControl.NmGenerator.Generate();
+                ptOfPlane.Name =GraphicsControl.NamesGenerator.Generate();
                 strg.TempObjects.Add(ptOfPlane);
                 strg.DrawLastAddedToTempObjects(settings, frameCenter, can.Graphics);
             }
             else
             {
-                if (Analyze.PointPos.Coincidence((Point2D)strg.TempObjects[0], new Point2D(pt))) return null;
+                if (Analyze.PointsPosition.Coincidence((Point2D)strg.TempObjects[0], new Point2D(pt))) return null;
                 var source = new Segment2D((Point2D)strg.TempObjects[0], new Point2D(pt));
                 source.SetName(strg.TempObjects[0].Name);
                 strg.TempObjects.Clear();

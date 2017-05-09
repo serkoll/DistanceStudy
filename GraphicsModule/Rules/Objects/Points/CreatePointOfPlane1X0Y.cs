@@ -22,7 +22,7 @@ namespace GraphicsModule.Rules.Objects.Points
         {
             if (!PointOfPlane1X0Y.IsCreatable(pt, frameCenter)) return null;
             var source = new PointOfPlane1X0Y(pt, frameCenter);
-            source.Name = GraphicsControl.NmGenerator.Generate();
+            source.Name = GraphicsControl.NamesGenerator.Generate();
             return source;
         }
     }

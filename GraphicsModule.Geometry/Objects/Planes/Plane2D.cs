@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Drawing;
 using System.Linq;
 using GraphicsModule.Configuration;
@@ -15,7 +15,6 @@ namespace GraphicsModule.Geometry.Objects.Planes
         public IObject[] Objects;
 
         private Name _name;
-        public Name Name { get; set; }
         public Plane2D()
         {
             Objects = new IObject[3];

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Drawing;
 using System.Linq;
 using GraphicsModule.Configuration;
@@ -62,12 +62,10 @@ namespace GraphicsModule.Geometry.Objects.Planes
         {
             return Objects.Any(obj => obj.IsSelected(mousecoords, ptR, frameCenter, distance));
         }
+
         public Name Name
         {
-            get
-            {
-                return _name;
-            }
+            get { return _name; }
             set
             {
                 _name = value;
@@ -76,6 +74,6 @@ namespace GraphicsModule.Geometry.Objects.Planes
                     t.Name = _name;
                 }
             }
-        
+        }
     }
 }

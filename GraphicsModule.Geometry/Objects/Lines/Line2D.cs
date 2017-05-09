@@ -27,7 +27,7 @@ namespace GraphicsModule.Geometry.Objects.Lines
 
         public Line2D(Point2D pt1, Point2D pt2)
         {
-            if (Analyze.Analyze.PointPos.Coincidence(pt1, pt2)) return;
+            if (Analyze.Analyze.PointsPosition.Coincidence(pt1, pt2)) return;
             Point0 = pt1;
             Point1 = pt2;
             kx = pt2.X - pt1.X;
@@ -39,7 +39,7 @@ namespace GraphicsModule.Geometry.Objects.Lines
 
         public Line2D(Point2D pt1, Point2D pt2, PictureBox pb)
         {
-            if (Analyze.Analyze.PointPos.Coincidence(pt1, pt2)) return;
+            if (Analyze.Analyze.PointsPosition.Coincidence(pt1, pt2)) return;
             Point0 = pt1;
             Point1 = pt2;
             kx = pt2.X - pt1.X;
@@ -103,7 +103,7 @@ namespace GraphicsModule.Geometry.Objects.Lines
         }
         public bool IsSelected(Point mscoords, float ptR, Point frameCenter, double distance)
         {
-            return Analyze.Analyze.LinesPos.IncidenceOfPoint(mscoords, this, 35 * distance);
+            return Analyze.Analyze.LinesPosition.IncidenceOfPoint(mscoords, this, 35 * distance);
         }
         //TODO: возможно в массив
         public Point2D Point0 { get; }

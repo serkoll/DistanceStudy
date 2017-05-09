@@ -12,19 +12,19 @@ namespace GraphicsModule.Geometry.Analyze
         #region Incidence of Point and Line
         public bool IncidenceOfPoint(Point pt, Line2D ln)
         {
-            return Math.Abs((pt.X - ln.Point0.X) * ln.Ky - (pt.Y - ln.Point0.Y) * ln.Kx) < 0.001;
+            return Math.Abs((pt.X - ln.Point0.X) * ln.ky - (pt.Y - ln.Point0.Y) * ln.kx) < 0.001;
         }
         public bool IncidenceOfPoint(Point pt, Line2D ln, double solveerror)
         {
-            return Math.Abs((pt.X - ln.Point0.X) * ln.Ky - (pt.Y - ln.Point0.Y) * ln.Kx) < solveerror;
+            return Math.Abs((pt.X - ln.Point0.X) * ln.ky - (pt.Y - ln.Point0.Y) * ln.kx) < solveerror;
         }
         public bool IncidenceOfPoint(Point2D pt, Line2D ln)
         {
-            return Math.Abs((pt.X - ln.Point0.X) * ln.Ky - (pt.Y - ln.Point0.Y) * ln.Kx) < 0.001;
+            return Math.Abs((pt.X - ln.Point0.X) * ln.ky - (pt.Y - ln.Point0.Y) * ln.kx) < 0.001;
         }
         public bool IncidenceOfPoint(Point2D pt, Line2D ln, double solveerror)
         {
-            return Math.Abs((pt.X - ln.Point0.X) * ln.Ky - (pt.Y - ln.Point0.Y) * ln.Kx) < solveerror;
+            return Math.Abs((pt.X - ln.Point0.X) * ln.ky - (pt.Y - ln.Point0.Y) * ln.kx) < solveerror;
         }
 
         public bool IncidenceOfPoint(Point3D pt, Line3D ln)
@@ -66,11 +66,11 @@ namespace GraphicsModule.Geometry.Analyze
         #region Parallelism of Lines
         public bool Parallelism(Line2D ln1, Line2D ln2)
         {
-            return Math.Abs(ln1.Kx - ln2.Kx) < 0.001 || Math.Abs(ln1.Ky - ln2.Ky) < 0.001;
+            return Math.Abs(ln1.kx - ln2.kx) < 0.001 || Math.Abs(ln1.ky - ln2.ky) < 0.001;
         }
         public bool Parallelism(Line2D ln1, Line2D ln2, double solveerror)
         {
-            return Math.Abs(ln1.Kx - ln2.Kx) < solveerror || Math.Abs(ln1.Ky - ln2.Ky) < solveerror;
+            return Math.Abs(ln1.kx - ln2.kx) < solveerror || Math.Abs(ln1.ky - ln2.ky) < solveerror;
         }
         public bool Parallelism(Line3D ln1, Line3D ln2)
         {
@@ -133,90 +133,90 @@ namespace GraphicsModule.Geometry.Analyze
         #region Crossing of lines
         public bool Crossing(Line2D ln1, Line2D ln2)
         {
-            var y = (ln2.Point0.Y * ln2.Kx * ln1.Ky - ln1.Point0.Y * ln2.Ky * ln1.Kx + ln2.Ky * ln1.Ky * (ln1.Point0.X - ln2.Point0.X)) /
-                    (ln2.Kx * ln1.Ky - ln1.Kx * ln2.Ky);
-            var x = ln1.Kx * (y - ln1.Point0.Y) / ln1.Ky + ln1.Point0.X;
+            var y = (ln2.Point0.Y * ln2.kx * ln1.ky - ln1.Point0.Y * ln2.ky * ln1.kx + ln2.ky * ln1.ky * (ln1.Point0.X - ln2.Point0.X)) /
+                    (ln2.kx * ln1.ky - ln1.kx * ln2.ky);
+            var x = ln1.kx * (y - ln1.Point0.Y) / ln1.ky + ln1.Point0.X;
             return !(y < 0) && !(x < 0);
         }
         public bool Crossing(Line2D ln1, LineOfPlane1X0Y ln, Point frameCenter)
         {
             var ln2 = DeterminePosition.ForLineProjection(ln, frameCenter);
-            var y = (ln2.Point0.Y * ln2.Kx * ln1.Ky - ln1.Point0.Y * ln2.Ky * ln1.Kx + ln2.Ky * ln1.Ky * (ln1.Point0.X - ln2.Point0.X)) /
-                    (ln2.Kx * ln1.Ky - ln1.Kx * ln2.Ky);
+            var y = (ln2.Point0.Y * ln2.kx * ln1.ky - ln1.Point0.Y * ln2.ky * ln1.kx + ln2.ky * ln1.ky * (ln1.Point0.X - ln2.Point0.X)) /
+                    (ln2.kx * ln1.ky - ln1.kx * ln2.ky);
             if (y < 0)
             {
                 return false;
             }
-            var x = (ln1.Point0.X * ln2.Kx * ln1.Ky - ln2.Point0.X * ln1.Kx * ln2.Ky + ln2.Kx * ln1.Kx * (ln2.Point0.Y - ln1.Point0.Y)) /
-                    (ln1.Ky * ln2.Kx - ln1.Kx * ln2.Ky);
+            var x = (ln1.Point0.X * ln2.kx * ln1.ky - ln2.Point0.X * ln1.kx * ln2.ky + ln2.kx * ln1.kx * (ln2.Point0.Y - ln1.Point0.Y)) /
+                    (ln1.ky * ln2.kx - ln1.kx * ln2.ky);
             return !(x < 0);
         }
         public bool Crossing(Line2D ln1, LineOfPlane2X0Z ln, Point frameCenter)
         {
             var ln2 = DeterminePosition.ForLineProjection(ln, frameCenter);
-            var y = (ln2.Point0.Y * ln2.Kx * ln1.Ky - ln1.Point0.Y * ln2.Ky * ln1.Kx + ln2.Ky * ln1.Ky * (ln1.Point0.X - ln2.Point0.X)) /
-                     (ln2.Kx * ln1.Ky - ln1.Kx * ln2.Ky);
+            var y = (ln2.Point0.Y * ln2.kx * ln1.ky - ln1.Point0.Y * ln2.ky * ln1.kx + ln2.ky * ln1.ky * (ln1.Point0.X - ln2.Point0.X)) /
+                     (ln2.kx * ln1.ky - ln1.kx * ln2.ky);
             if (y < 0)
             {
                 return false;
             }
-            var x = (ln1.Point0.X * ln2.Kx * ln1.Ky - ln2.Point0.X * ln1.Kx * ln2.Ky + ln2.Kx * ln1.Kx * (ln2.Point0.Y - ln1.Point0.Y)) /
-                    (ln1.Ky * ln2.Kx - ln1.Kx * ln2.Ky);
+            var x = (ln1.Point0.X * ln2.kx * ln1.ky - ln2.Point0.X * ln1.kx * ln2.ky + ln2.kx * ln1.kx * (ln2.Point0.Y - ln1.Point0.Y)) /
+                    (ln1.ky * ln2.kx - ln1.kx * ln2.ky);
             return !(x < 0);
         }
         public bool Crossing(Line2D ln1, LineOfPlane3Y0Z ln, Point frameCenter)
         {
             var ln2 = DeterminePosition.ForLineProjection(ln, frameCenter);
-            var y = (ln2.Point0.Y * ln2.Kx * ln1.Ky - ln1.Point0.Y * ln2.Ky * ln1.Kx + ln2.Ky * ln1.Ky * (ln1.Point0.X - ln2.Point0.X)) /
-                     (ln2.Kx * ln1.Ky - ln1.Kx * ln2.Ky);
+            var y = (ln2.Point0.Y * ln2.kx * ln1.ky - ln1.Point0.Y * ln2.ky * ln1.kx + ln2.ky * ln1.ky * (ln1.Point0.X - ln2.Point0.X)) /
+                     (ln2.kx * ln1.ky - ln1.kx * ln2.ky);
             if (y < 0)
             {
                 return false;
             }
-            var x = (ln1.Point0.X * ln2.Kx * ln1.Ky - ln2.Point0.X * ln1.Kx * ln2.Ky + ln2.Kx * ln1.Kx * (ln2.Point0.Y - ln1.Point0.Y)) /
-                    (ln1.Ky * ln2.Kx - ln1.Kx * ln2.Ky);
+            var x = (ln1.Point0.X * ln2.kx * ln1.ky - ln2.Point0.X * ln1.kx * ln2.ky + ln2.kx * ln1.kx * (ln2.Point0.Y - ln1.Point0.Y)) /
+                    (ln1.ky * ln2.kx - ln1.kx * ln2.ky);
             return !(x < 0);
         }
         public bool Crossing(LineOfPlane1X0Y lnOfPlane1, LineOfPlane1X0Y lnOfPlane2, Point frameCenter)
         {
             var ln1 = DeterminePosition.ForLineProjection(lnOfPlane1, frameCenter);
             var ln2 = DeterminePosition.ForLineProjection(lnOfPlane2, frameCenter);
-            var y = (ln2.Point0.Y * ln2.Kx * ln1.Ky - ln1.Point0.Y * ln2.Ky * ln1.Kx + ln2.Ky * ln1.Ky * (ln1.Point0.X - ln2.Point0.X)) /
-                    (ln2.Kx * ln1.Ky - ln1.Kx * ln2.Ky);
+            var y = (ln2.Point0.Y * ln2.kx * ln1.ky - ln1.Point0.Y * ln2.ky * ln1.kx + ln2.ky * ln1.ky * (ln1.Point0.X - ln2.Point0.X)) /
+                    (ln2.kx * ln1.ky - ln1.kx * ln2.ky);
             if (y < 0)
             {
                 return false;
             }
-            var x = (ln1.Point0.X * ln2.Kx * ln1.Ky - ln2.Point0.X * ln1.Kx * ln2.Ky + ln2.Kx * ln1.Kx * (ln2.Point0.Y - ln1.Point0.Y)) /
-                    (ln1.Ky * ln2.Kx - ln1.Kx * ln2.Ky);
+            var x = (ln1.Point0.X * ln2.kx * ln1.ky - ln2.Point0.X * ln1.kx * ln2.ky + ln2.kx * ln1.kx * (ln2.Point0.Y - ln1.Point0.Y)) /
+                    (ln1.ky * ln2.kx - ln1.kx * ln2.ky);
             return !(x < 0);
         }
         public bool Crossing(LineOfPlane2X0Z lnOfPlane1, LineOfPlane2X0Z lnOfPlane2, Point frameCenter)
         {
             var ln1 = DeterminePosition.ForLineProjection(lnOfPlane1, frameCenter);
             var ln2 = DeterminePosition.ForLineProjection(lnOfPlane2, frameCenter);
-            var y = (ln2.Point0.Y * ln2.Kx * ln1.Ky - ln1.Point0.Y * ln2.Ky * ln1.Kx + ln2.Ky * ln1.Ky * (ln1.Point0.X - ln2.Point0.X)) /
-                    (ln2.Kx * ln1.Ky - ln1.Kx * ln2.Ky);
+            var y = (ln2.Point0.Y * ln2.kx * ln1.ky - ln1.Point0.Y * ln2.ky * ln1.kx + ln2.ky * ln1.ky * (ln1.Point0.X - ln2.Point0.X)) /
+                    (ln2.kx * ln1.ky - ln1.kx * ln2.ky);
             if (y < 0)
             {
                 return false;
             }
-            var x = (ln1.Point0.X * ln2.Kx * ln1.Ky - ln2.Point0.X * ln1.Kx * ln2.Ky + ln2.Kx * ln1.Kx * (ln2.Point0.Y - ln1.Point0.Y)) /
-                    (ln1.Ky * ln2.Kx - ln1.Kx * ln2.Ky);
+            var x = (ln1.Point0.X * ln2.kx * ln1.ky - ln2.Point0.X * ln1.kx * ln2.ky + ln2.kx * ln1.kx * (ln2.Point0.Y - ln1.Point0.Y)) /
+                    (ln1.ky * ln2.kx - ln1.kx * ln2.ky);
             return !(x < 0);
         }
         public bool Crossing(LineOfPlane3Y0Z lnOfPlane1, LineOfPlane3Y0Z lnOfPlane2, Point frameCenter)
         {
             var ln1 = DeterminePosition.ForLineProjection(lnOfPlane1, frameCenter);
             var ln2 = DeterminePosition.ForLineProjection(lnOfPlane2, frameCenter);
-            var y = (ln2.Point0.Y * ln2.Kx * ln1.Ky - ln1.Point0.Y * ln2.Ky * ln1.Kx + ln2.Ky * ln1.Ky * (ln1.Point0.X - ln2.Point0.X)) /
-                    (ln2.Kx * ln1.Ky - ln1.Kx * ln2.Ky);
+            var y = (ln2.Point0.Y * ln2.kx * ln1.ky - ln1.Point0.Y * ln2.ky * ln1.kx + ln2.ky * ln1.ky * (ln1.Point0.X - ln2.Point0.X)) /
+                    (ln2.kx * ln1.ky - ln1.kx * ln2.ky);
             if (y < 0)
             {
                 return false;
             }
-            var x = (ln1.Point0.X * ln2.Kx * ln1.Ky - ln2.Point0.X * ln1.Kx * ln2.Ky + ln2.Kx * ln1.Kx * (ln2.Point0.Y - ln1.Point0.Y)) /
-                    (ln1.Ky * ln2.Kx - ln1.Kx * ln2.Ky);
+            var x = (ln1.Point0.X * ln2.kx * ln1.ky - ln2.Point0.X * ln1.kx * ln2.ky + ln2.kx * ln1.kx * (ln2.Point0.Y - ln1.Point0.Y)) /
+                    (ln1.ky * ln2.kx - ln1.kx * ln2.ky);
             return !(x < 0);
         }
         public bool Crossing(SegmentOfPlane1X0Y lnOfPlane1, SegmentOfPlane1X0Y lnOfPlane2, Point frameCenter)

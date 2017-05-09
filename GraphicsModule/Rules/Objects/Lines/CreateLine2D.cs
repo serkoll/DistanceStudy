@@ -23,13 +23,13 @@ namespace GraphicsModule.Rules.Objects.Lines
             var ptOfPlane = new Point2D(pt);
             if (strg.TempObjects.Count == 0)
             {
-                ptOfPlane.Name = GraphicsControl.NmGenerator.Generate();
+                ptOfPlane.Name = GraphicsControl.NamesGenerator.Generate();
                 strg.TempObjects.Add(ptOfPlane);
                 strg.DrawLastAddedToTempObjects(settings, frameCenter, can.Graphics);
             }
             else
             {
-                if (Analyze.PointPos.Coincidence((Point2D)strg.TempObjects.First(), new Point2D(pt))) return null;
+                if (Analyze.PointsPosition.Coincidence((Point2D)strg.TempObjects.First(), new Point2D(pt))) return null;
                 var source = new Line2D((Point2D)strg.TempObjects.First(), new Point2D(pt), can.PicBox);
                 source.Name = strg.TempObjects.First().Name;
                 strg.TempObjects.Clear();

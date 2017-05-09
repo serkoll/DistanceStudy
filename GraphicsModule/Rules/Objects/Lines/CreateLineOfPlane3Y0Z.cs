@@ -27,12 +27,12 @@ namespace GraphicsModule.Rules.Objects.Lines
             var ptOfPlane = new PointOfPlane3Y0Z(pt, frameCenter);
             if (strg.TempObjects.Count == 0)
             {
-                ptOfPlane.Name = GraphicsControl.NmGenerator.Generate();
+                ptOfPlane.Name = GraphicsControl.NamesGenerator.Generate();
                 strg.TempObjects.Add(ptOfPlane);
                 strg.DrawLastAddedToTempObjects(setting, frameCenter, can.Graphics);
                 return null;
             }
-            if (Analyze.PointPos.Coincidence((PointOfPlane3Y0Z)strg.TempObjects.First(), new PointOfPlane3Y0Z(pt, frameCenter))) return null;
+            if (Analyze.PointsPosition.Coincidence((PointOfPlane3Y0Z)strg.TempObjects.First(), new PointOfPlane3Y0Z(pt, frameCenter))) return null;
             var source = new LineOfPlane3Y0Z((PointOfPlane3Y0Z)strg.TempObjects.First(), new PointOfPlane3Y0Z(pt, frameCenter), frameCenter, can.PlaneY0Z);
             source.Name =strg.TempObjects.First().Name;
             strg.TempObjects.Clear();

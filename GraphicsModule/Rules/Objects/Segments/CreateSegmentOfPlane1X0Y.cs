@@ -23,12 +23,12 @@ namespace GraphicsModule.Rules.Objects.Segments
             var ptOfPlane = new PointOfPlane1X0Y(pt, frameCenter);
             if (strg.TempObjects.Count == 0)
             {
-                ptOfPlane.Name = GraphicsControl.NmGenerator.Generate();
+                ptOfPlane.Name = GraphicsControl.NamesGenerator.Generate();
                 strg.TempObjects.Add(ptOfPlane);
                 strg.DrawLastAddedToTempObjects(setting, frameCenter, can.Graphics);
                 return null;
             }
-            if (Analyze.PointPos.Coincidence((PointOfPlane1X0Y)strg.TempObjects[0],
+            if (Analyze.PointsPosition.Coincidence((PointOfPlane1X0Y)strg.TempObjects[0],
                 new PointOfPlane1X0Y(pt, frameCenter))) return null;
             var source = new SegmentOfPlane1X0Y((PointOfPlane1X0Y)strg.TempObjects[0],
                 new PointOfPlane1X0Y(pt, frameCenter));

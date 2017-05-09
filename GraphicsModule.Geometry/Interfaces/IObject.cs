@@ -9,7 +9,5 @@ namespace GraphicsModule.Geometry.Interfaces
         void Draw(DrawSettings st, Point frameCenter, Graphics graphics);
         //TODO: параметры
         bool IsSelected(Point mousecoords, float ptR, Point frameCenter, double distance);
-        //Name GetName();
-        //void SetName(Name name);
     }
 }
