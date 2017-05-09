@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.Linq;
 using GraphicsModule.Configuration;
@@ -76,6 +76,6 @@ namespace GraphicsModule.Geometry.Objects.Planes
                     t.Name = _name;
                 }
             }
-        }
+        
     }
 }
