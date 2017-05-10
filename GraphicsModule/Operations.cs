@@ -9,11 +9,11 @@ namespace GraphicsModule
     /// </summary>
     class SelectObject : IOperation
     {
-        public void Execute(Point mousecoords, Storage strg, Canvas.Canvas can)
+        public void Execute(Point mousecoords, Storage strg, Canvas can)
         {
-            foreach (IObject obj in strg.Objects)
+            foreach (var obj in strg.Objects)
             {
-                if (obj.IsSelected(mousecoords, can.Setting.SelectedDrawS.RadiusPoints, can.CenterSystemPoint, 5))
+                if (obj.IsSelected(mousecoords, can.Settings.SelectedDrawSettings.RadiusPoints, can.CenterSystemPoint, 5))
                 {
                     strg.SelectedObjects.Add(obj);
                     can.Update(strg);
@@ -27,13 +27,14 @@ namespace GraphicsModule
     /// </summary>
     class SelectPointOfPlane : IOperation
     {
-        public void Execute(Point mousecoords, Storage strg, Canvas.Canvas can)
+        //TODO: исправить вызов
+        public void Execute(Point mousecoords, Storage strg, Canvas can)
         {
-            foreach (IObject obj in strg.Objects)
+            foreach (var obj in strg.Objects)
             {
                 var type = obj.GetType().GetInterfaces();
                 if(type.Length < 2) continue;
-                if (obj.IsSelected(mousecoords, can.Setting.SelectedDrawS.RadiusPoints, can.CenterSystemPoint, 5) && (type[1] == typeof(IPointOfPlane)))
+                if (obj.IsSelected(mousecoords, can.Settings.SelectedDrawSettings.RadiusPoints, can.CenterSystemPoint, 5) && type[1] == typeof(IPointOfPlane))
                 {
                     strg.SelectedObjects.Add(obj);
                     can.Update(strg);
@@ -47,12 +48,12 @@ namespace GraphicsModule
     /// </summary>
     class SelectLineOfPlane : IOperation
     {
-        public void Execute(Point mousecoords, Storage strg, Canvas.Canvas can)
+        public void Execute(Point mousecoords, Storage strg, Canvas can)
         {
             foreach (IObject obj in strg.Objects)
             {
                 var type = obj.GetType().GetInterfaces();
-                if (obj.IsSelected(mousecoords, can.Setting.SelectedDrawS.RadiusPoints, can.CenterSystemPoint, 5) && (type[1].Name == "ILineOfPlane"))
+                if (obj.IsSelected(mousecoords, can.Settings.SelectedDrawSettings.RadiusPoints, can.CenterSystemPoint, 5) && type[1].Name == "ILineOfPlane")
                 {
                     strg.SelectedObjects.Add(obj);
                     can.Update(strg);
@@ -63,12 +64,12 @@ namespace GraphicsModule
     }
     class SelectSegmentOfPlane : IOperation
     {
-        public void Execute(Point mousecoords, Storage strg, Canvas.Canvas can)
+        public void Execute(Point mousecoords, Storage strg, Canvas can)
         {
             foreach (IObject obj in strg.Objects)
             {
                 var type = obj.GetType().GetInterfaces();
-                if (obj.IsSelected(mousecoords, can.Setting.SelectedDrawS.RadiusPoints, can.CenterSystemPoint, 5) && (type[1].Name == "ISegmentOfPlane"))
+                if (obj.IsSelected(mousecoords, can.Settings.SelectedDrawSettings.RadiusPoints, can.CenterSystemPoint, 5) && type[1].Name == "ISegmentOfPlane")
                 {
                     strg.SelectedObjects.Add(obj);
                     can.Update(strg);
@@ -82,7 +83,7 @@ namespace GraphicsModule
     /// </summary>
     class DeleteSelected
     {
-        public void Execute(Storage strg, Canvas.Canvas can)
+        public void Execute(Storage strg, Canvas can)
         {
             foreach (IObject obj in strg.SelectedObjects)
             {
@@ -97,11 +98,11 @@ namespace GraphicsModule
     /// </summary>
     class Erase : IOperation
     {
-        public void Execute(Point mousecoords, Storage strg, Canvas.Canvas can)
+        public void Execute(Point mousecoords, Storage strg, Canvas can)
         {
             foreach (IObject obj in strg.Objects)
             {
-                if (obj.IsSelected(mousecoords, can.Setting.SelectedDrawS.RadiusPoints, can.CenterSystemPoint, 5))
+                if (obj.IsSelected(mousecoords, can.Settings.SelectedDrawSettings.RadiusPoints, can.CenterSystemPoint, 5))
                 {
                     strg.Objects.Remove(obj);
                     can.Update(strg);
@@ -112,11 +113,11 @@ namespace GraphicsModule
     }
     class Copy : IOperation
     {
-        public void Execute(Point mousecoords, Storage strg, Canvas.Canvas can)
+        public void Execute(Point mousecoords, Storage strg, Canvas can)
         {
             foreach (IObject obj in strg.Objects)
             {
-                if (obj.IsSelected(mousecoords, can.Setting.SelectedDrawS.RadiusPoints, can.CenterSystemPoint, 5))
+                if (obj.IsSelected(mousecoords, can.Settings.SelectedDrawSettings.RadiusPoints, can.CenterSystemPoint, 5))
                 {
                     strg.CopiedObjects.Add(obj);
                     can.Update(strg);

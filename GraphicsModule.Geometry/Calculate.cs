@@ -38,15 +38,16 @@ namespace GraphicsModule.Geometry
                                   Distance(mscoords, ptR, frameCenter, pt.PointOfPlane3Y0Z)};
         }
         #endregion
-        #region Intersection
-        public static PointF IntersectionPoint(Line2D ln1, Line2D ln2)
+
+        #region Crossing
+        public static PointF CrossingPoint(Line2D ln1, Line2D ln2)
         {
             var y = (ln2.Point0.Y * ln2.kx * ln1.ky - ln1.Point0.Y * ln2.ky * ln1.kx + ln2.ky * ln1.ky * (ln1.Point0.X - ln2.Point0.X)) /
                     (ln2.kx * ln1.ky - ln1.kx * ln2.ky);
             var x = ln1.kx * (y - ln1.Point0.Y) / ln1.ky + ln1.Point0.X;
             return new PointF((float)x, (float)y);
         }
-        public static PointF IntersectionPoint(Line2D ln1, LineOfPlane1X0Y ln, Point frameCenter)
+        public static PointF CrossingPoint(Line2D ln1, LineOfPlane1X0Y ln, Point frameCenter)
         {
             var ln2 = DeterminePosition.ForLineProjection(ln, frameCenter);
             var y = (ln2.Point0.Y * ln2.kx * ln1.ky - ln1.Point0.Y * ln2.ky * ln1.kx + ln2.ky * ln1.ky * (ln1.Point0.X - ln2.Point0.X)) /
@@ -55,7 +56,7 @@ namespace GraphicsModule.Geometry
                     (ln1.ky * ln2.kx - ln1.kx * ln2.ky);
             return new PointF((float)x, (float)y);
         }
-        public static PointF IntersectionPoint(Line2D ln1, LineOfPlane2X0Z ln, Point frameCenter)
+        public static PointF CrossingPoint(Line2D ln1, LineOfPlane2X0Z ln, Point frameCenter)
         {
             var ln2 = DeterminePosition.ForLineProjection(ln, frameCenter);
             var y = (ln2.Point0.Y * ln2.kx * ln1.ky - ln1.Point0.Y * ln2.ky * ln1.kx + ln2.ky * ln1.ky * (ln1.Point0.X - ln2.Point0.X)) /
@@ -64,7 +65,7 @@ namespace GraphicsModule.Geometry
                     (ln1.ky * ln2.kx - ln1.kx * ln2.ky);
             return new PointF((float)x, (float)y);
         }
-        public static PointF IntersectionPoint(Line2D ln1, LineOfPlane3Y0Z ln, Point frameCenter)
+        public static PointF CrossingPoint(Line2D ln1, LineOfPlane3Y0Z ln, Point frameCenter)
         {
             var ln2 = DeterminePosition.ForLineProjection(ln, frameCenter);
             var y = (ln2.Point0.Y * ln2.kx * ln1.ky - ln1.Point0.Y * ln2.ky * ln1.kx + ln2.ky * ln1.ky * (ln1.Point0.X - ln2.Point0.X)) /

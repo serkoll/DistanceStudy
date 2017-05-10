@@ -25,9 +25,9 @@ namespace GraphicsModule.Cursors
         /// Передвигает курсор в заданном Canvas, привязывая его к узлам заданной сетки
         /// </summary>
         /// <param name="can">Полотно</param>
-        public void CursorPointToGridMove(Canvas.Canvas can)
+        public void CursorPointToGridMove(Canvas can)
         {
-            CursorPointToGridMove(can.PicBox, can.CenterSystemPoint, can.Bckground.Grid.StepOnWidth, can.Bckground.Grid.StepOnHeight);
+            CursorPointToGridMove(can.PicBox, can.CenterSystemPoint, can.Background.Grid.StepOnWidth, can.Background.Grid.StepOnHeight);
         }
         /// <summary>
         /// Передвигает курсор в заданном PictureBox, привязывая его к узлам заданной сетки
@@ -40,15 +40,17 @@ namespace GraphicsModule.Cursors
         {
             if (!ToGridFixation) return;
             // Пересчет координат курсора относительно узловых точек сетки
-            int dX = Cursor.Position.X - pb.PointToClient(Cursor.Position).X; //Разность значений координат X в системе координат основной формы и в системе координат PictureBox1 (определяет положение PictureBox1 в системе координат основной формы)
-            int dY = Cursor.Position.Y - pb.PointToClient(Cursor.Position).Y; //Разность значений координат Y в системе координат основной формы и в системе координат PictureBox1 (определяет положение PictureBox1 в системе координат основной формы)
+            var dX = Cursor.Position.X - pb.PointToClient(Cursor.Position).X; //Разность значений координат X в системе координат основной формы и в системе координат PictureBox1 (определяет положение PictureBox1 в системе координат основной формы)
+            var dY = Cursor.Position.Y - pb.PointToClient(Cursor.Position).Y; //Разность значений координат Y в системе координат основной формы и в системе координат PictureBox1 (определяет положение PictureBox1 в системе координат основной формы)
             if (_oldPosition.X == 0 && _oldPosition.Y == 0) // Установка стартовых значений
             {
-                var curPosOnGird = new Point();
+                var curPosOnGird = new Point
+                {
+                    X = pb.PointToClient(Cursor.Position).X - gridCenter.X,
+                    Y = pb.PointToClient(Cursor.Position).Y - gridCenter.Y
+                };
 
                 // 1. Перевод координат точки курсора из системы координат PictureBox-а в систему координат СЕТКИ
-                curPosOnGird.X = pb.PointToClient(Cursor.Position).X - gridCenter.X;
-                curPosOnGird.Y = pb.PointToClient(Cursor.Position).Y - gridCenter.Y;
 
                 // 2. Пересчет координат с учетом шага сетки
                 // 2.1. Расчет расстояния от центра сетки до заданной точки

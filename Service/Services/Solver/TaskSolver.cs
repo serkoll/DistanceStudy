@@ -26,7 +26,7 @@ namespace Service.Services.Solver
         /// Проверка текущей задачи
         /// </summary>
         /// <param name="task">Задача для проверки</param>
-        public string StartCheckTask(Task task, Collection<IObject> graphicObjects)
+        public string StartCheckTask(Task task, IList<IObject> graphicObjects)
         {
             ClearAllDictionaries();
             var sb = new StringBuilder();

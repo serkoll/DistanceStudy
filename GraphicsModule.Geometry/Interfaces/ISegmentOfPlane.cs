@@ -1,10 +1,10 @@
 ﻿using System.Drawing;
-using GraphicsModule.Settings;
+using GraphicsModule.Configuration;
 
 namespace GraphicsModule.Geometry.Interfaces
 {
-    internal interface ISegmentOfPlane
+    internal interface ISegmentOfPlane: IObject
     {
-        void DrawSegmentOnly(DrawS st, Point framecenter, Graphics g);
+        void DrawSegmentOnly(DrawSettings st, Point framecenter, Graphics g);
     }
 }

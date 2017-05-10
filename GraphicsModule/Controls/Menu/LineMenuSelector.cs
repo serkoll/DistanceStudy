@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
+using GraphicsModule.Configuration.Access.Structures;
 using GraphicsModule.Rules.Objects;
+using GraphicsModule.Rules.Objects.Lines;
 
 namespace GraphicsModule.Controls.Menu
 {
@@ -9,12 +11,27 @@ namespace GraphicsModule.Controls.Menu
         private PictureBox _mainPictureBox;
         private ToolStripButton _mainStripButton;
         private StatusStrip _menuStrip;
-        public LineMenuSelector(PictureBox mainPictureBox, ToolStripButton mainStripButton, StatusStrip menuStrip)
+        public LineMenuSelector(PictureBox mainPictureBox, ToolStripButton mainStripButton, StatusStrip menuStrip, LinesAccess linesAccess)
         {
             InitializeComponent();
             _mainPictureBox = mainPictureBox;
             _mainStripButton = mainStripButton;
             _menuStrip = menuStrip;
+            buttonLine2D.Enabled = linesAccess.IsLine2DEnabled;
+            buttonLine3D.Enabled = linesAccess.IsLine3DEnabled;
+            buttonLineOfPlane1X0Y.Enabled = linesAccess.IsLineOfPlane1X0YEnabled;
+            buttonLineOfPlane2X0Z.Enabled = linesAccess.IsLineOfPlane2X0ZEnabled;
+            buttonLineOfPlane3Y0Z.Enabled = linesAccess.IsLineOfPlane3Y0ZEnabled;
+            buttonGenerateLine3D.Enabled = linesAccess.IsGenerateLine3DEnabled;
+        }
+        public void SetAccess(LinesAccess linesAccess)
+        {
+            buttonLine2D.Enabled = linesAccess.IsLine2DEnabled;
+            buttonLine3D.Enabled = linesAccess.IsLine3DEnabled;
+            buttonLineOfPlane1X0Y.Enabled = linesAccess.IsLineOfPlane1X0YEnabled;
+            buttonLineOfPlane2X0Z.Enabled = linesAccess.IsLineOfPlane2X0ZEnabled;
+            buttonLineOfPlane3Y0Z.Enabled = linesAccess.IsLineOfPlane3Y0ZEnabled;
+            buttonGenerateLine3D.Enabled = linesAccess.IsGenerateLine3DEnabled;
         }
         private void mainStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
@@ -61,3 +78,4 @@ namespace GraphicsModule.Controls.Menu
         }
     }
 }
+

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
+using GraphicsModule.Configuration.Access.Structures;
 using GraphicsModule.Rules.Objects;
+using GraphicsModule.Rules.Objects.Segments;
 
 namespace GraphicsModule.Controls.Menu
 {
@@ -9,12 +11,28 @@ namespace GraphicsModule.Controls.Menu
         private PictureBox _mainPictureBox;
         private ToolStripButton _mainStripButton;
         private StatusStrip _menuStrip;
-        public SegmentMenuSelector(PictureBox mainPictureBox, ToolStripButton mainStripButton, StatusStrip mainStrip)
+        public SegmentMenuSelector(PictureBox mainPictureBox, ToolStripButton mainStripButton, StatusStrip mainStrip, SegmentsAccess segmentsAccess)
         {
             InitializeComponent();
             _mainPictureBox = mainPictureBox;
             _mainStripButton = mainStripButton;
             _menuStrip = mainStrip;
+            buttonSegment2D.Enabled = segmentsAccess.IsSegment2DEnabled;
+            buttonSegment3D.Enabled = segmentsAccess.IsSegment3DEnabled;
+            buttonSegmentOfPlane1X0Y.Enabled = segmentsAccess.IsSegmentOfPlane1X0YEnabled;
+            buttonSegmentOfPlane2X0Z.Enabled = segmentsAccess.IsSegmentOfPlane2X0ZEnabled;
+            buttonSegmentOfPlane3Y0Z.Enabled = segmentsAccess.IsSegmentOfPlane3Y0ZEnabled;
+            buttonGenerateSegment3D.Enabled = segmentsAccess.IsGenerateSegment3DEnabled;
+        }
+
+        public void SetAccess(SegmentsAccess segmentsAccess)
+        {
+            buttonSegment2D.Enabled = segmentsAccess.IsSegment2DEnabled;
+            buttonSegment3D.Enabled = segmentsAccess.IsSegment3DEnabled;
+            buttonSegmentOfPlane1X0Y.Enabled = segmentsAccess.IsSegmentOfPlane1X0YEnabled;
+            buttonSegmentOfPlane2X0Z.Enabled = segmentsAccess.IsSegmentOfPlane2X0ZEnabled;
+            buttonSegmentOfPlane3Y0Z.Enabled = segmentsAccess.IsSegmentOfPlane3Y0ZEnabled;
+            buttonGenerateSegment3D.Enabled = segmentsAccess.IsGenerateSegment3DEnabled;
         }
         private void mainStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {

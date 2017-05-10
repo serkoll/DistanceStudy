@@ -9,7 +9,7 @@ namespace GraphicsModule.Geometry.Analyze
         #region X,Y,Z Coincidence
         public bool CoincidenceOnX(Point2D pt1, Point2D pt2)
         {
-            return pt2.X - pt1.X == 0;
+            return Math.Abs(pt2.X - pt1.X) < 0.0001;
         }
         public bool CoincidenceOnX(Point2D pt1, Point2D pt2, double solveerror)
         {
@@ -17,7 +17,7 @@ namespace GraphicsModule.Geometry.Analyze
         }
         public bool CoincidenceOnY(Point2D pt1, Point2D pt2)
         {
-            return pt2.Y - pt1.Y == 0;
+            return Math.Abs(pt2.Y - pt1.Y) < 0.0001;
         }
         public bool CoincidenceOnY(Point2D pt1, Point2D pt2, double solveerror)
         {
@@ -25,7 +25,7 @@ namespace GraphicsModule.Geometry.Analyze
         }
         public bool CoincidenceOnX(Point3D pt1, Point3D pt2)
         {
-            return pt2.X - pt1.X == 0;
+            return Math.Abs(pt2.X - pt1.X) < 0.0001;
         }
         public bool CoincidenceOnX(Point3D pt1, Point3D pt2, double solveerror)
         {
@@ -33,14 +33,7 @@ namespace GraphicsModule.Geometry.Analyze
         }
         public bool CoincidenceOnY(Point3D pt1, Point3D pt2)
         {
-            if (pt2.Y - pt1.Y == 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return Math.Abs(pt2.Y - pt1.Y) < 0.0001;
         }
         public bool CoincidenceOnY(Point3D pt1, Point3D pt2, double solveerror)
         {
@@ -48,18 +41,17 @@ namespace GraphicsModule.Geometry.Analyze
         }
         public bool CoincidenceOnZ(Point3D pt1, Point3D pt2)
         {
-            return pt2.Z - pt1.Z == 0;
+            return Math.Abs(pt2.Z - pt1.Z) < 0.0001;
         }
         public bool CoincidenceOnZ(Point3D pt1, Point3D pt2, double solveerror)
         {
             return pt2.Z - pt1.Z <= solveerror;
         }
         #endregion
-
         #region Full Coincidence
         public bool Coincidence(Point2D pt1, Point2D pt2)
         {
-            return Math.Abs(pt1.X - pt2.X) == 0 & Math.Abs(pt1.Y - pt2.Y) == 0;
+            return Math.Abs(Math.Abs(pt1.X - pt2.X)) < 0.0001 && Math.Abs(Math.Abs(pt1.Y - pt2.Y)) < 0.0001;
         }
         public bool Coincidence(Point2D pt1, Point2D pt2, double solveerror)
         {
@@ -89,7 +81,7 @@ namespace GraphicsModule.Geometry.Analyze
         }
         public bool Coincidence(Point3D pt1, Point3D pt2)
         {
-            return Math.Abs(pt1.X - pt2.X) == 0 & Math.Abs(pt1.Y - pt2.Y) == 0 & Math.Abs(pt1.Z - pt2.Z) == 0;
+            return Math.Abs(Math.Abs(pt1.X - pt2.X)) < 0.0001 & Math.Abs(Math.Abs(pt1.Y - pt2.Y)) < 0.0001 & Math.Abs(Math.Abs(pt1.Z - pt2.Z)) < 0.0001;
         }
         public bool Coincidence(Point3D pt1, Point3D pt2, double solveerror)
         {
@@ -142,7 +134,6 @@ namespace GraphicsModule.Geometry.Analyze
             return Coincidence(Cnv.ToPoint2D(pt1), Cnv.ToPoint2D(pt2), solveerror);
         }
         #endregion
-
         #region Relative Positioning
         public bool LeftOfPoint(Point2D spt, Point2D pt2)
         {
@@ -225,11 +216,10 @@ namespace GraphicsModule.Geometry.Analyze
             return pt2.Y - spt.Y < solveerror;
         }
         #endregion
-
         #region Strictly Relative Positioning
         public bool StrictlyLeftOfPoint(Point2D spt, Point2D pt2)
         {
-            return (pt2.Y - spt.Y == 0) && (pt2.X - spt.X < 0);
+            return (Math.Abs(pt2.Y - spt.Y) < 0.0001) && (pt2.X - spt.X < 0);
         }
         public bool StrictlyLeftOfPoint(Point2D spt, Point2D pt2, double solveerror)
         {
@@ -237,7 +227,7 @@ namespace GraphicsModule.Geometry.Analyze
         }
         public bool StrictlyLeftOfPoint(Point3D spt, Point3D pt2)
         {
-            return (pt2.Y - spt.Y == 0) && (pt2.Z - spt.Z == 0) && (pt2.X - spt.X < 0);
+            return (Math.Abs(pt2.Y - spt.Y) < 0.0001) && (Math.Abs(pt2.Z - spt.Z) < 0.0001) && (pt2.X - spt.X < 0);
         }
         public bool StrictlyLeftOfPoint(Point3D spt, Point3D pt2, double solveerror)
         {
@@ -245,7 +235,7 @@ namespace GraphicsModule.Geometry.Analyze
         }
         public bool StrictlyRightOfPoint(Point2D spt, Point2D pt2)
         {
-            return (pt2.Y - spt.Y == 0) && (pt2.X - spt.X > 0);
+            return (Math.Abs(pt2.Y - spt.Y) < 0.0001) && (pt2.X - spt.X > 0);
         }
         public bool StrictlyRightOfPoint(Point2D spt, Point2D pt2, double solveerror)
         {
@@ -253,7 +243,7 @@ namespace GraphicsModule.Geometry.Analyze
         }
         public bool StrictlyRightOfPoint(Point3D spt, Point3D pt2)
         {
-            return (pt2.Y - spt.Y == 0) && (pt2.Z - spt.Z == 0) && (pt2.X - spt.X > 0);
+            return (Math.Abs(pt2.Y - spt.Y) < 0.0001) && (Math.Abs(pt2.Z - spt.Z) < 0.0001) && (pt2.X - spt.X > 0);
         }
         public bool StrictlyRightOfPoint(Point3D spt, Point3D pt2, double solveerror)
         {
@@ -261,7 +251,7 @@ namespace GraphicsModule.Geometry.Analyze
         }
         public bool StrictlyOverAPoint(Point2D spt, Point2D pt2)
         {
-            return (pt2.X - spt.X == 0) && (pt2.Y - spt.Y > 0);
+            return (Math.Abs(pt2.X - spt.X) < 0.0001) && (pt2.Y - spt.Y > 0);
         }
         public bool StrictlyOverAPoint(Point2D spt, Point2D pt2, double solveerror)
         {
@@ -269,7 +259,7 @@ namespace GraphicsModule.Geometry.Analyze
         }
         public bool StrictlyOverAPoint(Point3D spt, Point3D pt2)
         {
-            return (pt2.X - spt.X == 0) && (pt2.Y - spt.Y == 0) && (pt2.Z - spt.Z > 0);
+            return (Math.Abs(pt2.X - spt.X) < 0.0001) && (Math.Abs(pt2.Y - spt.Y) < 0.0001) && (pt2.Z - spt.Z > 0);
         }
         public bool StrictlyOverAPoint(Point3D spt, Point3D pt2, double solveerror)
         {
@@ -277,7 +267,7 @@ namespace GraphicsModule.Geometry.Analyze
         }
         public bool StrictlyUnderAPoint(Point2D spt, Point2D pt2)
         {
-            return (pt2.X - spt.X == 0) && (pt2.Y - spt.Y < 0);
+            return (Math.Abs(pt2.X - spt.X) < 0.0001) && (pt2.Y - spt.Y < 0);
         }
         public bool StrictlyUnderAPoint(Point2D spt, Point2D pt2, double solveerror)
         {
@@ -285,7 +275,7 @@ namespace GraphicsModule.Geometry.Analyze
         }
         public bool StrictlyUnderAPoint(Point3D spt, Point3D pt2)
         {
-            return (pt2.X - spt.X == 0) && (pt2.Y - spt.Y == 0) && (pt2.Z - spt.Z < 0);
+            return (Math.Abs(pt2.X - spt.X) < 0.0001) && (Math.Abs(pt2.Y - spt.Y) < 0.0001) && (pt2.Z - spt.Z < 0);
         }
         public bool StrictlyUnderAPoint(Point3D spt, Point3D pt2, double solveerror)
         {
@@ -293,7 +283,7 @@ namespace GraphicsModule.Geometry.Analyze
         }
         public bool StrictlyBeforeAPoint(Point3D spt, Point3D pt2)
         {
-            return (pt2.X - spt.X == 0) && (pt2.Z - spt.Z == 0) && (pt2.Y - spt.Y > 0);
+            return (Math.Abs(pt2.X - spt.X) < 0.0001) && (Math.Abs(pt2.Z - spt.Z) < 0.0001) && (pt2.Y - spt.Y > 0);
         }
         public bool StrictlyBeforeAPoint(Point3D spt, Point3D pt2, double solveerror)
         {
@@ -301,7 +291,7 @@ namespace GraphicsModule.Geometry.Analyze
         }
         public bool StrictlyAfterAPoint(Point3D spt, Point3D pt2)
         {
-            return (pt2.X - spt.X == 0) && (pt2.Z - spt.Z == 0) && (pt2.Y - spt.Y < 0);
+            return (Math.Abs(pt2.X - spt.X) < 0.0001) && (Math.Abs(pt2.Z - spt.Z) < 0.0001) && (pt2.Y - spt.Y < 0);
         }
         public bool StrictlyAfterAPoint(Point3D spt, Point3D pt2, double solveerror)
         {

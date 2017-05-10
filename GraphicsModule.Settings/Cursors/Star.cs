@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
-namespace GraphicsModule.Settings.Cursors
+namespace GraphicsModule.Configuration.Cursors
 {
-    class Star:Cursor
+    public class Star:Cursor
     {
         readonly List<Point> _starPoints = new List<Point>();
 

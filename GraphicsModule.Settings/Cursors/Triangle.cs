@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
-namespace GraphicsModule.Settings.Cursors
+namespace GraphicsModule.Configuration.Cursors
 {
-    class Triangle:Cursor
+    public class Triangle:Cursor
     {
         readonly List<Point> _trianglePoints=new List<Point>();
 

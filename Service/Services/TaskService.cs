@@ -113,7 +113,7 @@ namespace Service.Services
         /// </summary>
         /// <param name="taskId">Id задачи, к которой подвязаны графические объекты</param>
         /// <param name="coll">Коллекция графических оъектов</param>
-        public void AddGraphicObjectsForTask(int taskId, Collection<IObject> coll)
+        public void AddGraphicObjectsForTask(int taskId, IList<IObject> coll)
         {
             if (coll.Any())
                 JsonFormatter.WriteObjectsToJson(coll, taskId.ToString());

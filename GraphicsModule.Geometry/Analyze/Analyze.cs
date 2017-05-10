@@ -1,9 +1,10 @@
 ﻿namespace GraphicsModule.Geometry.Analyze
 {
+    //TODO: логика именования
     public static class Analyze
     {
-        public static PointsPosition PointPos = new PointsPosition();
-        public static LinesPosition LinesPos = new LinesPosition();
-        public static SegmentPosition SegmentPos = new SegmentPosition();
+        public static PointsPosition PointsPosition = new PointsPosition();
+        public static LinesPosition LinesPosition = new LinesPosition();
+        public static SegmentPosition SegmentsPosition = new SegmentPosition();
     }
 }

@@ -1,8 +1,8 @@
 ﻿using System.Drawing;
 
-namespace GraphicsModule.Settings.Cursors
+namespace GraphicsModule.Configuration.Cursors
 {
-    class Circle:Cursor
+    public class Circle:Cursor
     {
         public override void Draw(int x, int y, Color color, Graphics picture)
         {

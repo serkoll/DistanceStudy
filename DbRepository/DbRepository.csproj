@@ -53,12 +53,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Keys\GraphicKey.cs" />
-    <Compile Include="Classes\Keys\TaskMethodRef.cs" />
     <Compile Include="Classes\Repository\ErrorMessagesDb.cs" />
     <Compile Include="Classes\Repository\SubthemaRepository.cs" />
     <Compile Include="Classes\Repository\TaskRepository.cs" />
     <Compile Include="Classes\Repository\ThemaRepository.cs" />
     <Compile Include="Classes\Repository\UserRepository.cs" />
+    <Compile Include="Classes\Keys\Task_MethodRef.cs" />
     <Compile Include="Context\DSModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

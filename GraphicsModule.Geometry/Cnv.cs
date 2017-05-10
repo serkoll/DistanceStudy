@@ -94,6 +94,7 @@ namespace GraphicsModule.Geometry
             return new Point3D(pt, z);
         }
         #endregion
+
         #region Lines
         public static Line2D ToLine2D(LineOfPlane1X0Y linePr)
         {
@@ -120,6 +121,7 @@ namespace GraphicsModule.Geometry
             return new LineOfPlane3Y0Z(line);
         }
         #endregion
+
         #region Segments
         public static Segment2D ToSegment2D(SegmentOfPlane1X0Y linePr)
         {

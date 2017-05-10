@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
-namespace GraphicsModule.Settings.Cursors
+namespace GraphicsModule.Configuration.Cursors
 {
-    class Envelope:Cursor
+    public class Envelope:Cursor
     {
          readonly List<Point> _envelopePoints = new List<Point>();
 

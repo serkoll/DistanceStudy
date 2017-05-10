@@ -5,11 +5,9 @@ using System.Linq;
 
 namespace GraphicsModule.Geometry.Objects.Lines
 {
+    //TODO: исправить логику класса, сделать статическим
     public class LineDrawCalc
     {
-        public double Tolerance { get; set; } = 0.0001;
-        public Point FrameCenter { get; set; }
-        public RectangleF Rc { get; set; }
         public LineDrawCalc(Point frameCenter, RectangleF rc)
         {
             Rc = rc;
@@ -141,5 +139,9 @@ namespace GraphicsModule.Geometry.Objects.Lines
             lst = lst.OrderBy(point => point.X).ToList();
             return false;
         }
+
+        public double Tolerance { get; set; } = 0.0001;
+        public Point FrameCenter { get; set; }
+        public RectangleF Rc { get; set; }
     }
 }
