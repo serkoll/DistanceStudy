@@ -5,6 +5,8 @@ using DistanceStudy.Classes;
 using GraphicsModule.Form;
 using Point3DCntrl;
 using Service.HandlerUI;
+using GraphicsModule.Geometry.Interfaces;
+using System.Collections.Generic;
 
 namespace DistanceStudy.Forms.Teacher
 {
@@ -90,6 +92,10 @@ namespace DistanceStudy.Forms.Teacher
                 formGraphics.FormClosing += (s, ev) =>
                 {
                     var graphObj = formGraphics.ExportSelected().FirstOrDefault();
+                    var tmpColl = new List<IObject>();
+                    tmpColl.Add(graphObj);
+                    _taskWorker?.AddGraphicsObjectsToJsonTaskRelated(tmpColl);
+                    tmpColl.Clear();
                     var jsonGraphKey = _taskWorker.GetGraphicsKeysFromJsonTaskRelated().FirstOrDefault(c => c.GraphicObject.GetType().Name.Equals(graphObj?.GetType().Name));
                     _taskWorker.AddReferenceToinitialMethod(checkedListBoxProectionsControls.SelectedItem?.ToString(), jsonGraphKey?.Guid.ToString(), listBoxInitialParams.SelectedItem?.ToString());
                     ChangeVisibleControlsComboLabelBtn(buttonAcceptRefMethod, labelEnterInputParam, comboBoxInputParam, checkedListBoxProectionsControls, radioButtonGraphic, radioButtonMethod, false, false, false, true, false, false);
