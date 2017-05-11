@@ -72,8 +72,14 @@ namespace GraphicsModule.Rules.Objects.Planes
         private void CreateByThreePoint(Point pt, Point frameCenter, Canvas can, DrawSettings settings, Storage strg)
         {
             var tmpobj = new CreatePoint3D().Create(pt, frameCenter, can, settings, strg);
-            if (tmpobj == null) return;
+            if (tmpobj == null)
+            {
+                if(_planeObjects.Count != 0)
+                    this.PlaneObjectsDraw(settings, frameCenter, can);
+                return;
+            }
             _planeObjects.Add(tmpobj);
+            can.Update(strg);
             PlaneObjectsDraw(settings, frameCenter, can);
             if (_planeObjects.Count != 3) return;
             var source = CreateByThreePoint(_planeObjects);

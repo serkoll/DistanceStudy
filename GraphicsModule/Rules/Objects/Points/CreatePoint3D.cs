@@ -20,12 +20,12 @@ namespace GraphicsModule.Rules.Objects.Points
             var source = Create(pt, frameCenter, canvas, settings, storage);
             if (source == null) return;
             storage.AddToCollection(source);
-            storage.TempObjects.Clear();
             canvas.Update(storage);
         }
         public Point3D Create(Point pt, Point frameCenter, Canvas canvas, DrawSettings settings, Storage storage)
         {
             var ptOfPlane = TypeOf.PointOfPlane(pt, frameCenter);
+            if (ptOfPlane == null) return null;
             if (storage.TempObjects.Count == 0)
             {
                 ptOfPlane.Name = GraphicsControl.NamesGenerator.Generate();
@@ -51,6 +51,7 @@ namespace GraphicsModule.Rules.Objects.Points
                 return null;
             }
             source.Name = storage.TempObjects.First().Name;
+            storage.TempObjects.Clear();
             return source;
         }
     }
