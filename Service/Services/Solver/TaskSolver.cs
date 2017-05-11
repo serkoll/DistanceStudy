@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -8,7 +7,6 @@ using DbRepository.Classes.Keys;
 using DbRepository.Context;
 using Formatter;
 using GraphicsModule.Geometry.Interfaces;
-using GraphicsModule.Geometry.Objects;
 using Point3DCntrl;
 
 namespace Service.Services.Solver

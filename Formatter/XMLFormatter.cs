@@ -14,6 +14,7 @@ namespace Formatter
             foreach(var item in methods)
             {
                 sb.Append(item).Append(";");
+                //comment
             }
             return sb.ToString();
         }

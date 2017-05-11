@@ -5,7 +5,6 @@ using System.Collections.ObjectModel;
 using System.IO;
 using DbRepository.Classes.Keys;
 using GraphicsModule.Geometry.Interfaces;
-using GraphicsModule.Geometry.Objects;
 
 namespace Formatter
 {
