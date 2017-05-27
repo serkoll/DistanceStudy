@@ -9,7 +9,7 @@ using GraphicsModule.Geometry.Objects.Segments;
 
 namespace GraphicsModule.Geometry.Objects.Planes
 {
-    public class PlaneOfPlane3Y0Z : IObject
+    public class PlaneOfPlane3Y0Z : IPlaneOfPlane
     {
         public IObject[] Objects;
 

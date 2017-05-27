@@ -9,7 +9,7 @@ using GraphicsModule.Geometry.Objects.Segments;
 
 namespace GraphicsModule.Geometry.Objects.Planes
 {
-    public class Plane2D : IObject
+    public class Plane2D : IPlaneOfPlane
     {
         //TODO: fix
         public IObject[] Objects;
