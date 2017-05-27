@@ -30,7 +30,7 @@ namespace GraphicsModule.Rules.Objects.Lines
             else
             {
                 if (Analyze.PointsPosition.Coincidence((Point2D)strg.TempObjects.First(), new Point2D(pt))) return null;
-                var source = new Line2D((Point2D)strg.TempObjects.First(), new Point2D(pt), can.PicBox);
+                var source = new Line2D((Point2D)strg.TempObjects.First(), new Point2D(pt), can.PictureBox);
                 source.Name = strg.TempObjects.First().Name;
                 strg.TempObjects.Clear();
                 return source;

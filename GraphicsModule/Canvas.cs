@@ -6,39 +6,42 @@ namespace GraphicsModule
 {
     public class Canvas
     {
-        public Canvas(Settings settings, PictureBox picBox)
+        private Bitmap _bitmap;
+
+        public Canvas(Settings settings, PictureBox pictureBox)
         {
-            PicBox = picBox;
+            PictureBox = pictureBox;
             Settings = settings;
-            CalculateBackground();
-            Mainbmp = new Bitmap(Background.BackBitmap);
-            Mainbmp.MakeTransparent();
-            Graphics = Graphics.FromImage(Mainbmp);
-            CalculatePlanes(Background.Axis.Center);
-            picBox.Image = (Image)Mainbmp.Clone();
-            picBox.Refresh();
+            this.CalculateBackground();
+            _bitmap = new Bitmap(Background.BackBitmap);
+            _bitmap.MakeTransparent();
+            Graphics = Graphics.FromImage(_bitmap);
+            this.CalculatePlanes(Background.Axis.Center);
+            this.Refresh();
         }
 
         public void CalculateBackground()
         {
-            CenterSystemPoint = new Point(PicBox.ClientSize.Width / 2, PicBox.ClientSize.Height / 2);
-            Background = new Background(CenterSystemPoint, Settings, PicBox);
+            CenterSystemPoint = new Point(PictureBox.ClientSize.Width / 2, PictureBox.ClientSize.Height / 2);
+            Background = new Background(CenterSystemPoint, Settings, PictureBox);
         }
+
         public void Refresh()
         {
-            PicBox.Image = (Image)Mainbmp.Clone();
-            PicBox.Refresh();
+            PictureBox.Image = (Image)_bitmap.Clone();
+            PictureBox.Refresh();
         }
+
         public void Update(Storage strg)
         {
-            Mainbmp = new Bitmap(Background.BackBitmap);
-            Mainbmp.MakeTransparent();
-            Graphics = Graphics.FromImage(Mainbmp);
+            _bitmap = new Bitmap(Background.BackBitmap);
+            _bitmap.MakeTransparent();
+            Graphics = Graphics.FromImage(_bitmap);
             strg.DrawObjects(Settings, Background.Axis.Center, Graphics);
-            CalculatePlanes(Background.Axis.Center);
-            PicBox.Image = (Image)Mainbmp.Clone();
-            PicBox.Refresh();
+            this.CalculatePlanes(Background.Axis.Center);
+            this.Refresh();
         }
+
         private void CalculatePlanes(Point centerPoint)
         {
             PlaneX0Y = new RectangleF(0, centerPoint.Y, centerPoint.X, centerPoint.Y);
@@ -46,14 +49,20 @@ namespace GraphicsModule
             PlaneY0Z = new RectangleF(centerPoint.X, 0, centerPoint.X, centerPoint.Y);
         }
 
-        public PictureBox PicBox { get; set; }
+        public PictureBox PictureBox { get; set; }
+
         public Settings Settings { get; set; }
-        public Bitmap Mainbmp { get; set; }
+
         public Background Background { get; set; }
+
         public Graphics Graphics { get; set; }
+
         public RectangleF PlaneX0Y { get; set; }
+
         public RectangleF PlaneX0Z { get; set; }
+
         public RectangleF PlaneY0Z { get; set; }
+
         public Point CenterSystemPoint { get; set; }
     }
 }
