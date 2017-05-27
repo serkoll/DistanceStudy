@@ -6,27 +6,29 @@ using GraphicsModule.Geometry.CoordinateSystem;
 
 namespace GraphicsModule
 {
-    //TODO: логика отрисовки
     public class Background
     {
-        public Background(Point centerPoint, Settings settings, Control pb)
+        public Background(Point centerPoint, Settings settings, Control pictureBox)
         {
-            BackBitmap = new Bitmap(pb.ClientSize.Width, pb.ClientSize.Height, PixelFormat.Format24bppRgb);
-            BackBitmap.MakeTransparent();
-            var graphics = Graphics.FromImage(BackBitmap);
-            Axis = new Axis(centerPoint, graphics);
-            Grid = new Grid(settings.GridSettings, centerPoint, graphics);
-            DrawBackground(settings);
+            Bitmap = new Bitmap(pictureBox.ClientSize.Width, pictureBox.ClientSize.Height, PixelFormat.Format24bppRgb);
+            Bitmap.MakeTransparent();
+            using (var graphics = Graphics.FromImage(Bitmap))
+            {
+                Axis = new Axis(centerPoint, graphics);
+                Grid = new Grid(settings.GridSettings, centerPoint, graphics);
+                this.Draw(settings, graphics);
+            }
         }
-        public void DrawBackground(Settings settings)
+        private void Draw(Settings settings, Graphics graphics)
         {
-            var graphics = Graphics.FromImage(BackBitmap);
             Grid.DrawGrid(settings.GridSettings, graphics);
             Axis.DrawAxis(settings.AxisSettings, graphics);
-            graphics.Dispose();
         }
-        public Bitmap BackBitmap { get; set; }
-        public Axis Axis { get; set; }
-        public Grid Grid { get; set; }
+
+        public Bitmap Bitmap { get; private set; }
+
+        public Axis Axis { get; private set; }
+
+        public Grid Grid { get; private set; }
     }
 }

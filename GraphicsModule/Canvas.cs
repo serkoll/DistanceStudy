@@ -13,7 +13,7 @@ namespace GraphicsModule
             PictureBox = pictureBox;
             Settings = settings;
             this.CalculateBackground();
-            _bitmap = new Bitmap(Background.BackBitmap);
+            _bitmap = new Bitmap(Background.Bitmap);
             _bitmap.MakeTransparent();
             Graphics = Graphics.FromImage(_bitmap);
             this.CalculatePlanes(Background.Axis.Center);
@@ -34,7 +34,7 @@ namespace GraphicsModule
 
         public void Update(Storage strg)
         {
-            _bitmap = new Bitmap(Background.BackBitmap);
+            _bitmap = new Bitmap(Background.Bitmap);
             _bitmap.MakeTransparent();
             Graphics = Graphics.FromImage(_bitmap);
             strg.DrawObjects(Settings, Background.Axis.Center, Graphics);
