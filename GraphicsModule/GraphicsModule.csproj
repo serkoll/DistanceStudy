@@ -41,6 +41,14 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="WeifenLuo.WinFormsUI.Docking, Version=2.13.0.0, Culture=neutral, PublicKeyToken=5cded1a1a0a7b481, processorArchitecture=MSIL">
+      <HintPath>..\packages\DockPanelSuite.2.14.0\lib\net40\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WeifenLuo.WinFormsUI.Docking.ThemeVS2015, Version=2.13.0.0, Culture=neutral, PublicKeyToken=5cded1a1a0a7b481, processorArchitecture=MSIL">
+      <HintPath>..\packages\DockPanelSuite.ThemeVS2015.2.14.0\lib\net40\WeifenLuo.WinFormsUI.Docking.ThemeVS2015.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Background.cs" />
@@ -153,6 +161,12 @@
     <Compile Include="Controls\TaskAccess\SegmentsAccessControl.Designer.cs">
       <DependentUpon>SegmentsAccessControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="DockPanels\ObjectPanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DockPanels\ObjectPanel.Designer.cs">
+      <DependentUpon>ObjectPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Enums\NamePosition.cs" />
     <Compile Include="Enums\PlaneCreateType.cs" />
     <Compile Include="Enums\Point3DCreateType.cs" />
@@ -261,6 +275,9 @@
     <EmbeddedResource Include="Controls\TaskAccess\SegmentsAccessControl.resx">
       <DependentUpon>SegmentsAccessControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DockPanels\ObjectPanel.resx">
+      <DependentUpon>ObjectPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\GraphicsControlSettingsForm.resx">
       <DependentUpon>GraphicsControlSettingsForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -302,6 +319,9 @@
       <Project>{fb1ff034-ecea-4dd1-911f-3c4f384c3723}</Project>
       <Name>GraphicsModule.SolidworksInteraction</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
