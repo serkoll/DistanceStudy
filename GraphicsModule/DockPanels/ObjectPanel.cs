@@ -24,7 +24,6 @@ namespace GraphicsModule.DockPanels
             if (this.DockState == DockState.DockLeft || this.DockState == DockState.DockLeftAutoHide || this.DockState == DockState.DockRight || this.DockState == DockState.DockRightAutoHide)
             {
                 this.ObjectsBuildMenu.LayoutStyle = ToolStripLayoutStyle.VerticalStackWithOverflow;
-                this.Width = this.ObjectsBuildMenu.Width + 5;
             }
             else
             {
