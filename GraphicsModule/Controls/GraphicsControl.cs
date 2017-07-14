@@ -19,7 +19,9 @@ namespace GraphicsModule.Controls
     public partial class GraphicsControl : UserControl
     {
         #region Properties
+
         public static string StaticName;
+
         #region Menus
         /// <summary>
         /// Меню создания точек
@@ -38,57 +40,73 @@ namespace GraphicsModule.Controls
         /// </summary>
         private Menu.PlaneMenuSelector _plMenuSelector;
         #endregion
+
         /// <summary>
         /// Полотно отрисовки
         /// </summary>
         private Canvas _canvas;
+
         /// <summary>
         /// Хранилище графических объектов
         /// </summary>
         private Storage _storage;
+
         /// <summary>
         /// Класс настроек
         /// </summary>
         private Settings _settings;
+
         /// <summary>
         /// Текущее инициализированное правило создания объека
         /// </summary>
         public static ICreate SetObject;
+
         /// <summary>
         /// Текущая инициализированная операция над графическими объектами
         /// </summary>
         public static IOperation Operations;
+
         /// <summary>
         /// Генератор имен объектов
         /// </summary>
         public static NamesGenerator NamesGenerator;
+
         /// <summary>
         /// Класс привязки курсора к сетке
         /// </summary>
         private readonly CursorOnGridMove _crMove = new CursorOnGridMove();
+
         /// <summary>
         /// Путь к настройкам редактора
         /// </summary>
         private const string SettingsFileName = "config.cfg";
+
         #endregion
+
         /// <summary>
         /// Инициализация контрола
         /// </summary>
         public GraphicsControl()
         {
             InitializeComponent();
-            this.LoadSettings();
-            this.InitializeMenu();
-            var objectPanel = new ObjectPanel();   
+            LoadSettings();
+            InitializeMenu();
+
+            //var objectPanel = new ObjectPanel();
+
             GraphicsControl.NamesGenerator = new NamesGenerator(true, 0, _settings);
             _storage = new Storage();
-            objectPanel.Show(dockPanel1);
+
+            //objectPanel.Show(dockPanel1);
         }
+        /// <summary>
+        /// Загрузка общих настроек настроек
+        /// </summary>
         public void LoadSettings()
         {
             if (File.Exists(SettingsFileName))
             {
-                _settings = new Settings().Deserialize(SettingsFileName); //Получаем экземпляр настроек
+                _settings = new Settings().Deserialize(SettingsFileName);
                 GraphicsControlSettingsForm.CurrentSettings = _settings;
             }
             else
@@ -97,25 +115,31 @@ namespace GraphicsModule.Controls
                 _settings.Serialize(SettingsFileName);
                 GraphicsControlSettingsForm.CurrentSettings = _settings;
             }
-            this.MainPictureBox.BackColor = _settings.BackgroundColor;
+            MainPictureBox.BackColor = _settings.BackgroundColor;
         }
+
+        /// <summary>
+        /// Ининциализация панелей создания объекта
+        /// </summary>
         public void InitializeMenu()
-        {  
+        {
             _ptMenuSelector = new Menu.PointMenuSelector(MainPictureBox, buttonPointsMenu, ObjectsPropertyMenu, _settings.PrimitivesAcces.Points);
-            _lnMenuSelector = new Menu.LineMenuSelector(MainPictureBox, buttonLinesMenu, ObjectsPropertyMenu, _settings.PrimitivesAcces.Lines); 
-            _sgMenuSelector = new Menu.SegmentMenuSelector(MainPictureBox, buttonSegmentMenu, ObjectsPropertyMenu, _settings.PrimitivesAcces.Segments); 
+            _lnMenuSelector = new Menu.LineMenuSelector(MainPictureBox, buttonLinesMenu, ObjectsPropertyMenu, _settings.PrimitivesAcces.Lines);
+            _sgMenuSelector = new Menu.SegmentMenuSelector(MainPictureBox, buttonSegmentMenu, ObjectsPropertyMenu, _settings.PrimitivesAcces.Segments);
             _plMenuSelector = new Menu.PlaneMenuSelector(MainPictureBox, buttonPlanesMenu, ObjectsPropertyMenu, _settings.PrimitivesAcces.Planes);
-            this.AddMenus();
-            this.SetPrimitivesButtonsEnabled();
+            AddMenus();
+            SetPrimitivesButtonsEnabled();
         }
+
         private void AddMenus()
         {
-            //TODO: GOVNOCOD
-            this.Controls.Add(_ptMenuSelector);
-            this.Controls.Add(_lnMenuSelector); 
-            this.Controls.Add(_sgMenuSelector); 
-            this.Controls.Add(_plMenuSelector);
+            Controls.AddRange(new Control[] {
+                    _ptMenuSelector,
+                    _lnMenuSelector,
+                    _sgMenuSelector,
+                    _plMenuSelector});
         }
+
         private void SetPrimitivesButtonsEnabled()
         {
             this.buttonPointsMenu.Enabled = _settings.PrimitivesAcces.Points.IsPointsEnabled;
@@ -134,17 +158,25 @@ namespace GraphicsModule.Controls
             _plMenuSelector.SetAccess(_settings.PrimitivesAcces.Planes);
             _sgMenuSelector.SetAccess(_settings.PrimitivesAcces.Segments);
         }
+
         private void GraphicsControl_Load(object sender, EventArgs e)
         {
-            _canvas = new Canvas(_settings, MainPictureBox); // Инициализируем полотно отрисовки
-            if (_storage == null) throw new Exception("STROAGE IS NULL"); // инициализируем хранилище графических объектов
+            _canvas = new Canvas(_settings, MainPictureBox);
+
+            if (_storage == null)
+            {
+                var msg = "Ошибка при инициализации хранилища данных";
+                throw new ArgumentNullException($"{_storage}", msg);
+            }
         }
+
         private void GraphicsControl_Resize(object sender, EventArgs e)
         {
             if (_storage == null || _canvas == null) return;
             _canvas.CalculateBackground();
             _canvas.Update(_storage);
         }
+
         #region Other operations
         /// <summary>
         /// Импорт графических объектов
@@ -163,12 +195,14 @@ namespace GraphicsModule.Controls
         {
             return _storage.Objects;
         }
+
         public IList<IObject> ExportSelected()
         {
             return _storage.SelectedObjects;
         }
 
         #endregion
+
         #region UI help functions
         /// <summary>
         /// Скрывает выпадающее меню для графических примитивов
@@ -181,11 +215,14 @@ namespace GraphicsModule.Controls
             _sgMenuSelector.Visible = false;
             _plMenuSelector.Visible = false;
         }
+
         private void HidePropertyBuidMenu()
         {
             ObjectsPropertyMenu.Visible = false;
         }
+
         #endregion
+
         #region Workspace buttons events
         /// <summary>
         /// Отрисовка линий связи
@@ -262,7 +299,9 @@ namespace GraphicsModule.Controls
         }
 
         #endregion
+
         #region Control and PictureBox events
+
         private void MainPictureBox_MouseDown(object sender, EventArgs e)
         {
             HideSelectorMenus(); // скрываем открытые меню
@@ -279,12 +318,14 @@ namespace GraphicsModule.Controls
                 _canvas.Refresh(); //Перерисовываем полотно
             }
         }
+
         private void MainPictureBox_MouseMove(object sender, MouseEventArgs e)
         {
             _crMove.CursorPointToGridMove(_canvas); // Привязка к сетке
             labelValueX.Text = (MainPictureBox.PointToClient(Cursor.Position).X - _canvas.CenterSystemPoint.X).ToString();
             labelValueY.Text = (MainPictureBox.PointToClient(Cursor.Position).Y - _canvas.CenterSystemPoint.Y).ToString();
         }
+
         private void GraphicsControl_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
@@ -304,6 +345,7 @@ namespace GraphicsModule.Controls
             }
         }
         #endregion
+
         #region ObjectsBuildMenu events
         /// <summary>
         /// Вызов контекстного меню точек
@@ -350,6 +392,7 @@ namespace GraphicsModule.Controls
             _plMenuSelector.BringToFront();
         }
         #endregion
+
         #region BaseOperationsMenu events
         /// <summary>
         /// Копирование объектов
@@ -412,6 +455,7 @@ namespace GraphicsModule.Controls
 
 
         #endregion
+
         #region MainMenu events
         /// <summary>
         /// Вызов меню настроек графического редактора
@@ -441,6 +485,7 @@ namespace GraphicsModule.Controls
             }
         }
         #endregion
+
         #region ObjectsPropertMenu events
         #region Names position
         private void buttonNameMenuTopLeftMenuItem_Click(object sender, EventArgs e)
@@ -515,14 +560,9 @@ namespace GraphicsModule.Controls
 
         private void доступностьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var f = new TaskSettingsForm {Owner = Form.ActiveForm};
+            var f = new TaskSettingsForm { Owner = Form.ActiveForm };
             f.ShowDialog();
             _canvas.Update(_storage);
-        }
-
-        private void MainPictureBox_MouseDown(object sender, MouseEventArgs e)
-        {
-
         }
     }
 }

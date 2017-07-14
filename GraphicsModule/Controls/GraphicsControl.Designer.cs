@@ -34,6 +34,7 @@ namespace GraphicsModule.Controls
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GraphicsControl));
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.baseTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.MainPictureBox = new System.Windows.Forms.PictureBox();
             this.WorkspaceOperations = new System.Windows.Forms.StatusStrip();
             this.labelValueX = new System.Windows.Forms.ToolStripStatusLabel();
             this.labelValueY = new System.Windows.Forms.ToolStripStatusLabel();
@@ -46,23 +47,6 @@ namespace GraphicsModule.Controls
             this.labelExternalEntitiy = new System.Windows.Forms.ToolStripStatusLabel();
             this.ObjectsPropertyMenu = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel_Help = new System.Windows.Forms.ToolStripStatusLabel();
-            this.ObjectsBuildMenu = new System.Windows.Forms.ToolStrip();
-            this.BaseOperationsMenu = new System.Windows.Forms.ToolStrip();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripComboBox_ScaleSize = new System.Windows.Forms.ToolStripComboBox();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.MainMenu = new System.Windows.Forms.MenuStrip();
-            this.toolStripMenuItem_File = new System.Windows.Forms.ToolStripMenuItem();
-            this.правкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.видToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.инструментыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.buttonSettings = new System.Windows.Forms.ToolStripMenuItem();
-            this.окнаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.импортToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.solidWorksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.доступностьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonNameMenu = new System.Windows.Forms.ToolStripDropDownButton();
             this.buttonNameMenuTopLeft = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonNameMenuTopRight = new System.Windows.Forms.ToolStripMenuItem();
@@ -76,28 +60,43 @@ namespace GraphicsModule.Controls
             this.buttonPlaneTypeSegmentPoint = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonPlaneTypeParallelSegment = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonPlaneTypeCrossedSegment = new System.Windows.Forms.ToolStripMenuItem();
+            this.ObjectsBuildMenu = new System.Windows.Forms.ToolStrip();
             this.buttonPointsMenu = new System.Windows.Forms.ToolStripButton();
             this.buttonLinesMenu = new System.Windows.Forms.ToolStripButton();
             this.buttonSegmentMenu = new System.Windows.Forms.ToolStripButton();
             this.buttonPlanesMenu = new System.Windows.Forms.ToolStripButton();
+            this.BaseOperationsMenu = new System.Windows.Forms.ToolStrip();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.buttonCopy = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
             this.buttonSelect = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.buttonErase = new System.Windows.Forms.ToolStripButton();
             this.buttonDeleteSelected = new System.Windows.Forms.ToolStripButton();
             this.buttonClearAll = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton_Scale = new System.Windows.Forms.ToolStripButton();
+            this.toolStripComboBox_ScaleSize = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripButton34 = new System.Windows.Forms.ToolStripButton();
-            this.dockPanel1 = new WeifenLuo.WinFormsUI.Docking.DockPanel();
-            this.MainPictureBox = new System.Windows.Forms.PictureBox();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.MainMenu = new System.Windows.Forms.MenuStrip();
+            this.toolStripMenuItem_File = new System.Windows.Forms.ToolStripMenuItem();
+            this.правкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.видToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.инструментыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonSettings = new System.Windows.Forms.ToolStripMenuItem();
+            this.окнаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.импортToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.solidWorksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.доступностьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.baseTableLayoutPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.MainPictureBox)).BeginInit();
             this.WorkspaceOperations.SuspendLayout();
             this.ObjectsPropertyMenu.SuspendLayout();
             this.ObjectsBuildMenu.SuspendLayout();
             this.BaseOperationsMenu.SuspendLayout();
             this.MainMenu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.MainPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStripSeparator
@@ -112,13 +111,12 @@ namespace GraphicsModule.Controls
             this.baseTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 36F));
             this.baseTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.baseTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.baseTableLayoutPanel.Controls.Add(this.MainPictureBox, 1, 3);
+            this.baseTableLayoutPanel.Controls.Add(this.MainPictureBox, 1, 2);
             this.baseTableLayoutPanel.Controls.Add(this.WorkspaceOperations, 0, 4);
             this.baseTableLayoutPanel.Controls.Add(this.ObjectsPropertyMenu, 1, 3);
             this.baseTableLayoutPanel.Controls.Add(this.ObjectsBuildMenu, 0, 2);
             this.baseTableLayoutPanel.Controls.Add(this.BaseOperationsMenu, 0, 1);
             this.baseTableLayoutPanel.Controls.Add(this.MainMenu, 0, 0);
-            this.baseTableLayoutPanel.Controls.Add(this.dockPanel1, 1, 2);
             this.baseTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.baseTableLayoutPanel.Location = new System.Drawing.Point(0, 0);
             this.baseTableLayoutPanel.Name = "baseTableLayoutPanel";
@@ -130,6 +128,18 @@ namespace GraphicsModule.Controls
             this.baseTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.baseTableLayoutPanel.Size = new System.Drawing.Size(1239, 593);
             this.baseTableLayoutPanel.TabIndex = 7;
+            // 
+            // MainPictureBox
+            // 
+            this.MainPictureBox.BackColor = System.Drawing.Color.Azure;
+            this.baseTableLayoutPanel.SetColumnSpan(this.MainPictureBox, 2);
+            this.MainPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MainPictureBox.Location = new System.Drawing.Point(39, 58);
+            this.MainPictureBox.Name = "MainPictureBox";
+            this.baseTableLayoutPanel.SetRowSpan(this.MainPictureBox, 2);
+            this.MainPictureBox.Size = new System.Drawing.Size(1197, 507);
+            this.MainPictureBox.TabIndex = 14;
+            this.MainPictureBox.TabStop = false;
             // 
             // WorkspaceOperations
             // 
@@ -255,157 +265,6 @@ namespace GraphicsModule.Controls
             this.toolStripStatusLabel_Help.Size = new System.Drawing.Size(64, 22);
             this.toolStripStatusLabel_Help.Text = "Подсказка";
             // 
-            // ObjectsBuildMenu
-            // 
-            this.ObjectsBuildMenu.BackColor = System.Drawing.SystemColors.Control;
-            this.ObjectsBuildMenu.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ObjectsBuildMenu.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.ObjectsBuildMenu.ImageScalingSize = new System.Drawing.Size(32, 32);
-            this.ObjectsBuildMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.buttonPointsMenu,
-            this.buttonLinesMenu,
-            this.buttonSegmentMenu,
-            this.buttonPlanesMenu});
-            this.ObjectsBuildMenu.Location = new System.Drawing.Point(0, 55);
-            this.ObjectsBuildMenu.Name = "ObjectsBuildMenu";
-            this.baseTableLayoutPanel.SetRowSpan(this.ObjectsBuildMenu, 2);
-            this.ObjectsBuildMenu.Size = new System.Drawing.Size(36, 513);
-            this.ObjectsBuildMenu.TabIndex = 4;
-            // 
-            // BaseOperationsMenu
-            // 
-            this.BaseOperationsMenu.BackColor = System.Drawing.SystemColors.Control;
-            this.BaseOperationsMenu.CanOverflow = false;
-            this.baseTableLayoutPanel.SetColumnSpan(this.BaseOperationsMenu, 3);
-            this.BaseOperationsMenu.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BaseOperationsMenu.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.BaseOperationsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton5,
-            this.buttonCopy,
-            this.toolStripButton7,
-            this.buttonSelect,
-            this.toolStripSeparator1,
-            this.buttonErase,
-            this.buttonDeleteSelected,
-            this.buttonClearAll,
-            this.toolStripSeparator2,
-            this.toolStripButton_Scale,
-            this.toolStripComboBox_ScaleSize,
-            this.toolStripButton34,
-            this.toolStripSeparator3});
-            this.BaseOperationsMenu.Location = new System.Drawing.Point(0, 25);
-            this.BaseOperationsMenu.Name = "BaseOperationsMenu";
-            this.BaseOperationsMenu.Size = new System.Drawing.Size(1239, 30);
-            this.BaseOperationsMenu.TabIndex = 2;
-            this.BaseOperationsMenu.Text = "toolStrip1";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 30);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 30);
-            // 
-            // toolStripComboBox_ScaleSize
-            // 
-            this.toolStripComboBox_ScaleSize.Name = "toolStripComboBox_ScaleSize";
-            this.toolStripComboBox_ScaleSize.Size = new System.Drawing.Size(121, 30);
-            this.toolStripComboBox_ScaleSize.Text = "1:1";
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 30);
-            // 
-            // MainMenu
-            // 
-            this.MainMenu.BackColor = System.Drawing.SystemColors.Control;
-            this.baseTableLayoutPanel.SetColumnSpan(this.MainMenu, 3);
-            this.MainMenu.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem_File,
-            this.правкаToolStripMenuItem,
-            this.видToolStripMenuItem,
-            this.инструментыToolStripMenuItem,
-            this.buttonSettings,
-            this.окнаToolStripMenuItem,
-            this.справкаToolStripMenuItem,
-            this.импортToolStripMenuItem,
-            this.доступностьToolStripMenuItem});
-            this.MainMenu.Location = new System.Drawing.Point(0, 0);
-            this.MainMenu.Name = "MainMenu";
-            this.MainMenu.Size = new System.Drawing.Size(1239, 25);
-            this.MainMenu.TabIndex = 1;
-            this.MainMenu.Text = "menuStrip1";
-            // 
-            // toolStripMenuItem_File
-            // 
-            this.toolStripMenuItem_File.Name = "toolStripMenuItem_File";
-            this.toolStripMenuItem_File.Size = new System.Drawing.Size(48, 21);
-            this.toolStripMenuItem_File.Text = "Файл";
-            // 
-            // правкаToolStripMenuItem
-            // 
-            this.правкаToolStripMenuItem.Name = "правкаToolStripMenuItem";
-            this.правкаToolStripMenuItem.Size = new System.Drawing.Size(59, 21);
-            this.правкаToolStripMenuItem.Text = "Правка";
-            // 
-            // видToolStripMenuItem
-            // 
-            this.видToolStripMenuItem.Name = "видToolStripMenuItem";
-            this.видToolStripMenuItem.Size = new System.Drawing.Size(39, 21);
-            this.видToolStripMenuItem.Text = "Вид";
-            // 
-            // инструментыToolStripMenuItem
-            // 
-            this.инструментыToolStripMenuItem.Name = "инструментыToolStripMenuItem";
-            this.инструментыToolStripMenuItem.Size = new System.Drawing.Size(95, 21);
-            this.инструментыToolStripMenuItem.Text = "Инструменты";
-            // 
-            // buttonSettings
-            // 
-            this.buttonSettings.Name = "buttonSettings";
-            this.buttonSettings.Size = new System.Drawing.Size(79, 21);
-            this.buttonSettings.Text = "Настройки";
-            this.buttonSettings.Click += new System.EventHandler(this.buttonSettings_Click);
-            // 
-            // окнаToolStripMenuItem
-            // 
-            this.окнаToolStripMenuItem.Name = "окнаToolStripMenuItem";
-            this.окнаToolStripMenuItem.Size = new System.Drawing.Size(47, 21);
-            this.окнаToolStripMenuItem.Text = "Окна";
-            // 
-            // справкаToolStripMenuItem
-            // 
-            this.справкаToolStripMenuItem.Name = "справкаToolStripMenuItem";
-            this.справкаToolStripMenuItem.Size = new System.Drawing.Size(65, 21);
-            this.справкаToolStripMenuItem.Text = "Справка";
-            // 
-            // импортToolStripMenuItem
-            // 
-            this.импортToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.solidWorksToolStripMenuItem});
-            this.импортToolStripMenuItem.Name = "импортToolStripMenuItem";
-            this.импортToolStripMenuItem.Size = new System.Drawing.Size(63, 21);
-            this.импортToolStripMenuItem.Text = "Импорт";
-            // 
-            // solidWorksToolStripMenuItem
-            // 
-            this.solidWorksToolStripMenuItem.Name = "solidWorksToolStripMenuItem";
-            this.solidWorksToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-            this.solidWorksToolStripMenuItem.Text = "SolidWorks";
-            this.solidWorksToolStripMenuItem.Click += new System.EventHandler(this.solidWorksToolStripMenuItem_Click);
-            // 
-            // доступностьToolStripMenuItem
-            // 
-            this.доступностьToolStripMenuItem.Name = "доступностьToolStripMenuItem";
-            this.доступностьToolStripMenuItem.Size = new System.Drawing.Size(89, 21);
-            this.доступностьToolStripMenuItem.Text = "Доступность";
-            this.доступностьToolStripMenuItem.Click += new System.EventHandler(this.доступностьToolStripMenuItem_Click);
-            // 
             // buttonNameMenu
             // 
             this.buttonNameMenu.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
@@ -517,6 +376,23 @@ namespace GraphicsModule.Controls
             this.buttonPlaneTypeCrossedSegment.Text = "Пересекающиеся отрезки";
             this.buttonPlaneTypeCrossedSegment.Click += new System.EventHandler(this.buttonPlaneTypeCrossedSegment_Click);
             // 
+            // ObjectsBuildMenu
+            // 
+            this.ObjectsBuildMenu.BackColor = System.Drawing.SystemColors.Control;
+            this.ObjectsBuildMenu.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ObjectsBuildMenu.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.ObjectsBuildMenu.ImageScalingSize = new System.Drawing.Size(32, 32);
+            this.ObjectsBuildMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.buttonPointsMenu,
+            this.buttonLinesMenu,
+            this.buttonSegmentMenu,
+            this.buttonPlanesMenu});
+            this.ObjectsBuildMenu.Location = new System.Drawing.Point(0, 55);
+            this.ObjectsBuildMenu.Name = "ObjectsBuildMenu";
+            this.baseTableLayoutPanel.SetRowSpan(this.ObjectsBuildMenu, 2);
+            this.ObjectsBuildMenu.Size = new System.Drawing.Size(36, 513);
+            this.ObjectsBuildMenu.TabIndex = 4;
+            // 
             // buttonPointsMenu
             // 
             this.buttonPointsMenu.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -559,6 +435,33 @@ namespace GraphicsModule.Controls
             this.buttonPlanesMenu.ToolTipText = "Плоскость";
             this.buttonPlanesMenu.Click += new System.EventHandler(this.buttonPlaneMenu_Click);
             // 
+            // BaseOperationsMenu
+            // 
+            this.BaseOperationsMenu.BackColor = System.Drawing.SystemColors.Control;
+            this.BaseOperationsMenu.CanOverflow = false;
+            this.baseTableLayoutPanel.SetColumnSpan(this.BaseOperationsMenu, 3);
+            this.BaseOperationsMenu.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BaseOperationsMenu.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.BaseOperationsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton5,
+            this.buttonCopy,
+            this.toolStripButton7,
+            this.buttonSelect,
+            this.toolStripSeparator1,
+            this.buttonErase,
+            this.buttonDeleteSelected,
+            this.buttonClearAll,
+            this.toolStripSeparator2,
+            this.toolStripButton_Scale,
+            this.toolStripComboBox_ScaleSize,
+            this.toolStripButton34,
+            this.toolStripSeparator3});
+            this.BaseOperationsMenu.Location = new System.Drawing.Point(0, 25);
+            this.BaseOperationsMenu.Name = "BaseOperationsMenu";
+            this.BaseOperationsMenu.Size = new System.Drawing.Size(1239, 30);
+            this.BaseOperationsMenu.TabIndex = 2;
+            this.BaseOperationsMenu.Text = "toolStrip1";
+            // 
             // toolStripButton5
             // 
             this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
@@ -597,6 +500,11 @@ namespace GraphicsModule.Controls
             this.buttonSelect.Text = "Выбрать";
             this.buttonSelect.Click += new System.EventHandler(this.toolStripButton8_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 30);
+            // 
             // buttonErase
             // 
             this.buttonErase.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
@@ -627,6 +535,11 @@ namespace GraphicsModule.Controls
             this.buttonClearAll.Text = "Очистить все";
             this.buttonClearAll.Click += new System.EventHandler(this.buttonClearAll_Click);
             // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 30);
+            // 
             // toolStripButton_Scale
             // 
             this.toolStripButton_Scale.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
@@ -635,6 +548,12 @@ namespace GraphicsModule.Controls
             this.toolStripButton_Scale.Name = "toolStripButton_Scale";
             this.toolStripButton_Scale.Size = new System.Drawing.Size(78, 27);
             this.toolStripButton_Scale.Text = "Приблизить";
+            // 
+            // toolStripComboBox_ScaleSize
+            // 
+            this.toolStripComboBox_ScaleSize.Name = "toolStripComboBox_ScaleSize";
+            this.toolStripComboBox_ScaleSize.Size = new System.Drawing.Size(121, 30);
+            this.toolStripComboBox_ScaleSize.Text = "1:1";
             // 
             // toolStripButton34
             // 
@@ -645,26 +564,96 @@ namespace GraphicsModule.Controls
             this.toolStripButton34.Size = new System.Drawing.Size(62, 27);
             this.toolStripButton34.Text = "Сдвинуть";
             // 
-            // dockPanel1
+            // toolStripSeparator3
             // 
-            this.baseTableLayoutPanel.SetColumnSpan(this.dockPanel1, 2);
-            this.dockPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dockPanel1.DocumentStyle = WeifenLuo.WinFormsUI.Docking.DocumentStyle.DockingWindow;
-            this.dockPanel1.Location = new System.Drawing.Point(39, 58);
-            this.dockPanel1.Name = "dockPanel1";
-            this.dockPanel1.Size = new System.Drawing.Size(1197, 480);
-            this.dockPanel1.TabIndex = 12;
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 30);
             // 
-            // MainPictureBox
+            // MainMenu
             // 
-            this.MainPictureBox.BackColor = System.Drawing.Color.Azure;
-            this.baseTableLayoutPanel.SetColumnSpan(this.MainPictureBox, 2);
-            this.MainPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MainPictureBox.Location = new System.Drawing.Point(39, 544);
-            this.MainPictureBox.Name = "MainPictureBox";
-            this.MainPictureBox.Size = new System.Drawing.Size(1197, 21);
-            this.MainPictureBox.TabIndex = 14;
-            this.MainPictureBox.TabStop = false;
+            this.MainMenu.BackColor = System.Drawing.SystemColors.Control;
+            this.baseTableLayoutPanel.SetColumnSpan(this.MainMenu, 3);
+            this.MainMenu.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem_File,
+            this.правкаToolStripMenuItem,
+            this.видToolStripMenuItem,
+            this.инструментыToolStripMenuItem,
+            this.buttonSettings,
+            this.окнаToolStripMenuItem,
+            this.справкаToolStripMenuItem,
+            this.импортToolStripMenuItem,
+            this.доступностьToolStripMenuItem});
+            this.MainMenu.Location = new System.Drawing.Point(0, 0);
+            this.MainMenu.Name = "MainMenu";
+            this.MainMenu.Size = new System.Drawing.Size(1239, 25);
+            this.MainMenu.TabIndex = 1;
+            this.MainMenu.Text = "menuStrip1";
+            // 
+            // toolStripMenuItem_File
+            // 
+            this.toolStripMenuItem_File.Name = "toolStripMenuItem_File";
+            this.toolStripMenuItem_File.Size = new System.Drawing.Size(48, 21);
+            this.toolStripMenuItem_File.Text = "Файл";
+            // 
+            // правкаToolStripMenuItem
+            // 
+            this.правкаToolStripMenuItem.Name = "правкаToolStripMenuItem";
+            this.правкаToolStripMenuItem.Size = new System.Drawing.Size(59, 21);
+            this.правкаToolStripMenuItem.Text = "Правка";
+            // 
+            // видToolStripMenuItem
+            // 
+            this.видToolStripMenuItem.Name = "видToolStripMenuItem";
+            this.видToolStripMenuItem.Size = new System.Drawing.Size(39, 21);
+            this.видToolStripMenuItem.Text = "Вид";
+            // 
+            // инструментыToolStripMenuItem
+            // 
+            this.инструментыToolStripMenuItem.Name = "инструментыToolStripMenuItem";
+            this.инструментыToolStripMenuItem.Size = new System.Drawing.Size(95, 21);
+            this.инструментыToolStripMenuItem.Text = "Инструменты";
+            // 
+            // buttonSettings
+            // 
+            this.buttonSettings.Name = "buttonSettings";
+            this.buttonSettings.Size = new System.Drawing.Size(79, 21);
+            this.buttonSettings.Text = "Настройки";
+            this.buttonSettings.Click += new System.EventHandler(this.buttonSettings_Click);
+            // 
+            // окнаToolStripMenuItem
+            // 
+            this.окнаToolStripMenuItem.Name = "окнаToolStripMenuItem";
+            this.окнаToolStripMenuItem.Size = new System.Drawing.Size(47, 21);
+            this.окнаToolStripMenuItem.Text = "Окна";
+            // 
+            // справкаToolStripMenuItem
+            // 
+            this.справкаToolStripMenuItem.Name = "справкаToolStripMenuItem";
+            this.справкаToolStripMenuItem.Size = new System.Drawing.Size(65, 21);
+            this.справкаToolStripMenuItem.Text = "Справка";
+            // 
+            // импортToolStripMenuItem
+            // 
+            this.импортToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.solidWorksToolStripMenuItem});
+            this.импортToolStripMenuItem.Name = "импортToolStripMenuItem";
+            this.импортToolStripMenuItem.Size = new System.Drawing.Size(63, 21);
+            this.импортToolStripMenuItem.Text = "Импорт";
+            // 
+            // solidWorksToolStripMenuItem
+            // 
+            this.solidWorksToolStripMenuItem.Name = "solidWorksToolStripMenuItem";
+            this.solidWorksToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.solidWorksToolStripMenuItem.Text = "SolidWorks";
+            this.solidWorksToolStripMenuItem.Click += new System.EventHandler(this.solidWorksToolStripMenuItem_Click);
+            // 
+            // доступностьToolStripMenuItem
+            // 
+            this.доступностьToolStripMenuItem.Name = "доступностьToolStripMenuItem";
+            this.доступностьToolStripMenuItem.Size = new System.Drawing.Size(89, 21);
+            this.доступностьToolStripMenuItem.Text = "Доступность";
+            this.доступностьToolStripMenuItem.Click += new System.EventHandler(this.доступностьToolStripMenuItem_Click);
             // 
             // GraphicsControl
             // 
@@ -681,6 +670,7 @@ namespace GraphicsModule.Controls
             this.Resize += new System.EventHandler(this.GraphicsControl_Resize);
             this.baseTableLayoutPanel.ResumeLayout(false);
             this.baseTableLayoutPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.MainPictureBox)).EndInit();
             this.WorkspaceOperations.ResumeLayout(false);
             this.WorkspaceOperations.PerformLayout();
             this.ObjectsPropertyMenu.ResumeLayout(false);
@@ -691,7 +681,6 @@ namespace GraphicsModule.Controls
             this.BaseOperationsMenu.PerformLayout();
             this.MainMenu.ResumeLayout(false);
             this.MainMenu.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.MainPictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -756,6 +745,5 @@ namespace GraphicsModule.Controls
         private ToolStripMenuItem buttonPlaneTypeCrossedSegment;
         private ToolStripMenuItem доступностьToolStripMenuItem;
         public PictureBox MainPictureBox;
-        private WeifenLuo.WinFormsUI.Docking.DockPanel dockPanel1;
     }
 }
