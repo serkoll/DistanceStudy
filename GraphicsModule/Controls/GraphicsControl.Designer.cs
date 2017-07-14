@@ -405,7 +405,7 @@ namespace GraphicsModule.Controls
             // buttonSegmentMenu
             // 
             this.buttonSegmentMenu.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.buttonSegmentMenu.Image = ((System.Drawing.Image)(resources.GetObject("buttonSegmentMenu.Image")));
+            this.buttonSegmentMenu.Image = global::GraphicsModule.Properties.Resources.line3D;
             this.buttonSegmentMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonSegmentMenu.Name = "buttonSegmentMenu";
             this.buttonSegmentMenu.Size = new System.Drawing.Size(34, 36);
@@ -415,7 +415,7 @@ namespace GraphicsModule.Controls
             // buttonPlanesMenu
             // 
             this.buttonPlanesMenu.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.buttonPlanesMenu.Image = ((System.Drawing.Image)(resources.GetObject("buttonPlanesMenu.Image")));
+            this.buttonPlanesMenu.Image = global::GraphicsModule.Properties.Resources.dot3D;
             this.buttonPlanesMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonPlanesMenu.Name = "buttonPlanesMenu";
             this.buttonPlanesMenu.Size = new System.Drawing.Size(34, 36);

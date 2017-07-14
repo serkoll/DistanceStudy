@@ -51,7 +51,7 @@ namespace GraphicsModule.Form
             this.Controls.Add(this.graphicsControl1);
             this.KeyPreview = true;
             this.Name = "FormGraphicsControl";
-            this.Text = "FormGraphicsControl";
+            this.Text = "Подсистема графического построения";
             this.Load += new System.EventHandler(this.FormGraphicsControl_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
