@@ -16,7 +16,7 @@ namespace GraphicsModule
             _bitmap = new Bitmap(Background.Bitmap);
             _bitmap.MakeTransparent();
             Graphics = Graphics.FromImage(_bitmap);
-            this.CalculatePlanes(Background.Axis.Center);
+            this.CalculatePlanes(Background.Axis.CoordinateSystemCenter);
             this.Refresh();
         }
 
@@ -37,8 +37,8 @@ namespace GraphicsModule
             _bitmap = new Bitmap(Background.Bitmap);
             _bitmap.MakeTransparent();
             Graphics = Graphics.FromImage(_bitmap);
-            strg.DrawObjects(Settings, Background.Axis.Center, Graphics);
-            this.CalculatePlanes(Background.Axis.Center);
+            strg.DrawObjects(Settings, Background.Axis.CoordinateSystemCenter, Graphics);
+            this.CalculatePlanes(Background.Axis.CoordinateSystemCenter);
             this.Refresh();
         }
 
