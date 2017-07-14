@@ -142,34 +142,6 @@ namespace GraphicsModule.Geometry.CoordinateSystem
             return gridKnotPoint;
         }
 
-        /// <summary>
-        /// Задает сетку на поверхности Graphics с учетом установленных по умолчанию параметров шага по вертикали и горизонтали, радиуса и цвета узловых точек сетки
-        /// </summary>
-        /// <param name="g">Заданная поверхность рисования</param>
-        /// <remarks>Расчитывает и задает сетку с учетом размеров заданной поверхности рисования Graphics</remarks>
-        //public void CreateGridToGraphics(Graphics g)
-        //{
-        //    if (Height == 0 || Width == 0)
-        //    {
-        //        Height = (int)g.VisibleClipBounds.Size.Height;
-        //        Width = (int)g.VisibleClipBounds.Size.Width;
-        //        Knots = CalculateGrid(Height, Width, Setting.StepOfHeight, Setting.StepOfWidth);
-        //        CenterPoint = CalculateGridCenter(Knots);
-        //        if (Setting.IsDraw)
-        //        {
-        //            DrawGrid(Knots, Setting.PointsColor, Setting.PointsSize, g);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        Knots = CalculateGrid(Height, Width, Setting.StepOfHeight, Setting.StepOfWidth);
-        //        CenterPoint = CalculateGridCenter(Knots);
-        //        if (Setting.IsDraw)
-        //        {
-        //            DrawGrid(Knots, Setting.PointsColor, Setting.PointsSize, g);
-        //        }
-        //    }
-        //}
         public void DrawGrid(GridSettings sett, Graphics g)
         {
             if (sett.IsDraw)

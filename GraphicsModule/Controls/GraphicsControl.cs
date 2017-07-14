@@ -9,6 +9,7 @@ using GraphicsModule.Enums;
 using GraphicsModule.Forms;
 using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Interfaces;
+using GraphicsModule.DockPanels;
 
 namespace GraphicsModule.Controls
 {
@@ -78,8 +79,10 @@ namespace GraphicsModule.Controls
             InitializeComponent();
             this.LoadSettings();
             this.InitializeMenu();
+            var objectPanel = new ObjectPanel();   
             GraphicsControl.NamesGenerator = new NamesGenerator(true, 0, _settings);
             _storage = new Storage();
+            objectPanel.Show(dockPanel1);
         }
         public void LoadSettings()
         {
@@ -515,6 +518,11 @@ namespace GraphicsModule.Controls
             var f = new TaskSettingsForm {Owner = Form.ActiveForm};
             f.ShowDialog();
             _canvas.Update(_storage);
+        }
+
+        private void MainPictureBox_MouseDown(object sender, MouseEventArgs e)
+        {
+
         }
     }
 }
