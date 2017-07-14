@@ -140,6 +140,7 @@ namespace GraphicsModule.Controls
             this.MainPictureBox.Size = new System.Drawing.Size(1197, 507);
             this.MainPictureBox.TabIndex = 14;
             this.MainPictureBox.TabStop = false;
+            this.MainPictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainPictureBox_MouseDown);
             // 
             // WorkspaceOperations
             // 
@@ -667,6 +668,8 @@ namespace GraphicsModule.Controls
             this.Size = new System.Drawing.Size(1239, 593);
             this.Load += new System.EventHandler(this.GraphicsControl_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GraphicsControl_KeyDown);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainPictureBox_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MainPictureBox_MouseMove);
             this.Resize += new System.EventHandler(this.GraphicsControl_Resize);
             this.baseTableLayoutPanel.ResumeLayout(false);
             this.baseTableLayoutPanel.PerformLayout();
