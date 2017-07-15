@@ -32,7 +32,11 @@ namespace GraphicsModule.Rules.Create.Lines
                 strg.DrawLastAddedToTempObjects(setting, frameCenter, can.Graphics);
                 return null;
             }
-            if (Analyze.PointsPosition.Coincidence((PointOfPlane2X0Z)strg.TempObjects.First(), new PointOfPlane2X0Z(pt, frameCenter))) return null;
+
+            if (ptOfPlane.IsCoincides((PointOfPlane2X0Z) strg.TempObjects.First()))
+            {
+                return null;
+            }
             var source = new LineOfPlane2X0Z((PointOfPlane2X0Z)strg.TempObjects.First(), new PointOfPlane2X0Z(pt, frameCenter), frameCenter, can.PlaneX0Z);
             source.Name = strg.TempObjects.First().Name;
             strg.TempObjects.Clear();

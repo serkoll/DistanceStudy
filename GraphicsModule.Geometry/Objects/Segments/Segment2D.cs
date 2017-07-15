@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using GraphicsModule.Configuration;
+using GraphicsModule.Geometry.Analyze;
 using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Geometry.Objects.Points;
 
@@ -13,7 +14,7 @@ namespace GraphicsModule.Geometry.Objects.Segments
 
         public Segment2D(Point2D pt1, Point2D pt2)
         {
-            if (Analyze.Analyze.PointsPosition.Coincidence(pt1, pt2)) return;
+            if (pt1.IsCoincides(pt2)) return;
             Point0 = pt1;
             Point1 = pt2;
             Kx = pt2.X - pt1.X;

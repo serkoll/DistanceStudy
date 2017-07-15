@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Linq;
 using GraphicsModule.Configuration;
 using GraphicsModule.Controls;
 using GraphicsModule.Geometry.Analyze;
@@ -13,7 +14,8 @@ namespace GraphicsModule.Rules.Create.Segments
         public void AddToStorageAndDraw(Point pt, Point frameCenter, Drawing drawing, DrawSettings settings, Storage storage)
         {
             var obj = Create(pt, frameCenter, drawing, settings, storage);
-            if (obj == null) return;
+            if (obj == null)
+                return;
             storage.AddToCollection(obj);
             drawing.Update(storage);
         }
@@ -28,8 +30,11 @@ namespace GraphicsModule.Rules.Create.Segments
             }
             else
             {
-                if (Analyze.PointsPosition.Coincidence((Point2D)strg.TempObjects[0], new Point2D(pt))) return null;
-                var source = new Segment2D((Point2D)strg.TempObjects[0], new Point2D(pt));
+                if (ptOfPlane.IsCoincides((Point2D) strg.TempObjects.First()))
+                {
+                    return null;
+                }
+                var source = new Segment2D((Point2D)strg.TempObjects.First(), ptOfPlane);
                 source.SetName(strg.TempObjects[0].Name);
                 strg.TempObjects.Clear();
                 return source;

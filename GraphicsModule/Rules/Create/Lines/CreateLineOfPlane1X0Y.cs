@@ -40,11 +40,12 @@ namespace GraphicsModule.Rules.Create.Lines
                 return null;
             }
 
-            if (Analyze.PointsPosition.Coincidence((PointOfPlane1X0Y) strg.TempObjects.First(), new PointOfPlane1X0Y(pt, frameCenter)))
+            if (ptOfPlane.IsCoincides((PointOfPlane1X0Y) strg.TempObjects.First()))
             {
                 return null;
             }
-            var source = new LineOfPlane1X0Y((PointOfPlane1X0Y) strg.TempObjects.First(), new PointOfPlane1X0Y(pt, frameCenter), frameCenter, can.PlaneX0Y)
+
+            var source = new LineOfPlane1X0Y((PointOfPlane1X0Y) strg.TempObjects.First(), ptOfPlane, frameCenter, can.PlaneX0Y)
             {
                 Name = strg.TempObjects.First().Name
             };

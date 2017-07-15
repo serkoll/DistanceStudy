@@ -4,23 +4,46 @@ using GraphicsModule.Configuration;
 using GraphicsModule.Geometry.Interfaces;
 
 namespace GraphicsModule.Geometry.Objects.Points
-{ 
+{
     public class PointOfPlane1X0Y : IPointOfPlane, IObjectOfPlane1X0Y
     {
-        public PointOfPlane1X0Y() { X = 0; Y = 0; }
+        public PointOfPlane1X0Y()
+        {
+            X = 0;
+            Y = 0;
+        }
 
-        public PointOfPlane1X0Y(double x, double y) { X = x; Y = y; }
+        public PointOfPlane1X0Y(double x, double y)
+        {
+            X = x;
+            Y = y;
+        }
+
+        public PointOfPlane1X0Y(double x, double y, Name name)
+        {
+            X = x;
+            Y = y;
+            Name = name;
+        }
 
         public PointOfPlane1X0Y(Point pt, Point center)
         {
             X = -(pt.X - center.X);
             Y = pt.Y - center.Y;
         }
+
+        public PointOfPlane1X0Y(Point pt, Point center, Name name)
+        {
+            X = -(pt.X - center.X);
+            Y = pt.Y - center.Y;
+            Name = name;
+        }
+
         public static bool IsCreatable(Point pt, Point frameCenter)
         {
             return (pt.X - frameCenter.X) <= 0 && (pt.Y - frameCenter.Y) >= 0;
         }
-  
+
         public void PointMove(double dx, double dy) { X += dx; Y += dy; }
 
         public void Draw(Pen pen, float poitRaduis, Point frameCenter, Graphics graphics)
@@ -32,7 +55,7 @@ namespace GraphicsModule.Geometry.Objects.Points
         public void DrawName(DrawSettings st, float poitRaduis, Point frameCenter, Graphics graphics)
         {
             var ptForDraw = DeterminePosition.ForPointProjection(this, poitRaduis, frameCenter);
-            graphics.DrawString(Name.Value +"'", st.TextFont, st.TextBrush, ptForDraw.X + Name.Dx, ptForDraw.Y + Name.Dy);
+            graphics.DrawString(Name.Value + "'", st.TextFont, st.TextBrush, ptForDraw.X + Name.Dx, ptForDraw.Y + Name.Dy);
         }
 
         public void Draw(DrawSettings st, Point frameCenter, Graphics g)

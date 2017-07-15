@@ -55,8 +55,8 @@ namespace GraphicsModule.Geometry.Objects.Segments
             set
             {
                 _name = value;
-                Point0.Name = _name;
-                Point1.Name = _name;
+                //Point0.Name = _name;
+                //Point1.Name = _name;
             }
         }
         public double Kx { get; private set; }

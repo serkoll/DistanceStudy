@@ -41,7 +41,7 @@ namespace GraphicsModule.Geometry.Analyze
                    (Math.Abs((pt.Y - ln.Point0.Y) * ln.Kz - (pt.Z - ln.Point0.Z) * ln.Ky) < solveerror);
         }
         #endregion
-        #region Coincidence of Lines
+        #region IsCoincides of Lines
 
         public bool Coincidence(Segment2D ln1, Segment2D ln2)
         {

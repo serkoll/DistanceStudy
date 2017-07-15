@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Linq;
 using GraphicsModule.Configuration;
 using GraphicsModule.Controls;
 using GraphicsModule.Geometry.Analyze;
@@ -13,13 +14,19 @@ namespace GraphicsModule.Rules.Create.Segments
         public void AddToStorageAndDraw(Point pt, Point frameCenter, Drawing drawing, DrawSettings settings, Storage storage)
         {
             var obj = Create(pt, frameCenter, drawing, settings, storage);
-            if (obj == null) return;
+            if (obj == null)
+            {
+                return;
+            }
             storage.AddToCollection(obj);
             drawing.Update(storage);
         }
         public SegmentOfPlane3Y0Z Create(Point pt, Point frameCenter, Drawing can, DrawSettings setting, Storage strg)
         {
-            if (!PointOfPlane3Y0Z.IsCreatable(pt, frameCenter)) return null;
+            if (!PointOfPlane3Y0Z.IsCreatable(pt, frameCenter))
+            {
+                return null;
+            }
             var ptOfPlane = new PointOfPlane3Y0Z(pt, frameCenter);
             if (strg.TempObjects.Count == 0)
             {
@@ -28,11 +35,12 @@ namespace GraphicsModule.Rules.Create.Segments
                 strg.DrawLastAddedToTempObjects(setting, frameCenter, can.Graphics);
                 return null;
             }
-            if (Analyze.PointsPosition.Coincidence((PointOfPlane3Y0Z)strg.TempObjects[0],
-                new PointOfPlane3Y0Z(pt, frameCenter))) return null;
-            var source = new SegmentOfPlane3Y0Z((PointOfPlane3Y0Z)strg.TempObjects[0],
-                new PointOfPlane3Y0Z(pt, frameCenter));
-            source.Name = strg.TempObjects[0].Name;
+            ptOfPlane.Name = GraphicsControl.NamesGenerator.Generate();
+            if (ptOfPlane.IsCoincides((PointOfPlane3Y0Z)strg.TempObjects.First()))
+            {
+                return null;
+            }
+            var source = new SegmentOfPlane3Y0Z((PointOfPlane3Y0Z) strg.TempObjects.First(), ptOfPlane) {Name = strg.TempObjects[0].Name};
             strg.TempObjects.Clear();
             return source;
         }

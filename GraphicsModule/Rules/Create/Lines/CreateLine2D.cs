@@ -33,11 +33,11 @@ namespace GraphicsModule.Rules.Create.Lines
             }
             else
             {
-                if (Analyze.PointsPosition.Coincidence((Point2D)strg.TempObjects.First(), new Point2D(pt)))
+                if (ptOfPlane.IsCoincides((Point2D)strg.TempObjects.First()))
                 {
                     return null;
                 }
-                var source = new Line2D((Point2D)strg.TempObjects.First(), new Point2D(pt), can.PictureBox);
+                var source = new Line2D((Point2D)strg.TempObjects.First(), ptOfPlane, can.PictureBox);
                 source.Name = strg.TempObjects.First().Name;
                 strg.TempObjects.Clear();
                 return source;

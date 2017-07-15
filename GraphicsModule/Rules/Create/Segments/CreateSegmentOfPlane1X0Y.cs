@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Linq;
 using GraphicsModule.Configuration;
 using GraphicsModule.Controls;
 using GraphicsModule.Geometry.Analyze;
@@ -13,13 +14,20 @@ namespace GraphicsModule.Rules.Create.Segments
         public void AddToStorageAndDraw(Point pt, Point frameCenter, Drawing drawing, DrawSettings settings, Storage storage)
         {
             var obj = Create(pt, frameCenter, drawing, settings, storage);
-            if (obj == null) return;
+            if (obj == null)
+            {
+                return;
+            }
             storage.AddToCollection(obj);
             drawing.Update(storage);
         }
         public SegmentOfPlane1X0Y Create(Point pt, Point frameCenter, Drawing can, DrawSettings setting, Storage strg)
         {
-            if (!PointOfPlane1X0Y.IsCreatable(pt, frameCenter)) return null;
+            if (!PointOfPlane1X0Y.IsCreatable(pt, frameCenter))
+            {
+                return null;
+            }
+
             var ptOfPlane = new PointOfPlane1X0Y(pt, frameCenter);
             if (strg.TempObjects.Count == 0)
             {
@@ -28,11 +36,13 @@ namespace GraphicsModule.Rules.Create.Segments
                 strg.DrawLastAddedToTempObjects(setting, frameCenter, can.Graphics);
                 return null;
             }
-            if (Analyze.PointsPosition.Coincidence((PointOfPlane1X0Y)strg.TempObjects[0],
-                new PointOfPlane1X0Y(pt, frameCenter))) return null;
-            var source = new SegmentOfPlane1X0Y((PointOfPlane1X0Y)strg.TempObjects[0],
-                new PointOfPlane1X0Y(pt, frameCenter));
-            source.Name = strg.TempObjects[0].Name;
+
+            if (ptOfPlane.IsCoincides((PointOfPlane1X0Y) strg.TempObjects.First()))
+            {
+                return null;
+            }
+            ptOfPlane.Name = GraphicsControl.NamesGenerator.Generate();
+            var source = new SegmentOfPlane1X0Y((PointOfPlane1X0Y) strg.TempObjects.First(), ptOfPlane);
             strg.TempObjects.Clear();
             return source;
         }
