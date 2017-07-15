@@ -111,27 +111,27 @@ namespace GraphicsModule.Geometry.Analyze
         }
         public bool Coincidence(PointOfPlane1X0Y pt1, PointOfPlane1X0Y pt2)
         {
-            return Coincidence(Cnv.ToPoint2D(pt1), Cnv.ToPoint2D(pt2));
+            return Coincidence(pt1.ToPoint2D(), pt2.ToPoint2D());
         }
         public bool Coincidence(PointOfPlane1X0Y pt1, PointOfPlane1X0Y pt2, double solveerror)
         {
-            return Coincidence(Cnv.ToPoint2D(pt1), Cnv.ToPoint2D(pt2), solveerror);
+            return Coincidence(pt1.ToPoint2D(), pt2.ToPoint2D(), solveerror);
         }
         public bool Coincidence(PointOfPlane2X0Z pt1, PointOfPlane2X0Z pt2)
         {
-            return Coincidence(Cnv.ToPoint2D(pt1), Cnv.ToPoint2D(pt2));
+            return Coincidence(pt1.ToPoint2D(), pt2.ToPoint2D());
         }
         public bool Coincidence(PointOfPlane2X0Z pt1, PointOfPlane2X0Z pt2, double solveerror)
         {
-            return Coincidence(Cnv.ToPoint2D(pt1), Cnv.ToPoint2D(pt2), solveerror);
+            return Coincidence(pt1.ToPoint2D(), pt2.ToPoint2D(), solveerror);
         }
         public bool Coincidence(PointOfPlane3Y0Z pt1, PointOfPlane3Y0Z pt2)
         {
-            return Coincidence(Cnv.ToPoint2D(pt1), Cnv.ToPoint2D(pt2));
+            return Coincidence(pt1.ToPoint2D(), pt2.ToPoint2D());
         }
         public bool Coincidence(PointOfPlane3Y0Z pt1, PointOfPlane3Y0Z pt2, double solveerror)
         {
-            return Coincidence(Cnv.ToPoint2D(pt1), Cnv.ToPoint2D(pt2), solveerror);
+            return Coincidence(pt1.ToPoint2D(), pt2.ToPoint2D(), solveerror);
         }
         #endregion
         #region Relative Positioning

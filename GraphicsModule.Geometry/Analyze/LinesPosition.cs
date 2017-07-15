@@ -52,15 +52,15 @@ namespace GraphicsModule.Geometry.Analyze
         }
         public bool Coincidence(LineOfPlane1X0Y ln1, LineOfPlane1X0Y ln2)
         {
-            return Coincidence(Cnv.ToLine2D(ln1), Cnv.ToLine2D(ln2));
+            return Coincidence(ln1.ToLine2D(), ln2.ToLine2D());
         }
         public bool Coincidence(LineOfPlane2X0Z ln1, LineOfPlane2X0Z ln2)
         {
-            return Coincidence(Cnv.ToLine2D(ln1), Cnv.ToLine2D(ln2));
+            return Coincidence(ln1.ToLine2D(), ln2.ToLine2D());
         }
         public bool Coincidence(LineOfPlane3Y0Z ln1, LineOfPlane3Y0Z ln2)
         {
-            return Coincidence(Cnv.ToLine2D(ln1), Cnv.ToLine2D(ln2));
+            return Coincidence(ln1.ToLine2D(), ln2.ToLine2D());
         }
         #endregion
         #region Parallelism of Lines

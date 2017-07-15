@@ -4,6 +4,7 @@ using GraphicsModule.Configuration;
 
 namespace GraphicsModule
 {
+    //TODO: IDisposable
     public class Canvas
     {
         private Bitmap _bitmap;

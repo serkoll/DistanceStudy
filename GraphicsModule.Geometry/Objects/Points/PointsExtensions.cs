@@ -5,15 +5,15 @@
     {
         public static Point2D ToPoint2D(this PointOfPlane1X0Y pt)
         {
-            return Cnv.ToPoint2D(pt);
+            return ConvertObjectsExtensions.ToPoint2D(pt);
         }
         public static Point2D ToPoint2D(this PointOfPlane2X0Z pt)
         {
-            return Cnv.ToPoint2D(pt);
+            return ConvertObjectsExtensions.ToPoint2D(pt);
         }
         public static Point2D ToPoint2D(this PointOfPlane3Y0Z pt)
         {
-            return Cnv.ToPoint2D(pt);
+            return ConvertObjectsExtensions.ToPoint2D(pt);
         }
     }
 }

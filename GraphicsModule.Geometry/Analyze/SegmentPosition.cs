@@ -41,25 +41,30 @@ namespace GraphicsModule.Geometry.Analyze
         }
         #endregion
         #region Coincidence of Lines
+
         public bool Coincidence(Segment2D ln1, Segment2D ln2)
         {
             return IncidenceOfPoint(ln1.Point0, ln2) && IncidenceOfPoint(ln1.Point1, ln2);
         }
+
         public bool Coincidence(Segment3D ln1, Segment3D ln2)
         {
             return IncidenceOfPoint(ln1.Point0, ln2) && IncidenceOfPoint(ln1.Point1, ln2);
         }
+
         public bool Coincidence(SegmentOfPlane1X0Y ln1, SegmentOfPlane1X0Y ln2)
         {
-            return Coincidence(Cnv.ToSegment2D(ln1), Cnv.ToSegment2D(ln2));
+            return Coincidence(ln1.ToSegment2D(), ln2.ToSegment2D());
         }
+
         public bool Coincidence(SegmentOfPlane2X0Z ln1, SegmentOfPlane2X0Z ln2)
         {
-            return Coincidence(Cnv.ToSegment2D(ln1), Cnv.ToSegment2D(ln2));
+            return Coincidence(ln1.ToSegment2D(), ln2.ToSegment2D());
         }
+
         public bool Coincidence(SegmentOfPlane3Y0Z ln1, SegmentOfPlane3Y0Z ln2)
         {
-            return Coincidence(Cnv.ToSegment2D(ln1), Cnv.ToSegment2D(ln2));
+            return Coincidence(ln1.ToSegment2D(), ln2.ToSegment2D());
         }
         #endregion
         #region Parallelism of Lines
