@@ -45,7 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Analyze\Analyze.cs" />
-    <Compile Include="Analyze\LinesPosition.cs" />
+    <Compile Include="Extensions\LinesPositionExtensions.cs" />
     <Compile Include="Extensions\PointsPositionExtensions.cs" />
     <Compile Include="Analyze\SegmentPosition.cs" />
     <Compile Include="CoordinateSystem\Axis.cs" />

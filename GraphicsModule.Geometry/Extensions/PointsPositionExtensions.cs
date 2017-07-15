@@ -1,59 +1,58 @@
 ﻿using System;
-using GraphicsModule.Geometry.Extensions;
 using GraphicsModule.Geometry.Objects.Points;
 
-namespace GraphicsModule.Geometry.Analyze
+namespace GraphicsModule.Geometry.Extensions
 {
 
     public static class PointsPositionExtensions
     {
         #region X,Y,Z IsCoincides
 
-        public static bool CoincidenceOnX(this Point2D pt1, Point2D pt2)
+        public static bool IsCoincidesOnX(this Point2D pt1, Point2D pt2)
         {
             return Math.Abs(pt2.X - pt1.X) < 0.0001;
         }
 
-        public static bool CoincidenceOnX(this Point2D pt1, Point2D pt2, double solveerror)
+        public static bool IsCoincidesOnX(this Point2D pt1, Point2D pt2, double solveerror)
         {
             return pt2.X - pt1.X < solveerror;
         }
 
-        public static bool CoincidenceOnY(this Point2D pt1, Point2D pt2)
+        public static bool IsCoincidesOnY(this Point2D pt1, Point2D pt2)
         {
             return Math.Abs(pt2.Y - pt1.Y) < 0.0001;
         }
 
-        public static bool CoincidenceOnY(this Point2D pt1, Point2D pt2, double solveerror)
+        public static bool IsCoincidesOnY(this Point2D pt1, Point2D pt2, double solveerror)
         {
             return pt2.Y - pt1.Y < solveerror;
         }
 
-        public static bool CoincidenceOnX(this Point3D pt1, Point3D pt2)
+        public static bool IsCoincidesOnX(this Point3D pt1, Point3D pt2)
         {
             return Math.Abs(pt2.X - pt1.X) < 0.0001;
         }
-        public static bool CoincidenceOnX(this Point3D pt1, Point3D pt2, double solveerror)
+        public static bool IsCoincidesOnX(this Point3D pt1, Point3D pt2, double solveerror)
         {
             return pt2.X - pt1.X < solveerror;
         }
 
-        public static bool CoincidenceOnY(this Point3D pt1, Point3D pt2)
+        public static bool IsCoincidesOnY(this Point3D pt1, Point3D pt2)
         {
             return Math.Abs(pt2.Y - pt1.Y) < 0.0001;
         }
 
-        public static bool CoincidenceOnY(this Point3D pt1, Point3D pt2, double solveerror)
+        public static bool IsCoincidesOnY(this Point3D pt1, Point3D pt2, double solveerror)
         {
             return pt2.Y - pt1.Y <= solveerror;
         }
 
-        public static bool CoincidenceOnZ(this Point3D pt1, Point3D pt2)
+        public static bool IsCoincidesOnZ(this Point3D pt1, Point3D pt2)
         {
             return Math.Abs(pt2.Z - pt1.Z) < 0.0001;
         }
 
-        public static bool CoincidenceOnZ(this Point3D pt1, Point3D pt2, double solveerror)
+        public static bool IsCoincidesOnZ(this Point3D pt1, Point3D pt2, double solveerror)
         {
             return pt2.Z - pt1.Z <= solveerror;
         }
@@ -162,7 +161,7 @@ namespace GraphicsModule.Geometry.Analyze
         #endregion
 
         #region Relative Positioning
-
+        
         public static bool IsLeftOfPoint(this Point2D pt, Point2D pt2)
         {
             return pt2.X - pt.X < 0;
@@ -366,6 +365,5 @@ namespace GraphicsModule.Geometry.Analyze
             return (Math.Abs(pt2.X - pt.X) <= solveerror) && (Math.Abs(pt2.Z - pt.Z) <= solveerror) && (pt2.Y - pt.Y < solveerror);
         }
         #endregion
-
     }
 }

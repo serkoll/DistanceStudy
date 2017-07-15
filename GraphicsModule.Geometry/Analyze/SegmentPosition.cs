@@ -68,7 +68,7 @@ namespace GraphicsModule.Geometry.Analyze
             return Coincidence(ln1.ToSegment2D(), ln2.ToSegment2D());
         }
         #endregion
-        #region Parallelism of Lines
+        #region IsParallel of Lines
         public bool Parallelism(Segment2D sg1, Segment2D sg2)
         {
             return Math.Abs(sg1.Kx - sg2.Kx) < 0.001 || Math.Abs(sg1.Ky - sg2.Ky) < 0.001;
@@ -90,7 +90,7 @@ namespace GraphicsModule.Geometry.Analyze
             return Math.Abs(sg1.Kz - sg2.Kz) < 0.001 || Math.Abs(sg1.Ky - sg2.Ky) < 0.001;
         }
         #endregion
-        #region Crossing of Lines
+        #region IsCrossed of Lines
         public bool Crossing(Segment2D ln1, Segment2D ln2)
         {
             var y = (ln2.Point0.Y * ln2.Kx * ln1.Ky - ln1.Point0.Y * ln2.Ky * ln1.Kx + ln2.Ky * ln1.Ky * (ln1.Point0.X - ln2.Point0.X)) /
@@ -150,7 +150,7 @@ namespace GraphicsModule.Geometry.Analyze
             return true;
         }
         #endregion
-        #region Point Of Crossing 
+        #region Point Of IsCrossed 
 
         #endregion
     }

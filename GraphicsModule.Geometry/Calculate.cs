@@ -39,7 +39,7 @@ namespace GraphicsModule.Geometry
         }
         #endregion
 
-        #region Crossing
+        #region IsCrossed
         public static PointF CrossingPoint(Line2D ln1, Line2D ln2)
         {
             var y = (ln2.Point0.Y * ln2.kx * ln1.ky - ln1.Point0.Y * ln2.ky * ln1.kx + ln2.ky * ln1.ky * (ln1.Point0.X - ln2.Point0.X)) /

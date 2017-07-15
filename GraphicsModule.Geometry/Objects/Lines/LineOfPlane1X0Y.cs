@@ -61,7 +61,7 @@ namespace GraphicsModule.Geometry.Objects.Lines
         public bool IsSelected(Point mscoords, float ptR, Point frameCenter, double distance)
         {
             var ln = DeterminePosition.ForLineProjection(this, frameCenter);
-            return Analyze.Analyze.LinesPosition.IncidenceOfPoint(mscoords, ln, 35 * distance);
+            return Analyze.Analyze.LinesPositionExtensions.IsIncidentalToPoint(mscoords, ln, 35 * distance);
         }
 
         public PointOfPlane1X0Y Point0 { get; }

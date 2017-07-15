@@ -102,7 +102,7 @@ namespace GraphicsModule.Geometry.Objects.Lines
         }
         public bool IsSelected(Point mscoords, float ptR, Point frameCenter, double distance)
         {
-            return Analyze.Analyze.LinesPosition.IncidenceOfPoint(mscoords, this, 35 * distance);
+            return Analyze.Analyze.LinesPositionExtensions.IsIncidentalToPoint(mscoords, this, 35 * distance);
         }
         //TODO: возможно в массив
         public Point2D Point0 { get; }
