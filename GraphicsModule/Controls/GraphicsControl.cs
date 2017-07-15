@@ -9,7 +9,6 @@ using GraphicsModule.Enums;
 using GraphicsModule.Forms;
 using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Interfaces;
-using GraphicsModule.DockPanels;
 
 namespace GraphicsModule.Controls
 {

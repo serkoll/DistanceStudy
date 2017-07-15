@@ -3,7 +3,6 @@ using System.Windows.Forms;
 using GraphicsModule.Configuration.Access.Structures;
 using GraphicsModule.Rules.Create.Lines;
 using GraphicsModule.Rules.Generate;
-using GraphicsModule.Rules.Objects;
 
 namespace GraphicsModule.Controls.Menu
 {
