@@ -146,21 +146,6 @@ namespace GraphicsModule.Geometry.Extensions
             return Math.Abs(ln1.Kz - ln2.Kz) < 0.001 || Math.Abs(ln1.Ky - ln2.Ky) < 0.001;
         }
 
-        public static bool IsParallel(this SegmentOfPlane1X0Y sg1, SegmentOfPlane1X0Y sg2)
-        {
-            return Math.Abs(sg1.Kx - sg2.Kx) < 0.001 || Math.Abs(sg1.Ky - sg2.Ky) < 0.001;
-        }
-
-        public static bool IsParallel(this SegmentOfPlane2X0Z sg1, SegmentOfPlane2X0Z sg2)
-        {
-            return Math.Abs(sg1.Kx - sg2.Kx) < 0.001 || Math.Abs(sg1.Kz - sg2.Kz) < 0.001;
-        }
-
-        public static bool IsParallel(this SegmentOfPlane3Y0Z sg1, SegmentOfPlane3Y0Z sg2)
-        {
-            return Math.Abs(sg1.Kz - sg2.Kz) < 0.001 || Math.Abs(sg1.Ky - sg2.Ky) < 0.001;
-        }
-
         #endregion
 
         #region IsCrossed of lines

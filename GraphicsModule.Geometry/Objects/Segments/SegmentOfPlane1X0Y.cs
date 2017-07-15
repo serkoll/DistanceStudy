@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using GraphicsModule.Configuration;
+using GraphicsModule.Geometry.Extensions;
 using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Geometry.Objects.Points;
 
@@ -44,7 +45,7 @@ namespace GraphicsModule.Geometry.Objects.Segments
         public bool IsSelected(Point mscoords, float ptR, Point frameCenter, double distance)
         {
             var sg = DeterminePosition.ForSegmentProjection(this, frameCenter);
-            return Analyze.Analyze.SegmentsPosition.IncidenceOfPoint(mscoords, sg, 35 * distance);
+            return sg.IsIncidentalToPoint(mscoords, 35 * distance);
         }
         public PointOfPlane1X0Y Point0 { get; private set; }
         public PointOfPlane1X0Y Point1 { get; private set; }

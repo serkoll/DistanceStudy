@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using GraphicsModule.Configuration;
+using GraphicsModule.Geometry.Extensions;
 using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Geometry.Objects.Points;
 
@@ -61,7 +62,7 @@ namespace GraphicsModule.Geometry.Objects.Lines
         public bool IsSelected(Point mscoords, float ptR, Point frameCenter, double distance)
         {
             var ln = DeterminePosition.ForLineProjection(this, frameCenter);
-            return Analyze.Analyze.LinesPositionExtensions.IsIncidentalToPoint(mscoords, ln, 35 * distance);
+            return ln.IsIncidentalToPoint(mscoords, 35 * distance);
         }
 
         public PointOfPlane1X0Y Point0 { get; }

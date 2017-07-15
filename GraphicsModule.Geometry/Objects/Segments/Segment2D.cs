@@ -1,6 +1,5 @@
 ﻿using System.Drawing;
 using GraphicsModule.Configuration;
-using GraphicsModule.Geometry.Analyze;
 using GraphicsModule.Geometry.Extensions;
 using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Geometry.Objects.Points;
@@ -30,7 +29,7 @@ namespace GraphicsModule.Geometry.Objects.Segments
         }
         public bool IsSelected(Point mscoords, float ptR, Point frameCenter, double distance)
         {
-            return Analyze.Analyze.SegmentsPosition.IncidenceOfPoint(mscoords, this, 35 * distance);
+            return this.IsIncidentalToPoint(mscoords, 35 * distance);
         }
         public Name GetName()
         {

@@ -3,7 +3,7 @@ using System.Drawing;
 using GraphicsModule.Configuration;
 using GraphicsModule.Enums;
 using GraphicsModule.Geometry;
-using GraphicsModule.Geometry.Analyze;
+using GraphicsModule.Geometry.Extensions;
 using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Geometry.Objects.Lines;
 using GraphicsModule.Geometry.Objects.Planes;
@@ -254,11 +254,11 @@ namespace GraphicsModule.Rules.Create.Planes
         }
         public PlaneOfPlane1X0Y CreateByParallelLines(LineOfPlane1X0Y ln1, LineOfPlane1X0Y ln2)
         {
-            return Analyze.LinesPositionExtensions.IsParallel(ln1, ln2) ? new PlaneOfPlane1X0Y(ln1, ln2) : null;
+            return ln1.IsParallel(ln2) ? new PlaneOfPlane1X0Y(ln1, ln2) : null;
         }
         public PlaneOfPlane1X0Y CreateByCrossedLines(LineOfPlane1X0Y ln1, LineOfPlane1X0Y ln2, Point frameCenter)
         {
-            return Analyze.LinesPositionExtensions.IsCrossed(ln1, ln2, frameCenter) ? new PlaneOfPlane1X0Y(ln1, ln2) : null;
+            return ln1.IsCrossed(ln2, frameCenter) ? new PlaneOfPlane1X0Y(ln1, ln2) : null;
         }
         public PlaneOfPlane1X0Y CreateByPointAndSegment(SegmentOfPlane1X0Y sg, PointOfPlane1X0Y pt)
         {
@@ -266,11 +266,11 @@ namespace GraphicsModule.Rules.Create.Planes
         }
         public PlaneOfPlane1X0Y CreateByParallelSegments(SegmentOfPlane1X0Y sg1, SegmentOfPlane1X0Y sg2)
         {
-            return Analyze.LinesPositionExtensions.IsParallel(sg1, sg2) ? new PlaneOfPlane1X0Y(sg1, sg2) : null;
+            return sg1.IsParallel(sg2) ? new PlaneOfPlane1X0Y(sg1, sg2) : null;
         }
         public PlaneOfPlane1X0Y CreateByCrossedSegments(SegmentOfPlane1X0Y sg1, SegmentOfPlane1X0Y sg2, Point frameCenter)
         {
-            return Analyze.LinesPositionExtensions.IsCrossed(sg1, sg2, frameCenter) ? new PlaneOfPlane1X0Y(sg1, sg2) : null;
+            return sg1.IsCrossed(sg1, frameCenter) ? new PlaneOfPlane1X0Y(sg1, sg2) : null;
         }
         public void SetBuildType(PlaneCreateType type)
         {

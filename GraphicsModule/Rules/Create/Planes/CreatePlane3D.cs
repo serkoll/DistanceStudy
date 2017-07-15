@@ -4,7 +4,7 @@ using System.Linq;
 using GraphicsModule.Configuration;
 using GraphicsModule.Enums;
 using GraphicsModule.Geometry;
-using GraphicsModule.Geometry.Analyze;
+using GraphicsModule.Geometry.Extensions;
 using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Geometry.Objects.Lines;
 using GraphicsModule.Geometry.Objects.Planes;
@@ -123,7 +123,7 @@ namespace GraphicsModule.Rules.Create.Planes
                 if (_planeObjects.Count != 0)
                 {
                     var line3D = (Line3D)_planeObjects.First();
-                    if(_createLine.TempLineOfPlane != null && Analyze.LinesPositionExtensions.IsParallel(line3D, _createLine.TempLineOfPlane))
+                    if(_createLine.TempLineOfPlane != null && line3D.IsParallel(_createLine.TempLineOfPlane))
                     {
                         _createLine.TempLineOfPlane = null;
                         can.Update(strg);
@@ -283,7 +283,7 @@ namespace GraphicsModule.Rules.Create.Planes
         }
         public Plane3D CreateByParallelLines(Line3D ln1, Line3D ln2)
         {
-            return Analyze.LinesPositionExtensions.IsParallel(ln1, ln2) ? new Plane3D(ln1, ln2) : null;
+            return ln1.IsParallel(ln2) ? new Plane3D(ln1, ln2) : null;
         }
         //public Plane3D CreateByCrossedLines(Line3D ln1, Line3D ln2, Point frameCenter)
         //{

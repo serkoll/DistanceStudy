@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using GraphicsModule.Configuration;
-using GraphicsModule.Geometry.Analyze;
+using GraphicsModule.Geometry.Extensions;
 using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Geometry.Objects.Points;
 
@@ -102,7 +102,7 @@ namespace GraphicsModule.Geometry.Objects.Lines
         }
         public bool IsSelected(Point mscoords, float ptR, Point frameCenter, double distance)
         {
-            return Analyze.Analyze.LinesPositionExtensions.IsIncidentalToPoint(mscoords, this, 35 * distance);
+            return this.IsIncidentalToPoint(mscoords, 35 * distance);
         }
         //TODO: возможно в массив
         public Point2D Point0 { get; }

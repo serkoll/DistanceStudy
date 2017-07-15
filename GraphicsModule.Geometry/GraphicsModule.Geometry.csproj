@@ -44,10 +44,9 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Analyze\Analyze.cs" />
     <Compile Include="Extensions\LinesPositionExtensions.cs" />
     <Compile Include="Extensions\PointsPositionExtensions.cs" />
-    <Compile Include="Analyze\SegmentPosition.cs" />
+    <Compile Include="Extensions\SegmentPositionExtensions.cs" />
     <Compile Include="CoordinateSystem\Axis.cs" />
     <Compile Include="CoordinateSystem\Grid.cs" />
     <Compile Include="Calculate.cs" />
