@@ -4,7 +4,7 @@ using GraphicsModule.Controls;
 using GraphicsModule.Geometry.Objects.Points;
 using GraphicsModule.Interfaces;
 
-namespace GraphicsModule.Rules.Objects.Points
+namespace GraphicsModule.Rules.Generate
 {
     /// <summary>
     /// Генерация 3D точки

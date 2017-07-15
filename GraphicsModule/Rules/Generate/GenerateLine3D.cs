@@ -3,7 +3,7 @@ using GraphicsModule.Configuration;
 using GraphicsModule.Geometry.Objects.Lines;
 using GraphicsModule.Interfaces;
 
-namespace GraphicsModule.Rules.Objects.Lines
+namespace GraphicsModule.Rules.Generate
 {
     public class GenerateLine3D : ICreate
     {

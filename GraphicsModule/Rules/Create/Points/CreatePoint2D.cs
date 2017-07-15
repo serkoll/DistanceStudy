@@ -4,7 +4,7 @@ using GraphicsModule.Controls;
 using GraphicsModule.Geometry.Objects.Points;
 using GraphicsModule.Interfaces;
 
-namespace GraphicsModule.Rules.Objects.Points
+namespace GraphicsModule.Rules.Create.Points
 {
     /// <summary>
     /// Создание 2Д точки
@@ -18,9 +18,10 @@ namespace GraphicsModule.Rules.Objects.Points
         }
         public Point2D Create(Point pt, Point frameCenter, Canvas can, DrawSettings setting, Storage strg)
         {
-            var source = new Point2D(pt);
-            source.Name = GraphicsControl.NamesGenerator.Generate();
-            return source;
+            return new Point2D(pt)
+            {
+                Name = GraphicsControl.NamesGenerator.Generate()
+            };
         }
     }
 }

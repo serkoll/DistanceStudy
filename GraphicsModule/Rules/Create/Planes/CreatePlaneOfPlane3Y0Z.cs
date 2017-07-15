@@ -3,18 +3,18 @@ using System.Drawing;
 using GraphicsModule.Configuration;
 using GraphicsModule.Enums;
 using GraphicsModule.Geometry;
+using GraphicsModule.Geometry.Analyze;
 using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Geometry.Objects.Lines;
 using GraphicsModule.Geometry.Objects.Planes;
 using GraphicsModule.Geometry.Objects.Points;
-using GraphicsModule.Interfaces;
-using GraphicsModule.Geometry.Analyze;
 using GraphicsModule.Geometry.Objects.Segments;
-using GraphicsModule.Rules.Objects.Lines;
-using GraphicsModule.Rules.Objects.Points;
-using GraphicsModule.Rules.Objects.Segments;
+using GraphicsModule.Interfaces;
+using GraphicsModule.Rules.Create.Lines;
+using GraphicsModule.Rules.Create.Points;
+using GraphicsModule.Rules.Create.Segments;
 
-namespace GraphicsModule.Rules.Objects.Planes
+namespace GraphicsModule.Rules.Create.Planes
 {
     public class CreatePlaneOfPlane3Y0Z : ICreate, ICreatePlanes
     {

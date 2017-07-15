@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
+using GraphicsModule.Configuration;
 using GraphicsModule.Controls;
+using GraphicsModule.Geometry.Extensions;
+using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Geometry.Objects.Lines;
 using GraphicsModule.Geometry.Objects.Points;
 using GraphicsModule.Interfaces;
-using GraphicsModule.Geometry.Interfaces;
-using System.Collections.ObjectModel;
-using System.Linq;
-using GraphicsModule.Configuration;
-using GraphicsModule.Geometry;
-using GraphicsModule.Geometry.Extensions;
 
-namespace GraphicsModule.Rules.Objects.Lines
+namespace GraphicsModule.Rules.Create.Lines
 {
     /// <summary>
     /// Создание 3D линии

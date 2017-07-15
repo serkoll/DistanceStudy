@@ -6,13 +6,9 @@ using GraphicsModule.Geometry.Objects.Points;
 using GraphicsModule.Geometry.Objects.Segments;
 using GraphicsModule.Interfaces;
 
-
-namespace GraphicsModule.Rules.Objects.Segments
+namespace GraphicsModule.Rules.Create.Segments
 {
-    /// <summary>
-    /// Создание проекции линии на плоскость X0Y
-    /// </summary>
-    public class CreateSegmentOfPlane2X0Z : ICreate
+    public class CreateSegmentOfPlane3Y0Z : ICreate
     {
         public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas canvas, DrawSettings settings, Storage storage)
         {
@@ -21,10 +17,10 @@ namespace GraphicsModule.Rules.Objects.Segments
             storage.AddToCollection(obj);
             canvas.Update(storage);
         }
-        public SegmentOfPlane2X0Z Create(Point pt, Point frameCenter, Canvas can, DrawSettings setting, Storage strg)
+        public SegmentOfPlane3Y0Z Create(Point pt, Point frameCenter, Canvas can, DrawSettings setting, Storage strg)
         {
-            if (!PointOfPlane2X0Z.IsCreatable(pt, frameCenter)) return null;
-            var ptOfPlane = new PointOfPlane2X0Z(pt, frameCenter);
+            if (!PointOfPlane3Y0Z.IsCreatable(pt, frameCenter)) return null;
+            var ptOfPlane = new PointOfPlane3Y0Z(pt, frameCenter);
             if (strg.TempObjects.Count == 0)
             {
                 ptOfPlane.Name = GraphicsControl.NamesGenerator.Generate();
@@ -32,10 +28,10 @@ namespace GraphicsModule.Rules.Objects.Segments
                 strg.DrawLastAddedToTempObjects(setting, frameCenter, can.Graphics);
                 return null;
             }
-            if (Analyze.PointsPosition.Coincidence((PointOfPlane2X0Z)strg.TempObjects[0],
-                new PointOfPlane2X0Z(pt, frameCenter))) return null;
-            var source = new SegmentOfPlane2X0Z((PointOfPlane2X0Z) strg.TempObjects[0],
-                new PointOfPlane2X0Z(pt, frameCenter));
+            if (Analyze.PointsPosition.Coincidence((PointOfPlane3Y0Z)strg.TempObjects[0],
+                new PointOfPlane3Y0Z(pt, frameCenter))) return null;
+            var source = new SegmentOfPlane3Y0Z((PointOfPlane3Y0Z)strg.TempObjects[0],
+                new PointOfPlane3Y0Z(pt, frameCenter));
             source.Name = strg.TempObjects[0].Name;
             strg.TempObjects.Clear();
             return source;

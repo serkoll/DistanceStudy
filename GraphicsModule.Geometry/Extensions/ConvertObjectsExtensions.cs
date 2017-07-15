@@ -5,7 +5,7 @@ using GraphicsModule.Geometry.Objects.Lines;
 using GraphicsModule.Geometry.Objects.Points;
 using GraphicsModule.Geometry.Objects.Segments;
 
-//TODO: для некоторых методов конвертации сделать безопасную проверку. Дописать xml документацию
+//TODO: для некоторых методов конвертации сделать безопасную проверку. Дописать xml документацию. Покрыть тестами
 namespace GraphicsModule.Geometry.Extensions
 {
     /// <summary>

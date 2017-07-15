@@ -10,12 +10,11 @@ using GraphicsModule.Geometry.Objects.Planes;
 using GraphicsModule.Geometry.Objects.Points;
 using GraphicsModule.Geometry.Objects.Segments;
 using GraphicsModule.Interfaces;
-using GraphicsModule.Rules.Objects.Lines;
-using GraphicsModule.Rules.Objects.Points;
-using GraphicsModule.Rules.Objects.Segments;
+using GraphicsModule.Rules.Create.Lines;
+using GraphicsModule.Rules.Create.Points;
+using GraphicsModule.Rules.Create.Segments;
 
-
-namespace GraphicsModule.Rules.Objects.Planes
+namespace GraphicsModule.Rules.Create.Planes
 {
     public class CreatePlane2D : ICreate, ICreatePlanes
     {

@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Drawing;
 using GraphicsModule.Configuration;
 using GraphicsModule.Controls;
-using GraphicsModule.Geometry;
 using GraphicsModule.Geometry.Extensions;
 using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Geometry.Objects.Points;
 using GraphicsModule.Geometry.Objects.Segments;
 using GraphicsModule.Interfaces;
 
-
-namespace GraphicsModule.Rules.Objects.Segments
+namespace GraphicsModule.Rules.Create.Segments
 {
     /// <summary>
     /// Создание 3D линии

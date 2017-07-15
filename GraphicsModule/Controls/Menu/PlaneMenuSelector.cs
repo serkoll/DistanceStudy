@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Windows.Forms;
 using GraphicsModule.Configuration.Access.Structures;
+using GraphicsModule.Rules.Create.Planes;
+using GraphicsModule.Rules.Generate;
 using GraphicsModule.Rules.Objects;
-using GraphicsModule.Rules.Objects.Planes;
-using GraphicsModule.Rules.Objects.Lines;
 
 namespace GraphicsModule.Controls.Menu
 {

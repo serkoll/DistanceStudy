@@ -49,6 +49,7 @@ namespace GraphicsModule.Geometry.Analyze
             return pt2.Z - pt1.Z <= solveerror;
         }
         #endregion
+
         #region Full Coincidence
         public bool Coincidence(Point2D pt1, Point2D pt2)
         {
@@ -135,6 +136,7 @@ namespace GraphicsModule.Geometry.Analyze
             return Coincidence(ConvertObjectsExtensions.ToPoint2D(pt1), ConvertObjectsExtensions.ToPoint2D(pt2), solveerror);
         }
         #endregion
+
         #region Relative Positioning
         public bool LeftOfPoint(Point2D spt, Point2D pt2)
         {
@@ -217,6 +219,7 @@ namespace GraphicsModule.Geometry.Analyze
             return pt2.Y - spt.Y < solveerror;
         }
         #endregion
+
         #region Strictly Relative Positioning
         public bool StrictlyLeftOfPoint(Point2D spt, Point2D pt2)
         {
@@ -299,5 +302,6 @@ namespace GraphicsModule.Geometry.Analyze
             return (Math.Abs(pt2.X - spt.X) <= solveerror) && (Math.Abs(pt2.Z - spt.Z) <= solveerror) && (pt2.Y - spt.Y < solveerror);
         }
         #endregion
+
     }
 }

@@ -4,16 +4,16 @@ using System.Linq;
 using GraphicsModule.Configuration;
 using GraphicsModule.Enums;
 using GraphicsModule.Geometry;
+using GraphicsModule.Geometry.Analyze;
 using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Geometry.Objects.Lines;
 using GraphicsModule.Geometry.Objects.Planes;
 using GraphicsModule.Geometry.Objects.Points;
 using GraphicsModule.Interfaces;
-using GraphicsModule.Geometry.Analyze;
-using GraphicsModule.Rules.Objects.Lines;
-using GraphicsModule.Rules.Objects.Points;
+using GraphicsModule.Rules.Create.Lines;
+using GraphicsModule.Rules.Create.Points;
 
-namespace GraphicsModule.Rules.Objects.Planes
+namespace GraphicsModule.Rules.Create.Planes
 {
     public class CreatePlane3D : ICreate, ICreatePlanes
     {

@@ -7,7 +7,7 @@ using GraphicsModule.Geometry.Objects.Lines;
 using GraphicsModule.Geometry.Objects.Points;
 using GraphicsModule.Interfaces;
 
-namespace GraphicsModule.Rules.Objects.Lines
+namespace GraphicsModule.Rules.Create.Lines
 {
     /// <summary>
     /// Создание проекции линии на плоскость X0Y

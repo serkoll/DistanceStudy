@@ -3,20 +3,20 @@ using System.Drawing;
 using GraphicsModule.Configuration;
 using GraphicsModule.Enums;
 using GraphicsModule.Geometry;
+using GraphicsModule.Geometry.Analyze;
 using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Geometry.Objects.Lines;
 using GraphicsModule.Geometry.Objects.Planes;
 using GraphicsModule.Geometry.Objects.Points;
-using GraphicsModule.Interfaces;
-using GraphicsModule.Geometry.Analyze;
 using GraphicsModule.Geometry.Objects.Segments;
-using GraphicsModule.Rules.Objects.Lines;
-using GraphicsModule.Rules.Objects.Points;
-using GraphicsModule.Rules.Objects.Segments;
+using GraphicsModule.Interfaces;
+using GraphicsModule.Rules.Create.Lines;
+using GraphicsModule.Rules.Create.Points;
+using GraphicsModule.Rules.Create.Segments;
 
-namespace GraphicsModule.Rules.Objects.Planes
+namespace GraphicsModule.Rules.Create.Planes
 {
-    public class CreatePlaneOfPlane1X0Y : ICreate, ICreatePlanes
+    public class CreatePlaneOfPlane2X0Z : ICreate, ICreatePlanes
     {
         private PlaneCreateType _creationType;
         private Collection<IObject> _planeObjects = new Collection<IObject>();
@@ -26,7 +26,7 @@ namespace GraphicsModule.Rules.Objects.Planes
             {
                 case PlaneCreateType.ThreePoints:
                     {
-                        CreateByThreePoint(pt, frameCenter, canvas, settings, storage);
+                        CreateByThreePoints(pt, frameCenter, canvas, settings, storage);
                         break;
                     }
                 case PlaneCreateType.LineAndPoint:
@@ -46,7 +46,7 @@ namespace GraphicsModule.Rules.Objects.Planes
                     }
                 case PlaneCreateType.SegmentAndPoint:
                     {
-                        CreateByPointAndSegment(pt, frameCenter, canvas, settings, storage);
+                        CreateBySegmentAndPoint(pt, frameCenter, canvas, settings, storage);
                         break;
                     }
                 case PlaneCreateType.ParallelSegments:
@@ -61,14 +61,13 @@ namespace GraphicsModule.Rules.Objects.Planes
                     }
             }
         }
-        private void CreateByThreePoint(Point pt, Point frameCenter, Canvas can, DrawSettings setting, Storage strg)
+        private void CreateByThreePoints(Point pt, Point frameCenter, Canvas can, DrawSettings setting, Storage strg)
         {
-            var tmpobj = new CreatePointOfPlane1X0Y().Create(pt, frameCenter, can, setting, strg);
-            if(tmpobj == null) return;
+            var tmpobj = new CreatePointOfPlane2X0Z().Create(pt, frameCenter, can, setting, strg);
             tmpobj.Draw(setting, frameCenter, can.Graphics);
             _planeObjects.Add(tmpobj);
             if (_planeObjects.Count != 3) return;
-            var source = CreateByThreePoint(_planeObjects);
+            var source = CreateByThreePoints(_planeObjects);
             var nameparams = _planeObjects[0].Name;
             source.Name = new Name(@"p", nameparams.Dx, nameparams.Dy);
             _planeObjects.Clear();
@@ -79,15 +78,15 @@ namespace GraphicsModule.Rules.Objects.Planes
         {
             if (_planeObjects.Count == 0)
             {
-                var tmpobj = new CreateLineOfPlane1X0Y().Create(pt, frameCenter, can, setting, strg);
+                var tmpobj = new CreateLineOfPlane2X0Z().Create(pt, frameCenter, can, setting, strg);
                 if (tmpobj == null) return;
                 tmpobj.Draw(setting, frameCenter, can.Graphics);
                 _planeObjects.Add(tmpobj);
             }
             else
             {
-                var tmpobj = new CreatePointOfPlane1X0Y().Create(pt, frameCenter, can, setting, strg);
-                var source = CreateByLineAndPoint((LineOfPlane1X0Y)_planeObjects[0], tmpobj);
+                var tmpobj = new CreatePointOfPlane2X0Z().Create(pt, frameCenter, can, setting, strg);
+                var source = CreateByLineAndPoint((LineOfPlane2X0Z)_planeObjects[0], tmpobj);
                 var nameparams = _planeObjects[0].Name;
                 source.Name = new Name(@"p", nameparams.Dx, nameparams.Dy);
                 _planeObjects.Clear();
@@ -99,7 +98,7 @@ namespace GraphicsModule.Rules.Objects.Planes
         {
             if (_planeObjects.Count < 2)
             {
-                var tmpobj = new CreateLineOfPlane1X0Y().Create(pt, frameCenter, can, setting, strg);
+                var tmpobj = new CreateLineOfPlane2X0Z().Create(pt, frameCenter, can, setting, strg);
                 if (tmpobj != null)
                 {
                     tmpobj.Draw(setting, frameCenter, can.Graphics);
@@ -107,7 +106,7 @@ namespace GraphicsModule.Rules.Objects.Planes
                 }
             }
             if (_planeObjects.Count != 2) return;
-            var source = CreateByParallelLines((LineOfPlane1X0Y)_planeObjects[0], (LineOfPlane1X0Y)_planeObjects[1]);
+            var source = CreateByParallelLines((LineOfPlane2X0Z)_planeObjects[0], (LineOfPlane2X0Z)_planeObjects[1]);
             if (source != null)
             {
                 var nameparams = _planeObjects[0].Name;
@@ -122,7 +121,7 @@ namespace GraphicsModule.Rules.Objects.Planes
                 can.Update(strg);
                 foreach (var o in _planeObjects)
                 {
-                    var ln = (LineOfPlane1X0Y) o;
+                    var ln = (LineOfPlane2X0Z) o;
                     ln.Draw(setting, frameCenter, can.Graphics);
                 }
             }
@@ -131,7 +130,7 @@ namespace GraphicsModule.Rules.Objects.Planes
         {
             if (_planeObjects.Count < 2)
             {
-                var tmpobj = new CreateLineOfPlane1X0Y().Create(pt, frameCenter, can, setting, strg);
+                var tmpobj = new CreateLineOfPlane2X0Z().Create(pt, frameCenter, can, setting, strg);
                 if (tmpobj != null)
                 {
                     tmpobj.Draw(setting, frameCenter, can.Graphics);
@@ -139,7 +138,7 @@ namespace GraphicsModule.Rules.Objects.Planes
                 }
             }
             if (_planeObjects.Count != 2) return;
-            var source = CreateByCrossedLines((LineOfPlane1X0Y)_planeObjects[0], (LineOfPlane1X0Y)_planeObjects[1], frameCenter);
+            var source = CreateByCrossedLines((LineOfPlane2X0Z)_planeObjects[0], (LineOfPlane2X0Z)_planeObjects[1], frameCenter);
             if (source != null)
             {
                 var nameparams = _planeObjects[0].Name;
@@ -154,24 +153,24 @@ namespace GraphicsModule.Rules.Objects.Planes
                 can.Update(strg);
                 foreach (var o in _planeObjects)
                 {
-                    var ln = (LineOfPlane1X0Y) o;
+                    var ln = (LineOfPlane2X0Z) o;
                     ln.Draw(setting, frameCenter, can.Graphics);
                 }
             }
         }
-        private void CreateByPointAndSegment(Point pt, Point frameCenter, Canvas can, DrawSettings setting, Storage strg)
+        private void CreateBySegmentAndPoint(Point pt, Point frameCenter, Canvas can, DrawSettings setting, Storage strg)
         {
             if (_planeObjects.Count == 0)
             {
-                var tmpobj = new CreateSegmentOfPlane1X0Y().Create(pt, frameCenter, can, setting, strg);
+                var tmpobj = new CreateSegmentOfPlane2X0Z().Create(pt, frameCenter, can, setting, strg);
                 if (tmpobj == null) return;
                 tmpobj.Draw(setting, frameCenter, can.Graphics);
                 _planeObjects.Add(tmpobj);
             }
             else
             {
-                var tmpobj = new CreatePointOfPlane1X0Y().Create(pt, frameCenter, can, setting, strg);
-                var source = CreateByPointAndSegment((SegmentOfPlane1X0Y)_planeObjects[0], tmpobj);
+                var tmpobj = new CreatePointOfPlane2X0Z().Create(pt, frameCenter, can, setting, strg);
+                var source = CreateBySegmentAndPoint((SegmentOfPlane2X0Z)_planeObjects[0], tmpobj);
                 var nameparams = _planeObjects[0].Name;
                 source.Name = new Name(@"p", nameparams.Dx, nameparams.Dy);
                 _planeObjects.Clear();
@@ -183,7 +182,7 @@ namespace GraphicsModule.Rules.Objects.Planes
         {
             if (_planeObjects.Count < 2)
             {
-                var tmpobj = new CreateSegmentOfPlane1X0Y().Create(pt, frameCenter, can, setting, strg);
+                var tmpobj = new CreateSegmentOfPlane2X0Z().Create(pt, frameCenter, can, setting, strg);
                 if (tmpobj != null)
                 {
                     tmpobj.Draw(setting, frameCenter, can.Graphics);
@@ -191,7 +190,7 @@ namespace GraphicsModule.Rules.Objects.Planes
                 }
             }
             if (_planeObjects.Count != 2) return;
-            var source = CreateByParallelSegments((SegmentOfPlane1X0Y)_planeObjects[0], (SegmentOfPlane1X0Y)_planeObjects[1]);
+            var source = CreateByParallelSegments((SegmentOfPlane2X0Z)_planeObjects[0], (SegmentOfPlane2X0Z)_planeObjects[1]);
             if (source != null)
             {
                 var nameparams = _planeObjects[0].Name;
@@ -206,7 +205,7 @@ namespace GraphicsModule.Rules.Objects.Planes
                 can.Update(strg);
                 foreach (var o in _planeObjects)
                 {
-                    var ln = (SegmentOfPlane1X0Y)o;
+                    var ln = (SegmentOfPlane2X0Z)o;
                     ln.Draw(setting, frameCenter, can.Graphics);
                 }
             }
@@ -215,7 +214,7 @@ namespace GraphicsModule.Rules.Objects.Planes
         {
             if (_planeObjects.Count < 2)
             {
-                var tmpobj = new CreateSegmentOfPlane1X0Y().Create(pt, frameCenter, can, setting, strg);
+                var tmpobj = new CreateSegmentOfPlane2X0Z().Create(pt, frameCenter, can, setting, strg);
                 if (tmpobj != null)
                 {
                     tmpobj.Draw(setting, frameCenter, can.Graphics);
@@ -223,7 +222,7 @@ namespace GraphicsModule.Rules.Objects.Planes
                 }
             }
             if (_planeObjects.Count != 2) return;
-            var source = CreateByCrossedSegments((SegmentOfPlane1X0Y)_planeObjects[0], (SegmentOfPlane1X0Y)_planeObjects[1], frameCenter);
+            var source = CreateByCrossedSegments((SegmentOfPlane2X0Z)_planeObjects[0], (SegmentOfPlane2X0Z)_planeObjects[1], frameCenter);
             if (source != null)
             {
                 var nameparams = _planeObjects[0].Name;
@@ -238,39 +237,38 @@ namespace GraphicsModule.Rules.Objects.Planes
                 can.Update(strg);
                 foreach (var o in _planeObjects)
                 {
-                    var ln = (SegmentOfPlane1X0Y)o;
+                    var ln = (SegmentOfPlane2X0Z)o;
                     ln.Draw(setting, frameCenter, can.Graphics);
                 }
             }
         }
-        public PlaneOfPlane1X0Y CreateByThreePoint(Collection<IObject> obj)
+        public PlaneOfPlane2X0Z CreateByThreePoints(Collection<IObject> obj)
         {
-            //TODO: govnokod popravit
-            return obj.Count != 3 ? null : new PlaneOfPlane1X0Y((PointOfPlane1X0Y)obj[0], (PointOfPlane1X0Y)obj[1], (PointOfPlane1X0Y)obj[2]);
+            return obj.Count != 3 ? null : new PlaneOfPlane2X0Z((PointOfPlane2X0Z)obj[0], (PointOfPlane2X0Z)obj[1], (PointOfPlane2X0Z)obj[2]);
         }
-        public PlaneOfPlane1X0Y CreateByLineAndPoint(LineOfPlane1X0Y ln, PointOfPlane1X0Y pt)
+        public PlaneOfPlane2X0Z CreateByLineAndPoint(LineOfPlane2X0Z ln, PointOfPlane2X0Z pt)
         {
-            return new PlaneOfPlane1X0Y(ln, pt);
+            return new PlaneOfPlane2X0Z(ln, pt);
         }
-        public PlaneOfPlane1X0Y CreateByParallelLines(LineOfPlane1X0Y ln1, LineOfPlane1X0Y ln2)
+        public PlaneOfPlane2X0Z CreateByParallelLines(LineOfPlane2X0Z ln1, LineOfPlane2X0Z ln2)
         {
-            return Analyze.LinesPosition.Parallelism(ln1, ln2) ? new PlaneOfPlane1X0Y(ln1, ln2) : null;
+            return Analyze.LinesPosition.Parallelism(ln1, ln2) ? new PlaneOfPlane2X0Z(ln1, ln2) : null;
         }
-        public PlaneOfPlane1X0Y CreateByCrossedLines(LineOfPlane1X0Y ln1, LineOfPlane1X0Y ln2, Point frameCenter)
+        public PlaneOfPlane2X0Z CreateByCrossedLines(LineOfPlane2X0Z ln1, LineOfPlane2X0Z ln2, Point frameCenter)
         {
-            return Analyze.LinesPosition.Crossing(ln1, ln2, frameCenter) ? new PlaneOfPlane1X0Y(ln1, ln2) : null;
+            return Analyze.LinesPosition.Crossing(ln1, ln2, frameCenter) ? new PlaneOfPlane2X0Z(ln1, ln2) : null;
         }
-        public PlaneOfPlane1X0Y CreateByPointAndSegment(SegmentOfPlane1X0Y sg, PointOfPlane1X0Y pt)
+        public PlaneOfPlane2X0Z CreateBySegmentAndPoint(SegmentOfPlane2X0Z sg, PointOfPlane2X0Z pt)
         {
-            return new PlaneOfPlane1X0Y(sg, pt);
+            return new PlaneOfPlane2X0Z(sg, pt);
         }
-        public PlaneOfPlane1X0Y CreateByParallelSegments(SegmentOfPlane1X0Y sg1, SegmentOfPlane1X0Y sg2)
+        public PlaneOfPlane2X0Z CreateByParallelSegments(SegmentOfPlane2X0Z sg1, SegmentOfPlane2X0Z sg2)
         {
-            return Analyze.LinesPosition.Parallelism(sg1, sg2) ? new PlaneOfPlane1X0Y(sg1, sg2) : null;
+            return Analyze.LinesPosition.Parallelism(sg1, sg2) ? new PlaneOfPlane2X0Z(sg1, sg2) : null;
         }
-        public PlaneOfPlane1X0Y CreateByCrossedSegments(SegmentOfPlane1X0Y sg1, SegmentOfPlane1X0Y sg2, Point frameCenter)
+        public PlaneOfPlane2X0Z CreateByCrossedSegments(SegmentOfPlane2X0Z sg1, SegmentOfPlane2X0Z sg2, Point frameCenter)
         {
-            return Analyze.LinesPosition.Crossing(sg1, sg2, frameCenter) ? new PlaneOfPlane1X0Y(sg1, sg2) : null;
+            return Analyze.LinesPosition.Crossing(sg1, sg2, frameCenter) ? new PlaneOfPlane2X0Z(sg1, sg2) : null;
         }
         public void SetBuildType(PlaneCreateType type)
         {

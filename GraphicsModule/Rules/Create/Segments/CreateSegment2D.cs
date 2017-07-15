@@ -6,8 +6,7 @@ using GraphicsModule.Geometry.Objects.Points;
 using GraphicsModule.Geometry.Objects.Segments;
 using GraphicsModule.Interfaces;
 
-
-namespace GraphicsModule.Rules.Objects.Segments
+namespace GraphicsModule.Rules.Create.Segments
 {
     public class CreateSegment2D : ICreate
     {

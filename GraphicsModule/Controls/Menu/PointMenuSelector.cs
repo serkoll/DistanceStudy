@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Windows.Forms;
 using GraphicsModule.Configuration.Access.Structures;
+using GraphicsModule.Rules.Create.Points;
+using GraphicsModule.Rules.Generate;
 using GraphicsModule.Rules.Objects;
-using GraphicsModule.Rules.Objects.Points;
 
 namespace GraphicsModule.Controls.Menu
 {
