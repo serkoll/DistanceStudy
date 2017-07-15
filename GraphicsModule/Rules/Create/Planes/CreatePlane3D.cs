@@ -20,48 +20,48 @@ namespace GraphicsModule.Rules.Create.Planes
         private PlaneCreateType _creationType;
         private Collection<IObject> _planeObjects = new Collection<IObject>();
         private CreateLine3D _createLine = new CreateLine3D();
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas canvas, DrawSettings settings, Storage storage)
+        public void AddToStorageAndDraw(Point pt, Point frameCenter, Drawing drawing, DrawSettings settings, Storage storage)
         {
             switch (_creationType)
             {
                 case PlaneCreateType.ThreePoints:
                     {
-                        CreateByThreePoint(pt, frameCenter, canvas, settings, storage);
+                        CreateByThreePoint(pt, frameCenter, drawing, settings, storage);
                         break;
                     }
                 case PlaneCreateType.LineAndPoint:
                     {
-                        CreateByLineAndPoint(pt, frameCenter, canvas, settings, storage);
+                        CreateByLineAndPoint(pt, frameCenter, drawing, settings, storage);
                         break;
                     }
                 case PlaneCreateType.ParallelLines:
                     {
-                        CreateByParallelLines(pt, frameCenter, canvas, settings, storage);
+                        CreateByParallelLines(pt, frameCenter, drawing, settings, storage);
                         break;
                     }
                 case PlaneCreateType.CrossedLines:
                     {
-                        //CreateByCrossedLines(pt, frameCenter, canvas, settings, storage);
+                        //CreateByCrossedLines(pt, frameCenter, drawing, settings, storage);
                         break;
                     }
                 case PlaneCreateType.SegmentAndPoint:
                     {
-                        //CreateByPointAndSegment(pt, frameCenter, canvas, settings, storage);
+                        //CreateByPointAndSegment(pt, frameCenter, drawing, settings, storage);
                         break;
                     }
                 case PlaneCreateType.ParallelSegments:
                     {
-                        //CreateByParallelSegments(pt, frameCenter, canvas, settings, storage);
+                        //CreateByParallelSegments(pt, frameCenter, drawing, settings, storage);
                         break;
                     }
                 case PlaneCreateType.CrossedSegments:
                     {
-                        //CreateByCrossedSegments(pt, frameCenter, canvas, settings, storage);
+                        //CreateByCrossedSegments(pt, frameCenter, drawing, settings, storage);
                         break;
                     }
             }
         }
-        private void PlaneObjectsDraw(DrawSettings settings, Point frameCenter, Canvas can)
+        private void PlaneObjectsDraw(DrawSettings settings, Point frameCenter, Drawing can)
         {
             if (_planeObjects.Count == 0) return;
             foreach (var o in _planeObjects)
@@ -69,7 +69,7 @@ namespace GraphicsModule.Rules.Create.Planes
                 o.Draw(settings, frameCenter, can.Graphics);
             }
         }
-        private void CreateByThreePoint(Point pt, Point frameCenter, Canvas can, DrawSettings settings, Storage strg)
+        private void CreateByThreePoint(Point pt, Point frameCenter, Drawing can, DrawSettings settings, Storage strg)
         {
             var tmpobj = new CreatePoint3D().Create(pt, frameCenter, can, settings, strg);
             if (tmpobj == null)
@@ -89,7 +89,7 @@ namespace GraphicsModule.Rules.Create.Planes
             strg.AddToCollection(source);
             can.Update(strg);
         }
-        private void CreateByLineAndPoint(Point pt, Point frameCenter, Canvas can, DrawSettings settings, Storage strg)
+        private void CreateByLineAndPoint(Point pt, Point frameCenter, Drawing can, DrawSettings settings, Storage strg)
         {
             if (_planeObjects.Count == 0)
             {
@@ -115,7 +115,7 @@ namespace GraphicsModule.Rules.Create.Planes
                 can.Update(strg);
             }
         }
-        private void CreateByParallelLines(Point pt, Point frameCenter, Canvas can, DrawSettings settings, Storage strg)
+        private void CreateByParallelLines(Point pt, Point frameCenter, Drawing can, DrawSettings settings, Storage strg)
         {
             if (_planeObjects.Count < 2)
             {
@@ -157,14 +157,14 @@ namespace GraphicsModule.Rules.Create.Planes
                 }
             }
         }
-        //private void CreateByCrossedLines(Point pt, Point frameCenter, Canvas.Canvas canvas, DrawS settings, Storage storage)
+        //private void CreateByCrossedLines(Point pt, Point frameCenter, Drawing.Drawing drawing, DrawS settings, Storage storage)
         //{
         //    if (_planeObjects.Count < 2)
         //    {
-        //        var tmpobj = new CreateLineOfPlane1X0Y().Create(pt, frameCenter, canvas, settings, storage);
+        //        var tmpobj = new CreateLineOfPlane1X0Y().Create(pt, frameCenter, drawing, settings, storage);
         //        if (tmpobj != null)
         //        {
-        //            tmpobj.Draw(settings, frameCenter, canvas.Graphics);
+        //            tmpobj.Draw(settings, frameCenter, drawing.Graphics);
         //            _planeObjects.Add(tmpobj);
         //        }
         //    }
@@ -176,47 +176,47 @@ namespace GraphicsModule.Rules.Create.Planes
         //        source.SetName(new Name(@"p", nameparams.Dx, nameparams.Dy));
         //        _planeObjects.Clear();
         //        storage.AddToCollection(source);
-        //        canvas.Update(storage);
+        //        drawing.Update(storage);
         //    }
         //    else
         //    {
         //        _planeObjects.RemoveAt(1);
-        //        canvas.Update(storage);
+        //        drawing.Update(storage);
         //        foreach (var o in _planeObjects)
         //        {
         //            var ln = (LineOfPlane1X0Y)o;
-        //            ln.Draw(settings, frameCenter, canvas.Graphics);
+        //            ln.Draw(settings, frameCenter, drawing.Graphics);
         //        }
         //    }
         //}
-        //private void CreateByPointAndSegment(Point pt, Point frameCenter, Canvas.Canvas canvas, DrawS settings, Storage storage)
+        //private void CreateByPointAndSegment(Point pt, Point frameCenter, Drawing.Drawing drawing, DrawS settings, Storage storage)
         //{
         //    if (_planeObjects.Count == 0)
         //    {
-        //        var tmpobj = new CreateSegmentOfPlane1X0Y().Create(pt, frameCenter, canvas, settings, storage);
+        //        var tmpobj = new CreateSegmentOfPlane1X0Y().Create(pt, frameCenter, drawing, settings, storage);
         //        if (tmpobj == null) return;
-        //        tmpobj.Draw(settings, frameCenter, canvas.Graphics);
+        //        tmpobj.Draw(settings, frameCenter, drawing.Graphics);
         //        _planeObjects.Add(tmpobj);
         //    }
         //    else
         //    {
-        //        var tmpobj = new CreatePointOfPlane1X0Y().Create(pt, frameCenter, canvas, settings, storage);
+        //        var tmpobj = new CreatePointOfPlane1X0Y().Create(pt, frameCenter, drawing, settings, storage);
         //        var source = CreateByPointAndSegment((SegmentOfPlane1X0Y)_planeObjects[0], tmpobj);
         //        var nameparams = _planeObjects[0].GetName();
         //        source.SetName(new Name(@"p", nameparams.Dx, nameparams.Dy));
         //        _planeObjects.Clear();
         //        storage.AddToCollection(source);
-        //        canvas.Update(storage);
+        //        drawing.Update(storage);
         //    }
         //}
-        //private void CreateByParallelSegments(Point pt, Point frameCenter, Canvas.Canvas canvas, DrawS settings, Storage storage)
+        //private void CreateByParallelSegments(Point pt, Point frameCenter, Drawing.Drawing drawing, DrawS settings, Storage storage)
         //{
         //    if (_planeObjects.Count < 2)
         //    {
-        //        var tmpobj = new CreateSegmentOfPlane1X0Y().Create(pt, frameCenter, canvas, settings, storage);
+        //        var tmpobj = new CreateSegmentOfPlane1X0Y().Create(pt, frameCenter, drawing, settings, storage);
         //        if (tmpobj != null)
         //        {
-        //            tmpobj.Draw(settings, frameCenter, canvas.Graphics);
+        //            tmpobj.Draw(settings, frameCenter, drawing.Graphics);
         //            _planeObjects.Add(tmpobj);
         //        }
         //    }
@@ -228,27 +228,27 @@ namespace GraphicsModule.Rules.Create.Planes
         //        source.SetName(new Name(@"p", nameparams.Dx, nameparams.Dy));
         //        _planeObjects.Clear();
         //        storage.AddToCollection(source);
-        //        canvas.Update(storage);
+        //        drawing.Update(storage);
         //    }
         //    else
         //    {
         //        _planeObjects.RemoveAt(1);
-        //        canvas.Update(storage);
+        //        drawing.Update(storage);
         //        foreach (var o in _planeObjects)
         //        {
         //            var ln = (SegmentOfPlane1X0Y)o;
-        //            ln.Draw(settings, frameCenter, canvas.Graphics);
+        //            ln.Draw(settings, frameCenter, drawing.Graphics);
         //        }
         //    }
         //}
-        //private void CreateByCrossedSegments(Point pt, Point frameCenter, Canvas.Canvas canvas, DrawS settings, Storage storage)
+        //private void CreateByCrossedSegments(Point pt, Point frameCenter, Drawing.Drawing drawing, DrawS settings, Storage storage)
         //{
         //    if (_planeObjects.Count < 2)
         //    {
-        //        var tmpobj = new CreateSegmentOfPlane1X0Y().Create(pt, frameCenter, canvas, settings, storage);
+        //        var tmpobj = new CreateSegmentOfPlane1X0Y().Create(pt, frameCenter, drawing, settings, storage);
         //        if (tmpobj != null)
         //        {
-        //            tmpobj.Draw(settings, frameCenter, canvas.Graphics);
+        //            tmpobj.Draw(settings, frameCenter, drawing.Graphics);
         //            _planeObjects.Add(tmpobj);
         //        }
         //    }
@@ -260,16 +260,16 @@ namespace GraphicsModule.Rules.Create.Planes
         //        source.SetName(new Name(@"p", nameparams.Dx, nameparams.Dy));
         //        _planeObjects.Clear();
         //        storage.AddToCollection(source);
-        //        canvas.Update(storage);
+        //        drawing.Update(storage);
         //    }
         //    else
         //    {
         //        _planeObjects.RemoveAt(1);
-        //        canvas.Update(storage);
+        //        drawing.Update(storage);
         //        foreach (var o in _planeObjects)
         //        {
         //            var ln = (SegmentOfPlane1X0Y)o;
-        //            ln.Draw(settings, frameCenter, canvas.Graphics);
+        //            ln.Draw(settings, frameCenter, drawing.Graphics);
         //        }
         //    }
         //}

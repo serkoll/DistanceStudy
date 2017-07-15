@@ -10,14 +10,14 @@ namespace GraphicsModule.Rules.Create.Segments
 {
     public class CreateSegment2D : ICreate
     {
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas canvas, DrawSettings settings, Storage storage)
+        public void AddToStorageAndDraw(Point pt, Point frameCenter, Drawing drawing, DrawSettings settings, Storage storage)
         {
-            var obj = Create(pt, frameCenter, canvas, settings, storage);
+            var obj = Create(pt, frameCenter, drawing, settings, storage);
             if (obj == null) return;
             storage.AddToCollection(obj);
-            canvas.Update(storage);
+            drawing.Update(storage);
         }
-        public Segment2D Create(Point pt, Point frameCenter, Canvas can, DrawSettings settings, Storage strg)
+        public Segment2D Create(Point pt, Point frameCenter, Drawing can, DrawSettings settings, Storage strg)
         {
             var ptOfPlane = new Point2D(pt);
             if (strg.TempObjects.Count == 0)

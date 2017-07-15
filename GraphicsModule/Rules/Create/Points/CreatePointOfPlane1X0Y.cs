@@ -11,17 +11,17 @@ namespace GraphicsModule.Rules.Create.Points
     /// </summary>
     public class CreatePointOfPlane1X0Y : ICreate
     {
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas canvas, DrawSettings settings, Storage storage)
+        public void AddToStorageAndDraw(Point pt, Point frameCenter, Drawing drawing, DrawSettings settings, Storage storage)
         {
-            var source = Create(pt, frameCenter, canvas, settings, storage);
+            var source = Create(pt, frameCenter, drawing, settings, storage);
             if (source == null)
             {
                 return;
             }
             storage.AddToCollection(source);
-            storage.DrawLastAddedToObjects(settings, frameCenter, canvas.Graphics);
+            storage.DrawLastAddedToObjects(settings, frameCenter, drawing.Graphics);
         }
-        public PointOfPlane1X0Y Create(Point pt, Point frameCenter, Canvas can, DrawSettings setting, Storage strg)
+        public PointOfPlane1X0Y Create(Point pt, Point frameCenter, Drawing can, DrawSettings setting, Storage strg)
         {
             return PointOfPlane1X0Y.IsCreatable(pt, frameCenter)
                 ? new PointOfPlane1X0Y(pt, frameCenter) { Name = GraphicsControl.NamesGenerator.Generate() }

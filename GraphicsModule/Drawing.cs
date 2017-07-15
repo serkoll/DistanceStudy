@@ -5,21 +5,24 @@ using GraphicsModule.Configuration;
 
 namespace GraphicsModule
 {
-    public class Canvas : IDisposable
+    /// <summary>
+    /// Чертеж
+    /// </summary>
+    public class Drawing : IDisposable
     {
         private Bitmap _bitmap;
         private Point _centerSystemPoint;
 
         /// <summary>
-        /// Инициализация полотна
+        /// Инициализация чертежа
         /// </summary>
         /// <param name="settings">Настройки графического редактора</param>
         /// <param name="pictureBox">Целевой PictureBox</param>
-        public Canvas(Settings settings, PictureBox pictureBox)
+        public Drawing(Settings settings, PictureBox pictureBox)
         {
             if (pictureBox == null)
             {
-                var msg = "PictureBox is null";
+                var msg = "PictureBox не инициализирован";
                 throw new ArgumentNullException(nameof(pictureBox), msg);
             }
             if (settings == null)
@@ -59,7 +62,7 @@ namespace GraphicsModule
         }
 
         /// <summary>
-        /// Перерисовывает полотно
+        /// Перерисовывает чертеж
         /// </summary>
         public void Refresh()
         {
@@ -68,7 +71,7 @@ namespace GraphicsModule
         }
 
         /// <summary>
-        /// Пересчитывает фон полотна и отрисовывает на нем графические объекты
+        /// Пересчитывает фон чертежа и отрисовывает на нем графические объекты
         /// </summary>
         /// <param name="strg"></param>
         public void Update(Storage strg)
@@ -101,18 +104,39 @@ namespace GraphicsModule
 
         public PictureBox PictureBox { get; }
 
+        /// <summary>
+        /// Настройки графического редактора (в том числе настройки чертежа)
+        /// </summary>
         public Settings Settings { get; }
 
+        /// <summary>
+        /// Фон чертежа
+        /// </summary>
         public Background Background { get; private set; }
 
+        /// <summary>
+        /// Graphics чертежа
+        /// </summary>
         public Graphics Graphics { get; private set; }
 
+        /// <summary>
+        /// Границы горизонтальной плоскости проекции
+        /// </summary>
         public RectangleF PlaneX0Y { get; private set; }
 
+        /// <summary>
+        /// Границы фронтальной плоскости проекции
+        /// </summary>
         public RectangleF PlaneX0Z { get; private set; }
 
+        /// <summary>
+        /// Границы горизонтальной плоскости проекции
+        /// </summary>
         public RectangleF PlaneY0Z { get; private set; }
 
+        /// <summary>
+        /// Центр системы координат
+        /// </summary>
         public Point CenterSystemPoint => _centerSystemPoint;
     }
 }

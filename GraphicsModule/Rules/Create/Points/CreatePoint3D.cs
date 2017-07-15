@@ -16,17 +16,17 @@ namespace GraphicsModule.Rules.Create.Points
     {
         private Point3DCreateType BuildType = Point3DCreateType.By2PointsOfPlane;
 
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas canvas, DrawSettings settings, Storage storage)
+        public void AddToStorageAndDraw(Point pt, Point frameCenter, Drawing drawing, DrawSettings settings, Storage storage)
         {
-            var source = Create(pt, frameCenter, canvas, settings, storage);
+            var source = Create(pt, frameCenter, drawing, settings, storage);
             if (source == null)
             {
                 return;
             }
             storage.AddToCollection(source);
-            canvas.Update(storage);
+            drawing.Update(storage);
         }
-        public Point3D Create(Point pt, Point frameCenter, Canvas canvas, DrawSettings settings, Storage storage)
+        public Point3D Create(Point pt, Point frameCenter, Drawing drawing, DrawSettings settings, Storage storage)
         {
             var ptOfPlane = pt.ToPointOfPlane(frameCenter);
             if (ptOfPlane == null)
@@ -38,7 +38,7 @@ namespace GraphicsModule.Rules.Create.Points
             {
                 ptOfPlane.Name = GraphicsControl.NamesGenerator.Generate();
                 storage.TempObjects.Add(ptOfPlane);
-                ptOfPlane.Draw(settings, frameCenter, canvas.Graphics);
+                ptOfPlane.Draw(settings, frameCenter, drawing.Graphics);
                 return null;
             }
 
@@ -57,7 +57,7 @@ namespace GraphicsModule.Rules.Create.Points
                 }
                 else
                 {
-                    ptOfPlane.Draw(settings, frameCenter, canvas.Graphics);
+                    ptOfPlane.Draw(settings, frameCenter, drawing.Graphics);
                 }
                 return null;
             }
@@ -66,7 +66,7 @@ namespace GraphicsModule.Rules.Create.Points
             if (source == null)
             {
                 storage.TempObjects.RemoveAt(storage.TempObjects.Count - 1);
-                canvas.Update(storage);
+                drawing.Update(storage);
                 return null;
             }
 

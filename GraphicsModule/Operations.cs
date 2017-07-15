@@ -9,7 +9,7 @@ namespace GraphicsModule
     /// </summary>
     class SelectObject : IOperation
     {
-        public void Execute(Point mousecoords, Storage strg, Canvas can)
+        public void Execute(Point mousecoords, Storage strg, Drawing can)
         {
             foreach (var obj in strg.Objects)
             {
@@ -28,7 +28,7 @@ namespace GraphicsModule
     class SelectPointOfPlane : IOperation
     {
         //TODO: исправить вызов
-        public void Execute(Point mousecoords, Storage strg, Canvas can)
+        public void Execute(Point mousecoords, Storage strg, Drawing can)
         {
             foreach (var obj in strg.Objects)
             {
@@ -48,7 +48,7 @@ namespace GraphicsModule
     /// </summary>
     class SelectLineOfPlane : IOperation
     {
-        public void Execute(Point mousecoords, Storage strg, Canvas can)
+        public void Execute(Point mousecoords, Storage strg, Drawing can)
         {
             foreach (IObject obj in strg.Objects)
             {
@@ -64,7 +64,7 @@ namespace GraphicsModule
     }
     class SelectSegmentOfPlane : IOperation
     {
-        public void Execute(Point mousecoords, Storage strg, Canvas can)
+        public void Execute(Point mousecoords, Storage strg, Drawing can)
         {
             foreach (IObject obj in strg.Objects)
             {
@@ -83,7 +83,7 @@ namespace GraphicsModule
     /// </summary>
     class DeleteSelected
     {
-        public void Execute(Storage strg, Canvas can)
+        public void Execute(Storage strg, Drawing can)
         {
             foreach (IObject obj in strg.SelectedObjects)
             {
@@ -98,7 +98,7 @@ namespace GraphicsModule
     /// </summary>
     class Erase : IOperation
     {
-        public void Execute(Point mousecoords, Storage strg, Canvas can)
+        public void Execute(Point mousecoords, Storage strg, Drawing can)
         {
             foreach (IObject obj in strg.Objects)
             {
@@ -113,7 +113,7 @@ namespace GraphicsModule
     }
     class Copy : IOperation
     {
-        public void Execute(Point mousecoords, Storage strg, Canvas can)
+        public void Execute(Point mousecoords, Storage strg, Drawing can)
         {
             foreach (IObject obj in strg.Objects)
             {

@@ -22,10 +22,10 @@ namespace GraphicsModule.Cursors
         /// </summary>
         private Point _newPosition; 
         /// <summary>
-        /// Передвигает курсор в заданном Canvas, привязывая его к узлам заданной сетки
+        /// Передвигает курсор в заданном Drawing, привязывая его к узлам заданной сетки
         /// </summary>
         /// <param name="can">Полотно</param>
-        public void CursorPointToGridMove(Canvas can)
+        public void CursorPointToGridMove(Drawing can)
         {
             CursorPointToGridMove(can.PictureBox, can.CenterSystemPoint, can.Background.Grid.StepOnWidth, can.Background.Grid.StepOnHeight);
         }

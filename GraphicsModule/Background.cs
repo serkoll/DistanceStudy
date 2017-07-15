@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Drawing.Imaging;
 using System.Windows.Forms;
 using GraphicsModule.Configuration;
@@ -6,17 +7,37 @@ using GraphicsModule.Geometry.CoordinateSystem;
 
 namespace GraphicsModule
 {
-    public class Background
+    /// <summary>
+    /// Фон чертежа
+    /// </summary>
+    public class Background : IDisposable
     {
-        public Background(Point centerPoint, Settings settings, Control pictureBox)
+        /// <summary>
+        /// Инициализирует фон чертежа
+        /// </summary>
+        /// <param name="centerSystemPoint">Центр системы координат</param>
+        /// <param name="settings">Настройки графического редактора</param>
+        /// <param name="pictureBox">Целевой PictureBox</param>
+        public Background(Point centerSystemPoint, Settings settings, PictureBox pictureBox)
         {
+            if (settings == null)
+            {
+                var msg = "Настройки редактора не инициализированы";
+                throw new ArgumentNullException(nameof(settings), msg);
+            }
+            if (pictureBox == null)
+            {
+                var msg = "PictureBox не инициализирован";
+                throw new ArgumentNullException(nameof(pictureBox), msg);
+            }
+
             Bitmap = new Bitmap(pictureBox.ClientSize.Width, pictureBox.ClientSize.Height, PixelFormat.Format24bppRgb);
             Bitmap.MakeTransparent();
             using (var graphics = Graphics.FromImage(Bitmap))
             {
-                Axis = new Axis(centerPoint, graphics);
-                Grid = new Grid(settings.GridSettings, centerPoint, graphics);
-                this.Draw(settings, graphics);
+                Axis = new Axis(centerSystemPoint, graphics);
+                Grid = new Grid(settings.GridSettings, centerSystemPoint, graphics);
+                Draw(settings, graphics);
             }
         }
         private void Draw(Settings settings, Graphics graphics)
@@ -25,10 +46,28 @@ namespace GraphicsModule
             Axis.DrawAxis(settings.AxisSettings, graphics);
         }
 
-        public Bitmap Bitmap { get; private set; }
+        #region IDisposable
 
-        public Axis Axis { get; private set; }
+        public void Dispose()
+        {
+            Bitmap?.Dispose();
+        }
 
-        public Grid Grid { get; private set; }
+        #endregion
+
+        /// <summary>
+        /// Bitmap фона
+        /// </summary>
+        public Bitmap Bitmap { get; }
+
+        /// <summary>
+        /// Координатные оси
+        /// </summary>
+        public Axis Axis { get; }
+
+        /// <summary>
+        /// Сетка
+        /// </summary>
+        public Grid Grid { get; }
     }
 }
