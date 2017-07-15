@@ -6,6 +6,7 @@ using GraphicsModule.Enums;
 using GraphicsModule.Geometry.Objects.Points;
 using GraphicsModule.Interfaces;
 using GraphicsModule.Geometry;
+using GraphicsModule.Geometry.Extensions;
 
 namespace GraphicsModule.Rules.Objects.Points
 {
@@ -24,7 +25,7 @@ namespace GraphicsModule.Rules.Objects.Points
         }
         public Point3D Create(Point pt, Point frameCenter, Canvas canvas, DrawSettings settings, Storage storage)
         {
-            var ptOfPlane = TypeOf.PointOfPlane(pt, frameCenter);
+            var ptOfPlane = pt.ToPointOfPlane(frameCenter);
             if (ptOfPlane == null) return null;
             if (storage.TempObjects.Count == 0)
             {

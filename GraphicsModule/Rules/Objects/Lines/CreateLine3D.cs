@@ -10,6 +10,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using GraphicsModule.Configuration;
 using GraphicsModule.Geometry;
+using GraphicsModule.Geometry.Extensions;
 
 namespace GraphicsModule.Rules.Objects.Lines
 {
@@ -29,7 +30,7 @@ namespace GraphicsModule.Rules.Objects.Lines
         }
         public Line3D Create(Point pt, Point frameCenter, Canvas can, DrawSettings setting, Storage strg)
         {
-            var ptOfPlane = TypeOf.PointOfPlane(pt, frameCenter);
+            var ptOfPlane = pt.ToPointOfPlane(frameCenter);
             if (strg.TempObjects.Count == 0)
             {
                 if (TempLineOfPlane == null)

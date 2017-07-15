@@ -5,6 +5,7 @@ using System.Drawing;
 using GraphicsModule.Configuration;
 using GraphicsModule.Controls;
 using GraphicsModule.Geometry;
+using GraphicsModule.Geometry.Extensions;
 using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Geometry.Objects.Points;
 using GraphicsModule.Geometry.Objects.Segments;
@@ -22,7 +23,7 @@ namespace GraphicsModule.Rules.Objects.Segments
         private Segment3D _source;
         public void AddToStorageAndDraw(Point pt, Point frameCenter, Canvas canvas, DrawSettings settings, Storage storage)
         {
-            var ptOfPlane = TypeOf.PointOfPlane(pt, frameCenter);
+            var ptOfPlane = pt.ToPointOfPlane(frameCenter);
             if (storage.TempObjects.Count == 0)
             {
                 if (_tempLineOfPlane == null)

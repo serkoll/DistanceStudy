@@ -1,4 +1,5 @@
 ﻿using System;
+using GraphicsModule.Geometry.Extensions;
 using GraphicsModule.Geometry.Objects.Points;
 
 namespace GraphicsModule.Geometry.Analyze
@@ -111,27 +112,27 @@ namespace GraphicsModule.Geometry.Analyze
         }
         public bool Coincidence(PointOfPlane1X0Y pt1, PointOfPlane1X0Y pt2)
         {
-            return Coincidence(pt1.ToPoint2D(), pt2.ToPoint2D());
+            return Coincidence(ConvertObjectsExtensions.ToPoint2D(pt1), ConvertObjectsExtensions.ToPoint2D(pt2));
         }
         public bool Coincidence(PointOfPlane1X0Y pt1, PointOfPlane1X0Y pt2, double solveerror)
         {
-            return Coincidence(pt1.ToPoint2D(), pt2.ToPoint2D(), solveerror);
+            return Coincidence(ConvertObjectsExtensions.ToPoint2D(pt1), ConvertObjectsExtensions.ToPoint2D(pt2), solveerror);
         }
         public bool Coincidence(PointOfPlane2X0Z pt1, PointOfPlane2X0Z pt2)
         {
-            return Coincidence(pt1.ToPoint2D(), pt2.ToPoint2D());
+            return Coincidence(ConvertObjectsExtensions.ToPoint2D(pt1), ConvertObjectsExtensions.ToPoint2D(pt2));
         }
         public bool Coincidence(PointOfPlane2X0Z pt1, PointOfPlane2X0Z pt2, double solveerror)
         {
-            return Coincidence(pt1.ToPoint2D(), pt2.ToPoint2D(), solveerror);
+            return Coincidence(ConvertObjectsExtensions.ToPoint2D(pt1), ConvertObjectsExtensions.ToPoint2D(pt2), solveerror);
         }
         public bool Coincidence(PointOfPlane3Y0Z pt1, PointOfPlane3Y0Z pt2)
         {
-            return Coincidence(pt1.ToPoint2D(), pt2.ToPoint2D());
+            return Coincidence(ConvertObjectsExtensions.ToPoint2D(pt1), ConvertObjectsExtensions.ToPoint2D(pt2));
         }
         public bool Coincidence(PointOfPlane3Y0Z pt1, PointOfPlane3Y0Z pt2, double solveerror)
         {
-            return Coincidence(pt1.ToPoint2D(), pt2.ToPoint2D(), solveerror);
+            return Coincidence(ConvertObjectsExtensions.ToPoint2D(pt1), ConvertObjectsExtensions.ToPoint2D(pt2), solveerror);
         }
         #endregion
         #region Relative Positioning

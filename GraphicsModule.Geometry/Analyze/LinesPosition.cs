@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using GraphicsModule.Geometry.Extensions;
 using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Geometry.Objects.Lines;
 using GraphicsModule.Geometry.Objects.Points;

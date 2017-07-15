@@ -1,4 +1,6 @@
-﻿namespace GraphicsModule.Geometry.Objects.Points
+﻿using GraphicsModule.Geometry.Extensions;
+
+namespace GraphicsModule.Geometry.Objects.Points
 {
     //TODO: из CNV сюда всё перенести
     public static class PointExtensions

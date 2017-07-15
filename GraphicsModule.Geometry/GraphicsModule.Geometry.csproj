@@ -51,7 +51,7 @@
     <Compile Include="CoordinateSystem\Axis.cs" />
     <Compile Include="CoordinateSystem\Grid.cs" />
     <Compile Include="Calculate.cs" />
-    <Compile Include="ConvertObjectsExtensions.cs" />
+    <Compile Include="Extensions\ConvertObjectsExtensions.cs" />
     <Compile Include="DeterminePosition.cs" />
     <Compile Include="Interfaces\ILineOfPlane.cs" />
     <Compile Include="Interfaces\IObjectOfPlane1X0Y.cs" />
@@ -72,7 +72,6 @@
     <Compile Include="Objects\Segments\SegmentOfPlane1X0Y.cs" />
     <Compile Include="Objects\Segments\SegmentOfPlane2X0Z.cs" />
     <Compile Include="Objects\Segments\SegmentOfPlane3Y0Z.cs" />
-    <Compile Include="TypeOf.cs" />
     <Compile Include="Interfaces\IObject.cs" />
     <Compile Include="Interfaces\IPointOfPlane.cs" />
     <Compile Include="Objects\Lines\Line2D.cs" />

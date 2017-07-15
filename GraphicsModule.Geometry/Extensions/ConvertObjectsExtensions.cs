@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Drawing;
+using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Geometry.Objects.Lines;
 using GraphicsModule.Geometry.Objects.Points;
 using GraphicsModule.Geometry.Objects.Segments;
 
 //TODO: для некоторых методов конвертации сделать безопасную проверку. Дописать xml документацию
-namespace GraphicsModule.Geometry
+namespace GraphicsModule.Geometry.Extensions
 {
     /// <summary>
     /// Методы расширения для объектов. Выполняют конвертацию одного типа объекта в другой
@@ -220,6 +221,24 @@ namespace GraphicsModule.Geometry
             return new Point3D(pt, z);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pt"></param>
+        /// <param name="frameCenter"></param>
+        /// <returns></returns>
+        public static IPointOfPlane ToPointOfPlane(this Point pt, Point frameCenter)
+        {
+            if (PointOfPlane1X0Y.IsCreatable(pt, frameCenter))
+            {
+                return new PointOfPlane1X0Y(pt, frameCenter);
+            }
+            if (PointOfPlane2X0Z.IsCreatable(pt, frameCenter))
+            {
+                return new PointOfPlane2X0Z(pt, frameCenter);
+            }
+            return PointOfPlane3Y0Z.IsCreatable(pt, frameCenter) ? new PointOfPlane3Y0Z(pt, frameCenter) : null;
+        }
         #endregion
 
         #region Lines
