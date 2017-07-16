@@ -11,6 +11,8 @@ namespace GraphicsModule.Geometry.Extensions
     /// </summary>
     public static class DeterminePositionExtensions
     {
+        #region Points
+
         /// <summary>
         /// Конвертирует горизонтальную проекцию точки в точку с глобальными координатами
         /// </summary>
@@ -21,8 +23,7 @@ namespace GraphicsModule.Geometry.Extensions
         public static Point ToGlobalCoordinatesPoint(this PointOfPlane1X0Y pt, float ptR, Point coordinateSystemCenter)
         {
             var cnvPt = pt.ToPoint();
-            return new Point(cnvPt.X + coordinateSystemCenter.X - Convert.ToInt32(ptR),
-                             cnvPt.Y + coordinateSystemCenter.Y - Convert.ToInt32(ptR));
+            return new Point(cnvPt.X + coordinateSystemCenter.X - Convert.ToInt32(ptR), cnvPt.Y + coordinateSystemCenter.Y - Convert.ToInt32(ptR));
         }
 
         /// <summary>
@@ -47,8 +48,19 @@ namespace GraphicsModule.Geometry.Extensions
         public static Point ToGlobalCoordinatesPoint(this PointOfPlane2X0Z pt, float ptR, Point coordinateSystemCenter)
         {
             var cnvPt = pt.ToPoint();
-            return new Point(cnvPt.X + coordinateSystemCenter.X - Convert.ToInt32(ptR),
-                             cnvPt.Y + coordinateSystemCenter.Y - Convert.ToInt32(ptR));
+            return new Point(cnvPt.X + coordinateSystemCenter.X - Convert.ToInt32(ptR), cnvPt.Y + coordinateSystemCenter.Y - Convert.ToInt32(ptR));
+        }
+
+        /// <summary>
+        /// Конвертирует фронтальную проекцию точки в точку с глобальными координатами
+        /// </summary>
+        /// <param name="pt">Фротнальная проекция точки</param>
+        /// <param name="coordinateSystemCenter">Центр системы координат</param>
+        /// <returns>Точка, соответствующая проекции, с глобальными координатами</returns>
+        public static Point ToGlobalCoordinatesPoint(this PointOfPlane2X0Z pt, Point coordinateSystemCenter)
+        {
+            var cnvPt = pt.ToPoint();
+            return new Point(cnvPt.X + coordinateSystemCenter.X, cnvPt.Y + coordinateSystemCenter.Y);
         }
 
         /// <summary>
@@ -61,9 +73,23 @@ namespace GraphicsModule.Geometry.Extensions
         public static Point ToGlobalCoordinatesPoint(this PointOfPlane3Y0Z pt, float ptR, Point coordinateSystemCenter)
         {
             var cnvPt = pt.ToPoint();
-            return new Point(cnvPt.X + coordinateSystemCenter.X - Convert.ToInt32(ptR),
-                             cnvPt.Y + coordinateSystemCenter.Y - Convert.ToInt32(ptR));
+            return new Point(cnvPt.X + coordinateSystemCenter.X - Convert.ToInt32(ptR), cnvPt.Y + coordinateSystemCenter.Y - Convert.ToInt32(ptR));
         }
+
+        /// <summary>
+        /// Конвертирует профильную проекцию точки в точку с глобальными координатами
+        /// </summary>
+        /// <param name="pt">Фронтальная проекция точки</param>
+        /// <param name="ptR">Радиус точки</param>
+        /// <param name="coordinateSystemCenter">Центр системы координат</param>
+        /// <returns>Точка, соответствующая проекции, с глобальными координатами</returns>
+        public static Point ToGlobalCoordinatesPoint(this PointOfPlane3Y0Z pt, Point coordinateSystemCenter)
+        {
+            var cnvPt = pt.ToPoint();
+            return new Point(cnvPt.X + coordinateSystemCenter.X, cnvPt.Y + coordinateSystemCenter.Y);
+        }
+
+        #endregion
 
         /// <summary>
         /// 

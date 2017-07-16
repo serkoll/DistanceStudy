@@ -8,49 +8,93 @@ namespace GraphicsModule.Geometry.Objects.Points
 {
     public class PointOfPlane3Y0Z : IPointOfPlane, IObjectOfPlane3Y0Z
     {
-        public PointOfPlane3Y0Z() { Y = 0; Z = 0; }
+        public PointOfPlane3Y0Z()
+        {
+            Y = 0;
+            Z = 0;
+            Name = new Name();
+        }
 
-        public PointOfPlane3Y0Z(double y, double z) { Y = y; Z = z; }
+        public PointOfPlane3Y0Z(double y, double z)
+        {
+            Y = y;
+            Z = z;
+            Name = new Name();
+        }
 
         public PointOfPlane3Y0Z(Point pt, Point center)
         {
             Y = pt.X - center.X;
             Z = -(pt.Y - center.Y);
+            Name = new Name();
         }
 
-        public PointOfPlane3Y0Z(PointOfPlane3Y0Z pt) { Y = pt.Y; Z = pt.Z; }
         public static bool IsCreatable(Point pt, Point frameCenter)
         {
             return (pt.X - frameCenter.X) >= 0 && (pt.Y - frameCenter.Y) <= 0;
         }
- 
-        public void PointMove(double dy, double dz) { Y += dy; Z += dz; }
 
         public void Draw(Pen pen, float poitRaduis, Point frameCenter, Graphics graphics)
         {
             var ptForDraw = this.ToGlobalCoordinatesPoint(poitRaduis, frameCenter);
             graphics.DrawPie(pen, ptForDraw.X, ptForDraw.Y, poitRaduis * 2, poitRaduis * 2, 0, 360);
         }
-        public void DrawName(DrawSettings st, float poitRaduis, Point frameCenter, Graphics graphics)
+
+        public void Draw(DrawSettings settings, Point coordinateSystemCenter, Graphics graphics)
         {
-            var ptForDraw = this.ToGlobalCoordinatesPoint(poitRaduis, frameCenter);
-            graphics.DrawString(Name.Value + "'''", st.TextFont, st.TextBrush, ptForDraw.X + Name.Dx, ptForDraw.Y + Name.Dy);
-        }
-        public void Draw(DrawSettings settings, Point coordinateSystemCenter, Graphics g)
-        {
-            Draw(settings.PenPoints, settings.RadiusPoints, coordinateSystemCenter, g);
-            if (settings.LinkLinesSettings.IsDraw)
+            var linkLineSettings = settings.LinkLinesSettings;
+            if (linkLineSettings.IsDraw)
             {
-                DrawLinkLine(settings.LinkLinesSettings.PenLinkLineX0ZtoZ, settings.LinkLinesSettings.PenLinkLineY0ZtoY, true, true, true, true, true, coordinateSystemCenter, g);
+                DrawLinkLine(linkLineSettings.PenLinkLineX0ZtoZ, linkLineSettings.PenLinkLineY0ZtoY, coordinateSystemCenter, graphics);
             }
-            if (Name != null)
-                DrawName(settings, settings.RadiusPoints, coordinateSystemCenter, g);
+
+            Draw(settings.PenPoints, settings.RadiusPoints, coordinateSystemCenter, graphics);
+
+            DrawName(settings, settings.RadiusPoints, coordinateSystemCenter, graphics);
         }
+
         public void DrawPointsOnly(DrawSettings st, Point frameCenter, Graphics g)
         {
             Draw(st.PenPoints, st.RadiusPoints, frameCenter, g);
             DrawName(st, st.RadiusPoints, frameCenter, g);
         }
+
+        public void DrawName(DrawSettings st, float poitRaduis, Point frameCenter, Graphics graphics)
+        {
+            var ptForDraw = this.ToGlobalCoordinatesPoint(poitRaduis, frameCenter);
+            graphics.DrawString(Name.Value + "'''", st.TextFont, st.TextBrush, ptForDraw.X + Name.Dx, ptForDraw.Y + Name.Dy);
+        }
+
+        #region LinkLines
+
+        public void DrawLinkLine(Pen penLinkLineToZ, Pen penLinkLineToY, Point coordinateSystemCenter, Graphics graphics)
+        {
+            DrawLinkLineToZ(penLinkLineToZ, coordinateSystemCenter, graphics);
+            DrawLinLineToY(penLinkLineToY, coordinateSystemCenter, graphics);
+        }
+
+        private void DrawLinkLineToZ(Pen penLinkLineToZ, Point coordinateSystemCenter, Graphics graphics)
+        {
+            var pt = this.ToGlobalCoordinatesPoint(coordinateSystemCenter);
+            graphics.DrawLine(penLinkLineToZ, pt, new Point(0, pt.Y));
+        }
+
+        private void DrawLinLineToY(Pen penLinkLineToY, Point coordinateSystemCenter, Graphics graphics)
+        {
+            var pt = this.ToGlobalCoordinatesPoint(coordinateSystemCenter);
+            var ptOnYPi3 = new Point(pt.X, coordinateSystemCenter.Y);
+            graphics.DrawLine(penLinkLineToY, pt, ptOnYPi3);
+
+            var ptForArc = new Point(coordinateSystemCenter.X - Convert.ToInt32(Y), coordinateSystemCenter.Y - Convert.ToInt32(Y));
+            graphics.DrawArc(penLinkLineToY, ptForArc.X, ptForArc.Y, Convert.ToInt32(Y * 2), Convert.ToInt32(Y * 2), 0, 90);
+
+            var ptOnYPi1 = new Point(coordinateSystemCenter.X, coordinateSystemCenter.Y + Convert.ToInt32(Y));
+            graphics.DrawLine(penLinkLineToY, ptOnYPi1, new Point(0, ptOnYPi1.Y));
+        }
+
+        #endregion
+
+        [Obsolete("Нет необходимости в кусочном включении частей линии связи. Использовать общий метод ")]
         public void DrawLinkLine(Pen penLinkLineY0ZtoZ, Pen penLinkLineY0ZtoY, bool linkPointToY, bool linkPointToZ, bool linkYToBorderPi1, bool linkZToBorderPi2, bool linkCurveY3ToY1, Point frameCenter, Graphics graphics)
         {
             //Отрисовка линий связи Профильной проекции

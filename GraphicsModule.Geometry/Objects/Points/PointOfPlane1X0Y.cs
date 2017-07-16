@@ -47,30 +47,29 @@ namespace GraphicsModule.Geometry.Objects.Points
             return (pt.X - frameCenter.X) <= 0 && (pt.Y - frameCenter.Y) >= 0;
         }
 
-        public void PointMove(double dx, double dy) { X += dx; Y += dy; }
-
         public void Draw(Pen pen, float poitRaduis, Point frameCenter, Graphics graphics)
         {
             var ptForDraw = this.ToGlobalCoordinatesPoint(poitRaduis, frameCenter);
             graphics.DrawPie(pen, ptForDraw.X - poitRaduis, ptForDraw.Y - poitRaduis, poitRaduis * 2, poitRaduis * 2, 0, 360);
         }
 
-        public void DrawName(DrawSettings st, float poitRaduis, Point frameCenter, Graphics graphics)
-        {
-            var ptForDraw = this.ToGlobalCoordinatesPoint(poitRaduis, frameCenter);
-            graphics.DrawString(Name.Value + "'", st.TextFont, st.TextBrush, ptForDraw.X + Name.Dx, ptForDraw.Y + Name.Dy);
-        }
-
         public void Draw(DrawSettings settings, Point coordinateSystemCenter, Graphics graphics)
         {
-            if (settings.LinkLinesSettings.IsDraw)
+            var linkLineSettings = settings.LinkLinesSettings;
+            if (linkLineSettings.IsDraw)
             {
-                DrawLinkLIne(settings.LinkLinesSettings.PenLinkLineX0YtoX, settings.LinkLinesSettings.PenLinkLineX0YtoY, coordinateSystemCenter, graphics);
+                DrawLinkLine(linkLineSettings.PenLinkLineX0YtoX, linkLineSettings.PenLinkLineX0YtoY, coordinateSystemCenter, graphics);
             }
 
             Draw(settings.PenPoints, settings.RadiusPoints, coordinateSystemCenter, graphics);
 
             DrawName(settings, settings.RadiusPoints, coordinateSystemCenter, graphics);
+        }
+    
+        public void DrawName(DrawSettings st, float poitRaduis, Point frameCenter, Graphics graphics)
+        {
+            var ptForDraw = this.ToGlobalCoordinatesPoint(poitRaduis, frameCenter);
+            graphics.DrawString(Name.Value + "'", st.TextFont, st.TextBrush, ptForDraw.X + Name.Dx, ptForDraw.Y + Name.Dy);
         }
 
         public void DrawPointsOnly(DrawSettings st, Point coordinateSystemCenter, Graphics graphics)
@@ -79,7 +78,9 @@ namespace GraphicsModule.Geometry.Objects.Points
             DrawName(st, st.RadiusPoints, coordinateSystemCenter, graphics);
         }
 
-        public void DrawLinkLIne(Pen penLinkLineToX, Pen penLinkLineToY, Point coordinateSystemCenter, Graphics graphics)
+        #region LinkLines
+
+        public void DrawLinkLine(Pen penLinkLineToX, Pen penLinkLineToY, Point coordinateSystemCenter, Graphics graphics)
         {
             DrawLinkLineToX(penLinkLineToX, coordinateSystemCenter, graphics);
             DrawLinLineToY(penLinkLineToY, coordinateSystemCenter, graphics);
@@ -88,7 +89,6 @@ namespace GraphicsModule.Geometry.Objects.Points
         private void DrawLinkLineToX(Pen penLinkLineToX, Point coordinateSystemCenter, Graphics graphics)
         {
             var pt = this.ToGlobalCoordinatesPoint(coordinateSystemCenter);
-
             graphics.DrawLine(penLinkLineToX, pt, new Point(pt.X, 0));
         }
 
@@ -104,6 +104,8 @@ namespace GraphicsModule.Geometry.Objects.Points
             var ptOnYPi3 = new Point(coordinateSystemCenter.X + Convert.ToInt32(Y), coordinateSystemCenter.Y);
             graphics.DrawLine(penLinkLineToY, ptOnYPi3, new Point(ptOnYPi3.X, 0));
         }
+
+        #endregion
 
         [Obsolete("Нет необходимости в кусочном включении частей линии связи. Использовать общий метод ")]
         public void DrawLinkLine(Pen penLinkLineToX, Pen penLinkLinetoY, bool linkPointToX, bool linkPointToY, bool linkXToBorderPi2, bool linkYToBorderPi3, bool linkCurveY1ToY3, Point frameCenter, Graphics graphics)

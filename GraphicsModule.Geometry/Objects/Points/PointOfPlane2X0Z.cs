@@ -8,24 +8,31 @@ namespace GraphicsModule.Geometry.Objects.Points
 {
     public class PointOfPlane2X0Z : IPointOfPlane, IObjectOfPlane2X0Z
     {
-        public PointOfPlane2X0Z() { X = 0; Z = 0; }
- 
-        public PointOfPlane2X0Z(double x, double z) { X = x; Z = z; }
+        public PointOfPlane2X0Z()
+        {
+            X = 0;
+            Z = 0;
+            Name = new Name();
+        }
+
+        public PointOfPlane2X0Z(double x, double z)
+        {
+            X = x;
+            Z = z;
+            Name = new Name();
+        }
 
         public PointOfPlane2X0Z(Point pt, Point center)
         {
             X = -(pt.X - center.X);
             Z = -(pt.Y - center.Y);
+            Name = new Name();
         }
-
-        public PointOfPlane2X0Z(PointOfPlane2X0Z pt) { X = pt.X; Z = pt.Z; }
 
         public static bool IsCreatable(Point pt, Point frameCenter)
         {
             return (pt.X - frameCenter.X) <= 0 && (pt.Y - frameCenter.Y) <= 0;
         }
-     
-        public void PointMove(double dx, double dz) { X += dx; Z += dz; }
 
         public void Draw(Pen pen, float poitRaduis, Point frameCenter, Graphics graphics)
         {
@@ -39,15 +46,17 @@ namespace GraphicsModule.Geometry.Objects.Points
             graphics.DrawString(Name.Value + "''", st.TextFont, st.TextBrush, ptForDraw.X + Name.Dx, ptForDraw.Y + Name.Dy);
         }
 
-        public void Draw(DrawSettings settings, Point coordinateSystemCenter, Graphics g)
+        public void Draw(DrawSettings settings, Point coordinateSystemCenter, Graphics graphics)
         {
-            Draw(settings.PenPoints, settings.RadiusPoints, coordinateSystemCenter, g);
-            if (settings.LinkLinesSettings.IsDraw)
+            var linkLineSettings = settings.LinkLinesSettings;
+            if (linkLineSettings.IsDraw)
             {
-                DrawLinkLine(settings.LinkLinesSettings.PenLinkLineX0ZtoX, settings.LinkLinesSettings.PenLinkLineX0ZtoZ, true, true, true, true, coordinateSystemCenter, g);
+                DrawLinkLine(linkLineSettings.PenLinkLineX0ZtoX, linkLineSettings.PenLinkLineX0ZtoZ, coordinateSystemCenter, graphics);
             }
-            if (Name != null)
-                DrawName(settings, settings.RadiusPoints, coordinateSystemCenter, g);
+
+            Draw(settings.PenPoints, settings.RadiusPoints, coordinateSystemCenter, graphics);
+
+            DrawName(settings, settings.RadiusPoints, coordinateSystemCenter, graphics);
         }
 
         public void DrawPointsOnly(DrawSettings st, Point frameCenter, Graphics g)
@@ -56,6 +65,31 @@ namespace GraphicsModule.Geometry.Objects.Points
             DrawName(st, st.RadiusPoints, frameCenter, g);
         }
 
+        #region LinkLines
+
+        public void DrawLinkLine(Pen penLinkLineToX, Pen penLinkLineToZ, Point coordinateSystemCenter, Graphics graphics)
+        {
+            DrawLinkLineToX(penLinkLineToX, coordinateSystemCenter, graphics);
+            DrawLinLineToZ(penLinkLineToZ, coordinateSystemCenter, graphics);
+        }
+
+        private void DrawLinkLineToX(Pen penLinkLineToX, Point coordinateSystemCenter, Graphics graphics)
+        {
+            var pt = this.ToGlobalCoordinatesPoint(coordinateSystemCenter);
+            const int solveErrorSize = 10;
+            graphics.DrawLine(penLinkLineToX, pt, new Point(pt.X, coordinateSystemCenter.Y * 2 + solveErrorSize));
+        }
+
+        private void DrawLinLineToZ(Pen penLinkLineToZ, Point coordinateSystemCenter, Graphics graphics)
+        {
+            var pt = this.ToGlobalCoordinatesPoint(coordinateSystemCenter);
+            const int solveErrorSize = 10;
+            graphics.DrawLine(penLinkLineToZ, pt, new Point(coordinateSystemCenter.X * 2 + solveErrorSize, pt.Y));
+        }
+
+        #endregion
+
+        [Obsolete("Нет необходимости в кусочном включении частей линии связи. Использовать общий метод ")]
         public void DrawLinkLine(Pen penLinkLineX0ZtoX, Pen penLinkLineX0ZtoZ, bool linkPointToX, bool linkPointToZ, bool linkXToBorderPi1, bool linkZToBorderPi3, Point frameCenter, Graphics graphics)
         {
             //Отрисовка линий связи Фронтальной проекции
@@ -77,15 +111,15 @@ namespace GraphicsModule.Geometry.Objects.Points
             }
         }
 
-        public double X { get; private set; }
-
-        public double Z { get; private set; }
-
-        public Name Name { get; set; }
-
         public bool IsSelected(Point mscoords, float ptR, Point frameCenter, double distance)
         {
             return Calculate.Distance(mscoords, ptR, frameCenter, this) < distance;
         }
+
+        public double X { get; }
+
+        public double Z { get; }
+
+        public Name Name { get; set; }
     }
 }
