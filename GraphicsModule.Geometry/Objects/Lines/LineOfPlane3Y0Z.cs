@@ -37,11 +37,11 @@ namespace GraphicsModule.Geometry.Objects.Lines
             Point1 = new PointOfPlane3Y0Z(line.Point1.Y, line.Point1.Z);
         }
 
-        public void Draw(DrawSettings st, Point coordinateSystemCenter, Graphics g)
+        public void Draw(DrawSettings settings, Point coordinateSystemCenter, Graphics g)
         {
-            Point0.Draw(st, coordinateSystemCenter, g);
-            Point1.Draw(st, coordinateSystemCenter, g);
-            g.DrawLine(st.PenLineOfPlane3Y0Z, DrawPoints[0], DrawPoints[1]);
+            Point0.Draw(settings, coordinateSystemCenter, g);
+            Point1.Draw(settings, coordinateSystemCenter, g);
+            g.DrawLine(settings.PenLineOfPlane3Y0Z, DrawPoints[0], DrawPoints[1]);
         }
 
         public void DrawLineOnly(DrawSettings st, Point framecenter, Graphics g)

@@ -36,15 +36,15 @@ namespace GraphicsModule.Geometry.Objects.Points
             var ptForDraw = this.ToGlobalCoordinatesPoint(poitRaduis, frameCenter);
             graphics.DrawString(Name.Value + "'''", st.TextFont, st.TextBrush, ptForDraw.X + Name.Dx, ptForDraw.Y + Name.Dy);
         }
-        public void Draw(DrawSettings st, Point coordinateSystemCenter, Graphics g)
+        public void Draw(DrawSettings settings, Point coordinateSystemCenter, Graphics g)
         {
-            Draw(st.PenPoints, st.RadiusPoints, coordinateSystemCenter, g);
-            if (st.LinkLinesSettings.IsDraw)
+            Draw(settings.PenPoints, settings.RadiusPoints, coordinateSystemCenter, g);
+            if (settings.LinkLinesSettings.IsDraw)
             {
-                DrawLinkLine(st.LinkLinesSettings.PenLinkLineX0ZtoZ, st.LinkLinesSettings.PenLinkLineY0ZtoY, true, true, true, true, true, coordinateSystemCenter, g);
+                DrawLinkLine(settings.LinkLinesSettings.PenLinkLineX0ZtoZ, settings.LinkLinesSettings.PenLinkLineY0ZtoY, true, true, true, true, true, coordinateSystemCenter, g);
             }
             if (Name != null)
-                DrawName(st, st.RadiusPoints, coordinateSystemCenter, g);
+                DrawName(settings, settings.RadiusPoints, coordinateSystemCenter, g);
         }
         public void DrawPointsOnly(DrawSettings st, Point frameCenter, Graphics g)
         {

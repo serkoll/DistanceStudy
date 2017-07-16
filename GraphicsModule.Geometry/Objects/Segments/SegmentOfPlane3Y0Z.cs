@@ -25,14 +25,14 @@ namespace GraphicsModule.Geometry.Objects.Segments
             Point1 = new PointOfPlane3Y0Z(segment.Point1.Y, segment.Point1.Z);
         }
 
-        public void Draw(DrawSettings st, Point coordinateSystemCenter, Graphics g)
+        public void Draw(DrawSettings settings, Point coordinateSystemCenter, Graphics g)
         {
-            Point0.Draw(st, coordinateSystemCenter, g);
-            Point1.Draw(st, coordinateSystemCenter, g);
-            var pt0 = Point0.ToGlobalCoordinatesPoint(st.RadiusPoints, coordinateSystemCenter);
-            var pt1 = Point1.ToGlobalCoordinatesPoint(st.RadiusPoints, coordinateSystemCenter);
-            g.DrawLine(st.PenLineOfPlane3Y0Z, new PointF(pt0.X + st.RadiusPoints, pt0.Y + st.RadiusPoints),
-                                              new PointF(pt1.X + st.RadiusPoints, pt1.Y + st.RadiusPoints));
+            Point0.Draw(settings, coordinateSystemCenter, g);
+            Point1.Draw(settings, coordinateSystemCenter, g);
+            var pt0 = Point0.ToGlobalCoordinatesPoint(settings.RadiusPoints, coordinateSystemCenter);
+            var pt1 = Point1.ToGlobalCoordinatesPoint(settings.RadiusPoints, coordinateSystemCenter);
+            g.DrawLine(settings.PenLineOfPlane3Y0Z, new PointF(pt0.X + settings.RadiusPoints, pt0.Y + settings.RadiusPoints),
+                                              new PointF(pt1.X + settings.RadiusPoints, pt1.Y + settings.RadiusPoints));
         }
 
         public void DrawSegmentOnly(DrawSettings settings, Point coordinateSystemCenter, Graphics graphics)

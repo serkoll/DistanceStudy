@@ -61,23 +61,51 @@ namespace GraphicsModule.Geometry.Objects.Points
             graphics.DrawString(Name.Value + "'", st.TextFont, st.TextBrush, ptForDraw.X + Name.Dx, ptForDraw.Y + Name.Dy);
         }
 
-        public void Draw(DrawSettings st, Point coordinateSystemCenter, Graphics g)
+        public void Draw(DrawSettings settings, Point coordinateSystemCenter, Graphics graphics)
         {
-            Draw(st.PenPoints, st.RadiusPoints, coordinateSystemCenter, g);
-
-            if (st.LinkLinesSettings.IsDraw)
+            if (settings.LinkLinesSettings.IsDraw)
             {
-                DrawLinkLine(st.LinkLinesSettings.PenLinkLineX0YtoX, st.LinkLinesSettings.PenLinkLineX0YtoY, true, true, true, true, true, coordinateSystemCenter, g);
+                DrawLinkLIne(settings.LinkLinesSettings.PenLinkLineX0YtoX, settings.LinkLinesSettings.PenLinkLineX0YtoY, coordinateSystemCenter, graphics);
             }
 
-            DrawName(st, st.RadiusPoints, coordinateSystemCenter, g);
+            Draw(settings.PenPoints, settings.RadiusPoints, coordinateSystemCenter, graphics);
+
+            DrawName(settings, settings.RadiusPoints, coordinateSystemCenter, graphics);
         }
 
-        public void DrawPointsOnly(DrawSettings st, Point frameCenter, Graphics g)
+        public void DrawPointsOnly(DrawSettings st, Point coordinateSystemCenter, Graphics graphics)
         {
-            Draw(st.PenPoints, st.RadiusPoints, frameCenter, g);
-            DrawName(st, st.RadiusPoints, frameCenter, g);
+            Draw(st.PenPoints, st.RadiusPoints, coordinateSystemCenter, graphics);
+            DrawName(st, st.RadiusPoints, coordinateSystemCenter, graphics);
         }
+
+        public void DrawLinkLIne(Pen penLinkLineToX, Pen penLinkLineToY, Point coordinateSystemCenter, Graphics graphics)
+        {
+            DrawLinkLineToX(penLinkLineToX, coordinateSystemCenter, graphics);
+            DrawLinLineToY(penLinkLineToY, coordinateSystemCenter, graphics);
+        }
+
+        private void DrawLinkLineToX(Pen penLinkLineToX, Point coordinateSystemCenter, Graphics graphics)
+        {
+            var pt = this.ToGlobalCoordinatesPoint(coordinateSystemCenter);
+
+            graphics.DrawLine(penLinkLineToX, pt, new Point(pt.X, 0));
+        }
+
+        private void DrawLinLineToY(Pen penLinkLineToY, Point coordinateSystemCenter, Graphics graphics)
+        {
+            var pt = this.ToGlobalCoordinatesPoint(coordinateSystemCenter);
+            var ptOnYPi1 = new Point(coordinateSystemCenter.X, pt.Y);
+            graphics.DrawLine(penLinkLineToY, pt, ptOnYPi1);
+
+            var ptForArc = new Point(coordinateSystemCenter.X - Convert.ToInt32(Y), coordinateSystemCenter.Y - Convert.ToInt32(Y));
+            graphics.DrawArc(penLinkLineToY, ptForArc.X, ptForArc.Y, Convert.ToInt32(Y * 2), Convert.ToInt32(Y * 2), 0, 90);
+
+            var ptOnYPi3 = new Point(coordinateSystemCenter.X + Convert.ToInt32(Y), coordinateSystemCenter.Y);
+            graphics.DrawLine(penLinkLineToY, ptOnYPi3, new Point(ptOnYPi3.X, 0));
+        }
+
+        [Obsolete("Нет необходимости в кусочном включении частей линии связи. Использовать общий метод ")]
         public void DrawLinkLine(Pen penLinkLineToX, Pen penLinkLinetoY, bool linkPointToX, bool linkPointToY, bool linkXToBorderPi2, bool linkYToBorderPi3, bool linkCurveY1ToY3, Point frameCenter, Graphics graphics)
         {
             const double tolerance = 0.0001;

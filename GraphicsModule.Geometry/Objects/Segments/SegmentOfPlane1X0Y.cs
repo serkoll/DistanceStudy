@@ -27,10 +27,12 @@ namespace GraphicsModule.Geometry.Objects.Segments
             var pt0 = Point0.ToGlobalCoordinatesPoint(settings.RadiusPoints, coordinateSystemCenter);
             var pt1 = Point1.ToGlobalCoordinatesPoint(settings.RadiusPoints, coordinateSystemCenter);
 
+            graphics.DrawLine(settings.PenLineOfPlane1X0Y, pt0, pt1);
+
             Point0.Draw(settings, coordinateSystemCenter, graphics);
             Point1.Draw(settings, coordinateSystemCenter, graphics);
             
-            graphics.DrawLine(settings.PenLineOfPlane1X0Y, pt0, pt1);
+            
         }
 
         public void DrawSegmentOnly(DrawSettings settings, Point coordinateSystemCenter, Graphics graphics)
@@ -38,10 +40,12 @@ namespace GraphicsModule.Geometry.Objects.Segments
             var pt0 = Point0.ToGlobalCoordinatesPoint(settings.RadiusPoints, coordinateSystemCenter);
             var pt1 = Point1.ToGlobalCoordinatesPoint(settings.RadiusPoints, coordinateSystemCenter);
 
+            graphics.DrawLine(settings.PenLineOfPlane1X0Y, pt0, pt1);
+
             Point0.DrawPointsOnly(settings, coordinateSystemCenter, graphics);
             Point1.DrawPointsOnly(settings, coordinateSystemCenter, graphics);
             
-            graphics.DrawLine(settings.PenLineOfPlane1X0Y, pt0, pt1);
+            
         }
 
         public bool IsSelected(Point mscoords, float ptR, Point frameCenter, double distance)

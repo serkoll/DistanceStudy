@@ -61,11 +61,11 @@ namespace GraphicsModule.Geometry.Objects.Lines
             return line.ky / line.kx;
 
         }
-        public void Draw(DrawSettings st, Point coordinateSystemCenter, Graphics g)
+        public void Draw(DrawSettings settings, Point coordinateSystemCenter, Graphics g)
         {
-            Point0.Draw(st, coordinateSystemCenter, g);
-            Point1.Draw(st, coordinateSystemCenter, g);
-            g.DrawLine(st.PenLine2D, pts[0], pts[1]);
+            Point0.Draw(settings, coordinateSystemCenter, g);
+            Point1.Draw(settings, coordinateSystemCenter, g);
+            g.DrawLine(settings.PenLine2D, pts[0], pts[1]);
         }
         private void CalculatePointsForDraw(PictureBox pb)
         {

@@ -23,10 +23,10 @@ namespace GraphicsModule.Geometry.Objects.Points
             Name = new Name();
         }
 
-        public void Draw(DrawSettings st, Point coordinateSystemCenter, Graphics g)
+        public void Draw(DrawSettings settings, Point coordinateSystemCenter, Graphics g)
         {
-            g.DrawPie(st.PenPoints, (float)X - st.RadiusPoints, (float)Y - st.RadiusPoints, st.RadiusPoints * 2, st.RadiusPoints * 2, 0, 360);
-            g.DrawString(Name.Value, st.TextFont, st.TextBrush, (float)X + Name.Dx, (float)Y + Name.Dy);
+            g.DrawPie(settings.PenPoints, (float)X - settings.RadiusPoints, (float)Y - settings.RadiusPoints, settings.RadiusPoints * 2, settings.RadiusPoints * 2, 0, 360);
+            g.DrawString(Name.Value, settings.TextFont, settings.TextBrush, (float)X + Name.Dx, (float)Y + Name.Dy);
         }
 
         public double X { get; }

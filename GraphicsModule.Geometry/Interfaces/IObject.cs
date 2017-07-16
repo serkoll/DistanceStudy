@@ -7,7 +7,7 @@ namespace GraphicsModule.Geometry.Interfaces
     {
         Name Name { get; set; }
 
-        void Draw(DrawSettings st, Point coordinateSystemCenter, Graphics graphics);
+        void Draw(DrawSettings settings, Point coordinateSystemCenter, Graphics graphics);
 
         bool IsSelected(Point mousecoords, float ptR, Point frameCenter, double distance);
     }
