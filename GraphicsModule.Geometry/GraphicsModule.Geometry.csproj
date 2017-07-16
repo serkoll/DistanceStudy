@@ -51,7 +51,7 @@
     <Compile Include="CoordinateSystem\Grid.cs" />
     <Compile Include="Calculate.cs" />
     <Compile Include="Extensions\ConvertObjectsExtensions.cs" />
-    <Compile Include="DeterminePosition.cs" />
+    <Compile Include="Extensions\DeterminePositionExtensions.cs" />
     <Compile Include="Interfaces\ILineOfPlane.cs" />
     <Compile Include="Interfaces\IObjectOfPlane1X0Y.cs" />
     <Compile Include="Interfaces\IObjectOfPlane2X0Z.cs" />

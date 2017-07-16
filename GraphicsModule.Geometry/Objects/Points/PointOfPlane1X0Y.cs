@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using GraphicsModule.Configuration;
+using GraphicsModule.Geometry.Extensions;
 using GraphicsModule.Geometry.Interfaces;
 
 namespace GraphicsModule.Geometry.Objects.Points
@@ -48,13 +49,13 @@ namespace GraphicsModule.Geometry.Objects.Points
 
         public void Draw(Pen pen, float poitRaduis, Point frameCenter, Graphics graphics)
         {
-            var ptForDraw = DeterminePosition.ForPointProjection(this, poitRaduis, frameCenter);
+            var ptForDraw = this.ToGlobalCoordinatesPoint(poitRaduis, frameCenter);
             graphics.DrawPie(pen, ptForDraw.X, ptForDraw.Y, poitRaduis * 2, poitRaduis * 2, 0, 360);
         }
 
         public void DrawName(DrawSettings st, float poitRaduis, Point frameCenter, Graphics graphics)
         {
-            var ptForDraw = DeterminePosition.ForPointProjection(this, poitRaduis, frameCenter);
+            var ptForDraw = this.ToGlobalCoordinatesPoint(poitRaduis, frameCenter);
             graphics.DrawString(Name.Value + "'", st.TextFont, st.TextBrush, ptForDraw.X + Name.Dx, ptForDraw.Y + Name.Dy);
         }
 

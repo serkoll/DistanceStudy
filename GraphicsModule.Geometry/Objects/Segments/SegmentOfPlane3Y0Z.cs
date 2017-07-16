@@ -29,8 +29,8 @@ namespace GraphicsModule.Geometry.Objects.Segments
         {
             Point0.Draw(st, framecenter, g);
             Point1.Draw(st, framecenter, g);
-            var pt0 = DeterminePosition.ForPointProjection(Point0, st.RadiusPoints, framecenter);
-            var pt1 = DeterminePosition.ForPointProjection(Point1, st.RadiusPoints, framecenter);
+            var pt0 = Point0.ToGlobalCoordinatesPoint(st.RadiusPoints, framecenter);
+            var pt1 = Point1.ToGlobalCoordinatesPoint(st.RadiusPoints, framecenter);
             g.DrawLine(st.PenLineOfPlane3Y0Z, new PointF(pt0.X + st.RadiusPoints, pt0.Y + st.RadiusPoints),
                                               new PointF(pt1.X + st.RadiusPoints, pt1.Y + st.RadiusPoints));
         }
@@ -39,15 +39,15 @@ namespace GraphicsModule.Geometry.Objects.Segments
         {
             Point0.DrawPointsOnly(st, framecenter, g);
             Point1.DrawPointsOnly(st, framecenter, g);
-            var pt0 = DeterminePosition.ForPointProjection(Point0, st.RadiusPoints, framecenter);
-            var pt1 = DeterminePosition.ForPointProjection(Point1, st.RadiusPoints, framecenter);
+            var pt0 = Point0.ToGlobalCoordinatesPoint(st.RadiusPoints, framecenter);
+            var pt1 = Point1.ToGlobalCoordinatesPoint(st.RadiusPoints, framecenter);
             g.DrawLine(st.PenLineOfPlane3Y0Z, new PointF(pt0.X + st.RadiusPoints, pt0.Y + st.RadiusPoints),
                                               new PointF(pt1.X + st.RadiusPoints, pt1.Y + st.RadiusPoints));
         }
 
         public bool IsSelected(Point mscoords, float ptR, Point frameCenter, double distance)
         {
-            var sg = DeterminePosition.ForSegmentProjection(this, frameCenter);
+            var sg = this.ToGlobalCoordinatesSegment(frameCenter);
             return sg.IsIncidentalToPoint(mscoords, 35 * distance);
         }
 

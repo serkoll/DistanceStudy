@@ -24,8 +24,7 @@ namespace GraphicsModule.Geometry.Objects.Segments
         {
             Point0.Draw(st, framecenter, g);
             Point1.Draw(st, framecenter, g);
-            g.DrawLine(st.PenLine2D, new PointF((float)Point0.X, (float)Point0.Y), 
-                                     new PointF((float)Point1.X, (float)Point1.Y));
+            g.DrawLine(st.PenLine2D, Point0.ToPointF(), Point1.ToPointF());
         }
         public bool IsSelected(Point mscoords, float ptR, Point frameCenter, double distance)
         {

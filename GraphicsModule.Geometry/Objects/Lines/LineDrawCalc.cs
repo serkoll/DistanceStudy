@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using GraphicsModule.Geometry.Extensions;
 
 namespace GraphicsModule.Geometry.Objects.Lines
 {
@@ -17,7 +18,7 @@ namespace GraphicsModule.Geometry.Objects.Lines
         {
             var pts = new List<PointF>();
             
-            var ln = DeterminePosition.ForLineProjection(ln1, FrameCenter);
+            var ln = ln1.ToGlobalCoordinatesLine2D(FrameCenter);
 
             if (Math.Abs(ln.kx) < Tolerance)
             {
@@ -56,7 +57,7 @@ namespace GraphicsModule.Geometry.Objects.Lines
         {
             var pts = new List<PointF>();
 
-            var ln = DeterminePosition.ForLineProjection(ln2, FrameCenter);
+            var ln = ln2.ToGlobalCoordinatesLine2D(FrameCenter);
 
             if (Math.Abs(ln.kx) < Tolerance)
             {
@@ -95,7 +96,7 @@ namespace GraphicsModule.Geometry.Objects.Lines
         {
             var pts = new List<PointF>();
 
-            var ln = DeterminePosition.ForLineProjection(ln3, FrameCenter);
+            var ln = ln3.ToGlobalCoordinatesLine2D(FrameCenter);
 
             if (Math.Abs(ln.kx) < Tolerance)
             {

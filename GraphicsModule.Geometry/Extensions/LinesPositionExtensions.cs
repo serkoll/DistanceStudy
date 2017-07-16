@@ -160,7 +160,7 @@ namespace GraphicsModule.Geometry.Extensions
 
         public static bool IsCrossed(this Line2D ln1, LineOfPlane1X0Y ln, Point frameCenter)
         {
-            var ln2 = DeterminePosition.ForLineProjection(ln, frameCenter);
+            var ln2 = ln.ToGlobalCoordinatesLine2D(frameCenter);
             var y = (ln2.Point0.Y * ln2.kx * ln1.ky - ln1.Point0.Y * ln2.ky * ln1.kx + ln2.ky * ln1.ky * (ln1.Point0.X - ln2.Point0.X)) /
                     (ln2.kx * ln1.ky - ln1.kx * ln2.ky);
             if (y < 0)
@@ -174,7 +174,7 @@ namespace GraphicsModule.Geometry.Extensions
 
         public static bool IsCrossed(this Line2D ln1, LineOfPlane2X0Z ln, Point frameCenter)
         {
-            var ln2 = DeterminePosition.ForLineProjection(ln, frameCenter);
+            var ln2 = ln.ToGlobalCoordinatesLine2D(frameCenter);
             var y = (ln2.Point0.Y * ln2.kx * ln1.ky - ln1.Point0.Y * ln2.ky * ln1.kx + ln2.ky * ln1.ky * (ln1.Point0.X - ln2.Point0.X)) /
                      (ln2.kx * ln1.ky - ln1.kx * ln2.ky);
             if (y < 0)
@@ -188,7 +188,7 @@ namespace GraphicsModule.Geometry.Extensions
 
         public static bool IsCrossed(this Line2D ln1, LineOfPlane3Y0Z ln, Point frameCenter)
         {
-            var ln2 = DeterminePosition.ForLineProjection(ln, frameCenter);
+            var ln2 = ln.ToGlobalCoordinatesLine2D(frameCenter);
             var y = (ln2.Point0.Y * ln2.kx * ln1.ky - ln1.Point0.Y * ln2.ky * ln1.kx + ln2.ky * ln1.ky * (ln1.Point0.X - ln2.Point0.X)) /
                      (ln2.kx * ln1.ky - ln1.kx * ln2.ky);
             if (y < 0)
@@ -202,8 +202,8 @@ namespace GraphicsModule.Geometry.Extensions
 
         public static bool IsCrossed(this LineOfPlane1X0Y lnOfPlane1, LineOfPlane1X0Y lnOfPlane2, Point frameCenter)
         {
-            var ln1 = DeterminePosition.ForLineProjection(lnOfPlane1, frameCenter);
-            var ln2 = DeterminePosition.ForLineProjection(lnOfPlane2, frameCenter);
+            var ln1 = lnOfPlane1.ToGlobalCoordinatesLine2D(frameCenter);
+            var ln2 = lnOfPlane2.ToGlobalCoordinatesLine2D(frameCenter);
             var y = (ln2.Point0.Y * ln2.kx * ln1.ky - ln1.Point0.Y * ln2.ky * ln1.kx + ln2.ky * ln1.ky * (ln1.Point0.X - ln2.Point0.X)) /
                     (ln2.kx * ln1.ky - ln1.kx * ln2.ky);
             if (y < 0)
@@ -217,8 +217,8 @@ namespace GraphicsModule.Geometry.Extensions
 
         public static bool IsCrossed(this LineOfPlane2X0Z lnOfPlane1, LineOfPlane2X0Z lnOfPlane2, Point frameCenter)
         {
-            var ln1 = DeterminePosition.ForLineProjection(lnOfPlane1, frameCenter);
-            var ln2 = DeterminePosition.ForLineProjection(lnOfPlane2, frameCenter);
+            var ln1 = lnOfPlane1.ToGlobalCoordinatesLine2D(frameCenter);
+            var ln2 = lnOfPlane2.ToGlobalCoordinatesLine2D(frameCenter);
             var y = (ln2.Point0.Y * ln2.kx * ln1.ky - ln1.Point0.Y * ln2.ky * ln1.kx + ln2.ky * ln1.ky * (ln1.Point0.X - ln2.Point0.X)) /
                     (ln2.kx * ln1.ky - ln1.kx * ln2.ky);
             if (y < 0)
@@ -232,8 +232,8 @@ namespace GraphicsModule.Geometry.Extensions
 
         public static bool IsCrossed(this LineOfPlane3Y0Z lnOfPlane1, LineOfPlane3Y0Z lnOfPlane2, Point frameCenter)
         {
-            var ln1 = DeterminePosition.ForLineProjection(lnOfPlane1, frameCenter);
-            var ln2 = DeterminePosition.ForLineProjection(lnOfPlane2, frameCenter);
+            var ln1 = lnOfPlane1.ToGlobalCoordinatesLine2D(frameCenter);
+            var ln2 = lnOfPlane2.ToGlobalCoordinatesLine2D(frameCenter);
             var y = (ln2.Point0.Y * ln2.kx * ln1.ky - ln1.Point0.Y * ln2.ky * ln1.kx + ln2.ky * ln1.ky * (ln1.Point0.X - ln2.Point0.X)) /
                     (ln2.kx * ln1.ky - ln1.kx * ln2.ky);
             if (y < 0)
@@ -247,8 +247,8 @@ namespace GraphicsModule.Geometry.Extensions
 
         public static bool IsCrossed(this SegmentOfPlane1X0Y lnOfPlane1, SegmentOfPlane1X0Y lnOfPlane2, Point frameCenter)
         {
-            var ln1 = DeterminePosition.ForSegmentProjection(lnOfPlane1, frameCenter);
-            var ln2 = DeterminePosition.ForSegmentProjection(lnOfPlane2, frameCenter);
+            var ln1 = lnOfPlane1.ToGlobalCoordinatesSegment(frameCenter);
+            var ln2 = lnOfPlane2.ToGlobalCoordinatesSegment(frameCenter);
             var y = (ln2.Point0.Y * ln2.Kx * ln1.Ky - ln1.Point0.Y * ln2.Ky * ln1.Kx + ln2.Ky * ln1.Ky * (ln1.Point0.X - ln2.Point0.X)) /
                     (ln2.Kx * ln1.Ky - ln1.Kx * ln2.Ky);
             if (y < 0)
@@ -262,8 +262,8 @@ namespace GraphicsModule.Geometry.Extensions
 
         public static bool IsCrossed(this SegmentOfPlane2X0Z lnOfPlane1, SegmentOfPlane2X0Z lnOfPlane2, Point frameCenter)
         {
-            var ln1 = DeterminePosition.ForSegmentProjection(lnOfPlane1, frameCenter);
-            var ln2 = DeterminePosition.ForSegmentProjection(lnOfPlane2, frameCenter);
+            var ln1 = lnOfPlane1.ToGlobalCoordinatesSegment(frameCenter);
+            var ln2 = lnOfPlane2.ToGlobalCoordinatesSegment(frameCenter);
             var y = (ln2.Point0.Y * ln2.Kx * ln1.Ky - ln1.Point0.Y * ln2.Ky * ln1.Kx + ln2.Ky * ln1.Ky * (ln1.Point0.X - ln2.Point0.X)) /
                     (ln2.Kx * ln1.Ky - ln1.Kx * ln2.Ky);
             if (y < 0)
@@ -277,8 +277,8 @@ namespace GraphicsModule.Geometry.Extensions
 
         public static bool IsCrossed(this SegmentOfPlane3Y0Z lnOfPlane1, SegmentOfPlane3Y0Z lnOfPlane2, Point frameCenter)
         {
-            var ln1 = DeterminePosition.ForSegmentProjection(lnOfPlane1, frameCenter);
-            var ln2 = DeterminePosition.ForSegmentProjection(lnOfPlane2, frameCenter);
+            var ln1 = lnOfPlane1.ToGlobalCoordinatesSegment(frameCenter);
+            var ln2 = lnOfPlane2.ToGlobalCoordinatesSegment(frameCenter);
             var y = (ln2.Point0.Y * ln2.Kx * ln1.Ky - ln1.Point0.Y * ln2.Ky * ln1.Kx + ln2.Ky * ln1.Ky * (ln1.Point0.X - ln2.Point0.X)) /
                     (ln2.Kx * ln1.Ky - ln1.Kx * ln2.Ky);
             if (y < 0)
