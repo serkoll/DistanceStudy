@@ -106,12 +106,12 @@ namespace GraphicsModule.Geometry.Objects.Points
             PointOfPlane3Y0Z.Draw(pen, ptR, frameCenter, graphics);
         }
 
-        public void Draw(DrawSettings st, Point frameCenter, Graphics g)
+        public void Draw(DrawSettings st, Point coordinateSystemCenter, Graphics g)
         {
-            Draw(st.PenPoints, st.RadiusPoints, frameCenter, g);
+            Draw(st.PenPoints, st.RadiusPoints, coordinateSystemCenter, g);
             DrawLinkLine(st.LinkLinesSettings.PenLinkLineX0YtoX, st.LinkLinesSettings.PenLinkLineX0YtoY, st.LinkLinesSettings.PenLinkLineX0ZtoX, st.LinkLinesSettings.PenLinkLineX0ZtoZ,
-                         st.LinkLinesSettings.PenLinkLineY0ZtoZ, st.LinkLinesSettings.PenLinkLineY0ZtoY, frameCenter, ref g);
-            DrawName(st, st.RadiusPoints, frameCenter, g);
+                         st.LinkLinesSettings.PenLinkLineY0ZtoZ, st.LinkLinesSettings.PenLinkLineY0ZtoY, coordinateSystemCenter, ref g);
+            DrawName(st, st.RadiusPoints, coordinateSystemCenter, g);
         }
 
         public void DrawName(DrawSettings st, float poitRaduis, Point frameCenter, Graphics graphics)

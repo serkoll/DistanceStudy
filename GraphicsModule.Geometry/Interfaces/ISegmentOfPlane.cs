@@ -5,6 +5,6 @@ namespace GraphicsModule.Geometry.Interfaces
 {
     internal interface ISegmentOfPlane: IObject
     {
-        void DrawSegmentOnly(DrawSettings st, Point framecenter, Graphics g);
+        void DrawSegmentOnly(DrawSettings settings, Point coordinateSystemCenter, Graphics graphics);
     }
 }

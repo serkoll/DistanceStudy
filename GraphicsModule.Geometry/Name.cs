@@ -11,7 +11,7 @@
             Value = "";
             Dx = 0;
             Dy = 0;
-            IsDraw = true;
+            IsDraw = false;
         }
         public Name(Name name)
         {

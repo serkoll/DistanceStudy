@@ -12,12 +12,14 @@ namespace GraphicsModule.Geometry.Objects.Points
         {
             X = 0;
             Y = 0;
+            Name = new Name();
         }
 
         public PointOfPlane1X0Y(double x, double y)
         {
             X = x;
             Y = y;
+            Name = new Name();
         }
 
         public PointOfPlane1X0Y(double x, double y, Name name)
@@ -50,7 +52,7 @@ namespace GraphicsModule.Geometry.Objects.Points
         public void Draw(Pen pen, float poitRaduis, Point frameCenter, Graphics graphics)
         {
             var ptForDraw = this.ToGlobalCoordinatesPoint(poitRaduis, frameCenter);
-            graphics.DrawPie(pen, ptForDraw.X, ptForDraw.Y, poitRaduis * 2, poitRaduis * 2, 0, 360);
+            graphics.DrawPie(pen, ptForDraw.X - poitRaduis, ptForDraw.Y - poitRaduis, poitRaduis * 2, poitRaduis * 2, 0, 360);
         }
 
         public void DrawName(DrawSettings st, float poitRaduis, Point frameCenter, Graphics graphics)
@@ -59,15 +61,16 @@ namespace GraphicsModule.Geometry.Objects.Points
             graphics.DrawString(Name.Value + "'", st.TextFont, st.TextBrush, ptForDraw.X + Name.Dx, ptForDraw.Y + Name.Dy);
         }
 
-        public void Draw(DrawSettings st, Point frameCenter, Graphics g)
+        public void Draw(DrawSettings st, Point coordinateSystemCenter, Graphics g)
         {
-            this.Draw(st.PenPoints, st.RadiusPoints, frameCenter, g);
+            Draw(st.PenPoints, st.RadiusPoints, coordinateSystemCenter, g);
+
             if (st.LinkLinesSettings.IsDraw)
             {
-                this.DrawLinkLine(st.LinkLinesSettings.PenLinkLineX0YtoX, st.LinkLinesSettings.PenLinkLineX0YtoY, true, true, true, true, true, frameCenter, g);
+                DrawLinkLine(st.LinkLinesSettings.PenLinkLineX0YtoX, st.LinkLinesSettings.PenLinkLineX0YtoY, true, true, true, true, true, coordinateSystemCenter, g);
             }
-            if (Name != null)
-                this.DrawName(st, st.RadiusPoints, frameCenter, g);
+
+            DrawName(st, st.RadiusPoints, coordinateSystemCenter, g);
         }
 
         public void DrawPointsOnly(DrawSettings st, Point frameCenter, Graphics g)
@@ -105,16 +108,15 @@ namespace GraphicsModule.Geometry.Objects.Points
                 graphics.DrawLine(penLinkLinetoY, Convert.ToInt32(frameCenter.X + Y), frameCenter.Y, Convert.ToInt32(frameCenter.X + Y), 0);
             }
         }
+        public bool IsSelected(Point mscoords, float ptR, Point frameCenter, double distance)
+        {
+            return Calculate.Distance(mscoords, ptR, frameCenter, this) < distance;
+        }
 
         public double X { get; private set; }
 
         public double Y { get; private set; }
 
         public Name Name { get; set; }
-
-        public bool IsSelected(Point mscoords, float ptR, Point frameCenter, double distance)
-        {
-            return Calculate.Distance(mscoords, ptR, frameCenter, this) < distance;
-        }
     }
 }

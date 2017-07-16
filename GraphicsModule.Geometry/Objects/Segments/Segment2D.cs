@@ -20,10 +20,10 @@ namespace GraphicsModule.Geometry.Objects.Segments
             Kx = pt2.X - pt1.X;
             Ky = pt2.Y - pt1.Y;
         }
-        public void Draw(DrawSettings st, Point framecenter, Graphics g)
+        public void Draw(DrawSettings st, Point coordinateSystemCenter, Graphics g)
         {
-            Point0.Draw(st, framecenter, g);
-            Point1.Draw(st, framecenter, g);
+            Point0.Draw(st, coordinateSystemCenter, g);
+            Point1.Draw(st, coordinateSystemCenter, g);
             g.DrawLine(st.PenLine2D, Point0.ToPointF(), Point1.ToPointF());
         }
         public bool IsSelected(Point mscoords, float ptR, Point frameCenter, double distance)

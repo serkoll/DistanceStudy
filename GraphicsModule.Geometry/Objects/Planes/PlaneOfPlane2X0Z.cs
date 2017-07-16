@@ -51,11 +51,11 @@ namespace GraphicsModule.Geometry.Objects.Planes
             Objects = new IObject[] { sg1, sg2 };
             _name = new Name();
         }
-        public void Draw(DrawSettings st, Point frameCenter, Graphics graphics)
+        public void Draw(DrawSettings st, Point coordinateSystemCenter, Graphics graphics)
         {
             foreach (var obj in Objects)
             {
-                obj.Draw(st, frameCenter, graphics);
+                obj.Draw(st, coordinateSystemCenter, graphics);
             }
         }
         public bool IsSelected(Point mousecoords, float ptR, Point frameCenter, double distance)

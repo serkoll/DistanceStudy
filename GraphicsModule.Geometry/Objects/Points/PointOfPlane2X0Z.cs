@@ -39,15 +39,15 @@ namespace GraphicsModule.Geometry.Objects.Points
             graphics.DrawString(Name.Value + "''", st.TextFont, st.TextBrush, ptForDraw.X + Name.Dx, ptForDraw.Y + Name.Dy);
         }
 
-        public void Draw(DrawSettings st, Point frameCenter, Graphics g)
+        public void Draw(DrawSettings st, Point coordinateSystemCenter, Graphics g)
         {
-            Draw(st.PenPoints, st.RadiusPoints, frameCenter, g);
+            Draw(st.PenPoints, st.RadiusPoints, coordinateSystemCenter, g);
             if (st.LinkLinesSettings.IsDraw)
             {
-                DrawLinkLine(st.LinkLinesSettings.PenLinkLineX0ZtoX, st.LinkLinesSettings.PenLinkLineX0ZtoZ, true, true, true, true, frameCenter, g);
+                DrawLinkLine(st.LinkLinesSettings.PenLinkLineX0ZtoX, st.LinkLinesSettings.PenLinkLineX0ZtoZ, true, true, true, true, coordinateSystemCenter, g);
             }
             if (Name != null)
-                DrawName(st, st.RadiusPoints, frameCenter, g);
+                DrawName(st, st.RadiusPoints, coordinateSystemCenter, g);
         }
 
         public void DrawPointsOnly(DrawSettings st, Point frameCenter, Graphics g)

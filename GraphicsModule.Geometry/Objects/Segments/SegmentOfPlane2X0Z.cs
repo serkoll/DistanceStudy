@@ -27,23 +27,23 @@ namespace GraphicsModule.Geometry.Objects.Segments
             Point0 = new PointOfPlane2X0Z(segment.Point0.X, segment.Point0.Z);
             Point1 = new PointOfPlane2X0Z(segment.Point1.X, segment.Point1.Z);
         }
-        public void Draw(DrawSettings settings, Point framecenter, Graphics g)
+        public void Draw(DrawSettings settings, Point coordinateSystemCenter, Graphics g)
         {
-            Point0.Draw(settings, framecenter, g);
-            Point1.Draw(settings, framecenter, g);
-            var pt0 = Point0.ToGlobalCoordinatesPoint(settings.RadiusPoints, framecenter);
-            var pt1 = Point1.ToGlobalCoordinatesPoint(settings.RadiusPoints, framecenter);
+            Point0.Draw(settings, coordinateSystemCenter, g);
+            Point1.Draw(settings, coordinateSystemCenter, g);
+            var pt0 = Point0.ToGlobalCoordinatesPoint(settings.RadiusPoints, coordinateSystemCenter);
+            var pt1 = Point1.ToGlobalCoordinatesPoint(settings.RadiusPoints, coordinateSystemCenter);
             g.DrawLine(settings.PenLineOfPlane2X0Z, new PointF(pt0.X + settings.RadiusPoints, pt0.Y + settings.RadiusPoints),
                                               new PointF(pt1.X + settings.RadiusPoints, pt1.Y + settings.RadiusPoints));
         } 
-        public void DrawSegmentOnly(DrawSettings st, Point framecenter, Graphics g)
+        public void DrawSegmentOnly(DrawSettings settings, Point coordinateSystemCenter, Graphics graphics)
         {
-            Point0.DrawPointsOnly(st, framecenter, g);
-            Point1.DrawPointsOnly(st, framecenter, g);
-            var pt0 = Point0.ToGlobalCoordinatesPoint(st.RadiusPoints, framecenter);
-            var pt1 = Point1.ToGlobalCoordinatesPoint(st.RadiusPoints, framecenter);
-            g.DrawLine(st.PenLineOfPlane2X0Z, new PointF(pt0.X + st.RadiusPoints, pt0.Y + st.RadiusPoints),
-                                              new PointF(pt1.X + st.RadiusPoints, pt1.Y + st.RadiusPoints));
+            Point0.DrawPointsOnly(settings, coordinateSystemCenter, graphics);
+            Point1.DrawPointsOnly(settings, coordinateSystemCenter, graphics);
+            var pt0 = Point0.ToGlobalCoordinatesPoint(settings.RadiusPoints, coordinateSystemCenter);
+            var pt1 = Point1.ToGlobalCoordinatesPoint(settings.RadiusPoints, coordinateSystemCenter);
+            graphics.DrawLine(settings.PenLineOfPlane2X0Z, new PointF(pt0.X + settings.RadiusPoints, pt0.Y + settings.RadiusPoints),
+                                              new PointF(pt1.X + settings.RadiusPoints, pt1.Y + settings.RadiusPoints));
 
         }
         public bool IsSelected(Point mscoords, float ptR, Point frameCenter, double distance)

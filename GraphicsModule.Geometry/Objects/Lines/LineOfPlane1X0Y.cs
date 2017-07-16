@@ -39,10 +39,10 @@ namespace GraphicsModule.Geometry.Objects.Lines
             Point1 = new PointOfPlane1X0Y(line.Point1.X, line.Point1.Y);
         }
 
-        public void Draw(DrawSettings st, Point framecenter, Graphics g)
+        public void Draw(DrawSettings st, Point coordinateSystemCenter, Graphics g)
         {
-            Point0.Draw(st, framecenter, g);
-            Point1.Draw(st, framecenter, g);
+            Point0.Draw(st, coordinateSystemCenter, g);
+            Point1.Draw(st, coordinateSystemCenter, g);
             g.DrawLine(st.PenLineOfPlane1X0Y, DrawPoints[0], DrawPoints[1]);
         }
 

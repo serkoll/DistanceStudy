@@ -8,7 +8,6 @@ namespace GraphicsModule.Geometry.Objects.Segments
 {
     public class SegmentOfPlane1X0Y : ISegmentOfPlane
     {
-        private Name _name;
         public SegmentOfPlane1X0Y(PointOfPlane1X0Y pt0, PointOfPlane1X0Y pt1)
         {
             Point0 = pt0;
@@ -16,51 +15,49 @@ namespace GraphicsModule.Geometry.Objects.Segments
             Kx = pt1.X - pt0.X;
             Ky = pt1.Y - pt0.Y;
         }
+
         public SegmentOfPlane1X0Y(Segment3D segment)
         {
             Point0 = new PointOfPlane1X0Y(segment.Point0.X, segment.Point0.Y);
             Point1 = new PointOfPlane1X0Y(segment.Point1.X, segment.Point1.Y);
         }
-        public void Draw(DrawSettings settings, Point framecenter, Graphics g)
+
+        public void Draw(DrawSettings settings, Point coordinateSystemCenter, Graphics graphics)
         {
+            var pt0 = Point0.ToGlobalCoordinatesPoint(settings.RadiusPoints, coordinateSystemCenter);
+            var pt1 = Point1.ToGlobalCoordinatesPoint(settings.RadiusPoints, coordinateSystemCenter);
+
+            Point0.Draw(settings, coordinateSystemCenter, graphics);
+            Point1.Draw(settings, coordinateSystemCenter, graphics);
             
-            Point0.Draw(settings, framecenter, g);
-            Point1.Draw(settings, framecenter, g);
-            var pt0 = Point0.ToGlobalCoordinatesPoint(settings.RadiusPoints, framecenter);
-            var pt1 = Point1.ToGlobalCoordinatesPoint(settings.RadiusPoints, framecenter);
-            g.DrawLine(settings.PenLineOfPlane1X0Y, new PointF(pt0.X + settings.RadiusPoints, pt0.Y + settings.RadiusPoints),
-                                             new PointF(pt1.X + settings.RadiusPoints, pt1.Y + settings.RadiusPoints));
-
+            graphics.DrawLine(settings.PenLineOfPlane1X0Y, pt0, pt1);
         }
-        public void DrawSegmentOnly(DrawSettings st, Point framecenter, Graphics g)
+
+        public void DrawSegmentOnly(DrawSettings settings, Point coordinateSystemCenter, Graphics graphics)
         {
-            Point0.DrawPointsOnly(st, framecenter, g);
-            Point1.DrawPointsOnly(st, framecenter, g);
-            var pt0 = Point0.ToGlobalCoordinatesPoint(st.RadiusPoints, framecenter);
-            var pt1 = Point1.ToGlobalCoordinatesPoint(st.RadiusPoints, framecenter);
-            g.DrawLine(st.PenLineOfPlane1X0Y, new PointF(pt0.X + st.RadiusPoints, pt0.Y + st.RadiusPoints),
-                                              new PointF(pt1.X + st.RadiusPoints, pt1.Y + st.RadiusPoints));
+            var pt0 = Point0.ToGlobalCoordinatesPoint(settings.RadiusPoints, coordinateSystemCenter);
+            var pt1 = Point1.ToGlobalCoordinatesPoint(settings.RadiusPoints, coordinateSystemCenter);
 
+            Point0.DrawPointsOnly(settings, coordinateSystemCenter, graphics);
+            Point1.DrawPointsOnly(settings, coordinateSystemCenter, graphics);
+            
+            graphics.DrawLine(settings.PenLineOfPlane1X0Y, pt0, pt1);
         }
+
         public bool IsSelected(Point mscoords, float ptR, Point frameCenter, double distance)
         {
             var sg = this.ToGlobalCoordinatesSegment(frameCenter);
             return sg.IsIncidentalToPoint(mscoords, 35 * distance);
         }
-        public PointOfPlane1X0Y Point0 { get; private set; }
-        public PointOfPlane1X0Y Point1 { get; private set; }
 
-        public Name Name
-        {
-            get { return _name; }
-            set
-            {
-                _name = value;
-                //Point0.Name = _name;
-                //Point1.Name = _name;
-            }
-        }
-        public double Kx { get; private set; }
-        public double Ky { get; private set; }
+        public PointOfPlane1X0Y Point0 { get; }
+
+        public PointOfPlane1X0Y Point1 { get; }
+
+        public double Kx { get; }
+
+        public double Ky { get; }
+
+        public Name Name { get; set; }
     }
 }

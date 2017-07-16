@@ -96,15 +96,15 @@ namespace GraphicsModule.Geometry.Objects.Segments
                 SegmentOfPlane3Y0Z = linePi3;
             }
         }
-        public void Draw(DrawSettings settings, Point frameCenter, Graphics g)
+        public void Draw(DrawSettings settings, Point coordinateSystemCenter, Graphics g)
         {
-            SegmentOfPlane1X0Y.DrawSegmentOnly(settings, frameCenter, g);
-            SegmentOfPlane2X0Z.DrawSegmentOnly(settings, frameCenter, g);
-            SegmentOfPlane3Y0Z.DrawSegmentOnly(settings, frameCenter, g);
+            SegmentOfPlane1X0Y.DrawSegmentOnly(settings, coordinateSystemCenter, g);
+            SegmentOfPlane2X0Z.DrawSegmentOnly(settings, coordinateSystemCenter, g);
+            SegmentOfPlane3Y0Z.DrawSegmentOnly(settings, coordinateSystemCenter, g);
             if (settings.LinkLinesSettings.IsDraw)
             {
                 DrawLinkLine(settings.LinkLinesSettings.PenLinkLineX0YtoX, settings.LinkLinesSettings.PenLinkLineX0YtoY, settings.LinkLinesSettings.PenLinkLineX0ZtoX, settings.LinkLinesSettings.PenLinkLineX0ZtoZ,
-                             settings.LinkLinesSettings.PenLinkLineY0ZtoZ, settings.LinkLinesSettings.PenLinkLineY0ZtoY, frameCenter, ref g);
+                             settings.LinkLinesSettings.PenLinkLineY0ZtoZ, settings.LinkLinesSettings.PenLinkLineY0ZtoY, coordinateSystemCenter, ref g);
             }
 
         }
