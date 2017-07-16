@@ -14,6 +14,7 @@ namespace GraphicsModule.Geometry.Objects.Segments
             Point1 = pt1;
             Kx = pt1.X - pt0.X;
             Ky = pt1.Y - pt0.Y;
+            Name = new Name();
         }
 
         public SegmentOfPlane1X0Y(Segment3D segment)
@@ -27,12 +28,10 @@ namespace GraphicsModule.Geometry.Objects.Segments
             var pt0 = Point0.ToGlobalCoordinatesPoint(coordinateSystemCenter);
             var pt1 = Point1.ToGlobalCoordinatesPoint(coordinateSystemCenter);
 
-            
+            graphics.DrawLine(settings.PenLineOfPlane1X0Y, pt0, pt1);
 
             Point0.Draw(settings, coordinateSystemCenter, graphics);
             Point1.Draw(settings, coordinateSystemCenter, graphics);
-            graphics.DrawLine(settings.PenLineOfPlane1X0Y, pt0, pt1);
-
         }
 
         public void DrawSegmentOnly(DrawSettings settings, Point coordinateSystemCenter, Graphics graphics)

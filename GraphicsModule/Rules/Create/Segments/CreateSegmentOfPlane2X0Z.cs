@@ -40,16 +40,12 @@ namespace GraphicsModule.Rules.Create.Segments
                 return null;
             }
 
-
             if (ptOfPlane.IsCoincides((PointOfPlane2X0Z)strg.TempObjects.First()))
             {
                 return null;
             }
             ptOfPlane.Name = GraphicsControl.NamesGenerator.Generate();
-            var source = new SegmentOfPlane2X0Z((PointOfPlane2X0Z)strg.TempObjects.First(), ptOfPlane)
-            {
-                Name = strg.TempObjects[0].Name
-            };
+            var source = new SegmentOfPlane2X0Z((PointOfPlane2X0Z) strg.TempObjects.First(), ptOfPlane);
             strg.TempObjects.Clear();
             return source;
         }

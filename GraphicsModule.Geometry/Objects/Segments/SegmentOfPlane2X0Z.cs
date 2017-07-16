@@ -8,22 +8,13 @@ namespace GraphicsModule.Geometry.Objects.Segments
 {
     public class SegmentOfPlane2X0Z : ISegmentOfPlane
     {
-        private Name _name;
-
-        public SegmentOfPlane2X0Z()
-        {
-            Point0 = new PointOfPlane2X0Z();
-            Point1 = new PointOfPlane2X0Z();
-            _name = new Name();
-        }
-
         public SegmentOfPlane2X0Z(PointOfPlane2X0Z pt0, PointOfPlane2X0Z pt1)
         {
             Point0 = pt0;
             Point1 = pt1;
             Kx = pt1.X - pt0.X;
             Kz = pt1.Z - pt0.Z;
-            _name = new Name();
+            Name = new Name();
         }
 
         public SegmentOfPlane2X0Z(Segment3D segment)
@@ -36,21 +27,21 @@ namespace GraphicsModule.Geometry.Objects.Segments
         {
             var pt0 = Point0.ToGlobalCoordinatesPoint(coordinateSystemCenter);
             var pt1 = Point1.ToGlobalCoordinatesPoint(coordinateSystemCenter);
-            graphics.DrawLine(settings.PenLineOfPlane2X0Z, new PointF(pt0.X + settings.RadiusPoints, pt0.Y + settings.RadiusPoints),
-                                              new PointF(pt1.X + settings.RadiusPoints, pt1.Y + settings.RadiusPoints));
 
-            Point0.Draw(settings.PenPoints, settings.RadiusPoints, coordinateSystemCenter, graphics);
-            Point1.Draw(settings.PenPoints, settings.RadiusPoints, coordinateSystemCenter, graphics);
+            graphics.DrawLine(settings.PenLineOfPlane2X0Z, pt0, pt1);
+
+            Point0.Draw(settings, coordinateSystemCenter, graphics);
+            Point1.Draw(settings, coordinateSystemCenter, graphics);
         } 
         public void DrawSegmentOnly(DrawSettings settings, Point coordinateSystemCenter, Graphics graphics)
         {
-            Point0.DrawPointsOnly(settings, coordinateSystemCenter, graphics);
-            Point1.DrawPointsOnly(settings, coordinateSystemCenter, graphics);
             var pt0 = Point0.ToGlobalCoordinatesPoint(coordinateSystemCenter);
             var pt1 = Point1.ToGlobalCoordinatesPoint(coordinateSystemCenter);
-            graphics.DrawLine(settings.PenLineOfPlane2X0Z, new PointF(pt0.X + settings.RadiusPoints, pt0.Y + settings.RadiusPoints),
-                                              new PointF(pt1.X + settings.RadiusPoints, pt1.Y + settings.RadiusPoints));
 
+            graphics.DrawLine(settings.PenLineOfPlane2X0Z, pt0, pt1);
+
+            Point0.Draw(settings.PenPoints, settings.RadiusPoints, coordinateSystemCenter, graphics);
+            Point1.Draw(settings.PenPoints, settings.RadiusPoints, coordinateSystemCenter, graphics);
         }
         public bool IsSelected(Point mscoords, float ptR, Point coordinateSystemCenter, double distance)
         {
@@ -62,17 +53,10 @@ namespace GraphicsModule.Geometry.Objects.Segments
 
         public PointOfPlane2X0Z Point1 { get; }
 
-        public Name Name
-        {
-            get { return _name; }
-            set
-            {
-                _name = value;
-                Point0.Name = _name;
-                Point1.Name = _name;
-            }
-        }
         public double Kx { get; set; }
+
         public double Kz { get; set; }
+
+        public Name Name { get; set; }
     }
 }
