@@ -7,7 +7,7 @@ using GraphicsModule.Geometry.Objects.Segments;
 
 namespace GraphicsModule.Geometry.Extensions
 {
-    internal static class LinesPositionExtensions
+    public static class LinesPositionExtensions
     {
         #region Incidence of Point and Line
 

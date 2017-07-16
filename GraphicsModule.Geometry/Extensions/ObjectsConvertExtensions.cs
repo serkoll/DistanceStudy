@@ -11,7 +11,7 @@ namespace GraphicsModule.Geometry.Extensions
     /// <summary>
     /// Методы расширения для объектов. Выполняют конвертацию одного типа объекта в другой
     /// </summary>
-    internal static class ObjectsConvertExtensions
+    public static class ObjectsConvertExtensions
     {
         #region Points
 

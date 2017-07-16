@@ -5,7 +5,7 @@ using GraphicsModule.Geometry.Objects.Points;
 
 namespace GraphicsModule.Geometry.Extensions
 {
-    internal static class ObjectsCalculateExtensions
+    public static class ObjectsCalculateExtensions
     {
         #region DistanceToPoint
 

@@ -14,34 +14,40 @@ namespace GraphicsModule.Geometry.Objects.Segments
         {
             Point0 = new PointOfPlane2X0Z();
             Point1 = new PointOfPlane2X0Z();
+            _name = new Name();
         }
+
         public SegmentOfPlane2X0Z(PointOfPlane2X0Z pt0, PointOfPlane2X0Z pt1)
         {
             Point0 = pt0;
             Point1 = pt1;
             Kx = pt1.X - pt0.X;
             Kz = pt1.Z - pt0.Z;
+            _name = new Name();
         }
+
         public SegmentOfPlane2X0Z(Segment3D segment)
         {
             Point0 = new PointOfPlane2X0Z(segment.Point0.X, segment.Point0.Z);
             Point1 = new PointOfPlane2X0Z(segment.Point1.X, segment.Point1.Z);
         }
-        public void Draw(DrawSettings settings, Point coordinateSystemCenter, Graphics g)
+
+        public void Draw(DrawSettings settings, Point coordinateSystemCenter, Graphics graphics)
         {
-            Point0.Draw(settings, coordinateSystemCenter, g);
-            Point1.Draw(settings, coordinateSystemCenter, g);
-            var pt0 = Point0.ToGlobalCoordinatesPoint(settings.RadiusPoints, coordinateSystemCenter);
-            var pt1 = Point1.ToGlobalCoordinatesPoint(settings.RadiusPoints, coordinateSystemCenter);
-            g.DrawLine(settings.PenLineOfPlane2X0Z, new PointF(pt0.X + settings.RadiusPoints, pt0.Y + settings.RadiusPoints),
+            var pt0 = Point0.ToGlobalCoordinatesPoint(coordinateSystemCenter);
+            var pt1 = Point1.ToGlobalCoordinatesPoint(coordinateSystemCenter);
+            graphics.DrawLine(settings.PenLineOfPlane2X0Z, new PointF(pt0.X + settings.RadiusPoints, pt0.Y + settings.RadiusPoints),
                                               new PointF(pt1.X + settings.RadiusPoints, pt1.Y + settings.RadiusPoints));
+
+            Point0.Draw(settings.PenPoints, settings.RadiusPoints, coordinateSystemCenter, graphics);
+            Point1.Draw(settings.PenPoints, settings.RadiusPoints, coordinateSystemCenter, graphics);
         } 
         public void DrawSegmentOnly(DrawSettings settings, Point coordinateSystemCenter, Graphics graphics)
         {
             Point0.DrawPointsOnly(settings, coordinateSystemCenter, graphics);
             Point1.DrawPointsOnly(settings, coordinateSystemCenter, graphics);
-            var pt0 = Point0.ToGlobalCoordinatesPoint(settings.RadiusPoints, coordinateSystemCenter);
-            var pt1 = Point1.ToGlobalCoordinatesPoint(settings.RadiusPoints, coordinateSystemCenter);
+            var pt0 = Point0.ToGlobalCoordinatesPoint(coordinateSystemCenter);
+            var pt1 = Point1.ToGlobalCoordinatesPoint(coordinateSystemCenter);
             graphics.DrawLine(settings.PenLineOfPlane2X0Z, new PointF(pt0.X + settings.RadiusPoints, pt0.Y + settings.RadiusPoints),
                                               new PointF(pt1.X + settings.RadiusPoints, pt1.Y + settings.RadiusPoints));
 

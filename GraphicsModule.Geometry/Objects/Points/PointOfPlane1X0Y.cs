@@ -49,7 +49,7 @@ namespace GraphicsModule.Geometry.Objects.Points
 
         public void Draw(Pen pen, float poitRaduis, Point frameCenter, Graphics graphics)
         {
-            var ptForDraw = this.ToGlobalCoordinatesPoint(poitRaduis, frameCenter);
+            var ptForDraw = this.ToGlobalCoordinatesPoint(frameCenter);
             graphics.DrawPie(pen, ptForDraw.X - poitRaduis, ptForDraw.Y - poitRaduis, poitRaduis * 2, poitRaduis * 2, 0, 360);
         }
 
@@ -68,7 +68,7 @@ namespace GraphicsModule.Geometry.Objects.Points
     
         public void DrawName(DrawSettings st, float poitRaduis, Point frameCenter, Graphics graphics)
         {
-            var ptForDraw = this.ToGlobalCoordinatesPoint(poitRaduis, frameCenter);
+            var ptForDraw = this.ToGlobalCoordinatesPoint(frameCenter);
             graphics.DrawString(Name.Value + "'", st.TextFont, st.TextBrush, ptForDraw.X + Name.Dx, ptForDraw.Y + Name.Dy);
         }
 

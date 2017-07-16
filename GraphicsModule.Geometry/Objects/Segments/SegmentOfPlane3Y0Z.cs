@@ -29,8 +29,8 @@ namespace GraphicsModule.Geometry.Objects.Segments
         {
             Point0.Draw(settings, coordinateSystemCenter, g);
             Point1.Draw(settings, coordinateSystemCenter, g);
-            var pt0 = Point0.ToGlobalCoordinatesPoint(settings.RadiusPoints, coordinateSystemCenter);
-            var pt1 = Point1.ToGlobalCoordinatesPoint(settings.RadiusPoints, coordinateSystemCenter);
+            var pt0 = Point0.ToGlobalCoordinatesPoint(coordinateSystemCenter);
+            var pt1 = Point1.ToGlobalCoordinatesPoint(coordinateSystemCenter);
             g.DrawLine(settings.PenLineOfPlane3Y0Z, new PointF(pt0.X + settings.RadiusPoints, pt0.Y + settings.RadiusPoints),
                                               new PointF(pt1.X + settings.RadiusPoints, pt1.Y + settings.RadiusPoints));
         }
@@ -39,8 +39,8 @@ namespace GraphicsModule.Geometry.Objects.Segments
         {
             Point0.DrawPointsOnly(settings, coordinateSystemCenter, graphics);
             Point1.DrawPointsOnly(settings, coordinateSystemCenter, graphics);
-            var pt0 = Point0.ToGlobalCoordinatesPoint(settings.RadiusPoints, coordinateSystemCenter);
-            var pt1 = Point1.ToGlobalCoordinatesPoint(settings.RadiusPoints, coordinateSystemCenter);
+            var pt0 = Point0.ToGlobalCoordinatesPoint(coordinateSystemCenter);
+            var pt1 = Point1.ToGlobalCoordinatesPoint(coordinateSystemCenter);
             graphics.DrawLine(settings.PenLineOfPlane3Y0Z, new PointF(pt0.X + settings.RadiusPoints, pt0.Y + settings.RadiusPoints),
                                               new PointF(pt1.X + settings.RadiusPoints, pt1.Y + settings.RadiusPoints));
         }

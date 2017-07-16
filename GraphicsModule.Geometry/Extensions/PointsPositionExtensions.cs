@@ -4,7 +4,7 @@ using GraphicsModule.Geometry.Objects.Points;
 namespace GraphicsModule.Geometry.Extensions
 {
 
-    internal static class PointsPositionExtensions
+    public static class PointsPositionExtensions
     {
         #region X,Y,Z IsCoincides
 
