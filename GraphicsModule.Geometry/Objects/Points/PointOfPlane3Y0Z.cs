@@ -70,7 +70,7 @@ namespace GraphicsModule.Geometry.Objects.Points
         public void DrawLinkLine(Pen penLinkLineToZ, Pen penLinkLineToY, Point coordinateSystemCenter, Graphics graphics)
         {
             DrawLinkLineToZ(penLinkLineToZ, coordinateSystemCenter, graphics);
-            DrawLinLineToY(penLinkLineToY, coordinateSystemCenter, graphics);
+            DrawLinkLineToY(penLinkLineToY, coordinateSystemCenter, graphics);
         }
 
         private void DrawLinkLineToZ(Pen penLinkLineToZ, Point coordinateSystemCenter, Graphics graphics)
@@ -79,7 +79,7 @@ namespace GraphicsModule.Geometry.Objects.Points
             graphics.DrawLine(penLinkLineToZ, pt, new Point(0, pt.Y));
         }
 
-        private void DrawLinLineToY(Pen penLinkLineToY, Point coordinateSystemCenter, Graphics graphics)
+        private void DrawLinkLineToY(Pen penLinkLineToY, Point coordinateSystemCenter, Graphics graphics)
         {
             var pt = this.ToGlobalCoordinatesPoint(coordinateSystemCenter);
             var ptOnYPi3 = new Point(pt.X, coordinateSystemCenter.Y);
@@ -126,12 +126,17 @@ namespace GraphicsModule.Geometry.Objects.Points
                 graphics.DrawLine(penLinkLineY0ZtoZ, Convert.ToInt32(frameCenter.X), Convert.ToInt32(frameCenter.Y - Z), 0, Convert.ToInt32(frameCenter.Y - Z));
             }
         }
-        public double Y { get; private set; }
-        public double Z { get; private set; }
-        public Name Name { get; set; }
+
         public bool IsSelected(Point mscoords, float ptR, Point frameCenter, double distance)
         {
             return Calculate.Distance(mscoords, ptR, frameCenter, this) < distance;
         }
+
+        public double Y { get; }
+
+        public double Z { get; }
+
+        public Name Name { get; set; }
+        
     }
 }

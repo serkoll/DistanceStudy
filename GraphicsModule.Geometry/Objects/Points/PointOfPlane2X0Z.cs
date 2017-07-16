@@ -70,7 +70,7 @@ namespace GraphicsModule.Geometry.Objects.Points
         public void DrawLinkLine(Pen penLinkLineToX, Pen penLinkLineToZ, Point coordinateSystemCenter, Graphics graphics)
         {
             DrawLinkLineToX(penLinkLineToX, coordinateSystemCenter, graphics);
-            DrawLinLineToZ(penLinkLineToZ, coordinateSystemCenter, graphics);
+            DrawLinkLineToZ(penLinkLineToZ, coordinateSystemCenter, graphics);
         }
 
         private void DrawLinkLineToX(Pen penLinkLineToX, Point coordinateSystemCenter, Graphics graphics)
@@ -80,7 +80,7 @@ namespace GraphicsModule.Geometry.Objects.Points
             graphics.DrawLine(penLinkLineToX, pt, new Point(pt.X, coordinateSystemCenter.Y * 2 + solveErrorSize));
         }
 
-        private void DrawLinLineToZ(Pen penLinkLineToZ, Point coordinateSystemCenter, Graphics graphics)
+        private void DrawLinkLineToZ(Pen penLinkLineToZ, Point coordinateSystemCenter, Graphics graphics)
         {
             var pt = this.ToGlobalCoordinatesPoint(coordinateSystemCenter);
             const int solveErrorSize = 10;

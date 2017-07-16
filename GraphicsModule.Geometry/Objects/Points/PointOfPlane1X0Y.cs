@@ -83,7 +83,7 @@ namespace GraphicsModule.Geometry.Objects.Points
         public void DrawLinkLine(Pen penLinkLineToX, Pen penLinkLineToY, Point coordinateSystemCenter, Graphics graphics)
         {
             DrawLinkLineToX(penLinkLineToX, coordinateSystemCenter, graphics);
-            DrawLinLineToY(penLinkLineToY, coordinateSystemCenter, graphics);
+            DrawLinkLineToY(penLinkLineToY, coordinateSystemCenter, graphics);
         }
 
         private void DrawLinkLineToX(Pen penLinkLineToX, Point coordinateSystemCenter, Graphics graphics)
@@ -92,7 +92,7 @@ namespace GraphicsModule.Geometry.Objects.Points
             graphics.DrawLine(penLinkLineToX, pt, new Point(pt.X, 0));
         }
 
-        private void DrawLinLineToY(Pen penLinkLineToY, Point coordinateSystemCenter, Graphics graphics)
+        private void DrawLinkLineToY(Pen penLinkLineToY, Point coordinateSystemCenter, Graphics graphics)
         {
             var pt = this.ToGlobalCoordinatesPoint(coordinateSystemCenter);
             var ptOnYPi1 = new Point(coordinateSystemCenter.X, pt.Y);
@@ -143,9 +143,9 @@ namespace GraphicsModule.Geometry.Objects.Points
             return Calculate.Distance(mscoords, ptR, frameCenter, this) < distance;
         }
 
-        public double X { get; private set; }
+        public double X { get; }
 
-        public double Y { get; private set; }
+        public double Y { get; }
 
         public Name Name { get; set; }
     }
