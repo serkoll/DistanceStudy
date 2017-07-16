@@ -9,6 +9,6 @@ namespace GraphicsModule.Geometry.Interfaces
 
         void Draw(DrawSettings settings, Point coordinateSystemCenter, Graphics graphics);
 
-        bool IsSelected(Point mousecoords, float ptR, Point frameCenter, double distance);
+        bool IsSelected(Point mousecoords, float ptR, Point coordinateSystemCenter, double distance);
     }
 }

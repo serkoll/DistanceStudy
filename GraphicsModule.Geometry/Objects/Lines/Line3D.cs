@@ -117,11 +117,11 @@ namespace GraphicsModule.Geometry.Objects.Lines
             Point1.DrawLinkLine(penLinkLineX0YtoX, penLinkLineX0YtoY, penLinkLineX0ZtoX, penLinkLineX0ZtoZ,
                           penLinkLineY0ZtoZ, penLinkLineY0ZtoY, frameCenter, ref graphics);
         }
-        public bool IsSelected(Point mscoords, float ptR, Point frameCenter, double distance)
+        public bool IsSelected(Point mscoords, float ptR, Point coordinateSystemCenter, double distance)
         {
-            return LineOfPlane1X0Y.IsSelected(mscoords, ptR, frameCenter, distance) ||
-                   LineOfPlane2X0Z.IsSelected(mscoords, ptR, frameCenter, distance) ||
-                   LineOfPlane3Y0Z.IsSelected(mscoords, ptR, frameCenter, distance);
+            return LineOfPlane1X0Y.IsSelected(mscoords, ptR, coordinateSystemCenter, distance) ||
+                   LineOfPlane2X0Z.IsSelected(mscoords, ptR, coordinateSystemCenter, distance) ||
+                   LineOfPlane3Y0Z.IsSelected(mscoords, ptR, coordinateSystemCenter, distance);
         }
         private void CalculatePointsForDraw(Point frameCenter, RectangleF rc1, RectangleF rc2, RectangleF rc3)
         {
@@ -143,13 +143,13 @@ namespace GraphicsModule.Geometry.Objects.Lines
             {
                 var ln = new Line2D(new Point2D(LineOfPlane1X0Y.DrawPoints[0].X, LineOfPlane1X0Y.DrawPoints[0].Y),
                                     new Point2D(LineOfPlane1X0Y.DrawPoints[0].X, LineOfPlane1X0Y.DrawPoints[0].Y - 10));
-                LineOfPlane2X0Z.DrawPoints[0] = Calculate.CrossingPoint(ln, LineOfPlane2X0Z, frameCenter);
+                LineOfPlane2X0Z.DrawPoints[0] = (PointF)LineOfPlane2X0Z.GetCrossingPoint(ln, frameCenter);
             }
             if(LineOfPlane1X0Y.DrawPoints[1].X < LineOfPlane2X0Z.DrawPoints[1].X && (LineOfPlane1X0Y.DrawPoints[1].Y == rc.Top))
             {
                 var ln = new Line2D(new Point2D(LineOfPlane1X0Y.DrawPoints[1].X, LineOfPlane1X0Y.DrawPoints[1].Y),
                                     new Point2D(LineOfPlane1X0Y.DrawPoints[1].X, LineOfPlane1X0Y.DrawPoints[1].Y - 10));
-                LineOfPlane2X0Z.DrawPoints[1] = Calculate.CrossingPoint(ln, LineOfPlane2X0Z, frameCenter);
+                LineOfPlane2X0Z.DrawPoints[1] = (PointF)LineOfPlane2X0Z.GetCrossingPoint(ln, frameCenter);
             }
         }
         private void CutLineX0ZtoX0Y(Point frameCenter, RectangleF rc)
@@ -158,13 +158,13 @@ namespace GraphicsModule.Geometry.Objects.Lines
             {
                 var ln = new Line2D(new Point2D(LineOfPlane2X0Z.DrawPoints[0].X, LineOfPlane2X0Z.DrawPoints[0].Y),
                                     new Point2D(LineOfPlane2X0Z.DrawPoints[0].X, LineOfPlane2X0Z.DrawPoints[0].Y - 10));
-                LineOfPlane1X0Y.DrawPoints[0] = Calculate.CrossingPoint(ln, LineOfPlane1X0Y, frameCenter);
+                LineOfPlane1X0Y.DrawPoints[0] = (PointF)LineOfPlane1X0Y.GetCrossingPoint(ln, frameCenter);
             }
             if ((LineOfPlane2X0Z.DrawPoints[1].X < LineOfPlane1X0Y.DrawPoints[1].X) && (LineOfPlane2X0Z.DrawPoints[1].Y == rc.Top))
             {
                 var ln = new Line2D(new Point2D(LineOfPlane2X0Z.DrawPoints[1].X, LineOfPlane2X0Z.DrawPoints[1].Y),
                                     new Point2D(LineOfPlane2X0Z.DrawPoints[1].X, LineOfPlane2X0Z.DrawPoints[1].Y - 10));
-                LineOfPlane1X0Y.DrawPoints[1] = Calculate.CrossingPoint(ln, LineOfPlane1X0Y, frameCenter);
+                LineOfPlane1X0Y.DrawPoints[1] = (PointF)LineOfPlane1X0Y.GetCrossingPoint(ln, frameCenter);
             }
         }
         private void CutLineX0ZtoY0Z(Point frameCenter, RectangleF rc)
@@ -173,13 +173,13 @@ namespace GraphicsModule.Geometry.Objects.Lines
             {
                 var ln = new Line2D(new Point2D(LineOfPlane2X0Z.DrawPoints[0].X, LineOfPlane2X0Z.DrawPoints[0].Y),
                                     new Point2D(LineOfPlane2X0Z.DrawPoints[0].X - 10, LineOfPlane2X0Z.DrawPoints[0].Y));
-                LineOfPlane3Y0Z.DrawPoints[0] = Calculate.CrossingPoint(ln, LineOfPlane3Y0Z, frameCenter);
+                LineOfPlane3Y0Z.DrawPoints[0] = (PointF)LineOfPlane3Y0Z.GetCrossingPoint(ln, frameCenter);
             }
             if((LineOfPlane2X0Z.DrawPoints[1].Y > LineOfPlane3Y0Z.DrawPoints[1].Y) && (LineOfPlane2X0Z.DrawPoints[1].X == rc.Right))
             {
                 var ln = new Line2D(new Point2D(LineOfPlane2X0Z.DrawPoints[1].X, LineOfPlane2X0Z.DrawPoints[1].Y),
                                     new Point2D(LineOfPlane2X0Z.DrawPoints[1].X - 10, LineOfPlane2X0Z.DrawPoints[1].Y));
-                LineOfPlane3Y0Z.DrawPoints[1] = Calculate.CrossingPoint(ln, LineOfPlane3Y0Z, frameCenter);
+                LineOfPlane3Y0Z.DrawPoints[1] = (PointF)LineOfPlane3Y0Z.GetCrossingPoint(ln, frameCenter);
             }
         }
         private void CutLineY0ZtoX0Z(Point frameCenter, RectangleF rc)
@@ -188,13 +188,13 @@ namespace GraphicsModule.Geometry.Objects.Lines
             {
                 var ln = new Line2D(new Point2D(LineOfPlane3Y0Z.DrawPoints[0].X, LineOfPlane3Y0Z.DrawPoints[0].Y),
                                     new Point2D(LineOfPlane3Y0Z.DrawPoints[0].X - 10, LineOfPlane3Y0Z.DrawPoints[0].Y));
-                LineOfPlane2X0Z.DrawPoints[0] = Calculate.CrossingPoint(ln, LineOfPlane2X0Z, frameCenter);
+                LineOfPlane2X0Z.DrawPoints[0] = (PointF)LineOfPlane2X0Z.GetCrossingPoint(ln, frameCenter);
             }
             if ((LineOfPlane3Y0Z.DrawPoints[1].Y > LineOfPlane2X0Z.DrawPoints[1].Y) && (LineOfPlane3Y0Z.DrawPoints[1].X == rc.Right))
             {
                 var ln = new Line2D(new Point2D(LineOfPlane3Y0Z.DrawPoints[1].X, LineOfPlane3Y0Z.DrawPoints[1].Y),
                                     new Point2D(LineOfPlane3Y0Z.DrawPoints[1].X - 10, LineOfPlane3Y0Z.DrawPoints[1].Y));
-                LineOfPlane2X0Z.DrawPoints[1] = Calculate.CrossingPoint(ln, LineOfPlane2X0Z, frameCenter);
+                LineOfPlane2X0Z.DrawPoints[1] = (PointF)LineOfPlane2X0Z.GetCrossingPoint(ln, frameCenter);
             }
         }
         public Point3D Point0 { get; }

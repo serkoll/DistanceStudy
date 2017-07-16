@@ -138,9 +138,9 @@ namespace GraphicsModule.Geometry.Objects.Points
                 graphics.DrawLine(penLinkLinetoY, Convert.ToInt32(frameCenter.X + Y), frameCenter.Y, Convert.ToInt32(frameCenter.X + Y), 0);
             }
         }
-        public bool IsSelected(Point mscoords, float ptR, Point frameCenter, double distance)
+        public bool IsSelected(Point mscoords, float ptR, Point coordinateSystemCenter, double distance)
         {
-            return Calculate.Distance(mscoords, ptR, frameCenter, this) < distance;
+            return this.DistanceToPoint(mscoords, coordinateSystemCenter) < distance;
         }
 
         public double X { get; }

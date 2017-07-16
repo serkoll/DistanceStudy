@@ -26,7 +26,7 @@ namespace GraphicsModule.Geometry.Objects.Segments
             Point1.Draw(settings, coordinateSystemCenter, g);
             g.DrawLine(settings.PenLine2D, Point0.ToPointF(), Point1.ToPointF());
         }
-        public bool IsSelected(Point mscoords, float ptR, Point frameCenter, double distance)
+        public bool IsSelected(Point mscoords, float ptR, Point coordinateSystemCenter, double distance)
         {
             return this.IsIncidentalToPoint(mscoords, 35 * distance);
         }

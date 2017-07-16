@@ -45,9 +45,9 @@ namespace GraphicsModule.Geometry.Objects.Segments
                                               new PointF(pt1.X + settings.RadiusPoints, pt1.Y + settings.RadiusPoints));
         }
 
-        public bool IsSelected(Point mscoords, float ptR, Point frameCenter, double distance)
+        public bool IsSelected(Point mscoords, float ptR, Point coordinateSystemCenter, double distance)
         {
-            var sg = this.ToGlobalCoordinatesSegment(frameCenter);
+            var sg = this.ToGlobalCoordinatesSegment(coordinateSystemCenter);
             return sg.IsIncidentalToPoint(mscoords, 35 * distance);
         }
 

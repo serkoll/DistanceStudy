@@ -9,7 +9,7 @@ namespace GraphicsModule.Geometry.Extensions
     /// <summary>
     /// Методы расширения, позволяющие конвертировать проекцию с локальными координатами в 2D аналог с глобальными координатами
     /// </summary>
-    public static class DeterminePositionExtensions
+    internal static class ObjectsDeterminePositionExtensions
     {
         #region Points
 

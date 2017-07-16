@@ -100,7 +100,7 @@ namespace GraphicsModule.Geometry.Objects.Lines
         {
             return lst.Count < 2;
         }
-        public bool IsSelected(Point mscoords, float ptR, Point frameCenter, double distance)
+        public bool IsSelected(Point mscoords, float ptR, Point coordinateSystemCenter, double distance)
         {
             return this.IsIncidentalToPoint(mscoords, 35 * distance);
         }

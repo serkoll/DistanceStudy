@@ -111,9 +111,9 @@ namespace GraphicsModule.Geometry.Objects.Points
             }
         }
 
-        public bool IsSelected(Point mscoords, float ptR, Point frameCenter, double distance)
+        public bool IsSelected(Point mscoords, float ptR, Point coordinateSystemCenter, double distance)
         {
-            return Calculate.Distance(mscoords, ptR, frameCenter, this) < distance;
+            return this.DistanceToPoint(mscoords, coordinateSystemCenter) < distance;
         }
 
         public double X { get; }

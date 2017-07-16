@@ -219,9 +219,9 @@ namespace GraphicsModule.Geometry.Objects.Points
             }
         }
 
-        public bool IsSelected(Point mscoords, float ptR, Point frameCenter, double distance)
+        public bool IsSelected(Point mscoords, float ptR, Point coordinateSystemCenter, double distance)
         {
-            var dst = Calculate.Distance(mscoords, ptR, frameCenter, this);
+            var dst = this.DistanceToPoint(mscoords, coordinateSystemCenter);
             return dst.Any(x => x < distance);
         }
 

@@ -49,9 +49,9 @@
     <Compile Include="Extensions\SegmentPositionExtensions.cs" />
     <Compile Include="CoordinateSystem\Axis.cs" />
     <Compile Include="CoordinateSystem\Grid.cs" />
-    <Compile Include="Calculate.cs" />
-    <Compile Include="Extensions\ConvertObjectsExtensions.cs" />
-    <Compile Include="Extensions\DeterminePositionExtensions.cs" />
+    <Compile Include="Extensions\ObjectsCalculateExtensions.cs" />
+    <Compile Include="Extensions\ObjectsConvertExtensions.cs" />
+    <Compile Include="Extensions\ObjectsDeterminePositionExtensions.cs" />
     <Compile Include="Interfaces\ILineOfPlane.cs" />
     <Compile Include="Interfaces\IObjectOfPlane1X0Y.cs" />
     <Compile Include="Interfaces\IObjectOfPlane2X0Z.cs" />

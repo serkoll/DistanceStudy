@@ -58,9 +58,9 @@ namespace GraphicsModule.Geometry.Objects.Planes
                 obj.Draw(settings, coordinateSystemCenter, graphics);
             }
         }
-        public bool IsSelected(Point mousecoords, float ptR, Point frameCenter, double distance)
+        public bool IsSelected(Point mousecoords, float ptR, Point coordinateSystemCenter, double distance)
         {
-            return Objects.Any(obj => obj.IsSelected(mousecoords, ptR, frameCenter, distance));
+            return Objects.Any(obj => obj.IsSelected(mousecoords, ptR, coordinateSystemCenter, distance));
         }
 
         public Name Name

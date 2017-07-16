@@ -115,11 +115,11 @@ namespace GraphicsModule.Geometry.Objects.Segments
             Point1.DrawLinkLine(penLinkLineX0YtoX, penLinkLineX0YtoY, penLinkLineX0ZtoX, penLinkLineX0ZtoZ,
                           penLinkLineY0ZtoZ, penLinkLineY0ZtoY, frameCenter, ref graphics);
         }
-        public bool IsSelected(Point mscoords, float ptR, Point frameCenter, double distance)
+        public bool IsSelected(Point mscoords, float ptR, Point coordinateSystemCenter, double distance)
         {
-            return SegmentOfPlane1X0Y.IsSelected(mscoords, ptR, frameCenter, distance) ||
-                   SegmentOfPlane2X0Z.IsSelected(mscoords, ptR, frameCenter, distance) ||
-                   SegmentOfPlane3Y0Z.IsSelected(mscoords, ptR, frameCenter, distance);
+            return SegmentOfPlane1X0Y.IsSelected(mscoords, ptR, coordinateSystemCenter, distance) ||
+                   SegmentOfPlane2X0Z.IsSelected(mscoords, ptR, coordinateSystemCenter, distance) ||
+                   SegmentOfPlane3Y0Z.IsSelected(mscoords, ptR, coordinateSystemCenter, distance);
         }
         public Point3D Point0 { get; private set; }
 

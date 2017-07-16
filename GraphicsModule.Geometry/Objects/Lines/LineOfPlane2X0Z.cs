@@ -52,9 +52,9 @@ namespace GraphicsModule.Geometry.Objects.Lines
             DrawPoints = _calc.CalculatePointsForDraw(this);
         }
 
-        public bool IsSelected(Point mscoords, float ptR, Point frameCenter, double distance)
+        public bool IsSelected(Point mscoords, float ptR, Point coordinateSystemCenter, double distance)
         {
-            var ln = this.ToGlobalCoordinatesLine2D(frameCenter);
+            var ln = this.ToGlobalCoordinatesLine2D(coordinateSystemCenter);
             return ln.IsIncidentalToPoint(mscoords, 35 * distance);
         }
 

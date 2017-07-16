@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using GraphicsModule.Configuration;
+using GraphicsModule.Geometry.Extensions;
 using GraphicsModule.Geometry.Interfaces;
 
 namespace GraphicsModule.Geometry.Objects.Points
@@ -35,9 +36,9 @@ namespace GraphicsModule.Geometry.Objects.Points
 
         public Name Name { get; set; }
 
-        public bool IsSelected(Point mscoords, float ptR, Point frameCenter, double distance)
+        public bool IsSelected(Point mscoords, float ptR, Point coordinateSystemCenter, double distance)
         {
-            return Calculate.Distance(mscoords, this) < distance;
+            return this.DistanceToPoint(mscoords) < distance;
         }
     }
 }
