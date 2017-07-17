@@ -45,7 +45,7 @@ namespace GraphicsModule.Rules.Create.Lines
                 return null;
             }
 
-            var source = new LineOfPlane1X0Y((PointOfPlane1X0Y) strg.TempObjects.First(), ptOfPlane, frameCenter, can.PlaneX0Y)
+            var source = new LineOfPlane1X0Y((PointOfPlane1X0Y) strg.TempObjects.First(), ptOfPlane, frameCenter)
             {
                 Name = strg.TempObjects.First().Name
             };

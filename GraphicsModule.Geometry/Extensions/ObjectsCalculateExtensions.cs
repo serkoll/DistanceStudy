@@ -48,7 +48,7 @@ namespace GraphicsModule.Geometry.Extensions
 
         #region GetCrossingPoint
 
-        public static object GetCrossingPoint(this Line2D ln1, Line2D ln2)
+        public static PointF? GetCrossingPoint(this Line2D ln1, Line2D ln2)
         {
             if (!ln1.IsCrossed(ln2))
             {
@@ -62,7 +62,7 @@ namespace GraphicsModule.Geometry.Extensions
             return new PointF((float)x, (float)y);
         }
 
-        public static object GetCrossingPoint(this LineOfPlane1X0Y ln, Line2D ln1, Point coordinateSystemCenter)
+        public static PointF? GetCrossingPoint(this LineOfPlane1X0Y ln, Line2D ln1, Point coordinateSystemCenter)
         {
             var ln2 = ln.ToGlobalCoordinatesLine2D(coordinateSystemCenter);
             if (!ln1.IsCrossed(ln2))
@@ -76,7 +76,7 @@ namespace GraphicsModule.Geometry.Extensions
             return new PointF((float)x, (float)y);
         }
 
-        public static object GetCrossingPoint(this LineOfPlane2X0Z ln, Line2D ln1, Point coordinateSystemCenter)
+        public static PointF? GetCrossingPoint(this LineOfPlane2X0Z ln, Line2D ln1, Point coordinateSystemCenter)
         {
             var ln2 = ln.ToGlobalCoordinatesLine2D(coordinateSystemCenter);
             if (!ln1.IsCrossed(ln2))

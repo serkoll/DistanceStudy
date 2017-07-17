@@ -33,6 +33,7 @@ namespace GraphicsModule.Geometry.Objects.Points
         {
             X = -(pt.X - center.X);
             Y = pt.Y - center.Y;
+            Name = new Name();
         }
 
         public PointOfPlane1X0Y(Point pt, Point center, Name name)

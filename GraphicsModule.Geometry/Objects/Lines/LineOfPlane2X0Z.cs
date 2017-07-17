@@ -9,47 +9,57 @@ namespace GraphicsModule.Geometry.Objects.Lines
 {
     public class LineOfPlane2X0Z : ILineOfPlane
     {
-        private Name _name;
-        //TODO: GOVNO SMENIT
-        private LineDrawCalc _calc;
         public LineOfPlane2X0Z(PointOfPlane2X0Z pt0, PointOfPlane2X0Z pt1)
         {
             Point0 = pt0;
             Point1 = pt1;
             Kx = pt1.X - pt0.X;
             Kz = pt1.Z - pt0.Z;
+            EndingPoints = null;
+            Name = new Name();
         }
-        public LineOfPlane2X0Z(PointOfPlane2X0Z pt0, PointOfPlane2X0Z pt1, Point frameCenter, RectangleF rc)
+        public LineOfPlane2X0Z(PointOfPlane2X0Z pt0, PointOfPlane2X0Z pt1, Point coordinateSystemCenter)
         {
             Point0 = pt0;
             Point1 = pt1;
             Kx = pt1.X - pt0.X;
             Kz = pt1.Z - pt0.Z;
-            _calc = new LineDrawCalc(frameCenter, rc);
-            DrawPoints = _calc.CalculatePointsForDraw(this);
+            EndingPoints = this.CalculateEndingPointsOnFrame(coordinateSystemCenter);
             Name = new Name();
         }
         public LineOfPlane2X0Z(Line3D line)
         {
             Point0 = new PointOfPlane2X0Z(line.Point0.X, line.Point0.Z);
             Point1 = new PointOfPlane2X0Z(line.Point1.X, line.Point1.Z);
+            Kx = Point1.X - Point0.X;
+            Kz = Point1.Z - Point0.Z;
+            EndingPoints = null;
+            Name = new Name();
         }
-        public void Draw(DrawSettings settings, Point coordinateSystemCenter, Graphics g)
+        public void Draw(DrawSettings settings, Point coordinateSystemCenter, Graphics graphics)
         {
-            Point0.Draw(settings, coordinateSystemCenter, g);
-            Point1.Draw(settings, coordinateSystemCenter, g);
-            g.DrawLine(settings.PenLineOfPlane2X0Z, DrawPoints[0], DrawPoints[1]);
+            if (EndingPoints == null)
+            {
+                EndingPoints = this.CalculateEndingPointsOnFrame(coordinateSystemCenter);
+            }
+
+            graphics.DrawLine(settings.PenLineOfPlane2X0Z, EndingPoints[0], EndingPoints[1]);
+
+            Point0.Draw(settings, coordinateSystemCenter, graphics);
+            Point1.Draw(settings, coordinateSystemCenter, graphics);
+            
         }
-        public void DrawLineOnly(DrawSettings st, Point framecenter, Graphics g)
+        public void DrawLineOnly(DrawSettings settings, Point coordinateSystemCenter, Graphics graphics)
         {
-            Point0.DrawPointsOnly(st, framecenter, g);
-            Point1.DrawPointsOnly(st, framecenter, g);
-            g.DrawLine(st.PenLineOfPlane2X0Z, DrawPoints[0], DrawPoints[1]);
-        }
-        public void CalculatePointsForDraw(Point frameCenter, RectangleF rc)
-        {
-            _calc = new LineDrawCalc(frameCenter, rc);
-            DrawPoints = _calc.CalculatePointsForDraw(this);
+            if (EndingPoints == null)
+            {
+                EndingPoints = this.CalculateEndingPointsOnFrame(coordinateSystemCenter);
+            }
+
+            graphics.DrawLine(settings.PenLineOfPlane2X0Z, EndingPoints[0], EndingPoints[1]);
+
+            Point0.DrawPointsOnly(settings, coordinateSystemCenter, graphics);
+            Point1.DrawPointsOnly(settings, coordinateSystemCenter, graphics);
         }
 
         public bool IsSelected(Point mscoords, float ptR, Point coordinateSystemCenter, double distance)
@@ -62,24 +72,12 @@ namespace GraphicsModule.Geometry.Objects.Lines
 
         public PointOfPlane2X0Z Point1 { get; }
 
-        public List<PointF> DrawPoints { get; set; }
-
         public double Kx { get; }
 
         public double Kz { get; }
 
-        public Name Name
-        {
-            get
-            {
-                return _name;
-            }
-            set
-            {
-                _name = value;
-                Point0.Name = _name;
-                Point1.Name = _name;             
-            }
-        }
+        public Name Name { get; set; }
+
+        public IList<PointF> EndingPoints { get; set; }
     }
 }

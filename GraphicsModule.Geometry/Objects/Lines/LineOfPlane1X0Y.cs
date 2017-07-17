@@ -9,27 +9,22 @@ namespace GraphicsModule.Geometry.Objects.Lines
 {
     public class LineOfPlane1X0Y : ILineOfPlane
     {
-        private Name _name;
-        private LineDrawCalc _calc;
-        //TODO: check
-        public List<PointF> DrawPoints { get; set; }
-
         public LineOfPlane1X0Y(PointOfPlane1X0Y pt0, PointOfPlane1X0Y pt1)
         {
             Point0 = pt0;
             Point1 = pt1;
             Kx = pt1.X - pt0.X;
             Ky = pt1.Y - pt0.Y;
+            EndingPoints = null;
+            Name = new Name();
         }
-        public LineOfPlane1X0Y(PointOfPlane1X0Y pt0, PointOfPlane1X0Y pt1, Point frameCenter, RectangleF rc)
+        public LineOfPlane1X0Y(PointOfPlane1X0Y pt0, PointOfPlane1X0Y pt1, Point coordinateSystemCenter)
         {
             Point0 = pt0;
             Point1 = pt1;
             Kx = pt1.X - pt0.X;
             Ky = pt1.Y - pt0.Y;
-            _calc = new LineDrawCalc(frameCenter, rc);
-            //TODO: govnokod
-            DrawPoints = _calc.CalculatePointsForDraw(this);
+            EndingPoints = this.CalculateEndingPointsOnFrame(coordinateSystemCenter);
             Name = new Name();
         }
 
@@ -37,26 +32,37 @@ namespace GraphicsModule.Geometry.Objects.Lines
         {
             Point0 = new PointOfPlane1X0Y(line.Point0.X, line.Point0.Y);
             Point1 = new PointOfPlane1X0Y(line.Point1.X, line.Point1.Y);
+            Kx = Point1.X - Point0.X;
+            Ky = Point1.Y - Point0.Y;
+            EndingPoints = null;
+            Name = new Name();
         }
 
-        public void Draw(DrawSettings settings, Point coordinateSystemCenter, Graphics g)
+        public void Draw(DrawSettings settings, Point coordinateSystemCenter, Graphics graphics)
         {
-            Point0.Draw(settings, coordinateSystemCenter, g);
-            Point1.Draw(settings, coordinateSystemCenter, g);
-            g.DrawLine(settings.PenLineOfPlane1X0Y, DrawPoints[0], DrawPoints[1]);
+            if (EndingPoints == null)
+            {
+                EndingPoints = this.CalculateEndingPointsOnFrame(coordinateSystemCenter);
+            }
+
+            graphics.DrawLine(settings.PenLineOfPlane1X0Y, EndingPoints[0], EndingPoints[1]);
+
+            Point0.Draw(settings, coordinateSystemCenter, graphics);
+            Point1.Draw(settings, coordinateSystemCenter, graphics);
         }
 
-        public void DrawLineOnly(DrawSettings st, Point framecenter, Graphics g)
+        public void DrawLineOnly(DrawSettings settings, Point coordinateSystemCenter, Graphics graphics)
         {
-            Point0.DrawPointsOnly(st, framecenter, g);
-            Point1.DrawPointsOnly(st, framecenter, g);
-            g.DrawLine(st.PenLineOfPlane1X0Y, DrawPoints[0], DrawPoints[1]);
-        }
+            if (EndingPoints == null)
+            {
+                EndingPoints = this.CalculateEndingPointsOnFrame(coordinateSystemCenter);
+            }
 
-        public void CalculatePointsForDraw(Point frameCenter, RectangleF rc)
-        {
-            _calc = new LineDrawCalc(frameCenter, rc);
-            DrawPoints = _calc.CalculatePointsForDraw(this);
+            graphics.DrawLine(settings.PenLineOfPlane1X0Y, EndingPoints[0], EndingPoints[1]);
+
+            Point0.DrawPointsOnly(settings, coordinateSystemCenter, graphics);
+            Point1.DrawPointsOnly(settings, coordinateSystemCenter, graphics);
+            
         }
 
         public bool IsSelected(Point mscoords, float ptR, Point coordinateSystemCenter, double distance)
@@ -73,19 +79,8 @@ namespace GraphicsModule.Geometry.Objects.Lines
 
         public double Ky { get; }
 
-        public Name Name
-        {
-            get
-            {
-                return _name;
-            }
-            set
-            {
-                _name = value;
-                Point0.Name = _name;
-                Point1.Name = _name;          
-            }
-        }
-
+        public Name Name { get; set; }
+    
+        public IList<PointF> EndingPoints { get; set; }
     }
 }

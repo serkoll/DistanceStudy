@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using GraphicsModule.Geometry.Objects.Points;
 
 namespace GraphicsModule.Geometry.Extensions
@@ -60,6 +61,16 @@ namespace GraphicsModule.Geometry.Extensions
         #endregion
 
         #region Full IsCoincides
+
+        public static bool IsCoincides(this PointF pt1, PointF pt2)
+        {
+            return Math.Abs(Math.Abs(pt1.X - pt2.X)) < 0.0001 && Math.Abs(Math.Abs(pt1.Y - pt2.Y)) < 0.0001;
+        }
+
+        public static bool IsCoincides(this Point pt1, Point pt2)
+        {
+            return Math.Abs(Math.Abs(pt1.X - pt2.X)) < 0.0001 && Math.Abs(Math.Abs(pt1.Y - pt2.Y)) < 0.0001;
+        }
 
         public static bool IsCoincides(this Point2D pt1, Point2D pt2)
         {

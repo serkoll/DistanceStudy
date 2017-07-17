@@ -37,7 +37,7 @@ namespace GraphicsModule.Rules.Create.Lines
             {
                 return null;
             }
-            var source = new LineOfPlane2X0Z((PointOfPlane2X0Z)strg.TempObjects.First(), new PointOfPlane2X0Z(pt, frameCenter), frameCenter, can.PlaneX0Z);
+            var source = new LineOfPlane2X0Z((PointOfPlane2X0Z)strg.TempObjects.First(), new PointOfPlane2X0Z(pt, frameCenter), frameCenter);
             source.Name = strg.TempObjects.First().Name;
             strg.TempObjects.Clear();
             return source;

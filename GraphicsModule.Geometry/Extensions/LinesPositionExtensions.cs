@@ -148,14 +148,23 @@ namespace GraphicsModule.Geometry.Extensions
 
         #endregion
 
-        #region IsCrossed of lines
+        #region IsCrossed
 
         public static bool IsCrossed(this Line2D ln1, Line2D ln2)
         {
+            const int solveError = 5;
             var y = (ln2.Point0.Y * ln2.kx * ln1.ky - ln1.Point0.Y * ln2.ky * ln1.kx + ln2.ky * ln1.ky * (ln1.Point0.X - ln2.Point0.X)) /
                     (ln2.kx * ln1.ky - ln1.kx * ln2.ky);
             var x = ln1.kx * (y - ln1.Point0.Y) / ln1.ky + ln1.Point0.X;
-            return !(y < 0) && !(x < 0);
+            if (Math.Abs(y) < solveError)
+            {
+                y = 0;
+            }
+            if (Math.Abs(x) < solveError)
+            {
+                x = 0;
+            }
+            return (y > 0) && (x >= 0);
         }
 
         public static bool IsCrossed(this Line2D ln1, LineOfPlane1X0Y ln, Point frameCenter)

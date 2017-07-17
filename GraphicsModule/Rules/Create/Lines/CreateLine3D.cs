@@ -110,22 +110,13 @@ namespace GraphicsModule.Rules.Create.Lines
         {
             if (obj[0].GetType() == typeof(PointOfPlane1X0Y))
             {
-                var source = new LineOfPlane1X0Y((PointOfPlane1X0Y)obj[0], (PointOfPlane1X0Y)obj[1]);
-                source.CalculatePointsForDraw(frameCenter, can.PlaneX0Y);
-                return source;
+                return new LineOfPlane1X0Y((PointOfPlane1X0Y)obj[0], (PointOfPlane1X0Y)obj[1], frameCenter);
             }
             if (obj[0].GetType() == typeof(PointOfPlane2X0Z))
             {
-                var source = new LineOfPlane2X0Z((PointOfPlane2X0Z)obj[0], (PointOfPlane2X0Z)obj[1]);
-                source.CalculatePointsForDraw(frameCenter, can.PlaneX0Z);
-                return source;
+                return new LineOfPlane2X0Z((PointOfPlane2X0Z)obj[0], (PointOfPlane2X0Z)obj[1], frameCenter);
             }
-            else
-            {
-                var source = new LineOfPlane3Y0Z((PointOfPlane3Y0Z)obj[0], (PointOfPlane3Y0Z)obj[1]);
-                source.CalculatePointsForDraw(frameCenter, can.PlaneY0Z);
-                return source;
-            }
+            return new LineOfPlane3Y0Z((PointOfPlane3Y0Z)obj[0], (PointOfPlane3Y0Z)obj[1], frameCenter);
         }
 
         protected bool IsInOnePlane(IObject lnproj, IObject ptproj)
