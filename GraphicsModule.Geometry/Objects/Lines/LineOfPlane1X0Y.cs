@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using GraphicsModule.Configuration;
 using GraphicsModule.Geometry.Extensions;
 using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Geometry.Objects.Points;
+using GraphicsModule.Geometry.Structures;
 
 namespace GraphicsModule.Geometry.Objects.Lines
 {
@@ -17,6 +19,7 @@ namespace GraphicsModule.Geometry.Objects.Lines
             Ky = pt1.Y - pt0.Y;
             EndingPoints = null;
             Name = new Name();
+            Coefficients = new LineCoefficients(Point0.ToPoint2D(), Point1.ToPoint2D());
         }
         public LineOfPlane1X0Y(PointOfPlane1X0Y pt0, PointOfPlane1X0Y pt1, Point coordinateSystemCenter)
         {
@@ -26,6 +29,7 @@ namespace GraphicsModule.Geometry.Objects.Lines
             Ky = pt1.Y - pt0.Y;
             EndingPoints = this.CalculateEndingPointsOnFrame(coordinateSystemCenter);
             Name = new Name();
+            Coefficients = new LineCoefficients(Point0.ToPoint2D(), Point1.ToPoint2D());
         }
 
         public LineOfPlane1X0Y(Line3D line)
@@ -36,6 +40,7 @@ namespace GraphicsModule.Geometry.Objects.Lines
             Ky = Point1.Y - Point0.Y;
             EndingPoints = null;
             Name = new Name();
+            Coefficients = new LineCoefficients(Point0.ToPoint2D(), Point1.ToPoint2D());
         }
 
         public void Draw(DrawSettings settings, Point coordinateSystemCenter, Graphics graphics)
@@ -51,6 +56,7 @@ namespace GraphicsModule.Geometry.Objects.Lines
             Point1.Draw(settings, coordinateSystemCenter, graphics);
         }
 
+        [Obsolete]
         public void DrawLineOnly(DrawSettings settings, Point coordinateSystemCenter, Graphics graphics)
         {
             if (EndingPoints == null)
@@ -80,7 +86,13 @@ namespace GraphicsModule.Geometry.Objects.Lines
         public double Ky { get; }
 
         public Name Name { get; set; }
-    
+        
+        /// <summary>
+        /// For internal use
+        /// </summary>
         public IList<PointF> EndingPoints { get; set; }
+
+        public LineCoefficients Coefficients { get; }
+
     }
 }

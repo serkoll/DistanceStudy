@@ -20,48 +20,48 @@ namespace GraphicsModule.Rules.Create.Planes
     {
         private PlaneCreateType _creationType;
         private Collection<IObject> _planeObjects = new Collection<IObject>();
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Drawing drawing, DrawSettings settings, Storage storage)
+        public void AddToStorageAndDraw(Point pt, Point frameCenter, Blueprint blueprint, DrawSettings settings, Storage storage)
         {
             switch (_creationType)
             {
                 case PlaneCreateType.ThreePoints:
                     {
-                        CreateByThreePoint(pt, frameCenter, drawing, settings, storage);
+                        CreateByThreePoint(pt, frameCenter, blueprint, settings, storage);
                         break;
                     }
                 case PlaneCreateType.LineAndPoint:
                     {
-                        CreateByLineAndPoint(pt, frameCenter, drawing, settings, storage);
+                        CreateByLineAndPoint(pt, frameCenter, blueprint, settings, storage);
                         break;
                     }
                 case PlaneCreateType.ParallelLines:
                     {
-                        CreateByParallelLines(pt, frameCenter, drawing, settings, storage);
+                        CreateByParallelLines(pt, frameCenter, blueprint, settings, storage);
                         break;
                     }
                 case PlaneCreateType.CrossedLines:
                     {
-                        CreateByCrossedLines(pt, frameCenter, drawing, settings, storage);
+                        CreateByCrossedLines(pt, frameCenter, blueprint, settings, storage);
                         break;
                     }
                 case PlaneCreateType.SegmentAndPoint:
                     {
-                        CreateBySegmentAndPoint(pt, frameCenter, drawing, settings, storage);
+                        CreateBySegmentAndPoint(pt, frameCenter, blueprint, settings, storage);
                         break;
                     }
                 case PlaneCreateType.ParallelSegments:
                     {
-                        CreateByParallelSegments(pt, frameCenter, drawing, settings, storage);
+                        CreateByParallelSegments(pt, frameCenter, blueprint, settings, storage);
                         break;
                     }
                 case PlaneCreateType.CrossedSegments:
                     {
-                        CreateByCrossedSegments(pt, frameCenter, drawing, settings, storage);
+                        CreateByCrossedSegments(pt, frameCenter, blueprint, settings, storage);
                         break;
                     }
             }
         }
-        private void CreateByThreePoint(Point pt, Point frameCenter, Drawing can, DrawSettings setting, Storage strg)
+        private void CreateByThreePoint(Point pt, Point frameCenter, Blueprint can, DrawSettings setting, Storage strg)
         {
             var tmpobj = new CreatePointOfPlane3Y0Z().Create(pt, frameCenter, can, setting, strg);
             tmpobj.Draw(setting, frameCenter, can.Graphics);
@@ -74,7 +74,7 @@ namespace GraphicsModule.Rules.Create.Planes
             strg.AddToCollection(source);
             can.Update(strg);
         }
-        private void CreateByLineAndPoint(Point pt, Point frameCenter, Drawing can, DrawSettings setting, Storage strg)
+        private void CreateByLineAndPoint(Point pt, Point frameCenter, Blueprint can, DrawSettings setting, Storage strg)
         {
             if (_planeObjects.Count == 0)
             {
@@ -94,7 +94,7 @@ namespace GraphicsModule.Rules.Create.Planes
                 can.Update(strg);
             }
         }
-        private void CreateByParallelLines(Point pt, Point frameCenter, Drawing can, DrawSettings setting, Storage strg)
+        private void CreateByParallelLines(Point pt, Point frameCenter, Blueprint can, DrawSettings setting, Storage strg)
         {
             if (_planeObjects.Count < 2)
             {
@@ -126,7 +126,7 @@ namespace GraphicsModule.Rules.Create.Planes
                 }
             }
         }
-        private void CreateByCrossedLines(Point pt, Point frameCenter, Drawing can, DrawSettings setting, Storage strg)
+        private void CreateByCrossedLines(Point pt, Point frameCenter, Blueprint can, DrawSettings setting, Storage strg)
         {
             if (_planeObjects.Count < 2)
             {
@@ -158,7 +158,7 @@ namespace GraphicsModule.Rules.Create.Planes
                 }
             }
         }
-        private void CreateBySegmentAndPoint(Point pt, Point frameCenter, Drawing can, DrawSettings setting, Storage strg)
+        private void CreateBySegmentAndPoint(Point pt, Point frameCenter, Blueprint can, DrawSettings setting, Storage strg)
         {
             if (_planeObjects.Count == 0)
             {
@@ -178,7 +178,7 @@ namespace GraphicsModule.Rules.Create.Planes
                 can.Update(strg);
             }
         }
-        private void CreateByParallelSegments(Point pt, Point frameCenter, Drawing can, DrawSettings setting, Storage strg)
+        private void CreateByParallelSegments(Point pt, Point frameCenter, Blueprint can, DrawSettings setting, Storage strg)
         {
             if (_planeObjects.Count < 2)
             {
@@ -210,7 +210,7 @@ namespace GraphicsModule.Rules.Create.Planes
                 }
             }
         }
-        private void CreateByCrossedSegments(Point pt, Point frameCenter, Drawing can, DrawSettings setting, Storage strg)
+        private void CreateByCrossedSegments(Point pt, Point frameCenter, Blueprint can, DrawSettings setting, Storage strg)
         {
             if (_planeObjects.Count < 2)
             {

@@ -8,7 +8,7 @@ namespace GraphicsModule
     /// <summary>
     /// Чертеж
     /// </summary>
-    public class Drawing : IDisposable
+    public class Blueprint : IDisposable
     {
         private Bitmap _bitmap;
         private Point _centerSystemPoint;
@@ -18,7 +18,7 @@ namespace GraphicsModule
         /// </summary>
         /// <param name="settings">Настройки графического редактора</param>
         /// <param name="pictureBox">Целевой PictureBox</param>
-        public Drawing(Settings settings, PictureBox pictureBox)
+        public Blueprint(Settings settings, PictureBox pictureBox)
         {
             if (pictureBox == null)
             {
@@ -34,7 +34,6 @@ namespace GraphicsModule
             Settings = settings;
             CalculateBackground();
             InitializeGraphics();
-            CalculatePlanes(Background.Axis.CoordinateSystemCenter);
             Refresh();
         }
 
@@ -47,6 +46,7 @@ namespace GraphicsModule
             _centerSystemPoint.X = PictureBox.ClientSize.Width / 2;
             _centerSystemPoint.Y = PictureBox.ClientSize.Height / 2;
             Background = new Background(_centerSystemPoint, Settings, PictureBox);
+            CalculatePlanes(_centerSystemPoint);
         }
 
         private void InitializeGraphics()

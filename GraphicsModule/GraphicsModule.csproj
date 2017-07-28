@@ -52,7 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Background.cs" />
-    <Compile Include="Drawing.cs" />
+    <Compile Include="Blueprint.cs" />
     <Compile Include="Controls\SettingsForm\AxisSettingsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

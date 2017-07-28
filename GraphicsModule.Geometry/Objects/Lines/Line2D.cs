@@ -6,124 +6,79 @@ using GraphicsModule.Configuration;
 using GraphicsModule.Geometry.Extensions;
 using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Geometry.Objects.Points;
+using GraphicsModule.Geometry.Structures;
 
 namespace GraphicsModule.Geometry.Objects.Lines
 {
     /// <summary>Класс для задания и расчета параметров 2D прямой</summary>
     /// <remarks>Copyright © Polozkov V. Yury, 2015</remarks>
-    public class Line2D : IObject
+    public class Line2D : ILine
     {
-        private Name _name;
-
-        private List<PointF> pts { get; set; }
-
         public Line2D()
         {
             Point0 = new Point2D(0, 0);
             Point1 = new Point2D(1, 0);
-            kx = 1;
-            ky = 0;
+            Kx = 1;
+            Ky = 0;
             Name = new Name();
+            Coefficients = new LineCoefficients(Point0, Point1);
         }
 
         public Line2D(Point2D pt1, Point2D pt2)
         {
             Point0 = pt1;
             Point1 = pt2;
-            kx = pt2.X - pt1.X;
-            ky = pt2.Y - pt1.Y;
+            Kx = pt2.X - pt1.X;
+            Ky = pt2.Y - pt1.Y;
             Name = new Name();
-            pt1.Name = Name;
-            pt2.Name = Name;
+            EndingPoints = null;
+            Coefficients = new LineCoefficients(Point0, Point1);
         }
 
         public Line2D(Point2D pt1, Point2D pt2, PictureBox pb)
         {
             Point0 = pt1;
             Point1 = pt2;
-            kx = pt2.X - pt1.X;
-            ky = pt2.Y - pt1.Y;
-            CalculatePointsForDraw(pb);
+            Kx = pt2.X - pt1.X;
+            Ky = pt2.Y - pt1.Y;
+            Coefficients = new LineCoefficients(Point0, Point1);
+            EndingPoints = new LineEndingPoints(this, pb.ClientRectangle);
         }
 
         public Line2D ConstructPerpendicularOfPointToLine(Line2D line, Point2D pt)
         {
-            return new Line2D(pt, new Point2D(-line.kx + pt.X, line.ky + pt.Y));
+            return new Line2D(pt, new Point2D(-line.Kx + pt.X, line.Ky + pt.Y));
         }
 
         public Line2D ConstructParallelOfPointToLine(Line2D line, Point2D pt)
         {
-            return new Line2D(pt, new Point2D(line.kx + pt.X, line.ky + pt.Y));
+            return new Line2D(pt, new Point2D(line.Kx + pt.X, line.Ky + pt.Y));
         }
 
-        public double CalculateSlopeOfLine(Line2D line)
-        {
-            return line.ky / line.kx;
-
-        }
         public void Draw(DrawSettings settings, Point coordinateSystemCenter, Graphics g)
         {
             Point0.Draw(settings, coordinateSystemCenter, g);
             Point1.Draw(settings, coordinateSystemCenter, g);
-            g.DrawLine(settings.PenLine2D, pts[0], pts[1]);
+            g.DrawLine(settings.PenLine2D, EndingPoints.Point0.ToPoint(), EndingPoints.Point1.ToPoint());
         }
-        private void CalculatePointsForDraw(PictureBox pb)
-        {
-            pts = new List<PointF>();
 
-            if (Math.Abs(kx) < 0.0001)
-            {
-                pts.Add(new PointF((float)Point0.X, 0));
-                pts.Add(new PointF((float)Point0.X, pb.Height));
-            }
-            if (Math.Abs(ky) < 0.0001)
-            {
-                pts.Add(new PointF(0, (float)Point0.Y));
-                pts.Add(new PointF(pb.Width, (float)Point0.Y));
-            }
-            //y=0
-            var x = (float)(-Point0.Y * kx / ky + Point0.X);
-            if (x > 0) pts.Add(new PointF(x, 0));
-            //y=max
-            x = (float)((pb.Height - Point0.Y) * kx / ky + Point0.X);
-            if (x < pb.Width) pts.Add(new PointF(x, pb.Height));
-            if (!CheckListState(pts)) return;
-            //x = 0
-            var y = (float)(-Point0.X * ky / kx + Point0.Y);
-            if (y > 0) pts.Add(new PointF(0, y));
-            if (!CheckListState(pts)) return;
-            //x = max
-            y = (int)((pb.Width - Point0.X) * ky / kx + Point0.Y);
-            pts.Add(new PointF(pb.Width, y));
-        }
-        private bool CheckListState(List<PointF> lst)
-        {
-            return lst.Count < 2;
-        }
         public bool IsSelected(Point mscoords, float ptR, Point coordinateSystemCenter, double distance)
         {
             return this.IsIncidentalToPoint(mscoords, 35 * distance);
         }
-        //TODO: возможно в массив
+
         public Point2D Point0 { get; }
 
         public Point2D Point1 { get; }
 
-        public Name Name
-        {
-            get
-            {
-                return _name;
-            }
-            set
-            {
-                Point0.Name = value;
-                Point1.Name = value;
-                _name = value;
-            }
-        }
-        public double kx { get; }
+        public Name Name { get; set; }
 
-        public double ky { get; }
+        public double Kx { get; }
+
+        public double Ky { get; }
+
+        public LineCoefficients Coefficients { get; }
+
+        public LineEndingPoints EndingPoints { get; }
     }
 }

@@ -55,9 +55,9 @@ namespace GraphicsModule.Geometry.Extensions
                 return null;
             }
 
-            var y = (ln2.Point0.Y * ln2.kx * ln1.ky - ln1.Point0.Y * ln2.ky * ln1.kx + ln2.ky * ln1.ky * (ln1.Point0.X - ln2.Point0.X)) /
-                    (ln2.kx * ln1.ky - ln1.kx * ln2.ky);
-            var x = ln1.kx * (y - ln1.Point0.Y) / ln1.ky + ln1.Point0.X;
+            var y = (ln2.Point0.Y * ln2.Kx * ln1.Ky - ln1.Point0.Y * ln2.Ky * ln1.Kx + ln2.Ky * ln1.Ky * (ln1.Point0.X - ln2.Point0.X)) /
+                    (ln2.Kx * ln1.Ky - ln1.Kx * ln2.Ky);
+            var x = ln1.Kx * (y - ln1.Point0.Y) / ln1.Ky + ln1.Point0.X;
 
             return new PointF((float)x, (float)y);
         }
@@ -69,10 +69,10 @@ namespace GraphicsModule.Geometry.Extensions
             {
                 return null;
             }
-            var y = (ln2.Point0.Y * ln2.kx * ln1.ky - ln1.Point0.Y * ln2.ky * ln1.kx + ln2.ky * ln1.ky * (ln1.Point0.X - ln2.Point0.X)) /
-                    (ln2.kx * ln1.ky - ln1.kx * ln2.ky);
-            var x = (ln1.Point0.X * ln2.kx * ln1.ky - ln2.Point0.X * ln1.kx * ln2.ky + ln2.kx * ln1.kx * (ln2.Point0.Y - ln1.Point0.Y)) /
-                    (ln1.ky * ln2.kx - ln1.kx * ln2.ky);
+            var y = (ln2.Point0.Y * ln2.Kx * ln1.Ky - ln1.Point0.Y * ln2.Ky * ln1.Kx + ln2.Ky * ln1.Ky * (ln1.Point0.X - ln2.Point0.X)) /
+                    (ln2.Kx * ln1.Ky - ln1.Kx * ln2.Ky);
+            var x = (ln1.Point0.X * ln2.Kx * ln1.Ky - ln2.Point0.X * ln1.Kx * ln2.Ky + ln2.Kx * ln1.Kx * (ln2.Point0.Y - ln1.Point0.Y)) /
+                    (ln1.Ky * ln2.Kx - ln1.Kx * ln2.Ky);
             return new PointF((float)x, (float)y);
         }
 
@@ -84,10 +84,10 @@ namespace GraphicsModule.Geometry.Extensions
                 return null;
             }
 
-            var y = (ln2.Point0.Y * ln2.kx * ln1.ky - ln1.Point0.Y * ln2.ky * ln1.kx + ln2.ky * ln1.ky * (ln1.Point0.X - ln2.Point0.X)) /
-                     (ln2.kx * ln1.ky - ln1.kx * ln2.ky);
-            var x = (ln1.Point0.X * ln2.kx * ln1.ky - ln2.Point0.X * ln1.kx * ln2.ky + ln2.kx * ln1.kx * (ln2.Point0.Y - ln1.Point0.Y)) /
-                    (ln1.ky * ln2.kx - ln1.kx * ln2.ky);
+            var y = (ln2.Point0.Y * ln2.Kx * ln1.Ky - ln1.Point0.Y * ln2.Ky * ln1.Kx + ln2.Ky * ln1.Ky * (ln1.Point0.X - ln2.Point0.X)) /
+                     (ln2.Kx * ln1.Ky - ln1.Kx * ln2.Ky);
+            var x = (ln1.Point0.X * ln2.Kx * ln1.Ky - ln2.Point0.X * ln1.Kx * ln2.Ky + ln2.Kx * ln1.Kx * (ln2.Point0.Y - ln1.Point0.Y)) /
+                    (ln1.Ky * ln2.Kx - ln1.Kx * ln2.Ky);
             return new PointF((float)x, (float)y);
         }
 
@@ -99,10 +99,10 @@ namespace GraphicsModule.Geometry.Extensions
                 return null;
             }
 
-            var y = (ln2.Point0.Y * ln2.kx * ln1.ky - ln1.Point0.Y * ln2.ky * ln1.kx + ln2.ky * ln1.ky * (ln1.Point0.X - ln2.Point0.X)) /
-                     (ln2.kx * ln1.ky - ln1.kx * ln2.ky);
-            var x = (ln1.Point0.X * ln2.kx * ln1.ky - ln2.Point0.X * ln1.kx * ln2.ky + ln2.kx * ln1.kx * (ln2.Point0.Y - ln1.Point0.Y)) /
-                    (ln1.ky * ln2.kx - ln1.kx * ln2.ky);
+            var y = (ln2.Point0.Y * ln2.Kx * ln1.Ky - ln1.Point0.Y * ln2.Ky * ln1.Kx + ln2.Ky * ln1.Ky * (ln1.Point0.X - ln2.Point0.X)) /
+                     (ln2.Kx * ln1.Ky - ln1.Kx * ln2.Ky);
+            var x = (ln1.Point0.X * ln2.Kx * ln1.Ky - ln2.Point0.X * ln1.Kx * ln2.Ky + ln2.Kx * ln1.Kx * (ln2.Point0.Y - ln1.Point0.Y)) /
+                    (ln1.Ky * ln2.Kx - ln1.Kx * ln2.Ky);
 
             return new PointF((float)x, (float)y);
         }

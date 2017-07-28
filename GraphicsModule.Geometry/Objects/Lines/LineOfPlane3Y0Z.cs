@@ -4,6 +4,7 @@ using GraphicsModule.Configuration;
 using GraphicsModule.Geometry.Extensions;
 using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Geometry.Objects.Points;
+using GraphicsModule.Geometry.Structures;
 
 namespace GraphicsModule.Geometry.Objects.Lines
 {
@@ -16,6 +17,7 @@ namespace GraphicsModule.Geometry.Objects.Lines
             Ky = pt1.Y - pt0.Y;
             Kz = pt1.Z - pt0.Z;
             Name = new Name();
+            Coefficients = new LineCoefficients(Point0.ToPoint2D(), Point1.ToPoint2D());
         }
 
         public LineOfPlane3Y0Z(PointOfPlane3Y0Z pt0, PointOfPlane3Y0Z pt1, Point coordinateSystemCenter)
@@ -26,8 +28,9 @@ namespace GraphicsModule.Geometry.Objects.Lines
             Kz = pt1.Z - pt0.Z;
             EndingPoints = this.CalculateEndingPointsOnFrame(coordinateSystemCenter);
             Name = new Name();
+            Coefficients = new LineCoefficients(Point0.ToPoint2D(), Point1.ToPoint2D());
         }
-        
+
         public LineOfPlane3Y0Z(Line3D line)
         {
             Point0 = new PointOfPlane3Y0Z(line.Point0.Y, line.Point0.Z);
@@ -36,6 +39,7 @@ namespace GraphicsModule.Geometry.Objects.Lines
             Kz = Point1.Z - Point0.Z;
             EndingPoints = null;
             Name = new Name();
+            Coefficients = new LineCoefficients(Point0.ToPoint2D(), Point1.ToPoint2D());
         }
 
         public void Draw(DrawSettings settings, Point coordinateSystemCenter, Graphics graphics)
@@ -81,5 +85,7 @@ namespace GraphicsModule.Geometry.Objects.Lines
         public Name Name { get; set; }
 
         public IList<PointF> EndingPoints { get; set; }
+
+        public LineCoefficients Coefficients { get; }
     }
 }

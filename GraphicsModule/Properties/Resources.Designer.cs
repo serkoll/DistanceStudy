@@ -61,7 +61,7 @@ namespace GraphicsModule.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        ///   Looks up a localized resource of type System.Blueprint.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap dot {
             get {
@@ -71,7 +71,7 @@ namespace GraphicsModule.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        ///   Looks up a localized resource of type System.Blueprint.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap dot3D {
             get {
@@ -81,7 +81,7 @@ namespace GraphicsModule.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        ///   Looks up a localized resource of type System.Blueprint.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap dotX0Y {
             get {
@@ -91,7 +91,7 @@ namespace GraphicsModule.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        ///   Looks up a localized resource of type System.Blueprint.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap dotX0Z {
             get {
@@ -101,7 +101,7 @@ namespace GraphicsModule.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        ///   Looks up a localized resource of type System.Blueprint.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap dotY0Z {
             get {
@@ -111,7 +111,7 @@ namespace GraphicsModule.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        ///   Looks up a localized resource of type System.Blueprint.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap line {
             get {
@@ -121,7 +121,7 @@ namespace GraphicsModule.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        ///   Looks up a localized resource of type System.Blueprint.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap line3D {
             get {
@@ -131,7 +131,7 @@ namespace GraphicsModule.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        ///   Looks up a localized resource of type System.Blueprint.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap lineX0Y {
             get {
@@ -141,7 +141,7 @@ namespace GraphicsModule.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        ///   Looks up a localized resource of type System.Blueprint.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap lineX0Z {
             get {
@@ -151,7 +151,7 @@ namespace GraphicsModule.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        ///   Looks up a localized resource of type System.Blueprint.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap lineY0Z {
             get {
@@ -161,7 +161,7 @@ namespace GraphicsModule.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        ///   Looks up a localized resource of type System.Blueprint.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Segment3D {
             get {
@@ -171,7 +171,7 @@ namespace GraphicsModule.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        ///   Looks up a localized resource of type System.Blueprint.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap SegmentX0Y {
             get {
@@ -181,7 +181,7 @@ namespace GraphicsModule.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        ///   Looks up a localized resource of type System.Blueprint.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap SegmentX0Z {
             get {
@@ -191,7 +191,7 @@ namespace GraphicsModule.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        ///   Looks up a localized resource of type System.Blueprint.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap SegmentY0Z {
             get {

@@ -11,17 +11,17 @@ namespace GraphicsModule.Rules.Create.Lines
 {
     public class CreateLine2D : ICreate
     {
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Drawing drawing, DrawSettings settings, Storage storage)
+        public void AddToStorageAndDraw(Point pt, Point frameCenter, Blueprint blueprint, DrawSettings settings, Storage storage)
         {
-            var obj = Create(pt, frameCenter, drawing, settings, storage);
+            var obj = Create(pt, frameCenter, blueprint, settings, storage);
             if (obj == null)
             {
                 return;
             }
             storage.AddToCollection(obj);
-            drawing.Update(storage);
+            blueprint.Update(storage);
         }
-        public Line2D Create(Point pt, Point frameCenter, Drawing can, DrawSettings settings, Storage strg)
+        public Line2D Create(Point pt, Point frameCenter, Blueprint can, DrawSettings settings, Storage strg)
         {
             var ptOfPlane = new Point2D(pt);
 
@@ -37,6 +37,7 @@ namespace GraphicsModule.Rules.Create.Lines
                 {
                     return null;
                 }
+                //TODO: другой конструктор
                 var source = new Line2D((Point2D)strg.TempObjects.First(), ptOfPlane, can.PictureBox);
                 source.Name = strg.TempObjects.First().Name;
                 strg.TempObjects.Clear();

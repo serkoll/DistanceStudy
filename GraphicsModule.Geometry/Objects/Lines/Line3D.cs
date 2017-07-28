@@ -4,6 +4,7 @@ using GraphicsModule.Configuration;
 using GraphicsModule.Geometry.Extensions;
 using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Geometry.Objects.Points;
+using GraphicsModule.Geometry.Structures;
 
 namespace GraphicsModule.Geometry.Objects.Lines
 {
@@ -202,5 +203,7 @@ namespace GraphicsModule.Geometry.Objects.Lines
         public double Kz { get; private set; }
 
         public Name Name { get; set; }
+
+        public LineCoefficients Coefficients { get; }
     }
 }

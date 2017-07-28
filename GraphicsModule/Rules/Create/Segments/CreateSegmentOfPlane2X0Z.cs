@@ -14,17 +14,17 @@ namespace GraphicsModule.Rules.Create.Segments
     /// </summary>
     public class CreateSegmentOfPlane2X0Z : ICreate
     {
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Drawing drawing, DrawSettings settings, Storage storage)
+        public void AddToStorageAndDraw(Point pt, Point frameCenter, Blueprint blueprint, DrawSettings settings, Storage storage)
         {
-            var obj = Create(pt, frameCenter, drawing, settings, storage);
+            var obj = Create(pt, frameCenter, blueprint, settings, storage);
             if (obj == null)
             {
                 return;
             }
             storage.AddToCollection(obj);
-            drawing.Update(storage);
+            blueprint.Update(storage);
         }
-        public SegmentOfPlane2X0Z Create(Point pt, Point frameCenter, Drawing can, DrawSettings setting, Storage strg)
+        public SegmentOfPlane2X0Z Create(Point pt, Point frameCenter, Blueprint can, DrawSettings setting, Storage strg)
         {
             if (!PointOfPlane2X0Z.IsCreatable(pt, frameCenter))
             {

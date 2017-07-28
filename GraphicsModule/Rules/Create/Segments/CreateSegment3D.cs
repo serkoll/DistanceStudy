@@ -18,7 +18,7 @@ namespace GraphicsModule.Rules.Create.Segments
     {
         private IObject _tempLineOfPlane;
         private Segment3D _source;
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Drawing drawing, DrawSettings settings, Storage storage)
+        public void AddToStorageAndDraw(Point pt, Point frameCenter, Blueprint blueprint, DrawSettings settings, Storage storage)
         {
             var ptOfPlane = pt.ToPointOfPlane(frameCenter);
             if (storage.TempObjects.Count == 0)
@@ -27,14 +27,14 @@ namespace GraphicsModule.Rules.Create.Segments
                 {
                     ptOfPlane.Name = GraphicsControl.NamesGenerator.Generate();
                     storage.TempObjects.Add(ptOfPlane);
-                    storage.DrawLastAddedToTempObjects(settings, frameCenter, drawing.Graphics);
+                    storage.DrawLastAddedToTempObjects(settings, frameCenter, blueprint.Graphics);
                 }
                 else
                 {
                     if (IsInOnePlane(_tempLineOfPlane, ptOfPlane)) return;
                     if (!IsOnLinkLine(_tempLineOfPlane, ptOfPlane)) return;
                     storage.TempObjects.Add(ptOfPlane);
-                    storage.DrawLastAddedToTempObjects(settings, frameCenter, drawing.Graphics);
+                    storage.DrawLastAddedToTempObjects(settings, frameCenter, blueprint.Graphics);
                 }
             }
             else
@@ -42,26 +42,26 @@ namespace GraphicsModule.Rules.Create.Segments
                 if (ReferenceEquals(storage.TempObjects[0].GetType(), ptOfPlane.GetType()) && _tempLineOfPlane == null)
                 {
                     storage.TempObjects.Add(ptOfPlane);
-                    _tempLineOfPlane = CreateSegmentOfPlane(storage.TempObjects, settings, frameCenter, drawing);
+                    _tempLineOfPlane = CreateSegmentOfPlane(storage.TempObjects, settings, frameCenter, blueprint);
                     _tempLineOfPlane.Name = storage.TempObjects[0].Name;
                     storage.TempObjects.Clear();
-                    drawing.Update(storage);
-                    _tempLineOfPlane.Draw(settings, frameCenter, drawing.Graphics);
+                    blueprint.Update(storage);
+                    _tempLineOfPlane.Draw(settings, frameCenter, blueprint.Graphics);
                 }
                 else if (IsOnLinkLine(_tempLineOfPlane, ptOfPlane))
                 {
                     storage.TempObjects.Add(ptOfPlane);
-                    if (!IsSegment3DCreatable(_tempLineOfPlane, CreateSegmentOfPlane(storage.TempObjects, settings, frameCenter, drawing), settings, frameCenter, drawing)) return;
+                    if (!IsSegment3DCreatable(_tempLineOfPlane, CreateSegmentOfPlane(storage.TempObjects, settings, frameCenter, blueprint), settings, frameCenter, blueprint)) return;
                     _source.Name = _tempLineOfPlane.Name;
                     storage.TempObjects.Clear();
                     _tempLineOfPlane = null;
                     storage.Objects.Add(_source);
-                    drawing.Update(storage);
-                    storage.DrawLastAddedToObjects(settings, frameCenter, drawing.Graphics);
+                    blueprint.Update(storage);
+                    storage.DrawLastAddedToObjects(settings, frameCenter, blueprint.Graphics);
                 }
             }
         }
-        protected bool IsSegment3DCreatable(IObject ln1, IObject ln2, DrawSettings st, Point frameCenter, Drawing can)
+        protected bool IsSegment3DCreatable(IObject ln1, IObject ln2, DrawSettings st, Point frameCenter, Blueprint can)
         {
             if (ln1.GetType() == typeof(SegmentOfPlane1X0Y) && ln2.GetType() == typeof(SegmentOfPlane2X0Z))
             {
@@ -96,7 +96,7 @@ namespace GraphicsModule.Rules.Create.Segments
             }
             return false;
         }
-        protected IObject CreateSegmentOfPlane(IList<IObject> obj, DrawSettings st, Point frameCenter, Drawing can)
+        protected IObject CreateSegmentOfPlane(IList<IObject> obj, DrawSettings st, Point frameCenter, Blueprint can)
         {
             if (obj[0].GetType() == typeof(PointOfPlane1X0Y))
             {
