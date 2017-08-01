@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using GraphicsModule.Configuration;
+using GraphicsModule.Geometry;
 
 namespace GraphicsModule.Interfaces
 {

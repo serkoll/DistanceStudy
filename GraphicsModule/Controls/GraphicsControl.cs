@@ -7,6 +7,7 @@ using System.IO;
 using GraphicsModule.Configuration;
 using GraphicsModule.Enums;
 using GraphicsModule.Forms;
+using GraphicsModule.Geometry;
 using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Interfaces;
 
@@ -122,10 +123,10 @@ namespace GraphicsModule.Controls
         /// </summary>
         public void InitializeMenu()
         {
-            _ptMenuSelector = new Menu.PointMenuSelector(MainPictureBox, buttonPointsMenu, ObjectsPropertyMenu, _settings.PrimitivesAcces.Points);
-            _lnMenuSelector = new Menu.LineMenuSelector(MainPictureBox, buttonLinesMenu, ObjectsPropertyMenu, _settings.PrimitivesAcces.Lines);
-            _sgMenuSelector = new Menu.SegmentMenuSelector(MainPictureBox, buttonSegmentMenu, ObjectsPropertyMenu, _settings.PrimitivesAcces.Segments);
-            _plMenuSelector = new Menu.PlaneMenuSelector(MainPictureBox, buttonPlanesMenu, ObjectsPropertyMenu, _settings.PrimitivesAcces.Planes);
+            _ptMenuSelector = new Menu.PointMenuSelector(MainPictureBox, buttonPointsMenu, ObjectsPropertyMenu, _settings.Access.Points);
+            _lnMenuSelector = new Menu.LineMenuSelector(MainPictureBox, buttonLinesMenu, ObjectsPropertyMenu, _settings.Access.Lines);
+            _sgMenuSelector = new Menu.SegmentMenuSelector(MainPictureBox, buttonSegmentMenu, ObjectsPropertyMenu, _settings.Access.Segments);
+            _plMenuSelector = new Menu.PlaneMenuSelector(MainPictureBox, buttonPlanesMenu, ObjectsPropertyMenu, _settings.Access.Planes);
             AddMenus();
             SetPrimitivesButtonsEnabled();
         }
@@ -141,21 +142,21 @@ namespace GraphicsModule.Controls
 
         private void SetPrimitivesButtonsEnabled()
         {
-            this.buttonPointsMenu.Enabled = _settings.PrimitivesAcces.Points.IsPointsEnabled;
-            this.buttonLinesMenu.Enabled = _settings.PrimitivesAcces.Lines.IsLinesEnabled;
-            this.buttonSegmentMenu.Enabled = _settings.PrimitivesAcces.Segments.IsSegmentsEnabled;
-            this.buttonPlanesMenu.Enabled = _settings.PrimitivesAcces.Planes.IsPlanesEnabled;
+            this.buttonPointsMenu.Enabled = _settings.Access.Points.IsPointsEnabled;
+            this.buttonLinesMenu.Enabled = _settings.Access.Lines.IsLinesEnabled;
+            this.buttonSegmentMenu.Enabled = _settings.Access.Segments.IsSegmentsEnabled;
+            this.buttonPlanesMenu.Enabled = _settings.Access.Planes.IsPlanesEnabled;
         }
         public void SetAccess()
         {
-            this.buttonPointsMenu.Enabled = _settings.PrimitivesAcces.Points.IsPointsEnabled;
-            this.buttonLinesMenu.Enabled = _settings.PrimitivesAcces.Lines.IsLinesEnabled;
-            this.buttonSegmentMenu.Enabled = _settings.PrimitivesAcces.Segments.IsSegmentsEnabled;
-            this.buttonPlanesMenu.Enabled = _settings.PrimitivesAcces.Planes.IsPlanesEnabled;
-            _ptMenuSelector.SetAccess(_settings.PrimitivesAcces.Points);
-            _lnMenuSelector.SetAccess(_settings.PrimitivesAcces.Lines);
-            _plMenuSelector.SetAccess(_settings.PrimitivesAcces.Planes);
-            _sgMenuSelector.SetAccess(_settings.PrimitivesAcces.Segments);
+            this.buttonPointsMenu.Enabled = _settings.Access.Points.IsPointsEnabled;
+            this.buttonLinesMenu.Enabled = _settings.Access.Lines.IsLinesEnabled;
+            this.buttonSegmentMenu.Enabled = _settings.Access.Segments.IsSegmentsEnabled;
+            this.buttonPlanesMenu.Enabled = _settings.Access.Planes.IsPlanesEnabled;
+            _ptMenuSelector.SetAccess(_settings.Access.Points);
+            _lnMenuSelector.SetAccess(_settings.Access.Lines);
+            _plMenuSelector.SetAccess(_settings.Access.Planes);
+            _sgMenuSelector.SetAccess(_settings.Access.Segments);
         }
 
         private void GraphicsControl_Load(object sender, EventArgs e)
@@ -234,13 +235,13 @@ namespace GraphicsModule.Controls
             if (labelStatusLinkLine.BorderStyle == Border3DStyle.RaisedInner)
             {
                 labelStatusLinkLine.BorderStyle = Border3DStyle.SunkenOuter;
-                _blueprint.Settings.DrawSettings.LinkLinesSettings.IsDraw = true;
+                _blueprint.Settings.Drawing.LinkLinesSettings.Enabled = true;
                 _blueprint.Update(_storage);
             }
             else
             {
                 labelStatusLinkLine.BorderStyle = Border3DStyle.RaisedInner;
-                _blueprint.Settings.DrawSettings.LinkLinesSettings.IsDraw = false;
+                _blueprint.Settings.Drawing.LinkLinesSettings.Enabled = false;
                 _blueprint.Update(_storage);
             }
         }
@@ -267,13 +268,13 @@ namespace GraphicsModule.Controls
             if (labelStatusGrid.BorderStyle == Border3DStyle.RaisedInner)
             {
                 labelStatusGrid.BorderStyle = Border3DStyle.SunkenOuter;
-                _blueprint.Settings.GridSettings.IsDraw = true;
+                _blueprint.Settings.Grid.IsDraw = true;
                 _blueprint.Update(_storage);
             }
             else
             {
                 labelStatusGrid.BorderStyle = Border3DStyle.RaisedInner;
-                _blueprint.Settings.GridSettings.IsDraw = false;
+                _blueprint.Settings.Grid.IsDraw = false;
                 _blueprint.Update(_storage);
             }
         }
@@ -287,13 +288,13 @@ namespace GraphicsModule.Controls
             if (labelSatusAxis.BorderStyle == Border3DStyle.RaisedInner)
             {
                 labelSatusAxis.BorderStyle = Border3DStyle.SunkenOuter;
-                _blueprint.Settings.AxisSettings.IsDraw = true;
+                _blueprint.Settings.Axis.IsDraw = true;
                 _blueprint.Update(_storage);
             }
             else
             {
                 labelSatusAxis.BorderStyle = Border3DStyle.RaisedInner;
-                _blueprint.Settings.AxisSettings.IsDraw = false;
+                _blueprint.Settings.Axis.IsDraw = false;
                 _blueprint.Update(_storage);
             }
         }
@@ -308,7 +309,7 @@ namespace GraphicsModule.Controls
             var mousecoords = MainPictureBox.PointToClient(MousePosition);  //Получаем координаты курсора мыши
             if (SetObject != null) //Контроль существования объекта
             {
-                SetObject.AddToStorageAndDraw(mousecoords, _blueprint.CenterSystemPoint, _blueprint, _settings.DrawSettings, _storage); //Отрисовываем объект и добавляем его в коллекцию объектов
+                SetObject.AddToStorageAndDraw(mousecoords, _blueprint.CoordinateSystemCenterPoint, _blueprint, _settings.Drawing, _storage); //Отрисовываем объект и добавляем его в коллекцию объектов
                 //TODO: нужно ли
                 _blueprint.Refresh(); //Перерисовывам полотно
             }
@@ -322,8 +323,8 @@ namespace GraphicsModule.Controls
         private void MainPictureBox_MouseMove(object sender, MouseEventArgs e)
         {
             _crMove.CursorPointToGridMove(_blueprint); // Привязка к сетке
-            labelValueX.Text = (MainPictureBox.PointToClient(Cursor.Position).X - _blueprint.CenterSystemPoint.X).ToString();
-            labelValueY.Text = (MainPictureBox.PointToClient(Cursor.Position).Y - _blueprint.CenterSystemPoint.Y).ToString();
+            labelValueX.Text = (MainPictureBox.PointToClient(Cursor.Position).X - _blueprint.CoordinateSystemCenterPoint.X).ToString();
+            labelValueY.Text = (MainPictureBox.PointToClient(Cursor.Position).Y - _blueprint.CoordinateSystemCenterPoint.Y).ToString();
         }
 
         private void GraphicsControl_KeyDown(object sender, KeyEventArgs e)
@@ -477,7 +478,7 @@ namespace GraphicsModule.Controls
                 sldWorksObject.SetActiveDocument();
                 sldWorksObject.ImportGrid(_blueprint.Background.Grid);
                 sldWorksObject.ImportAxis(_blueprint.Background.Axis);
-                sldWorksObject.ImportCollectionToActiveDoc(_storage.Objects, _blueprint.Settings.DrawSettings);
+                sldWorksObject.ImportCollectionToActiveDoc(_storage.Objects, _blueprint.Settings.Drawing);
             }
             else
             {

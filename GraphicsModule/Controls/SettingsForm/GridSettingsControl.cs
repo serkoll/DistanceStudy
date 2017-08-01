@@ -12,7 +12,7 @@ namespace GraphicsModule.Controls.SettingsForm
         public GridSettingsControl()
         {
             InitializeComponent();
-            GridSettings = GraphicsControlSettingsForm.CurrentSettings.GridSettings;
+            GridSettings = GraphicsControlSettingsForm.CurrentSettings.Grid;
             CheckBoxFlagDrawGrid.Checked = GridSettings.IsDraw;
             NumericUpDownPointsSize.Value = GridSettings.PointsSize;
             colorEdge.BackColor = GridSettings.PointsColor;

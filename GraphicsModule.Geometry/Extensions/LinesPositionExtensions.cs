@@ -9,6 +9,8 @@ namespace GraphicsModule.Geometry.Extensions
 {
     public static class LinesPositionExtensions
     {
+        private static int Tolerance = 5;
+
         #region Incidence of Point and Line
 
         public static bool IsIncidentalToPoint(this Line2D ln, Point pt)
@@ -151,31 +153,44 @@ namespace GraphicsModule.Geometry.Extensions
 
         #endregion
 
-        #region IsCrossed
+        #region IsIntersect
 
-        [Obsolete]
-        public static bool IsCrossed(this Line2D ln1, Line2D ln2)
+        public static bool IsIntersect(this Line2D ln1, Line2D ln2)
         {
-            const int solveError = 5;
             var y = (ln2.Point0.Y * ln2.Kx * ln1.Ky - ln1.Point0.Y * ln2.Ky * ln1.Kx +
                      ln2.Ky * ln1.Ky * (ln1.Point0.X - ln2.Point0.X)) /
                     (ln2.Kx * ln1.Ky - ln1.Kx * ln2.Ky);
             var x = ln1.Kx * (y - ln1.Point0.Y) / ln1.Ky + ln1.Point0.X;
-            if (Math.Abs(y) < solveError)
+            if (Math.Abs(y) < Constants.Tolerance)
             {
                 y = 0;
             }
-            if (Math.Abs(x) < solveError)
+            if (Math.Abs(x) < Constants.Tolerance)
             {
                 x = 0;
             }
             return (y > 0) && (x >= 0);
         }
 
-        [Obsolete]
-        public static bool IsCrossed(this Line2D ln1, LineOfPlane1X0Y ln, Point frameCenter)
+        public static bool IsIntersect(this Line2D ln1, LineOfPlane1X0Y ln, Point coordinateSystemCenter)
         {
-            var ln2 = ln.ToGlobalCoordinatesLine2D(frameCenter);
+            var ln2 = ln.ToGlobalCoordinates(coordinateSystemCenter);
+            var y = (ln2.Point0.Y * ln2.Kx * ln1.Ky - ln1.Point0.Y * ln2.Ky * ln1.Kx +
+                     ln2.Ky * ln1.Ky * (ln1.Point0.X - ln2.Point0.X)) /
+                    (ln2.Kx * ln1.Ky - ln1.Kx * ln2.Ky);
+            if (Math.Abs(y) < Constants.Tolerance)
+            {
+                return false;
+            }
+            var x = (ln1.Point0.X * ln2.Kx * ln1.Ky - ln2.Point0.X * ln1.Kx * ln2.Ky +
+                     ln2.Kx * ln1.Kx * (ln2.Point0.Y - ln1.Point0.Y)) /
+                    (ln1.Ky * ln2.Kx - ln1.Kx * ln2.Ky);
+            return !(Math.Abs(x) < Constants.Tolerance);
+        }
+
+        public static bool IsIntersect(this Line2D ln1, LineOfPlane2X0Z ln, Point coordinateSystemCenter)
+        {
+            var ln2 = ln.ToGlobalCoordinates(coordinateSystemCenter);
             var y = (ln2.Point0.Y * ln2.Kx * ln1.Ky - ln1.Point0.Y * ln2.Ky * ln1.Kx +
                      ln2.Ky * ln1.Ky * (ln1.Point0.X - ln2.Point0.X)) /
                     (ln2.Kx * ln1.Ky - ln1.Kx * ln2.Ky);
@@ -189,10 +204,9 @@ namespace GraphicsModule.Geometry.Extensions
             return !(x < 0);
         }
 
-        [Obsolete]
-        public static bool IsCrossed(this Line2D ln1, LineOfPlane2X0Z ln, Point frameCenter)
+        public static bool IsIntersect(this Line2D ln1, LineOfPlane3Y0Z ln, Point coordinateSystemCenter)
         {
-            var ln2 = ln.ToGlobalCoordinatesLine2D(frameCenter);
+            var ln2 = ln.ToGlobalCoordinates(coordinateSystemCenter);
             var y = (ln2.Point0.Y * ln2.Kx * ln1.Ky - ln1.Point0.Y * ln2.Ky * ln1.Kx +
                      ln2.Ky * ln1.Ky * (ln1.Point0.X - ln2.Point0.X)) /
                     (ln2.Kx * ln1.Ky - ln1.Kx * ln2.Ky);
@@ -206,10 +220,10 @@ namespace GraphicsModule.Geometry.Extensions
             return !(x < 0);
         }
 
-        [Obsolete]
-        public static bool IsCrossed(this Line2D ln1, LineOfPlane3Y0Z ln, Point frameCenter)
+        public static bool IsIntersect(this LineOfPlane1X0Y lnOfPlane1, LineOfPlane1X0Y lnOfPlane2, Point coordinateSystemCenter)
         {
-            var ln2 = ln.ToGlobalCoordinatesLine2D(frameCenter);
+            var ln1 = lnOfPlane1.ToGlobalCoordinates(coordinateSystemCenter);
+            var ln2 = lnOfPlane2.ToGlobalCoordinates(coordinateSystemCenter);
             var y = (ln2.Point0.Y * ln2.Kx * ln1.Ky - ln1.Point0.Y * ln2.Ky * ln1.Kx +
                      ln2.Ky * ln1.Ky * (ln1.Point0.X - ln2.Point0.X)) /
                     (ln2.Kx * ln1.Ky - ln1.Kx * ln2.Ky);
@@ -223,11 +237,10 @@ namespace GraphicsModule.Geometry.Extensions
             return !(x < 0);
         }
 
-        [Obsolete]
-        public static bool IsCrossed(this LineOfPlane1X0Y lnOfPlane1, LineOfPlane1X0Y lnOfPlane2, Point frameCenter)
+        public static bool IsIntersect(this LineOfPlane2X0Z lnOfPlane1, LineOfPlane2X0Z lnOfPlane2, Point coordinateSystemCenter)
         {
-            var ln1 = lnOfPlane1.ToGlobalCoordinatesLine2D(frameCenter);
-            var ln2 = lnOfPlane2.ToGlobalCoordinatesLine2D(frameCenter);
+            var ln1 = lnOfPlane1.ToGlobalCoordinates(coordinateSystemCenter);
+            var ln2 = lnOfPlane2.ToGlobalCoordinates(coordinateSystemCenter);
             var y = (ln2.Point0.Y * ln2.Kx * ln1.Ky - ln1.Point0.Y * ln2.Ky * ln1.Kx +
                      ln2.Ky * ln1.Ky * (ln1.Point0.X - ln2.Point0.X)) /
                     (ln2.Kx * ln1.Ky - ln1.Kx * ln2.Ky);
@@ -241,11 +254,10 @@ namespace GraphicsModule.Geometry.Extensions
             return !(x < 0);
         }
 
-        [Obsolete]
-        public static bool IsCrossed(this LineOfPlane2X0Z lnOfPlane1, LineOfPlane2X0Z lnOfPlane2, Point frameCenter)
+        public static bool IsIntersect(this LineOfPlane3Y0Z sg1, LineOfPlane3Y0Z sg2, Point coordinateSystemCenter)
         {
-            var ln1 = lnOfPlane1.ToGlobalCoordinatesLine2D(frameCenter);
-            var ln2 = lnOfPlane2.ToGlobalCoordinatesLine2D(frameCenter);
+            var ln1 = sg1.ToGlobalCoordinates(coordinateSystemCenter);
+            var ln2 = sg2.ToGlobalCoordinates(coordinateSystemCenter);
             var y = (ln2.Point0.Y * ln2.Kx * ln1.Ky - ln1.Point0.Y * ln2.Ky * ln1.Kx +
                      ln2.Ky * ln1.Ky * (ln1.Point0.X - ln2.Point0.X)) /
                     (ln2.Kx * ln1.Ky - ln1.Kx * ln2.Ky);
@@ -259,11 +271,10 @@ namespace GraphicsModule.Geometry.Extensions
             return !(x < 0);
         }
 
-        [Obsolete]
-        public static bool IsCrossed(this LineOfPlane3Y0Z lnOfPlane1, LineOfPlane3Y0Z lnOfPlane2, Point frameCenter)
+        public static bool IsIntersect(this SegmentOfPlane1X0Y sg1, SegmentOfPlane1X0Y sg2, Point coordinateSystemCenter)
         {
-            var ln1 = lnOfPlane1.ToGlobalCoordinatesLine2D(frameCenter);
-            var ln2 = lnOfPlane2.ToGlobalCoordinatesLine2D(frameCenter);
+            var ln1 = sg1.ToGlobalCoordinates(coordinateSystemCenter);
+            var ln2 = sg2.ToGlobalCoordinates(coordinateSystemCenter);
             var y = (ln2.Point0.Y * ln2.Kx * ln1.Ky - ln1.Point0.Y * ln2.Ky * ln1.Kx +
                      ln2.Ky * ln1.Ky * (ln1.Point0.X - ln2.Point0.X)) /
                     (ln2.Kx * ln1.Ky - ln1.Kx * ln2.Ky);
@@ -277,12 +288,10 @@ namespace GraphicsModule.Geometry.Extensions
             return !(x < 0);
         }
 
-        [Obsolete]
-        public static bool IsCrossed(this SegmentOfPlane1X0Y lnOfPlane1, SegmentOfPlane1X0Y lnOfPlane2,
-            Point frameCenter)
+        public static bool IsIntersect(this SegmentOfPlane2X0Z sg1, SegmentOfPlane2X0Z sg2, Point coordinateSystemCenter)
         {
-            var ln1 = lnOfPlane1.ToGlobalCoordinatesSegment(frameCenter);
-            var ln2 = lnOfPlane2.ToGlobalCoordinatesSegment(frameCenter);
+            var ln1 = sg1.ToGlobalCoordinates(coordinateSystemCenter);
+            var ln2 = sg2.ToGlobalCoordinates(coordinateSystemCenter);
             var y = (ln2.Point0.Y * ln2.Kx * ln1.Ky - ln1.Point0.Y * ln2.Ky * ln1.Kx +
                      ln2.Ky * ln1.Ky * (ln1.Point0.X - ln2.Point0.X)) /
                     (ln2.Kx * ln1.Ky - ln1.Kx * ln2.Ky);
@@ -296,31 +305,10 @@ namespace GraphicsModule.Geometry.Extensions
             return !(x < 0);
         }
 
-        [Obsolete]
-        public static bool IsCrossed(this SegmentOfPlane2X0Z lnOfPlane1, SegmentOfPlane2X0Z lnOfPlane2,
-            Point frameCenter)
+        public static bool IsIntersect(this SegmentOfPlane3Y0Z lnOfPlane1, SegmentOfPlane3Y0Z lnOfPlane2, Point coordinateSystemCenter)
         {
-            var ln1 = lnOfPlane1.ToGlobalCoordinatesSegment(frameCenter);
-            var ln2 = lnOfPlane2.ToGlobalCoordinatesSegment(frameCenter);
-            var y = (ln2.Point0.Y * ln2.Kx * ln1.Ky - ln1.Point0.Y * ln2.Ky * ln1.Kx +
-                     ln2.Ky * ln1.Ky * (ln1.Point0.X - ln2.Point0.X)) /
-                    (ln2.Kx * ln1.Ky - ln1.Kx * ln2.Ky);
-            if (y < 0)
-            {
-                return false;
-            }
-            var x = (ln1.Point0.X * ln2.Kx * ln1.Ky - ln2.Point0.X * ln1.Kx * ln2.Ky +
-                     ln2.Kx * ln1.Kx * (ln2.Point0.Y - ln1.Point0.Y)) /
-                    (ln1.Ky * ln2.Kx - ln1.Kx * ln2.Ky);
-            return !(x < 0);
-        }
-
-        [Obsolete]
-        public static bool IsCrossed(this SegmentOfPlane3Y0Z lnOfPlane1, SegmentOfPlane3Y0Z lnOfPlane2,
-            Point frameCenter)
-        {
-            var ln1 = lnOfPlane1.ToGlobalCoordinatesSegment(frameCenter);
-            var ln2 = lnOfPlane2.ToGlobalCoordinatesSegment(frameCenter);
+            var ln1 = lnOfPlane1.ToGlobalCoordinates(coordinateSystemCenter);
+            var ln2 = lnOfPlane2.ToGlobalCoordinates(coordinateSystemCenter);
             var y = (ln2.Point0.Y * ln2.Kx * ln1.Ky - ln1.Point0.Y * ln2.Ky * ln1.Kx +
                      ln2.Ky * ln1.Ky * (ln1.Point0.X - ln2.Point0.X)) /
                     (ln2.Kx * ln1.Ky - ln1.Kx * ln2.Ky);
@@ -336,118 +324,9 @@ namespace GraphicsModule.Geometry.Extensions
 
         #endregion
 
-        #region Intersect
+        #region Get Intersect Point
 
-        /// <summary>
-        /// Вычисляет определитель матрицы системы, состоящей из двух прямых, описанных в общем виде
-        /// </summary>
-        /// <param name="ln1"></param>
-        /// <param name="ln2"></param>
-        /// <returns>Значение определителя</returns>
-        private static double CalculateDeterminant(ILine ln1, ILine ln2)
-        {
-            return CalculateDeterminant(ln1.Coefficients.A, ln1.Coefficients.B, ln2.Coefficients.A, ln2.Coefficients.B);
-        }
-
-        /// <summary>
-        /// Вычисляет определитель матрицы вида |a c|
-        ///                                     |b d|
-        /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
-        /// <param name="c"></param>
-        /// <param name="d"></param>
-        /// <returns></returns>
-        private static double CalculateDeterminant(double a, double b, double c, double d)
-        {
-            return a * d - b * c;
-        }
-
-        /// <summary>
-        /// Определяет, пересекаются ли заданные прямые
-        /// </summary>
-        /// <param name="ln1"></param>
-        /// <param name="ln2"></param>
-        /// <returns></returns>
-        public static bool IsIntersect(this Line2D ln1, Line2D ln2)
-        {
-            var det = CalculateDeterminant(ln1, ln2);
-            return !(det < Constants.Tolerance);
-        }
-
-        /// <summary>
-        /// Определяет, пресекаются ли заданные прямые в границах текущей области
-        /// </summary>
-        /// <param name="ln1"></param>
-        /// <param name="ln2"></param>
-        /// <param name="frame">Прямоугольник, описывающий текущую область</param>
-        /// <returns></returns>
-        public static bool IsIntersect(this Line2D ln1, Line2D ln2, Rectangle frame)
-        {
-            return GetIntersectPoint(ln1, ln2, frame) != null;
-        }
-
-        #endregion
-
-        //TODO: сделать equivalent и parallel функции на основе этих
-
-        #region Get intersect point
-
-        /// <summary>
-        /// Возвращает точку пересечения двух прямых
-        /// </summary>
-        /// <param name="ln1"></param>
-        /// <param name="ln2"></param>
-        /// <returns>Null, если совпадают или параллельны</returns>
-        public static Point2D GetIntersectPoint(this Line2D ln1, Line2D ln2)
-        {
-            var det = CalculateDeterminant(ln1, ln2);
-            if (Math.Abs(det) < Constants.Tolerance)
-            {
-                return null;
-            }
-            var x = -CalculateDeterminant(ln1.Coefficients.C, ln1.Coefficients.B, ln2.Coefficients.C,
-                        ln2.Coefficients.B) / det;
-            var y = -CalculateDeterminant(ln1.Coefficients.A, ln1.Coefficients.B, ln2.Coefficients.A,
-                        ln2.Coefficients.B) / det;
-            return new Point2D(x, y);
-        }
-
-        /// <summary>
-        /// Возвращает точку пересечения двух прямых в заданной области
-        /// </summary>
-        /// <param name="ln1"></param>
-        /// <param name="ln2"></param>
-        /// <param name="frame"></param>
-        /// <returns>Null, если не пересекаются</returns>
-        public static Point2D GetIntersectPoint(this Line2D ln1, Line2D ln2, Rectangle frame)
-        {
-            var ipt = GetIntersectPoint(ln1, ln2);
-            if (ipt == null)
-            {
-                return null;
-            }
-            if (ipt.X < frame.Left || ipt.X < frame.Right ||
-                ipt.Y < frame.Top || ipt.Y > frame.Bottom)
-            {
-                return null;
-            }
-            return ipt;
-        }
-
-        #endregion
-
-        #region Equivalent
-
-        public static bool IsEquivalent(this Line2D ln1, Line2D ln2)
-        {
-            var ln1C = ln1.Coefficients;
-            var ln2C = ln2.Coefficients;
-
-            return Math.Abs(CalculateDeterminant(ln1C.A, ln1C.B, ln2C.A, ln2C.B)) < Constants.Tolerance
-                   && Math.Abs(CalculateDeterminant(ln1C.A, ln1C.C, ln2C.A, ln2C.C)) < Constants.Tolerance
-                   && Math.Abs(CalculateDeterminant(ln1C.B, ln1C.C, ln2C.B, ln2C.C)) < Constants.Tolerance;
-        }
+        
 
         #endregion
     }

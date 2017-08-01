@@ -19,7 +19,7 @@ namespace GraphicsModule.Geometry.Extensions
         /// <param name="pt">Горизонтальная проекция точки</param>
         /// <param name="coordinateSystemCenter">Центр системы координат</param>
         /// <returns>Точка, соответствующая проекции, с глобальными координатами</returns>
-        public static Point ToGlobalCoordinatesPoint(this PointOfPlane1X0Y pt, Point coordinateSystemCenter)
+        public static Point ToGlobalCoordinates(this PointOfPlane1X0Y pt, Point coordinateSystemCenter)
         {
             var cnvPt = pt.ToPoint();
             return new Point(cnvPt.X + coordinateSystemCenter.X, cnvPt.Y + coordinateSystemCenter.Y);
@@ -31,7 +31,7 @@ namespace GraphicsModule.Geometry.Extensions
         /// <param name="pt">Фротнальная проекция точки</param>
         /// <param name="coordinateSystemCenter">Центр системы координат</param>
         /// <returns>Точка, соответствующая проекции, с глобальными координатами</returns>
-        public static Point ToGlobalCoordinatesPoint(this PointOfPlane2X0Z pt, Point coordinateSystemCenter)
+        public static Point ToGlobalCoordinates(this PointOfPlane2X0Z pt, Point coordinateSystemCenter)
         {
             var cnvPt = pt.ToPoint();
             return new Point(cnvPt.X + coordinateSystemCenter.X, cnvPt.Y + coordinateSystemCenter.Y);
@@ -44,7 +44,7 @@ namespace GraphicsModule.Geometry.Extensions
         /// <param name="ptR">Радиус точки</param>
         /// <param name="coordinateSystemCenter">Центр системы координат</param>
         /// <returns>Точка, соответствующая проекции, с глобальными координатами</returns>
-        public static Point ToGlobalCoordinatesPoint(this PointOfPlane3Y0Z pt, Point coordinateSystemCenter)
+        public static Point ToGlobalCoordinates(this PointOfPlane3Y0Z pt, Point coordinateSystemCenter)
         {
             var cnvPt = pt.ToPoint();
             return new Point(cnvPt.X + coordinateSystemCenter.X, cnvPt.Y + coordinateSystemCenter.Y);
@@ -59,7 +59,7 @@ namespace GraphicsModule.Geometry.Extensions
         /// <param name="ptR"></param>
         /// <param name="framecenter"></param>
         /// <returns></returns>
-        public static Line2D ToGlobalCoordinatesLine2D(this LineOfPlane1X0Y ln, float ptR, Point framecenter)
+        public static Line2D ToGlobalCoordinates(this LineOfPlane1X0Y ln, float ptR, Point framecenter)
         {
             var cnvPt0 = ln.Point0.ToPoint();
             var cnvPt1 = ln.Point1.ToPoint();
@@ -75,7 +75,7 @@ namespace GraphicsModule.Geometry.Extensions
         /// <param name="ln"></param>
         /// <param name="framecenter"></param>
         /// <returns></returns>
-        public static Line2D ToGlobalCoordinatesLine2D(this LineOfPlane1X0Y ln, Point framecenter)
+        public static Line2D ToGlobalCoordinates(this LineOfPlane1X0Y ln, Point framecenter)
         {
             var cnvPt0 = ln.Point0.ToPoint();
             var cnvPt1 = ln.Point1.ToPoint();
@@ -92,7 +92,7 @@ namespace GraphicsModule.Geometry.Extensions
         /// <param name="ptR"></param>
         /// <param name="framecenter"></param>
         /// <returns></returns>
-        public static Line2D ToGlobalCoordinatesLine2D(this LineOfPlane2X0Z ln, float ptR, Point framecenter)
+        public static Line2D ToGlobalCoordinates(this LineOfPlane2X0Z ln, float ptR, Point framecenter)
         {
             var cnvPt0 = ln.Point0.ToPoint();
             var cnvPt1 = ln.Point1.ToPoint();
@@ -107,7 +107,7 @@ namespace GraphicsModule.Geometry.Extensions
         /// <param name="ln"></param>
         /// <param name="framecenter"></param>
         /// <returns></returns>
-        public static Line2D ToGlobalCoordinatesLine2D(this LineOfPlane2X0Z ln, Point framecenter)
+        public static Line2D ToGlobalCoordinates(this LineOfPlane2X0Z ln, Point framecenter)
         {
             var cnvPt0 = ln.Point0.ToPoint();
             var cnvPt1 = ln.Point1.ToPoint();
@@ -124,7 +124,7 @@ namespace GraphicsModule.Geometry.Extensions
         /// <param name="ptR"></param>
         /// <param name="framecenter"></param>
         /// <returns></returns>
-        public static Line2D ToGlobalCoordinatesLine2D(this LineOfPlane3Y0Z ln, float ptR, Point framecenter)
+        public static Line2D ToGlobalCoordinates(this LineOfPlane3Y0Z ln, float ptR, Point framecenter)
         {
             var cnvPt0 = ln.Point0.ToPoint();
             var cnvPt1 = ln.Point1.ToPoint();
@@ -140,7 +140,7 @@ namespace GraphicsModule.Geometry.Extensions
         /// <param name="ln"></param>
         /// <param name="framecenter"></param>
         /// <returns></returns>
-        public static Line2D ToGlobalCoordinatesLine2D(this LineOfPlane3Y0Z ln, Point framecenter)
+        public static Line2D ToGlobalCoordinates(this LineOfPlane3Y0Z ln, Point framecenter)
         {
             var cnvPt0 = ln.Point0.ToPoint();
             var cnvPt1 = ln.Point1.ToPoint();
@@ -157,7 +157,7 @@ namespace GraphicsModule.Geometry.Extensions
         /// <param name="ptR"></param>
         /// <param name="framecenter"></param>
         /// <returns></returns>
-        public static Segment2D ToGlobalCoordinatesSegment(this SegmentOfPlane1X0Y ln, float ptR, Point framecenter)
+        public static Segment2D ToGlobalCoordinates(this SegmentOfPlane1X0Y ln, float ptR, Point framecenter)
         {
             var cnvPt0 = ln.Point0.ToPoint();
             var cnvPt1 = ln.Point1.ToPoint();
@@ -173,7 +173,7 @@ namespace GraphicsModule.Geometry.Extensions
         /// <param name="ln"></param>
         /// <param name="framecenter"></param>
         /// <returns></returns>
-        public static Segment2D ToGlobalCoordinatesSegment(this SegmentOfPlane1X0Y ln, Point framecenter)
+        public static Segment2D ToGlobalCoordinates(this SegmentOfPlane1X0Y ln, Point framecenter)
         {
             var cnvPt0 = ln.Point0.ToPoint();
             var cnvPt1 = ln.Point1.ToPoint();
@@ -190,7 +190,7 @@ namespace GraphicsModule.Geometry.Extensions
         /// <param name="ptR"></param>
         /// <param name="framecenter"></param>
         /// <returns></returns>
-        public static Segment2D ToGlobalCoordinatesSegment(this SegmentOfPlane2X0Z ln, float ptR, Point framecenter)
+        public static Segment2D ToGlobalCoordinates(this SegmentOfPlane2X0Z ln, float ptR, Point framecenter)
         {
             var cnvPt0 = ln.Point0.ToPoint();
             var cnvPt1 = ln.Point1.ToPoint();
@@ -206,7 +206,7 @@ namespace GraphicsModule.Geometry.Extensions
         /// <param name="ln"></param>
         /// <param name="framecenter"></param>
         /// <returns></returns>
-        public static Segment2D ToGlobalCoordinatesSegment(this SegmentOfPlane2X0Z ln, Point framecenter)
+        public static Segment2D ToGlobalCoordinates(this SegmentOfPlane2X0Z ln, Point framecenter)
         {
             var cnvPt0 = ln.Point0.ToPoint();
             var cnvPt1 = ln.Point1.ToPoint();
@@ -223,7 +223,7 @@ namespace GraphicsModule.Geometry.Extensions
         /// <param name="ptR"></param>
         /// <param name="framecenter"></param>
         /// <returns></returns>
-        public static Segment2D ToGlobalCoordinatesSegment(this SegmentOfPlane3Y0Z ln, float ptR, Point framecenter)
+        public static Segment2D ToGlobalCoordinates(this SegmentOfPlane3Y0Z ln, float ptR, Point framecenter)
         {
             var cnvPt0 = ln.Point0.ToPoint();
             var cnvPt1 = ln.Point1.ToPoint();
@@ -239,7 +239,7 @@ namespace GraphicsModule.Geometry.Extensions
         /// <param name="ln"></param>
         /// <param name="framecenter"></param>
         /// <returns></returns>
-        public static Segment2D ToGlobalCoordinatesSegment(this SegmentOfPlane3Y0Z ln, Point framecenter)
+        public static Segment2D ToGlobalCoordinates(this SegmentOfPlane3Y0Z ln, Point framecenter)
         {
             var cnvPt0 = ln.Point0.ToPoint();
             var cnvPt1 = ln.Point1.ToPoint();

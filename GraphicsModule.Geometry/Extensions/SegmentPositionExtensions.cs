@@ -104,7 +104,7 @@ namespace GraphicsModule.Geometry.Extensions
 
         #endregion
 
-        #region IsCrossed of Lines
+        #region IsIntersect of Lines
 
         public static bool IsCrossed(this Segment2D sg1, Segment2D sg2)
         {
@@ -116,7 +116,7 @@ namespace GraphicsModule.Geometry.Extensions
 
         public static bool IsCrossed(this Segment2D sg1, SegmentOfPlane1X0Y ln, Point frameCenter)
         {
-            var ln2 = ln.ToGlobalCoordinatesSegment(frameCenter);
+            var ln2 = ln.ToGlobalCoordinates(frameCenter);
             var y = (ln2.Point0.Y * ln2.Kx * sg1.Ky - sg1.Point0.Y * ln2.Ky * sg1.Kx + ln2.Ky * sg1.Ky * (sg1.Point0.X - ln2.Point0.X)) /
                     (ln2.Kx * sg1.Ky - sg1.Kx * ln2.Ky);
             if (y < 0)
@@ -130,7 +130,7 @@ namespace GraphicsModule.Geometry.Extensions
 
         public static bool IsCrossed(this Segment2D sg1, SegmentOfPlane2X0Z ln, Point frameCenter)
         {
-            var ln2 = ln.ToGlobalCoordinatesSegment(frameCenter);
+            var ln2 = ln.ToGlobalCoordinates(frameCenter);
             var y = (ln2.Point0.Y * ln2.Kx * sg1.Ky - sg1.Point0.Y * ln2.Ky * sg1.Kx + ln2.Ky * sg1.Ky * (sg1.Point0.X - ln2.Point0.X)) /
                      (ln2.Kx * sg1.Ky - sg1.Kx * ln2.Ky);
             if (y < 0)
@@ -144,7 +144,7 @@ namespace GraphicsModule.Geometry.Extensions
 
         public static bool IsCrossed(this Segment2D sg1, SegmentOfPlane3Y0Z ln, Point frameCenter)
         {
-            var ln2 = ln.ToGlobalCoordinatesSegment(frameCenter);
+            var ln2 = ln.ToGlobalCoordinates(frameCenter);
             var y = (ln2.Point0.Y * ln2.Kx * sg1.Ky - sg1.Point0.Y * ln2.Ky * sg1.Kx + ln2.Ky * sg1.Ky * (sg1.Point0.X - ln2.Point0.X)) /
                      (ln2.Kx * sg1.Ky - sg1.Kx * ln2.Ky);
             if (y < 0)

@@ -2,6 +2,7 @@
 using System.Linq;
 using GraphicsModule.Configuration;
 using GraphicsModule.Controls;
+using GraphicsModule.Geometry;
 using GraphicsModule.Geometry.Extensions;
 using GraphicsModule.Geometry.Objects.Lines;
 using GraphicsModule.Geometry.Objects.Points;
@@ -21,7 +22,7 @@ namespace GraphicsModule.Rules.Create.Lines
             storage.AddToCollection(obj);
             blueprint.Update(storage);
         }
-        public LineOfPlane2X0Z Create(Point pt, Point frameCenter, Blueprint can, DrawSettings setting, Storage strg)
+        public LineOfPlane2X0Z Create(Point pt, Point frameCenter, Blueprint blueprint, DrawSettings setting, Storage strg)
         {
             if (!PointOfPlane2X0Z.IsCreatable(pt, frameCenter)) return null;
             var ptOfPlane = new PointOfPlane2X0Z(pt, frameCenter);
@@ -29,7 +30,7 @@ namespace GraphicsModule.Rules.Create.Lines
             {
                 ptOfPlane.Name = GraphicsControl.NamesGenerator.Generate();
                 strg.TempObjects.Add(ptOfPlane);
-                strg.DrawLastAddedToTempObjects(setting, frameCenter, can.Graphics);
+                strg.DrawLastAddedToTempObjects(blueprint);
                 return null;
             }
 
@@ -37,7 +38,7 @@ namespace GraphicsModule.Rules.Create.Lines
             {
                 return null;
             }
-            var source = new LineOfPlane2X0Z((PointOfPlane2X0Z)strg.TempObjects.First(), new PointOfPlane2X0Z(pt, frameCenter), frameCenter);
+            var source = new LineOfPlane2X0Z((PointOfPlane2X0Z)strg.TempObjects.First(), new PointOfPlane2X0Z(pt, frameCenter), blueprint.PlaneX0Z);
             source.Name = strg.TempObjects.First().Name;
             strg.TempObjects.Clear();
             return source;

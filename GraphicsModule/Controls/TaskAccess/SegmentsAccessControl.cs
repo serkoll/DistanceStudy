@@ -12,7 +12,7 @@ namespace GraphicsModule.Controls.TaskAccess
         public SegmentsAccessControl()
         {
             InitializeComponent();
-            SegmentsAccess = GraphicsControlSettingsForm.CurrentSettings.PrimitivesAcces.Segments;
+            SegmentsAccess = GraphicsControlSettingsForm.CurrentSettings.Access.Segments;
             accessSegmentsCheckBox.Checked = SegmentsAccess.IsSegmentsEnabled;
             AccessSegment2DCheckBox.Checked = SegmentsAccess.IsSegment2DEnabled;
             AccessSegment3DCheckBox.Checked = SegmentsAccess.IsSegment3DEnabled;

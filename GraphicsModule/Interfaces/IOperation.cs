@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using GraphicsModule.Geometry;
 
 namespace GraphicsModule.Interfaces
 {
@@ -7,6 +8,6 @@ namespace GraphicsModule.Interfaces
     /// </summary>
     public interface IOperation
     {
-        void Execute(Point mousecoords, Storage strg, Blueprint can);
+        void Execute(Point mousecoords, Storage strg, Blueprint blueprint);
     }
 }

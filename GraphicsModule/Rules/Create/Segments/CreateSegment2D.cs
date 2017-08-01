@@ -2,6 +2,7 @@
 using System.Linq;
 using GraphicsModule.Configuration;
 using GraphicsModule.Controls;
+using GraphicsModule.Geometry;
 using GraphicsModule.Geometry.Extensions;
 using GraphicsModule.Geometry.Objects.Points;
 using GraphicsModule.Geometry.Objects.Segments;
@@ -19,14 +20,14 @@ namespace GraphicsModule.Rules.Create.Segments
             storage.AddToCollection(obj);
             blueprint.Update(storage);
         }
-        public Segment2D Create(Point pt, Point frameCenter, Blueprint can, DrawSettings settings, Storage strg)
+        public Segment2D Create(Point pt, Point frameCenter, Blueprint blueprint, DrawSettings settings, Storage strg)
         {
             var ptOfPlane = new Point2D(pt);
             if (strg.TempObjects.Count == 0)
             {
                 ptOfPlane.Name =GraphicsControl.NamesGenerator.Generate();
                 strg.TempObjects.Add(ptOfPlane);
-                strg.DrawLastAddedToTempObjects(settings, frameCenter, can.Graphics);
+                strg.DrawLastAddedToTempObjects(blueprint);
             }
             else
             {

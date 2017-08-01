@@ -11,7 +11,7 @@ namespace GraphicsModule.Controls.TaskAccess
         public GeneralAccessControl()
         {
             InitializeComponent();
-            GeneralAccess = GraphicsControlSettingsForm.CurrentSettings.PrimitivesAcces.General;
+            GeneralAccess = GraphicsControlSettingsForm.CurrentSettings.Access.General;
             AccessAxisXCheckBox.Checked = GeneralAccess.IsAxisOXEnabled;
             AccessAxisYCheckBox.Checked = GeneralAccess.IsAxisOYEnabled;
             AccessAxisZCheckBox.Checked = GeneralAccess.IsAxisOZEnabled;

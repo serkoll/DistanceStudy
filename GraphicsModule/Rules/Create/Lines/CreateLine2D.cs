@@ -2,6 +2,7 @@
 using System.Linq;
 using GraphicsModule.Configuration;
 using GraphicsModule.Controls;
+using GraphicsModule.Geometry;
 using GraphicsModule.Geometry.Extensions;
 using GraphicsModule.Geometry.Objects.Lines;
 using GraphicsModule.Geometry.Objects.Points;
@@ -21,7 +22,7 @@ namespace GraphicsModule.Rules.Create.Lines
             storage.AddToCollection(obj);
             blueprint.Update(storage);
         }
-        public Line2D Create(Point pt, Point frameCenter, Blueprint can, DrawSettings settings, Storage strg)
+        public Line2D Create(Point pt, Point frameCenter, Blueprint blueprint, DrawSettings settings, Storage strg)
         {
             var ptOfPlane = new Point2D(pt);
 
@@ -29,7 +30,7 @@ namespace GraphicsModule.Rules.Create.Lines
             {
                 ptOfPlane.Name = GraphicsControl.NamesGenerator.Generate();
                 strg.TempObjects.Add(ptOfPlane);
-                strg.DrawLastAddedToTempObjects(settings, frameCenter, can.Graphics);
+                strg.DrawLastAddedToTempObjects(blueprint);
             }
             else
             {
@@ -38,7 +39,7 @@ namespace GraphicsModule.Rules.Create.Lines
                     return null;
                 }
                 //TODO: другой конструктор
-                var source = new Line2D((Point2D)strg.TempObjects.First(), ptOfPlane, can.PictureBox);
+                var source = new Line2D((Point2D)strg.TempObjects.First(), ptOfPlane, blueprint.PictureBox.ClientRectangle);
                 source.Name = strg.TempObjects.First().Name;
                 strg.TempObjects.Clear();
                 return source;

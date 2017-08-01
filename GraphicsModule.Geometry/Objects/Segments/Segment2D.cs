@@ -20,11 +20,11 @@ namespace GraphicsModule.Geometry.Objects.Segments
             Kx = pt2.X - pt1.X;
             Ky = pt2.Y - pt1.Y;
         }
-        public void Draw(DrawSettings settings, Point coordinateSystemCenter, Graphics g)
+        public void Draw(Blueprint blueprint)
         {
-            Point0.Draw(settings, coordinateSystemCenter, g);
-            Point1.Draw(settings, coordinateSystemCenter, g);
-            g.DrawLine(settings.PenLine2D, Point0.ToPointF(), Point1.ToPointF());
+            Point0.Draw(blueprint);
+            Point1.Draw(blueprint);
+            blueprint.Graphics.DrawLine(blueprint.Settings.Drawing.PenLine2D, Point0.ToPointF(), Point1.ToPointF());
         }
         public bool IsSelected(Point mscoords, float ptR, Point coordinateSystemCenter, double distance)
         {

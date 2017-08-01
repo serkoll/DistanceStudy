@@ -12,20 +12,20 @@ namespace GraphicsModule.Configuration
         public Settings()
         {
             BackgroundColor = Color.White;
-            GridSettings = new GridSettings();
-            AxisSettings = new AxisSettings();
-            DrawSettings = new DrawSettings();
-            PrimitivesAcces = new PrimitivesAccess();
-            SelectedDrawSettings = new DrawSettings(new Pen(Brushes.Orange, 4), new Pen(Brushes.Orange, 1), new Pen(Brushes.Orange, 1), new Pen(Brushes.Orange, 1), new Pen(Brushes.Orange, 1), 2, 1, new Font("Times New Roman", 6, FontStyle.Bold), new SolidBrush(Color.Black));
+            Grid = new GridSettings();
+            Axis = new AxisSettings();
+            Drawing = new DrawSettings();
+            Access = new PrimitivesAccess();
+            DrawingSelected = new DrawSettings(new Pen(Brushes.Orange, 4), new Pen(Brushes.Orange, 1), new Pen(Brushes.Orange, 1), new Pen(Brushes.Orange, 1), new Pen(Brushes.Orange, 1), 2, 1, new Font("Times New Roman", 6, FontStyle.Bold), new SolidBrush(Color.Black));
         }
-        public Settings(AxisSettings axisSettings, GridSettings gridSettings, DrawSettings drawSettings, DrawSettings selectedDrawSettings)
+        public Settings(AxisSettings axis, GridSettings grid, DrawSettings drawing, DrawSettings drawingSelected)
         {
             BackgroundColor = Color.White;
-            GridSettings = gridSettings;
-            AxisSettings = axisSettings;
-            DrawSettings = drawSettings;
-            SelectedDrawSettings = selectedDrawSettings;
-            PrimitivesAcces = new PrimitivesAccess();
+            Grid = grid;
+            Axis = axis;
+            Drawing = drawing;
+            DrawingSelected = drawingSelected;
+            Access = new PrimitivesAccess();
         }
         public void Serialize(string fileName)
         {
@@ -53,10 +53,10 @@ namespace GraphicsModule.Configuration
             get { return ColorTranslator.ToHtml(BackgroundColor); }
             set { BackgroundColor = ColorTranslator.FromHtml(value); }
         }
-        public PrimitivesAccess PrimitivesAcces { get; set; }
-        public GridSettings GridSettings { get; set; }
-        public AxisSettings AxisSettings { get; set; }
-        public DrawSettings DrawSettings { get; set; }
-        public DrawSettings SelectedDrawSettings { get; set; }
+        public PrimitivesAccess Access { get; set; }
+        public GridSettings Grid { get; set; }
+        public AxisSettings Axis { get; set; }
+        public DrawSettings Drawing { get; set; }
+        public DrawSettings DrawingSelected { get; set; }
     }
 }

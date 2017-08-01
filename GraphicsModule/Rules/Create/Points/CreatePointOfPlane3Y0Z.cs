@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using GraphicsModule.Configuration;
 using GraphicsModule.Controls;
+using GraphicsModule.Geometry;
 using GraphicsModule.Geometry.Objects.Points;
 using GraphicsModule.Interfaces;
 
@@ -19,9 +20,9 @@ namespace GraphicsModule.Rules.Create.Points
                 return;
             }
             storage.AddToCollection(source);
-            storage.DrawLastAddedToObjects(settings, frameCenter, blueprint.Graphics);
+            storage.DrawLastAddedToObjects(blueprint);
         }
-        public PointOfPlane3Y0Z Create(Point pt, Point frameCenter, Blueprint can, DrawSettings setting, Storage strg)
+        public PointOfPlane3Y0Z Create(Point pt, Point frameCenter, Blueprint blueprint, DrawSettings setting, Storage strg)
         {
             return PointOfPlane3Y0Z.IsCreatable(pt, frameCenter) 
                 ? new PointOfPlane3Y0Z(pt, frameCenter) { Name = GraphicsControl.NamesGenerator.Generate() } 

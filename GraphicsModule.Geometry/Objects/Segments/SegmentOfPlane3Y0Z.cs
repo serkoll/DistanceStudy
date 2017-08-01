@@ -23,31 +23,29 @@ namespace GraphicsModule.Geometry.Objects.Segments
             Point1 = new PointOfPlane3Y0Z(segment.Point1.Y, segment.Point1.Z);
         }
 
-        public void Draw(DrawSettings settings, Point coordinateSystemCenter, Graphics g)
+        public void Draw(Blueprint blueprint)
         {
-            var pt0 = Point0.ToGlobalCoordinatesPoint(coordinateSystemCenter);
-            var pt1 = Point1.ToGlobalCoordinatesPoint(coordinateSystemCenter);
+            var pt0 = Point0.ToGlobalCoordinates(blueprint.CoordinateSystemCenterPoint);
+            var pt1 = Point1.ToGlobalCoordinates(blueprint.CoordinateSystemCenterPoint);
 
-            g.DrawLine(settings.PenLineOfPlane3Y0Z, pt0, pt1);
-
-            Point0.Draw(settings, coordinateSystemCenter, g);
-            Point1.Draw(settings, coordinateSystemCenter, g);
+            blueprint.Graphics.DrawLine(blueprint.Settings.Drawing.PenLineOfPlane3Y0Z, pt0, pt1);
+            Point0.Draw(blueprint);
+            Point1.Draw(blueprint);
         }
 
-        public void DrawSegmentOnly(DrawSettings settings, Point coordinateSystemCenter, Graphics graphics)
+        public void DrawSegmentOnly(Blueprint blueprint)
         {
-            var pt0 = Point0.ToGlobalCoordinatesPoint(coordinateSystemCenter);
-            var pt1 = Point1.ToGlobalCoordinatesPoint(coordinateSystemCenter);
+            var pt0 = Point0.ToGlobalCoordinates(blueprint.CoordinateSystemCenterPoint);
+            var pt1 = Point1.ToGlobalCoordinates(blueprint.CoordinateSystemCenterPoint);
 
-            graphics.DrawLine(settings.PenLineOfPlane3Y0Z, pt0, pt1);
-
-            Point0.DrawPointsOnly(settings, coordinateSystemCenter, graphics);
-            Point1.DrawPointsOnly(settings, coordinateSystemCenter, graphics);
+            blueprint.Graphics.DrawLine(blueprint.Settings.Drawing.PenLineOfPlane3Y0Z, pt0, pt1);
+            Point0.DrawPointsOnly(blueprint);
+            Point1.DrawPointsOnly(blueprint);
         }
 
         public bool IsSelected(Point mscoords, float ptR, Point coordinateSystemCenter, double distance)
         {
-            var sg = this.ToGlobalCoordinatesSegment(coordinateSystemCenter);
+            var sg = this.ToGlobalCoordinates(coordinateSystemCenter);
             return sg.IsIncidentalToPoint(mscoords, 35 * distance);
         }
 

@@ -9,7 +9,7 @@ namespace GraphicsModule.Configuration
     {
         public LinkLinesSettings()
         {
-            IsDraw = true;
+            Enabled = true;
             PenLinkLineX0YtoX = new Pen(Color.LightGreen, 0.3F);
             PenLinkLineX0YtoY = new Pen(Color.Blue, 0.3F);
             PenLinkLineX0ZtoX = new Pen(Color.LightGreen, 0.3F);
@@ -27,7 +27,7 @@ namespace GraphicsModule.Configuration
         }
         public LinkLinesSettings(Pen selectedPen)
         {
-            IsDraw = true;
+            Enabled = true;
             PenLinkLineX0YtoX = selectedPen;
             PenLinkLineX0YtoY = selectedPen;
             PenLinkLineX0ZtoX = selectedPen;
@@ -43,7 +43,7 @@ namespace GraphicsModule.Configuration
             LinkCurveY3ToY1 = true;
             LinkCurveY1ToY3 = true;
         }
-        public bool IsDraw { get; set; }
+        public bool Enabled { get; set; }
         [XmlIgnore]
         public Pen PenLinkLineX0YtoX { get; set; }
         [XmlIgnore]

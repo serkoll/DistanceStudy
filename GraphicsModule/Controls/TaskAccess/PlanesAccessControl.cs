@@ -11,7 +11,7 @@ namespace GraphicsModule.Controls.TaskAccess
         public PlanesAccessControl()
         {
             InitializeComponent();
-            PlanesAccess = GraphicsControlSettingsForm.CurrentSettings.PrimitivesAcces.Planes;
+            PlanesAccess = GraphicsControlSettingsForm.CurrentSettings.Access.Planes;
             accessPlanesCheckBox.Checked = PlanesAccess.IsPlanesEnabled;
             accessPlane2DCheckBox.Checked = PlanesAccess.IsPlane2DEnabled;
             accessPlane3DCheckBox.Checked = PlanesAccess.IsPlane3DEnabled;

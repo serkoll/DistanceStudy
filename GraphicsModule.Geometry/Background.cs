@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using GraphicsModule.Configuration;
 using GraphicsModule.Geometry.CoordinateSystem;
 
-namespace GraphicsModule
+namespace GraphicsModule.Geometry
 {
     /// <summary>
     /// Фон чертежа
@@ -36,14 +36,14 @@ namespace GraphicsModule
             using (var graphics = Graphics.FromImage(Bitmap))
             {
                 Axis = new Axis(centerSystemPoint, graphics);
-                Grid = new Grid(settings.GridSettings, centerSystemPoint, graphics);
+                Grid = new Grid(settings.Grid, centerSystemPoint, graphics);
                 Draw(settings, graphics);
             }
         }
         private void Draw(Settings settings, Graphics graphics)
         {
-            Grid.DrawGrid(settings.GridSettings, graphics);
-            Axis.DrawAxis(settings.AxisSettings, graphics);
+            Grid.DrawGrid(settings.Grid, graphics);
+            Axis.DrawAxis(settings.Axis, graphics);
         }
 
         #region IDisposable

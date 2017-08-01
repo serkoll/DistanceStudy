@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using GraphicsModule.Configuration;
 using GraphicsModule.Controls;
+using GraphicsModule.Geometry;
 using GraphicsModule.Geometry.Extensions;
 using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Geometry.Objects.Points;
@@ -27,14 +28,14 @@ namespace GraphicsModule.Rules.Create.Segments
                 {
                     ptOfPlane.Name = GraphicsControl.NamesGenerator.Generate();
                     storage.TempObjects.Add(ptOfPlane);
-                    storage.DrawLastAddedToTempObjects(settings, frameCenter, blueprint.Graphics);
+                    storage.DrawLastAddedToTempObjects(blueprint);
                 }
                 else
                 {
                     if (IsInOnePlane(_tempLineOfPlane, ptOfPlane)) return;
                     if (!IsOnLinkLine(_tempLineOfPlane, ptOfPlane)) return;
                     storage.TempObjects.Add(ptOfPlane);
-                    storage.DrawLastAddedToTempObjects(settings, frameCenter, blueprint.Graphics);
+                    storage.DrawLastAddedToTempObjects(blueprint);
                 }
             }
             else
@@ -46,7 +47,7 @@ namespace GraphicsModule.Rules.Create.Segments
                     _tempLineOfPlane.Name = storage.TempObjects[0].Name;
                     storage.TempObjects.Clear();
                     blueprint.Update(storage);
-                    _tempLineOfPlane.Draw(settings, frameCenter, blueprint.Graphics);
+                    _tempLineOfPlane.Draw(blueprint);
                 }
                 else if (IsOnLinkLine(_tempLineOfPlane, ptOfPlane))
                 {
@@ -57,11 +58,11 @@ namespace GraphicsModule.Rules.Create.Segments
                     _tempLineOfPlane = null;
                     storage.Objects.Add(_source);
                     blueprint.Update(storage);
-                    storage.DrawLastAddedToObjects(settings, frameCenter, blueprint.Graphics);
+                    storage.DrawLastAddedToObjects(blueprint);
                 }
             }
         }
-        protected bool IsSegment3DCreatable(IObject ln1, IObject ln2, DrawSettings st, Point frameCenter, Blueprint can)
+        protected bool IsSegment3DCreatable(IObject ln1, IObject ln2, DrawSettings st, Point frameCenter, Blueprint blueprint)
         {
             if (ln1.GetType() == typeof(SegmentOfPlane1X0Y) && ln2.GetType() == typeof(SegmentOfPlane2X0Z))
             {
@@ -96,7 +97,7 @@ namespace GraphicsModule.Rules.Create.Segments
             }
             return false;
         }
-        protected IObject CreateSegmentOfPlane(IList<IObject> obj, DrawSettings st, Point frameCenter, Blueprint can)
+        protected IObject CreateSegmentOfPlane(IList<IObject> obj, DrawSettings st, Point frameCenter, Blueprint blueprint)
         {
             if (obj[0].GetType() == typeof(PointOfPlane1X0Y))
             {

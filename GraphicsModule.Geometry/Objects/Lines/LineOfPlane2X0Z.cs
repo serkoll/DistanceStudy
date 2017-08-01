@@ -18,17 +18,15 @@ namespace GraphicsModule.Geometry.Objects.Lines
             Kz = pt1.Z - pt0.Z;
             EndingPoints = null;
             Name = new Name();
-            Coefficients = new LineCoefficients(Point0.ToPoint2D(), Point1.ToPoint2D());
         }
-        public LineOfPlane2X0Z(PointOfPlane2X0Z pt0, PointOfPlane2X0Z pt1, Point coordinateSystemCenter)
+        public LineOfPlane2X0Z(PointOfPlane2X0Z pt0, PointOfPlane2X0Z pt1, Rectangle frame)
         {
             Point0 = pt0;
             Point1 = pt1;
             Kx = pt1.X - pt0.X;
             Kz = pt1.Z - pt0.Z;
-            EndingPoints = this.CalculateEndingPointsOnFrame(coordinateSystemCenter);
+            EndingPoints = new LineEndingPoints(this.ToLine2D(), frame);
             Name = new Name();
-            Coefficients = new LineCoefficients(Point0.ToPoint2D(), Point1.ToPoint2D());
         }
         public LineOfPlane2X0Z(Line3D line)
         {
@@ -38,37 +36,36 @@ namespace GraphicsModule.Geometry.Objects.Lines
             Kz = Point1.Z - Point0.Z;
             EndingPoints = null;
             Name = new Name();
-            Coefficients = new LineCoefficients(Point0.ToPoint2D(), Point1.ToPoint2D());
         }
-        public void Draw(DrawSettings settings, Point coordinateSystemCenter, Graphics graphics)
+        public void Draw(Blueprint blueprint)
         {
-            if (EndingPoints == null)
+            if (EndingPoints == null || !EndingPoints.IsInitialized)
             {
-                EndingPoints = this.CalculateEndingPointsOnFrame(coordinateSystemCenter);
+                EndingPoints = new LineEndingPoints(this.ToLine2D(), blueprint.PlaneX0Z);
             }
 
-            graphics.DrawLine(settings.PenLineOfPlane2X0Z, EndingPoints[0], EndingPoints[1]);
+            blueprint.Graphics.DrawLine(blueprint.Settings.Drawing.PenLineOfPlane2X0Z, EndingPoints.Point0.ToPoint(), EndingPoints.Point1.ToPoint());
 
-            Point0.Draw(settings, coordinateSystemCenter, graphics);
-            Point1.Draw(settings, coordinateSystemCenter, graphics);
+            Point0.Draw(blueprint);
+            Point1.Draw(blueprint);
             
         }
-        public void DrawLineOnly(DrawSettings settings, Point coordinateSystemCenter, Graphics graphics)
+        public void DrawLineOnly(Blueprint blueprint)
         {
-            if (EndingPoints == null)
+            if (EndingPoints == null || !EndingPoints.IsInitialized)
             {
-                EndingPoints = this.CalculateEndingPointsOnFrame(coordinateSystemCenter);
+                EndingPoints = new LineEndingPoints(this.ToLine2D(), blueprint.PlaneX0Z);
             }
 
-            graphics.DrawLine(settings.PenLineOfPlane2X0Z, EndingPoints[0], EndingPoints[1]);
+            blueprint.Graphics.DrawLine(blueprint.Settings.Drawing.PenLineOfPlane2X0Z, EndingPoints.Point0.ToPoint(), EndingPoints.Point1.ToPoint());
 
-            Point0.DrawPointsOnly(settings, coordinateSystemCenter, graphics);
-            Point1.DrawPointsOnly(settings, coordinateSystemCenter, graphics);
+            Point0.DrawPointsOnly(blueprint);
+            Point1.DrawPointsOnly(blueprint);
         }
 
         public bool IsSelected(Point mscoords, float ptR, Point coordinateSystemCenter, double distance)
         {
-            var ln = this.ToGlobalCoordinatesLine2D(coordinateSystemCenter);
+            var ln = this.ToGlobalCoordinates(coordinateSystemCenter);
             return ln.IsIncidentalToPoint(mscoords, 35 * distance);
         }
 
@@ -82,9 +79,6 @@ namespace GraphicsModule.Geometry.Objects.Lines
 
         public Name Name { get; set; }
 
-        public IList<PointF> EndingPoints { get; set; }
-
-        public LineCoefficients Coefficients { get; }
-
+        public LineEndingPoints EndingPoints { get; private set; }
     }
 }

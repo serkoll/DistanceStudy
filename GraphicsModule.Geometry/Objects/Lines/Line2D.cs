@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Windows.Forms;
-using GraphicsModule.Configuration;
+﻿using System.Drawing;
 using GraphicsModule.Geometry.Extensions;
 using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Geometry.Objects.Points;
@@ -10,8 +6,6 @@ using GraphicsModule.Geometry.Structures;
 
 namespace GraphicsModule.Geometry.Objects.Lines
 {
-    /// <summary>Класс для задания и расчета параметров 2D прямой</summary>
-    /// <remarks>Copyright © Polozkov V. Yury, 2015</remarks>
     public class Line2D : ILine
     {
         public Line2D()
@@ -21,7 +15,6 @@ namespace GraphicsModule.Geometry.Objects.Lines
             Kx = 1;
             Ky = 0;
             Name = new Name();
-            Coefficients = new LineCoefficients(Point0, Point1);
         }
 
         public Line2D(Point2D pt1, Point2D pt2)
@@ -32,17 +25,16 @@ namespace GraphicsModule.Geometry.Objects.Lines
             Ky = pt2.Y - pt1.Y;
             Name = new Name();
             EndingPoints = null;
-            Coefficients = new LineCoefficients(Point0, Point1);
         }
 
-        public Line2D(Point2D pt1, Point2D pt2, PictureBox pb)
+        public Line2D(Point2D pt1, Point2D pt2, Rectangle frame)
         {
             Point0 = pt1;
             Point1 = pt2;
             Kx = pt2.X - pt1.X;
             Ky = pt2.Y - pt1.Y;
-            Coefficients = new LineCoefficients(Point0, Point1);
-            EndingPoints = new LineEndingPoints(this, pb.ClientRectangle);
+            Name = new Name();
+            EndingPoints = new LineEndingPoints(this, frame);
         }
 
         public Line2D ConstructPerpendicularOfPointToLine(Line2D line, Point2D pt)
@@ -55,11 +47,11 @@ namespace GraphicsModule.Geometry.Objects.Lines
             return new Line2D(pt, new Point2D(line.Kx + pt.X, line.Ky + pt.Y));
         }
 
-        public void Draw(DrawSettings settings, Point coordinateSystemCenter, Graphics g)
+        public void Draw(Blueprint blueprint)
         {
-            Point0.Draw(settings, coordinateSystemCenter, g);
-            Point1.Draw(settings, coordinateSystemCenter, g);
-            g.DrawLine(settings.PenLine2D, EndingPoints.Point0.ToPoint(), EndingPoints.Point1.ToPoint());
+            Point0.Draw(blueprint);
+            Point1.Draw(blueprint);
+            blueprint.Graphics.DrawLine(blueprint.Settings.Drawing.PenLine2D, EndingPoints.Point0.ToPoint(), EndingPoints.Point1.ToPoint());
         }
 
         public bool IsSelected(Point mscoords, float ptR, Point coordinateSystemCenter, double distance)
@@ -76,8 +68,6 @@ namespace GraphicsModule.Geometry.Objects.Lines
         public double Kx { get; }
 
         public double Ky { get; }
-
-        public LineCoefficients Coefficients { get; }
 
         public LineEndingPoints EndingPoints { get; }
     }

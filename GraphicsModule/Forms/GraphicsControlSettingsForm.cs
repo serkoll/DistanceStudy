@@ -84,7 +84,7 @@ namespace GraphicsModule.Forms
             CurrentSettings.Serialize(FileName);
             Close();
         }
-        private void buttonCancel_Click(object sender, System.EventArgs e)
+        private void buttonblueprintcel_Click(object sender, System.EventArgs e)
         {
             Close();
         }

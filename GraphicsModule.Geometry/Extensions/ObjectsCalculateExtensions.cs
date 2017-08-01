@@ -21,19 +21,19 @@ namespace GraphicsModule.Geometry.Extensions
 
         public static double DistanceToPoint(this PointOfPlane1X0Y pt, Point targetPt, Point coordinateSystemCenter)
         {
-            var dpt = pt.ToGlobalCoordinatesPoint(coordinateSystemCenter);
+            var dpt = pt.ToGlobalCoordinates(coordinateSystemCenter);
             return DistanceToPoint(targetPt, dpt);
         }
 
         public static double DistanceToPoint(this PointOfPlane2X0Z pt, Point targetPt, Point coordinateSystemCenter)
         {
-            var dpt = pt.ToGlobalCoordinatesPoint(coordinateSystemCenter);
+            var dpt = pt.ToGlobalCoordinates(coordinateSystemCenter);
             return DistanceToPoint(targetPt, dpt);
         }
 
         public static double DistanceToPoint(this PointOfPlane3Y0Z pt, Point targetPt, Point coordinateSystemCenter)
         {
-            var dpt = pt.ToGlobalCoordinatesPoint(coordinateSystemCenter);
+            var dpt = pt.ToGlobalCoordinates(coordinateSystemCenter);
             return DistanceToPoint(targetPt, dpt);
         }
 
@@ -50,7 +50,7 @@ namespace GraphicsModule.Geometry.Extensions
 
         public static PointF? GetCrossingPoint(this Line2D ln1, Line2D ln2)
         {
-            if (!ln1.IsCrossed(ln2))
+            if (!ln1.IsIntersect(ln2))
             {
                 return null;
             }
@@ -64,8 +64,8 @@ namespace GraphicsModule.Geometry.Extensions
 
         public static PointF? GetCrossingPoint(this LineOfPlane1X0Y ln, Line2D ln1, Point coordinateSystemCenter)
         {
-            var ln2 = ln.ToGlobalCoordinatesLine2D(coordinateSystemCenter);
-            if (!ln1.IsCrossed(ln2))
+            var ln2 = ln.ToGlobalCoordinates(coordinateSystemCenter);
+            if (!ln1.IsIntersect(ln2))
             {
                 return null;
             }
@@ -78,8 +78,8 @@ namespace GraphicsModule.Geometry.Extensions
 
         public static PointF? GetCrossingPoint(this LineOfPlane2X0Z ln, Line2D ln1, Point coordinateSystemCenter)
         {
-            var ln2 = ln.ToGlobalCoordinatesLine2D(coordinateSystemCenter);
-            if (!ln1.IsCrossed(ln2))
+            var ln2 = ln.ToGlobalCoordinates(coordinateSystemCenter);
+            if (!ln1.IsIntersect(ln2))
             {
                 return null;
             }
@@ -93,8 +93,8 @@ namespace GraphicsModule.Geometry.Extensions
 
         public static object GetCrossingPoint(this LineOfPlane3Y0Z ln, Line2D ln1,  Point coordinateSystemCenter)
         {
-            var ln2 = ln.ToGlobalCoordinatesLine2D(coordinateSystemCenter);
-            if (!ln1.IsCrossed(ln2))
+            var ln2 = ln.ToGlobalCoordinates(coordinateSystemCenter);
+            if (!ln1.IsIntersect(ln2))
             {
                 return null;
             }

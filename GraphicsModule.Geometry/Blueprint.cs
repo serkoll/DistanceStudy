@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using GraphicsModule.Configuration;
 
-namespace GraphicsModule
+namespace GraphicsModule.Geometry
 {
     /// <summary>
     /// Чертеж
@@ -11,7 +11,7 @@ namespace GraphicsModule
     public class Blueprint : IDisposable
     {
         private Bitmap _bitmap;
-        private Point _centerSystemPoint;
+        private Point _coordinateSystemCenterPoint;
 
         /// <summary>
         /// Инициализация чертежа
@@ -43,10 +43,10 @@ namespace GraphicsModule
         /// <remarks>Фоном являются сетка и оси</remarks>
         public void CalculateBackground()
         {
-            _centerSystemPoint.X = PictureBox.ClientSize.Width / 2;
-            _centerSystemPoint.Y = PictureBox.ClientSize.Height / 2;
-            Background = new Background(_centerSystemPoint, Settings, PictureBox);
-            CalculatePlanes(_centerSystemPoint);
+            _coordinateSystemCenterPoint.X = PictureBox.ClientSize.Width / 2;
+            _coordinateSystemCenterPoint.Y = PictureBox.ClientSize.Height / 2;
+            Background = new Background(_coordinateSystemCenterPoint, Settings, PictureBox);
+            InitializePlanes(_coordinateSystemCenterPoint);
         }
 
         private void InitializeGraphics()
@@ -80,16 +80,16 @@ namespace GraphicsModule
             Graphics?.Dispose();
 
             InitializeGraphics();
-            strg.DrawObjects(Settings, Background.Axis.CoordinateSystemCenter, Graphics);
-            CalculatePlanes(Background.Axis.CoordinateSystemCenter);
+            strg.DrawObjects(this);
+            InitializePlanes(Background.Axis.CoordinateSystemCenter);
             Refresh();
         }
 
-        private void CalculatePlanes(Point centerPoint)
+        private void InitializePlanes(Point centerPoint)
         {
-            PlaneX0Y = new RectangleF(0, centerPoint.Y, centerPoint.X, centerPoint.Y);
-            PlaneX0Z = new RectangleF(0, 0, centerPoint.X, centerPoint.Y);
-            PlaneY0Z = new RectangleF(centerPoint.X, 0, centerPoint.X, centerPoint.Y);
+            PlaneX0Y = new Rectangle(0, centerPoint.Y, centerPoint.X, centerPoint.Y);
+            PlaneX0Z = new Rectangle(0, 0, centerPoint.X, centerPoint.Y);
+            PlaneY0Z = new Rectangle(centerPoint.X, 0, centerPoint.X, centerPoint.Y);
         }
 
         #region IDisposable
@@ -122,21 +122,21 @@ namespace GraphicsModule
         /// <summary>
         /// Границы горизонтальной плоскости проекции
         /// </summary>
-        public RectangleF PlaneX0Y { get; private set; }
+        public Rectangle PlaneX0Y { get; private set; }
 
         /// <summary>
         /// Границы фронтальной плоскости проекции
         /// </summary>
-        public RectangleF PlaneX0Z { get; private set; }
+        public Rectangle PlaneX0Z { get; private set; }
 
         /// <summary>
         /// Границы горизонтальной плоскости проекции
         /// </summary>
-        public RectangleF PlaneY0Z { get; private set; }
+        public Rectangle PlaneY0Z { get; private set; }
 
         /// <summary>
         /// Центр системы координат
         /// </summary>
-        public Point CenterSystemPoint => _centerSystemPoint;
+        public Point CoordinateSystemCenterPoint => _coordinateSystemCenterPoint;
     }
 }

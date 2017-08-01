@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using GraphicsModule.Geometry;
 
 namespace GraphicsModule.Cursors
 {
@@ -27,7 +28,7 @@ namespace GraphicsModule.Cursors
         /// <param name="blueprint">Полотно</param>
         public void CursorPointToGridMove(Blueprint blueprint)
         {
-            CursorPointToGridMove(blueprint.PictureBox, blueprint.CenterSystemPoint, blueprint.Background.Grid.StepOnWidth, blueprint.Background.Grid.StepOnHeight);
+            CursorPointToGridMove(blueprint.PictureBox, blueprint.CoordinateSystemCenterPoint, blueprint.Background.Grid.StepOnWidth, blueprint.Background.Grid.StepOnHeight);
         }
 
         //TODO: переписать логику

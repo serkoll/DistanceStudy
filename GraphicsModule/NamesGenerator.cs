@@ -16,7 +16,7 @@ namespace GraphicsModule
             _counter = type ? 65 : 49;
             _quality = 1;
             Position = startPosition;
-            _textSettings = textSettings.DrawSettings;
+            _textSettings = textSettings.Drawing;
         }
         public Name Generate()
         {

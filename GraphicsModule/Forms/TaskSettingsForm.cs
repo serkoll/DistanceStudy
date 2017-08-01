@@ -56,7 +56,7 @@ namespace GraphicsModule.Forms
         }
         private void button1_Click(object sender, System.EventArgs e)
         {
-            GraphicsControlSettingsForm.CurrentSettings.PrimitivesAcces = new PrimitivesAccess(
+            GraphicsControlSettingsForm.CurrentSettings.Access = new PrimitivesAccess(
                 _generalAccessControl.GeneralAccess, 
                 _pointsAccessControl.PointsAccess, 
                 _linesAccessControl.LinesAccess, 

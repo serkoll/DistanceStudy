@@ -11,7 +11,7 @@ namespace GraphicsModule.Controls.TaskAccess
         public PointsAccessControl()
         {
             InitializeComponent();
-            PointsAccess = GraphicsControlSettingsForm.CurrentSettings.PrimitivesAcces.Points;
+            PointsAccess = GraphicsControlSettingsForm.CurrentSettings.Access.Points;
             accessPointsCheckBox.Checked = PointsAccess.IsPointsEnabled;
             accessPoint2DCheckBox.Checked = PointsAccess.IsPoint2DEnabled;
             accessPoint3DCheckBox.Checked = PointsAccess.IsPoint3DEnabled;

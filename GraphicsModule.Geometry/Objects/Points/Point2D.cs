@@ -24,8 +24,10 @@ namespace GraphicsModule.Geometry.Objects.Points
             Name = new Name();
         }
 
-        public void Draw(DrawSettings settings, Point coordinateSystemCenter, Graphics g)
+        public void Draw(Blueprint blueprint)
         {
+            var g = blueprint.Graphics;
+            var settings = blueprint.Settings.Drawing;
             g.DrawPie(settings.PenPoints, (float)X - settings.RadiusPoints, (float)Y - settings.RadiusPoints, settings.RadiusPoints * 2, settings.RadiusPoints * 2, 0, 360);
             g.DrawString(Name.Value, settings.TextFont, settings.TextBrush, (float)X + Name.Dx, (float)Y + Name.Dy);
         }

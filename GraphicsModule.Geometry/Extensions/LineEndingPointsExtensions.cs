@@ -12,7 +12,7 @@ namespace GraphicsModule.Geometry.Extensions
         public static IList<PointF> CalculateEndingPointsOnFrame(this LineOfPlane1X0Y ln1, Point coordinateSystemCenter)
         {
             const int frameSizeSolveError = 20;
-            var ln = ln1.ToGlobalCoordinatesLine2D(coordinateSystemCenter);
+            var ln = ln1.ToGlobalCoordinates(coordinateSystemCenter);
 
             var topLeftPoint = new Point(0, coordinateSystemCenter.Y);
             var bottomRightPoint = new Point(coordinateSystemCenter.X, coordinateSystemCenter.Y * 2 + frameSizeSolveError);
@@ -34,7 +34,7 @@ namespace GraphicsModule.Geometry.Extensions
 
         public static IList<PointF> CalculateEndingPointsOnFrame(this LineOfPlane2X0Z ln2, Point coordinateSystemCenter)
         {
-            var ln = ln2.ToGlobalCoordinatesLine2D(coordinateSystemCenter);
+            var ln = ln2.ToGlobalCoordinates(coordinateSystemCenter);
 
             var topLeftPoint = new Point(0, 0);
             var bottomrightPoint = coordinateSystemCenter;
@@ -57,7 +57,7 @@ namespace GraphicsModule.Geometry.Extensions
         public static IList<PointF> CalculateEndingPointsOnFrame(this LineOfPlane3Y0Z ln3, Point coordinateSystemCenter)
         {
             const int frameSizeSolveError = 20;
-            var ln = ln3.ToGlobalCoordinatesLine2D(coordinateSystemCenter);
+            var ln = ln3.ToGlobalCoordinates(coordinateSystemCenter);
 
             var topLeftPoint = new Point(coordinateSystemCenter.X, 0);
             var bottomrightPoint = new Point(coordinateSystemCenter.X * 2 + frameSizeSolveError, coordinateSystemCenter.Y);

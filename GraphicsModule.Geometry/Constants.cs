@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GraphicsModule.Geometry
+﻿namespace GraphicsModule.Geometry
 {
+    /// <summary>
+    /// Статический класс, хранящий постоянные среды
+    /// </summary>
     public static class Constants
     {
+        /// <summary>
+        /// Погрешность вычислений
+        /// </summary>
         public const double Tolerance = 1e-9;
     }
 }

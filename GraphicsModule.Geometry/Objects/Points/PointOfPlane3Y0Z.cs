@@ -36,32 +36,36 @@ namespace GraphicsModule.Geometry.Objects.Points
 
         public void Draw(Pen pen, float poitRaduis, Point frameCenter, Graphics graphics)
         {
-            var ptForDraw = this.ToGlobalCoordinatesPoint(frameCenter);
+            var ptForDraw = this.ToGlobalCoordinates(frameCenter);
             graphics.DrawPie(pen, ptForDraw.X - poitRaduis, ptForDraw.Y - poitRaduis, poitRaduis * 2, poitRaduis * 2, 0, 360);
         }
 
-        public void Draw(DrawSettings settings, Point coordinateSystemCenter, Graphics graphics)
+        public void Draw(Blueprint blueprint)
         {
+            var graphics = blueprint.Graphics;
+            var settings = blueprint.Settings.Drawing;
             var linkLineSettings = settings.LinkLinesSettings;
-            if (linkLineSettings.IsDraw)
+            if (linkLineSettings.Enabled)
             {
-                DrawLinkLine(linkLineSettings.PenLinkLineX0ZtoZ, linkLineSettings.PenLinkLineY0ZtoY, coordinateSystemCenter, graphics);
+                DrawLinkLine(linkLineSettings.PenLinkLineX0ZtoZ, linkLineSettings.PenLinkLineY0ZtoY, blueprint.CoordinateSystemCenterPoint, graphics);
             }
 
-            Draw(settings.PenPoints, settings.RadiusPoints, coordinateSystemCenter, graphics);
+            Draw(settings.PenPoints, settings.RadiusPoints, blueprint.CoordinateSystemCenterPoint, graphics);
 
-            DrawName(settings, settings.RadiusPoints, coordinateSystemCenter, graphics);
+            DrawName(settings, settings.RadiusPoints, blueprint.CoordinateSystemCenterPoint, graphics);
         }
 
-        public void DrawPointsOnly(DrawSettings st, Point frameCenter, Graphics g)
+        [Obsolete("Поменять название")]
+        public void DrawPointsOnly(Blueprint blueprint)
         {
-            Draw(st.PenPoints, st.RadiusPoints, frameCenter, g);
-            DrawName(st, st.RadiusPoints, frameCenter, g);
+            var settings = blueprint.Settings.Drawing;
+            Draw(settings.PenPoints, settings.RadiusPoints, blueprint.CoordinateSystemCenterPoint, blueprint.Graphics);
+            DrawName(settings, settings.RadiusPoints, blueprint.CoordinateSystemCenterPoint, blueprint.Graphics);
         }
 
         public void DrawName(DrawSettings st, float poitRaduis, Point frameCenter, Graphics graphics)
         {
-            var ptForDraw = this.ToGlobalCoordinatesPoint(frameCenter);
+            var ptForDraw = this.ToGlobalCoordinates(frameCenter);
             graphics.DrawString(Name.Value + "'''", st.TextFont, st.TextBrush, ptForDraw.X + Name.Dx, ptForDraw.Y + Name.Dy);
         }
 
@@ -75,13 +79,13 @@ namespace GraphicsModule.Geometry.Objects.Points
 
         private void DrawLinkLineToZ(Pen penLinkLineToZ, Point coordinateSystemCenter, Graphics graphics)
         {
-            var pt = this.ToGlobalCoordinatesPoint(coordinateSystemCenter);
+            var pt = this.ToGlobalCoordinates(coordinateSystemCenter);
             graphics.DrawLine(penLinkLineToZ, pt, new Point(0, pt.Y));
         }
 
         private void DrawLinkLineToY(Pen penLinkLineToY, Point coordinateSystemCenter, Graphics graphics)
         {
-            var pt = this.ToGlobalCoordinatesPoint(coordinateSystemCenter);
+            var pt = this.ToGlobalCoordinates(coordinateSystemCenter);
             var ptOnYPi3 = new Point(pt.X, coordinateSystemCenter.Y);
             graphics.DrawLine(penLinkLineToY, pt, ptOnYPi3);
 

@@ -95,17 +95,17 @@ namespace GraphicsModule.Geometry.Objects.Lines
                 LineOfPlane3Y0Z = linePi3;
             }
         }
-        public void Draw(DrawSettings settings, Point coordinateSystemCenter, Graphics graphics)
+        public void Draw(Blueprint blueprint)
         {
-            var linkLineSettings = settings.LinkLinesSettings;
-            if (linkLineSettings.IsDraw)
+            var settings = blueprint.Settings.Drawing.LinkLinesSettings;
+            if (settings.Enabled)
             {
-                Point0.DrawLinkLine(linkLineSettings.PenLinkLineX0YtoX, linkLineSettings.PenLinkLineX0YtoY, linkLineSettings.PenLinkLineX0ZtoZ, coordinateSystemCenter, graphics);
-                Point1.DrawLinkLine(linkLineSettings.PenLinkLineX0YtoX, linkLineSettings.PenLinkLineX0YtoY, linkLineSettings.PenLinkLineX0ZtoZ, coordinateSystemCenter, graphics);
+                Point0.DrawLinkLine(settings.PenLinkLineX0YtoX, settings.PenLinkLineX0YtoY, settings.PenLinkLineX0ZtoZ, blueprint.CoordinateSystemCenterPoint, blueprint.Graphics);
+                Point1.DrawLinkLine(settings.PenLinkLineX0YtoX, settings.PenLinkLineX0YtoY, settings.PenLinkLineX0ZtoZ, blueprint.CoordinateSystemCenterPoint, blueprint.Graphics);
             }
-            LineOfPlane1X0Y.DrawLineOnly(settings, coordinateSystemCenter, graphics);
-            LineOfPlane2X0Z.DrawLineOnly(settings, coordinateSystemCenter, graphics);
-            LineOfPlane3Y0Z.DrawLineOnly(settings, coordinateSystemCenter, graphics);
+            LineOfPlane1X0Y.DrawLineOnly(blueprint);
+            LineOfPlane2X0Z.DrawLineOnly(blueprint);
+            LineOfPlane3Y0Z.DrawLineOnly(blueprint);
 
         }
 
@@ -118,9 +118,9 @@ namespace GraphicsModule.Geometry.Objects.Lines
 
         public void SpecifyBoundaryPoints(Point frameCenter, RectangleF rc1, RectangleF rc2, RectangleF rc3)
         {
-            LineOfPlane1X0Y.EndingPoints = LineOfPlane1X0Y.CalculateEndingPointsOnFrame(frameCenter);
-            LineOfPlane2X0Z.EndingPoints = LineOfPlane2X0Z.CalculateEndingPointsOnFrame(frameCenter);
-            LineOfPlane3Y0Z.EndingPoints = LineOfPlane3Y0Z.CalculateEndingPointsOnFrame(frameCenter);
+            //LineOfPlane1X0Y.EndingPoints = LineOfPlane1X0Y.CalculateEndingPointsOnFrame(frameCenter);
+            //LineOfPlane2X0Z.EndingPoints = LineOfPlane2X0Z.CalculateEndingPointsOnFrame(frameCenter);
+            //LineOfPlane3Y0Z.EndingPoints = LineOfPlane3Y0Z.CalculateEndingPointsOnFrame(frameCenter);
             CutLineX0YtoX0Z(frameCenter, rc1);
             CutLineX0ZtoX0Y(frameCenter, rc1);
             CutLineX0ZtoY0Z(frameCenter, rc1);
@@ -128,63 +128,63 @@ namespace GraphicsModule.Geometry.Objects.Lines
         }
         private void CutLineX0YtoX0Z(Point frameCenter, RectangleF rc)
         {
-            if((LineOfPlane1X0Y.EndingPoints[0].X > LineOfPlane2X0Z.EndingPoints[0].X) && (LineOfPlane1X0Y.EndingPoints[0].Y == rc.Top))
-            {
-                var ln = new Line2D(new Point2D(LineOfPlane1X0Y.EndingPoints[0].X, LineOfPlane1X0Y.EndingPoints[0].Y),
-                                    new Point2D(LineOfPlane1X0Y.EndingPoints[0].X, LineOfPlane1X0Y.EndingPoints[0].Y - 10));
-                LineOfPlane2X0Z.EndingPoints[0] = (PointF)LineOfPlane2X0Z.GetCrossingPoint(ln, frameCenter);
-            }
-            if(LineOfPlane1X0Y.EndingPoints[1].X < LineOfPlane2X0Z.EndingPoints[1].X && (LineOfPlane1X0Y.EndingPoints[1].Y == rc.Top))
-            {
-                var ln = new Line2D(new Point2D(LineOfPlane1X0Y.EndingPoints[1].X, LineOfPlane1X0Y.EndingPoints[1].Y),
-                                    new Point2D(LineOfPlane1X0Y.EndingPoints[1].X, LineOfPlane1X0Y.EndingPoints[1].Y - 10));
-                LineOfPlane2X0Z.EndingPoints[1] = (PointF)LineOfPlane2X0Z.GetCrossingPoint(ln, frameCenter);
-            }
+            //if((LineOfPlane1X0Y.EndingPoints[0].X > LineOfPlane2X0Z.EndingPoints[0].X) && (LineOfPlane1X0Y.EndingPoints[0].Y == rc.Top))
+            //{
+            //    var ln = new Line2D(new Point2D(LineOfPlane1X0Y.EndingPoints[0].X, LineOfPlane1X0Y.EndingPoints[0].Y),
+            //                        new Point2D(LineOfPlane1X0Y.EndingPoints[0].X, LineOfPlane1X0Y.EndingPoints[0].Y - 10));
+            //    LineOfPlane2X0Z.EndingPoints[0] = (PointF)LineOfPlane2X0Z.GetCrossingPoint(ln, frameCenter);
+            //}
+            //if(LineOfPlane1X0Y.EndingPoints[1].X < LineOfPlane2X0Z.EndingPoints[1].X && (LineOfPlane1X0Y.EndingPoints[1].Y == rc.Top))
+            //{
+            //    var ln = new Line2D(new Point2D(LineOfPlane1X0Y.EndingPoints[1].X, LineOfPlane1X0Y.EndingPoints[1].Y),
+            //                        new Point2D(LineOfPlane1X0Y.EndingPoints[1].X, LineOfPlane1X0Y.EndingPoints[1].Y - 10));
+            //    LineOfPlane2X0Z.EndingPoints[1] = (PointF)LineOfPlane2X0Z.GetCrossingPoint(ln, frameCenter);
+            //}
         }
         private void CutLineX0ZtoX0Y(Point frameCenter, RectangleF rc)
         {
-            if ((LineOfPlane2X0Z.EndingPoints[0].X > LineOfPlane1X0Y.EndingPoints[0].X) && (LineOfPlane2X0Z.EndingPoints[0].Y == rc.Top))
-            {
-                var ln = new Line2D(new Point2D(LineOfPlane2X0Z.EndingPoints[0].X, LineOfPlane2X0Z.EndingPoints[0].Y),
-                                    new Point2D(LineOfPlane2X0Z.EndingPoints[0].X, LineOfPlane2X0Z.EndingPoints[0].Y - 10));
-                LineOfPlane1X0Y.EndingPoints[0] = (PointF)LineOfPlane1X0Y.GetCrossingPoint(ln, frameCenter);
-            }
-            if ((LineOfPlane2X0Z.EndingPoints[1].X < LineOfPlane1X0Y.EndingPoints[1].X) && (LineOfPlane2X0Z.EndingPoints[1].Y == rc.Top))
-            {
-                var ln = new Line2D(new Point2D(LineOfPlane2X0Z.EndingPoints[1].X, LineOfPlane2X0Z.EndingPoints[1].Y),
-                                    new Point2D(LineOfPlane2X0Z.EndingPoints[1].X, LineOfPlane2X0Z.EndingPoints[1].Y - 10));
-                LineOfPlane1X0Y.EndingPoints[1] = (PointF)LineOfPlane1X0Y.GetCrossingPoint(ln, frameCenter);
-            }
+            //if ((LineOfPlane2X0Z.EndingPoints[0].X > LineOfPlane1X0Y.EndingPoints[0].X) && (LineOfPlane2X0Z.EndingPoints[0].Y == rc.Top))
+            //{
+            //    var ln = new Line2D(new Point2D(LineOfPlane2X0Z.EndingPoints[0].X, LineOfPlane2X0Z.EndingPoints[0].Y),
+            //                        new Point2D(LineOfPlane2X0Z.EndingPoints[0].X, LineOfPlane2X0Z.EndingPoints[0].Y - 10));
+            //    LineOfPlane1X0Y.EndingPoints[0] = (PointF)LineOfPlane1X0Y.GetCrossingPoint(ln, frameCenter);
+            //}
+            //if ((LineOfPlane2X0Z.EndingPoints[1].X < LineOfPlane1X0Y.EndingPoints[1].X) && (LineOfPlane2X0Z.EndingPoints[1].Y == rc.Top))
+            //{
+            //    var ln = new Line2D(new Point2D(LineOfPlane2X0Z.EndingPoints[1].X, LineOfPlane2X0Z.EndingPoints[1].Y),
+            //                        new Point2D(LineOfPlane2X0Z.EndingPoints[1].X, LineOfPlane2X0Z.EndingPoints[1].Y - 10));
+            //    LineOfPlane1X0Y.EndingPoints[1] = (PointF)LineOfPlane1X0Y.GetCrossingPoint(ln, frameCenter);
+            //}
         }
         private void CutLineX0ZtoY0Z(Point frameCenter, RectangleF rc)
         {
-            if ((LineOfPlane2X0Z.EndingPoints[0].Y < LineOfPlane3Y0Z.EndingPoints[0].Y) && (LineOfPlane2X0Z.EndingPoints[0].X == rc.Right))
-            {
-                var ln = new Line2D(new Point2D(LineOfPlane2X0Z.EndingPoints[0].X, LineOfPlane2X0Z.EndingPoints[0].Y),
-                                    new Point2D(LineOfPlane2X0Z.EndingPoints[0].X - 10, LineOfPlane2X0Z.EndingPoints[0].Y));
-                LineOfPlane3Y0Z.EndingPoints[0] = (PointF)LineOfPlane3Y0Z.GetCrossingPoint(ln, frameCenter);
-            }
-            if((LineOfPlane2X0Z.EndingPoints[1].Y > LineOfPlane3Y0Z.EndingPoints[1].Y) && (LineOfPlane2X0Z.EndingPoints[1].X == rc.Right))
-            {
-                var ln = new Line2D(new Point2D(LineOfPlane2X0Z.EndingPoints[1].X, LineOfPlane2X0Z.EndingPoints[1].Y),
-                                    new Point2D(LineOfPlane2X0Z.EndingPoints[1].X - 10, LineOfPlane2X0Z.EndingPoints[1].Y));
-                LineOfPlane3Y0Z.EndingPoints[1] = (PointF)LineOfPlane3Y0Z.GetCrossingPoint(ln, frameCenter);
-            }
+            //if ((LineOfPlane2X0Z.EndingPoints[0].Y < LineOfPlane3Y0Z.EndingPoints[0].Y) && (LineOfPlane2X0Z.EndingPoints[0].X == rc.Right))
+            //{
+            //    var ln = new Line2D(new Point2D(LineOfPlane2X0Z.EndingPoints[0].X, LineOfPlane2X0Z.EndingPoints[0].Y),
+            //                        new Point2D(LineOfPlane2X0Z.EndingPoints[0].X - 10, LineOfPlane2X0Z.EndingPoints[0].Y));
+            //    LineOfPlane3Y0Z.EndingPoints[0] = (PointF)LineOfPlane3Y0Z.GetCrossingPoint(ln, frameCenter);
+            //}
+            //if((LineOfPlane2X0Z.EndingPoints[1].Y > LineOfPlane3Y0Z.EndingPoints[1].Y) && (LineOfPlane2X0Z.EndingPoints[1].X == rc.Right))
+            //{
+            //    var ln = new Line2D(new Point2D(LineOfPlane2X0Z.EndingPoints[1].X, LineOfPlane2X0Z.EndingPoints[1].Y),
+            //                        new Point2D(LineOfPlane2X0Z.EndingPoints[1].X - 10, LineOfPlane2X0Z.EndingPoints[1].Y));
+            //    LineOfPlane3Y0Z.EndingPoints[1] = (PointF)LineOfPlane3Y0Z.GetCrossingPoint(ln, frameCenter);
+            //}
         }
         private void CutLineY0ZtoX0Z(Point frameCenter, RectangleF rc)
         {
-            if ((LineOfPlane3Y0Z.EndingPoints[0].Y > LineOfPlane2X0Z.EndingPoints[0].Y) && (LineOfPlane3Y0Z.EndingPoints[0].X == rc.Right))
-            {
-                var ln = new Line2D(new Point2D(LineOfPlane3Y0Z.EndingPoints[0].X, LineOfPlane3Y0Z.EndingPoints[0].Y),
-                                    new Point2D(LineOfPlane3Y0Z.EndingPoints[0].X - 10, LineOfPlane3Y0Z.EndingPoints[0].Y));
-                LineOfPlane2X0Z.EndingPoints[0] = (PointF)LineOfPlane2X0Z.GetCrossingPoint(ln, frameCenter);
-            }
-            if ((LineOfPlane3Y0Z.EndingPoints[1].Y > LineOfPlane2X0Z.EndingPoints[1].Y) && (LineOfPlane3Y0Z.EndingPoints[1].X == rc.Right))
-            {
-                var ln = new Line2D(new Point2D(LineOfPlane3Y0Z.EndingPoints[1].X, LineOfPlane3Y0Z.EndingPoints[1].Y),
-                                    new Point2D(LineOfPlane3Y0Z.EndingPoints[1].X - 10, LineOfPlane3Y0Z.EndingPoints[1].Y));
-                LineOfPlane2X0Z.EndingPoints[1] = (PointF)LineOfPlane2X0Z.GetCrossingPoint(ln, frameCenter);
-            }
+            //if ((LineOfPlane3Y0Z.EndingPoints[0].Y > LineOfPlane2X0Z.EndingPoints[0].Y) && (LineOfPlane3Y0Z.EndingPoints[0].X == rc.Right))
+            //{
+            //    var ln = new Line2D(new Point2D(LineOfPlane3Y0Z.EndingPoints[0].X, LineOfPlane3Y0Z.EndingPoints[0].Y),
+            //                        new Point2D(LineOfPlane3Y0Z.EndingPoints[0].X - 10, LineOfPlane3Y0Z.EndingPoints[0].Y));
+            //    LineOfPlane2X0Z.EndingPoints[0] = (PointF)LineOfPlane2X0Z.GetCrossingPoint(ln, frameCenter);
+            //}
+            //if ((LineOfPlane3Y0Z.EndingPoints[1].Y > LineOfPlane2X0Z.EndingPoints[1].Y) && (LineOfPlane3Y0Z.EndingPoints[1].X == rc.Right))
+            //{
+            //    var ln = new Line2D(new Point2D(LineOfPlane3Y0Z.EndingPoints[1].X, LineOfPlane3Y0Z.EndingPoints[1].Y),
+            //                        new Point2D(LineOfPlane3Y0Z.EndingPoints[1].X - 10, LineOfPlane3Y0Z.EndingPoints[1].Y));
+            //    LineOfPlane2X0Z.EndingPoints[1] = (PointF)LineOfPlane2X0Z.GetCrossingPoint(ln, frameCenter);
+            //}
         }
         public Point3D Point0 { get; }
 
@@ -203,7 +203,5 @@ namespace GraphicsModule.Geometry.Objects.Lines
         public double Kz { get; private set; }
 
         public Name Name { get; set; }
-
-        public LineCoefficients Coefficients { get; }
     }
 }

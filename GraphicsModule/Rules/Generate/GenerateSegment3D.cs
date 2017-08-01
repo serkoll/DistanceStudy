@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using GraphicsModule.Configuration;
+using GraphicsModule.Geometry;
 using GraphicsModule.Geometry.Objects.Segments;
 using GraphicsModule.Interfaces;
 
@@ -27,7 +28,7 @@ namespace GraphicsModule.Rules.Generate
                     blueprint.Update(storage);
                     storage.AddToCollection(_source);
                     _source = null;
-                    storage.DrawLastAddedToObjects(settings, frameCenter, blueprint.Graphics);
+                    storage.DrawLastAddedToObjects(blueprint);
                 }
                 else
                 {

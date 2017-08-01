@@ -11,7 +11,7 @@ namespace GraphicsModule.Controls.TaskAccess
         public LinesAccessControl()
         {
             InitializeComponent();
-            LinesAccess = GraphicsControlSettingsForm.CurrentSettings.PrimitivesAcces.Lines;
+            LinesAccess = GraphicsControlSettingsForm.CurrentSettings.Access.Lines;
             AccessLinesCheckBox.Checked = LinesAccess.IsLinesEnabled;
             AccessPoint2DCheckBox.Checked = LinesAccess.IsLine2DEnabled;
             AccessPoint3DCheckBox.Checked = LinesAccess.IsLine3DEnabled;

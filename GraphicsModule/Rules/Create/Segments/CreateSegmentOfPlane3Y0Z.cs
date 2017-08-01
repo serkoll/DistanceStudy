@@ -2,6 +2,7 @@
 using System.Linq;
 using GraphicsModule.Configuration;
 using GraphicsModule.Controls;
+using GraphicsModule.Geometry;
 using GraphicsModule.Geometry.Extensions;
 using GraphicsModule.Geometry.Objects.Points;
 using GraphicsModule.Geometry.Objects.Segments;
@@ -21,7 +22,7 @@ namespace GraphicsModule.Rules.Create.Segments
             storage.AddToCollection(obj);
             blueprint.Update(storage);
         }
-        public SegmentOfPlane3Y0Z Create(Point pt, Point frameCenter, Blueprint can, DrawSettings setting, Storage strg)
+        public SegmentOfPlane3Y0Z Create(Point pt, Point frameCenter, Blueprint blueprint, DrawSettings setting, Storage strg)
         {
             if (!PointOfPlane3Y0Z.IsCreatable(pt, frameCenter))
             {
@@ -32,7 +33,7 @@ namespace GraphicsModule.Rules.Create.Segments
             {
                 ptOfPlane.Name = GraphicsControl.NamesGenerator.Generate();
                 strg.TempObjects.Add(ptOfPlane);
-                strg.DrawLastAddedToTempObjects(setting, frameCenter, can.Graphics);
+                strg.DrawLastAddedToTempObjects(blueprint);
                 return null;
             }
             ptOfPlane.Name = GraphicsControl.NamesGenerator.Generate();

@@ -5,6 +5,6 @@ namespace GraphicsModule.Geometry.Interfaces
 {
     public interface ILineOfPlane : ILine
     {
-        void DrawLineOnly(DrawSettings settings, Point framecenter, Graphics graphics);
+        void DrawLineOnly(Blueprint blueprint);
     }
 }

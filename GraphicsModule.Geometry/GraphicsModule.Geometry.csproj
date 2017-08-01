@@ -44,6 +44,8 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Background.cs" />
+    <Compile Include="Blueprint.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Extensions\LinesPositionExtensions.cs" />
     <Compile Include="Extensions\PointsPositionExtensions.cs" />
@@ -59,8 +61,8 @@
     <Compile Include="Interfaces\IObjectOfPlane2X0Z.cs" />
     <Compile Include="Interfaces\IObjectOfPlane3Y0Z.cs" />
     <Compile Include="Interfaces\IPlaneOfPlane.cs" />
+    <Compile Include="Storage.cs" />
     <Compile Include="Structures\LineEndingPoints.cs" />
-    <Compile Include="Structures\LineCoefficients.cs" />
     <Compile Include="Name.cs" />
     <Compile Include="Extensions\LineEndingPointsExtensions.cs" />
     <Compile Include="Interfaces\ISegmentOfPlane.cs" />

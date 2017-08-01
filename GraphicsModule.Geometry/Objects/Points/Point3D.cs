@@ -105,16 +105,18 @@ namespace GraphicsModule.Geometry.Objects.Points
             PointOfPlane3Y0Z = new PointOfPlane3Y0Z(Y, Z);
         }
 
-        public void Draw(DrawSettings settings, Point coordinateSystemCenter, Graphics graphics)
+        public void Draw(Blueprint blueprint)
         {
+            var graphics = blueprint.Graphics;
+            var settings = blueprint.Settings.Drawing;
             var linkLineSettings = settings.LinkLinesSettings;
-            if (linkLineSettings.IsDraw)
+            if (linkLineSettings.Enabled)
             {
-                DrawLinkLine(linkLineSettings.PenLinkLineX0YtoX, linkLineSettings.PenLinkLineX0YtoY, linkLineSettings.PenLinkLineX0ZtoZ, coordinateSystemCenter, graphics);
+                DrawLinkLine(linkLineSettings.PenLinkLineX0YtoX, linkLineSettings.PenLinkLineX0YtoY, linkLineSettings.PenLinkLineX0ZtoZ, blueprint.CoordinateSystemCenterPoint, graphics);
             }
 
-            Draw(settings.PenPoints, settings.RadiusPoints, coordinateSystemCenter, graphics);
-            DrawName(settings, settings.RadiusPoints, coordinateSystemCenter, graphics);
+            Draw(settings.PenPoints, settings.RadiusPoints, blueprint.CoordinateSystemCenterPoint, graphics);
+            DrawName(settings, settings.RadiusPoints, blueprint.CoordinateSystemCenterPoint, graphics);
         }
 
         private void Draw(Pen pen, float ptR, Point coordinateSystemCenter, Graphics graphics)
@@ -142,15 +144,15 @@ namespace GraphicsModule.Geometry.Objects.Points
 
         private void DrawLinkLineToX(Pen penLinkLineToX, Point coordinateSystemCenter, Graphics graphics)
         {
-            var ptX0Y = PointOfPlane1X0Y.ToGlobalCoordinatesPoint(coordinateSystemCenter);
-            var ptX0Z = PointOfPlane2X0Z.ToGlobalCoordinatesPoint(coordinateSystemCenter);
+            var ptX0Y = PointOfPlane1X0Y.ToGlobalCoordinates(coordinateSystemCenter);
+            var ptX0Z = PointOfPlane2X0Z.ToGlobalCoordinates(coordinateSystemCenter);
             graphics.DrawLine(penLinkLineToX, ptX0Y, ptX0Z);
         }
 
         private void DrawLinkLineToY(Pen penLinkLineToY, Point coordinateSystemCenter, Graphics graphics)
         {
-            var ptX0Y = PointOfPlane1X0Y.ToGlobalCoordinatesPoint(coordinateSystemCenter);
-            var ptY0Z = PointOfPlane3Y0Z.ToGlobalCoordinatesPoint(coordinateSystemCenter);
+            var ptX0Y = PointOfPlane1X0Y.ToGlobalCoordinates(coordinateSystemCenter);
+            var ptY0Z = PointOfPlane3Y0Z.ToGlobalCoordinates(coordinateSystemCenter);
 
             var ptOnYPi1 = new Point(coordinateSystemCenter.X, ptX0Y.Y);
             graphics.DrawLine(penLinkLineToY, ptX0Y, ptOnYPi1);
@@ -164,8 +166,8 @@ namespace GraphicsModule.Geometry.Objects.Points
 
         private void DrawLinkLineToZ(Pen penLinkLineToZ, Point coordinateSystemCenter, Graphics graphics)
         {
-            var ptX0Z = PointOfPlane2X0Z.ToGlobalCoordinatesPoint(coordinateSystemCenter);
-            var ptY0Z = PointOfPlane3Y0Z.ToGlobalCoordinatesPoint(coordinateSystemCenter);
+            var ptX0Z = PointOfPlane2X0Z.ToGlobalCoordinates(coordinateSystemCenter);
+            var ptY0Z = PointOfPlane3Y0Z.ToGlobalCoordinates(coordinateSystemCenter);
             graphics.DrawLine(penLinkLineToZ, ptX0Z, ptY0Z);
         }
 

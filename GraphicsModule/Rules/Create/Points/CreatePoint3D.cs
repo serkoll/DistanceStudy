@@ -3,6 +3,7 @@ using System.Linq;
 using GraphicsModule.Configuration;
 using GraphicsModule.Controls;
 using GraphicsModule.Enums;
+using GraphicsModule.Geometry;
 using GraphicsModule.Geometry.Extensions;
 using GraphicsModule.Geometry.Objects.Points;
 using GraphicsModule.Interfaces;
@@ -38,7 +39,7 @@ namespace GraphicsModule.Rules.Create.Points
             {
                 ptOfPlane.Name = GraphicsControl.NamesGenerator.Generate();
                 storage.TempObjects.Add(ptOfPlane);
-                ptOfPlane.Draw(settings, frameCenter, blueprint.Graphics);
+                ptOfPlane.Draw(blueprint);
                 return null;
             }
 
@@ -57,7 +58,7 @@ namespace GraphicsModule.Rules.Create.Points
                 }
                 else
                 {
-                    ptOfPlane.Draw(settings, frameCenter, blueprint.Graphics);
+                    ptOfPlane.Draw(blueprint);
                 }
                 return null;
             }

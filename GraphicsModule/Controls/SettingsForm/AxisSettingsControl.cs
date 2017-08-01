@@ -12,14 +12,14 @@ namespace GraphicsModule.Controls.SettingsForm
         public AxisSettingsControl()
         {
             InitializeComponent();
-            AxisSettings = GraphicsControlSettingsForm.CurrentSettings.AxisSettings;
+            AxisSettings = GraphicsControlSettingsForm.CurrentSettings.Axis;
             CheckBoxFlagDrawAxisX.Checked = AxisSettings.FlagDrawX;
             CheckBoxFlagDrawAxisY.Checked = AxisSettings.FlagDrawY;
             CheckBoxFlagDrawAxisZ.Checked = AxisSettings.FlagDrawZ;
             NumericUpDownAxisWidth.Value = AxisSettings.Width;
-            colorBoxX.BackColor = GraphicsControlSettingsForm.CurrentSettings.AxisSettings.ColorX;
-            colorBoxY.BackColor = GraphicsControlSettingsForm.CurrentSettings.AxisSettings.ColorY;
-            colorBoxZ.BackColor = GraphicsControlSettingsForm.CurrentSettings.AxisSettings.ColorZ;
+            colorBoxX.BackColor = GraphicsControlSettingsForm.CurrentSettings.Axis.ColorX;
+            colorBoxY.BackColor = GraphicsControlSettingsForm.CurrentSettings.Axis.ColorY;
+            colorBoxZ.BackColor = GraphicsControlSettingsForm.CurrentSettings.Axis.ColorZ;
         }
 
         private void colorBoxX_Click(object sender, EventArgs e)

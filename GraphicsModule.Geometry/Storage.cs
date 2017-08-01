@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
-using GraphicsModule.Configuration;
 using GraphicsModule.Geometry.Interfaces;
 
-namespace GraphicsModule
+namespace GraphicsModule.Geometry
 {
     public class Storage
     {
@@ -44,50 +42,47 @@ namespace GraphicsModule
                 Objects.Add(source);
             }
         }
+
         /// <summary>
         /// Отрисовывает все коллекции объектов
         /// </summary>
-        /// <param name="st">Настройки</param>
-        /// <param name="frameCenter">Центр системы координат</param>
-        /// <param name="g">Целевой Graphics</param>
-        public void DrawObjects(Settings st, Point frameCenter, Graphics g)
+        /// <param name="blueprint"></param>
+        public void DrawObjects(Blueprint blueprint)
         {
             foreach(var ob in Objects)
             {
-                ob.Draw(st.DrawSettings, frameCenter, g);
+                ob.Draw(blueprint);
             }
             foreach (var ob in TempObjects)
             {
-                ob.Draw(st.DrawSettings, frameCenter, g);
+                ob.Draw(blueprint);
             }
             foreach (var ob in SelectedObjects)
             {
-                ob.Draw(st.SelectedDrawSettings, frameCenter, g);
+                ob.Draw(blueprint);
             }
             foreach (var ob in DeletedObjects)
             {
-                ob.Draw(st.SelectedDrawSettings, frameCenter, g);
+                ob.Draw(blueprint);
             }
         }
+
         /// <summary>
         /// Отрисовывает последний добавленный объект в коллекцию объектов
         /// </summary>
-        /// <param name="st"></param>
-        /// <param name="frameCenter"></param>
-        /// <param name="g"></param>
-        public void DrawLastAddedToObjects(DrawSettings st, Point frameCenter, Graphics g)
+        /// <param name="blueprint"></param>
+        public void DrawLastAddedToObjects(Blueprint blueprint)
         {
-            Objects.Last().Draw(st, frameCenter, g);
+            Objects.Last().Draw(blueprint);
         }
+
         /// <summary>
         /// Отрисовывает последний добавленный объект в коллекцию временных объектов
         /// </summary>
-        /// <param name="st"></param>
-        /// <param name="frameCenter"></param>
-        /// <param name="g"></param>
-        public void DrawLastAddedToTempObjects(DrawSettings st, Point frameCenter, Graphics g)
+        /// <param name="blueprint"></param>
+        public void DrawLastAddedToTempObjects(Blueprint blueprint)
         {
-            TempObjects.Last().Draw(st, frameCenter, g);
+            TempObjects.Last().Draw(blueprint);
         }
 
         public void ClearTempCollections()
@@ -101,7 +96,6 @@ namespace GraphicsModule
         public IList<IObject> PastedObjects { get; }
         public IList<IObject> DeletedObjects { get; }
         public IList<IObject> TempObjects { get; }
-        public IList<IPointOfPlane> TempPointsOfPlane { get; }
         public IList<IObject> TempLinesOfPlane { get; }
     }
 }

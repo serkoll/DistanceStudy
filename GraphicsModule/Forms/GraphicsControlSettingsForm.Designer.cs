@@ -46,7 +46,7 @@
             this.treeView = new System.Windows.Forms.TreeView();
             this.labelTitle = new System.Windows.Forms.Label();
             this.groupBoxControls = new System.Windows.Forms.GroupBox();
-            this.buttonCancel = new System.Windows.Forms.Button();
+            this.buttonblueprintcel = new System.Windows.Forms.Button();
             this.buttonOK = new System.Windows.Forms.Button();
             this.tableLayoutPanel.SuspendLayout();
             this.SuspendLayout();
@@ -61,7 +61,7 @@
             this.tableLayoutPanel.Controls.Add(this.treeView, 0, 0);
             this.tableLayoutPanel.Controls.Add(this.labelTitle, 1, 0);
             this.tableLayoutPanel.Controls.Add(this.groupBoxControls, 0, 1);
-            this.tableLayoutPanel.Controls.Add(this.buttonCancel, 3, 3);
+            this.tableLayoutPanel.Controls.Add(this.buttonblueprintcel, 3, 3);
             this.tableLayoutPanel.Controls.Add(this.buttonOK, 2, 3);
             this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel.Location = new System.Drawing.Point(0, 0);
@@ -138,16 +138,16 @@
             this.groupBoxControls.TabIndex = 2;
             this.groupBoxControls.TabStop = false;
             // 
-            // buttonCancel
+            // buttonblueprintcel
             // 
-            this.buttonCancel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonCancel.Location = new System.Drawing.Point(648, 297);
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(80, 24);
-            this.buttonCancel.TabIndex = 4;
-            this.buttonCancel.Text = "Отмена";
-            this.buttonCancel.UseVisualStyleBackColor = true;
-            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            this.buttonblueprintcel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonblueprintcel.Location = new System.Drawing.Point(648, 297);
+            this.buttonblueprintcel.Name = "buttonblueprintcel";
+            this.buttonblueprintcel.Size = new System.Drawing.Size(80, 24);
+            this.buttonblueprintcel.TabIndex = 4;
+            this.buttonblueprintcel.Text = "Отмена";
+            this.buttonblueprintcel.UseVisualStyleBackColor = true;
+            this.buttonblueprintcel.Click += new System.EventHandler(this.buttonblueprintcel_Click);
             // 
             // buttonOK
             // 
@@ -183,7 +183,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
         private System.Windows.Forms.TreeView treeView;
         private System.Windows.Forms.GroupBox groupBoxControls;
-        private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.Button buttonblueprintcel;
         private System.Windows.Forms.Button buttonOK;
         private System.Windows.Forms.Label labelTitle;
     }

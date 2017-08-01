@@ -61,50 +61,50 @@ namespace GraphicsModule.Rules.Create.Planes
                     }
             }
         }
-        private void PlaneObjectsDraw(DrawSettings settings, Point frameCenter, Blueprint can)
+        private void PlaneObjectsDraw(DrawSettings settings, Point frameCenter, Blueprint blueprint)
         {
             if (_planeObjects.Count == 0) return;
             foreach (var o in _planeObjects)
             {
-                o.Draw(settings, frameCenter, can.Graphics);
+                o.Draw(blueprint);
             }
         }
-        private void CreateByThreePoint(Point pt, Point frameCenter, Blueprint can, DrawSettings settings, Storage strg)
+        private void CreateByThreePoint(Point pt, Point frameCenter, Blueprint blueprint, DrawSettings settings, Storage strg)
         {
-            var tmpobj = new CreatePoint3D().Create(pt, frameCenter, can, settings, strg);
+            var tmpobj = new CreatePoint3D().Create(pt, frameCenter, blueprint, settings, strg);
             if (tmpobj == null)
             {
                 if(_planeObjects.Count != 0)
-                    this.PlaneObjectsDraw(settings, frameCenter, can);
+                    this.PlaneObjectsDraw(settings, frameCenter, blueprint);
                 return;
             }
             _planeObjects.Add(tmpobj);
-            can.Update(strg);
-            PlaneObjectsDraw(settings, frameCenter, can);
+            blueprint.Update(strg);
+            PlaneObjectsDraw(settings, frameCenter, blueprint);
             if (_planeObjects.Count != 3) return;
             var source = CreateByThreePoint(_planeObjects);
             var nameparams = _planeObjects[0].Name;
             source.Name = new Name(@"p", nameparams.Dx, nameparams.Dy);
             _planeObjects.Clear();
             strg.AddToCollection(source);
-            can.Update(strg);
+            blueprint.Update(strg);
         }
-        private void CreateByLineAndPoint(Point pt, Point frameCenter, Blueprint can, DrawSettings settings, Storage strg)
+        private void CreateByLineAndPoint(Point pt, Point frameCenter, Blueprint blueprint, DrawSettings settings, Storage strg)
         {
             if (_planeObjects.Count == 0)
             {
-                var tmpobj = _createLine.Create(pt, frameCenter, can, settings, strg);
+                var tmpobj = _createLine.Create(pt, frameCenter, blueprint, settings, strg);
                 if (tmpobj == null) return;
-                can.Update(strg);
+                blueprint.Update(strg);
                 _planeObjects.Add(tmpobj);
-                PlaneObjectsDraw(settings, frameCenter, can);
+                PlaneObjectsDraw(settings, frameCenter, blueprint);
             }
             else
             {
-                var tmpobj = new CreatePoint3D().Create(pt, frameCenter, can, settings, strg);
+                var tmpobj = new CreatePoint3D().Create(pt, frameCenter, blueprint, settings, strg);
                 if (tmpobj == null)
                 {
-                    PlaneObjectsDraw(settings, frameCenter, can);
+                    PlaneObjectsDraw(settings, frameCenter, blueprint);
                     return;
                 }
                 var source = CreateByLineAndPoint((Line3D)_planeObjects[0], tmpobj);
@@ -112,28 +112,28 @@ namespace GraphicsModule.Rules.Create.Planes
                 source.Name = new Name(@"p", nameparams.Dx, nameparams.Dy);
                 _planeObjects.Clear();
                 strg.AddToCollection(source);
-                can.Update(strg);
+                blueprint.Update(strg);
             }
         }
-        private void CreateByParallelLines(Point pt, Point frameCenter, Blueprint can, DrawSettings settings, Storage strg)
+        private void CreateByParallelLines(Point pt, Point frameCenter, Blueprint blueprint, DrawSettings settings, Storage strg)
         {
             if (_planeObjects.Count < 2)
             {
-                var tmpobj = _createLine.Create(pt, frameCenter, can, settings, strg);
+                var tmpobj = _createLine.Create(pt, frameCenter, blueprint, settings, strg);
                 if (_planeObjects.Count != 0)
                 {
                     var line3D = (Line3D)_planeObjects.First();
                     if(_createLine.TempLineOfPlane != null && line3D.IsParallel(_createLine.TempLineOfPlane))
                     {
                         _createLine.TempLineOfPlane = null;
-                        can.Update(strg);
-                        PlaneObjectsDraw(settings, frameCenter, can);
+                        blueprint.Update(strg);
+                        PlaneObjectsDraw(settings, frameCenter, blueprint);
                     }
                 }
                 if (tmpobj != null)
                 {
                     _planeObjects.Add(tmpobj);
-                    PlaneObjectsDraw(settings, frameCenter, can);
+                    PlaneObjectsDraw(settings, frameCenter, blueprint);
                 }
             }
             if (_planeObjects.Count != 2) return;
@@ -144,16 +144,16 @@ namespace GraphicsModule.Rules.Create.Planes
                 source.Name = new Name(@"p", nameparams.Dx, nameparams.Dy);
                 _planeObjects.Clear();
                 strg.AddToCollection(source);
-                can.Update(strg);
+                blueprint.Update(strg);
             }
             else
             {
                 _planeObjects.RemoveAt(1);
-                can.Update(strg);
+                blueprint.Update(strg);
                 foreach (var o in _planeObjects)
                 {
                     var ln = (Line3D)o;
-                    ln.Draw(settings, frameCenter, can.Graphics);
+                    ln.Draw(blueprint);
                 }
             }
         }
@@ -164,7 +164,7 @@ namespace GraphicsModule.Rules.Create.Planes
         //        var tmpobj = new CreateLineOfPlane1X0Y().Create(pt, frameCenter, blueprint, settings, storage);
         //        if (tmpobj != null)
         //        {
-        //            tmpobj.Draw(settings, frameCenter, blueprint.Graphics);
+        //            tmpobj.Draw(blueprint);
         //            _planeObjects.Add(tmpobj);
         //        }
         //    }
@@ -185,7 +185,7 @@ namespace GraphicsModule.Rules.Create.Planes
         //        foreach (var o in _planeObjects)
         //        {
         //            var ln = (LineOfPlane1X0Y)o;
-        //            ln.Draw(settings, frameCenter, blueprint.Graphics);
+        //            ln.Draw(blueprint);
         //        }
         //    }
         //}
@@ -195,7 +195,7 @@ namespace GraphicsModule.Rules.Create.Planes
         //    {
         //        var tmpobj = new CreateSegmentOfPlane1X0Y().Create(pt, frameCenter, blueprint, settings, storage);
         //        if (tmpobj == null) return;
-        //        tmpobj.Draw(settings, frameCenter, blueprint.Graphics);
+        //        tmpobj.Draw(blueprint);
         //        _planeObjects.Add(tmpobj);
         //    }
         //    else
@@ -216,7 +216,7 @@ namespace GraphicsModule.Rules.Create.Planes
         //        var tmpobj = new CreateSegmentOfPlane1X0Y().Create(pt, frameCenter, blueprint, settings, storage);
         //        if (tmpobj != null)
         //        {
-        //            tmpobj.Draw(settings, frameCenter, blueprint.Graphics);
+        //            tmpobj.Draw(blueprint);
         //            _planeObjects.Add(tmpobj);
         //        }
         //    }
@@ -237,7 +237,7 @@ namespace GraphicsModule.Rules.Create.Planes
         //        foreach (var o in _planeObjects)
         //        {
         //            var ln = (SegmentOfPlane1X0Y)o;
-        //            ln.Draw(settings, frameCenter, blueprint.Graphics);
+        //            ln.Draw(blueprint);
         //        }
         //    }
         //}
@@ -248,7 +248,7 @@ namespace GraphicsModule.Rules.Create.Planes
         //        var tmpobj = new CreateSegmentOfPlane1X0Y().Create(pt, frameCenter, blueprint, settings, storage);
         //        if (tmpobj != null)
         //        {
-        //            tmpobj.Draw(settings, frameCenter, blueprint.Graphics);
+        //            tmpobj.Draw(blueprint);
         //            _planeObjects.Add(tmpobj);
         //        }
         //    }
@@ -269,7 +269,7 @@ namespace GraphicsModule.Rules.Create.Planes
         //        foreach (var o in _planeObjects)
         //        {
         //            var ln = (SegmentOfPlane1X0Y)o;
-        //            ln.Draw(settings, frameCenter, blueprint.Graphics);
+        //            ln.Draw(blueprint);
         //        }
         //    }
         //}
@@ -287,7 +287,7 @@ namespace GraphicsModule.Rules.Create.Planes
         }
         //public Plane3D CreateByCrossedLines(Line3D ln1, Line3D ln2, Point frameCenter)
         //{
-        //    return Analyze.LinesPositionExtensions.IsCrossed(ln1, ln2, frameCenter) ? new Plane3D(ln1, ln2) : null;
+        //    return Analyze.LinesPositionExtensions.IsIntersect(ln1, ln2, frameCenter) ? new Plane3D(ln1, ln2) : null;
         //}
         //public Plane3D CreateByPointAndSegment(Segment3D sg, Point3D pt)
         //{
@@ -299,7 +299,7 @@ namespace GraphicsModule.Rules.Create.Planes
         //}
         //public Plane3D CreateByCrossedSegments(Segment3D sg1, Segment3D sg2, Point frameCenter)
         //{
-        //    return Analyze.LinesPositionExtensions.IsCrossed(sg1, sg2, frameCenter) ? new Plane3D(sg1, sg2) : null;
+        //    return Analyze.LinesPositionExtensions.IsIntersect(sg1, sg2, frameCenter) ? new Plane3D(sg1, sg2) : null;
         //}
         public void SetBuildType(PlaneCreateType type)
         {
