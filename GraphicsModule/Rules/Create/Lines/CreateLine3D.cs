@@ -111,13 +111,13 @@ namespace GraphicsModule.Rules.Create.Lines
         {
             if (obj[0].GetType() == typeof(PointOfPlane1X0Y))
             {
-                return new LineOfPlane1X0Y((PointOfPlane1X0Y)obj[0], (PointOfPlane1X0Y)obj[1], blueprint.PlaneX0Y);
+                return new LineOfPlane1X0Y((PointOfPlane1X0Y)obj[0], (PointOfPlane1X0Y)obj[1]);
             }
             if (obj[0].GetType() == typeof(PointOfPlane2X0Z))
             {
-                return new LineOfPlane2X0Z((PointOfPlane2X0Z)obj[0], (PointOfPlane2X0Z)obj[1], blueprint.PlaneX0Z);
+                return new LineOfPlane2X0Z((PointOfPlane2X0Z)obj[0], (PointOfPlane2X0Z)obj[1]);
             }
-            return new LineOfPlane3Y0Z((PointOfPlane3Y0Z)obj[0], (PointOfPlane3Y0Z)obj[1], blueprint.PlaneY0Z);
+            return new LineOfPlane3Y0Z((PointOfPlane3Y0Z)obj[0], (PointOfPlane3Y0Z)obj[1]);
         }
 
         protected bool IsInOnePlane(IObject lnproj, IObject ptproj)

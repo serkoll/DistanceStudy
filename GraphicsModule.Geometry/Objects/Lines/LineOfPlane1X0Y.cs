@@ -20,15 +20,6 @@ namespace GraphicsModule.Geometry.Objects.Lines
             EndingPoints = null;
             Name = new Name();
         }
-        public LineOfPlane1X0Y(PointOfPlane1X0Y pt0, PointOfPlane1X0Y pt1, Rectangle frame)
-        {
-            Point0 = pt0;
-            Point1 = pt1;
-            Kx = pt1.X - pt0.X;
-            Ky = pt1.Y - pt0.Y;
-            EndingPoints = new LineEndingPoints(this.ToLine2D(), frame);
-            Name = new Name();
-        }
 
         public LineOfPlane1X0Y(Line3D line)
         {
@@ -44,10 +35,10 @@ namespace GraphicsModule.Geometry.Objects.Lines
         {
             if (EndingPoints == null || !EndingPoints.IsInitialized)
             {
-                EndingPoints = new LineEndingPoints(this.ToLine2D(), blueprint.PlaneX0Y);
+                EndingPoints = new LineEndingPoints(this.ToGlobalCoordinates(blueprint.CoordinateSystemCenterPoint), blueprint.PlaneX0Y);
             }
 
-            blueprint.Graphics.DrawLine(blueprint.Settings.Drawing.PenLineOfPlane2X0Z, EndingPoints.Point0.ToPoint(), EndingPoints.Point1.ToPoint());
+            blueprint.Graphics.DrawLine(blueprint.Settings.Drawing.PenLineOfPlane1X0Y, EndingPoints.Point0.ToPoint(), EndingPoints.Point1.ToPoint());
 
             Point0.Draw(blueprint);
             Point1.Draw(blueprint);
@@ -61,7 +52,7 @@ namespace GraphicsModule.Geometry.Objects.Lines
                 EndingPoints = new LineEndingPoints(this.ToLine2D(), blueprint.PlaneX0Y);
             }
 
-            blueprint.Graphics.DrawLine(blueprint.Settings.Drawing.PenLineOfPlane2X0Z, EndingPoints.Point0.ToPoint(), EndingPoints.Point1.ToPoint());
+            blueprint.Graphics.DrawLine(blueprint.Settings.Drawing.PenLineOfPlane1X0Y, EndingPoints.Point0.ToPoint(), EndingPoints.Point1.ToPoint());
 
             Point0.DrawPointsOnly(blueprint);
             Point1.DrawPointsOnly(blueprint);

@@ -18,17 +18,6 @@ namespace GraphicsModule.Geometry.Objects.Lines
             Kz = pt1.Z - pt0.Z;
             Name = new Name();
         }
-
-        public LineOfPlane3Y0Z(PointOfPlane3Y0Z pt0, PointOfPlane3Y0Z pt1, Rectangle frame)
-        {
-            Point0 = pt0;
-            Point1 = pt1;
-            Ky = pt1.Y - pt0.Y;
-            Kz = pt1.Z - pt0.Z;
-            EndingPoints = new LineEndingPoints(this.ToLine2D(), frame);
-            Name = new Name();
-        }
-
         public LineOfPlane3Y0Z(Line3D line)
         {
             Point0 = new PointOfPlane3Y0Z(line.Point0.Y, line.Point0.Z);
@@ -43,7 +32,7 @@ namespace GraphicsModule.Geometry.Objects.Lines
         {
             if (EndingPoints == null || !EndingPoints.IsInitialized)
             {
-                EndingPoints = new LineEndingPoints(this.ToLine2D(), blueprint.PlaneY0Z);
+                EndingPoints = new LineEndingPoints(this.ToGlobalCoordinates(blueprint.CoordinateSystemCenterPoint), blueprint.PlaneY0Z);
             }
 
             blueprint.Graphics.DrawLine(blueprint.Settings.Drawing.PenLineOfPlane3Y0Z, EndingPoints.Point0.ToPoint(), EndingPoints.Point1.ToPoint());
