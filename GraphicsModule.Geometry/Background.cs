@@ -40,6 +40,7 @@ namespace GraphicsModule.Geometry
                 Draw(settings, graphics);
             }
         }
+
         private void Draw(Settings settings, Graphics graphics)
         {
             Grid.DrawGrid(settings.Grid, graphics);

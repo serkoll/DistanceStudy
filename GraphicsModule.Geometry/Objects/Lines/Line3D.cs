@@ -13,19 +13,19 @@ namespace GraphicsModule.Geometry.Objects.Lines
         {
             if (lst[0].GetType() == typeof(LineOfPlane1X0Y))
             {
-                return lst[1].GetType() == typeof(LineOfPlane2X0Z) ? 
-                    new Line3D((LineOfPlane1X0Y)lst[0], (LineOfPlane2X0Z)lst[1]) :
-                    new Line3D((LineOfPlane1X0Y)lst[0], (LineOfPlane3Y0Z)lst[1]);
+                return lst[1].GetType() == typeof(LineOfPlane2X0Z) 
+                    ? new Line3D((LineOfPlane1X0Y)lst[0], (LineOfPlane2X0Z)lst[1]) 
+                    : new Line3D((LineOfPlane1X0Y)lst[0], (LineOfPlane3Y0Z)lst[1]);
             }
             if (lst[0].GetType() == typeof(LineOfPlane2X0Z))
             {
-                return lst[1].GetType() == typeof(LineOfPlane1X0Y) ? 
-                    new Line3D((LineOfPlane1X0Y)lst[1], (LineOfPlane2X0Z)lst[0]) : 
-                    new Line3D((LineOfPlane2X0Z)lst[0], (LineOfPlane3Y0Z)lst[1]);
+                return lst[1].GetType() == typeof(LineOfPlane1X0Y) 
+                    ? new Line3D((LineOfPlane1X0Y)lst[1], (LineOfPlane2X0Z)lst[0]) 
+                    : new Line3D((LineOfPlane2X0Z)lst[0], (LineOfPlane3Y0Z)lst[1]);
             }
-            return lst[1].GetType() == typeof(LineOfPlane1X0Y) ? 
-                new Line3D((LineOfPlane1X0Y)lst[1], (LineOfPlane3Y0Z)lst[0]) : 
-                new Line3D((LineOfPlane2X0Z)lst[1], (LineOfPlane3Y0Z)lst[0]);
+            return lst[1].GetType() == typeof(LineOfPlane1X0Y) 
+                ? new Line3D((LineOfPlane1X0Y)lst[1], (LineOfPlane3Y0Z)lst[0]) 
+                : new Line3D((LineOfPlane2X0Z)lst[1], (LineOfPlane3Y0Z)lst[0]);
         }
 
         public Line3D(LineOfPlane1X0Y linePi1, LineOfPlane2X0Z linePi2)

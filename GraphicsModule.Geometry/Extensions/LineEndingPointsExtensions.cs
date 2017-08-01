@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using GraphicsModule.Geometry.Objects.Lines;
@@ -13,10 +12,8 @@ namespace GraphicsModule.Geometry.Extensions
         {
             const int frameSizeSolveError = 20;
             var ln = ln1.ToGlobalCoordinates(coordinateSystemCenter);
-
             var topLeftPoint = new Point(0, coordinateSystemCenter.Y);
             var bottomRightPoint = new Point(coordinateSystemCenter.X, coordinateSystemCenter.Y * 2 + frameSizeSolveError);
-
             var res0 = GetTopOrLeftPoints(ln, topLeftPoint, bottomRightPoint);
             if (res0 != null && res0.Count == 2)
             {
