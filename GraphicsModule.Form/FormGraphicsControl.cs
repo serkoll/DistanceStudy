@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows.Forms;
 using GraphicsModule.Controls;
 using GraphicsModule.Geometry.Interfaces;
 using GraphicsModule.Geometry.Objects;

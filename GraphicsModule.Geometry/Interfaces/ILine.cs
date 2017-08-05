@@ -1,5 +1,4 @@
-﻿using System;
-using GraphicsModule.Geometry.Structures;
+﻿using GraphicsModule.Geometry.Structures;
 
 namespace GraphicsModule.Geometry.Interfaces
 {
