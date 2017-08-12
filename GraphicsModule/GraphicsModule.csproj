@@ -159,12 +159,6 @@
     <Compile Include="Controls\TaskAccess\SegmentsAccessControl.Designer.cs">
       <DependentUpon>SegmentsAccessControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="DockPanels\ObjectPanel.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DockPanels\ObjectPanel.Designer.cs">
-      <DependentUpon>ObjectPanel.cs</DependentUpon>
-    </Compile>
     <Compile Include="Enums\NamePosition.cs" />
     <Compile Include="Enums\PlaneCreateType.cs" />
     <Compile Include="Enums\Point3DCreateType.cs" />
@@ -272,9 +266,6 @@
     <EmbeddedResource Include="Controls\TaskAccess\SegmentsAccessControl.resx">
       <DependentUpon>SegmentsAccessControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DockPanels\ObjectPanel.resx">
-      <DependentUpon>ObjectPanel.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\GraphicsControlSettingsForm.resx">
       <DependentUpon>GraphicsControlSettingsForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -319,6 +310,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DockPanels\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

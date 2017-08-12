@@ -31,15 +31,17 @@ namespace GraphicsModule.Geometry.Objects.Points
             g.DrawString(Name.Value, settings.TextFont, settings.TextBrush, (float)X + Name.Dx, (float)Y + Name.Dy);
         }
 
+        public bool IsSelected(Point mscoords, float ptR, Point coordinateSystemCenter, double distance)
+        {
+            return this.DistanceToPoint(mscoords) < distance;
+        }
+
         public double X { get; }
 
         public double Y { get; }
 
         public Name Name { get; set; }
 
-        public bool IsSelected(Point mscoords, float ptR, Point coordinateSystemCenter, double distance)
-        {
-            return this.DistanceToPoint(mscoords) < distance;
-        }
+
     }
 }
