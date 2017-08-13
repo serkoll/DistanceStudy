@@ -92,7 +92,7 @@ namespace GraphicsModule.Geometry.Objects.Points
             PointOfPlane3Y0Z.Draw(pen, ptR, coordinateSystemCenter, graphics);
         }
 
-        public void DrawName(DrawSettings st, float poitRaduis, Point frameCenter, Graphics graphics)
+        private void DrawName(DrawSettings st, float poitRaduis, Point frameCenter, Graphics graphics)
         {
             PointOfPlane1X0Y.DrawName(st, poitRaduis, frameCenter, graphics);
             PointOfPlane2X0Z.DrawName(st, poitRaduis, frameCenter, graphics);
@@ -106,7 +106,7 @@ namespace GraphicsModule.Geometry.Objects.Points
             DrawLinkLine(settings.PenLinkLineX0YtoX, settings.PenLinkLineX0YtoY, settings.PenLinkLineX0ZtoZ, coordinateSystemCenter, graphics);
         }
 
-        public void DrawLinkLine(Pen penLinkLineToX, Pen penLinkLineToY, Pen penLinkLineToZ, Point coordinateSystemCenter, Graphics graphics)
+        private void DrawLinkLine(Pen penLinkLineToX, Pen penLinkLineToY, Pen penLinkLineToZ, Point coordinateSystemCenter, Graphics graphics)
         {
             DrawLinkLineToX(penLinkLineToX, coordinateSystemCenter, graphics);
             DrawLinkLineToY(penLinkLineToY, coordinateSystemCenter, graphics);

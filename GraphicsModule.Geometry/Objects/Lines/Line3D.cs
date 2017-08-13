@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using GraphicsModule.Geometry.Extensions;
 using GraphicsModule.Geometry.Interfaces;
@@ -9,24 +8,21 @@ namespace GraphicsModule.Geometry.Objects.Lines
 {
     public class Line3D : IObject
     {
+        #region Constructors
+
         public Line3D(LineOfPlane1X0Y linePi1, LineOfPlane2X0Z linePi2)
         {
             if (Math.Abs(linePi1.Point0.X - linePi2.Point0.X) < Constants.Tolerance && Math.Abs(linePi1.Point1.X - linePi2.Point1.X) < Constants.Tolerance)
             {
                 Point0 = new Point3D(linePi1.Point0, linePi2.Point0);
                 Point1 = new Point3D(linePi1.Point1, linePi2.Point1);
-                LineOfPlane1X0Y = linePi1;
-                LineOfPlane2X0Z = linePi2;
-                LineOfPlane3Y0Z = new LineOfPlane3Y0Z(new PointOfPlane3Y0Z(linePi1.Point0.Y, linePi2.Point0.Z), new PointOfPlane3Y0Z(linePi1.Point1.Y, linePi2.Point1.Z));
             }
-            else 
+            else
             {
                 Point0 = new Point3D(linePi1.Point1.ToPoint2D(), linePi2.Point0.Z);
                 Point1 = new Point3D(linePi1.Point1.ToPoint2D(), linePi2.Point1.Z);
-                LineOfPlane1X0Y = linePi1;
-                LineOfPlane2X0Z = linePi2;
-                LineOfPlane3Y0Z = new LineOfPlane3Y0Z(new PointOfPlane3Y0Z(linePi1.Point1.Y, linePi2.Point0.Z), new PointOfPlane3Y0Z(linePi1.Point0.Y, linePi2.Point1.Z));
             }
+            InitializeLinesOfPlne();
         }
 
         public Line3D(LineOfPlane1X0Y linePi1, LineOfPlane3Y0Z linePi3)
@@ -35,38 +31,44 @@ namespace GraphicsModule.Geometry.Objects.Lines
             {
                 Point0 = new Point3D(linePi1.Point0, linePi3.Point0);
                 Point1 = new Point3D(linePi1.Point1, linePi3.Point1);
-                LineOfPlane1X0Y = linePi1;
-                LineOfPlane2X0Z = new LineOfPlane2X0Z(new PointOfPlane2X0Z(linePi1.Point0.X, linePi3.Point0.Z), new PointOfPlane2X0Z(linePi1.Point1.X, linePi3.Point1.Z));
-                LineOfPlane3Y0Z = linePi3;
             }
-            else 
+            else
             {
                 Point0 = new Point3D(linePi1.Point0.ToPoint2D(), linePi3.Point1.Z);
                 Point1 = new Point3D(linePi1.Point1.ToPoint2D(), linePi3.Point0.Z);
-                LineOfPlane1X0Y = linePi1;
-                LineOfPlane2X0Z = new LineOfPlane2X0Z(new PointOfPlane2X0Z(linePi1.Point0.X, linePi3.Point1.Z), new PointOfPlane2X0Z(linePi1.Point1.X, linePi3.Point0.Z));
-                LineOfPlane3Y0Z = linePi3;
             }
+            InitializeLinesOfPlne();
         }
+
         public Line3D(LineOfPlane2X0Z linePi2, LineOfPlane3Y0Z linePi3)
         {
             if (Math.Abs(linePi2.Point0.Z - linePi3.Point0.Z) < Constants.Tolerance && Math.Abs(linePi2.Point1.Z - linePi3.Point1.Z) < Constants.Tolerance)
             {
                 Point0 = new Point3D(linePi2.Point0, linePi3.Point0);
                 Point1 = new Point3D(linePi2.Point1, linePi3.Point1);
-                LineOfPlane1X0Y = new LineOfPlane1X0Y(new PointOfPlane1X0Y(linePi2.Point0.X, linePi3.Point0.Y), new PointOfPlane1X0Y(linePi2.Point1.X, linePi3.Point1.Y));
-                LineOfPlane2X0Z = linePi2;
-                LineOfPlane3Y0Z = linePi3;
             }
-            else 
+            else
             {
                 Point0 = new Point3D(linePi2.Point0.X, linePi3.Point1.Y, linePi2.Point0.Z);
                 Point1 = new Point3D(linePi2.Point1.X, linePi3.Point0.Y, linePi2.Point1.Z);
-                LineOfPlane1X0Y = new LineOfPlane1X0Y(new PointOfPlane1X0Y(linePi2.Point0.X, linePi3.Point1.Y), new PointOfPlane1X0Y(linePi2.Point1.X, linePi3.Point0.Y));
-                LineOfPlane2X0Z = linePi2;
-                LineOfPlane3Y0Z = linePi3;
             }
+            InitializeLinesOfPlne();
         }
+
+        #endregion
+
+        /// <summary>
+        /// TODO: локализовать текст ошибки
+        /// </summary>
+        private void InitializeLinesOfPlne()
+        {
+            if (Point0 == null || Point1 == null)
+                throw new ArgumentNullException("Points not initialized");
+            LineOfPlane1X0Y = new LineOfPlane1X0Y(Point0.PointOfPlane1X0Y, Point1.PointOfPlane1X0Y);
+            LineOfPlane2X0Z = new LineOfPlane2X0Z(Point0.PointOfPlane2X0Z, Point1.PointOfPlane2X0Z);
+            LineOfPlane3Y0Z = new LineOfPlane3Y0Z(Point0.PointOfPlane3Y0Z, Point0.PointOfPlane3Y0Z);
+        }
+
         public void Draw(Blueprint blueprint)
         {
             var settings = blueprint.Settings.Drawing.LinkLinesSettings;
@@ -164,11 +166,11 @@ namespace GraphicsModule.Geometry.Objects.Lines
 
         public Point3D Point1 { get; }
 
-        public LineOfPlane1X0Y LineOfPlane1X0Y { get; }
+        public LineOfPlane1X0Y LineOfPlane1X0Y { get; private set; }
 
-        public LineOfPlane2X0Z LineOfPlane2X0Z { get; }
+        public LineOfPlane2X0Z LineOfPlane2X0Z { get; private set; }
 
-        public LineOfPlane3Y0Z LineOfPlane3Y0Z { get; }
+        public LineOfPlane3Y0Z LineOfPlane3Y0Z { get; private set; }
 
         public double Kx { get; private set; }
 
