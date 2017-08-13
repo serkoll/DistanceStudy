@@ -90,8 +90,8 @@ namespace GraphicsModule.Geometry.Objects.Lines
             var settings = blueprint.Settings.Drawing.LinkLinesSettings;
             if (settings.Enabled)
             {
-                Point0.DrawLinkLine(settings.PenLinkLineX0YtoX, settings.PenLinkLineX0YtoY, settings.PenLinkLineX0ZtoZ, blueprint.CoordinateSystemCenterPoint, blueprint.Graphics);
-                Point1.DrawLinkLine(settings.PenLinkLineX0YtoX, settings.PenLinkLineX0YtoY, settings.PenLinkLineX0ZtoZ, blueprint.CoordinateSystemCenterPoint, blueprint.Graphics);
+                Point0.DrawLinkLine(settings, blueprint.CoordinateSystemCenterPoint, blueprint.Graphics);
+                Point1.DrawLinkLine(settings, blueprint.CoordinateSystemCenterPoint, blueprint.Graphics);
             }
 
             LineOfPlane1X0Y.DrawLineOnly(blueprint);

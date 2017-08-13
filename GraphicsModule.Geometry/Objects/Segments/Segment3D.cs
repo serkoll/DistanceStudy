@@ -96,21 +96,16 @@ namespace GraphicsModule.Geometry.Objects.Segments
             SegmentOfPlane1X0Y.DrawSegmentOnly(blueprint);
             SegmentOfPlane2X0Z.DrawSegmentOnly(blueprint);
             SegmentOfPlane3Y0Z.DrawSegmentOnly(blueprint);
-            var settings = blueprint.Settings.Drawing;
-            if (settings.LinkLinesSettings.Enabled)
+
+            var settings = blueprint.Settings.Drawing.LinkLinesSettings;
+            if (settings.Enabled)
             {
-                DrawLinkLine(settings.LinkLinesSettings.PenLinkLineX0YtoX, settings.LinkLinesSettings.PenLinkLineX0YtoY, settings.LinkLinesSettings.PenLinkLineX0ZtoX, settings.LinkLinesSettings.PenLinkLineX0ZtoZ,
-                             settings.LinkLinesSettings.PenLinkLineY0ZtoZ, settings.LinkLinesSettings.PenLinkLineY0ZtoY, blueprint.CoordinateSystemCenterPoint, blueprint.Graphics);
+                Point0.DrawLinkLine(settings, blueprint.CoordinateSystemCenterPoint, blueprint.Graphics);
+                Point1.DrawLinkLine(settings, blueprint.CoordinateSystemCenterPoint, blueprint.Graphics);
             }
 
         }
-        public void DrawLinkLine(Pen penLinkLineX0YtoX, Pen penLinkLineX0YtoY, Pen penLinkLineX0ZtoX, Pen penLinkLineX0ZtoZ, Pen penLinkLineY0ZtoZ, Pen penLinkLineY0ZtoY, Point frameCenter, Graphics graphics)
-        {
-            Point0.DrawLinkLine(penLinkLineX0YtoX, penLinkLineX0YtoY, penLinkLineX0ZtoX, penLinkLineX0ZtoZ,
-                         penLinkLineY0ZtoZ, penLinkLineY0ZtoY, frameCenter, ref graphics);
-            Point1.DrawLinkLine(penLinkLineX0YtoX, penLinkLineX0YtoY, penLinkLineX0ZtoX, penLinkLineX0ZtoZ,
-                          penLinkLineY0ZtoZ, penLinkLineY0ZtoY, frameCenter, ref graphics);
-        }
+
         public bool IsSelected(Point mscoords, float ptR, Point coordinateSystemCenter, double distance)
         {
             return SegmentOfPlane1X0Y.IsSelected(mscoords, ptR, coordinateSystemCenter, distance) ||
