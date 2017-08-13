@@ -92,12 +92,9 @@ namespace GraphicsModule.Controls
             LoadSettings();
             InitializeMenu();
 
-            //var objectPanel = new ObjectPanel();
 
             GraphicsControl.NamesGenerator = new NamesGenerator(true, 0, _settings);
             _storage = new Storage();
-
-            //objectPanel.Show(dockPanel1);
         }
         /// <summary>
         /// Загрузка общих настроек настроек

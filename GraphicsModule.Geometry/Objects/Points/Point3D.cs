@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using GraphicsModule.Configuration;
@@ -8,16 +7,12 @@ using GraphicsModule.Geometry.Interfaces;
 
 namespace GraphicsModule.Geometry.Objects.Points
 {
-    /// <summary>Класс для расчета параметров 3D точки</summary>
-    /// <remarks>Copyright © Polozkov V. Yury, 2015</remarks>
     public class Point3D : IObject
     {
         private Name _name;
-        public Point3D()
-        {
-            _name = new Name();
-            InitializePointsOfPlane();
-        }
+
+        #region Constructors
+
         public Point3D(double x, double y, double z)
         {
             X = x;
@@ -26,6 +21,7 @@ namespace GraphicsModule.Geometry.Objects.Points
             _name = new Name();
             InitializePointsOfPlane();
         }
+
         public Point3D(Point2D pt, double z)
         {
             X = pt.X;
@@ -66,44 +62,14 @@ namespace GraphicsModule.Geometry.Objects.Points
             InitializePointsOfPlane();
         }
 
-        public static Point3D Create(IList<IObject> points, byte projectionsCount = 2)
-        {
-            if (projectionsCount < 2 && projectionsCount > 3) throw new ArgumentOutOfRangeException();
-            if (points.Count != projectionsCount) throw new ArgumentOutOfRangeException();
-            var pt1 = points.FirstOrDefault(x => x is PointOfPlane1X0Y) as PointOfPlane1X0Y;
-            var pt2 = points.FirstOrDefault(x => x is PointOfPlane2X0Z) as PointOfPlane2X0Z;
-            var pt3 = points.FirstOrDefault(x => x is PointOfPlane3Y0Z) as PointOfPlane3Y0Z;
-            if (pt1 != null)
-                return (pt2 != null)
-                    ? Point3D.IsCreatable(pt1, pt2) ? new Point3D(pt1, pt2) : null
-                    : Point3D.IsCreatable(pt1, pt3) ? new Point3D(pt1, pt3) : null;
-            else if (pt2 != null && pt3 != null)
-                return Point3D.IsCreatable(pt2, pt3) ? new Point3D(pt2, pt3) : null; 
-            else
-                throw new ArgumentException();
-        }
-
-        public static bool IsCreatable(PointOfPlane1X0Y pt1, PointOfPlane2X0Z pt2)
-        {
-            return Math.Abs(pt1.X - pt2.X) < 0.0001;
-        }
-
-        public static bool IsCreatable(PointOfPlane1X0Y pt1, PointOfPlane3Y0Z pt3)
-        {
-            return Math.Abs(pt1.Y - pt3.Y) < 0.0001;
-        }
-
-        public static bool IsCreatable(PointOfPlane2X0Z pt2, PointOfPlane3Y0Z pt3)
-        {
-            return Math.Abs(pt2.Z - pt3.Z) < 0.0001;
-        }
-
-        public void InitializePointsOfPlane()
+        private void InitializePointsOfPlane()
         {
             PointOfPlane1X0Y = new PointOfPlane1X0Y(X, Y);
             PointOfPlane2X0Z = new PointOfPlane2X0Z(X, Z);
             PointOfPlane3Y0Z = new PointOfPlane3Y0Z(Y, Z);
         }
+
+        #endregion
 
         public void Draw(Blueprint blueprint)
         {

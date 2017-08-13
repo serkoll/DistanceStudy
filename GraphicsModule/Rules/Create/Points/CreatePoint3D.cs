@@ -5,6 +5,8 @@ using GraphicsModule.Controls;
 using GraphicsModule.Enums;
 using GraphicsModule.Geometry;
 using GraphicsModule.Geometry.Extensions;
+using GraphicsModule.Geometry.Interfaces;
+using GraphicsModule.Geometry.Objects;
 using GraphicsModule.Geometry.Objects.Points;
 using GraphicsModule.Interfaces;
 
@@ -52,7 +54,7 @@ namespace GraphicsModule.Rules.Create.Points
 
             if (BuildType == Point3DCreateType.By3PointsOfPlane && storage.TempObjects.Count != 3)
             {
-                if (Point3D.Create(storage.TempObjects, (byte)BuildType) == null)
+                if (ObjectsCreator.Point3D().Create(storage.TempObjects.Cast<IPointOfPlane>().ToList(), (byte)BuildType) == null)
                 {
                     storage.TempObjects.RemoveAt(storage.TempObjects.Count - 1);
                 }
@@ -63,7 +65,7 @@ namespace GraphicsModule.Rules.Create.Points
                 return null;
             }
 
-            var source = Point3D.Create(storage.TempObjects, (byte)BuildType);
+            var source = ObjectsCreator.Point3D().Create(storage.TempObjects.Cast<IPointOfPlane>().ToList(), (byte)BuildType);
             if (source == null)
             {
                 storage.TempObjects.RemoveAt(storage.TempObjects.Count - 1);

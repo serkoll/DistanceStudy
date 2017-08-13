@@ -2,11 +2,9 @@
 
 namespace GraphicsModule.Geometry.Interfaces
 {
-    public interface IObject
+    public interface IObject : IDraw
     {
         Name Name { get; set; }
-
-        void Draw(Blueprint blueprint);
 
         bool IsSelected(Point mousecoords, float ptR, Point coordinateSystemCenter, double distance);
     }

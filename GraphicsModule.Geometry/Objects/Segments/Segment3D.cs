@@ -77,8 +77,6 @@ namespace GraphicsModule.Geometry.Objects.Segments
             {
                 Point0 = new Point3D(linePi2.Point0, linePi3.Point0);
                 Point1 = new Point3D(linePi2.Point1, linePi3.Point1);
-                Point0.InitializePointsOfPlane();
-                Point1.InitializePointsOfPlane();
                 SegmentOfPlane1X0Y = new SegmentOfPlane1X0Y(new PointOfPlane1X0Y(linePi2.Point0.X, linePi3.Point0.Y), new PointOfPlane1X0Y(linePi2.Point1.X, linePi3.Point1.Y));
                 SegmentOfPlane2X0Z = linePi2;
                 SegmentOfPlane3Y0Z = linePi3;

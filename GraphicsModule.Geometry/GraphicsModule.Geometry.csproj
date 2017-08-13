@@ -55,12 +55,15 @@
     <Compile Include="Extensions\ObjectsCalculateExtensions.cs" />
     <Compile Include="Extensions\ObjectsConvertExtensions.cs" />
     <Compile Include="Extensions\ObjectsDeterminePositionExtensions.cs" />
+    <Compile Include="Helpers\ObjectsCreator\ObjectsCreatorPointsHelper.cs" />
+    <Compile Include="Interfaces\IDraw.cs" />
     <Compile Include="Interfaces\ILine.cs" />
     <Compile Include="Interfaces\ILineOfPlane.cs" />
     <Compile Include="Interfaces\IObjectOfPlane1X0Y.cs" />
     <Compile Include="Interfaces\IObjectOfPlane2X0Z.cs" />
     <Compile Include="Interfaces\IObjectOfPlane3Y0Z.cs" />
     <Compile Include="Interfaces\IPlaneOfPlane.cs" />
+    <Compile Include="Objects\ObjectsCreator.cs" />
     <Compile Include="Storage.cs" />
     <Compile Include="Structures\LineEndingPoints.cs" />
     <Compile Include="Name.cs" />
