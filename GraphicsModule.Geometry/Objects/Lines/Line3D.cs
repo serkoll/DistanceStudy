@@ -9,25 +9,6 @@ namespace GraphicsModule.Geometry.Objects.Lines
 {
     public class Line3D : IObject
     {
-        public static Line3D Create(IList<IObject> lst)
-        {
-            if (lst[0].GetType() == typeof(LineOfPlane1X0Y))
-            {
-                return lst[1].GetType() == typeof(LineOfPlane2X0Z) 
-                    ? new Line3D((LineOfPlane1X0Y)lst[0], (LineOfPlane2X0Z)lst[1]) 
-                    : new Line3D((LineOfPlane1X0Y)lst[0], (LineOfPlane3Y0Z)lst[1]);
-            }
-            if (lst[0].GetType() == typeof(LineOfPlane2X0Z))
-            {
-                return lst[1].GetType() == typeof(LineOfPlane1X0Y) 
-                    ? new Line3D((LineOfPlane1X0Y)lst[1], (LineOfPlane2X0Z)lst[0]) 
-                    : new Line3D((LineOfPlane2X0Z)lst[0], (LineOfPlane3Y0Z)lst[1]);
-            }
-            return lst[1].GetType() == typeof(LineOfPlane1X0Y) 
-                ? new Line3D((LineOfPlane1X0Y)lst[1], (LineOfPlane3Y0Z)lst[0]) 
-                : new Line3D((LineOfPlane2X0Z)lst[1], (LineOfPlane3Y0Z)lst[0]);
-        }
-
         public Line3D(LineOfPlane1X0Y linePi1, LineOfPlane2X0Z linePi2)
         {
             if (Math.Abs(linePi1.Point0.X - linePi2.Point0.X) < Constants.Tolerance && Math.Abs(linePi1.Point1.X - linePi2.Point1.X) < Constants.Tolerance)
@@ -47,6 +28,7 @@ namespace GraphicsModule.Geometry.Objects.Lines
                 LineOfPlane3Y0Z = new LineOfPlane3Y0Z(new PointOfPlane3Y0Z(linePi1.Point1.Y, linePi2.Point0.Z), new PointOfPlane3Y0Z(linePi1.Point0.Y, linePi2.Point1.Z));
             }
         }
+
         public Line3D(LineOfPlane1X0Y linePi1, LineOfPlane3Y0Z linePi3)
         {
             if (Math.Abs(linePi1.Point0.Y - linePi3.Point0.Y) < Constants.Tolerance && Math.Abs(linePi1.Point1.Y - linePi3.Point1.Y) < Constants.Tolerance)

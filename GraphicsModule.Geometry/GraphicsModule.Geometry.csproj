@@ -55,6 +55,7 @@
     <Compile Include="Extensions\ObjectsCalculateExtensions.cs" />
     <Compile Include="Extensions\ObjectsConvertExtensions.cs" />
     <Compile Include="Extensions\ObjectsDeterminePositionExtensions.cs" />
+    <Compile Include="Helpers\ObjectsCreator\ObjectsCreatorLinesHelper.cs" />
     <Compile Include="Helpers\ObjectsCreator\ObjectsCreatorPointsHelper.cs" />
     <Compile Include="Interfaces\IDraw.cs" />
     <Compile Include="Interfaces\ILine.cs" />

@@ -1,6 +1,9 @@
 ﻿using System.Drawing;
+using System.Linq;
 using GraphicsModule.Configuration;
 using GraphicsModule.Geometry;
+using GraphicsModule.Geometry.Interfaces;
+using GraphicsModule.Geometry.Objects;
 using GraphicsModule.Geometry.Objects.Lines;
 using GraphicsModule.Interfaces;
 
@@ -21,7 +24,7 @@ namespace GraphicsModule.Rules.Generate
                     blueprint.Update(storage);
                     return;
                 }
-                if ((_source = Line3D.Create(storage.SelectedObjects)) != null)
+                if ((_source = ObjectsCreator.Line3D().Create(storage.SelectedObjects.Cast<ILineOfPlane>().ToList())) != null)
                 {
                     _source.SpecifyBoundaryPoints(frameCenter, blueprint.PlaneX0Y, blueprint.PlaneX0Z, blueprint.PlaneY0Z);
                     storage.Objects.Remove(storage.SelectedObjects[0]);

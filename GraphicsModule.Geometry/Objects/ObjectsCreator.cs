@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GraphicsModule.Geometry.Helpers.ObjectsCreator;
+﻿using GraphicsModule.Geometry.Helpers.ObjectsCreator;
 
 namespace GraphicsModule.Geometry.Objects
 {
@@ -12,6 +7,11 @@ namespace GraphicsModule.Geometry.Objects
         public static ObjectsCreatorPointsHelper Point3D()
         {
             return new ObjectsCreatorPointsHelper();
+        }
+
+        public static ObjectsCreatorLinesHelper Line3D()
+        {
+            return new ObjectsCreatorLinesHelper();
         }
     }
 }
