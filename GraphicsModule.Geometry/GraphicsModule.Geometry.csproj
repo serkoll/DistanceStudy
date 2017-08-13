@@ -57,6 +57,7 @@
     <Compile Include="Extensions\ObjectsDeterminePositionExtensions.cs" />
     <Compile Include="Helpers\ObjectsCreator\ObjectsCreatorLinesHelper.cs" />
     <Compile Include="Helpers\ObjectsCreator\ObjectsCreatorPointsHelper.cs" />
+    <Compile Include="Helpers\ObjectsCreator\ObjectsCreatorSegmentsHelper.cs" />
     <Compile Include="Interfaces\IDraw.cs" />
     <Compile Include="Interfaces\ILine.cs" />
     <Compile Include="Interfaces\ILineOfPlane.cs" />

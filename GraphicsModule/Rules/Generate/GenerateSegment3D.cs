@@ -1,6 +1,9 @@
 ﻿using System.Drawing;
+using System.Linq;
 using GraphicsModule.Configuration;
 using GraphicsModule.Geometry;
+using GraphicsModule.Geometry.Interfaces;
+using GraphicsModule.Geometry.Objects;
 using GraphicsModule.Geometry.Objects.Segments;
 using GraphicsModule.Interfaces;
 
@@ -20,7 +23,7 @@ namespace GraphicsModule.Rules.Generate
                     blueprint.Update(storage);
                     return;
                 }
-                if ((_source = Segment3D.Create(storage.SelectedObjects)) != null)
+                if ((_source = ObjectsCreator.Segment3D().Create(storage.SelectedObjects.Cast<ISegmentOfPlane>().ToList())) != null)
                 {
                     storage.Objects.Remove(storage.SelectedObjects[0]);
                     storage.Objects.Remove(storage.SelectedObjects[1]);

@@ -1,6 +1,6 @@
 ﻿namespace GraphicsModule.Geometry.Interfaces
 {
-    internal interface ISegmentOfPlane: IObject
+    public interface ISegmentOfPlane: IObject
     {
         void DrawSegmentOnly(Blueprint blueprint);
     }

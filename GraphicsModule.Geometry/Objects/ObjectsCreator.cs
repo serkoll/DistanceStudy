@@ -13,5 +13,10 @@ namespace GraphicsModule.Geometry.Objects
         {
             return new ObjectsCreatorLinesHelper();
         }
+
+        public static ObjectsCreatorSegmentsHelper Segment3D()
+        {
+            return new ObjectsCreatorSegmentsHelper();
+        }
     }
 }
