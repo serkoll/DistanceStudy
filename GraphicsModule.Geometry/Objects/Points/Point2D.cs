@@ -23,7 +23,7 @@ namespace GraphicsModule.Geometry.Objects.Points
             Name = new Name();
         }
 
-        public void Draw(Blueprint blueprint)
+        public virtual void Draw(Blueprint blueprint)
         {
             var g = blueprint.Graphics;
             var settings = blueprint.Settings.Drawing;
@@ -31,7 +31,7 @@ namespace GraphicsModule.Geometry.Objects.Points
             g.DrawString(Name.Value, settings.TextFont, settings.TextBrush, (float)X + Name.Dx, (float)Y + Name.Dy);
         }
 
-        public bool IsSelected(Point mscoords, float ptR, Point coordinateSystemCenter, double distance)
+        public virtual bool IsSelected(Point mscoords, float ptR, Point coordinateSystemCenter, double distance)
         {
             return this.DistanceToPoint(mscoords) < distance;
         }
@@ -41,7 +41,5 @@ namespace GraphicsModule.Geometry.Objects.Points
         public double Y { get; }
 
         public Name Name { get; set; }
-
-
     }
 }

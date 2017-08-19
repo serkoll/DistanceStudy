@@ -88,12 +88,14 @@ namespace GraphicsModule.Geometry.Objects.Points
             var pt = this.ToGlobalCoordinates(coordinateSystemCenter);
             var ptOnYPi3 = new Point(pt.X, coordinateSystemCenter.Y);
             graphics.DrawLine(penLinkLineToY, pt, ptOnYPi3);
+
             var y = Convert.ToInt32(Y);
             if (y != 0)
             {
                 var ptForArc = new Point(coordinateSystemCenter.X - y, coordinateSystemCenter.Y - y);
                 graphics.DrawArc(penLinkLineToY, ptForArc.X, ptForArc.Y, y * 2, y * 2, 0, 90);
             }
+
             var ptOnYPi1 = new Point(coordinateSystemCenter.X, coordinateSystemCenter.Y + Convert.ToInt32(Y));
             graphics.DrawLine(penLinkLineToY, ptOnYPi1, new Point(0, ptOnYPi1.Y));
         }

@@ -7,58 +7,48 @@ using GraphicsModule.Geometry.Interfaces;
 
 namespace GraphicsModule.Geometry.Objects.Points
 {
-    public class Point3D : IObject
+    public class Point3D : Point2D
     {
         private Name _name;
 
         #region Constructors
 
-        public Point3D(double x, double y, double z)
+        public Point3D(double x, double y, double z) : base(x, y)
         {
-            X = x;
-            Y = y;
             Z = z;
             _name = new Name();
             InitializePointsOfPlane();
         }
 
-        public Point3D(Point2D pt, double z)
+        public Point3D(Point2D pt, double z) : base(pt.X, pt.Y)
         {
-            X = pt.X;
-            Y = pt.Y;
             Z = z;
             _name = new Name();
             InitializePointsOfPlane();
         }
-        public Point3D(PointOfPlane1X0Y pt1, PointOfPlane2X0Z pt2)
+        public Point3D(PointOfPlane1X0Y pt1, PointOfPlane2X0Z pt2) : base(pt1.X, pt1.Y)
         {
-            X = pt1.X;
-            Y = pt1.Y;
             Z = pt2.Z;
-            InitializePointsOfPlane();
             _name = new Name();
+            InitializePointsOfPlane();
         }
-        public Point3D(PointOfPlane1X0Y pt1, PointOfPlane3Y0Z pt3)
+        public Point3D(PointOfPlane1X0Y pt1, PointOfPlane3Y0Z pt3) : base(pt1.X, pt1.Y)
         {
-            X = pt1.X;
-            Y = pt1.Y;
             Z = pt3.Z;
             _name = new Name();
             InitializePointsOfPlane();
         }
-        public Point3D(PointOfPlane2X0Z pt2, PointOfPlane3Y0Z pt3)
+        public Point3D(PointOfPlane2X0Z pt2, PointOfPlane3Y0Z pt3) : base(pt2.X, pt3.Y)
         {
-            X = pt2.X;
-            Y = pt3.Y;
             Z = pt2.Z;
+            _name = new Name();
             InitializePointsOfPlane();
         }
 
-        public Point3D(PointOfPlane1X0Y pt1, PointOfPlane2X0Z pt2, PointOfPlane3Y0Z pt3)
+        public Point3D(PointOfPlane1X0Y pt1, PointOfPlane2X0Z pt2, PointOfPlane3Y0Z pt3) : base(pt1.X, pt3.Y)
         {
-            X = pt1.X;
-            Y = pt3.Y;
             Z = pt2.Z;
+            _name = new Name();
             InitializePointsOfPlane();
         }
 
@@ -71,7 +61,7 @@ namespace GraphicsModule.Geometry.Objects.Points
 
         #endregion
 
-        public void Draw(Blueprint blueprint)
+        public override void Draw(Blueprint blueprint)
         {
             var graphics = blueprint.Graphics;
             var settings = blueprint.Settings.Drawing;
@@ -128,10 +118,13 @@ namespace GraphicsModule.Geometry.Objects.Points
             var ptOnYPi1 = new Point(coordinateSystemCenter.X, ptX0Y.Y);
             graphics.DrawLine(penLinkLineToY, ptX0Y, ptOnYPi1);
 
-            var ptForArc = new Point(coordinateSystemCenter.X - Convert.ToInt32(Y), coordinateSystemCenter.Y - Convert.ToInt32(Y));
-            graphics.DrawArc(penLinkLineToY, ptForArc.X, ptForArc.Y, Convert.ToInt32(Y * 2), Convert.ToInt32(Y * 2), 0, 90);
-
-            var ptOnYPi3 = new Point(coordinateSystemCenter.X + Convert.ToInt32(Y), coordinateSystemCenter.Y);
+            var y = Convert.ToInt32(Y);
+            if (y != 0)
+            {
+                var ptForArc = new Point(coordinateSystemCenter.X - y, coordinateSystemCenter.Y - y);
+                graphics.DrawArc(penLinkLineToY, ptForArc.X, ptForArc.Y, y * 2, y * 2, 0, 90);
+            }
+            var ptOnYPi3 = new Point(coordinateSystemCenter.X + y, coordinateSystemCenter.Y);
             graphics.DrawLine(penLinkLineToY, ptOnYPi3, ptY0Z);
         }
 
@@ -144,19 +137,15 @@ namespace GraphicsModule.Geometry.Objects.Points
 
         #endregion
 
-        public bool IsSelected(Point mscoords, float ptR, Point coordinateSystemCenter, double distance)
+        public override bool IsSelected(Point mscoords, float ptR, Point coordinateSystemCenter, double distance)
         {
             var dst = this.DistanceToPoint(mscoords, coordinateSystemCenter);
             return dst.Any(x => x < distance);
         }
 
-        public double X { get; }
-
-        public double Y { get; }
-
         public double Z { get; }
 
-        public Name Name
+        public new Name Name
         {
             get
             {
