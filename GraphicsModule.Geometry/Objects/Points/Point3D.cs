@@ -7,7 +7,7 @@ using GraphicsModule.Geometry.Interfaces;
 
 namespace GraphicsModule.Geometry.Objects.Points
 {
-    public class Point3D : Point2D
+    public class Point3D : Point2D, IObject3D
     {
         private Name _name;
 

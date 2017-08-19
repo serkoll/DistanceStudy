@@ -6,7 +6,7 @@ using GraphicsModule.Geometry.Objects.Points;
 
 namespace GraphicsModule.Geometry.Objects.Segments
 {
-    public class Segment3D : IObject
+    public class Segment3D : IObject3D
     {
         #region Constructors
 

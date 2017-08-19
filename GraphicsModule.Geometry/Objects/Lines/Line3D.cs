@@ -6,7 +6,7 @@ using GraphicsModule.Geometry.Objects.Points;
 
 namespace GraphicsModule.Geometry.Objects.Lines
 {
-    public class Line3D : IObject
+    public class Line3D : IObject3D
     {
         #region Constructors
 

@@ -61,6 +61,7 @@
     <Compile Include="Interfaces\IDraw.cs" />
     <Compile Include="Interfaces\ILine.cs" />
     <Compile Include="Interfaces\ILineOfPlane.cs" />
+    <Compile Include="Interfaces\IObject3D.cs" />
     <Compile Include="Interfaces\IObjectOfPlane1X0Y.cs" />
     <Compile Include="Interfaces\IObjectOfPlane2X0Z.cs" />
     <Compile Include="Interfaces\IObjectOfPlane3Y0Z.cs" />
