@@ -91,28 +91,6 @@ namespace GraphicsModule.Geometry.Objects.Points
 
         #endregion
 
-        [Obsolete("Нет необходимости в кусочном включении частей линии связи. Использовать общий метод ")]
-        public void DrawLinkLine(Pen penLinkLineX0ZtoX, Pen penLinkLineX0ZtoZ, bool linkPointToX, bool linkPointToZ, bool linkXToBorderPi1, bool linkZToBorderPi3, Point frameCenter, Graphics graphics)
-        {
-            //Отрисовка линий связи Фронтальной проекции
-            if (linkPointToX)//Контроль включения линии связи от проекции точки до оси X
-            {//Вертикальная (от Pi2 к Pi1) - Часть 1: от точки до оси X
-                graphics.DrawLine(penLinkLineX0ZtoX, Convert.ToInt32(frameCenter.X - X), Convert.ToInt32(frameCenter.Y - Z), Convert.ToInt32(frameCenter.X - X), Convert.ToInt32(frameCenter.Y));
-            }
-            if (linkXToBorderPi1)//Контроль включения линии связи от оси X до нижней границы плоскости проекций Pi1
-            {//Вертикальная (от Pi2 к Pi1) - Часть 2: от оси X до границы Pi1
-                graphics.DrawLine(penLinkLineX0ZtoX, Convert.ToInt32(frameCenter.X - X), Convert.ToInt32(frameCenter.Y), Convert.ToInt32(frameCenter.X - X), Convert.ToInt32(frameCenter.Y - Z) + Convert.ToInt32(frameCenter.Y * 2 + 20));
-            }
-            if (linkPointToZ)//Контроль включения линии связи от проекции точки до оси Z
-            {//Горизонтальная (от Pi2 к Pi3) - Часть 3: от точки до оси Z
-                graphics.DrawLine(penLinkLineX0ZtoZ, Convert.ToInt32(frameCenter.X - X), Convert.ToInt32(frameCenter.Y - Z), Convert.ToInt32(frameCenter.X), Convert.ToInt32(frameCenter.Y - Z));
-            }
-            if (linkZToBorderPi3)//Контроль включения линии связи от оси Z правой до границы плоскости проекций Pi3
-            {//Горизонтальная (от Pi2 к Pi3) - Часть 4: от оси Z до границы Pi3
-                graphics.DrawLine(penLinkLineX0ZtoZ, Convert.ToInt32(frameCenter.X), Convert.ToInt32(frameCenter.Y - Z), Convert.ToInt32(frameCenter.X - X) + Convert.ToInt32(frameCenter.X * 2 + 20), Convert.ToInt32(frameCenter.Y - Z));
-            }
-        }
-
         public bool IsSelected(Point mscoords, float ptR, Point coordinateSystemCenter, double distance)
         {
             return this.DistanceToPoint(mscoords, coordinateSystemCenter) < distance;

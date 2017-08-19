@@ -88,48 +88,17 @@ namespace GraphicsModule.Geometry.Objects.Points
             var pt = this.ToGlobalCoordinates(coordinateSystemCenter);
             var ptOnYPi3 = new Point(pt.X, coordinateSystemCenter.Y);
             graphics.DrawLine(penLinkLineToY, pt, ptOnYPi3);
-
-            var ptForArc = new Point(coordinateSystemCenter.X - Convert.ToInt32(Y), coordinateSystemCenter.Y - Convert.ToInt32(Y));
-            graphics.DrawArc(penLinkLineToY, ptForArc.X, ptForArc.Y, Convert.ToInt32(Y * 2), Convert.ToInt32(Y * 2), 0, 90);
-
+            var y = Convert.ToInt32(Y);
+            if (y != 0)
+            {
+                var ptForArc = new Point(coordinateSystemCenter.X - y, coordinateSystemCenter.Y - y);
+                graphics.DrawArc(penLinkLineToY, ptForArc.X, ptForArc.Y, y * 2, y * 2, 0, 90);
+            }
             var ptOnYPi1 = new Point(coordinateSystemCenter.X, coordinateSystemCenter.Y + Convert.ToInt32(Y));
             graphics.DrawLine(penLinkLineToY, ptOnYPi1, new Point(0, ptOnYPi1.Y));
         }
 
         #endregion
-
-        [Obsolete("Нет необходимости в кусочном включении частей линии связи. Использовать общий метод ")]
-        public void DrawLinkLine(Pen penLinkLineY0ZtoZ, Pen penLinkLineY0ZtoY, bool linkPointToY, bool linkPointToZ, bool linkYToBorderPi1, bool linkZToBorderPi2, bool linkCurveY3ToY1, Point frameCenter, Graphics graphics)
-        {
-            //Отрисовка линий связи Профильной проекции
-            //Контроль нулевого значения координаты Y Горизонтальной проекции точки
-            //Проекция точки инцидентна оси X, следовательно отрисовка линий связи не требуется (обрабатывается ошибка существования нулевой ширины и высоты прямоугольника, в который вписывается дуга окружности)v
-            const double tolerance = 0.0001;
-            if (Math.Abs(Y) < tolerance) { return; }
-            //В отличие от отключенных условий заменены координаты центра X на Y и наоборот
-            if (linkPointToZ) //Контроль включения линии связи от проекции точки до оси Z
-            {//Горизонтальная (от Pi3 к Pi2) - часть 1: отрезок от заданной точки до оси Z на Pi2
-                graphics.DrawLine(penLinkLineY0ZtoZ, Convert.ToInt32(frameCenter.X + Y), Convert.ToInt32(frameCenter.Y - Z), Convert.ToInt32(frameCenter.X), Convert.ToInt32(frameCenter.Y - Z));
-            }
-            if (linkPointToY)//Контроль включения линии связи от проекции точки до оси Y
-            {
-                graphics.DrawLine(penLinkLineY0ZtoY, Convert.ToInt32(frameCenter.X + Y), Convert.ToInt32(frameCenter.Y - Z), Convert.ToInt32(frameCenter.X + Y), Convert.ToInt32(frameCenter.Y));
-                //Вертикальная (от Pi3 к Pi2) - часть 2: отрезок от заданной точки до оси Y на Pi3
-            }
-            if (linkCurveY3ToY1)//Контроль включения линии связи (дуги) от проекции горизонтальной оси Y плоскости Pi3 до вертикальной оси Y плоскости Pi1 
-            {    //Часть 3: дуга (от Pi3 к Pi1)  от точки пересечения с горизонтальной осью Y до вертикальной оси Y
-                graphics.DrawArc(penLinkLineY0ZtoY, Convert.ToInt32(frameCenter.X) - Convert.ToInt32(Y), Convert.ToInt32(frameCenter.Y) - Convert.ToInt32(Y), Convert.ToInt32(2 * Y), Convert.ToInt32(2 * Y), 0, 90);
-            }
-            //Дополнительно от осей до границ области отрисовки
-            if (linkYToBorderPi1) //Контроль включения линии связи от оси Y до границы плоскости проекций Pi1
-            { //Горизонтальная (от Pi3 к Pi2) - часть 4: отрезок от вертикальной оси Y на Pi1 до границы области рисования
-                graphics.DrawLine(penLinkLineY0ZtoY, Convert.ToInt32(frameCenter.X), Convert.ToInt32(frameCenter.Y + Y), 0, Convert.ToInt32(frameCenter.Y + Y));
-            }
-            if (linkZToBorderPi2)//Контроль включения линии связи от оси Z до границы плоскости проекций Pi2
-            {//Горизонтальная (от Pi3 к Pi2) - часть 4: отрезок от заданной точки до оси Z на Pi2
-                graphics.DrawLine(penLinkLineY0ZtoZ, Convert.ToInt32(frameCenter.X), Convert.ToInt32(frameCenter.Y - Z), 0, Convert.ToInt32(frameCenter.Y - Z));
-            }
-        }
 
         public bool IsSelected(Point mscoords, float ptR, Point coordinateSystemCenter, double distance)
         {
