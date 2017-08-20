@@ -137,7 +137,7 @@ namespace GraphicsModule.Geometry.Objects.Points
 
         #endregion
 
-        public override bool IsSelected(Point mscoords, float ptR, Point coordinateSystemCenter, double distance)
+        public override bool IsSelected(Point mscoords, Point coordinateSystemCenter, double distance)
         {
             var dst = this.DistanceToPoint(mscoords, coordinateSystemCenter);
             return dst.Any(x => x < distance);

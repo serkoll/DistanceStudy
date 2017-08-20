@@ -89,11 +89,11 @@ namespace GraphicsModule.Geometry.Objects.Segments
 
         }
 
-        public bool IsSelected(Point mscoords, float ptR, Point coordinateSystemCenter, double distance)
+        public bool IsSelected(Point mscoords, Point coordinateSystemCenter, double distance)
         {
-            return SegmentOfPlane1X0Y.IsSelected(mscoords, ptR, coordinateSystemCenter, distance) ||
-                   SegmentOfPlane2X0Z.IsSelected(mscoords, ptR, coordinateSystemCenter, distance) ||
-                   SegmentOfPlane3Y0Z.IsSelected(mscoords, ptR, coordinateSystemCenter, distance);
+            return SegmentOfPlane1X0Y.IsSelected(mscoords, coordinateSystemCenter, distance) ||
+                   SegmentOfPlane2X0Z.IsSelected(mscoords, coordinateSystemCenter, distance) ||
+                   SegmentOfPlane3Y0Z.IsSelected(mscoords, coordinateSystemCenter, distance);
         }
         public Point3D Point0 { get; private set; }
 

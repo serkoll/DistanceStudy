@@ -57,7 +57,7 @@ namespace GraphicsModule.Geometry.Objects.Lines
             
         }
 
-        public bool IsSelected(Point mscoords, float ptR, Point coordinateSystemCenter, double distance)
+        public bool IsSelected(Point mscoords, Point coordinateSystemCenter, double distance)
         {
             var ln = this.ToGlobalCoordinates(coordinateSystemCenter);
             return ln.IsIncidentalToPoint(mscoords, 35 * distance);

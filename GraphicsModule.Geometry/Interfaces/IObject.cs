@@ -6,6 +6,6 @@ namespace GraphicsModule.Geometry.Interfaces
     {
         Name Name { get; set; }
 
-        bool IsSelected(Point mousecoords, float ptR, Point coordinateSystemCenter, double distance);
+        bool IsSelected(Point mousecoords, Point coordinateSystemCenter, double distance);
     }
 }

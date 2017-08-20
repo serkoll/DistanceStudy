@@ -5,8 +5,6 @@ using GraphicsModule.Geometry.Objects.Points;
 
 namespace GraphicsModule.Geometry.Objects.Segments
 {
-    /// <summary>Класс для задания и расчета параметров 2D прямой</summary>
-    /// <remarks>Copyright © Polozkov V. Yury, 2015</remarks>
     public class Segment2D : IObject
     {
         private Name _name;
@@ -25,7 +23,7 @@ namespace GraphicsModule.Geometry.Objects.Segments
             Point1.Draw(blueprint);
             blueprint.Graphics.DrawLine(blueprint.Settings.Drawing.PenLine2D, Point0.ToPointF(), Point1.ToPointF());
         }
-        public bool IsSelected(Point mscoords, float ptR, Point coordinateSystemCenter, double distance)
+        public bool IsSelected(Point mscoords, Point coordinateSystemCenter, double distance)
         {
             return this.IsIncidentalToPoint(mscoords, 35 * distance);
         }

@@ -54,7 +54,7 @@ namespace GraphicsModule.Geometry.Objects.Lines
             blueprint.Graphics.DrawLine(blueprint.Settings.Drawing.PenLine2D, EndingPoints.Point0.ToPoint(), EndingPoints.Point1.ToPoint());
         }
 
-        public bool IsSelected(Point mscoords, float ptR, Point coordinateSystemCenter, double distance)
+        public bool IsSelected(Point mscoords, Point coordinateSystemCenter, double distance)
         {
             return this.IsIncidentalToPoint(mscoords, 35 * distance);
         }

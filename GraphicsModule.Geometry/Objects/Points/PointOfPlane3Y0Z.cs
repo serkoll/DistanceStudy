@@ -102,7 +102,7 @@ namespace GraphicsModule.Geometry.Objects.Points
 
         #endregion
 
-        public bool IsSelected(Point mscoords, float ptR, Point coordinateSystemCenter, double distance)
+        public bool IsSelected(Point mscoords, Point coordinateSystemCenter, double distance)
         {
             return this.DistanceToPoint(mscoords, coordinateSystemCenter) < distance;
         }

@@ -31,7 +31,7 @@ namespace GraphicsModule.Geometry.Objects.Points
             g.DrawString(Name.Value, settings.TextFont, settings.TextBrush, (float)X + Name.Dx, (float)Y + Name.Dy);
         }
 
-        public virtual bool IsSelected(Point mscoords, float ptR, Point coordinateSystemCenter, double distance)
+        public virtual bool IsSelected(Point mscoords, Point coordinateSystemCenter, double distance)
         {
             return this.DistanceToPoint(mscoords) < distance;
         }

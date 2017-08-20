@@ -42,7 +42,7 @@ namespace GraphicsModule.Geometry.Objects.Segments
             Point1.Draw(blueprint);
         }
 
-        public bool IsSelected(Point mscoords, float ptR, Point coordinateSystemCenter, double distance)
+        public bool IsSelected(Point mscoords, Point coordinateSystemCenter, double distance)
         {
             var sg = this.ToGlobalCoordinates(coordinateSystemCenter);
             return sg.IsIncidentalToPoint(mscoords, 35 * distance);

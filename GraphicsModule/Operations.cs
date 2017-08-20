@@ -14,7 +14,7 @@ namespace GraphicsModule
         {
             foreach (var obj in strg.Objects)
             {
-                if (obj.IsSelected(mousecoords, blueprint.Settings.DrawingSelected.RadiusPoints, blueprint.CoordinateSystemCenterPoint, 5))
+                if (obj.IsSelected(mousecoords, blueprint.CoordinateSystemCenterPoint, 5))
                 {
                     strg.SelectedObjects.Add(obj);
                     blueprint.Update(strg);
@@ -35,7 +35,7 @@ namespace GraphicsModule
             {
                 var type = obj.GetType().GetInterfaces();
                 if(type.Length < 2) continue;
-                if (obj.IsSelected(mousecoords, blueprint.Settings.DrawingSelected.RadiusPoints, blueprint.CoordinateSystemCenterPoint, 5) && type[1] == typeof(IPointOfPlane))
+                if (obj.IsSelected(mousecoords, blueprint.CoordinateSystemCenterPoint, 5) && type[1] == typeof(IPointOfPlane))
                 {
                     strg.SelectedObjects.Add(obj);
                     blueprint.Update(strg);
@@ -54,7 +54,7 @@ namespace GraphicsModule
             foreach (IObject obj in strg.Objects)
             {
                 var type = obj.GetType().GetInterfaces();
-                if (obj.IsSelected(mousecoords, blueprint.Settings.DrawingSelected.RadiusPoints, blueprint.CoordinateSystemCenterPoint, 5) && type[1].Name == "ILineOfPlane")
+                if (obj.IsSelected(mousecoords, blueprint.CoordinateSystemCenterPoint, 5) && type[1].Name == "ILineOfPlane")
                 {
                     strg.SelectedObjects.Add(obj);
                     blueprint.Update(strg);
@@ -70,7 +70,7 @@ namespace GraphicsModule
             foreach (IObject obj in strg.Objects)
             {
                 var type = obj.GetType().GetInterfaces();
-                if (obj.IsSelected(mousecoords, blueprint.Settings.DrawingSelected.RadiusPoints, blueprint.CoordinateSystemCenterPoint, 5) && type[1].Name == "ISegmentOfPlane")
+                if (obj.IsSelected(mousecoords, blueprint.CoordinateSystemCenterPoint, 5) && type[1].Name == "ISegmentOfPlane")
                 {
                     strg.SelectedObjects.Add(obj);
                     blueprint.Update(strg);
@@ -103,7 +103,7 @@ namespace GraphicsModule
         {
             foreach (IObject obj in strg.Objects)
             {
-                if (obj.IsSelected(mousecoords, blueprint.Settings.DrawingSelected.RadiusPoints, blueprint.CoordinateSystemCenterPoint, 5))
+                if (obj.IsSelected(mousecoords, blueprint.CoordinateSystemCenterPoint, 5))
                 {
                     strg.Objects.Remove(obj);
                     blueprint.Update(strg);
@@ -118,7 +118,7 @@ namespace GraphicsModule
         {
             foreach (IObject obj in strg.Objects)
             {
-                if (obj.IsSelected(mousecoords, blueprint.Settings.DrawingSelected.RadiusPoints, blueprint.CoordinateSystemCenterPoint, 5))
+                if (obj.IsSelected(mousecoords, blueprint.CoordinateSystemCenterPoint, 5))
                 {
                     strg.CopiedObjects.Add(obj);
                     blueprint.Update(strg);

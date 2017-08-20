@@ -52,7 +52,7 @@ namespace GraphicsModule.Geometry.Objects.Lines
             Point1.DrawPointsOnly(blueprint);
         }
 
-        public bool IsSelected(Point mscoords, float ptR, Point coordinateSystemCenter, double distance)
+        public bool IsSelected(Point mscoords, Point coordinateSystemCenter, double distance)
         {
             var ln = this.ToGlobalCoordinates(coordinateSystemCenter);
             return ln.IsIncidentalToPoint(mscoords, 35 * distance);

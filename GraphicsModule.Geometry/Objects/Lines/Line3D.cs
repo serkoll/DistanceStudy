@@ -84,11 +84,11 @@ namespace GraphicsModule.Geometry.Objects.Lines
 
         }
 
-        public bool IsSelected(Point mscoords, float ptR, Point coordinateSystemCenter, double distance)
+        public bool IsSelected(Point mscoords, Point coordinateSystemCenter, double distance)
         {
-            return LineOfPlane1X0Y.IsSelected(mscoords, ptR, coordinateSystemCenter, distance) ||
-                   LineOfPlane2X0Z.IsSelected(mscoords, ptR, coordinateSystemCenter, distance) ||
-                   LineOfPlane3Y0Z.IsSelected(mscoords, ptR, coordinateSystemCenter, distance);
+            return LineOfPlane1X0Y.IsSelected(mscoords, coordinateSystemCenter, distance) ||
+                   LineOfPlane2X0Z.IsSelected(mscoords, coordinateSystemCenter, distance) ||
+                   LineOfPlane3Y0Z.IsSelected(mscoords, coordinateSystemCenter, distance);
         }
 
         public void SpecifyBoundaryPoints(Point frameCenter, Rectangle rc1, Rectangle rc2, Rectangle rc3)
