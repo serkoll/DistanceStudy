@@ -19,7 +19,7 @@ namespace GraphicsModule.Rules.Create.Points
                 return;
 
             blueprint.Storage.AddToCollection(source);
-            blueprint.Storage.DrawLastAddedToObjects(blueprint);
+            blueprint.Storage.DrawLastAddedToObjects();
         }
 
         public PointOfPlane1X0Y Create(Point pt, Blueprint blueprint)

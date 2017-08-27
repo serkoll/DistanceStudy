@@ -44,7 +44,7 @@ namespace GraphicsModule.Rules.Create.Lines
                 {
                     ptOfPlane.Name = GraphicsControl.NamesGenerator.Generate();
                     tempObjects.Add(ptOfPlane);
-                    storage.DrawLastAddedToTempObjects(blueprint);
+                    storage.DrawLastAddedToTempObjects();
                     return null;
                 }
                 if (IsInOnePlane(TempLineOfPlane, ptOfPlane))
@@ -53,7 +53,7 @@ namespace GraphicsModule.Rules.Create.Lines
                     return null;
 
                 tempObjects.Add(ptOfPlane);
-                storage.DrawLastAddedToTempObjects(blueprint);
+                storage.DrawLastAddedToTempObjects();
                 return null;
             }
 

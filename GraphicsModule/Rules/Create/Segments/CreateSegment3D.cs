@@ -30,14 +30,14 @@ namespace GraphicsModule.Rules.Create.Segments
                 {
                     ptOfPlane.Name = GraphicsControl.NamesGenerator.Generate();
                     tempObjects.Add(ptOfPlane);
-                    blueprint.Storage.DrawLastAddedToTempObjects(blueprint);
+                    blueprint.Storage.DrawLastAddedToTempObjects();
                 }
                 else
                 {
                     if (IsInOnePlane(_tempLineOfPlane, ptOfPlane)) return;
                     if (!IsOnLinkLine(_tempLineOfPlane, ptOfPlane)) return;
                     tempObjects.Add(ptOfPlane);
-                    blueprint.Storage.DrawLastAddedToTempObjects(blueprint);
+                    blueprint.Storage.DrawLastAddedToTempObjects();
                 }
             }
             else
@@ -63,7 +63,7 @@ namespace GraphicsModule.Rules.Create.Segments
                     _tempLineOfPlane = null;
                     blueprint.Storage.Objects.Add(_source);
                     blueprint.Update();
-                    blueprint.Storage.DrawLastAddedToObjects(blueprint);
+                    blueprint.Storage.DrawLastAddedToObjects();
                 }
             }
         }

@@ -38,7 +38,7 @@ namespace GraphicsModule.Rules.Create.Segments
             {
                 ptOfPlane.Name = GraphicsControl.NamesGenerator.Generate();
                 tempObjects.Add(ptOfPlane);
-                blueprint.Storage.DrawLastAddedToTempObjects(blueprint);
+                blueprint.Storage.DrawLastAddedToTempObjects();
                 return null;
             }
 

@@ -31,7 +31,7 @@ namespace GraphicsModule.Rules.Create.Lines
             {
                 ptOfPlane.Name = GraphicsControl.NamesGenerator.Generate();
                 tempObjects.Add(ptOfPlane);
-                blueprint.Storage.DrawLastAddedToTempObjects(blueprint);
+                blueprint.Storage.DrawLastAddedToTempObjects();
             }
             else
             {

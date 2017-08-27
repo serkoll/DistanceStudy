@@ -15,7 +15,7 @@ namespace GraphicsModule.Rules.Create.Points
         public void AddToStorageAndDraw(Point pt, Blueprint blueprint)
         {
             blueprint.Storage.AddToCollection(Create(pt));
-            blueprint.Storage.DrawLastAddedToObjects(blueprint);
+            blueprint.Storage.DrawLastAddedToObjects();
         }
 
         public Point2D Create(Point pt)

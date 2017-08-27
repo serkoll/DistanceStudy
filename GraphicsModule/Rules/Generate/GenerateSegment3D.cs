@@ -33,7 +33,7 @@ namespace GraphicsModule.Rules.Generate
                     blueprint.Update();
                     blueprint.Storage.AddToCollection(_source);
                     _source = null;
-                    blueprint.Storage.DrawLastAddedToObjects(blueprint);
+                    blueprint.Storage.DrawLastAddedToObjects();
                 }
                 else
                 {

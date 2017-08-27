@@ -34,7 +34,7 @@ namespace GraphicsModule.Geometry
 
             PictureBox = pictureBox;
             Settings = settings;
-            Storage = new Storage();
+            Storage = new Storage(this);
             CalculateBackground();
             InitializeGraphics();
             Refresh();
@@ -116,7 +116,7 @@ namespace GraphicsModule.Geometry
             Graphics?.Dispose();
 
             InitializeGraphics();
-            Storage.DrawObjects(this);
+            Storage.DrawObjects();
             InitializePlanes(Background.Axis.CoordinateSystemCenter);
             Refresh();
         }

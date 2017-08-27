@@ -20,7 +20,7 @@ namespace GraphicsModule.Rules.Create.Points
                 return;
             }
             blueprint.Storage.AddToCollection(source);
-            blueprint.Storage.DrawLastAddedToObjects(blueprint);
+            blueprint.Storage.DrawLastAddedToObjects();
         }
         public PointOfPlane3Y0Z Create(Point pt, Blueprint blueprint)
         {
