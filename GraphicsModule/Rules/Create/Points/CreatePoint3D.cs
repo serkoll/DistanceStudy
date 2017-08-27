@@ -19,17 +19,22 @@ namespace GraphicsModule.Rules.Create.Points
     {
         private Point3DCreateType BuildType = Point3DCreateType.By2PointsOfPlane;
 
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Blueprint blueprint, DrawSettings settings, Storage storage)
+        public void AddToStorageAndDraw(Point pt, Blueprint blueprint)
         {
-            var source = Create(pt, frameCenter, blueprint, settings, storage);
+            var source = Create(pt, blueprint);
             if (source == null)
-            {
                 return;
-            }
-            storage.AddToCollection(source);
-            blueprint.Update(storage);
+
+            blueprint.Storage.AddToCollection(source);
+            blueprint.Update();
         }
-        public Point3D Create(Point pt, Point frameCenter, Blueprint blueprint, DrawSettings settings, Storage storage)
+
+        public Point3D Create(Point pt, Blueprint blueprint)
+        {
+            return Create(pt, blueprint.CoordinateSystemCenterPoint, blueprint);
+        }
+
+        public Point3D Create(Point pt, Point frameCenter, Blueprint blueprint)
         {
             var ptOfPlane = pt.ToPointOfPlane(frameCenter);
             if (ptOfPlane == null)
@@ -37,26 +42,27 @@ namespace GraphicsModule.Rules.Create.Points
                 return null;
             }
 
-            if (storage.TempObjects.Count == 0)
+            var tempObjects = blueprint.Storage.TempObjects;
+            if (tempObjects.Count == 0)
             {
                 ptOfPlane.Name = GraphicsControl.NamesGenerator.Generate();
-                storage.TempObjects.Add(ptOfPlane);
+                tempObjects.Add(ptOfPlane);
                 ptOfPlane.Draw(blueprint);
                 return null;
             }
 
-            if (ReferenceEquals(storage.TempObjects.First().GetType(), ptOfPlane.GetType()))
+            if (ReferenceEquals(tempObjects.First().GetType(), ptOfPlane.GetType()))
             {
                 return null;
             }
 
-            storage.TempObjects.Add(ptOfPlane);
+            tempObjects.Add(ptOfPlane);
 
-            if (BuildType == Point3DCreateType.By3PointsOfPlane && storage.TempObjects.Count != 3)
+            if (BuildType == Point3DCreateType.By3PointsOfPlane && tempObjects.Count != 3)
             {
-                if (ObjectsCreator.Point3D().Create(storage.TempObjects.Cast<IPointOfPlane>().ToList(), (byte)BuildType) == null)
+                if (ObjectsCreator.Point3D().Create(tempObjects.Cast<IPointOfPlane>().ToList(), (byte)BuildType) == null)
                 {
-                    storage.TempObjects.RemoveAt(storage.TempObjects.Count - 1);
+                    tempObjects.RemoveAt(tempObjects.Count - 1);
                 }
                 else
                 {
@@ -65,16 +71,16 @@ namespace GraphicsModule.Rules.Create.Points
                 return null;
             }
 
-            var source = ObjectsCreator.Point3D().Create(storage.TempObjects.Cast<IPointOfPlane>().ToList(), (byte)BuildType);
+            var source = ObjectsCreator.Point3D().Create(tempObjects.Cast<IPointOfPlane>().ToList(), (byte)BuildType);
             if (source == null)
             {
-                storage.TempObjects.RemoveAt(storage.TempObjects.Count - 1);
-                blueprint.Update(storage);
+                tempObjects.RemoveAt(tempObjects.Count - 1);
+                blueprint.Update();
                 return null;
             }
 
-            source.Name = storage.TempObjects.First().Name;
-            storage.TempObjects.Clear();
+            source.Name = tempObjects.First().Name;
+            tempObjects.Clear();
             return source;
         }
     }

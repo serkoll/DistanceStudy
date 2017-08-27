@@ -10,14 +10,14 @@ namespace GraphicsModule
     /// </summary>
     class SelectObject : IOperation
     {
-        public void Execute(Point mousecoords, Storage strg, Blueprint blueprint)
+        public void Execute(Point mousecoords, Blueprint blueprint)
         {
-            foreach (var obj in strg.Objects)
+            foreach (var obj in blueprint.Storage.Objects)
             {
                 if (obj.IsSelected(mousecoords, blueprint.CoordinateSystemCenterPoint, 5))
                 {
-                    strg.SelectedObjects.Add(obj);
-                    blueprint.Update(strg);
+                    blueprint.Storage.SelectedObjects.Add(obj);
+                    blueprint.Update();
                     return;
                 }
             }
@@ -29,16 +29,16 @@ namespace GraphicsModule
     class SelectPointOfPlane : IOperation
     {
         //TODO: исправить вызов
-        public void Execute(Point mousecoords, Storage strg, Blueprint blueprint)
+        public void Execute(Point mousecoords, Blueprint blueprint)
         {
-            foreach (var obj in strg.Objects)
+            foreach (var obj in blueprint.Storage.Objects)
             {
                 var type = obj.GetType().GetInterfaces();
                 if(type.Length < 2) continue;
                 if (obj.IsSelected(mousecoords, blueprint.CoordinateSystemCenterPoint, 5) && type[1] == typeof(IPointOfPlane))
                 {
-                    strg.SelectedObjects.Add(obj);
-                    blueprint.Update(strg);
+                    blueprint.Storage.SelectedObjects.Add(obj);
+                    blueprint.Update();
                     return;
                 }
             }
@@ -49,15 +49,15 @@ namespace GraphicsModule
     /// </summary>
     class SelectLineOfPlane : IOperation
     {
-        public void Execute(Point mousecoords, Storage strg, Blueprint blueprint)
+        public void Execute(Point mousecoords, Blueprint blueprint)
         {
-            foreach (IObject obj in strg.Objects)
+            foreach (IObject obj in blueprint.Storage.Objects)
             {
                 var type = obj.GetType().GetInterfaces();
                 if (obj.IsSelected(mousecoords, blueprint.CoordinateSystemCenterPoint, 5) && type[1].Name == "ILineOfPlane")
                 {
-                    strg.SelectedObjects.Add(obj);
-                    blueprint.Update(strg);
+                    blueprint.Storage.SelectedObjects.Add(obj);
+                    blueprint.Update();
                     return;
                 }
             }
@@ -65,15 +65,15 @@ namespace GraphicsModule
     }
     class SelectSegmentOfPlane : IOperation
     {
-        public void Execute(Point mousecoords, Storage strg, Blueprint blueprint)
+        public void Execute(Point mousecoords, Blueprint blueprint)
         {
-            foreach (IObject obj in strg.Objects)
+            foreach (var obj in blueprint.Storage.Objects)
             {
                 var type = obj.GetType().GetInterfaces();
                 if (obj.IsSelected(mousecoords, blueprint.CoordinateSystemCenterPoint, 5) && type[1].Name == "ISegmentOfPlane")
                 {
-                    strg.SelectedObjects.Add(obj);
-                    blueprint.Update(strg);
+                    blueprint.Storage.SelectedObjects.Add(obj);
+                    blueprint.Update();
                     return;
                 }
             }
@@ -84,14 +84,14 @@ namespace GraphicsModule
     /// </summary>
     class DeleteSelected
     {
-        public void Execute(Storage strg, Blueprint blueprint)
+        public void Execute(Blueprint blueprint)
         {
-            foreach (IObject obj in strg.SelectedObjects)
+            foreach (IObject obj in blueprint.Storage.SelectedObjects)
             {
-                strg.Objects.Remove(obj);
+                blueprint.Storage.Objects.Remove(obj);
             }
-            strg.SelectedObjects.Clear();
-            blueprint.Update(strg);
+            blueprint.Storage.SelectedObjects.Clear();
+            blueprint.Update();
         }
     }
     /// <summary>
@@ -99,14 +99,14 @@ namespace GraphicsModule
     /// </summary>
     class Erase : IOperation
     {
-        public void Execute(Point mousecoords, Storage strg, Blueprint blueprint)
+        public void Execute(Point mousecoords, Blueprint blueprint)
         {
-            foreach (IObject obj in strg.Objects)
+            foreach (IObject obj in blueprint.Storage.Objects)
             {
                 if (obj.IsSelected(mousecoords, blueprint.CoordinateSystemCenterPoint, 5))
                 {
-                    strg.Objects.Remove(obj);
-                    blueprint.Update(strg);
+                    blueprint.Storage.Objects.Remove(obj);
+                    blueprint.Update();
                     return;
                 }
             }
@@ -114,14 +114,14 @@ namespace GraphicsModule
     }
     class Copy : IOperation
     {
-        public void Execute(Point mousecoords, Storage strg, Blueprint blueprint)
+        public void Execute(Point mousecoords, Blueprint blueprint)
         {
-            foreach (IObject obj in strg.Objects)
+            foreach (IObject obj in blueprint.Storage.Objects)
             {
                 if (obj.IsSelected(mousecoords, blueprint.CoordinateSystemCenterPoint, 5))
                 {
-                    strg.CopiedObjects.Add(obj);
-                    blueprint.Update(strg);
+                    blueprint.Storage.CopiedObjects.Add(obj);
+                    blueprint.Update();
                     return;
                 }
             }

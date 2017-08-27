@@ -20,23 +20,24 @@ namespace GraphicsModule.Rules.Create.Planes
         private PlaneCreateType _creationType;
         private Collection<IObject> _planeObjects = new Collection<IObject>();
         private CreateLine3D _createLine = new CreateLine3D();
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Blueprint blueprint, DrawSettings settings, Storage storage)
+
+        public void AddToStorageAndDraw(Point pt, Blueprint blueprint)
         {
             switch (_creationType)
             {
                 case PlaneCreateType.ThreePoints:
                     {
-                        CreateByThreePoint(pt, frameCenter, blueprint, settings, storage);
+                        CreateByThreePoint(pt, blueprint.CoordinateSystemCenterPoint, blueprint, blueprint.Settings.Drawing, blueprint.Storage);
                         break;
                     }
                 case PlaneCreateType.LineAndPoint:
                     {
-                        CreateByLineAndPoint(pt, frameCenter, blueprint, settings, storage);
+                        CreateByLineAndPoint(pt, blueprint.CoordinateSystemCenterPoint, blueprint, blueprint.Settings.Drawing, blueprint.Storage);
                         break;
                     }
                 case PlaneCreateType.ParallelLines:
                     {
-                        CreateByParallelLines(pt, frameCenter, blueprint, settings, storage);
+                        CreateByParallelLines(pt, blueprint, blueprint.Storage);
                         break;
                     }
                 case PlaneCreateType.CrossedLines:
@@ -61,7 +62,7 @@ namespace GraphicsModule.Rules.Create.Planes
                     }
             }
         }
-        private void PlaneObjectsDraw(DrawSettings settings, Point frameCenter, Blueprint blueprint)
+        private void PlaneObjectsDraw(Blueprint blueprint)
         {
             if (_planeObjects.Count == 0) return;
             foreach (var o in _planeObjects)
@@ -71,40 +72,41 @@ namespace GraphicsModule.Rules.Create.Planes
         }
         private void CreateByThreePoint(Point pt, Point frameCenter, Blueprint blueprint, DrawSettings settings, Storage strg)
         {
-            var tmpobj = new CreatePoint3D().Create(pt, frameCenter, blueprint, settings, strg);
+            var tmpobj = new CreatePoint3D().Create(pt, blueprint);
             if (tmpobj == null)
             {
                 if(_planeObjects.Count != 0)
-                    this.PlaneObjectsDraw(settings, frameCenter, blueprint);
+                    this.PlaneObjectsDraw(blueprint);
                 return;
             }
             _planeObjects.Add(tmpobj);
-            blueprint.Update(strg);
-            PlaneObjectsDraw(settings, frameCenter, blueprint);
+            blueprint.Update();
+            PlaneObjectsDraw(blueprint);
             if (_planeObjects.Count != 3) return;
             var source = CreateByThreePoint(_planeObjects);
             var nameparams = _planeObjects[0].Name;
             source.Name = new Name(@"p", nameparams.Dx, nameparams.Dy);
             _planeObjects.Clear();
             strg.AddToCollection(source);
-            blueprint.Update(strg);
+            blueprint.Update();
         }
+
         private void CreateByLineAndPoint(Point pt, Point frameCenter, Blueprint blueprint, DrawSettings settings, Storage strg)
         {
             if (_planeObjects.Count == 0)
             {
-                var tmpobj = _createLine.Create(pt, frameCenter, blueprint, settings, strg);
+                var tmpobj = _createLine.Create(pt, blueprint);
                 if (tmpobj == null) return;
-                blueprint.Update(strg);
+                blueprint.Update();
                 _planeObjects.Add(tmpobj);
-                PlaneObjectsDraw(settings, frameCenter, blueprint);
+                PlaneObjectsDraw(blueprint);
             }
             else
             {
-                var tmpobj = new CreatePoint3D().Create(pt, frameCenter, blueprint, settings, strg);
+                var tmpobj = new CreatePoint3D().Create(pt, blueprint);
                 if (tmpobj == null)
                 {
-                    PlaneObjectsDraw(settings, frameCenter, blueprint);
+                    PlaneObjectsDraw(blueprint);
                     return;
                 }
                 var source = CreateByLineAndPoint((Line3D)_planeObjects[0], tmpobj);
@@ -112,28 +114,28 @@ namespace GraphicsModule.Rules.Create.Planes
                 source.Name = new Name(@"p", nameparams.Dx, nameparams.Dy);
                 _planeObjects.Clear();
                 strg.AddToCollection(source);
-                blueprint.Update(strg);
+                blueprint.Update();
             }
         }
-        private void CreateByParallelLines(Point pt, Point frameCenter, Blueprint blueprint, DrawSettings settings, Storage strg)
+        private void CreateByParallelLines(Point pt, Blueprint blueprint, Storage strg)
         {
             if (_planeObjects.Count < 2)
             {
-                var tmpobj = _createLine.Create(pt, frameCenter, blueprint, settings, strg);
+                var tmpobj = _createLine.Create(pt, blueprint);
                 if (_planeObjects.Count != 0)
                 {
                     var line3D = (Line3D)_planeObjects.First();
                     if(_createLine.TempLineOfPlane != null && line3D.IsParallel(_createLine.TempLineOfPlane))
                     {
                         _createLine.TempLineOfPlane = null;
-                        blueprint.Update(strg);
-                        PlaneObjectsDraw(settings, frameCenter, blueprint);
+                        blueprint.Update();
+                        PlaneObjectsDraw(blueprint);
                     }
                 }
                 if (tmpobj != null)
                 {
                     _planeObjects.Add(tmpobj);
-                    PlaneObjectsDraw(settings, frameCenter, blueprint);
+                    PlaneObjectsDraw(blueprint);
                 }
             }
             if (_planeObjects.Count != 2) return;
@@ -144,12 +146,12 @@ namespace GraphicsModule.Rules.Create.Planes
                 source.Name = new Name(@"p", nameparams.Dx, nameparams.Dy);
                 _planeObjects.Clear();
                 strg.AddToCollection(source);
-                blueprint.Update(strg);
+                blueprint.Update();
             }
             else
             {
                 _planeObjects.RemoveAt(1);
-                blueprint.Update(strg);
+                blueprint.Update();
                 foreach (var o in _planeObjects)
                 {
                     var ln = (Line3D)o;

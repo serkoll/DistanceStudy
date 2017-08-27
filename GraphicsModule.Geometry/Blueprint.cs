@@ -25,13 +25,50 @@ namespace GraphicsModule.Geometry
                 var msg = "PictureBox не инициализирован";
                 throw new ArgumentNullException(nameof(pictureBox), msg);
             }
+
             if (settings == null)
             {
                 var msg = "Настройки не инициализированы";
                 throw new ArgumentNullException(nameof(settings), msg);
             }
+
             PictureBox = pictureBox;
             Settings = settings;
+            Storage = new Storage();
+            CalculateBackground();
+            InitializeGraphics();
+            Refresh();
+        }
+
+        /// <summary>
+        /// Инициализация чертежа
+        /// </summary>
+        /// <param name="settings">Настройки графического редактора</param>
+        /// <param name="storage"></param>
+        /// <param name="pictureBox">Целевой PictureBox</param>
+        public Blueprint(Settings settings, Storage storage, PictureBox pictureBox)
+        {
+            if (pictureBox == null)
+            {
+                var msg = "PictureBox не инициализирован";
+                throw new ArgumentNullException(nameof(pictureBox), msg);
+            }
+
+            if (settings == null)
+            {
+                var msg = "Настройки не инициализированы";
+                throw new ArgumentNullException(nameof(settings), msg);
+            }
+
+            if (storage == null)
+            {
+                var msg = "Ошибка при инициализации хранилища данных";
+                throw new ArgumentNullException(nameof(storage), msg);
+            }
+
+            PictureBox = pictureBox;
+            Settings = settings;
+            Storage = storage;
             CalculateBackground();
             InitializeGraphics();
             Refresh();
@@ -73,14 +110,13 @@ namespace GraphicsModule.Geometry
         /// <summary>
         /// Пересчитывает фон чертежа и отрисовывает на нем графические объекты
         /// </summary>
-        /// <param name="strg"></param>
-        public void Update(Storage strg)
+        public void Update()
         {
             _bitmap?.Dispose();
             Graphics?.Dispose();
 
             InitializeGraphics();
-            strg.DrawObjects(this);
+            Storage.DrawObjects(this);
             InitializePlanes(Background.Axis.CoordinateSystemCenter);
             Refresh();
         }
@@ -138,5 +174,10 @@ namespace GraphicsModule.Geometry
         /// Центр системы координат
         /// </summary>
         public Point CoordinateSystemCenterPoint => _coordinateSystemCenterPoint;
+
+        /// <summary>
+        /// Хранилище объектов чертежа
+        /// </summary>
+        public Storage Storage { get; }
     }
 }

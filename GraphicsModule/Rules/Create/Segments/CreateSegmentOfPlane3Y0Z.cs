@@ -12,37 +12,42 @@ namespace GraphicsModule.Rules.Create.Segments
 {
     public class CreateSegmentOfPlane3Y0Z : ICreate
     {
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Blueprint blueprint, DrawSettings settings, Storage storage)
+        public void AddToStorageAndDraw(Point pt, Blueprint blueprint)
         {
-            var obj = Create(pt, frameCenter, blueprint, settings, storage);
+            var obj = Create(pt, blueprint);
             if (obj == null)
-            {
                 return;
-            }
-            storage.AddToCollection(obj);
-            blueprint.Update(storage);
+
+            blueprint.Storage.AddToCollection(obj);
+            blueprint.Update();
         }
-        public SegmentOfPlane3Y0Z Create(Point pt, Point frameCenter, Blueprint blueprint, DrawSettings setting, Storage strg)
+
+        public SegmentOfPlane3Y0Z Create(Point pt, Blueprint blueprint)
+        {
+            return Create(pt, blueprint.CoordinateSystemCenterPoint, blueprint);
+        }
+
+        private SegmentOfPlane3Y0Z Create(Point pt, Point frameCenter, Blueprint blueprint)
         {
             if (!PointOfPlane3Y0Z.IsCreatable(pt, frameCenter))
-            {
                 return null;
-            }
+
+            var tempObjects = blueprint.Storage.TempObjects;
             var ptOfPlane = new PointOfPlane3Y0Z(pt, frameCenter);
-            if (strg.TempObjects.Count == 0)
+            if (tempObjects.Count == 0)
             {
                 ptOfPlane.Name = GraphicsControl.NamesGenerator.Generate();
-                strg.TempObjects.Add(ptOfPlane);
-                strg.DrawLastAddedToTempObjects(blueprint);
+                tempObjects.Add(ptOfPlane);
+                blueprint.Storage.DrawLastAddedToTempObjects(blueprint);
                 return null;
             }
+
             ptOfPlane.Name = GraphicsControl.NamesGenerator.Generate();
-            if (ptOfPlane.IsCoincides((PointOfPlane3Y0Z)strg.TempObjects.First()))
-            {
+            if (ptOfPlane.IsCoincides((PointOfPlane3Y0Z)tempObjects.First()))
                 return null;
-            }
-            var source = new SegmentOfPlane3Y0Z((PointOfPlane3Y0Z) strg.TempObjects.First(), ptOfPlane) {Name = strg.TempObjects[0].Name};
-            strg.TempObjects.Clear();
+
+            var source = new SegmentOfPlane3Y0Z((PointOfPlane3Y0Z) tempObjects.First(), ptOfPlane) {Name = tempObjects[0].Name};
+            tempObjects.Clear();
             return source;
         }
     }

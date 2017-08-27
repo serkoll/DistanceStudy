@@ -12,20 +12,19 @@ namespace GraphicsModule.Rules.Create.Points
     /// </summary>
     public class CreatePointOfPlane2X0Z : ICreate
     {
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Blueprint blueprint, DrawSettings settings, Storage storage)
+        public void AddToStorageAndDraw(Point pt, Blueprint blueprint)
         {
-            var source = Create(pt, frameCenter, blueprint, settings, storage);
+            var source = Create(pt, blueprint);
             if (source == null)
-            {
                 return;
-            }
-            storage.AddToCollection(source);
-            storage.DrawLastAddedToObjects(blueprint);
+
+            blueprint.Storage.AddToCollection(source);
+            blueprint.Storage.DrawLastAddedToObjects(blueprint);
         }
-        public PointOfPlane2X0Z Create(Point pt, Point frameCenter, Blueprint blueprint, DrawSettings setting, Storage strg)
+        public PointOfPlane2X0Z Create(Point pt, Blueprint blueprint)
         {
-            return PointOfPlane2X0Z.IsCreatable(pt, frameCenter) 
-                ? new PointOfPlane2X0Z(pt, frameCenter) { Name = GraphicsControl.NamesGenerator.Generate() } 
+            return PointOfPlane2X0Z.IsCreatable(pt, blueprint.CoordinateSystemCenterPoint) 
+                ? new PointOfPlane2X0Z(pt, blueprint.CoordinateSystemCenterPoint) { Name = GraphicsControl.NamesGenerator.Generate() } 
                 : null;
         }
     }

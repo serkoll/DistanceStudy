@@ -1,6 +1,5 @@
 ﻿using System.Drawing;
 using System.Linq;
-using GraphicsModule.Configuration;
 using GraphicsModule.Controls;
 using GraphicsModule.Geometry;
 using GraphicsModule.Geometry.Extensions;
@@ -15,43 +14,43 @@ namespace GraphicsModule.Rules.Create.Lines
     /// </summary>
     public class CreateLineOfPlane1X0Y : ICreate
     {
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Blueprint blueprint, DrawSettings settings, Storage storage)
+        public void AddToStorageAndDraw(Point pt, Blueprint blueprint)
         {
-            var obj = Create(pt, frameCenter, blueprint, settings, storage);
+            var obj = Create(pt, blueprint);
             if (obj == null)
-            {
                 return;
-            }
-            storage.AddToCollection(obj);
-            blueprint.Update(storage);
+
+            blueprint.Storage.AddToCollection(obj);
+            blueprint.Update();
         }
-        public LineOfPlane1X0Y Create(Point pt, Point frameCenter, Blueprint blueprint, DrawSettings setting, Storage strg)
+
+        public LineOfPlane1X0Y Create(Point pt, Blueprint blueprint)
+        {
+            return Create(pt, blueprint.CoordinateSystemCenterPoint, blueprint);
+        }
+
+        private LineOfPlane1X0Y Create(Point pt, Point frameCenter, Blueprint blueprint)
         {
             if (!PointOfPlane1X0Y.IsCreatable(pt, frameCenter))
-            {
                 return null;
-            }
 
             var ptOfPlane = new PointOfPlane1X0Y(pt, frameCenter);
-            if (strg.TempObjects.Count == 0)
+            var tempObjects = blueprint.Storage.TempObjects;
+            if (tempObjects.Count == 0)
             {
                 ptOfPlane.Name = GraphicsControl.NamesGenerator.Generate();
-                strg.TempObjects.Add(ptOfPlane);
-                strg.DrawLastAddedToTempObjects(blueprint);
+                tempObjects.Add(ptOfPlane);
+                blueprint.Storage.DrawLastAddedToTempObjects(blueprint);
                 return null;
             }
 
-            if (ptOfPlane.IsCoincides((PointOfPlane1X0Y) strg.TempObjects.First()))
-            {
+            if (ptOfPlane.IsCoincides((PointOfPlane1X0Y) tempObjects.First()))
                 return null;
-            }
 
-            var source = new LineOfPlane1X0Y((PointOfPlane1X0Y) strg.TempObjects.First(), ptOfPlane)
-            {
-                Name = strg.TempObjects.First().Name
-            };
+            ptOfPlane.Name = GraphicsControl.NamesGenerator.Generate();
+            var source = new LineOfPlane1X0Y((PointOfPlane1X0Y) tempObjects.First(), ptOfPlane);
 
-            strg.TempObjects.Clear();
+            tempObjects.Clear();
             return source;
         }
     }

@@ -19,46 +19,51 @@ namespace GraphicsModule.Rules.Create.Segments
     {
         private IObject _tempLineOfPlane;
         private Segment3D _source;
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Blueprint blueprint, DrawSettings settings, Storage storage)
+
+        public void AddToStorageAndDraw(Point pt, Blueprint blueprint)
         {
-            var ptOfPlane = pt.ToPointOfPlane(frameCenter);
-            if (storage.TempObjects.Count == 0)
+            var ptOfPlane = pt.ToPointOfPlane(blueprint.CoordinateSystemCenterPoint);
+            var tempObjects = blueprint.Storage.TempObjects;
+            if (tempObjects.Count == 0)
             {
                 if (_tempLineOfPlane == null)
                 {
                     ptOfPlane.Name = GraphicsControl.NamesGenerator.Generate();
-                    storage.TempObjects.Add(ptOfPlane);
-                    storage.DrawLastAddedToTempObjects(blueprint);
+                    tempObjects.Add(ptOfPlane);
+                    blueprint.Storage.DrawLastAddedToTempObjects(blueprint);
                 }
                 else
                 {
                     if (IsInOnePlane(_tempLineOfPlane, ptOfPlane)) return;
                     if (!IsOnLinkLine(_tempLineOfPlane, ptOfPlane)) return;
-                    storage.TempObjects.Add(ptOfPlane);
-                    storage.DrawLastAddedToTempObjects(blueprint);
+                    tempObjects.Add(ptOfPlane);
+                    blueprint.Storage.DrawLastAddedToTempObjects(blueprint);
                 }
             }
             else
             {
-                if (ReferenceEquals(storage.TempObjects[0].GetType(), ptOfPlane.GetType()) && _tempLineOfPlane == null)
+                if (ReferenceEquals(tempObjects[0].GetType(), ptOfPlane.GetType()) && _tempLineOfPlane == null)
                 {
-                    storage.TempObjects.Add(ptOfPlane);
-                    _tempLineOfPlane = CreateSegmentOfPlane(storage.TempObjects, settings, frameCenter, blueprint);
-                    _tempLineOfPlane.Name = storage.TempObjects[0].Name;
-                    storage.TempObjects.Clear();
-                    blueprint.Update(storage);
+                    tempObjects.Add(ptOfPlane);
+                    _tempLineOfPlane = CreateSegmentOfPlane(tempObjects, blueprint.Settings.Drawing, blueprint.CoordinateSystemCenterPoint, blueprint);
+                    _tempLineOfPlane.Name = tempObjects[0].Name;
+                    tempObjects.Clear();
+                    blueprint.Update();
                     _tempLineOfPlane.Draw(blueprint);
                 }
                 else if (IsOnLinkLine(_tempLineOfPlane, ptOfPlane))
                 {
-                    storage.TempObjects.Add(ptOfPlane);
-                    if (!IsSegment3DCreatable(_tempLineOfPlane, CreateSegmentOfPlane(storage.TempObjects, settings, frameCenter, blueprint), settings, frameCenter, blueprint)) return;
+                    tempObjects.Add(ptOfPlane);
+                    var segment = CreateSegmentOfPlane(tempObjects, blueprint.Settings.Drawing, blueprint.CoordinateSystemCenterPoint, blueprint);
+                    if (!IsSegment3DCreatable(_tempLineOfPlane, segment, blueprint.Settings.Drawing, blueprint.CoordinateSystemCenterPoint, blueprint))
+                        return;
+
                     _source.Name = _tempLineOfPlane.Name;
-                    storage.TempObjects.Clear();
+                    tempObjects.Clear();
                     _tempLineOfPlane = null;
-                    storage.Objects.Add(_source);
-                    blueprint.Update(storage);
-                    storage.DrawLastAddedToObjects(blueprint);
+                    blueprint.Storage.Objects.Add(_source);
+                    blueprint.Update();
+                    blueprint.Storage.DrawLastAddedToObjects(blueprint);
                 }
             }
         }

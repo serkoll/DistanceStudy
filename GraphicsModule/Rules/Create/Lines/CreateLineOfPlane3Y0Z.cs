@@ -1,6 +1,5 @@
 ﻿using System.Drawing;
 using System.Linq;
-using GraphicsModule.Configuration;
 using GraphicsModule.Controls;
 using GraphicsModule.Geometry;
 using GraphicsModule.Geometry.Extensions;
@@ -15,33 +14,46 @@ namespace GraphicsModule.Rules.Create.Lines
     /// </summary>
     public class CreateLineOfPlane3Y0Z : ICreate
     {
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Blueprint blueprint, DrawSettings settings, Storage storage)
+        public void AddToStorageAndDraw(Point pt, Blueprint blueprint)
         {
-            var obj = Create(pt, frameCenter, blueprint, settings, storage);
-            if (obj == null) return;
-            storage.AddToCollection(obj);
-            blueprint.Update(storage);
-        }
-        public LineOfPlane3Y0Z Create(Point pt, Point frameCenter, Blueprint blueprint, DrawSettings setting, Storage strg)
-        {
-            if (!PointOfPlane3Y0Z.IsCreatable(pt, frameCenter)) return null;
-            var ptOfPlane = new PointOfPlane3Y0Z(pt, frameCenter);
+            var obj = Create(pt, blueprint);
+            if (obj == null)
+                return;
 
-            if (strg.TempObjects.Count == 0)
+            blueprint.Storage.AddToCollection(obj);
+            blueprint.Update();
+        }
+
+        public LineOfPlane3Y0Z Create(Point pt, Blueprint blueprint)
+        {
+            return Create(pt, blueprint.CoordinateSystemCenterPoint, blueprint);
+        }
+
+        private LineOfPlane3Y0Z Create(Point pt, Point frameCenter, Blueprint blueprint)
+        {
+            if (!PointOfPlane3Y0Z.IsCreatable(pt, frameCenter))
+            {
+                return null;
+            }
+
+            var ptOfPlane = new PointOfPlane3Y0Z(pt, frameCenter);
+            var tempObjects = blueprint.Storage.TempObjects;
+            if (tempObjects.Count == 0)
             {
                 ptOfPlane.Name = GraphicsControl.NamesGenerator.Generate();
-                strg.TempObjects.Add(ptOfPlane);
-                strg.DrawLastAddedToTempObjects(blueprint);
+                tempObjects.Add(ptOfPlane);
+                blueprint.Storage.DrawLastAddedToTempObjects(blueprint);
                 return null;
             }
-            if (ptOfPlane.IsCoincides((PointOfPlane3Y0Z) strg.TempObjects.First()))
+
+            if (ptOfPlane.IsCoincides((PointOfPlane3Y0Z) tempObjects.First()))
             {
                 return null;
             }
 
-            var source = new LineOfPlane3Y0Z((PointOfPlane3Y0Z)strg.TempObjects.First(), new PointOfPlane3Y0Z(pt, frameCenter));
-            source.Name =strg.TempObjects.First().Name;
-            strg.TempObjects.Clear();
+            ptOfPlane.Name = GraphicsControl.NamesGenerator.Generate();
+            var source = new LineOfPlane3Y0Z((PointOfPlane3Y0Z) tempObjects.First(), ptOfPlane);
+            tempObjects.Clear();
             return source;
         }
     }

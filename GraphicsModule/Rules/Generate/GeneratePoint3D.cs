@@ -16,37 +16,39 @@ namespace GraphicsModule.Rules.Generate
     public class GeneratePoint3D : ICreate
     {
         private Point3D _source;
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Blueprint blueprint, DrawSettings settings, Storage storage)
+        public void AddToStorageAndDraw(Point pt, Blueprint blueprint)
         {
-            new SelectPointOfPlane().Execute(pt, storage, blueprint);
-            if (storage.SelectedObjects.Count > 1)
+            new SelectPointOfPlane().Execute(pt, blueprint);
+            var selected = blueprint.Storage.SelectedObjects;
+            if (selected.Count > 1)
             {
-                if (ReferenceEquals(storage.SelectedObjects[0].GetType(), storage.SelectedObjects[1].GetType()))
+                if (ReferenceEquals(selected[0].GetType(), selected[1].GetType()))
                 {
-                    storage.SelectedObjects.Remove(storage.SelectedObjects[0]);
-                    blueprint.Update(storage);
+                    selected.Remove(selected[0]);
+                    blueprint.Update();
                     return;
                 }
-                if ((_source = ObjectsCreator.Point3D().Create(storage.SelectedObjects.Cast<IPointOfPlane>().ToList())) != null)
+                if ((_source = ObjectsCreator.Point3D().Create(selected.Cast<IPointOfPlane>().ToList())) != null)
                 {
-                    storage.Objects.Remove(storage.SelectedObjects[0]);
-                    storage.Objects.Remove(storage.SelectedObjects[1]);
+                    var objects = blueprint.Storage.Objects;
+                    objects.Remove(selected[0]);
+                    objects.Remove(selected[1]);
                     _source.Name = GraphicsControl.NamesGenerator.Generate();
-                    storage.SelectedObjects.Clear();
-                    blueprint.Update(storage);
-                    storage.AddToCollection(_source);
+                    selected.Clear();
+                    blueprint.Update();
+                    blueprint.Storage.AddToCollection(_source);
                     _source = null;
-                    storage.DrawLastAddedToObjects(blueprint);
+                    blueprint.Storage.DrawLastAddedToObjects(blueprint);
                 }
                 else
                 {
-                    storage.SelectedObjects.RemoveAt(storage.SelectedObjects.Count - 1);
-                    blueprint.Update(storage);
+                    selected.RemoveAt(selected.Count - 1);
+                    blueprint.Update();
                 }
             }
             else
             {
-                blueprint.Update(storage);
+                blueprint.Update();
             }
         }
     }

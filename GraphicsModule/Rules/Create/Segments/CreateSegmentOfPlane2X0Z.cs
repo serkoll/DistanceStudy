@@ -15,39 +15,42 @@ namespace GraphicsModule.Rules.Create.Segments
     /// </summary>
     public class CreateSegmentOfPlane2X0Z : ICreate
     {
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Blueprint blueprint, DrawSettings settings, Storage storage)
+        public void AddToStorageAndDraw(Point pt, Blueprint blueprint)
         {
-            var obj = Create(pt, frameCenter, blueprint, settings, storage);
+            var obj = Create(pt, blueprint);
             if (obj == null)
-            {
                 return;
-            }
-            storage.AddToCollection(obj);
-            blueprint.Update(storage);
+
+            blueprint.Storage.AddToCollection(obj);
+            blueprint.Update();
         }
-        public SegmentOfPlane2X0Z Create(Point pt, Point frameCenter, Blueprint blueprint, DrawSettings setting, Storage strg)
+
+        public SegmentOfPlane2X0Z Create(Point pt, Blueprint blueprint)
+        {
+            return Create(pt, blueprint.CoordinateSystemCenterPoint, blueprint);
+        }
+
+        private SegmentOfPlane2X0Z Create(Point pt, Point frameCenter, Blueprint blueprint)
         {
             if (!PointOfPlane2X0Z.IsCreatable(pt, frameCenter))
-            {
                 return null;
-            }
 
             var ptOfPlane = new PointOfPlane2X0Z(pt, frameCenter);
-            if (strg.TempObjects.Count == 0)
+            var tempObjects = blueprint.Storage.TempObjects;
+            if (tempObjects.Count == 0)
             {
                 ptOfPlane.Name = GraphicsControl.NamesGenerator.Generate();
-                strg.TempObjects.Add(ptOfPlane);
-                strg.DrawLastAddedToTempObjects(blueprint);
+                tempObjects.Add(ptOfPlane);
+                blueprint.Storage.DrawLastAddedToTempObjects(blueprint);
                 return null;
             }
 
-            if (ptOfPlane.IsCoincides((PointOfPlane2X0Z)strg.TempObjects.First()))
-            {
+            if (ptOfPlane.IsCoincides((PointOfPlane2X0Z)tempObjects.First()))
                 return null;
-            }
+
             ptOfPlane.Name = GraphicsControl.NamesGenerator.Generate();
-            var source = new SegmentOfPlane2X0Z((PointOfPlane2X0Z) strg.TempObjects.First(), ptOfPlane);
-            strg.TempObjects.Clear();
+            var source = new SegmentOfPlane2X0Z((PointOfPlane2X0Z) tempObjects.First(), ptOfPlane);
+            tempObjects.Clear();
             return source;
         }
     }

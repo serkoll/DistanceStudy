@@ -12,32 +12,34 @@ namespace GraphicsModule.Rules.Create.Segments
 {
     public class CreateSegment2D : ICreate
     {
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Blueprint blueprint, DrawSettings settings, Storage storage)
+        public void AddToStorageAndDraw(Point pt, Blueprint blueprint)
         {
-            var obj = Create(pt, frameCenter, blueprint, settings, storage);
+            var obj = Create(pt, blueprint);
             if (obj == null)
                 return;
-            storage.AddToCollection(obj);
-            blueprint.Update(storage);
+            blueprint.Storage.AddToCollection(obj);
+            blueprint.Update();
         }
-        public Segment2D Create(Point pt, Point frameCenter, Blueprint blueprint, DrawSettings settings, Storage strg)
+
+        public Segment2D Create(Point pt, Blueprint blueprint)
         {
             var ptOfPlane = new Point2D(pt);
-            if (strg.TempObjects.Count == 0)
+            var tempObjects = blueprint.Storage.TempObjects;
+            if (tempObjects.Count == 0)
             {
                 ptOfPlane.Name =GraphicsControl.NamesGenerator.Generate();
-                strg.TempObjects.Add(ptOfPlane);
-                strg.DrawLastAddedToTempObjects(blueprint);
+                tempObjects.Add(ptOfPlane);
+                blueprint.Storage.DrawLastAddedToTempObjects(blueprint);
             }
             else
             {
-                if (ptOfPlane.IsCoincides((Point2D) strg.TempObjects.First()))
+                if (ptOfPlane.IsCoincides((Point2D) tempObjects.First()))
                 {
                     return null;
                 }
-                var source = new Segment2D((Point2D)strg.TempObjects.First(), ptOfPlane);
-                source.SetName(strg.TempObjects[0].Name);
-                strg.TempObjects.Clear();
+                var source = new Segment2D((Point2D)tempObjects.First(), ptOfPlane);
+                source.SetName(tempObjects[0].Name);
+                tempObjects.Clear();
                 return source;
             }
             return null;

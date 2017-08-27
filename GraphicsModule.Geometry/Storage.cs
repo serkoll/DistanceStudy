@@ -68,7 +68,7 @@ namespace GraphicsModule.Geometry
         }
 
         /// <summary>
-        /// Отрисовывает последний добавленный объект в коллекцию объектов
+        /// Отрисовывает последний добавленный объект в коллекцию объектов //TODO: починить рекурсивной ссылкой
         /// </summary>
         /// <param name="blueprint"></param>
         public void DrawLastAddedToObjects(Blueprint blueprint)

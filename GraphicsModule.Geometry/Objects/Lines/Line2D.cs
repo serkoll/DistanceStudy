@@ -37,16 +37,6 @@ namespace GraphicsModule.Geometry.Objects.Lines
             EndingPoints = new LineEndingPoints(this, frame);
         }
 
-        public Line2D ConstructPerpendicularOfPointToLine(Line2D line, Point2D pt)
-        {
-            return new Line2D(pt, new Point2D(-line.Kx + pt.X, line.Ky + pt.Y));
-        }
-
-        public Line2D ConstructParallelOfPointToLine(Line2D line, Point2D pt)
-        {
-            return new Line2D(pt, new Point2D(line.Kx + pt.X, line.Ky + pt.Y));
-        }
-
         public void Draw(Blueprint blueprint)
         {
             Point0.Draw(blueprint);

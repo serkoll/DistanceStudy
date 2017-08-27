@@ -20,46 +20,63 @@ namespace GraphicsModule.Rules.Create.Lines
     {
         public ILineOfPlane TempLineOfPlane;
         private Line3D _source;
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Blueprint blueprint, DrawSettings settings, Storage storage)
+
+        public void AddToStorageAndDraw(Point pt, Blueprint blueprint)
         {
-            var obj = Create(pt, frameCenter, blueprint, settings, storage);
+            var obj = Create(pt, blueprint);
             if (obj == null) return;
-            storage.AddToCollection(obj);
-            blueprint.Update(storage);
+            blueprint.Storage.AddToCollection(obj);
+            blueprint.Update();
         }
-        public Line3D Create(Point pt, Point frameCenter, Blueprint blueprint, DrawSettings setting, Storage strg)
+
+        public Line3D Create(Point pt, Blueprint blueprint)
+        {
+            return Create(pt, blueprint.CoordinateSystemCenterPoint, blueprint.Settings.Drawing, blueprint.Storage, blueprint);
+        }
+
+        private Line3D Create(Point pt, Point frameCenter, DrawSettings settings, Storage storage, Blueprint blueprint)
         {
             var ptOfPlane = pt.ToPointOfPlane(frameCenter);
-            if (strg.TempObjects.Count == 0)
+            var tempObjects = storage.TempObjects;
+            if (tempObjects.Count == 0)
             {
                 if (TempLineOfPlane == null)
                 {
                     ptOfPlane.Name = GraphicsControl.NamesGenerator.Generate();
-                    strg.TempObjects.Add(ptOfPlane);
-                    strg.DrawLastAddedToTempObjects(blueprint);
+                    tempObjects.Add(ptOfPlane);
+                    storage.DrawLastAddedToTempObjects(blueprint);
                     return null;
                 }
-                if (IsInOnePlane(TempLineOfPlane, ptOfPlane)) return null;
-                if (!IsOnLinkLine(TempLineOfPlane, ptOfPlane)) return null;
-                strg.TempObjects.Add(ptOfPlane);
-                strg.DrawLastAddedToTempObjects(blueprint);
+                if (IsInOnePlane(TempLineOfPlane, ptOfPlane))
+                    return null;
+                if (!IsOnLinkLine(TempLineOfPlane, ptOfPlane))
+                    return null;
+
+                tempObjects.Add(ptOfPlane);
+                storage.DrawLastAddedToTempObjects(blueprint);
                 return null;
             }
-            if (ReferenceEquals(strg.TempObjects.First().GetType(), ptOfPlane.GetType()) && TempLineOfPlane == null)
+
+            if (ReferenceEquals(tempObjects.First().GetType(), ptOfPlane.GetType()) && TempLineOfPlane == null)
             {
-                strg.TempObjects.Add(ptOfPlane);
-                TempLineOfPlane = CreateLineOfPlane(strg.TempObjects, setting, frameCenter, blueprint);
-                TempLineOfPlane.Name = strg.TempObjects.First().Name;
-                strg.TempObjects.Clear();
-                blueprint.Update(strg);
+                ptOfPlane.Name = GraphicsControl.NamesGenerator.Generate();
+                tempObjects.Add(ptOfPlane);
+                TempLineOfPlane = CreateLineOfPlane(tempObjects, settings, frameCenter, blueprint);
+                tempObjects.Clear();
+                blueprint.Update();
                 TempLineOfPlane.Draw(blueprint);
                 return null;
             }
-            if (!IsOnLinkLine(TempLineOfPlane, ptOfPlane)) return null;
-            strg.TempObjects.Add(ptOfPlane);
-            if (!IsLine3DCreatable(TempLineOfPlane, CreateLineOfPlane(strg.TempObjects, setting, frameCenter, blueprint), setting, frameCenter, blueprint)) return null;
-            _source.Name = TempLineOfPlane.Name;
-            strg.TempObjects.Clear();
+            if (!IsOnLinkLine(TempLineOfPlane, ptOfPlane))
+                return null;
+
+            ptOfPlane.Name = GraphicsControl.NamesGenerator.Generate();
+            tempObjects.Add(ptOfPlane);
+
+            if (!IsLine3DCreatable(TempLineOfPlane, CreateLineOfPlane(tempObjects, settings, frameCenter, blueprint), settings, frameCenter, blueprint))
+                return null;
+
+            tempObjects.Clear();
             TempLineOfPlane = null;
             return _source;
         }
@@ -122,19 +139,9 @@ namespace GraphicsModule.Rules.Create.Lines
 
         protected bool IsInOnePlane(IObject lnproj, IObject ptproj)
         {
-            if (lnproj.GetType() == typeof(LineOfPlane1X0Y) && ptproj.GetType() == typeof(PointOfPlane1X0Y))
-            {
-                return true;
-            }
-            if (lnproj.GetType() == typeof(LineOfPlane2X0Z) && ptproj.GetType() == typeof(PointOfPlane2X0Z))
-            {
-                return true;
-            }
-            if (lnproj.GetType() == typeof(LineOfPlane3Y0Z) && ptproj.GetType() == typeof(PointOfPlane3Y0Z))
-            {
-                return true;
-            }
-            return false;
+            return (lnproj.GetType() == typeof(LineOfPlane1X0Y) && ptproj.GetType() == typeof(PointOfPlane1X0Y))
+                   || (lnproj.GetType() == typeof(LineOfPlane2X0Z) && ptproj.GetType() == typeof(PointOfPlane2X0Z))
+                   || (lnproj.GetType() == typeof(LineOfPlane3Y0Z) && ptproj.GetType() == typeof(PointOfPlane3Y0Z));
         }
 
         protected bool IsOnLinkLine(IObject lnproj, IObject ptproj)

@@ -13,37 +13,39 @@ namespace GraphicsModule.Rules.Generate
     {
         private Line3D _source;
 
-        public void AddToStorageAndDraw(Point pt, Point frameCenter, Blueprint blueprint, DrawSettings settings, Storage storage)
+        public void AddToStorageAndDraw(Point pt, Blueprint blueprint)
         {
-            new SelectLineOfPlane().Execute(pt, storage, blueprint);
-            if (storage.SelectedObjects.Count > 1)
+            new SelectLineOfPlane().Execute(pt, blueprint);
+            var selected = blueprint.Storage.SelectedObjects;
+            if (selected.Count > 1)
             {
-                if (ReferenceEquals(storage.SelectedObjects[0].GetType(), storage.SelectedObjects[1].GetType()))
+                if (ReferenceEquals(selected[0].GetType(), selected[1].GetType()))
                 {
-                    storage.SelectedObjects.Remove(storage.SelectedObjects[0]);
-                    blueprint.Update(storage);
+                    selected.Remove(selected[0]);
+                    blueprint.Update();
                     return;
                 }
-                if ((_source = ObjectsCreator.Line3D().Create(storage.SelectedObjects.Cast<ILineOfPlane>().ToList())) != null)
+                if ((_source = ObjectsCreator.Line3D().Create(selected.Cast<ILineOfPlane>().ToList())) != null)
                 {
-                    _source.SpecifyBoundaryPoints(frameCenter, blueprint.PlaneX0Y, blueprint.PlaneX0Z, blueprint.PlaneY0Z);
-                    storage.Objects.Remove(storage.SelectedObjects[0]);
-                    storage.Objects.Remove(storage.SelectedObjects[1]);
-                    storage.SelectedObjects.Clear();
-                    blueprint.Update(storage);
-                    storage.AddToCollection(_source);
+                    _source.SpecifyBoundaryPoints(blueprint.CoordinateSystemCenterPoint, blueprint.PlaneX0Y, blueprint.PlaneX0Z, blueprint.PlaneY0Z);
+                    var objects = blueprint.Storage.Objects;
+                    objects.Remove(selected[0]);
+                    objects.Remove(selected[1]);
+                    selected.Clear();
+                    blueprint.Update();
+                    blueprint.Storage.AddToCollection(_source);
                     _source = null;
-                    storage.DrawLastAddedToObjects(blueprint);
+                    blueprint.Storage.DrawLastAddedToObjects(blueprint);
                 }
                 else
                 {
-                    storage.SelectedObjects.RemoveAt(storage.SelectedObjects.Count - 1);
-                    blueprint.Update(storage);
+                    selected.RemoveAt(selected.Count - 1);
+                    blueprint.Update();
                 }
             }
             else
             {
-                blueprint.Update(storage);
+                blueprint.Update();
             }
         }
     }

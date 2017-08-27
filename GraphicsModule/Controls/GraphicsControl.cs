@@ -47,11 +47,6 @@ namespace GraphicsModule.Controls
         private Blueprint _blueprint;
 
         /// <summary>
-        /// Хранилище графических объектов
-        /// </summary>
-        private Storage _storage;
-
-        /// <summary>
         /// Класс настроек
         /// </summary>
         private Settings _settings;
@@ -92,9 +87,7 @@ namespace GraphicsModule.Controls
             LoadSettings();
             InitializeMenu();
 
-
             GraphicsControl.NamesGenerator = new NamesGenerator(true, 0, _settings);
-            _storage = new Storage();
         }
         /// <summary>
         /// Загрузка общих настроек настроек
@@ -159,20 +152,14 @@ namespace GraphicsModule.Controls
         private void GraphicsControl_Load(object sender, EventArgs e)
         {
             _blueprint = new Blueprint(_settings, MainPictureBox);
-
-            if (_storage == null)
-            {
-                var msg = "Ошибка при инициализации хранилища данных";
-                throw new ArgumentNullException($"{_storage}", msg);
-            }
         }
 
         //TODO: при переходе на несколько чертежей изменить
         private void GraphicsControl_Resize(object sender, EventArgs e)
         {
-            if (_storage == null || _blueprint == null) return;
+            if (_blueprint == null) return;
             _blueprint.CalculateBackground();
-            _blueprint.Update(_storage);
+            _blueprint.Update();
         }
 
         #region Other operations
@@ -182,21 +169,23 @@ namespace GraphicsModule.Controls
         /// <param name="coll"></param>
         public void ImportObjects(IList<IObject> coll)
         {
-            if (_storage == null) _storage = new Storage(coll);
-            _blueprint.Update(_storage);
+            _blueprint = new Blueprint(_settings, new Storage(coll), MainPictureBox);
+            _blueprint.Update();
         }
+
+        //TODO: при новой логике с несколькими чертежами подумать по поводу переделки методов. Скорее всего перенести в панели
         /// <summary>
         /// Экспорт графических объектов
         /// </summary>
         /// <returns></returns>
         public IList<IObject> ExportObjects()
         {
-            return _storage.Objects;
+            return _blueprint.Storage.Objects;
         }
 
         public IList<IObject> ExportSelected()
         {
-            return _storage.SelectedObjects;
+            return _blueprint.Storage.SelectedObjects;
         }
 
         #endregion
@@ -233,13 +222,13 @@ namespace GraphicsModule.Controls
             {
                 labelStatusLinkLine.BorderStyle = Border3DStyle.SunkenOuter;
                 _blueprint.Settings.Drawing.LinkLinesSettings.Enabled = true;
-                _blueprint.Update(_storage);
+                _blueprint.Update();
             }
             else
             {
                 labelStatusLinkLine.BorderStyle = Border3DStyle.RaisedInner;
                 _blueprint.Settings.Drawing.LinkLinesSettings.Enabled = false;
-                _blueprint.Update(_storage);
+                _blueprint.Update();
             }
         }
         private void labelCursorToGridFixation_Click(object sender, EventArgs e)
@@ -266,13 +255,13 @@ namespace GraphicsModule.Controls
             {
                 labelStatusGrid.BorderStyle = Border3DStyle.SunkenOuter;
                 _blueprint.Settings.Grid.IsDraw = true;
-                _blueprint.Update(_storage);
+                _blueprint.Update();
             }
             else
             {
                 labelStatusGrid.BorderStyle = Border3DStyle.RaisedInner;
                 _blueprint.Settings.Grid.IsDraw = false;
-                _blueprint.Update(_storage);
+                _blueprint.Update();
             }
         }
         /// <summary>
@@ -286,13 +275,13 @@ namespace GraphicsModule.Controls
             {
                 labelSatusAxis.BorderStyle = Border3DStyle.SunkenOuter;
                 _blueprint.Settings.Axis.IsDraw = true;
-                _blueprint.Update(_storage);
+                _blueprint.Update();
             }
             else
             {
                 labelSatusAxis.BorderStyle = Border3DStyle.RaisedInner;
                 _blueprint.Settings.Axis.IsDraw = false;
-                _blueprint.Update(_storage);
+                _blueprint.Update();
             }
         }
 
@@ -302,18 +291,18 @@ namespace GraphicsModule.Controls
 
         private void MainPictureBox_MouseDown(object sender, EventArgs e)
         {
-            HideSelectorMenus(); // скрываем открытые меню
-            var mousecoords = MainPictureBox.PointToClient(MousePosition);  //Получаем координаты курсора мыши
-            if (SetObject != null) //Контроль существования объекта
+            HideSelectorMenus();
+            var mousecoords = MainPictureBox.PointToClient(MousePosition);  
+            if (SetObject != null) 
             {
-                SetObject.AddToStorageAndDraw(mousecoords, _blueprint.CoordinateSystemCenterPoint, _blueprint, _settings.Drawing, _storage); //Отрисовываем объект и добавляем его в коллекцию объектов
+                SetObject.AddToStorageAndDraw(mousecoords, _blueprint); 
                 //TODO: нужно ли
-                _blueprint.Refresh(); //Перерисовывам полотно
+                _blueprint.Refresh(); 
             }
-            if (Operations != null) //Наличие операции над объектами
+            if (Operations != null)
             {
-                Operations.Execute(mousecoords, _storage, _blueprint); // Выполненяем операцию
-                _blueprint.Refresh(); //Перерисовываем полотно
+                Operations.Execute(mousecoords, _blueprint); 
+                _blueprint.Refresh(); 
             }
         }
 
@@ -330,11 +319,11 @@ namespace GraphicsModule.Controls
             {
                 case Keys.Escape:
                     {
-                        _storage.TempObjects.Clear();
+                        _blueprint.Storage.TempObjects.Clear();
                         SetObject = null;
                         Operations = null;
-                        _storage.SelectedObjects.Clear();
-                        _blueprint.Update(_storage);
+                        _blueprint.Storage.SelectedObjects.Clear();
+                        _blueprint.Update();
                         HideSelectorMenus();
                         HidePropertyBuidMenu();
                         MainPictureBox.Cursor = System.Windows.Forms.Cursors.Default;
@@ -353,8 +342,8 @@ namespace GraphicsModule.Controls
         private void buttonPointsMenu_Click(object sender, EventArgs e)
         {
             HideSelectorMenus();
-            _storage.ClearTempCollections();
-            _blueprint.Update(_storage);
+            _blueprint.Storage.ClearTempCollections();
+            _blueprint.Update();
             _ptMenuSelector.Location = new Point(ObjectsBuildMenu.Size.Width, ObjectsBuildMenu.Location.Y);
             _ptMenuSelector.Visible = true;
             _ptMenuSelector.BringToFront();
@@ -367,8 +356,8 @@ namespace GraphicsModule.Controls
         private void lnPointsMenu_Click(object sender, EventArgs e)
         {
             HideSelectorMenus();
-            _storage.ClearTempCollections();
-            _blueprint.Update(_storage);
+            _blueprint.Storage.ClearTempCollections();
+            _blueprint.Update();
             _lnMenuSelector.Location = new Point(ObjectsBuildMenu.Size.Width, ObjectsBuildMenu.Location.Y + buttonPointsMenu.Size.Height);
             _lnMenuSelector.Visible = true;
             _lnMenuSelector.BringToFront();
@@ -376,8 +365,8 @@ namespace GraphicsModule.Controls
         private void buttonSegmentMenu_Click(object sender, EventArgs e)
         {
             HideSelectorMenus();
-            _storage.ClearTempCollections();
-            _blueprint.Update(_storage);
+            _blueprint.Storage.ClearTempCollections();
+            _blueprint.Update();
             _sgMenuSelector.Location = new Point(ObjectsBuildMenu.Size.Width, ObjectsBuildMenu.Location.Y + buttonPointsMenu.Size.Height + buttonLinesMenu.Size.Height);
             _sgMenuSelector.Visible = true;
             _sgMenuSelector.BringToFront();
@@ -432,8 +421,8 @@ namespace GraphicsModule.Controls
         /// <param name="e"></param>
         private void buttonClearAll_Click(object sender, EventArgs e)
         {
-            _storage.ClearAllCollections();
-            _blueprint.Update(_storage);
+            _blueprint.Storage.ClearAllCollections();
+            _blueprint.Update();
             SetObject = null;
             MainPictureBox.Cursor = System.Windows.Forms.Cursors.Default;
         }
@@ -446,7 +435,7 @@ namespace GraphicsModule.Controls
         {
             SetObject = null;
             Operations = null;
-            new DeleteSelected().Execute(_storage, _blueprint);
+            new DeleteSelected().Execute(_blueprint);
             MainPictureBox.Cursor = System.Windows.Forms.Cursors.Default;
         }
 
@@ -464,9 +453,10 @@ namespace GraphicsModule.Controls
         {
             var f = new GraphicsControlSettingsForm();
             f.ShowDialog();
-            _blueprint.Update(_storage);
+            _blueprint.Update();
             MainPictureBox.BackColor = _settings.BackgroundColor;
         }
+
         private void solidWorksToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var sldWorksObject = new SolidworksInteraction.SldWorksInteraction();
@@ -475,7 +465,7 @@ namespace GraphicsModule.Controls
                 sldWorksObject.SetActiveDocument();
                 sldWorksObject.ImportGrid(_blueprint.Background.Grid);
                 sldWorksObject.ImportAxis(_blueprint.Background.Axis);
-                sldWorksObject.ImportCollectionToActiveDoc(_storage.Objects, _blueprint.Settings.Drawing);
+                sldWorksObject.ImportCollectionToActiveDoc(_blueprint.Storage.Objects, _blueprint.Settings.Drawing);
             }
             else
             {
@@ -560,7 +550,7 @@ namespace GraphicsModule.Controls
         {
             var f = new TaskSettingsForm { Owner = Form.ActiveForm };
             f.ShowDialog();
-            _blueprint.Update(_storage);
+            _blueprint.Update();
         }
     }
 }
