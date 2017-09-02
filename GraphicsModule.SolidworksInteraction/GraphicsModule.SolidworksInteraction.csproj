@@ -57,13 +57,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GraphicsModule.Configuration\GraphicsModule.Configuration.csproj">
+      <Project>{FA7A373A-2140-4F47-B5DD-E4819BF1093E}</Project>
+      <Name>GraphicsModule.Configuration</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GraphicsModule.Geometry\GraphicsModule.Geometry.csproj">
       <Project>{9445d9ed-e7b5-451b-bf93-2265ba1e186a}</Project>
       <Name>GraphicsModule.Geometry</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GraphicsModule.Settings\GraphicsModule.Configuration.csproj">
-      <Project>{fa7a373a-2140-4f47-b5dd-e4819bf1093e}</Project>
-      <Name>GraphicsModule.Configuration</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

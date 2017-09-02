@@ -97,7 +97,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GraphicsModule.Settings\GraphicsModule.Configuration.csproj">
+    <ProjectReference Include="..\GraphicsModule.Configuration\GraphicsModule.Configuration.csproj">
       <Project>{fa7a373a-2140-4f47-b5dd-e4819bf1093e}</Project>
       <Name>GraphicsModule.Configuration</Name>
     </ProjectReference>

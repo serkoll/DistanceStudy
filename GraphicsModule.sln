@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphicsModule", "GraphicsModule\GraphicsModule.csproj", "{247CB926-7D51-45D6-9E9B-05AA4F4E30D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphicsModule.Configuration", "GraphicsModule.Configuration\GraphicsModule.Configuration.csproj", "{FA7A373A-2140-4F47-B5DD-E4819BF1093E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphicsModule.Form", "GraphicsModule.Form\GraphicsModule.Form.csproj", "{DF7DC90C-A6E8-45A2-9E88-69FCB0C12666}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphicsModule.Geometry", "GraphicsModule.Geometry\GraphicsModule.Geometry.csproj", "{9445D9ED-E7B5-451B-BF93-2265BA1E186A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphicsModule.SolidworksInteraction", "GraphicsModule.SolidworksInteraction\GraphicsModule.SolidworksInteraction.csproj", "{FB1FF034-ECEA-4DD1-911F-3C4F384C3723}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphicsModule.Tests", "GraphicsModule.Tests\GraphicsModule.Tests.csproj", "{E3803199-5EC7-482B-A791-EC3F96CEF6E4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{247CB926-7D51-45D6-9E9B-05AA4F4E30D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{247CB926-7D51-45D6-9E9B-05AA4F4E30D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{247CB926-7D51-45D6-9E9B-05AA4F4E30D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{247CB926-7D51-45D6-9E9B-05AA4F4E30D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA7A373A-2140-4F47-B5DD-E4819BF1093E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA7A373A-2140-4F47-B5DD-E4819BF1093E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA7A373A-2140-4F47-B5DD-E4819BF1093E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA7A373A-2140-4F47-B5DD-E4819BF1093E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF7DC90C-A6E8-45A2-9E88-69FCB0C12666}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF7DC90C-A6E8-45A2-9E88-69FCB0C12666}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF7DC90C-A6E8-45A2-9E88-69FCB0C12666}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF7DC90C-A6E8-45A2-9E88-69FCB0C12666}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9445D9ED-E7B5-451B-BF93-2265BA1E186A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9445D9ED-E7B5-451B-BF93-2265BA1E186A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9445D9ED-E7B5-451B-BF93-2265BA1E186A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9445D9ED-E7B5-451B-BF93-2265BA1E186A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB1FF034-ECEA-4DD1-911F-3C4F384C3723}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB1FF034-ECEA-4DD1-911F-3C4F384C3723}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB1FF034-ECEA-4DD1-911F-3C4F384C3723}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB1FF034-ECEA-4DD1-911F-3C4F384C3723}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3803199-5EC7-482B-A791-EC3F96CEF6E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3803199-5EC7-482B-A791-EC3F96CEF6E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3803199-5EC7-482B-A791-EC3F96CEF6E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3803199-5EC7-482B-A791-EC3F96CEF6E4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

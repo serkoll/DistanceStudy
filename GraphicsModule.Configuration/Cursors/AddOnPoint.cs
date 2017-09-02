@@ -5,7 +5,7 @@ using System.Drawing.Drawing2D;
 
 namespace GraphicsModule.Configuration.Cursors
 {
-    class AddOnPoint:Cursor
+    public class AddOnPoint:Cursor
     {
         readonly List<Point> _addOnPts=new List<Point>(); 
 

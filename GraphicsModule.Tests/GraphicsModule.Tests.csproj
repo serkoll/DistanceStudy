@@ -58,10 +58,6 @@
       <Project>{9445d9ed-e7b5-451b-bf93-2265ba1e186a}</Project>
       <Name>GraphicsModule.Geometry</Name>
     </ProjectReference>
-    <ProjectReference Include="..\GraphicsModule.Settings\GraphicsModule.Configuration.csproj">
-      <Project>{fa7a373a-2140-4f47-b5dd-e4819bf1093e}</Project>
-      <Name>GraphicsModule.Configuration</Name>
-    </ProjectReference>
     <ProjectReference Include="..\GraphicsModule.SolidworksInteraction\GraphicsModule.SolidworksInteraction.csproj">
       <Project>{fb1ff034-ecea-4dd1-911f-3c4f384c3723}</Project>
       <Name>GraphicsModule.SolidworksInteraction</Name>

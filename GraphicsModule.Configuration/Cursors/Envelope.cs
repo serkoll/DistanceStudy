@@ -5,7 +5,7 @@ using System.Drawing.Drawing2D;
 
 namespace GraphicsModule.Configuration.Cursors
 {
-    class Envelope:Cursor
+    public class Envelope:Cursor
     {
          readonly List<Point> _envelopePoints = new List<Point>();
 
